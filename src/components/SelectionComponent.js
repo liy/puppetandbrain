@@ -1,8 +1,10 @@
+const filters = require('pixi-filters');
+
 import Component from './Component';
 import Selection from '../Selection';
 
 // TODO: maybe use a outline filter instead???
-export default class SelectionBoxComponent extends Component
+export default class SelectionComponent extends Component
 {
   constructor(dimension) {
     super();
@@ -14,8 +16,10 @@ export default class SelectionBoxComponent extends Component
     this.mouseout = this.mouseout.bind(this);
     this.touchstart = this.touchstart.bind(this);
 
-    this.selectionBox = new PIXI.Graphics();
     this.selected = false;
+
+    this.selectOutline = new filters.OutlineFilter(3, 0x66EE66)
+    this.hoverOutline = new filters.OutlineFilter(2, 0xCCCCCC)
   }
 
   added() {
@@ -24,21 +28,18 @@ export default class SelectionBoxComponent extends Component
     this.owner.on('mouseover', this.mouseover);
     this.owner.on('mouseout', this.mouseout);
     this.owner.on('touchstart', this.touchstart);
-    this.owner.addChild(this.selectionBox)
 
     this.tickEnabled = true;
   }
   
   select() {
+    if(!this.owner.loaded) return;
+
     // TODO: handle muti-selection
     Selection.set(this.owner);
 
     this.selected = true;
-    this.selectionBox.visible = true;
-    this.selectionBox.clear();
-    this.selectionBox.lineStyle(2, 0x55FF55);
-    this.selectionBox.drawRect(-this.dimension.x/2, -this.dimension.y/2, this.dimension.x, this.dimension.y)
-    this.selectionBox.endFill();
+    this.owner.filters = [this.selectOutline];
   }
 
   deselect() {
@@ -46,7 +47,7 @@ export default class SelectionBoxComponent extends Component
     this.owner.alpha = 1
 
     this.selected = false;
-    this.selectionBox.visible = false;
+    this.owner.filters = [];
   }
 
   mousedown() {
@@ -54,17 +55,18 @@ export default class SelectionBoxComponent extends Component
   }
 
   mouseover() {
-    if(!this.selected) {
-      this.selectionBox.visible = true;
-      this.selectionBox.clear();
-      this.selectionBox.lineStyle(1, 0xFFFFFF, 0.5);
-      this.selectionBox.drawRect(-this.dimension.x/2, -this.dimension.y/2, this.dimension.x, this.dimension.y)
-      this.selectionBox.endFill();
+    if(!this.selected && this.owner.loaded) {
+      this.owner.filters = [this.hoverOutline];
     }
   }
 
   mouseout() {
-    this.selectionBox.visible = this.selected;
+    if(!this.selected) {
+      this.owner.filters = [];
+    }
+    else {
+      this.owner.filters = [this.selectOutline];
+    }
   }
 
   touchstart() {
@@ -72,5 +74,6 @@ export default class SelectionBoxComponent extends Component
   }
 
   tick() {
+    
   }
 }

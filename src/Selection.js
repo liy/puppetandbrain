@@ -39,7 +39,7 @@ class Selection
 
   deselectAll() {
     this.selected.forEach(entity => {
-      entity.getComponent('SelectionBoxComponent').deselect(entity)
+      entity.getComponent('SelectionComponent').deselect(entity)
     })
   }
 }
