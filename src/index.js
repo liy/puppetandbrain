@@ -24,11 +24,10 @@ window.renderer = PIXI.autoDetectRenderer({
   width: 800, 
   height: 600, 
   view: canvas,
-  transparent: true,
+  // transparent: true,
   antialias: true
 });
 
-var rendered = false;
 var stage = new Stage(renderer.width, renderer.height);
 function render() {
   // console.log('render')

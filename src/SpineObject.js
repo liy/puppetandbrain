@@ -3,6 +3,8 @@ import {mixin} from './utils/mixin.js';
 import Entity from './Entity';
 import PlaceHolderComponent from './components/PlaceHolderComponent';
 import SelectionComponent from './components/SelectionComponent';
+import DragComponent from './components/DragComponent';
+
 
 
 export default class SpineObject extends PIXI.Container
@@ -24,6 +26,7 @@ export default class SpineObject extends PIXI.Container
     InfoLoader.load(url).then(info => {
       this.addComponent(new PlaceHolderComponent(info.dimension));
       this.addComponent(new SelectionComponent(info.dimension));
+      this.addComponent(new DragComponent(info.dimension));
 
       this.loader.add(info.id);
       this.loader.load((loader, resources) => {

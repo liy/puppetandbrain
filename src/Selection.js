@@ -1,21 +1,25 @@
+// TODO: to be simplified
+/**
+ * Hold selection state
+ * 
+ * @class Selection
+ */
 class Selection
 {
   constructor() {
     this.selected = [];
 
-    this.selectionContainer = new PIXI.Container();
   }
 
   init(stage) {
     this.stage = stage;
-    this.stage.addChild(this.selectionContainer);
 
     let catcher = new PIXI.Graphics();
     catcher.interactive = true;
     catcher.beginFill(0, 0);
     catcher.drawRect(0, 0, this.stage.stageWidth, this.stage.stageHeight);
     catcher.endFill();
-    this.selectionContainer.addChild(catcher);
+    this.stage.addChild(catcher);
 
     this.deselectAll = this.deselectAll.bind(this);
     catcher.on('mousedown', this.deselectAll);
