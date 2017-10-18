@@ -15,6 +15,9 @@ import Stage from './Stage';
 
 import GizmoComponent from './components/GizmoComponent'
 
+import {Delay, Move} from './commands';
+import {chain, deserialize} from './commands/utils';
+
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
@@ -40,8 +43,18 @@ PIXI.ticker.shared.add(render);
 window.cow = new SpineObject(require('./assets/cow/info.json'));
 cow.setAnimation('walk');
 cow.getAnimations().then(animations => {
-  console.log(animations)
+  // console.log(animations)
 })
+cow.scale = {
+  x: 0.5,
+  y: 0.5
+}
 cow.x = 400;
 cow.y = 300;
 stage.addChild(cow)
+
+var arr = [new Delay(1), new Delay(1), new Delay(1)];
+arr.push(deserialize(arr[0].serialize()));
+chain(arr).then(result => {
+  console.log(result);
+})

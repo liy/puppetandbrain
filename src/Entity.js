@@ -1,7 +1,14 @@
+var ID = 0;
+
+window.LookUp = Object.create(null);
+
 export default class Entity
 {
   constructor() {
+    this.id = ++ID;
     this.components = Object.create(null);
+
+    LookUp[this.id] = this;
   }
 
   addComponent(component) {
