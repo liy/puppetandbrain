@@ -7,4 +7,4 @@
 // }
 
 export Delay from './Delay';
-export Move from './Delay';
+export Move from './Move';

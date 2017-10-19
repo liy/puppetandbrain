@@ -13,28 +13,29 @@ export default class PlaceHolderComponent extends Component
     this.hourGlass.pivot.x = 100;
     this.hourGlass.pivot.y = 100;
 
-    if(dimension) {
-      let s = Math.min((dimension.x*0.5)/200, (dimension.y*0.5)/200);
+    dimension = dimension || {x: this.hourGlass.width, y: this.hourGlass.height}; 
 
-      this.bg = new PIXI.Graphics();
-      this.bg.lineStyle(15*s, 0xCCCCCC, 1);
-      this.bg.drawRoundedRect(-dimension.x/2, -dimension.y/2, dimension.x, dimension.y, 30*s);
-      this.bg.endFill();
+    let s = Math.min((dimension.x*0.5)/200, (dimension.y*0.5)/200);
 
-      this.hourGlass.scale.y = this.hourGlass.scale.x = s
-    }
+    this.bg = new PIXI.Graphics();
+    this.bg.lineStyle(15*s, 0xCCCCCC, 1);
+    this.bg.drawRoundedRect(-dimension.x/2, -dimension.y/2, dimension.x, dimension.y, 30*s);
+    this.bg.endFill();
+
+    this.hourGlass.scale.y = this.hourGlass.scale.x = s
   }
 
-  added() {
+  async added() {
+    // show progress
     this.tickEnabled = true;
-
-    this.owner.addChild(this.bg);
-    this.owner.addChild(this.hourGlass);
-    this.owner.once('loaded', () => {
-      this.owner.removeChild(this.bg);
-      this.owner.removeChild(this.hourGlass)
-      this.tickEnabled = false;
-    });
+    this.entity.addChild(this.bg);
+    this.entity.addChild(this.hourGlass);
+    
+    // wait until it is loaded
+    await this.entity.loaded
+    this.entity.removeChild(this.bg);
+    this.entity.removeChild(this.hourGlass)
+    this.tickEnabled = false;
 
     setInterval(() => {
       this.targetRotation += Math.PI;

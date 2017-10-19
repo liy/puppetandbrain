@@ -23,31 +23,31 @@ export default class SelectionComponent extends Component
   }
 
   added() {
-    this.owner.interactive = true;
-    this.owner.on('mousedown', this.mousedown);
-    this.owner.on('mouseover', this.mouseover);
-    this.owner.on('mouseout', this.mouseout);
-    this.owner.on('touchstart', this.touchstart);
+    this.entity.interactive = true;
+    this.entity.on('mousedown', this.mousedown);
+    this.entity.on('mouseover', this.mouseover);
+    this.entity.on('mouseout', this.mouseout);
+    this.entity.on('touchstart', this.touchstart);
 
     this.tickEnabled = true;
   }
   
   select() {
-    if(!this.owner.loaded) return;
+    if(!this.entity.loaded) return;
 
     // TODO: handle muti-selection
-    Selection.set(this.owner);
+    Selection.set(this.entity);
 
     this.selected = true;
-    this.owner.filters = [this.selectOutline];
+    this.entity.filters = [this.selectOutline];
   }
 
   deselect() {
-    Selection.remove(this.owner);
-    this.owner.alpha = 1
+    Selection.remove(this.entity);
+    this.entity.alpha = 1
 
     this.selected = false;
-    this.owner.filters = [];
+    this.entity.filters = [];
   }
 
   mousedown() {
@@ -55,17 +55,17 @@ export default class SelectionComponent extends Component
   }
 
   mouseover() {
-    if(!this.selected && this.owner.loaded) {
-      this.owner.filters = [this.hoverOutline];
+    if(!this.selected && this.entity.loaded) {
+      this.entity.filters = [this.hoverOutline];
     }
   }
 
   mouseout() {
     if(!this.selected) {
-      this.owner.filters = [];
+      this.entity.filters = [];
     }
     else {
-      this.owner.filters = [this.selectOutline];
+      this.entity.filters = [this.selectOutline];
     }
   }
 

@@ -11,29 +11,29 @@ export default class DragComponent extends Component
   }
 
   added() {
-    this.owner.interctive = true;
+    this.entity.interctive = true;
 
-    this.owner.on('pointerdown', this.dragstart)
-    this.owner.on('pointermove', this.dragmove)
-    this.owner.on('pointerup', this.dragend)
-    this.owner.on('pointerupoutside', this.dragend)
+    this.entity.on('pointerdown', this.dragstart)
+    this.entity.on('pointermove', this.dragmove)
+    this.entity.on('pointerup', this.dragend)
+    this.entity.on('pointerupoutside', this.dragend)
   }
 
   dragstart(e) {
     this.data = e.data;
-    let p = this.data.getLocalPosition(this.owner.parent)
+    let p = this.data.getLocalPosition(this.entity.parent)
     this.offset = {
-      x: this.owner.x - p.x,
-      y: this.owner.y - p.y
+      x: this.entity.x - p.x,
+      y: this.entity.y - p.y
     }
   }
 
   dragmove(e) {
     // console.log(e.data)
     if(this.data) {
-      var newPosition = this.data.getLocalPosition(this.owner.parent);
-      this.owner.x = newPosition.x + this.offset.x;
-      this.owner.y = newPosition.y + this.offset.y;
+      var newPosition = this.data.getLocalPosition(this.entity.parent);
+      this.entity.x = newPosition.x + this.offset.x;
+      this.entity.y = newPosition.y + this.offset.y;
     }
   }
 

@@ -1,4 +1,4 @@
-export default class InfoLoader 
+export default class JSONLoader 
 {
   static load(url) {
     return new Promise((resolve, reject) => {

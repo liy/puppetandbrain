@@ -1,25 +1,27 @@
-var ID = 0;
 
-window.LookUp = Object.create(null);
+import LookUp from './LookUp';
+import EventEmitter from '../utils/EventEmitter'
 
-export default class Entity
+export default class Entity extends EventEmitter
 {
-  constructor() {
-    this.id = ++ID;
+  constructor(id) {
+    super();
+
     this.components = Object.create(null);
 
-    LookUp[this.id] = this;
+    // create an entry in the reference look up
+    this.id = LookUp.create(this, id);
   }
 
   addComponent(component) {
-    component.owner = this;
+    component.entity = this;
     this.components[component.constructor.name] = component;
     component.added();
   }
 
   removeComponent(componentClassName) {
     delete this.components[componentClassName];
-    component.owner = null;
+    component.entity = null;
     component.removed();
   }
 

@@ -1,4 +1,4 @@
-export function mixin(target, source) {
+export default function mixin(target, source) {
   // assign properties
   Object.assign(target, source);
 

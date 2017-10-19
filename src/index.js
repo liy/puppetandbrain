@@ -9,14 +9,13 @@ require('pixi-spine');
 
 
 
-import SpineObject from './SpineObject';
-import SpriteObject from './SpriteObject';
+import SpineActor from './objects/SpineActor';
+import SpriteActor from './objects/SpriteActor';
 import Stage from './Stage';
 
-import GizmoComponent from './components/GizmoComponent'
-
 import {Delay, Move} from './commands';
-import {chain, deserialize} from './commands/utils';
+import {chain} from './commands/utils';
+import Classier from './Classifier';
 
 
 var appDiv = document.getElementById('app');
@@ -31,16 +30,16 @@ window.renderer = PIXI.autoDetectRenderer({
   antialias: true
 });
 
-var stage = new Stage(renderer.width, renderer.height);
+Stage.init(renderer.width, renderer.height);
 function render() {
   // console.log('render')
-  renderer.render(stage);
+  renderer.render(Stage);
   // console.log('')
 }
 PIXI.ticker.shared.add(render);
 
 
-window.cow = new SpineObject(require('./assets/cow/info.json'));
+window.cow = new SpineActor(require('./assets/cow/info.json'));
 cow.setAnimation('walk');
 cow.getAnimations().then(animations => {
   // console.log(animations)
@@ -51,10 +50,10 @@ cow.scale = {
 }
 cow.x = 400;
 cow.y = 300;
-stage.addChild(cow)
+Stage.addChild(cow)
 
-var arr = [new Delay(1), new Delay(1), new Delay(1)];
-arr.push(deserialize(arr[0].serialize()));
-chain(arr).then(result => {
-  console.log(result);
-})
+let m1 = new Move({x: 100, y: 100}, 1000);
+let m2 = new Move({x: 400, y: 400}, 2000);
+cow.cmd.add(m1);
+m1.add(m2)
+cow.cmd.run();
