@@ -16,4 +16,11 @@ export default class EntryTask extends Task
   async run() {
     return this.next.run();
   }
+
+  pod() {
+    return {
+      ...super.pod(),
+      type: this.type,
+    }
+  }
 }

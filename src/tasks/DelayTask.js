@@ -14,6 +14,13 @@ export default class DelayTask extends Task
     });
   }
 
+  pod() {
+    return {
+      ...super.pod(),
+      miniseconds: this.miniseconds,
+    }
+  }
+
   serialize() {
     return JSON.stringify({
       class: 'Delay',

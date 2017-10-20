@@ -1,9 +1,9 @@
-import * as commands from './commands'
+import * as tasks from './tasks'
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 
 const scope = {
-  ...commands,
+  ...tasks,
   SpineActor,
   SpriteActor,
 }

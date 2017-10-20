@@ -1,13 +1,16 @@
 import EventEmitter from '../utils/EventEmitter'
 
+var ID = 0;
+
 export default class Task extends EventEmitter
 {
   constructor() {
     super();
 
+    this.id = ++ID;
+
     this.parent = null;
     this.next = null;
-    this.data = null;
   }
 
   async run() {
@@ -19,11 +22,23 @@ export default class Task extends EventEmitter
   chain(...tasks) {
     return tasks.reduce((result, current) => {
       result.next = current;
+      current.parent = result;
       return current
     }, this);
   }
 
   process() {
     return Promise.resolve();
+  }
+
+  pod() {
+    return {
+      class: this.__proto__.constructor.name,
+      next: this.next ? this.next.id : undefined
+    }
+  }
+
+  serialize() {
+    return JSON.stringify(this.pod());
   }
 }

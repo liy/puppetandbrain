@@ -19,6 +19,8 @@ import MoveTask from './tasks/MoveTask';
 import GroupTask from './tasks/GroupTask';
 import PrintTask from './tasks/PrintTask';
 
+import RoutePod from './tasks/RoutePod'
+
 import Classier from './Classifier';
 
 
@@ -62,11 +64,14 @@ Stage.addChild(cow)
 // m1.add(m2)
 // cow.cmd.run();
 
-let groupTask = new GroupTask([
+let groupTask = new GroupTask()
+groupTask.add(
   new PrintTask('test 1'),
   new PrintTask('test 2'),
   new PrintTask('test 3'),
-])
+)
+
+
 cow.entryTasks[TaskEvent.GAME_START].chain(new DelayTask(2000))
                  .chain(groupTask, new DelayTask(2000))
                  .chain(new MoveTask(cow, {x:0,y:0}, 1000));
@@ -74,3 +79,6 @@ cow.entryTasks[TaskEvent.GAME_START].chain(new DelayTask(2000))
 cow.entryTasks[TaskEvent.GAME_START].run().then(() => {
   console.log('all done')
 })
+
+let s = new RoutePod(cow);
+console.log( JSON.stringify(s.start()) );

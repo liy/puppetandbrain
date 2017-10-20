@@ -2,13 +2,25 @@ import Task from './Task'
 
 export default class PrintTask extends Task
 {
-  constructor(str) {
+  constructor(text) {
     super();
-    this.str = str;
+    this.text = text;
   }
 
   process() {
-    console.log(this.str, this.id);
+    // TODO: print on the actual editor console
+    console.log(this.str);
     return Promise.resolve()
+  }
+
+  pod() {
+    return {
+      ...super.pod(),
+      text: this.text
+    }
+  }
+
+  static deserialize(data) {
+    return new PrintTask(data.text);
   }
 }

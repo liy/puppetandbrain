@@ -1,7 +1,6 @@
 import Stage from '../Stage';
 import Entity from './Entity';
 import mixin from '../utils/mixin';
-import Command from '../commands/Command'
 import EntryTask from '../tasks/EntryTask'
 import TaskEvent from '../tasks/TaskEvent'
 
