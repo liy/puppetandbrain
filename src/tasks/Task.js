@@ -9,7 +9,6 @@ export default class Task extends EventEmitter
 
     this.id = ++ID;
 
-    this.parent = null;
     this.next = null;
   }
 
@@ -34,7 +33,6 @@ export default class Task extends EventEmitter
   pod() {
     return {
       class: this.__proto__.constructor.name,
-      next: this.next ? this.next.id : undefined
     }
   }
 

@@ -16,13 +16,13 @@ export default class MoveTask extends Task
     })
   }
 
-  serialize() {
-    return JSON.stringify({
-      class: 'Move',
+  pod() {
+    return {
+      ...super.pod(),
       target: this.target,
       duration: this.duration,
       ref: this.ref.id
-    })
+    }
   }
 
   static deserialize(data) {
