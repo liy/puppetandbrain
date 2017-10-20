@@ -2,6 +2,8 @@ import Stage from '../Stage';
 import Entity from './Entity';
 import mixin from '../utils/mixin';
 import Command from '../commands/Command'
+import EntryTask from '../tasks/EntryTask'
+import TaskEvent from '../tasks/TaskEvent'
 
 /**
  * Actor shows up on the stage!
@@ -15,8 +17,9 @@ export default class Actor extends PIXI.Container
   constructor(id) {
     super();
 
-    this.cmd = new Command();
-    this.cmd.target = this;
+    this.entryTasks = {
+      [TaskEvent.GAME_START]: new EntryTask(TaskEvent.GAME_START)
+    };
 
     mixin(this, new Entity(id));
   }

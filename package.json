@@ -1,5 +1,5 @@
 {
-  "name": "object-template",
+  "name": "puppet-editor",
   "version": "0.1.0",
   "description": "",
   "main": "./src",
@@ -8,6 +8,10 @@
     "build": "./node_modules/.bin/webpack -p"
   },
   "author": "Zhengyi Li <liy8272@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/team-puppets/editor"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

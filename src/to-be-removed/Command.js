@@ -7,16 +7,16 @@ export default class Command extends EventEmitter
   constructor() {
     super()
     this.id = ++ID;
-    this.target = null;
 
     this.children = []
   }
 
-  add(...cmds) {
-    for(let cmd of cmds) {
-      cmd.target = this.target;
-    }
-    this.children.push(...cmds);
+  chain(...cmds) {
+    this.children.push(cmds[0])
+    return cmds.reduce((result, current) => {
+      result.children.push(current)
+      return current
+    })
   }
 
   async run() {
@@ -31,19 +31,6 @@ export default class Command extends EventEmitter
     return Promise.all(promises);
   }
 
-  start() {
-    this.emit('start');
-    return Promise.resolve();
-  }
-
-  process() {
-    return Promise.resolve();
-  }
-
-  end() {
-    this.emit('end');
-    return Promise.resolve();
-  }
 
   serialize() {
     let data = Object.assign({
