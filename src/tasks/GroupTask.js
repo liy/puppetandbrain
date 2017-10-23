@@ -2,9 +2,9 @@ import Task from './Task'
 
 export default class GroupTask extends Task
 {
-  constructor(tasks=[]) {
-    super();
-    this.tasks = tasks;
+  constructor(data={}) {
+    super(data);
+    this.tasks = data.tasks || [];
   }
 
   add(...tasks) {
@@ -32,6 +32,10 @@ export default class GroupTask extends Task
   }
 
   static deserialize(data) {
-    return new MoveTask(LookUp.get(data.ref), data.target, data.duration);
+    let tasks = [];
+    for(let taskData of data.tasks) {
+      tasks.push(new taskData.class(taskData))
+    }
+    return new GroupTask({tasks})
   }
 }

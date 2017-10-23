@@ -1,13 +1,12 @@
 import Task from './Task';
-import LookUp from '../objects/LookUp'
 
 export default class MoveTask extends Task
 {
-  constructor(ref, target, duration) {
-    super();
-    this.ref = ref;
-    this.target = target;
-    this.duration = duration;
+  constructor(data) {
+    super(data);
+    this.ref = data.ref;
+    this.target = data.target;
+    this.duration = data.duration;
   }
 
   process() {
@@ -26,6 +25,6 @@ export default class MoveTask extends Task
   }
 
   static deserialize(data) {
-    return new MoveTask(LookUp.get(data.ref), data.target, data.duration);
+    return new MoveTask(data);
   }
 }

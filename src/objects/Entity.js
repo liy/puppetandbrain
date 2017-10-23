@@ -1,5 +1,3 @@
-
-import LookUp from './LookUp';
 import EventEmitter from '../utils/EventEmitter'
 
 export default class Entity extends EventEmitter
@@ -8,9 +6,7 @@ export default class Entity extends EventEmitter
     super();
 
     this.components = Object.create(null);
-
-    // create an entry in the reference look up
-    this.id = LookUp.create(this, id);
+    this.id = id;
   }
 
   addComponent(component) {

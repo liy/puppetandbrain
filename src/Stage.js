@@ -5,7 +5,7 @@ class Stage extends PIXI.Container
   constructor() {
     super();
 
-    this.entities = {};
+    this.actors = [];
   }
 
   init(width, height) {
@@ -22,19 +22,22 @@ class Stage extends PIXI.Container
     catcher.on('mousedown', Selection.deselectAll.bind(Selection));
   }
 
-  addChild(entity) {
-    if(entity.id) this.entities[entity.id] = entity;
-    super.addChild(entity);
+  addActor(actor) {
+    this.addChild(actor);
+    this.actors.push(actor.id);
   }
 
-  removeChild(entity) {
-    super.removeChild(entity);
-    if(entity.id) delete this.entities[entity.id];
+  removeActor(actor) {
+    this.removeChild(actor)
+    let index = this.actors.indexOf(actor.id);
+    if(index != -1) this.actors.splice(index);
   }
 
-  removeChildAt(index) {
-    let entity = super.removeChildAt(index);
-    if(entity.id) delete this.entities[entity.id];
+  removeActorAt(index) {
+    let id = super.removeChildAt(index);
+    if(id) {
+      this.actors.splice(index);
+    }
   }
 }
 

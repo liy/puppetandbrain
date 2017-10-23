@@ -7,14 +7,14 @@ export default class EntryTask extends Task
    * @param {String} type Event type
    * @memberof EventTask
    */
-  constructor(type) {
-    super();
+  constructor(data) {
+    super(data);
 
-    this.type = type;
+    this.type = data.type;
   }
 
   async run() {
-    return this.next.run();
+    return this.execution.default.run();
   }
 
   pod() {

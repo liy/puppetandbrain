@@ -8,20 +8,22 @@ require('pixi-spine');
 // require('./assets/cow/cow.json')
 
 
+require('./utils/ActorLookUp')
+require('./utils/TaskLookUp')
+
 
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import Stage from './Stage';
 
 import TaskEvent from './tasks/TaskEvent';
+import EntryTask from './tasks/EntryTask';
 import DelayTask from './tasks/DelayTask';
 import MoveTask from './tasks/MoveTask';
 import GroupTask from './tasks/GroupTask';
 import PrintTask from './tasks/PrintTask';
 
-import RoutePod from './tasks/RoutePod'
-
-import Classier from './Classifier';
+import ActivitySerializer from './ActivitySerializer';
 
 
 var appDiv = document.getElementById('app');
@@ -56,7 +58,7 @@ cow.scale = {
 }
 cow.x = 400;
 cow.y = 300;
-Stage.addChild(cow)
+Stage.addActor(cow)
 
 // let m1 = new Move({x: 100, y: 100}, 1000);
 // let m2 = new Move({x: 400, y: 400}, 2000);
@@ -66,19 +68,25 @@ Stage.addChild(cow)
 
 let groupTask = new GroupTask()
 groupTask.add(
-  new PrintTask('test 1'),
-  new PrintTask('test 2'),
-  new PrintTask('test 3'),
+  new PrintTask({text:'test 1'}),
+  new PrintTask({text:'test 2'}),
+  new PrintTask({text:'test 3'}),
 )
 
-
-cow.entryTasks[TaskEvent.GAME_START].chain(new DelayTask(2000))
-                 .chain(groupTask, new DelayTask(2000))
-                 .chain(new MoveTask(cow, {x:0,y:0}, 1000));
+cow.entryTasks[TaskEvent.GAME_START] = new EntryTask({type:TaskEvent.GAME_START})
+cow.entryTasks[TaskEvent.GAME_START].chain(new DelayTask({miniseconds:2000}))
+                 .chain(groupTask, new DelayTask({miniseconds:2000}))
+                 .chain(new MoveTask({ref:cow, target:{x:0,y:0}, duration:1000}));
 
 cow.entryTasks[TaskEvent.GAME_START].run().then(() => {
   console.log('all done')
 })
 
-let s = new RoutePod(cow);
-console.log( JSON.stringify(s.start()) );
+
+
+// console.log(ActorLookUp.load(ActorLookUp.pod()));
+// console.log(TaskLookUp.pod());
+
+
+let as = new ActivitySerializer();
+console.log(as.start());

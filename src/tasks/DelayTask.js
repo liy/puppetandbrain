@@ -1,11 +1,10 @@
 import Task from './Task';
-import LookUp from '../objects/LookUp'
 
 export default class DelayTask extends Task
 {
-  constructor(miniseconds) {
-    super();
-    this.miniseconds = miniseconds;
+  constructor(data) {
+    super(data);
+    this.miniseconds = data.miniseconds;
   }
 
   process() {
@@ -21,14 +20,7 @@ export default class DelayTask extends Task
     }
   }
 
-  serialize() {
-    return JSON.stringify({
-      class: 'Delay',
-      miniseconds: this.miniseconds
-    })
-  }
-
   static deserialize(data) {
-    return new Delay(data.miniseconds);
+    return new Delay(data);
   }
 }

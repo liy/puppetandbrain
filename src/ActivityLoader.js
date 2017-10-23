@@ -13,4 +13,12 @@ export default class ActivityLoader
       // TODO: parse commands
     })
   }
+
+  parseActor() {
+
+  }
+
+  parseTask() {
+    
+  }
 }

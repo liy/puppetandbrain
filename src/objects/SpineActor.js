@@ -1,6 +1,5 @@
 import JSONLoader from '../JSONLoader';
 import Actor from './Actor';
-import Entity from './Entity';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import SelectionComponent from '../components/SelectionComponent';
 import DragComponent from '../components/DragComponent';
@@ -41,12 +40,11 @@ export default class SpineActor extends Actor
     return this.spineComponent.getAnimations();
   }
 
-  serialize() {
-    return JSON.stringify({
-      class: 'SpineActor',
-      id: this.id,
+  pod() {
+    return {
+      ...super.pod(),
       url: this.url,
-    })
+    }
   }
 
   static deserialize(data) {

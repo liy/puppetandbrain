@@ -2,14 +2,14 @@ import Task from './Task'
 
 export default class PrintTask extends Task
 {
-  constructor(text) {
-    super();
-    this.text = text;
+  constructor(data) {
+    super(data);
+    this.text = data.text;
   }
 
   process() {
     // TODO: print on the actual editor console
-    console.log(this.str);
+    console.log(this.text);
     return Promise.resolve()
   }
 
@@ -21,6 +21,6 @@ export default class PrintTask extends Task
   }
 
   static deserialize(data) {
-    return new PrintTask(data.text);
+    return new PrintTask(data);
   }
 }

@@ -5,8 +5,8 @@ import DragComponent from '../components/DragComponent';
 
 export default class SpriteActor extends Actor
 {
-  constructor(url) {
-    super();
+  constructor(url, id) {
+    super(id);
     
     let sprite = PIXI.Sprite.fromImage(url);
     this.loaded = new Promise((resolve, reject) => {
@@ -17,13 +17,5 @@ export default class SpriteActor extends Actor
     this.addComponent(new PlaceHolderComponent());
     this.addComponent(new SelectionComponent());
     this.addComponent(new DragComponent());
-  }
-
-  serialize() {
-
-  }
-
-  static descerialize(str) {
-
   }
 }
