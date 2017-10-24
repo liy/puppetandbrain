@@ -14,8 +14,13 @@ export default class Actor extends PIXI.Container
 {
   constructor(id) {
     super();
+    
+    // create an entry in the reference look up
+    this.id = ActorLookUp.create(this, id);
 
-    this.entryTasks = {
+    this.name = 'Actor ' + this.id;
+
+    this.functions = {
       // TODO: maybe remove default entry task?
       // [TaskEvent.GAME_START]: new EntryTask({type:TaskEvent.GAME_START})
     };
@@ -23,9 +28,6 @@ export default class Actor extends PIXI.Container
     mixin(this, new Entity(id));
 
     this.childActors = [];
-    
-    // create an entry in the reference look up
-    this.id = ActorLookUp.create(this, id);
   }
 
   addActor(actor) {
@@ -48,8 +50,8 @@ export default class Actor extends PIXI.Container
     return {
       class: this.__proto__.constructor.name,
       id: this.id,
-      tasks: TaskWalker.pod(this.entryTasks),
-      childActors: this.childActors.concat()
+      name: this.name,
+      childActors: this.childActors.concat(),
     }
   }
 }

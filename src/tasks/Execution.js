@@ -27,10 +27,13 @@ export default class Execution
   }
 
   pod() {
-    let ids = [];
+    let data = [];
     for(let option of this.options) {
-      ids.push(option.task.id)
+      data.push({
+        name: option.name,
+        id: option.task.id
+      })
     }
-    return ids
+    return data
   }
 }

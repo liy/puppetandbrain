@@ -3,19 +3,17 @@ import Execution from './Execution'
 
 export default class Task extends EventEmitter
 {
-  constructor(data) {
+  constructor(actor, id) {
     super();
 
-    this.id = TaskLookUp.create(this, data.id);
-
+    this.id = TaskLookUp.create(this, id);
+    this.actor = actor;
     this.execution = new Execution();
+
+    this.inputs = new DataCollection();
+    this.outputs = new DataCollection();
   }
 
-  async run() {
-    await this.process();
-    this.emit('task.complete')
-    return this.execution.default ? this.execution.default.run() : Promise.resolve();
-  }
 
   chain(...tasks) {
     return tasks.reduce((result, current) => {
@@ -25,6 +23,12 @@ export default class Task extends EventEmitter
     }, this);
   }
 
+  async run() {
+    await this.process();
+    this.emit('task.complete')
+    return this.execution.default ? this.execution.default.run() : Promise.resolve();
+  }
+
   process() {
     return Promise.resolve();
   }
@@ -32,7 +36,8 @@ export default class Task extends EventEmitter
   pod() {
     return {
       class: this.__proto__.constructor.name,
-      execution: this.execution.pod()
+      execution: this.execution.pod(),
+      actor: this.actor.id
     }
   }
 }

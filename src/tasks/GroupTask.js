@@ -8,10 +8,10 @@ export default class GroupTask extends Task
   }
 
   add(...tasks) {
-    for(let task of tasks) {
-      task.parent = this
-    }
     this.tasks.push(...tasks);
+    for(let task of this.tasks) {
+      task.parent = this;
+    }
   }
 
   process() {

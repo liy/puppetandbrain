@@ -2,11 +2,10 @@ import EventEmitter from '../utils/EventEmitter'
 
 export default class Entity extends EventEmitter
 {
-  constructor(id) {
+  constructor() {
     super();
 
     this.components = Object.create(null);
-    this.id = id;
   }
 
   addComponent(component) {
