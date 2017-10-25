@@ -1,19 +1,16 @@
 import Task from './Task'
+import {Data, DataType} from '../utils/DataCollection'
 
 export default class AnimationTask extends Task
 {
-  constructor(data) {
-    super(data);
+  constructor(actor, id) {
+    super(actor, id);
 
-    this.params = {
-      animationName: data.animationName,
-    }
+    this.inputs.add('animationName', new Data(DataType.TEXT, ''));
   }
 
-  process(params) {
-    // override hardcoded animation name with passed params
-    this.params.animationName = params.animationName;
-    this.actor.setAnimation(this.params.animationName);
+  process() {
+    this.actor.setAnimation(this.inputs.get('animationName'));
     return Promise.resolve();
   }
 

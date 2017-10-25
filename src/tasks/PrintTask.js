@@ -1,15 +1,17 @@
 import Task from './Task'
+import {Data, DataType} from '../utils/DataCollection'
 
 export default class PrintTask extends Task
 {
   constructor(data) {
     super(data);
-    this.text = data.text;
+
+    this.inputs.add('text', new Data(DataType.TEXT, ''))
   }
 
   process() {
     // TODO: print on the actual editor console
-    console.log(this.text);
+    console.log(this.inputs.get('text'));
     return Promise.resolve()
   }
 

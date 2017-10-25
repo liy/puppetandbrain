@@ -1,5 +1,6 @@
 import EventEmitter from '../utils/EventEmitter'
 import Execution from './Execution'
+import {DataCollection} from '../utils/DataCollection'
 
 export default class Task extends EventEmitter
 {
@@ -37,7 +38,9 @@ export default class Task extends EventEmitter
     return {
       class: this.__proto__.constructor.name,
       execution: this.execution.pod(),
-      actor: this.actor.id
+      actor: this.actor.id,
+      inputs: this.inputs.pod(),
+      outputs: this.outputs.pod()
     }
   }
 }

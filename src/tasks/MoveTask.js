@@ -1,24 +1,28 @@
 import Task from './Task';
+import {Data, DataType} from '../utils/DataCollection'
 
 export default class MoveTask extends Task
 {
-  constructor(data) {
-    super(data);
-    this.target = data.target;
-    this.duration = data.duration;
+  constructor(actor, id) {
+    super(actor, id);
+
+    this.inputs.add('position', new Data(DataType.NUMBER, {x:actor.x+100,y:actor.y}));
+    this.inputs.add('duration', new Data(DataType.NUMBER, 1));
   }
 
   process() {
     return new Promise(resolve => {
-      TweenLite.to(this.actor, this.duration/1000, {...this.target, onComplete: resolve});
+      TweenLite.to(this.actor, this.inputs.get('duration'), {...this.inputs.get('position'), onComplete: resolve});
     })
   }
 
   pod() {
     return {
       ...super.pod(),
-      target: this.target,
-      duration: this.duration
+      inputs: {
+        position: this.inputs.get('position'),
+        duration: this.inputs.get('duration')
+      }
     }
   }
 

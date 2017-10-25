@@ -1,15 +1,16 @@
 import Task from './Task';
+import {Data, DataType} from '../utils/DataCollection'
 
 export default class DelayTask extends Task
 {
-  constructor(data) {
-    super(data);
-    this.miniseconds = data.miniseconds;
+  constructor(actor, id) {
+    super(actor, id);
+    this.inputs.add('seconds', new Data(DataType.NUMBER, 1));
   }
 
   process() {
     return new Promise((resolve, reject) => {
-      setTimeout(resolve, this.miniseconds)
+      setTimeout(resolve, this.inputs.get('seconds'))
     });
   }
 

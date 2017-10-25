@@ -85,14 +85,16 @@ functionTask.chain(animationTask);
 
 
 
-let groupTask = new GroupTask({actor:cow})
+let groupTask = new GroupTask(cow)
 groupTask.add(
   new PrintTask({text:'test 1', actor:cow}),
   new PrintTask({text:'test 2', actor:cow}),
   new PrintTask({text:'test 3', actor:cow}),
 )
-let callTask = new CallFunctionTask({actor:cow, callee:cow2, functionName:'playAnimation'});
-callTask.params.animationName = 'interactive'
+let callTask = new CallFunctionTask();
+callTask.inputs.set('callee', cow2.id)
+callTask.inputs.set('functionName', 'playAnimation')
+callTask.inputs.set('animationName','interactive')
 cow.functions[FunctionName.GAME_START] = new FunctionTask({name:FunctionName.GAME_START, actor:cow})
 cow.functions[FunctionName.GAME_START]
                  .chain(new DelayTask({miniseconds:2000, actor:cow}))
@@ -107,5 +109,5 @@ cow.functions[FunctionName.GAME_START].run().then(() => {
 
 
 
-let as = new ActivitySerializer();
-console.log(as.start());
+// let as = new ActivitySerializer();
+// console.log(as.start());
