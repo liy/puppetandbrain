@@ -70,19 +70,12 @@ export class DataCollection
     }
   }
 
-  // link(sourceName, targetData) {
-  //   let sourceData = this.map[sourceName];
-  //   let index = this.ids.indexOf(sourceData.id);
-  //   this.ids[index] = targetData.id
-
-  //   this.map[sourceName].deref();
-  //   this.map[sourceName] = targetData.id;
-  //   targetData.ref();
-  // }
-
   reference(sourceName, targetData) {
     let sourceID = this.map[sourceName];
     let index = this.ids.indexOf(sourceID);
+
+    // Remove source data from look up table
+    DataLookUp.remove(sourceID)
 
     this.ids[index] = targetData.id
     this.map[sourceName] = targetData.id

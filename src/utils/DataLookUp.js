@@ -14,8 +14,8 @@ window.DataLookUp = {
     return id;
   },
 
-  remove: function(target) {
-    delete this.data[target.id];
+  remove: function(id) {
+    delete this.data[id];
   },
 
   get: function(id) {
