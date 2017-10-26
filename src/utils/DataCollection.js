@@ -31,8 +31,8 @@ export class DataCollection
     this.counter = 0;
   }
 
-  create() {
-    let data = new Data(DataType.TEXT);
+  create(type=DataType.TEXT) {
+    let data = new Data(type);
     this.map['data ' + (++this.counter)] = data.id;
     this.ids.push(data.id);
     return data;
@@ -45,9 +45,13 @@ export class DataCollection
   }
 
   rename(name, newName) {
+    if(this.map[newName]) return false;
+
     let data = this.map[name];
     delete this.map[name]
     this.map[newName] = data;
+
+    return true;
   }
 
   remove(data) {
@@ -66,14 +70,22 @@ export class DataCollection
     }
   }
 
-  link(sourceName, targetData) {
-    let sourceData = this.map[sourceName];
-    let index = this.ids.indexOf(sourceData.id);
-    this.ids[index] = targetData.id
+  // link(sourceName, targetData) {
+  //   let sourceData = this.map[sourceName];
+  //   let index = this.ids.indexOf(sourceData.id);
+  //   this.ids[index] = targetData.id
 
-    this.map[sourceName].deref();
-    this.map[sourceName] = targetData.id;
-    targetData.ref();
+  //   this.map[sourceName].deref();
+  //   this.map[sourceName] = targetData.id;
+  //   targetData.ref();
+  // }
+
+  reference(sourceName, targetData) {
+    let sourceID = this.map[sourceName];
+    let index = this.ids.indexOf(sourceID);
+
+    this.ids[index] = targetData.id
+    this.map[sourceName] = targetData.id
   }
 
   /**
@@ -89,6 +101,11 @@ export class DataCollection
 
   set(name, value) {
     DataLookUp.get(this.map[name]).value = value;
+    return this;
+  }
+
+  getData(name) {
+    return DataLookUp.get(this.map[name]);
   }
 
   pod() {

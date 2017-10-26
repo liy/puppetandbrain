@@ -6,12 +6,12 @@ import DataLookUp from '../utils/DataLookUp'
  * Function call task
  * 
  * @export
- * @class CallFunctionTask
+ * @class FunctionCallTask
  * @extends {Task}
  */
-export default class CallFunctionTask extends Task
+export default class FunctionCallTask extends Task
 {
-  constructor(actor, id) {
+  constructor(functionTask, actor, id) {
     super(actor, id);
 
     // this.async = data.async || false;
@@ -29,34 +29,27 @@ export default class CallFunctionTask extends Task
     //   functioName: 0,
     //   async: 0
     // }
-    this.inputs.add('callee', new Data(DataType.REFERENCE));
-    this.inputs.add('functionName', new Data(DataType.TEXT));
-    this.inputs.add('animationName', new Data(DataType.TEXT));
-    this.inputs.add('async', new Data(DataType.BOOL));
     
+    this.inputs.add('async', new Data(DataType.BOOL));
+    this.functionTask = functionTask;
   }
 
   process() {
-    let callee = ActorLookUp.get(this.inputs.get('callee'));
-    if(callee && callee.functions[this.inputs.get('functionName')]) {
-      let funcTask = callee.functions[this.inputs.get('functionName')]
-      if(this.inputs.get('async')) {
-        // Do not wait for other actor to complete the data
-        funcTask.run();
-        return Promise.resolve();
-      }
-      else {
-        // return a promise for run method to wait.
-        return funcTask.run();
-      }
+    if(this.inputs.get('async')) {
+      // Do not wait for other actor to complete the data
+      this.functionTask.run();
+      return Promise.resolve();
+    }
+    else {
+      // return a promise for run method to wait.
+      return this.functionTask.run();
     }
   }
 
   pod() {
     return {
       ...super.pod(),
-      callee: this.callee.id,
-      functionName: this.functionName,
+      functionTask: this.functionTask.id,
       async: this.async,
     }
   }

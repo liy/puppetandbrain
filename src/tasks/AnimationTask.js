@@ -3,10 +3,10 @@ import {Data, DataType} from '../utils/DataCollection'
 
 export default class AnimationTask extends Task
 {
-  constructor(actor, id) {
+  constructor(animationName, actor, id) {
     super(actor, id);
 
-    this.inputs.add('animationName', new Data(DataType.TEXT, ''));
+    this.inputs.add('animationName', new Data(DataType.TEXT, animationName));
   }
 
   process() {

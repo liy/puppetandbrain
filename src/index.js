@@ -16,6 +16,8 @@ import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import Stage from './Stage';
 
+import {Data, DataType} from './utils/DataCollection'
+
 import FunctionName from './tasks/FunctionName';
 import FunctionTask from './tasks/FunctionTask';
 import DelayTask from './tasks/DelayTask';
@@ -23,7 +25,7 @@ import MoveTask from './tasks/MoveTask';
 import GroupTask from './tasks/GroupTask';
 import PrintTask from './tasks/PrintTask';
 import AnimationTask from './tasks/AnimationTask';
-import CallFunctionTask from './tasks/CallFunctionTask';
+import FunctionCallTask from './tasks/FunctionCallTask';
 
 import ActivitySerializer from './ActivitySerializer';
 
@@ -75,32 +77,44 @@ cow2.x = 700;
 cow2.y = 500;
 Stage.addActor(cow2)
 
-
-let functionTask = new FunctionTask({name:'playAnimation', actor:cow2, params: {
-  animationName: ''
-}});
-let animationTask = new AnimationTask({actor:cow2, params: {animationName: 'walk'}});
-cow2.functions['playAnimation'] = functionTask;
+let animationTask = new AnimationTask('walk', cow2);
+let functionTask = new FunctionTask('playAnimation',cow2);
+functionTask.outputs.add('animationName', new Data(DataType.TEXT))
 functionTask.chain(animationTask);
 
+animationTask.inputs.reference('animationName', functionTask.outputs.getData('animationName'));
 
+
+
+
+let callTask = new FunctionCallTask(functionTask, cow2);
+callTask.functionTask.outputs.set('animationName', 'interactive')
 
 let groupTask = new GroupTask(cow)
 groupTask.add(
-  new PrintTask({text:'test 1', actor:cow}),
-  new PrintTask({text:'test 2', actor:cow}),
-  new PrintTask({text:'test 3', actor:cow}),
+  new PrintTask('test 1', cow),
+  new PrintTask('test 2', cow),
+  new PrintTask('test 3', cow),
 )
-let callTask = new CallFunctionTask();
-callTask.inputs.set('callee', cow2.id)
-callTask.inputs.set('functionName', 'playAnimation')
-callTask.inputs.set('animationName','interactive')
-cow.functions[FunctionName.GAME_START] = new FunctionTask({name:FunctionName.GAME_START, actor:cow})
-cow.functions[FunctionName.GAME_START]
-                 .chain(new DelayTask({miniseconds:2000, actor:cow}))
-                 .chain(groupTask, new DelayTask({miniseconds:2000, actor:cow}))
-                 .chain(new MoveTask({target:{x:0,y:0}, duration:1000, actor:cow}))
+let moveTask = new MoveTask(cow);
+moveTask.inputs.set('position', {x:0,y:0})
+               .set('duration', 3)
+new FunctionTask(FunctionName.GAME_START, cow)
+                 .chain(new DelayTask(2, cow))
+                 .chain(groupTask, new DelayTask(2000, cow))
+                 .chain(moveTask)
                  .chain(callTask)
+
+
+
+
+
+
+
+
+
+
+
 cow.functions[FunctionName.GAME_START].run().then(() => {
   console.log('all done')
 })

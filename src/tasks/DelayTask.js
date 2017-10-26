@@ -3,9 +3,10 @@ import {Data, DataType} from '../utils/DataCollection'
 
 export default class DelayTask extends Task
 {
-  constructor(actor, id) {
+  constructor(seconds, actor, id) {
     super(actor, id);
-    this.inputs.add('seconds', new Data(DataType.NUMBER, 1));
+
+    this.inputs.add('seconds', new Data(DataType.NUMBER, seconds));
   }
 
   process() {

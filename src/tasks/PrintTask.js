@@ -3,10 +3,10 @@ import {Data, DataType} from '../utils/DataCollection'
 
 export default class PrintTask extends Task
 {
-  constructor(data) {
-    super(data);
+  constructor(text, actor, id) {
+    super(actor, id);
 
-    this.inputs.add('text', new Data(DataType.TEXT, ''))
+    this.inputs.add('text', new Data(DataType.TEXT, text))
   }
 
   process() {
