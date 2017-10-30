@@ -15,29 +15,37 @@ export class Data
 
 class Slot
 {
-  constructor(name) {
-    this.data = null;
-    this.name = name
-    this.owner = null;
-  }
-
-  init(owner) {
+  constructor(name, owner) {
+    this.data = new Data();
     this.owner = owner;
+    this._name = name
   }
 
   set name(name) {
     if(this.owner.canRename(this, name)) {
-      this.name = name;
+      this._name = name;
       return true;
     }
     return false;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  get value() {
+    return this.data.value;
+  }
+
+  set value(value) {
+    this.data.value = value;
   }
 }
 
 export class Input extends Slot
 {
-  constructor() {
-    super()
+  constructor(name, owner) {
+    super(name, owner)
   }
 
   link(output) {
@@ -53,13 +61,13 @@ export class Input extends Slot
 
 export class Output extends Slot
 {
-  constructor() {
-    super()
+  constructor(name, owner) {
+    super(name, owner)
   }
 
   link(input) {
     if(input instanceof Input) {
-      this.from(input);
+      this.to(input);
     }
   }
 
@@ -73,8 +81,18 @@ export class DataArray
   constructor(type="input") {
     this.type = type;
     this.slots = [];
+    this.map = Object.create(null);
 
     this.counter = 0;
+  }
+
+  create(name) {
+    name = name || this.type + (++this.counter);
+    let slot = (this.type == 'input') ? new Input(name, this) : new Output(name, this);
+    this.map[name] = slot;
+    this.slots.push(slot)
+
+    return slot;
   }
 
   canRename(slot, name) {
@@ -85,21 +103,22 @@ export class DataArray
     return true;
   }
 
-  create(name) {
-    name = name || this.type + (++this.counter);
-    return (this.type == 'input') ? new Input(name) : new Output(name); 
-  }
-
-  find(name) {
-    return this.slots.find(slot => {
-      return slot.name == name;
-    })
-  }
-
   remove(name) {
     let index = this.slots.findIndex(slot => {
       return slot.name == name;
     })
     return this.slots.splice(index, 1);
+  }
+
+  slot(name) {
+    return this.map[name]
+  }
+
+  data(name) {
+    return this.map[name] ? this.map[name].data : null;
+  }
+
+  value(name) {
+    return this.map[name] ? this.map[name].data.value : null;
   }
 }

@@ -1,12 +1,11 @@
 import Task from './Task'
-import {Data, DataType} from '../utils/DataCollection'
 
 export default class GroupTask extends Task
 {
   constructor(actor, id) {
     super(actor, id);
 
-    this.tasks = this.inputs.add('tasks', new Data(DataType.ARRAY, [])).value;
+    this.tasks = this.inputs.create('tasks').value = [];
   }
 
   add(...tasks) {

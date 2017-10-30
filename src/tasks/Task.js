@@ -1,6 +1,6 @@
 import EventEmitter from '../utils/EventEmitter'
 import Execution from './Execution'
-import {DataCollection} from '../utils/DataCollection'
+import {DataArray} from '../Data';
 
 export default class Task extends EventEmitter
 {
@@ -11,8 +11,8 @@ export default class Task extends EventEmitter
     this.actor = actor;
     this.execution = new Execution();
 
-    this.inputs = new DataCollection();
-    this.outputs = new DataCollection();
+    this.inputs = new DataArray('input');
+    this.outputs = new DataArray('output');
   }
 
 

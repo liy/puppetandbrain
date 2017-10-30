@@ -1,5 +1,4 @@
 import Task from './Task'
-import {Data, DataType} from '../utils/DataCollection'
 import DataLookUp from '../utils/DataLookUp'
 
 /**
@@ -30,12 +29,12 @@ export default class FunctionCallTask extends Task
     //   async: 0
     // }
     
-    this.inputs.add('async', new Data(DataType.BOOL));
+    this.inputs.create('async').value = true;
     this.functionTask = functionTask;
   }
 
   process() {
-    if(this.inputs.get('async')) {
+    if(this.inputs.value('async')) {
       // Do not wait for other actor to complete the data
       this.functionTask.run();
       return Promise.resolve();

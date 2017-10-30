@@ -1,5 +1,4 @@
 import Task from './Task'
-import {Data, DataType} from '../utils/DataCollection'
 
 export default class FunctionTask extends Task
 {
@@ -11,7 +10,7 @@ export default class FunctionTask extends Task
   constructor(name, actor, id) {
     super(actor, id);
 
-    let functionName = this.inputs.add('name', new Data(DataType.TEXT, name)).value;
+    let functionName = this.inputs.create('name').value = name;
     this.actor.functions[functionName] = this;
   }
 

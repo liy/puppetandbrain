@@ -16,8 +16,6 @@ import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import Stage from './Stage';
 
-import {Data, DataType} from './utils/DataCollection'
-
 import FunctionName from './tasks/FunctionName';
 import FunctionTask from './tasks/FunctionTask';
 import DelayTask from './tasks/DelayTask';
@@ -79,16 +77,17 @@ Stage.addActor(cow2)
 
 let animationTask = new AnimationTask('walk', cow2);
 let functionTask = new FunctionTask('playAnimation',cow2);
-functionTask.outputs.add('animationName', new Data(DataType.TEXT))
+functionTask.outputs.create('animationName')
 functionTask.chain(animationTask);
 
-animationTask.inputs.reference('animationName', functionTask.outputs.getData('animationName'));
+// animationTask.inputs.slot('animationName').link(functionTask.outputs.slot('animationName'));
+functionTask.outputs.slot('animationName').link(animationTask.inputs.slot('animationName'));
 
 
 
 
 let callTask = new FunctionCallTask(functionTask, cow2);
-callTask.functionTask.outputs.set('animationName', 'interactive')
+callTask.functionTask.outputs.data('animationName').value = 'interactive'
 
 let groupTask = new GroupTask(cow)
 groupTask.add(
@@ -97,8 +96,9 @@ groupTask.add(
   new PrintTask('test 3', cow),
 )
 let moveTask = new MoveTask(cow);
-moveTask.inputs.set('position', {x:0,y:0})
-               .set('duration', 3)
+moveTask.inputs.data('position').value = {x:0,y:0};
+moveTask.inputs.data('duration').value = 3;
+
 new FunctionTask(FunctionName.GAME_START, cow)
                  .chain(new DelayTask(2, cow))
                  .chain(groupTask, new DelayTask(2000, cow))
