@@ -15,7 +15,7 @@ export default class MoveTask extends Task
 
   process() {
     return new Promise(resolve => {
-      TweenLite.to(this.actor, this.inputs.value('duration'), {...this.inputs.value('position'), onComplete: resolve});
+      TweenLite.to(this.actor, this.inputs.value('duration'), {...this.inputs.value('position'), ease:Linear.easeNone, onComplete: resolve});
     })
   }
 
