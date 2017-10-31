@@ -17,6 +17,12 @@ export default class FunctionTask extends Task
     this.actor.functions[functionName] = this;
   }
 
+  fill(pod) {
+    super.fill(pod);
+    let functionName = this.inputs.value('name');
+    this.actor.functions[functionName] = this;
+  }
+
   rename(name) {
     // validate there are no same function names
     if(this.actor.functions[name]) return false;
