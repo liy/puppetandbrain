@@ -44,11 +44,14 @@ export default class SpineActor extends Actor
     return {
       ...super.pod(),
       url: this.url,
+      position: {
+        x: this.x,
+        y: this.y,
+      },
+      scale: {
+        x: this.scale.x,
+        y: this.scale.y
+      }
     }
-  }
-
-  static deserialize(data) {
-    let actor = new SpineActor(data.url, data.id);
-    return actor;
   }
 }

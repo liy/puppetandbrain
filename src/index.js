@@ -54,22 +54,8 @@ PIXI.ticker.shared.add(render);
 
 
 function init() {
-  var cow = new SpineActor(require('./assets/cow/cow.info.json'));
-  cow.setAnimation('walk');
-  cow.getAnimations().then(animations => {
-    // console.log(animations)
-  })
-  cow.scale = {
-    x: 0.5,
-    y: 0.5
-  }
-  cow.x = 0;
-  cow.y = 768/2;
-  Stage.addActor(cow)
-  
-  
+  // Donkey!  
   var donkey = new SpineActor(require('./assets/donkey/donkey.info.json'));
-  donkey.setAnimation('static');
   donkey.scale = {
     x: 0.5,
     y: 0.5
@@ -77,43 +63,58 @@ function init() {
   donkey.x = 1024/1.5;
   donkey.y = 768/2;
   Stage.addActor(donkey)
-  
+
   let animationTask = new AnimationTask();
   animationTask.init({
     actor: donkey,
     name: 'walk'
   })
-  let functionTask = new FunctionTask();
-  functionTask.init({
+  let onDonkeyExcit = new FunctionTask();
+  onDonkeyExcit.init({
     actor: donkey,
     name: 'playAnimation'
   })
-  functionTask.outputs.create('animationName', 'walk')
-  functionTask.outputs.slot('animationName').link(animationTask.inputs.slot('name'));
-  functionTask.chain(animationTask);
+  onDonkeyExcit.outputs.create('animationName')
+                     .link(animationTask.inputs.slot('name'));
+  onDonkeyExcit.chain(animationTask);
   
   
-  let callTask = new FunctionCallTask();
-  callTask.init({
+  // Cow
+  var cow = new SpineActor(require('./assets/cow/cow.info.json'));
+  cow.scale = {
+    x: 0.5,
+    y: 0.5
+  }
+  cow.x = 0;
+  cow.y = 768/2;
+  Stage.addActor(cow)
+
+
+  
+  let staticAnimationTask = new AnimationTask();
+  staticAnimationTask.init({
     actor: cow,
-    target: functionTask,
-  })
-  // function call task acts like wrapper around the target function task
-  callTask.target.outputs.data('animationName').value = 'interactive'
-  
+    name: 'static'
+  });
+
+  let delayTask = new DelayTask();
+  delayTask.init({
+    actor: cow,
+    seconds: 2
+  });
+
   let groupTask = new GroupTask()
   groupTask.init({
     actor: cow,
   })
-  for(let i=0; i<3; ++i) {
-    let task = new PrintTask();
-    task.init({
-      actor: cow,
-      text: 'test ' + (i+1)
-    })
-    groupTask.add(task)
-  }
-  
+  groupTask.add(staticAnimationTask, delayTask);
+
+  let walkAnimationTask = new AnimationTask();
+  walkAnimationTask.init({
+    actor: cow,
+    name: 'walk'
+  });
+
   let moveTask = new MoveTask(cow);
   moveTask.init({
     actor: cow,
@@ -126,16 +127,17 @@ function init() {
     actor: cow,
     name: FunctionName.GAME_START
   })
-  let delayTask = new DelayTask();
-  delayTask.init({
+  
+  let callTask = new FunctionCallTask();
+  callTask.init({
     actor: cow,
-    seconds: 2
-  });
-  startTask.chain(delayTask)
-           .chain(groupTask, moveTask)
+    target: onDonkeyExcit,
+  })
+  // function call task acts like wrapper around the target function task
+  callTask.target.outputs.data('animationName').value = 'interactive'
+
+  startTask.chain(groupTask, walkAnimationTask, moveTask)
            .chain(callTask)
-  
-  
   
   Promise.all([cow.loaded, donkey.loaded]).then(() => {
     startTask.run().then(() => {
@@ -161,7 +163,7 @@ async function load() {
     console.log(LookUp.pod())
 
     // HACK, I know item 35 is a start function
-    LookUp.get(35).run().then(() => {
+    LookUp.get(21).run().then(() => {
       console.log('all done')
     })
   })

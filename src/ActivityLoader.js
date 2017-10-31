@@ -41,6 +41,9 @@ export default class ActivityLoader
   createActors(pod) {
     var add = function(container, actorData) {
       let actor = new scope[actorData.class](actorData.url, actorData.id);
+      actor.x = actorData.position.x;
+      actor.y = actorData.position.y;
+      actor.scale = actorData.scale;
       container.addActor(actor);
 
       for(let i=0; i<actorData.childActors.length; ++i) {
