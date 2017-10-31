@@ -51,8 +51,8 @@ class Slot
 
 export class Input extends Slot
 {
-  constructor(name, owner) {
-    super(name, owner)
+  constructor(name, owner, data) {
+    super(name, owner, data)
   }
 
   link(output) {
@@ -83,24 +83,13 @@ export class Output extends Slot
   }
 }
 
-export class DataArray
+class SlotList
 {
-  constructor(task, type="input") {
-    this.task = task;
-    this.type = type;
+  constructor() {
     this.slots = [];
     this.map = Object.create(null);
 
     this.counter = 0;
-  }
-
-  create(name) {
-    name = name || this.type + (++this.counter);
-    let slot = (this.type == 'input') ? new Input(name, this) : new Output(name, this);
-    this.map[name] = slot;
-    this.slots.push(slot)
-
-    return slot;
   }
 
   canRename(slot, name) {
@@ -135,10 +124,44 @@ export class DataArray
     for(let slot of this.slots) {
       slots.push(slot.pod())
     }
-    return {
-      type: this.type,
-      task: this.task.id,
-      slots
-    }
+    return slots
+  }
+}
+
+export class InputList extends SlotList
+{
+  constructor() {
+    super()
+  }
+
+  create(name, value) {
+    return this.add(name, new Data(value))
+  }
+
+  add(name, data) {
+    let slot = new Input(name, this, data);
+    this.map[name] = slot;
+    this.slots.push(slot)
+
+    return slot;
+  }
+}
+
+export class OutputList extends SlotList
+{
+  constructor() {
+    super()
+  }
+
+  create(name, value) {
+    return this.add(name, new Data(value))
+  }
+
+  add(name, data) {
+    let slot = new Output(name, this, data);
+    this.map[name] = slot;
+    this.slots.push(slot)
+
+    return slot;
   }
 }

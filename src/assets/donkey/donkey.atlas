@@ -1,0 +1,292 @@
+
+donkey.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: false
+  xy: 2, 1586
+  size: 711, 460
+  orig: 711, 460
+  offset: 0, 0
+  index: -1
+ear1
+  rotate: false
+  xy: 1873, 1775
+  size: 128, 271
+  orig: 128, 271
+  offset: 0, 0
+  index: -1
+ear2
+  rotate: true
+  xy: 873, 9
+  size: 146, 217
+  orig: 146, 217
+  offset: 0, 0
+  index: -1
+face1
+  rotate: true
+  xy: 1522, 2
+  size: 209, 177
+  orig: 209, 177
+  offset: 0, 0
+  index: -1
+face2
+  rotate: true
+  xy: 1701, 2
+  size: 209, 177
+  orig: 209, 177
+  offset: 0, 0
+  index: -1
+face4
+  rotate: true
+  xy: 1854, 1553
+  size: 220, 177
+  orig: 220, 177
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 2, 361
+  size: 391, 509
+  orig: 391, 509
+  offset: 0, 0
+  index: -1
+leg1
+  rotate: false
+  xy: 1553, 213
+  size: 197, 497
+  orig: 197, 497
+  offset: 0, 0
+  index: -1
+leg1_3
+  rotate: false
+  xy: 1752, 215
+  size: 218, 497
+  orig: 218, 497
+  offset: 0, 0
+  index: -1
+leg1_4
+  rotate: false
+  xy: 868, 627
+  size: 288, 502
+  orig: 288, 502
+  offset: 0, 0
+  index: -1
+leg1_5
+  rotate: true
+  xy: 2, 2
+  size: 357, 481
+  orig: 357, 481
+  offset: 0, 0
+  index: -1
+leg2
+  rotate: true
+  xy: 715, 1493
+  size: 216, 589
+  orig: 216, 589
+  offset: 0, 0
+  index: -1
+leg2_2
+  rotate: false
+  xy: 638, 480
+  size: 228, 589
+  orig: 228, 589
+  offset: 0, 0
+  index: -1
+leg2_3
+  rotate: false
+  xy: 395, 480
+  size: 241, 589
+  orig: 241, 589
+  offset: 0, 0
+  index: -1
+leg2_4
+  rotate: true
+  xy: 1287, 1781
+  size: 265, 584
+  orig: 265, 584
+  offset: 0, 0
+  index: -1
+leg2_5
+  rotate: true
+  xy: 715, 1711
+  size: 335, 570
+  orig: 335, 570
+  offset: 0, 0
+  index: -1
+leg2_6
+  rotate: true
+  xy: 712, 1131
+  size: 360, 471
+  orig: 360, 471
+  offset: 0, 0
+  index: -1
+leg2_7
+  rotate: false
+  xy: 1201, 293
+  size: 350, 417
+  orig: 350, 417
+  offset: 0, 0
+  index: -1
+leg3
+  rotate: true
+  xy: 1306, 1347
+  size: 169, 529
+  orig: 169, 529
+  offset: 0, 0
+  index: -1
+leg3_2
+  rotate: true
+  xy: 1185, 956
+  size: 188, 529
+  orig: 188, 529
+  offset: 0, 0
+  index: -1
+leg3_3
+  rotate: true
+  xy: 1185, 1146
+  size: 199, 529
+  orig: 199, 529
+  offset: 0, 0
+  index: -1
+leg3_4
+  rotate: true
+  xy: 1306, 1518
+  size: 261, 546
+  orig: 261, 546
+  offset: 0, 0
+  index: -1
+leg3_5
+  rotate: false
+  xy: 366, 1071
+  size: 344, 513
+  orig: 344, 513
+  offset: 0, 0
+  index: -1
+leg3_6
+  rotate: false
+  xy: 485, 65
+  size: 386, 413
+  orig: 386, 413
+  offset: 0, 0
+  index: -1
+leg4_4
+  rotate: true
+  xy: 1158, 712
+  size: 242, 500
+  orig: 242, 500
+  offset: 0, 0
+  index: -1
+leg4_5
+  rotate: false
+  xy: 873, 157
+  size: 326, 468
+  orig: 326, 468
+  offset: 0, 0
+  index: -1
+leg4_7
+  rotate: true
+  xy: 1716, 714
+  size: 335, 327
+  orig: 335, 327
+  offset: 0, 0
+  index: -1
+mouth
+  rotate: false
+  xy: 1201, 55
+  size: 319, 236
+  orig: 319, 236
+  offset: 0, 0
+  index: -1
+neck
+  rotate: false
+  xy: 2, 872
+  size: 362, 712
+  orig: 362, 712
+  offset: 0, 0
+  index: -1
+tail1
+  rotate: false
+  xy: 1837, 1051
+  size: 209, 465
+  orig: 209, 465
+  offset: 0, 0
+  index: -1
+tail2
+  rotate: false
+  xy: 1716, 1101
+  size: 113, 244
+  orig: 113, 244
+  offset: 0, 0
+  index: -1
+
+donkey2.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face3
+  rotate: false
+  xy: 1733, 780
+  size: 209, 177
+  orig: 209, 177
+  offset: 0, 0
+  index: -1
+leg1_2
+  rotate: true
+  xy: 743, 745
+  size: 212, 497
+  orig: 212, 497
+  offset: 0, 0
+  index: -1
+leg1_6
+  rotate: false
+  xy: 2, 563
+  size: 357, 394
+  orig: 357, 394
+  offset: 0, 0
+  index: -1
+leg1_7
+  rotate: false
+  xy: 2, 192
+  size: 356, 369
+  orig: 356, 369
+  offset: 0, 0
+  index: -1
+leg3_7
+  rotate: false
+  xy: 361, 612
+  size: 380, 345
+  orig: 380, 345
+  offset: 0, 0
+  index: -1
+leg4
+  rotate: true
+  xy: 743, 566
+  size: 177, 489
+  orig: 177, 489
+  offset: 0, 0
+  index: -1
+leg4_2
+  rotate: true
+  xy: 2, 2
+  size: 188, 489
+  orig: 188, 489
+  offset: 0, 0
+  index: -1
+leg4_3
+  rotate: true
+  xy: 1242, 758
+  size: 199, 489
+  orig: 199, 489
+  offset: 0, 0
+  index: -1
+leg4_6
+  rotate: true
+  xy: 361, 267
+  size: 343, 363
+  orig: 343, 363
+  offset: 0, 0
+  index: -1

@@ -5,8 +5,17 @@ export default class GroupTask extends Task
   constructor(actor, id) {
     super(actor, id);
 
+  }
+
+  init(data) {
+    super.init(data);
     // obviously it would contains tasks id
-    this.ids = this.inputs.create('tasks').value = [];
+    this.ids = this.inputs.create('tasks', []).value;
+  }
+
+  fill(pod) {
+    super.fill(pod);
+    this.ids = this.inputs.value('tasks');
   }
 
   add(...tasks) {
@@ -23,13 +32,6 @@ export default class GroupTask extends Task
       promises.push(task.run());
     }
     return Promise.all(promises);
-  }
-
-  pod() {
-    return {
-      ...super.pod(),
-      tasks: this.ids
-    }
   }
 
   static deserialize(data) {

@@ -1,20 +1,34 @@
 import EventEmitter from '../utils/EventEmitter'
 import Execution from './Execution'
-import {DataArray} from '../Data';
+import {InputList, OutputList} from '../Data';
 
 export default class Task extends EventEmitter
 {
-  constructor(actor, id) {
+  constructor() {
     super();
-
-    this.id = LookUp.addTask(this, id);
-    this.actor = actor;
+    
     this.execution = new Execution();
-
-    this.inputs = new DataArray(this, 'input');
-    this.outputs = new DataArray(this, 'output');
+    this.inputs = new InputList();
+    this.outputs = new OutputList();
   }
 
+  init(data) {
+    this.id = LookUp.addTask(this);
+    this.actor = data.actor;
+  }
+
+  fill(pod) {
+    this.id = LookUp.addTask(this, pod.id)
+    this.actor = LookUp.get(pod.actor);
+
+    pod.inputs.forEach(input => {
+      this.inputs.add(input.name, LookUp.get(input.data))
+    })
+
+    pod.outputs.forEach(output => {
+      this.outputs.add(output.name, LookUp.get(output.data))
+    })
+  }
 
   chain(...tasks) {
     return tasks.reduce((result, current) => {
@@ -37,8 +51,11 @@ export default class Task extends EventEmitter
   pod() {
     return {
       class: this.__proto__.constructor.name,
+      id: this.id,
       execution: this.execution.pod(),
       actor: this.actor.id,
+      inputs: this.inputs.pod(),
+      outputs: this.outputs.pod(),
     }
   }
 }

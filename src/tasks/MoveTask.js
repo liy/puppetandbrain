@@ -5,24 +5,18 @@ export default class MoveTask extends Task
   constructor(actor, id) {
     super(actor, id);
 
-    this.inputs.create('position').value = {x:actor.x+100,y:actor.y};
-    this.inputs.create('duration').value = 1;
+  }
+
+  init(data) {
+    super.init(data);
+    this.inputs.create('position', data.position || {x:this.actor.x+100,y:this.actor.y});
+    this.inputs.create('duration', data.duration || 1);
   }
 
   process() {
     return new Promise(resolve => {
       TweenLite.to(this.actor, this.inputs.value('duration'), {...this.inputs.value('position'), onComplete: resolve});
     })
-  }
-
-  pod() {
-    return {
-      ...super.pod(),
-      inputs: {
-        position: this.inputs.value('position'),
-        duration: this.inputs.value('duration')
-      }
-    }
   }
 
   static deserialize(data) {

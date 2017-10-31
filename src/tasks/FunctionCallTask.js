@@ -9,30 +9,33 @@ import Task from './Task'
  */
 export default class FunctionCallTask extends Task
 {
-  constructor(functionTask, actor, id) {
-    super(actor, id);
+  constructor(target, actor, id) {
+    super();
     
-    this.inputs.create('async').value = true;
-    this.functionTask = functionTask;
+  }
+
+  init(data) {
+    super.init(data);
+    this.inputs.create('async', true)
+    this.inputs.create('target', data.target.id)
+  }
+
+  /**
+   * Just a shortcut for accessing target task.
+   */
+  get target() {
+    return LookUp.get(this.inputs.value('target'))
   }
 
   process() {
     if(this.inputs.value('async')) {
       // Do not wait for other actor to complete the data
-      this.functionTask.run();
+      this.target.run();
       return Promise.resolve();
     }
     else {
       // return a promise for run method to wait.
-      return this.functionTask.run();
-    }
-  }
-
-  pod() {
-    return {
-      ...super.pod(),
-      functionTask: this.functionTask.id,
-      async: this.inputs.value('async'),
+      return this.target.run();
     }
   }
 

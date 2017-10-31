@@ -3,25 +3,17 @@ import Task from './Task';
 export default class DelayTask extends Task
 {
   constructor(seconds, actor, id) {
-    super(actor, id);
-
-    this.inputs.create('seconds').value = seconds;
+    super();
   }
 
+  init(data) {
+    super.init(data);
+    this.inputs.create('seconds', data.seconds);
+  }
+  
   process() {
     return new Promise((resolve, reject) => {
-      setTimeout(resolve, this.inputs.value('seconds'))
+      setTimeout(resolve, this.inputs.value('seconds')*1000)
     });
-  }
-
-  pod() {
-    return {
-      ...super.pod(),
-      miniseconds: this.miniseconds,
-    }
-  }
-
-  static deserialize(data) {
-    return new Delay(data);
   }
 }

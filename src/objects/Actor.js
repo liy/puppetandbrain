@@ -1,7 +1,6 @@
 import Stage from '../Stage';
 import Entity from './Entity';
 import mixin from '../utils/mixin';
-import TaskWalker from '../tasks/TaskWalker';
 
 /**
  * Actor shows up on the stage!
@@ -47,11 +46,17 @@ export default class Actor extends PIXI.Container
   }
 
   pod() {
+    let functions = Object.create(null);
+    for(let key in this.functions) {
+      functions[key] = this.functions[key].id;
+    }
+
     return {
       class: this.__proto__.constructor.name,
       id: this.id,
       name: this.name,
       childActors: this.childActors.concat(),
+      functions,
     }
   }
 }

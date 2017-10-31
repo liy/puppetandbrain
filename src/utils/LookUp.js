@@ -6,7 +6,7 @@ var TASKS = [];
 function create(entry, id) {
   if(!id) {
     while(true) {
-      id = Math.floor(Math.random() * 9999999);
+      id = Math.floor(Math.random() * 99);
       if(!STORE[id]) break;
     }
   }
@@ -55,6 +55,18 @@ window.LookUp = {
 
   get: function(id) {
     return STORE[id];
+  },
+
+  getTasks: function() {
+    return TASKS.map(id => {
+      return STORE[id];
+    })
+  },
+
+  getActors: function() {
+    return ACTORS.map(id => {
+      return STORE[id]
+    })
   },
 
   pod: function() {

@@ -6,6 +6,10 @@ require('pixi-spine');
 // require('./assets/cow/cow2.png')
 // require('./assets/cow/cow3.png')
 // require('./assets/cow/cow.json')
+// require('./assets/donkey/donkey.atlas')
+// require('./assets/donkey/donkey.png')
+// require('./assets/donkey/donkey2.png')
+// require('./assets/donkey/donkey.json')
 
 
 require('./utils/LookUp')
@@ -25,6 +29,7 @@ import AnimationTask from './tasks/AnimationTask';
 import FunctionCallTask from './tasks/FunctionCallTask';
 
 import ActivitySerializer from './ActivitySerializer';
+import ActivityLoader from './ActivityLoader';
 
 
 var appDiv = document.getElementById('app');
@@ -48,79 +53,118 @@ function render() {
 PIXI.ticker.shared.add(render);
 
 
-window.cow = new SpineActor(require('./assets/cow/info.json'));
-cow.setAnimation('walk');
-cow.getAnimations().then(animations => {
-  // console.log(animations)
-})
-cow.scale = {
-  x: 0.5,
-  y: 0.5
+function init() {
+  var cow = new SpineActor(require('./assets/cow/cow.info.json'));
+  cow.setAnimation('walk');
+  cow.getAnimations().then(animations => {
+    // console.log(animations)
+  })
+  cow.scale = {
+    x: 0.5,
+    y: 0.5
+  }
+  cow.x = 0;
+  cow.y = 768/2;
+  Stage.addActor(cow)
+  
+  
+  var donkey = new SpineActor(require('./assets/donkey/donkey.info.json'));
+  donkey.setAnimation('static');
+  donkey.scale = {
+    x: 0.5,
+    y: 0.5
+  }
+  donkey.x = 1024/1.5;
+  donkey.y = 768/2;
+  Stage.addActor(donkey)
+  
+  let animationTask = new AnimationTask();
+  animationTask.init({
+    actor: donkey,
+    name: 'walk'
+  })
+  let functionTask = new FunctionTask();
+  functionTask.init({
+    actor: donkey,
+    name: 'playAnimation'
+  })
+  functionTask.outputs.create('animationName', 'walk')
+  functionTask.outputs.slot('animationName').link(animationTask.inputs.slot('name'));
+  functionTask.chain(animationTask);
+  
+  
+  let callTask = new FunctionCallTask();
+  callTask.init({
+    actor: cow,
+    target: functionTask,
+  })
+  // function call task acts like wrapper around the target function task
+  callTask.target.outputs.data('animationName').value = 'interactive'
+  
+  let groupTask = new GroupTask()
+  groupTask.init({
+    actor: cow,
+  })
+  for(let i=0; i<3; ++i) {
+    let task = new PrintTask();
+    task.init({
+      actor: cow,
+      text: 'test ' + (i+1)
+    })
+    groupTask.add(task)
+  }
+  
+  let moveTask = new MoveTask(cow);
+  moveTask.init({
+    actor: cow,
+    position: {x:1024/2.5,y:cow.y},
+    duration: 3
+  })
+  
+  let startTask = new FunctionTask();
+  startTask.init({
+    actor: cow,
+    name: FunctionName.GAME_START
+  })
+  let delayTask = new DelayTask();
+  delayTask.init({
+    actor: cow,
+    seconds: 2
+  });
+  startTask.chain(delayTask)
+           .chain(groupTask, moveTask)
+           .chain(callTask)
+  
+  
+  
+  Promise.all([cow.loaded, donkey.loaded]).then(() => {
+    startTask.run().then(() => {
+      console.log('all done')
+    })
+  })
+  
+  let as = new ActivitySerializer();
+  console.log(as.start());  
 }
-cow.x = 400;
-cow.y = 300;
-Stage.addActor(cow)
 
-window.cow2 = new SpineActor(require('./assets/cow/info.json'));
-cow2.setAnimation('static');
-cow2.getAnimations().then(animations => {
-  // console.log(animations)
-})
-cow2.scale = {
-  x: 0.5,
-  y: 0.5
+// init();
+
+async function load() {
+  var loader = new ActivityLoader();
+  await loader.load(require('./assets/activity.json'))
+
+  let promises = LookUp.getActors().map(actor => {
+    return actor.loaded;
+  })
+
+  Promise.all(promises).then(() => {
+    console.log(LookUp.pod())
+
+    // HACK, I know item 35 is a start function
+    LookUp.get(35).run().then(() => {
+      console.log('all done')
+    })
+  })
 }
-cow2.x = 700;
-cow2.y = 500;
-Stage.addActor(cow2)
 
-let animationTask = new AnimationTask('walk', cow2);
-let functionTask = new FunctionTask('playAnimation',cow2);
-functionTask.outputs.create('animationName')
-functionTask.chain(animationTask);
-
-// animationTask.inputs.slot('animationName').link(functionTask.outputs.slot('animationName'));
-functionTask.outputs.slot('animationName').link(animationTask.inputs.slot('animationName'));
-
-
-
-
-let callTask = new FunctionCallTask(functionTask, cow2);
-callTask.functionTask.outputs.data('animationName').value = 'interactive'
-
-let groupTask = new GroupTask(cow)
-groupTask.add(
-  new PrintTask('test 1', cow),
-  new PrintTask('test 2', cow),
-  new PrintTask('test 3', cow),
-)
-let moveTask = new MoveTask(cow);
-moveTask.inputs.data('position').value = {x:0,y:0};
-moveTask.inputs.data('duration').value = 3;
-
-new FunctionTask(FunctionName.GAME_START, cow)
-                 .chain(new DelayTask(2, cow))
-                 .chain(groupTask, new DelayTask(2000, cow))
-                 .chain(moveTask)
-                 .chain(callTask)
-
-
-
-
-
-
-
-
-
-
-
-cow.functions[FunctionName.GAME_START].run().then(() => {
-  console.log('all done')
-})
-
-
-
-
-
-let as = new ActivitySerializer();
-console.log(as.start());
+load();

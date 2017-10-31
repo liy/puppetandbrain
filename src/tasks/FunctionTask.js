@@ -7,10 +7,13 @@ export default class FunctionTask extends Task
    * @param {String} name Function name
    * @memberof FunctionTask
    */
-  constructor(name, actor, id) {
-    super(actor, id);
+  constructor() {
+    super();
+  }
 
-    let functionName = this.inputs.create('name').value = name;
+  init(data) {
+    super.init(data);
+    let functionName = this.inputs.create('name', data.name).value;
     this.actor.functions[functionName] = this;
   }
 
