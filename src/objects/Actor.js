@@ -16,7 +16,7 @@ export default class Actor extends PIXI.Container
     super();
     
     // create an entry in the reference look up
-    this.id = ActorLookUp.create(this, id);
+    this.id = LookUp.addActor(this, id);
 
     this.name = 'Actor ' + this.id;
 

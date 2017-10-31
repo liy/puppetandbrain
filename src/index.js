@@ -8,8 +8,7 @@ require('pixi-spine');
 // require('./assets/cow/cow.json')
 
 
-require('./utils/ActorLookUp')
-require('./utils/TaskLookUp')
+require('./utils/LookUp')
 
 
 import SpineActor from './objects/SpineActor';
@@ -123,5 +122,5 @@ cow.functions[FunctionName.GAME_START].run().then(() => {
 
 
 
-// let as = new ActivitySerializer();
-// console.log(as.start());
+let as = new ActivitySerializer();
+console.log(as.start());

@@ -16,8 +16,7 @@ export default class AnimationTask extends Task
   pod() {
     return {
       ...super.pod(),
-      target: this.target,
-      duration: this.duration
+      animationName: this.inputs.value('animationName')
     }
   }
 

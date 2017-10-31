@@ -5,19 +5,21 @@ export default class GroupTask extends Task
   constructor(actor, id) {
     super(actor, id);
 
-    this.tasks = this.inputs.create('tasks').value = [];
+    // obviously it would contains tasks id
+    this.ids = this.inputs.create('tasks').value = [];
   }
 
   add(...tasks) {
-    this.tasks.push(...tasks);
-    for(let task of this.tasks) {
+    for(let task of tasks) {
+      this.ids.push(task.id);
       task.parent = this;
     }
   }
 
   process() {
     let promises = [];
-    for(let task of this.tasks) {
+    for(let id of this.ids) {
+      let task = LookUp.get(id)
       promises.push(task.run());
     }
     return Promise.all(promises);
@@ -26,9 +28,7 @@ export default class GroupTask extends Task
   pod() {
     return {
       ...super.pod(),
-      tasks: this.tasks.map(task => {
-        return task.pod()
-      })
+      tasks: this.ids
     }
   }
 

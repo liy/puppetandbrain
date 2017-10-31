@@ -17,7 +17,7 @@ export default class PrintTask extends Task
   pod() {
     return {
       ...super.pod(),
-      text: this.text
+      text: this.inputs.value('text')
     }
   }
 

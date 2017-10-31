@@ -6,17 +6,12 @@ export default class ActivitySerializer
   }
 
   start() {
-    let actors = Object.create(null);
-
-    actors.lookup = ActorLookUp.pod();
-    actors.stage = [];
+    let results = LookUp.pod();
+    results.stage = [];
     for(let id of Stage.actors) {
-      actors.stage.push(id);
+      results.stage.push(id);
     }
 
-    return {
-      actors,
-      tasks: TaskLookUp.pod()
-    }
+    return results;
   }
 }

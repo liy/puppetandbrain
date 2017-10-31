@@ -7,12 +7,12 @@ export default class Task extends EventEmitter
   constructor(actor, id) {
     super();
 
-    this.id = TaskLookUp.create(this, id);
+    this.id = LookUp.addTask(this, id);
     this.actor = actor;
     this.execution = new Execution();
 
-    this.inputs = new DataArray('input');
-    this.outputs = new DataArray('output');
+    this.inputs = new DataArray(this, 'input');
+    this.outputs = new DataArray(this, 'output');
   }
 
 
@@ -39,8 +39,6 @@ export default class Task extends EventEmitter
       class: this.__proto__.constructor.name,
       execution: this.execution.pod(),
       actor: this.actor.id,
-      inputs: this.inputs.pod(),
-      outputs: this.outputs.pod()
     }
   }
 }

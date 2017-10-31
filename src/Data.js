@@ -1,7 +1,7 @@
 export class Data
 {
   constructor(value=null, id=null) {
-    this.id = DataLookUp.create(this, id);
+    this.id = LookUp.addData(this, id);
     this.value = value;
   }
 
@@ -15,8 +15,8 @@ export class Data
 
 class Slot
 {
-  constructor(name, owner) {
-    this.data = new Data();
+  constructor(name, owner, data) {
+    this.data = data || new Data();
     this.owner = owner;
     this._name = name
   }
@@ -40,6 +40,13 @@ class Slot
   set value(value) {
     this.data.value = value;
   }
+
+  pod() {
+    return {
+      name: this.name,
+      data: this.data.id,
+    }
+  }
 }
 
 export class Input extends Slot
@@ -61,8 +68,8 @@ export class Input extends Slot
 
 export class Output extends Slot
 {
-  constructor(name, owner) {
-    super(name, owner)
+  constructor(name, owner, data) {
+    super(name, owner, data)
   }
 
   link(input) {
@@ -78,7 +85,8 @@ export class Output extends Slot
 
 export class DataArray
 {
-  constructor(type="input") {
+  constructor(task, type="input") {
+    this.task = task;
     this.type = type;
     this.slots = [];
     this.map = Object.create(null);
@@ -120,5 +128,17 @@ export class DataArray
 
   value(name) {
     return this.map[name] ? this.map[name].data.value : null;
+  }
+
+  pod() {
+    let slots = [];
+    for(let slot of this.slots) {
+      slots.push(slot.pod())
+    }
+    return {
+      type: this.type,
+      task: this.task.id,
+      slots
+    }
   }
 }
