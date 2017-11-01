@@ -2,6 +2,7 @@ var STORE = Object.create(null);
 var ACTORS = [];
 var DATA = [];
 var TASKS = [];
+var ACCESSORS = [];
 
 function create(entry, id) {
   if(!id) {
@@ -29,6 +30,7 @@ window.LookUp = {
   removeActor: function(id) {
     let index = ACTORS.indexOf(id);
     ACTORS.splice(index, 1);
+    delete STORE[id]
   },
   
   addData: function(entry, id) {
@@ -40,6 +42,7 @@ window.LookUp = {
   removeData: function(id) {
     let index = DATA.indexOf(id);
     DATA.splice(index, 1);
+    delete STORE[id]
   },
   
   addTask: function(entry, id) {
@@ -51,6 +54,19 @@ window.LookUp = {
   removeTask: function(id) {
     let index = DATA.indexOf(id);
     DATA.splice(index, 1);
+    delete STORE[id]
+  },
+
+  addAccessor: function(entry, id) {
+    id = create(entry, id)
+    ACCESSORS.push(id);
+    return id;
+  },
+
+  removeAccessor: function(id) {
+    let index = ACCESSORS.indexOf(id);
+    ACCESSORS.splice(index, 1);
+    delete STORE[id]
   },
 
   get: function(id) {

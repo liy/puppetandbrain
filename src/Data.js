@@ -1,3 +1,28 @@
+export class Accessor
+{
+  constructor(ref, propertyName, id=null) {
+    this.id = LookUp.addAccessor(this, id);
+    this.ref = ref;
+    this.propertyName = propertyName;
+  }
+
+  get value() {
+    return ref[propertyName];
+  }
+
+  set value(v) {
+    ref[propertyName] = v;
+  }
+
+  pod() {
+    return {
+      id: this.id,
+      ref: this.ref.id,
+      propertyName: this.propertyName
+    }
+  }
+}
+
 export class Data
 {
   constructor(value=null, id=null) {
@@ -91,7 +116,7 @@ class SlotList
 
     this.counter = 0;
   }
-
+  
   canRename(slot, name) {
     for(let i=0; i<this.slots.length; ++i) {
       if(this.slots[i] == slot) continue;
