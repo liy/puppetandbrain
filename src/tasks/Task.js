@@ -6,13 +6,15 @@ export default class Task extends EventEmitter
 {
   constructor() {
     super();
-    
     this.execution = new Execution();
+    
     this.inputs = new InputList();
     this.outputs = new OutputList();
+
+    this.properties = Object.create(null);
   }
 
-  init(data) {
+  init(actor, properties, id) {
     this.id = LookUp.addTask(this);
     this.actor = data.actor;
   }
@@ -20,6 +22,8 @@ export default class Task extends EventEmitter
   fill(pod) {
     this.id = LookUp.addTask(this, pod.id)
     this.actor = LookUp.get(pod.actor);
+
+    // TODO: fill properties and inputs
 
     pod.inputs.forEach(input => {
       this.inputs.add(input.name, LookUp.get(input.data))

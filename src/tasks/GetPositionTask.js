@@ -2,6 +2,10 @@ export default class GetPositionTask extends Task
 {
   constructor() {
     super();
+    
+    this.properties = {
+      actor: null
+    }
   }
 
   init(data) {
@@ -11,7 +15,7 @@ export default class GetPositionTask extends Task
   }
 
   process() {
-    let actor = LookUp.get(this.inputs.value('actor'));
+    let actor = LookUp.get(this.inputs.value('actor') || this.properties.actor);
     let p = this.inputs.get('position').value;
     p.x = actor.x;
     p.y = actor.y;

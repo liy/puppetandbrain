@@ -26,9 +26,52 @@
 
 
 
-Call Actor PlayAnimation Function
-> aniamtionName
+AnimationTask {
+  inputs: {
+    name: <string>
+  }
+}
 
+DelayTask {
+  properties: null,
+  inputs: {
+    seconds: <number>
+  },
+  outputs: null
+}
 
-PlayAnimation Function
-animationName >
+FunctionTask {
+  properties: {
+    name: <string>,
+  },
+  inputs: null
+  outputs: [
+    <dynamic>
+  ]
+}
+
+GetLocationTask {
+  inputs: {
+    target: <number>
+  },
+  outputs: [
+    location
+  ]
+}
+
+GroupTask {
+  properties: {
+    tasks: []
+  },
+  inputs: null,
+  outputs: null,
+}
+
+MoveTask {
+  properties: {
+    location: {}
+  },
+  inputs: {
+    location: {}
+  }
+}

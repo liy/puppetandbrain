@@ -9,17 +9,16 @@ export default class FunctionTask extends Task
    */
   constructor() {
     super();
+
+    this.properties = {
+      name: null
+    }
   }
 
   init(data) {
     super.init(data);
-    let functionName = this.inputs.create('name', data.name).value;
-    this.actor.functions[functionName] = this;
-  }
 
-  fill(pod) {
-    super.fill(pod);
-    let functionName = this.inputs.value('name');
+    let functionName = this.properties.name = data.name;
     this.actor.functions[functionName] = this;
   }
 
@@ -28,7 +27,7 @@ export default class FunctionTask extends Task
     if(this.actor.functions[name]) return false;
 
     delete this.actor.functions[this.inputs.get('name')];
-    this.inputs.set('name', name);
+    this.properties.name = name;
     return true
   }
 

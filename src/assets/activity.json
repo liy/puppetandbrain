@@ -1,1 +1,282 @@
-{"store":{"3":{"id":3,"value":86},"11":{"class":"MoveTask","id":11,"execution":[{"name":"default","id":72}],"actor":66,"inputs":[{"name":"position","data":19},{"name":"duration","data":89}],"outputs":[]},"19":{"id":19,"value":{"x":409.6,"y":384}},"21":{"class":"FunctionTask","id":21,"execution":[{"name":"default","id":25}],"actor":66,"inputs":[{"name":"name","data":55}],"outputs":[]},"25":{"class":"GroupTask","id":25,"execution":[{"name":"default","id":36}],"actor":66,"inputs":[{"name":"tasks","data":71}],"outputs":[]},"32":{"id":32,"value":"playAnimation"},"36":{"class":"AnimationTask","id":36,"execution":[{"name":"default","id":11}],"actor":66,"inputs":[{"name":"name","data":80}],"outputs":[]},"49":{"id":49,"value":"static"},"53":{"class":"SpineActor","id":53,"name":"Actor 53","childActors":[],"functions":{"playAnimation":86},"url":"donkey.info.json","position":{"x":682.6666666666666,"y":384},"scale":{"x":0.5,"y":0.5}},"55":{"id":55,"value":"game.start"},"66":{"class":"SpineActor","id":66,"name":"Actor 66","childActors":[],"functions":{"game.start":21},"url":"cow.info.json","position":{"x":0,"y":384},"scale":{"x":0.5,"y":0.5}},"68":{"class":"DelayTask","id":68,"execution":[],"actor":66,"inputs":[{"name":"seconds","data":92}],"outputs":[]},"70":{"id":70,"value":"walk"},"71":{"id":71,"value":[79,68]},"72":{"class":"FunctionCallTask","id":72,"execution":[],"actor":66,"inputs":[{"name":"async","data":98},{"name":"target","data":3}],"outputs":[]},"74":{"id":74,"value":"interactive"},"79":{"class":"AnimationTask","id":79,"execution":[],"actor":66,"inputs":[{"name":"name","data":49}],"outputs":[]},"80":{"id":80,"value":"walk"},"83":{"class":"AnimationTask","id":83,"execution":[],"actor":53,"inputs":[{"name":"name","data":74}],"outputs":[]},"86":{"class":"FunctionTask","id":86,"execution":[{"name":"default","id":83}],"actor":53,"inputs":[{"name":"name","data":32}],"outputs":[{"name":"animationName","data":74}]},"89":{"id":89,"value":3},"92":{"id":92,"value":2},"98":{"id":98,"value":true}},"actors":[53,66],"tasks":[83,86,79,68,25,36,11,21,72],"data":[70,32,74,49,92,71,80,19,89,55,98,3],"stage":[53,66]}
+{
+    "store": {
+        "3": {
+            "id": 3,
+            "value": 86
+        },
+        "11": {
+            "class": "MoveTask",
+            "id": 11,
+            "execution": [
+                {
+                    "name": "default",
+                    "id": 72
+                }
+            ],
+            "actor": 66,
+            "inputs": [
+                {
+                    "name": "position",
+                    "data": 19
+                },
+                {
+                    "name": "duration",
+                    "data": 89
+                }
+            ],
+            "outputs": []
+        },
+        "19": {
+            "id": 19,
+            "value": {
+                "x": 409.6,
+                "y": 384
+            }
+        },
+        "21": {
+            "class": "FunctionTask",
+            "id": 21,
+            "execution": [
+                {
+                    "name": "default",
+                    "id": 25
+                }
+            ],
+            "actor": 66,
+            "inputs": [
+                {
+                    "name": "name",
+                    "data": 55
+                }
+            ],
+            "outputs": []
+        },
+        "25": {
+            "class": "GroupTask",
+            "id": 25,
+            "execution": [
+                {
+                    "name": "default",
+                    "id": 36
+                }
+            ],
+            "actor": 66,
+            "inputs": [
+                {
+                    "name": "tasks",
+                    "data": 71
+                }
+            ],
+            "outputs": []
+        },
+        "32": {
+            "id": 32,
+            "value": "playAnimation"
+        },
+        "36": {
+            "class": "AnimationTask",
+            "id": 36,
+            "execution": [
+                {
+                    "name": "default",
+                    "id": 11
+                }
+            ],
+            "actor": 66,
+            "inputs": [
+                {
+                    "name": "name",
+                    "data": 80
+                }
+            ],
+            "outputs": []
+        },
+        "49": {
+            "id": 49,
+            "value": "static"
+        },
+        "53": {
+            "class": "SpineActor",
+            "id": 53,
+            "name": "Actor 53",
+            "childActors": [],
+            "functions": {
+                "playAnimation": 86
+            },
+            "url": "donkey.info.json",
+            "position": {
+                "x": 682.6666666666666,
+                "y": 384
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        "55": {
+            "id": 55,
+            "value": "game.start"
+        },
+        "66": {
+            "class": "SpineActor",
+            "id": 66,
+            "name": "Actor 66",
+            "childActors": [],
+            "functions": {
+                "game.start": 21
+            },
+            "url": "cow.info.json",
+            "position": {
+                "x": 0,
+                "y": 384
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        "68": {
+            "class": "DelayTask",
+            "id": 68,
+            "execution": [],
+            "actor": 66,
+            "inputs": [
+                {
+                    "name": "seconds",
+                    "data": 92
+                }
+            ],
+            "outputs": []
+        },
+        "70": {
+            "id": 70,
+            "value": "walk"
+        },
+        "71": {
+            "id": 71,
+            "value": [
+                79,
+                68
+            ]
+        },
+        "72": {
+            "class": "FunctionCallTask",
+            "id": 72,
+            "execution": [],
+            "actor": 66,
+            "inputs": [
+                {
+                    "name": "async",
+                    "data": 98
+                },
+                {
+                    "name": "target",
+                    "data": 3
+                }
+            ],
+            "outputs": []
+        },
+        "74": {
+            "id": 74,
+            "value": "interactive"
+        },
+        "79": {
+            "class": "AnimationTask",
+            "id": 79,
+            "execution": [],
+            "actor": 66,
+            "inputs": [
+                {
+                    "name": "name",
+                    "data": 49
+                }
+            ],
+            "outputs": []
+        },
+        "80": {
+            "id": 80,
+            "value": "walk"
+        },
+        "83": {
+            "class": "AnimationTask",
+            "id": 83,
+            "execution": [],
+            "actor": 53,
+            "inputs": [
+                {
+                    "name": "name",
+                    "data": 74
+                }
+            ],
+            "outputs": []
+        },
+        "86": {
+            "class": "FunctionTask",
+            "id": 86,
+            "execution": [
+                {
+                    "name": "default",
+                    "id": 83
+                }
+            ],
+            "actor": 53,
+            "inputs": [
+                {
+                    "name": "name",
+                    "data": 32
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "animationName",
+                    "data": 74
+                }
+            ]
+        },
+        "89": {
+            "id": 89,
+            "value": 3
+        },
+        "92": {
+            "id": 92,
+            "value": 2
+        },
+        "98": {
+            "id": 98,
+            "value": true
+        }
+    },
+    "actors": [
+        53,
+        66
+    ],
+    "tasks": [
+        83,
+        86,
+        79,
+        68,
+        25,
+        36,
+        11,
+        21,
+        72
+    ],
+    "data": [
+        70,
+        32,
+        74,
+        49,
+        92,
+        71,
+        80,
+        19,
+        89,
+        55,
+        98,
+        3
+    ],
+    "stage": [
+        53,
+        66
+    ]
+}

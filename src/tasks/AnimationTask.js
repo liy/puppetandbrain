@@ -2,18 +2,21 @@ import Task from './Task'
 
 export default class AnimationTask extends Task
 {
-  constructor(name, actor, id) {
+  constructor(actor, id) {
     super(actor, id);
 
+    this.properties = {
+      name: ''
+    }
+    this.inputs.create('name');
   }
 
-  init(data) {
-    super.init(data);
-    this.inputs.create('name', data.name);
+  get name() {
+    return this.inputs.value('name') || this.properties.name;
   }
 
   process() {
-    this.actor.setAnimation(this.inputs.value('name'));
+    this.actor.setAnimation(this.name);
     return Promise.resolve();
   }
 }
