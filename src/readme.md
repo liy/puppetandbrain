@@ -75,3 +75,12 @@ MoveTask {
     location: {}
   }
 }
+
+PrintTask {
+  properties: {
+    text: ''
+  },
+  inputs: {
+    text: ''
+  }
+}
