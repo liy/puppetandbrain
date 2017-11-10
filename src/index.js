@@ -26,10 +26,10 @@ import MoveTask from './tasks/MoveTask';
 import GroupTask from './tasks/GroupTask';
 import PrintTask from './tasks/PrintTask';
 import AnimationTask from './tasks/AnimationTask';
-import FunctionCallTask from './tasks/FunctionCallTask';
 
 import ActivitySerializer from './ActivitySerializer';
 import ActivityLoader from './ActivityLoader';
+import { Accessor } from './Data';
 
 
 var appDiv = document.getElementById('app');
@@ -46,9 +46,7 @@ window.renderer = PIXI.autoDetectRenderer({
 
 Stage.init(renderer.width, renderer.height);
 function render() {
-  // console.log('render')
   renderer.render(Stage);
-  // console.log('')
 }
 PIXI.ticker.shared.add(render);
 
@@ -74,9 +72,10 @@ function init() {
     actor: donkey,
     name: 'playAnimation'
   })
-  onDonkeyExcit.outputs.create('animationName')
-                     .link(animationTask.inputs.slot('name'));
   onDonkeyExcit.chain(animationTask);
+
+  // link the animation name variable to function's aniamtionName variable
+  animationTask.accessors.set('name', new Accessor('animationName', onDonkeyExcit))
   
   
   // Cow
@@ -127,17 +126,10 @@ function init() {
     actor: cow,
     name: FunctionName.GAME_START
   })
-  
-  let callTask = new FunctionCallTask();
-  callTask.init({
-    actor: cow,
-    target: onDonkeyExcit,
-  })
-  // function call task acts like wrapper around the target function task
-  callTask.target.outputs.data('animationName').value = 'interactive'
 
+  onDonkeyExcit.variables.animationName = 'interactive'
   startTask.chain(groupTask, walkAnimationTask, moveTask)
-           .chain(callTask)
+           .chain(onDonkeyExcit)
   
   Promise.all([cow.loaded, donkey.loaded]).then(() => {
     startTask.run().then(() => {
@@ -149,24 +141,24 @@ function init() {
   console.log(as.start());  
 }
 
-// init();
+init();
 
-async function load() {
-  var loader = new ActivityLoader();
-  await loader.load(require('./assets/activity.json'))
+// async function load() {
+//   var loader = new ActivityLoader();
+//   await loader.load(require('./assets/activity.json'))
 
-  let promises = LookUp.getActors().map(actor => {
-    return actor.loaded;
-  })
+//   let promises = LookUp.getActors().map(actor => {
+//     return actor.loaded;
+//   })
 
-  Promise.all(promises).then(() => {
-    console.log(LookUp.pod())
+//   Promise.all(promises).then(() => {
+//     console.log(LookUp.pod())
 
-    // HACK, I know item 35 is a start function
-    LookUp.get(21).run().then(() => {
-      console.log('all done')
-    })
-  })
-}
+//     // HACK, I know item 35 is a start function
+//     LookUp.get(21).run().then(() => {
+//       console.log('all done')
+//     })
+//   })
+// }
 
-load();
+// load();

@@ -1,37 +1,21 @@
 import EventEmitter from '../utils/EventEmitter'
 import Execution from './Execution'
-import {InputList, OutputList} from '../Data';
+import {AccessorList, OutputList} from '../Data';
 
 export default class Task extends EventEmitter
 {
   constructor() {
     super();
     this.execution = new Execution();
-    
-    this.inputs = new InputList();
-    this.outputs = new OutputList();
 
-    this.properties = Object.create(null);
+    this.variables = Object.create(null);
+
+    this.accessors = new AccessorList();
   }
 
-  init(actor, properties, id) {
-    this.id = LookUp.addTask(this);
-    this.actor = data.actor;
-  }
-
-  fill(pod) {
-    this.id = LookUp.addTask(this, pod.id)
-    this.actor = LookUp.get(pod.actor);
-
-    // TODO: fill properties and inputs
-
-    pod.inputs.forEach(input => {
-      this.inputs.add(input.name, LookUp.get(input.data))
-    })
-
-    pod.outputs.forEach(output => {
-      this.outputs.add(output.name, LookUp.get(output.data))
-    })
+  init(data) {
+    this.id = LookUp.addTask(this, data.id)
+    this.actor = Number.isInteger(data.actor) ? LookUp.get(data.actor) : data.actor;
   }
 
   chain(...tasks) {
@@ -58,8 +42,8 @@ export default class Task extends EventEmitter
       id: this.id,
       execution: this.execution.pod(),
       actor: this.actor.id,
-      inputs: this.inputs.pod(),
-      outputs: this.outputs.pod(),
+      variables: this.variables,
+      accessors: this.accessors.pod(),
     }
   }
 }

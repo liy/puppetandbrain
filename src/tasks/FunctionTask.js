@@ -9,25 +9,21 @@ export default class FunctionTask extends Task
    */
   constructor() {
     super();
-
-    this.properties = {
-      name: null
-    }
   }
 
   init(data) {
     super.init(data);
 
-    let functionName = this.properties.name = data.name;
-    this.actor.functions[functionName] = this;
+    this.variables.name = data.name;
+    this.actor.functions[this.name] = this;
   }
 
   rename(name) {
     // validate there are no same function names
     if(this.actor.functions[name]) return false;
 
-    delete this.actor.functions[this.inputs.get('name')];
-    this.properties.name = name;
+    delete this.actor.functions[this.name];
+    this.name = name;
     return true
   }
 

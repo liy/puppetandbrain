@@ -1,22 +1,28 @@
 import Task from './Task'
+import {Accessor} from '../Data';
 
 export default class AnimationTask extends Task
 {
-  constructor(actor, id) {
-    super(actor, id);
+  constructor() {
+    super();
 
-    this.properties = {
-      name: ''
-    }
-    this.inputs.create('name');
   }
 
-  get name() {
-    return this.inputs.value('name') || this.properties.name;
+  init(data) {
+    super.init(data);
+
+    this.variables.name = data.name
+    this.accessors.add('name', new Accessor('name', this));
   }
 
   process() {
-    this.actor.setAnimation(this.name);
+    this.actor.setAnimation(this.accessors.value('name'));
     return Promise.resolve();
+  }
+
+  pod() {
+    let pod = super.pod();
+    pod.name = this.name;
+    return pod
   }
 }

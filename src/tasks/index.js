@@ -1,6 +1,5 @@
 export DelayTask from './DelayTask'
 export FunctionTask from './FunctionTask'
-export FunctionCallTask from './FunctionCallTask'
 export GroupTask from './GroupTask'
 export MoveTask from './MoveTask'
 export PrintTask from './PrintTask'

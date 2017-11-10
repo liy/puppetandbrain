@@ -1,4 +1,5 @@
 import Task from './Task';
+import { Accessor } from '../Data';
 
 export default class DelayTask extends Task
 {
@@ -8,12 +9,14 @@ export default class DelayTask extends Task
 
   init(data) {
     super.init(data);
-    this.inputs.create('seconds', data.seconds);
+    
+    this.seconds = data.seconds
+    this.accessors.add('seconds', new Accessor('seconds', this));
   }
   
   process() {
     return new Promise((resolve, reject) => {
-      setTimeout(resolve, this.inputs.value('seconds')*1000)
+      setTimeout(resolve, this.accessors.value('seconds')*1000)
     });
   }
 }

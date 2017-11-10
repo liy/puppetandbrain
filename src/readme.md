@@ -36,8 +36,7 @@ DelayTask {
   properties: null,
   inputs: {
     seconds: <number>
-  },
-  outputs: null
+  }
 }
 
 FunctionTask {

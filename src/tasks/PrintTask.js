@@ -1,4 +1,5 @@
 import Task from './Task'
+import { Accessor } from '../Data';
 
 export default class PrintTask extends Task
 {
@@ -9,7 +10,9 @@ export default class PrintTask extends Task
 
   init(data) {
     super.init(data);
-    this.inputs.create('text', data.text);
+
+    this.variables.text = data.text;
+    this.accessors.add('text', new Accessor('text', this));
   }
 
   fill(pod) {
@@ -18,7 +21,7 @@ export default class PrintTask extends Task
 
   process() {
     // TODO: print on the actual editor console
-    console.log(this.inputs.value('text'));
+    console.log(this.accessors.value('text'));
     return Promise.resolve()
   }
 }
