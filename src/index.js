@@ -23,7 +23,7 @@ import Wait from './tasks/Wait';
 import Tween from './tasks/Tween';
 import Group from './tasks/Group';
 import Trace from './tasks/Trace';
-import Animate from './tasks/Animate';
+import Animation from './tasks/Animation';
 
 import ActivitySerializer from './ActivitySerializer';
 import ActivityLoader from './ActivityLoader';
@@ -60,8 +60,8 @@ function init() {
   donkey.y = 768/2;
   Stage.addActor(donkey)
 
-  let animate = new Animate();
-  animate.init({
+  let animation = new Animation();
+  animation.init({
     actor: donkey,
     name: 'walk'
   })
@@ -71,10 +71,10 @@ function init() {
     name: 'playAnimation'
   })
   onDonkeyExcit.inputs.add('animationName', new Data())
-  onDonkeyExcit.chain(animate);
+  onDonkeyExcit.chain(animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
-  animate.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
+  animation.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
   
 
   
@@ -88,7 +88,7 @@ function init() {
   cow.y = 768/2;
   Stage.addActor(cow)
 
-  let staticAnimation = new Animate();
+  let staticAnimation = new Animation();
   staticAnimation.init({
     actor: cow,
     name: 'static'
@@ -112,7 +112,7 @@ function init() {
   })
   group.add(staticAnimation, wait, trace);
 
-  let walkAnimation = new Animate();
+  let walkAnimation = new Animation();
   walkAnimation.init({
     actor: cow,
     name: 'walk'
