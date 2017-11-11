@@ -1,10 +1,10 @@
 import Task from './Task'
-import { Accessor } from '../Data';
+import { Data } from '../Data';
 
 export default class PrintTask extends Task
 {
-  constructor(text, actor, id) {
-    super(actor, id);
+  constructor() {
+    super();
 
   }
 
@@ -13,11 +13,7 @@ export default class PrintTask extends Task
 
     this.inputs.add('text', new Data(data.text));
   }
-
-  fill(pod) {
-    super.fill(pod);
-  }
-
+  
   process() {
     // TODO: print on the actual editor console
     console.log(this.inputs.value('text'));

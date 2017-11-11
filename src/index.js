@@ -27,7 +27,7 @@ import AnimationTask from './tasks/AnimationTask';
 
 import ActivitySerializer from './ActivitySerializer';
 import ActivityLoader from './ActivityLoader';
-import { Accessor, Data } from './Data';
+import { Accessor, Data, Property } from './Data';
 
 
 var appDiv = document.getElementById('app');
@@ -104,7 +104,13 @@ function init() {
   groupTask.init({
     actor: cow,
   })
-  groupTask.add(staticAnimationTask, delayTask);
+
+  let printTask = new PrintTask();
+  printTask.init({
+    actor: cow,
+    text: 'debug print'
+  })
+  groupTask.add(staticAnimationTask, delayTask, printTask);
 
   let walkAnimationTask = new AnimationTask();
   walkAnimationTask.init({
@@ -115,9 +121,10 @@ function init() {
   let moveTask = new MoveTask(cow);
   moveTask.init({
     actor: cow,
-    position: {x:1024/2.5,y:cow.y},
     duration: 3
   })
+  // link to donkey's position
+  moveTask.inputs.set('position', new Property('position', donkey))
   
   let startTask = new FunctionTask();
   startTask.init({
@@ -134,6 +141,9 @@ function init() {
       console.log('all done')
     })
   })
+
+
+
   
   // serialize everything.
   let as = new ActivitySerializer();

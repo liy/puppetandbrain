@@ -3,7 +3,7 @@ import { Data } from '../Data';
 
 export default class DelayTask extends Task
 {
-  constructor(seconds, actor, id) {
+  constructor() {
     super();
   }
 

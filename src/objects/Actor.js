@@ -44,7 +44,7 @@ export default class Actor extends PIXI.Container
     super.tick();
     this.cmd.tick();
   }
-
+  
   pod() {
     let functions = Object.create(null);
     for(let key in this.functions) {

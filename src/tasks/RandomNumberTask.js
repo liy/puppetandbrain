@@ -5,7 +5,6 @@ export default class RandomNumberTask extends Task
 {
   constructor() {
     super();
-
   }
   
   init(data) {

@@ -26,6 +26,7 @@ export default class Task extends EventEmitter
   }
 
   async run() {
+    console.log('run', this)
     await this.process();
     this.emit('task.complete') 
     return this.execution.default ? this.execution.default.run() : Promise.resolve();

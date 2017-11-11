@@ -14,36 +14,6 @@ export class Data
   }
 }
 
-/**
- * For accessing object properties, e.g., actor's position etc. This is something must not be returned
- * 
- * User should be able to drag a getter block and link to any inputs
- */
-export class Getter
-{
-  constructor(name, target) {
-    this.id = LookUp.addGetter(this, id);
-    this.name = name;
-    this.target = target;
-  }
-
-  get value() {
-    return this.target[this.name];
-  }
-
-  set value(v) {
-    this.target[this.name] = v;
-  }
-
-  pod() {
-    return {
-      class: 'Accessor',
-      ref: this.target.id,
-      name: this.name,
-    }
-  }
-}
-
 export class DataList
 {
   constructor() {
@@ -84,9 +54,31 @@ export class DataList
   }
 }
 
+/**
+ * For accessing object properties, e.g., actor's position etc. 
+ * 
+ * User should be able to drag a getter block and link to any inputs
+ */
+export class Property
+{
+  constructor(name, ref) {
+    this.name = name;
+    this.ref = ref;
+  }
 
+  get value() {
+    return this.ref[this.name];
+  }
 
+  set value(v) {
+    this.ref[this.name] = v;
+  }
 
-
-
-
+  pod() {
+    return {
+      class: 'Property',
+      ref: this.ref.id,
+      name: this.name,
+    }
+  }
+}
