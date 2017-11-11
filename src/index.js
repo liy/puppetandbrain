@@ -1,15 +1,15 @@
 // for testing
 require('pixi-spine');
 
-// require('./assets/cow/cow.atlas')
-// require('./assets/cow/cow.png')
-// require('./assets/cow/cow2.png')
-// require('./assets/cow/cow3.png')
-// require('./assets/cow/cow.json')
-// require('./assets/donkey/donkey.atlas')
-// require('./assets/donkey/donkey.png')
-// require('./assets/donkey/donkey2.png')
-// require('./assets/donkey/donkey.json')
+require('./assets/cow/cow.atlas')
+require('./assets/cow/cow.png')
+require('./assets/cow/cow2.png')
+require('./assets/cow/cow3.png')
+require('./assets/cow/cow.json')
+require('./assets/donkey/donkey.atlas')
+require('./assets/donkey/donkey.png')
+require('./assets/donkey/donkey2.png')
+require('./assets/donkey/donkey.json')
 
 
 require('./utils/LookUp')
@@ -29,7 +29,7 @@ import AnimationTask from './tasks/AnimationTask';
 
 import ActivitySerializer from './ActivitySerializer';
 import ActivityLoader from './ActivityLoader';
-import { Accessor } from './Data';
+import { Accessor, Data } from './Data';
 
 
 var appDiv = document.getElementById('app');
@@ -68,6 +68,7 @@ function init() {
     name: 'walk'
   })
   let onDonkeyExcit = new FunctionTask();
+  onDonkeyExcit.inputs.add('animationName', new Data())
   onDonkeyExcit.init({
     actor: donkey,
     name: 'playAnimation'
@@ -75,7 +76,7 @@ function init() {
   onDonkeyExcit.chain(animationTask);
 
   // link the animation name variable to function's aniamtionName variable
-  animationTask.accessors.set('name', new Accessor('animationName', onDonkeyExcit))
+  animationTask.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
   
   
   // Cow
@@ -127,7 +128,7 @@ function init() {
     name: FunctionName.GAME_START
   })
 
-  onDonkeyExcit.variables.animationName = 'interactive'
+  onDonkeyExcit.inputs.update('animationName', 'interactive');
   startTask.chain(groupTask, walkAnimationTask, moveTask)
            .chain(onDonkeyExcit)
   

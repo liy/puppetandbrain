@@ -1,16 +1,38 @@
-export class Accessor
+export class Data
+{
+  constructor(value, id) {
+    this.id = LookUp.addData(this, id);
+    this.value = value;
+  }
+
+  pod() {
+    return {
+      class: 'Data',
+      id: this.id,
+      value: this.value
+    }
+  }
+}
+
+/**
+ * For accessing object properties, e.g., actor's position etc. This is something must not be returned
+ * 
+ * User should be able to drag a getter block and link to any inputs
+ */
+export class Getter
 {
   constructor(name, target) {
+    this.id = LookUp.addGetter(this, id);
     this.name = name;
     this.target = target;
   }
 
   get value() {
-    return this.target.variables[this.name];
+    return this.target[this.name];
   }
 
   set value(v) {
-    this.target.variables[this.name] = v;
+    this.target[this.name] = v;
   }
 
   pod() {
@@ -22,38 +44,49 @@ export class Accessor
   }
 }
 
-export class AccessorList
+export class DataList
 {
   constructor() {
     this.map = Object.create(null)
     this.list = [];
   }
 
-  add(name, accessor) {
-    this.map[name] = accessor;
+  add(name, entry) {
+    this.map[name] = entry;
     this.list.push(name);
     return this;
-  }
-
-  set(name, accessor) {
-    this.map[name] = accessor;
   }
 
   get(name) {
     return this.map[name];
   }
 
+  set(name, entry) {
+    this.map[name] = entry;
+  }
+
   value(name) {
     return this.map[name].value
   }
 
+  update(name, v) {
+    this.map[name].value = v;
+  }
+
   pod() {
-    let accessors = [];
+    let data = [];
     for(let name of this.list) {
-      accessors.push({
+      data.push({
         name: this.map[name].pod()
       })
     }
-    return accessors;
+    return data;
   }
 }
+
+
+
+
+
+
+

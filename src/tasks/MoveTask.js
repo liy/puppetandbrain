@@ -1,5 +1,5 @@
 import Task from './Task';
-import { Accessor } from '../Data';
+import { Data } from '../Data';
 
 export default class MoveTask extends Task
 {
@@ -10,16 +10,16 @@ export default class MoveTask extends Task
   init(data) {
     super.init(data);
 
-    this.variables.position = data.position || {x:this.actor.x+100, y:this.actor.y};
-    this.variables.duration = 1;
-
-    this.accessors.add('position', new Accessor('position', this));
-    this.accessors.add('duration', new Accessor('duration', this));
+    this.inputs.add('duration', new Data(data.duration || 1));
+    this.inputs.add('position', new Data(data.position || {
+      x: this.actor.x+100, 
+      y: this.actor.y
+    }));
   }
 
   process() {
     return new Promise(resolve => {
-      TweenLite.to(this.actor, this.accessors.value('duration'), {...this.accessors.value('position'), ease:Linear.easeNone, onComplete: resolve});
+      TweenLite.to(this.actor, this.inputs.value('duration'), {...this.inputs.value('position'), ease:Linear.easeNone, onComplete: resolve});
     })
   }
 

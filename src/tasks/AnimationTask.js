@@ -1,5 +1,5 @@
 import Task from './Task'
-import {Accessor} from '../Data';
+import {Data} from '../Data';
 
 export default class AnimationTask extends Task
 {
@@ -11,12 +11,11 @@ export default class AnimationTask extends Task
   init(data) {
     super.init(data);
 
-    this.variables.name = data.name
-    this.accessors.add('name', new Accessor('name', this));
+    this.inputs.add('name', new Data(data.name));
   }
 
   process() {
-    this.actor.setAnimation(this.accessors.value('name'));
+    this.actor.setAnimation(this.inputs.value('name'));
     return Promise.resolve();
   }
 

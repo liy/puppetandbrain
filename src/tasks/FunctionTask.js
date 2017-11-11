@@ -14,7 +14,8 @@ export default class FunctionTask extends Task
   init(data) {
     super.init(data);
 
-    this.variables.name = data.name;
+    // This is a authoring time static data, needs to be provided when creating activity.
+    this.name = data.name;
     this.actor.functions[this.name] = this;
   }
 

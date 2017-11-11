@@ -11,8 +11,7 @@ export default class PrintTask extends Task
   init(data) {
     super.init(data);
 
-    this.variables.text = data.text;
-    this.accessors.add('text', new Accessor('text', this));
+    this.inputs.add('text', new Data(data.text));
   }
 
   fill(pod) {
@@ -21,7 +20,7 @@ export default class PrintTask extends Task
 
   process() {
     // TODO: print on the actual editor console
-    console.log(this.accessors.value('text'));
+    console.log(this.inputs.value('text'));
     return Promise.resolve()
   }
 }

@@ -1,6 +1,6 @@
 import EventEmitter from '../utils/EventEmitter'
 import Execution from './Execution'
-import {AccessorList, OutputList} from '../Data';
+import { DataList } from '../Data';
 
 export default class Task extends EventEmitter
 {
@@ -8,9 +8,8 @@ export default class Task extends EventEmitter
     super();
     this.execution = new Execution();
 
-    this.variables = Object.create(null);
-
-    this.accessors = new AccessorList();
+    this.inputs = new DataList();
+    this.outputs = new DataList();
   }
 
   init(data) {
@@ -42,8 +41,8 @@ export default class Task extends EventEmitter
       id: this.id,
       execution: this.execution.pod(),
       actor: this.actor.id,
-      variables: this.variables,
-      accessors: this.accessors.pod(),
+      inputs: this.inputs.pod(),
+      outputs: this.outputs.pod(),
     }
   }
 }
