@@ -77,7 +77,7 @@ export class DataList
     let data = [];
     for(let name of this.list) {
       data.push({
-        name: this.map[name].pod()
+        [name]: this.map[name].id
       })
     }
     return data;

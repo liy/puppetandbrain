@@ -1,6 +1,5 @@
 // for testing
 require('pixi-spine');
-
 require('./assets/cow/cow.atlas')
 require('./assets/cow/cow.png')
 require('./assets/cow/cow2.png')
@@ -12,9 +11,8 @@ require('./assets/donkey/donkey2.png')
 require('./assets/donkey/donkey.json')
 
 
+// imports
 require('./utils/LookUp')
-
-
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import Stage from './Stage';
@@ -68,16 +66,17 @@ function init() {
     name: 'walk'
   })
   let onDonkeyExcit = new FunctionTask();
-  onDonkeyExcit.inputs.add('animationName', new Data())
   onDonkeyExcit.init({
     actor: donkey,
     name: 'playAnimation'
   })
+  onDonkeyExcit.inputs.add('animationName', new Data())
   onDonkeyExcit.chain(animationTask);
 
-  // link the animation name variable to function's aniamtionName variable
+  // Let the animation task name input referencing the function's animaitonName input data
   animationTask.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
   
+
   
   // Cow
   var cow = new SpineActor(require('./assets/cow/cow.info.json'));
@@ -89,8 +88,6 @@ function init() {
   cow.y = 768/2;
   Stage.addActor(cow)
 
-
-  
   let staticAnimationTask = new AnimationTask();
   staticAnimationTask.init({
     actor: cow,
@@ -138,8 +135,9 @@ function init() {
     })
   })
   
+  // serialize everything.
   let as = new ActivitySerializer();
-  console.log(as.start());  
+  console.warn('activity json data', as.start()); 
 }
 
 init();
