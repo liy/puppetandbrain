@@ -1,7 +1,7 @@
 import Task from './Task'
 import {Data} from '../Data';
 
-export default class AnimationTask extends Task
+export default class Animate extends Task
 {
   constructor() {
     super();

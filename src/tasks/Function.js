@@ -1,11 +1,11 @@
 import Task from './Task'
 
-export default class FunctionTask extends Task
+export default class Function extends Task
 {
   /**
    * 
    * @param {String} name Function name
-   * @memberof FunctionTask
+   * @memberof Function
    */
   constructor() {
     super();

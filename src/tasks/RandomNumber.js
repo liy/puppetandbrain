@@ -1,7 +1,7 @@
 import Task from './Task'
 import { Data } from '../Data';
 
-export default class RandomNumberTask extends Task
+export default class RandomNumber extends Task
 {
   constructor() {
     super();

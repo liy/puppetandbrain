@@ -1,7 +1,7 @@
 import Task from './Task';
 import { Data } from '../Data';
 
-export default class DelayTask extends Task
+export default class Wait extends Task
 {
   constructor() {
     super();

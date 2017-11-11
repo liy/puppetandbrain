@@ -1,7 +1,7 @@
 import Task from './Task'
 import { Data } from '../Data';
 
-export default class PrintTask extends Task
+export default class Trace extends Task
 {
   constructor() {
     super();

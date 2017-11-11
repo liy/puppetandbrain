@@ -1,7 +1,7 @@
 import Task from './Task';
 import { Data } from '../Data';
 
-export default class MoveTask extends Task
+export default class Tween extends Task
 {
   constructor() {
     super();
@@ -23,9 +23,5 @@ export default class MoveTask extends Task
     return new Promise(resolve => {
       TweenLite.to(this.actor, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: resolve});
     })
-  }
-
-  static deserialize(data) {
-    return new MoveTask(data);
   }
 }

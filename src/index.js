@@ -18,12 +18,12 @@ import SpriteActor from './objects/SpriteActor';
 import Stage from './Stage';
 
 import FunctionName from './tasks/FunctionName';
-import FunctionTask from './tasks/FunctionTask';
-import DelayTask from './tasks/DelayTask';
-import MoveTask from './tasks/MoveTask';
-import GroupTask from './tasks/GroupTask';
-import PrintTask from './tasks/PrintTask';
-import AnimationTask from './tasks/AnimationTask';
+import Function from './tasks/Function';
+import Wait from './tasks/Wait';
+import Tween from './tasks/Tween';
+import Group from './tasks/Group';
+import Trace from './tasks/Trace';
+import Animate from './tasks/Animate';
 
 import ActivitySerializer from './ActivitySerializer';
 import ActivityLoader from './ActivityLoader';
@@ -60,21 +60,21 @@ function init() {
   donkey.y = 768/2;
   Stage.addActor(donkey)
 
-  let animationTask = new AnimationTask();
-  animationTask.init({
+  let animate = new Animate();
+  animate.init({
     actor: donkey,
     name: 'walk'
   })
-  let onDonkeyExcit = new FunctionTask();
+  let onDonkeyExcit = new Function();
   onDonkeyExcit.init({
     actor: donkey,
     name: 'playAnimation'
   })
   onDonkeyExcit.inputs.add('animationName', new Data())
-  onDonkeyExcit.chain(animationTask);
+  onDonkeyExcit.chain(animate);
 
   // Let the animation task name input referencing the function's animaitonName input data
-  animationTask.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
+  animate.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
   
 
   
@@ -88,52 +88,52 @@ function init() {
   cow.y = 768/2;
   Stage.addActor(cow)
 
-  let staticAnimationTask = new AnimationTask();
-  staticAnimationTask.init({
+  let staticAnimation = new Animate();
+  staticAnimation.init({
     actor: cow,
     name: 'static'
   });
 
-  let delayTask = new DelayTask();
-  delayTask.init({
+  let wait = new Wait();
+  wait.init({
     actor: cow,
     seconds: 2
   });
 
-  let groupTask = new GroupTask()
-  groupTask.init({
+  let group = new Group()
+  group.init({
     actor: cow,
   })
 
-  let printTask = new PrintTask();
-  printTask.init({
+  let trace = new Trace();
+  trace.init({
     actor: cow,
     text: 'debug print'
   })
-  groupTask.add(staticAnimationTask, delayTask, printTask);
+  group.add(staticAnimation, wait, trace);
 
-  let walkAnimationTask = new AnimationTask();
-  walkAnimationTask.init({
+  let walkAnimation = new Animate();
+  walkAnimation.init({
     actor: cow,
     name: 'walk'
   });
 
-  let moveTask = new MoveTask(cow);
-  moveTask.init({
+  let tween = new Tween(cow);
+  tween.init({
     actor: cow,
     duration: 3
   })
   // link to donkey's position
-  moveTask.inputs.set('position', new Property('position', donkey))
+  tween.inputs.set('position', new Property('position', donkey))
   
-  let startTask = new FunctionTask();
+  let startTask = new Function();
   startTask.init({
     actor: cow,
     name: FunctionName.GAME_START
   })
 
   onDonkeyExcit.inputs.update('animationName', 'interactive');
-  startTask.chain(groupTask, walkAnimationTask, moveTask)
+  startTask.chain(group, walkAnimation, tween)
            .chain(onDonkeyExcit)
   
   Promise.all([cow.loaded, donkey.loaded]).then(() => {

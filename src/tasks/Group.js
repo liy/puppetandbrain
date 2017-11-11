@@ -1,7 +1,7 @@
 import Task from './Task'
 import { Data } from '../Data';
 
-export default class GroupTask extends Task
+export default class Group extends Task
 {
   constructor() {
     super();
