@@ -13,9 +13,10 @@ export default class Wait extends Task
     this.inputs.add('seconds', new Data(data.seconds));
   }
   
-  process() {
-    return new Promise((resolve, reject) => {
-      setTimeout(resolve, this.inputs.value('seconds')*1000)
-    });
+  run() {
+    super.run()
+    setTimeout(() => {
+      this.execution.run();
+    }, this.inputs.value('seconds')*1000);
   }
 }

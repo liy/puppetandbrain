@@ -28,6 +28,7 @@ import Animation from './tasks/Animation';
 import ActivitySerializer from './ActivitySerializer';
 import ActivityLoader from './ActivityLoader';
 import { Accessor, Data, Property } from './Data';
+import Trigger from './objects/Trigger';
 
 
 var appDiv = document.getElementById('app');
@@ -77,6 +78,10 @@ function init() {
   animation.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
   
 
+  var trigger = new Trigger();
+  trigger.x = 100;
+  trigger.y = 200
+  Stage.addActor(trigger);
   
   // Cow
   var cow = new SpineActor(require('./assets/cow/cow.info.json'));
@@ -124,17 +129,11 @@ function init() {
     seconds: 2
   });
 
-  let group = new Group()
-  group.init({
-    actor: cow,
-  })
-
   let trace = new Trace();
   trace.init({
     actor: cow,
     text: 'debug print'
   })
-  group.add(staticAnimation, wait, trace);
 
   let walkAnimation = new Animation();
   walkAnimation.init({
@@ -157,21 +156,31 @@ function init() {
   })
 
   onDonkeyExcit.inputs.update('animationName', 'interactive');
-  startTask.chain(group, walkAnimation, tween)
-           .chain(onDonkeyExcit)
+  startTask.chain(staticAnimation, wait, trace, walkAnimation, tween)
+           .chain({
+             executionName: 'complete',
+             task: onDonkeyExcit
+            });
   
-  Promise.all([cow.loaded, donkey.loaded]).then(() => {
-    startTask.run().then(() => {
-      console.log('all done')
-    })
+  // example of 2 executions
+  let straightAfterTween = new Trace();
+  straightAfterTween.init({
+    actor: cow,
+    text: 'This task run straight after tween started, no waiting for tween completion'
   })
-
-
-
+  tween.chain({
+    executionName: 'default',
+    task: straightAfterTween
+  })
+  
+  // start the activity when cow and donkey are loaded
+  Promise.all([cow.loaded, donkey.loaded]).then(() => {
+    startTask.run()
+  })
   
   // serialize everything.
   let as = new ActivitySerializer();
-  console.warn('activity json data', as.start()); 
+  console.log('%c Activity %o ', 'color: white; background-color: black', as.start()); 
 }
 
 init();

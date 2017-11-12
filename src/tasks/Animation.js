@@ -14,9 +14,10 @@ export default class Animation extends Task
     this.inputs.add('name', new Data(data.name));
   }
 
-  process() {
+  run() {
+    super.run()
     this.actor.setAnimation(this.inputs.value('name'));
-    return Promise.resolve();
+    this.execution.run();
   }
 
   pod() {

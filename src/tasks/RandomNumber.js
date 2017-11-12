@@ -14,7 +14,8 @@ export default class RandomNumber extends Task
   }
 
   run() {
+    super.run()
     this.outputs.update('random', Math.random());
-    return this.execution.default.run();
+    this.execution.run();
   }
 }

@@ -1,6 +1,5 @@
 export Wait from './Wait'
 export Function from './Function'
-export Group from './Group'
 export Tween from './Tween'
 export Trace from './Trace'
 export Animation from './Animation'

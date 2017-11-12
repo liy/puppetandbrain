@@ -14,9 +14,10 @@ export default class Trace extends Task
     this.inputs.add('text', new Data(data.text));
   }
   
-  process() {
+  run() {
+    super.run()
     // TODO: print on the actual editor console
     console.log(this.inputs.value('text'));
-    return Promise.resolve()
+    this.execution.run()
   }
 }

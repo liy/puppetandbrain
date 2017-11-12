@@ -1,6 +1,9 @@
 import Task from './Task'
 import { Data } from '../Data';
 
+/**
+ * Deprecated
+ */
 export default class Group extends Task
 {
   constructor() {
@@ -20,12 +23,20 @@ export default class Group extends Task
     }
   }
 
-  process() {
-    let promises = [];
+  run() {
+    // let promises = [];
+    // for(let id of this.inputs.value('tasks')) {
+    //   let task = LookUp.get(id)
+    //   promises.push(task.run());
+    // }
+    // return Promise.all(promises);
+
+    // run bundled tasks
     for(let id of this.inputs.value('tasks')) {
       let task = LookUp.get(id)
-      promises.push(task.run());
+      task.run();
     }
-    return Promise.all(promises);
+    // run next task
+    this.execution.run();
   }
 }

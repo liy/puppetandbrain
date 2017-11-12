@@ -6,7 +6,9 @@ export default class Task extends EventEmitter
 {
   constructor() {
     super();
+    
     this.execution = new Execution();
+    this.execution.set('default')
 
     this.inputs = new DataList();
     this.outputs = new DataList();
@@ -17,23 +19,28 @@ export default class Task extends EventEmitter
     this.actor = Number.isInteger(data.actor) ? LookUp.get(data.actor) : data.actor;
   }
 
-  chain(...tasks) {
-    return tasks.reduce((result, current) => {
-      result.execution.default = current;
-      current.parent = result;
-      return current
+  chain(...taskInfoArr) {
+    return taskInfoArr.reduce((result, current) => {
+      // result.execution.default = current;
+      // current.parent = result;
+
+      // chain to default execution
+      if(Number.isInteger(current.id)) {
+        result.execution.set('default', current);
+        current.parent = result;
+        return current
+      }
+      else {
+        let currentTask = current.task;
+        result.execution.set(current.executionName, currentTask);
+        currentTask.parent = result;
+        return currentTask
+      }
     }, this);
   }
 
-  async run() {
-    console.log('run', this)
-    await this.process();
-    this.emit('task.complete') 
-    return this.execution.default ? this.execution.default.run() : Promise.resolve();
-  }
-
-  process() {
-    return Promise.resolve();
+  run() {
+    console.log('run', this.__proto__.constructor.name, this.id);
   }
 
   pod() {

@@ -1,39 +1,53 @@
 export default class Execution
 {
   constructor() {
-    this.options = [];
+    this.options = Object.create(null);
+    this.nameList = [];
   }
 
-  add(name, task) {
-    this.options.push({
-      name,
-      task
-    })
+  set(name, task=null) {
+    // execution names have order.
+    // So only queue the name for the first time.
+    if(this.nameList.indexOf(name) == -1) {
+      this.nameList.push(name)
+    }
+    this.options[name] = task;
   }
 
-  remove(index) {
-    this.options.splice(index, 1);
+  remove(name) {
+    delete this.options[name];
+    this.nameList.splice(name, 1);
   }
 
-  get default() {
-    return this.options[0] ? this.options[0].task : null;
+  // get default() {
+  //   return this.options['default']
+  // }
+
+  // get complete() {
+  //   return this.options['complete']
+  // }
+
+  get(name) {
+    return this.options[name];
   }
 
-  set default(task) {
-    this.options[0] = {
-      name: 'default',
-      task: task 
+  run(name='default') {
+    if(this.options[name]) {
+      this.options[name].run();
     }
   }
 
   pod() {
-    let data = [];
-    for(let option of this.options) {
-      data.push({
-        name: option.name,
-        id: option.task.id
-      })
+    let executions = [];
+    for(let name of this.nameList) {
+      let data = {
+        name
+      }
+      if(this.options[name]) {
+        data.id = this.options[name].id
+      }
+      executions.push(data)
     }
-    return data
+    return executions
   }
 }

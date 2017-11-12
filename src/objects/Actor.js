@@ -28,7 +28,6 @@ export default class Actor extends PIXI.Container
 
     this.childActors = [];
 
-    
     this.on('pointerdown', this.pointerDown)
     this.on('pointerup', this.pointerUp)
   }

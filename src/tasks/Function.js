@@ -28,7 +28,8 @@ export default class Function extends Task
     return true
   }
 
-  async run(inputs) {
-    return this.execution.default.run();
+  run() {
+    super.run()
+    this.execution.run();
   }
 }
