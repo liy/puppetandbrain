@@ -27,9 +27,12 @@ import Animation from './tasks/Animation';
 
 import ActivitySerializer from './ActivitySerializer';
 import ActivityLoader from './ActivityLoader';
-import { Accessor, Data, Property } from './Data';
+import { Accessor, Data } from './Data';
 import Trigger from './objects/Trigger';
-
+import Branch from './tasks/Branch';
+import {Equal} from './statements/Arithmetic';
+import Property from './statements/Property';
+import Call from './tasks/Call';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
@@ -66,13 +69,18 @@ function init() {
     actor: donkey,
     name: 'walk'
   })
+  let delayAnimation = new Wait();
+  delayAnimation.init({
+    actor: donkey,
+    seconds: 3
+  })
   let onDonkeyExcit = new Function();
   onDonkeyExcit.init({
     actor: donkey,
     name: 'playAnimation'
   })
   onDonkeyExcit.inputs.add('animationName', new Data())
-  onDonkeyExcit.chain(animation);
+  onDonkeyExcit.chain(delayAnimation, animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
   animation.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
@@ -155,11 +163,17 @@ function init() {
     name: FunctionName.GAME_START
   })
 
-  onDonkeyExcit.inputs.update('animationName', 'interactive');
+  let call = new Call();
+  call.init({
+    actor: cow,
+    callee: donkey,
+    functionName: "playAnimation"
+  })
+  call.function.inputs.update('animationName', 'interactive');
   startTask.chain(staticAnimation, wait, trace, walkAnimation, tween)
            .chain({
              executionName: 'complete',
-             task: onDonkeyExcit
+             task: call
             });
   
   // example of 2 executions
@@ -181,6 +195,33 @@ function init() {
   // serialize everything.
   let as = new ActivitySerializer();
   console.log('%c Activity %o ', 'color: white; background-color: black', as.start()); 
+
+
+  // statements examples
+  let equal = new Equal()
+  equal.inputs.update('A', 1);
+  equal.inputs.update('B', 1);
+
+  let branch = new Branch();
+  branch.init({});
+  branch.inputs.set('condition', equal)
+
+  let trueTrace = new Trace();
+  trueTrace.init({
+    actor: cow,
+    text: 'true trace'
+  })
+
+  let falseTrace = new Trace();
+  falseTrace.init({
+    actor: cow,
+    text: 'false trace'
+  })
+
+  branch.execution.set('true', trueTrace)
+  branch.execution.set('false', falseTrace)
+
+  call.chain(branch)
 }
 
 init();

@@ -8,7 +8,6 @@ export default class Task extends EventEmitter
     super();
     
     this.execution = new Execution();
-    this.execution.set('default')
 
     this.inputs = new DataList();
     this.outputs = new DataList();

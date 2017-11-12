@@ -54,11 +54,6 @@ export default class Actor extends PIXI.Container
     let index = this.childActors.indexOf(actor.id);
     if(index != -1) this.childActors.splice(index);
   }
-
-  tick() {
-    super.tick();
-    this.cmd.tick();
-  }
   
   pod() {
     let functions = Object.create(null);

@@ -2,7 +2,7 @@ var STORE = Object.create(null);
 var ACTORS = [];
 var DATA = [];
 var TASKS = [];
-var ACCESSORS = [];
+var STATEMENTS = [];
 
 function create(entry, id) {
   if(!id) {
@@ -57,15 +57,15 @@ window.LookUp = {
     delete STORE[id]
   },
 
-  addAccessor: function(entry, id) {
+  addStatement: function(entry, id) {
     id = create(entry, id)
-    ACCESSORS.push(id);
+    STATEMENTS.push(id);
     return id;
   },
 
-  removeAccessor: function(id) {
-    let index = ACCESSORS.indexOf(id);
-    ACCESSORS.splice(index, 1);
+  removeStatement: function(id) {
+    let index = STATEMENTS.indexOf(id);
+    STATEMENTS.splice(index, 1);
     delete STORE[id]
   },
 
@@ -93,6 +93,7 @@ window.LookUp = {
     }
     result.actors = ACTORS.concat()
     result.tasks = TASKS.concat()
+    result.statements = STATEMENTS.concat();
     result.data = DATA.concat()
     
     return result;
