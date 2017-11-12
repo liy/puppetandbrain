@@ -4,6 +4,7 @@
   "description": "",
   "main": "./src",
   "scripts": {
+    "prestart": "npm run build",
     "start": "./node_modules/.bin/webpack-dev-server --open http://localhost:8081 --host 0.0.0.0 --port 8081",
     "build": "./node_modules/.bin/webpack -p"
   },
