@@ -9,7 +9,7 @@ export default class Block
     this.dom.style = `margin:20px;float:left;color:white;`
     
     this.title = document.createElement('div');
-    this.title.textContent = this.model.__proto__.constructor.name
+    this.title.textContent = this.model.__proto__.constructor.name + " " + (model.name ? model.name : '')
     this.dom.appendChild(this.title);
 
     // add pin
