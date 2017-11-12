@@ -33,6 +33,7 @@ import Branch from './tasks/Branch';
 import {Equal, RandomNumber, LessThan} from './statements/Arithmetic';
 import Property from './statements/Property';
 import Call from './tasks/Call';
+import Graph from './ui/Graph';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
@@ -86,10 +87,10 @@ function init() {
   animation.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
   
 
-  var trigger = new Trigger();
-  trigger.x = 100;
-  trigger.y = 200
-  Stage.addActor(trigger);
+  // var trigger = new Trigger();
+  // trigger.x = 100;
+  // trigger.y = 200
+  // Stage.addActor(trigger);
   
   // Cow
   var cow = new SpineActor(require('./assets/cow/cow.info.json'));
@@ -224,6 +225,12 @@ function init() {
   // serialize everything.
   let as = new ActivitySerializer();
   console.log('%c Activity %o ', 'color: white; background-color: black', as.start()); 
+
+  
+  let graph = new Graph();
+  LookUp.getTasks().forEach(task => {
+    graph.createBlock(task);
+  })
 }
 
 init();
@@ -250,26 +257,26 @@ init();
 
 
 // testing connect two div using svg
-let svg = document.getElementById('svg');
+// let svg = document.getElementById('svg');
 
-let outlet1 = document.getElementById('outlet1')
-let outlet2 = document.getElementById('outlet2')
+// let outlet1 = document.getElementById('outlet1')
+// let outlet2 = document.getElementById('outlet2')
 
-let offset = svg.getBoundingClientRect();
-let a = outlet1.getBoundingClientRect();
-let b = outlet2.getBoundingClientRect();
+// let offset = svg.getBoundingClientRect();
+// let a = outlet1.getBoundingClientRect();
+// let b = outlet2.getBoundingClientRect();
 
-let x1 = (a.left + a.right)  / 2 - offset.left;
-let y1 = (a.top  + a.bottom) / 2 - offset.top;
-let x2 = (b.left + b.right)  / 2 - offset.left;
-let y2 = (b.top  + b.bottom) / 2 - offset.top;
+// let x1 = (a.left + a.right)  / 2 - offset.left;
+// let y1 = (a.top  + a.bottom) / 2 - offset.top;
+// let x2 = (b.left + b.right)  / 2 - offset.left;
+// let y2 = (b.top  + b.bottom) / 2 - offset.top;
 
-let path = document.createElementNS('http://www.w3.org/2000/svg','line');
-path.setAttribute('x1', x1)
-path.setAttribute('y1', y1)
-path.setAttribute('x2', x2)
-path.setAttribute('y2', y2)
-path.setAttribute('stroke', '#FF0000');
-path.setAttribute('stroke-width', 3);
-path.setAttribute('fill', 'transparent');
-svg.appendChild(path);
+// let path = document.createElementNS('http://www.w3.org/2000/svg','line');
+// path.setAttribute('x1', x1)
+// path.setAttribute('y1', y1)
+// path.setAttribute('x2', x2)
+// path.setAttribute('y2', y2)
+// path.setAttribute('stroke', '#FF0000');
+// path.setAttribute('stroke-width', 3);
+// path.setAttribute('fill', 'transparent');
+// svg.appendChild(path);
