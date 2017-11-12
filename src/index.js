@@ -187,23 +187,15 @@ function init() {
     task: straightAfterTween
   })
   
-  // start the activity when cow and donkey are loaded
-  Promise.all([cow.loaded, donkey.loaded]).then(() => {
-    startTask.run()
-  })
-  
-  // serialize everything.
-  let as = new ActivitySerializer();
-  console.log('%c Activity %o ', 'color: white; background-color: black', as.start()); 
-
-
   // statements examples
   let equal = new Equal()
   equal.inputs.update('A', 1);
   equal.inputs.update('B', 1);
 
   let branch = new Branch();
-  branch.init({});
+  branch.init({
+    actor: cow
+  });
   branch.inputs.set('condition', equal)
 
   let trueTrace = new Trace();
@@ -222,6 +214,16 @@ function init() {
   branch.execution.set('false', falseTrace)
 
   call.chain(branch)
+
+  
+  // start the activity when cow and donkey are loaded
+  Promise.all([cow.loaded, donkey.loaded]).then(() => {
+    startTask.run()
+  })
+
+  // serialize everything.
+  let as = new ActivitySerializer();
+  console.log('%c Activity %o ', 'color: white; background-color: black', as.start()); 
 }
 
 init();
