@@ -27,6 +27,22 @@ export default class Actor extends PIXI.Container
     mixin(this, new Entity(id));
 
     this.childActors = [];
+
+    
+    this.on('pointerdown', this.pointerDown)
+    this.on('pointerup', this.pointerUp)
+  }
+
+  pointerDown(e) {
+    if(this.functions['pointer.down']) {
+      this.functions['pointer.down'].run();
+    }
+  }
+
+  pointerUp(e) {
+    if(this.functions['pointer.up']) {
+      this.functions['pointer.up'].run();
+    }
   }
 
   addActor(actor) {

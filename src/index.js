@@ -88,6 +88,30 @@ function init() {
   cow.y = 768/2;
   Stage.addActor(cow)
 
+  let mouseDownFunction = new Function();
+  mouseDownFunction.init({
+    actor: cow,
+    name: FunctionName.POINTER_DOWN
+  })
+  let downTrace = new Trace();
+  downTrace.init({
+    actor: cow,
+    text: FunctionName.POINTER_DOWN
+  })
+  mouseDownFunction.chain(downTrace);
+
+  let mouseUpFunction = new Function();
+  mouseUpFunction.init({
+    actor: cow,
+    name: FunctionName.POINTER_UP
+  })
+  let upTrace = new Trace();
+  upTrace.init({
+    actor: cow,
+    text: FunctionName.POINTER_UP
+  })
+  mouseUpFunction.chain(upTrace);
+
   let staticAnimation = new Animation();
   staticAnimation.init({
     actor: cow,

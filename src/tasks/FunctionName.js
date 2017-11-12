@@ -4,4 +4,7 @@ export default {
 
   TASK_START: 'task.start',
   TASK_COMPLETE: 'task.complete',
+
+  POINTER_DOWN: 'pointer.down',
+  POINTER_UP: 'pointer.up',
 }
