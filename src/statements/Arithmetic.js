@@ -99,3 +99,14 @@ export class LessEqual extends Operation
     return this.inputs.value('A') <= this.inputs.value('B');
   }
 }
+
+export class RandomNumber extends Operation
+{
+  constructor(id) {
+    super(id);
+  }
+
+  get value() {
+    return Math.random();
+  }
+}

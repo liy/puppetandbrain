@@ -17,7 +17,8 @@ export default class Trace extends Task
   run() {
     super.run()
     // TODO: print on the actual editor console
-    console.log(this.inputs.value('text'));
+    console.log('%c%s', 'color: green', this.inputs.value('text')); 
+    
     this.execution.run()
   }
 }

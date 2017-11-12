@@ -30,7 +30,7 @@ import ActivityLoader from './ActivityLoader';
 import { Accessor, Data } from './Data';
 import Trigger from './objects/Trigger';
 import Branch from './tasks/Branch';
-import {Equal} from './statements/Arithmetic';
+import {Equal, RandomNumber, LessThan} from './statements/Arithmetic';
 import Property from './statements/Property';
 import Call from './tasks/Call';
 
@@ -188,26 +188,26 @@ function init() {
   })
   
   // statements examples
-  let equal = new Equal()
-  equal.inputs.update('A', 1);
-  equal.inputs.update('B', 1);
+  let less = new LessThan()
+  less.inputs.set('A', new RandomNumber());
+  less.inputs.update('B', 0.5);
 
   let branch = new Branch();
   branch.init({
     actor: cow
   });
-  branch.inputs.set('condition', equal)
+  branch.inputs.set('condition', less)
 
   let trueTrace = new Trace();
   trueTrace.init({
     actor: cow,
-    text: 'true trace'
+    text: 'branch to true'
   })
 
   let falseTrace = new Trace();
   falseTrace.init({
     actor: cow,
-    text: 'false trace'
+    text: 'branch to false'
   })
 
   branch.execution.set('true', trueTrace)
