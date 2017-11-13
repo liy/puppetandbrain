@@ -254,9 +254,6 @@ function init() {
       tx = 0;
       ty += h;
     } 
-
-    // ty = Math.floor((i*w)/window.innerWidth) * 100 + graph.container.offsetTop;
-    
   }
 
   let arr = LookUp.getArithmetics();
@@ -271,6 +268,7 @@ function init() {
       ty += h;
     }
   }
+  graph.refresh();
 }
 
 init();

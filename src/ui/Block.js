@@ -9,11 +9,16 @@ export default class Block
   constructor(model) {
     this.model = model;
 
+    this.inPin = null;
+    this.outPins = Object.create(null);
+    this.inputPins = Object.create(null);
+    this.outputPins = Object.create(null);
+
     this.minWidth = 200;
     this.minHeight = 60;
  
     this.dom = document.createElement('div');
-    this.dom.style = `min-height:${this.minHeight}px; min-width:${this.minWidth}px; padding-bottom:5px; background:rgba(242, 245,251, 1); position:absolute; border-radius:10px; font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;`;
+    this.dom.style = `min-height:${this.minHeight}px; min-width:${this.minWidth}px; padding-bottom:5px; background:rgba(242, 245,251, 0.6); position:absolute; border-radius:10px; font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;`;
     
     this.title = document.createElement('div');
     this.title.style = 'user-select:none;cursor:default;background:#c0c4ce; border-radius:10px 10px 0 0; padding:5px 10px;'
@@ -30,12 +35,13 @@ export default class Block
       if(this.model.__proto__.constructor.name != 'Function') {
         let execIn = new ExecutionPin('', 'left');
         this.execSection.appendChild(execIn.dom)
+        this.inPin = execIn;
       }
 
       for(let name of this.model.execution.nameList) {
-        if(name == 'default') name = '';
         let out = new ExecutionPin(name, 'right');
         this.execSection.appendChild(out.dom)
+        this.outPins[name] = out;
       }
     }
 
@@ -48,6 +54,7 @@ export default class Block
       this.model.inputs.list.forEach(name => {
         let pin = new Pin(name);
         this.varSection.appendChild(pin.dom);
+        this.inputPins[name] = pin;
       })
     }
 
@@ -55,6 +62,7 @@ export default class Block
       this.model.outputs.list.forEach(name => {
         let pin = new Pin(name, 'right');
         this.varSection.appendChild(pin.dom);
+        this.outputPins[name] = pin;
       })
     }
     

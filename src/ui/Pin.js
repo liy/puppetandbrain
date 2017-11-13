@@ -1,6 +1,9 @@
 export default class Pin
 {
   constructor(name, type='input') {
+    this.svg = document.getElementById('svg');
+    this.offset = svg.getBoundingClientRect();
+
     this.dom = document.createElement('div');
 
     this.spot =  document.createElement('div');
@@ -19,6 +22,15 @@ export default class Pin
       this.dom.style = "float:right; clear:right; font-size:12px;"
       this.spot.style = `float:right; margin:6px; width:11px;height:11px; background:#ffc107; border-radius:7.5px; cursor:pointer;`
       this.label.style = "user-select:none;margin-top:4px;float:right;cursor:default"
+    }
+  }
+
+  get position() {
+    let rect = this.spot.getBoundingClientRect();
+    console.log(this.spot)
+    return {
+      x: (rect.left + rect.right)/2 - this.offset.left,
+      y: (rect.top + rect.bottom)/2 - this.offset.top
     }
   }
 }
