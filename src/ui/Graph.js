@@ -10,5 +10,6 @@ export default class Graph
   createBlock(model) {
     let block = new Block(model);
     this.container.appendChild(block.dom)
+    return block;
   }
 }

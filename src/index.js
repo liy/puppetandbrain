@@ -228,9 +228,24 @@ function init() {
 
   
   let graph = new Graph();
-  LookUp.getTasks().forEach(task => {
-    graph.createBlock(task);
-  })
+  // LookUp.getTasks().forEach(task => {
+  //   let block = graph.createBlock(task);
+  //   block.x = tx;
+
+  //   let row = tx/block.width
+  //   tx = (tx + block.width)%window.innerWidth;
+  //   ty = 
+  // })
+  let tasks = LookUp.getTasks();
+  let w = 225;
+  let tx = 0;
+  for(let i=0; i<tasks.length; ++i) {
+    let block = graph.createBlock(tasks[i]);
+    block.x = tx;
+    block.y = Math.floor((i*w)/window.innerWidth) * 100 + graph.container.offsetTop;
+    tx += w;
+    if(tx+w >= window.innerWidth) tx = 0;
+  }
 }
 
 init();
