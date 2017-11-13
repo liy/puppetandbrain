@@ -2,7 +2,6 @@ export default class Pin
 {
   constructor(name, type='input') {
     this.svg = document.getElementById('svg');
-    this.offset = svg.getBoundingClientRect();
 
     this.dom = document.createElement('div');
 
@@ -26,11 +25,12 @@ export default class Pin
   }
 
   get position() {
+    let offset = this.svg.getBoundingClientRect();
     let rect = this.spot.getBoundingClientRect();
     console.log(this.spot)
     return {
-      x: (rect.left + rect.right)/2 - this.offset.left,
-      y: (rect.top + rect.bottom)/2 - this.offset.top
+      x: (rect.left + rect.right)/2 - offset.left,
+      y: (rect.top + rect.bottom)/2 - offset.top
     }
   }
 }
