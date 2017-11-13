@@ -28,5 +28,10 @@ export default class ExecutionOutPin extends ExecutionPin
     this.linePath.setAttribute('y1', this.connectedPin.position.y)
     this.linePath.setAttribute('x2', this.position.x)
     this.linePath.setAttribute('y2', this.position.y)
+
+    let dx = this.connectedPin.position.x - this.position.x;
+    let dy = this.connectedPin.position.y - this.position.y;
+    let r = Math.atan2(dy, dx)
+    console.log(r/(Math.PI/180) )
   }
 }

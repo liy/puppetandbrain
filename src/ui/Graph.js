@@ -76,7 +76,6 @@ export default class Graph
 
     currentBlock.outPins[outPinName].connect(nextBlock.inPin);
 
-    console.log(nextBlock.model.execution.nameList)
     // traverse to next exectuion
     for(let name of nextBlock.model.execution.nameList) {
       let current = nextBlock;

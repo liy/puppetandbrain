@@ -23,8 +23,15 @@ export default class Block
     
     this.title = document.createElement('div');
     this.title.style = 'user-select:none;cursor:default;background:#c0c4ce; border-radius:10px 10px 0 0; padding:5px 10px;'
-    this.title.textContent = this.model.__proto__.constructor.name + " " + (model.name ? model.name : '')
     this.dom.appendChild(this.title);
+    let title = this.model.__proto__.constructor.name;
+    if(title == 'Call') {
+      title += ' ' + this.model.function.name
+    }
+    else if(title == 'Function') {
+      title += ' ' + this.model.name;
+    }
+    this.title.textContent = title;
 
     // TODO: clean up!!!
     if(this.model.execution) {
