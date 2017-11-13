@@ -17,7 +17,7 @@ export default class Pin
     }
     else if(type == 'right') {
       this.dom.style = "float:right; clear:right; font-size:12px;"
-      this.spot.style = `float:right;margin:6px; width:11px;height:11px; background:#ffc107; border-radius:7.5px; cursor:pointer;`
+      this.spot.style = `float:right; margin:6px; width:11px;height:11px; background:#ffc107; border-radius:7.5px; cursor:pointer;`
       this.label.style = "user-select:none;margin-top:4px;float:right;cursor:default"
     }
   }

@@ -1,4 +1,8 @@
 import Pin from "./Pin";
+import ExecutionPin from "./ExecutionPin";
+
+// FIXME: clean up the UI!!!
+
 
 export default class Block
 {
@@ -16,10 +20,23 @@ export default class Block
     this.title.textContent = this.model.__proto__.constructor.name + " " + (model.name ? model.name : '')
     this.dom.appendChild(this.title);
 
+    // TODO: clean up!!!
     if(this.model.execution) {
       this.execSection = document.createElement('div')
       this.execSection.style = `height:20px`;
-      this.dom.appendChild(this.execSection)
+      this.dom.appendChild(this.execSection);
+
+      // always have a in execpt function
+      if(this.model.__proto__.constructor.name != 'Function') {
+        let execIn = new ExecutionPin('', 'left');
+        this.execSection.appendChild(execIn.dom)
+      }
+
+      for(let name of this.model.execution.nameList) {
+        if(name == 'default') name = '';
+        let out = new ExecutionPin(name, 'right');
+        this.execSection.appendChild(out.dom)
+      }
     }
 
     this.varSection = document.createElement('div')

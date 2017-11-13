@@ -6,6 +6,8 @@ export default class Tween extends Task
   constructor() {
     super();
 
+    // ensure the order
+    this.execution.set('default');
     this.execution.set('complete');
   }
 

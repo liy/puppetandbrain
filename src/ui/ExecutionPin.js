@@ -10,8 +10,8 @@ export default class ExecutionPin
     this.label.textContent = name
     this.dom.appendChild(this.label)
 
-    this.dom.style = "float:right; clear:right; font-size:12px; margin-top:5px"
-    this.spot.style = `float:right;margin:6px; width:11px;height:11px; background-image: url(${require('../assets/execution.svg')}); border-radius:7.5px; cursor:pointer`;
-    this.label.style = "user-select:none;margin-top:4px;float:right;cursor:default"
+    this.dom.style = `float:${location}; clear:${location}; font-size:12px; margin-top:5px`
+    this.spot.style = `float:${location}; margin-left:10px; margin-top:6px; margin-right:6px;  width:11px;height:11px; background-image: url(${require('../assets/execution.svg')}); border-radius:7.5px; cursor:pointer`;
+    this.label.style = `user-select:none;margin-top:4px;float:${location};cursor:default`
   }
 }
