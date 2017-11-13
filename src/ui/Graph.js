@@ -76,15 +76,14 @@ export default class Graph
 
     currentBlock.outPins[outPinName].connect(nextBlock.inPin);
 
+    console.log(nextBlock.model.execution.nameList)
     // traverse to next exectuion
     for(let name of nextBlock.model.execution.nameList) {
-      currentBlock = nextBlock;
-      let task = currentBlock.model.execution.get(name);
+      let current = nextBlock;
+      let task = current.model.execution.get(name);
       if(task) {
-        nextBlock = this.map[task.id]
-        
-        console.log(currentBlock, name, nextBlock)
-        this.traverseExecution(currentBlock, name, nextBlock)
+        let next = this.map[task.id]
+        this.traverseExecution(current, name, next)
       }
     }
   }
