@@ -11,6 +11,7 @@ require('./assets/donkey/donkey2.png')
 require('./assets/donkey/donkey.json')
 
 
+
 // imports
 require('./utils/LookUp')
 import SpineActor from './objects/SpineActor';
@@ -242,6 +243,7 @@ function init() {
   let w = 225;
   let tx = 0;
   let ty = 0;
+  let h = 120;
   for(let i=0; i<tasks.length; ++i) {
     let block = new Block(tasks[i])
     graph.add(block);
@@ -250,7 +252,7 @@ function init() {
     tx += w;
     if(tx+w >= window.innerWidth) {
       tx = 0;
-      ty += 100;
+      ty += h;
     } 
 
     // ty = Math.floor((i*w)/window.innerWidth) * 100 + graph.container.offsetTop;
@@ -266,7 +268,7 @@ function init() {
     tx += w;
     if(tx+w >= window.innerWidth) {
       tx = 0;
-      ty += 100;
+      ty += h;
     }
   }
 }
