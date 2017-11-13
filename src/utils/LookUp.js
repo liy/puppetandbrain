@@ -2,7 +2,8 @@ var STORE = Object.create(null);
 var ACTORS = [];
 var DATA = [];
 var TASKS = [];
-var STATEMENTS = [];
+var ARITHMETICS = [];
+var PROPERTIES = [];
 
 function create(entry, id) {
   if(!id) {
@@ -57,15 +58,27 @@ window.LookUp = {
     delete STORE[id]
   },
 
-  addStatement: function(entry, id) {
+  addArithmetic: function(entry, id) {
     id = create(entry, id)
-    STATEMENTS.push(id);
+    ARITHMETICS.push(id);
     return id;
   },
 
-  removeStatement: function(id) {
-    let index = STATEMENTS.indexOf(id);
-    STATEMENTS.splice(index, 1);
+  removeArithmetic: function(id) {
+    let index = ARITHMETICS.indexOf(id);
+    ARITHMETICS.splice(index, 1);
+    delete STORE[id]
+  },
+
+  addProperty: function(entry, id) {
+    id = create(entry, id)
+    PROPERTIES.push(id);
+    return id;
+  },
+
+  removeProperty: function(id) {
+    let index = PROPERTIES.indexOf(id);
+    PROPERTIES.splice(index, 1);
     delete STORE[id]
   },
 
@@ -85,6 +98,18 @@ window.LookUp = {
     })
   },
 
+  getArithmetics: function() {
+    return ARITHMETICS.map(id => {
+      return STORE[id];
+    })
+  },
+
+  getProperties: function() {
+    return PROPERTIES.map(id => {
+      return STORE[id];
+    })
+  },
+
   pod: function() {
     let result = Object.create(null);
     result.store = Object.create(null);
@@ -93,7 +118,7 @@ window.LookUp = {
     }
     result.actors = ACTORS.concat()
     result.tasks = TASKS.concat()
-    result.statements = STATEMENTS.concat();
+    result.arithmetics = ARITHMETICS.concat();
     result.data = DATA.concat()
     
     return result;

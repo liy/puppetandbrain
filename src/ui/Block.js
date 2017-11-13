@@ -20,10 +20,25 @@ export default class Block
     this.dom.appendChild(this.title);
 
     // add pin
-    this.model.inputs.list.forEach(name => {
-      let pin = new Pin(name);
+    if(this.model.inputs) {
+      this.model.inputs.list.forEach(name => {
+        let pin = new Pin(name);
+        this.dom.appendChild(pin.dom);
+      })
+    }
+
+    if(this.model.outputs) {
+      this.model.outputs.list.forEach(name => {
+        let pin = new Pin(name, 'right');
+        this.dom.appendChild(pin.dom);
+      })
+    }
+    
+
+    if(this.model.value) {
+      let pin = new Pin('value', 'right');
       this.dom.appendChild(pin.dom);
-    })
+    }
 
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);

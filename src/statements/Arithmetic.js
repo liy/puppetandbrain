@@ -3,7 +3,7 @@ import { DataList, Data } from "../Data";
 class Operation
 {
   constructor(id) {
-    this.id = LookUp.addStatement(this, id)
+    this.id = LookUp.addArithmetic(this, id)
     this.inputs = new DataList();
   }
 

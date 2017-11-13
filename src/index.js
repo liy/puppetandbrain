@@ -34,6 +34,8 @@ import {Equal, RandomNumber, LessThan} from './statements/Arithmetic';
 import Property from './statements/Property';
 import Call from './tasks/Call';
 import Graph from './ui/Graph';
+import Block from './ui/Block';
+import ArithmeticBlock from './ui/ArithmeticBlock';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
@@ -80,11 +82,11 @@ function init() {
     actor: donkey,
     name: 'playAnimation'
   })
-  onDonkeyExcit.inputs.add('animationName', new Data())
+  onDonkeyExcit.outputs.add('animationName', new Data())
   onDonkeyExcit.chain(delayAnimation, animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
-  animation.inputs.set('name', onDonkeyExcit.inputs.get('animationName'));
+  animation.inputs.set('name', onDonkeyExcit.outputs.get('animationName'));
   
 
   // var trigger = new Trigger();
@@ -102,29 +104,29 @@ function init() {
   cow.y = 768/2;
   Stage.addActor(cow)
 
-  let mouseDownFunction = new Function();
-  mouseDownFunction.init({
-    actor: cow,
-    name: FunctionName.POINTER_DOWN
-  })
-  let downTrace = new Trace();
-  downTrace.init({
-    actor: cow,
-    text: FunctionName.POINTER_DOWN
-  })
-  mouseDownFunction.chain(downTrace);
+  // let mouseDownFunction = new Function();
+  // mouseDownFunction.init({
+  //   actor: cow,
+  //   name: FunctionName.POINTER_DOWN
+  // })
+  // let downTrace = new Trace();
+  // downTrace.init({
+  //   actor: cow,
+  //   text: FunctionName.POINTER_DOWN
+  // })
+  // mouseDownFunction.chain(downTrace);
 
-  let mouseUpFunction = new Function();
-  mouseUpFunction.init({
-    actor: cow,
-    name: FunctionName.POINTER_UP
-  })
-  let upTrace = new Trace();
-  upTrace.init({
-    actor: cow,
-    text: FunctionName.POINTER_UP
-  })
-  mouseUpFunction.chain(upTrace);
+  // let mouseUpFunction = new Function();
+  // mouseUpFunction.init({
+  //   actor: cow,
+  //   name: FunctionName.POINTER_UP
+  // })
+  // let upTrace = new Trace();
+  // upTrace.init({
+  //   actor: cow,
+  //   text: FunctionName.POINTER_UP
+  // })
+  // mouseUpFunction.chain(upTrace);
 
   let staticAnimation = new Animation();
   staticAnimation.init({
@@ -170,7 +172,7 @@ function init() {
     callee: donkey,
     functionName: "playAnimation"
   })
-  call.function.inputs.update('animationName', 'interactive');
+  call.function.outputs.update('animationName', 'interactive');
   startTask.chain(staticAnimation, wait, trace, walkAnimation, tween)
            .chain({
              executionName: 'complete',
@@ -239,12 +241,33 @@ function init() {
   let tasks = LookUp.getTasks();
   let w = 225;
   let tx = 0;
+  let ty = 0;
   for(let i=0; i<tasks.length; ++i) {
-    let block = graph.createBlock(tasks[i]);
+    let block = new Block(tasks[i])
+    graph.add(block);
     block.x = tx;
-    block.y = Math.floor((i*w)/window.innerWidth) * 100 + graph.container.offsetTop;
+    block.y = ty + graph.container.offsetTop;
     tx += w;
-    if(tx+w >= window.innerWidth) tx = 0;
+    if(tx+w >= window.innerWidth) {
+      tx = 0;
+      ty += 100;
+    } 
+
+    // ty = Math.floor((i*w)/window.innerWidth) * 100 + graph.container.offsetTop;
+    
+  }
+
+  let arr = LookUp.getArithmetics();
+  for(let i=0; i<arr.length; ++i) {
+    let block = new ArithmeticBlock(arr[i])
+    graph.add(block);
+    block.x = tx;
+    block.y = ty + graph.container.offsetTop;
+    tx += w;
+    if(tx+w >= window.innerWidth) {
+      tx = 0;
+      ty += 100;
+    }
   }
 }
 

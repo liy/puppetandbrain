@@ -7,9 +7,7 @@ export default class Graph
     this.svg = document.getElementById('svg');
   }
 
-  createBlock(model) {
-    let block = new Block(model);
+  add(block) {
     this.container.appendChild(block.dom)
-    return block;
   }
 }

@@ -11,7 +11,7 @@ export default class Property
   }
 
   init(data) {
-    this.id = LookUp.addStatement(this, data.id)
+    this.id = LookUp.addProperty(this, data.id)
   }
 
   get value() {
