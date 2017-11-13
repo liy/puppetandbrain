@@ -1,7 +1,9 @@
 export default class ExecutionPin
 {
   constructor(name, location='left') {
-    let svg = document.getElementById('svg');
+    this.connectedPin = null
+
+    this.svg = document.getElementById('svg');
     this.offset = svg.getBoundingClientRect();
 
     this.dom = document.createElement('div');
@@ -24,5 +26,9 @@ export default class ExecutionPin
       x: (rect.left + rect.right)/2 - this.offset.left,
       y: (rect.top + rect.bottom)/2 - this.offset.top
     }
+  }
+
+  get isConnected() {
+    return this.connectedPin != null;
   }
 }

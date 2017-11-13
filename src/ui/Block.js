@@ -1,5 +1,6 @@
 import Pin from "./Pin";
-import ExecutionPin from "./ExecutionPin";
+import ExecutionInPin from "./ExecutionInPin";
+import ExecutionOutPin from "./ExecutionOutPin";
 
 // FIXME: clean up the UI!!!
 
@@ -33,13 +34,13 @@ export default class Block
 
       // always have a in execpt function
       if(this.model.__proto__.constructor.name != 'Function') {
-        let execIn = new ExecutionPin('', 'left');
+        let execIn = new ExecutionInPin();
         this.execSection.appendChild(execIn.dom)
         this.inPin = execIn;
       }
 
       for(let name of this.model.execution.nameList) {
-        let out = new ExecutionPin(name, 'right');
+        let out = new ExecutionOutPin(name, 'right');
         this.execSection.appendChild(out.dom)
         this.outPins[name] = out;
       }
@@ -100,6 +101,12 @@ export default class Block
     // this.dom.style.left = e.clientX - (e.clientX - this.dom.offsetLeft) + "px";
     this.dom.style.top = e.clientY + this.offset.y + 'px';
     this.dom.style.left = e.clientX  + this.offset.x + "px";
+
+    Object.keys(this.outPins).forEach(name => {
+      let pin = this.outPins[name]
+      pin.draw();
+    })
+    if(this.inPin) this.inPin.draw();
   }
 
   set x(v) {

@@ -61,18 +61,20 @@ export default class Graph
 
   traverseExecution(currentBlock, outPinName, nextBlock) {
     // draw line form current block to next block
-    let a = currentBlock.outPins[outPinName].position;
-    let b = nextBlock.inPin.position
+    // let a = currentBlock.outPins[outPinName].position;
+    // let b = nextBlock.inPin.position
 
-    let path = document.createElementNS('http://www.w3.org/2000/svg','line');
-    path.setAttribute('x1', a.x)
-    path.setAttribute('y1', a.y)
-    path.setAttribute('x2', b.x)
-    path.setAttribute('y2', b.y)
-    path.setAttribute('stroke', '#FF0000');
-    path.setAttribute('stroke-width', 3);
-    path.setAttribute('fill', 'transparent');
-    this.svg.appendChild(path);
+    // let path = document.createElementNS('http://www.w3.org/2000/svg','line');
+    // path.setAttribute('x1', a.x)
+    // path.setAttribute('y1', a.y)
+    // path.setAttribute('x2', b.x)
+    // path.setAttribute('y2', b.y)
+    // path.setAttribute('stroke', '#FF0000');
+    // path.setAttribute('stroke-width', 3);
+    // path.setAttribute('fill', 'transparent');
+    // this.svg.appendChild(path);
+
+    currentBlock.outPins[outPinName].connect(nextBlock.inPin);
 
     // traverse to next exectuion
     for(let name of nextBlock.model.execution.nameList) {
