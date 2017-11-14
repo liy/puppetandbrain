@@ -1,4 +1,4 @@
-export default class Pin
+export default class DataPin
 {
   constructor(name, type='input') {
     this.svg = document.getElementById('svg');
@@ -14,10 +14,10 @@ export default class Pin
 
     if(type == 'input') {
       this.dom.style = "float:left; clear:left; font-size:12px;"
-      this.spot.style = "float:left;margin:6px; width:11px;height:11px; background:#8BC34A; border-radius:7.5px; cursor:pointer"
+      this.spot.style = "float:left;margin:6px; width:11px;height:11px; background:#6a39c1; border-radius:7.5px; cursor:pointer"
       this.label.style = "user-select:none;margin-top:4px;float:left;cursor:default"
     }
-    else if(type == 'right') {
+    else {
       this.dom.style = "float:right; clear:right; font-size:12px;"
       this.spot.style = `float:right; margin:6px; width:11px;height:11px; background:#ffc107; border-radius:7.5px; cursor:pointer;`
       this.label.style = "user-select:none;margin-top:4px;float:right;cursor:default"
@@ -27,7 +27,6 @@ export default class Pin
   get position() {
     let offset = this.svg.getBoundingClientRect();
     let rect = this.spot.getBoundingClientRect();
-    console.log(this.spot)
     return {
       x: (rect.left + rect.right)/2 - offset.left,
       y: (rect.top + rect.bottom)/2 - offset.top

@@ -18,11 +18,11 @@ export default class ExecutionOutPin extends ExecutionPin
       pin.connectedPin = this;
       this.svg.appendChild(this.path);
 
-      this.draw();
+      this.drawConnection();
     }
   }
   
-  draw() {
+  drawConnection() {
     if(!this.isConnected) return;
 
     let offsetX = 20;
@@ -32,7 +32,7 @@ export default class ExecutionOutPin extends ExecutionPin
     let ady = Math.abs(dy);
     let degree = Math.atan2(dy, dx)*180/Math.PI;
 
-    console.log(dx, dy, degree, Math.sqrt(dx*dx+dy*dy) )
+    // console.log(dx, dy, degree, Math.sqrt(dx*dx+dy*dy) )
 
     // direct line:
     // 1. degree in range: [-?,?]

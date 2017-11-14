@@ -1,6 +1,7 @@
-import Pin from "./Pin";
 import ExecutionInPin from "./ExecutionInPin";
 import ExecutionOutPin from "./ExecutionOutPin";
+import InputPin from "./InputPin";
+import OutputPin from "./OutputPin";
 
 // FIXME: clean up the UI!!!
 
@@ -10,75 +11,11 @@ export default class Block
   constructor(model) {
     this.model = model;
 
-    this.inPin = null;
-    this.outPins = Object.create(null);
-    this.inputPins = Object.create(null);
-    this.outputPins = Object.create(null);
-
     this.minWidth = 200;
     this.minHeight = 60;
  
     this.dom = document.createElement('div');
-    this.dom.style = `min-height:${this.minHeight}px; min-width:${this.minWidth}px; padding-bottom:5px; background:rgba(242, 245,251, 0.6); position:absolute; border-radius:10px; font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;`;
-    
-    this.title = document.createElement('div');
-    this.title.style = 'user-select:none;cursor:default;background:rgba(192, 196, 206, 0.7); border-radius:10px 10px 0 0; padding:5px 10px;'
-    this.dom.appendChild(this.title);
-    let title = this.model.__proto__.constructor.name;
-    if(title == 'Call') {
-      title += ' ' + this.model.function.name
-    }
-    else if(title == 'Function') {
-      title += ' ' + this.model.name;
-    }
-    this.title.textContent = title;
-
-    // TODO: clean up!!!
-    if(this.model.execution) {
-      this.execSection = document.createElement('div')
-      this.execSection.style = `height:20px`;
-      this.dom.appendChild(this.execSection);
-
-      // always have a in execpt function
-      if(this.model.__proto__.constructor.name != 'Function') {
-        let execIn = new ExecutionInPin();
-        this.execSection.appendChild(execIn.dom)
-        this.inPin = execIn;
-      }
-
-      for(let name of this.model.execution.nameList) {
-        let out = new ExecutionOutPin(name, 'right');
-        this.execSection.appendChild(out.dom)
-        this.outPins[name] = out;
-      }
-    }
-
-    this.varSection = document.createElement('div')
-    this.varSection.style = 'margin-left:5px; margin-right:5px; margin-top:5px;'
-    this.dom.appendChild(this.varSection);
-
-    // add pin
-    if(this.model.inputs) {
-      this.model.inputs.list.forEach(name => {
-        let pin = new Pin(name);
-        this.varSection.appendChild(pin.dom);
-        this.inputPins[name] = pin;
-      })
-    }
-
-    if(this.model.outputs) {
-      this.model.outputs.list.forEach(name => {
-        let pin = new Pin(name, 'right');
-        this.varSection.appendChild(pin.dom);
-        this.outputPins[name] = pin;
-      })
-    }
-    
-
-    if(this.model.value) {
-      let pin = new Pin('value', 'right');
-      this.varSection.appendChild(pin.dom);
-    }
+    this.dom.style = `min-height:${this.minHeight}px; min-width:${this.minWidth}px; padding-bottom:5px; background:rgba(242, 245,251, 0.7); position:absolute; border-radius:10px; font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;`;
 
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
@@ -108,12 +45,6 @@ export default class Block
     // this.dom.style.left = e.clientX - (e.clientX - this.dom.offsetLeft) + "px";
     this.dom.style.top = e.clientY + this.offset.y + 'px';
     this.dom.style.left = e.clientX  + this.offset.x + "px";
-
-    Object.keys(this.outPins).forEach(name => {
-      let pin = this.outPins[name]
-      pin.draw();
-    })
-    if(this.inPin) this.inPin.draw();
   }
 
   set x(v) {

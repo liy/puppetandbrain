@@ -8,9 +8,13 @@ export default class ExecutionInPin extends ExecutionPin
     this.connectedPin = null
   }
 
-  draw() {
+  connect(outPin) {
+    outPin.connect(this)
+  }
+
+  drawConnection() {
     if(this.connectedPin) {
-      this.connectedPin.draw();
+      this.connectedPin.drawConnection();
     }
   }
 }

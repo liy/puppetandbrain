@@ -37,6 +37,7 @@ import Call from './tasks/Call';
 import Graph from './ui/Graph';
 import Block from './ui/Block';
 import ArithmeticBlock from './ui/ArithmeticBlock';
+import TaskBlock from './ui/TaskBlock';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
@@ -245,7 +246,7 @@ function init() {
   let ty = 0;
   let h = 120;
   for(let i=0; i<tasks.length; ++i) {
-    let block = new Block(tasks[i])
+    let block = new TaskBlock(tasks[i])
     graph.add(block);
     block.x = tx;
     block.y = ty + graph.container.offsetTop + Math.random()*60-30;
