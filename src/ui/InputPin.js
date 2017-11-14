@@ -1,15 +1,20 @@
 import DataPin from "./DataPin";
+import VariableGetter from "../getters/VariableGetter";
 
 export default class InputPin extends DataPin
 {
-  constructor(name) {
-    super(name, 'input');
+  constructor(input) {
+    super(input.name, 'input');
     
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke', '#dbaee6');
     this.path.setAttribute('stroke-width', 2);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
+
+    if(input instanceof VariableGetter) {
+      this.label.textContent = input.value
+    }
 
     this.outputPin = null;
   }

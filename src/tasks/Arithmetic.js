@@ -1,7 +1,6 @@
 import DataList from "../DataList";
 
-
-class Operation
+export class Operation
 {
   constructor(id) {
     this.id = LookUp.addArithmetic(this, id)

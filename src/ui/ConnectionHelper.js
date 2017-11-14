@@ -1,3 +1,7 @@
+import { Operation } from "../tasks/Arithmetic";
+import OutputGetter from "../getters/OutputGetter";
+import PropertyGetter from "../getters/PropertyGetter";
+
 class ConnectionHelper
 {
   constructor() {
@@ -38,64 +42,91 @@ class ConnectionHelper
   }
 
   drawOutputConnections() {
-    let map = Object.create(null);
-    this.dataUses = [];
 
-    let tasks = LookUp.getTasks();
-    tasks.forEach(task => {
-      // inputs
-      for(let inputName of task.inputs.list) {
-        let data = task.inputs.get(inputName);
-        if(data && Number.isInteger(data.id)) {
-          if(!map[data.id]) {
-            map[data.id] = {
-              inputs: [],
-              output: null,
-              id: data.id
-            }
-            this.dataUses.push(map[data.id])
-          }
-          map[data.id].inputs.push({
-            taskID: task.id,
-            name: inputName
-          })
+    let entries = LookUp.getTasks().concat(LookUp.getArithmetics());
+    entries.forEach(entry => {
+      let inputBlock = this.graph.getBlock(entry.id);
+      for(let name of entry.inputs.list) {
+        let inputPin = inputBlock.inputPins[name];
+        let linker = entry.inputs.get(name);
+        if(linker instanceof OutputGetter) {
+          let outputBlock = this.graph.getBlock(linker.target.id);
+          let outputPin = outputBlock.outputPins[linker.name]
+          outputPin.connect(inputPin)
         }
-      }
-      // outputs
-      for(let outputName of task.outputs.list) {
-        let data = task.outputs.get(outputName);
-        if(data) {
-          if(!map[data.id]) {
-            map[data.id] = {
-              inputs: [],
-              output: null,
-              id: data.id
-            }
-            this.dataUses.push(map[data.id])
-          }
-          map[data.id].output = {
-            taskID: task.id,
-            name: outputName
-          };
+        else if(linker instanceof Operation){
+          let outputBlock = this.graph.getBlock(linker.id);
+          let outputPin = outputBlock.outputPins['value']
+          outputPin.connect(inputPin)
         }
-      }
-    })
-
-    // console.log(this.dataUses)
-    for(let use of this.dataUses) {
-      if(use.inputs.length != 0 && use.output != null) {
-        let outputBlock = this.graph.getBlock(use.output.taskID);
-        let outputPin = outputBlock.outputPins[use.output.name]
-        console.log(use.output.name)
-        for(let inputInfo of use.inputs) {
-          let inputBlock = this.graph.getBlock(inputInfo.taskID);
-
-          let inputPin = inputBlock.inputPins[inputInfo.name]
+        else if(linker instanceof PropertyGetter) {
+          let outputBlock = this.graph.getBlock(linker.id);
+          let outputPin = outputBlock.outputPins[name]
           outputPin.connect(inputPin)
         }
       }
-    }
+    });
   }
+
+  // drawOutputConnections() {
+  //   let map = Object.create(null);
+  //   this.dataUses = [];
+
+  //   let tasks = LookUp.getTasks();
+  //   tasks.forEach(task => {
+  //     // inputs
+  //     for(let inputName of task.inputs.list) {
+  //       let data = task.inputs.get(inputName);
+  //       if(data && Number.isInteger(data.id)) {
+  //         if(!map[data.id]) {
+  //           map[data.id] = {
+  //             inputs: [],
+  //             output: null,
+  //             id: data.id
+  //           }
+  //           this.dataUses.push(map[data.id])
+  //         }
+  //         map[data.id].inputs.push({
+  //           taskID: task.id,
+  //           name: inputName
+  //         })
+  //       }
+  //     }
+  //     // outputs
+  //     for(let outputName of task.outputs.list) {
+  //       let data = task.outputs.get(outputName);
+  //       if(data) {
+  //         if(!map[data.id]) {
+  //           map[data.id] = {
+  //             inputs: [],
+  //             output: null,
+  //             id: data.id
+  //           }
+  //           this.dataUses.push(map[data.id])
+  //         }
+  //         map[data.id].output = {
+  //           taskID: task.id,
+  //           name: outputName
+  //         };
+  //       }
+  //     }
+  //   })
+
+  //   // console.log(this.dataUses)
+  //   for(let use of this.dataUses) {
+  //     if(use.inputs.length != 0 && use.output != null) {
+  //       let outputBlock = this.graph.getBlock(use.output.taskID);
+  //       let outputPin = outputBlock.outputPins[use.output.name]
+  //       console.log(use.output.name)
+  //       for(let inputInfo of use.inputs) {
+  //         let inputBlock = this.graph.getBlock(inputInfo.taskID);
+
+  //         let inputPin = inputBlock.inputPins[inputInfo.name]
+  //         outputPin.connect(inputPin)
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 export default new ConnectionHelper();

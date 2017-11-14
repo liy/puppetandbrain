@@ -36,6 +36,7 @@ import Block from './ui/Block';
 import ArithmeticBlock from './ui/ArithmeticBlock';
 import TaskBlock from './ui/TaskBlock';
 import PropertyGetter from './getters/PropertyGetter';
+import OutputGetter from './getters/OutputGetter';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
@@ -86,7 +87,7 @@ function init() {
   onDonkeyExcit.chain(delayAnimation, animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
-  animation.inputs.connect('name', onDonkeyExcit.outputs.get('animationName'));
+  animation.inputs.connect('name', new OutputGetter(onDonkeyExcit, 'animationName'));
   
 
   // var trigger = new Trigger();

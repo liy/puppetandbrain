@@ -1,6 +1,7 @@
 export default class DataPin
 {
   constructor(name, type='input') {
+    this.name = name;
     this.svg = document.getElementById('svg');
 
     this.dom = document.createElement('div');
@@ -11,6 +12,9 @@ export default class DataPin
     this.label = document.createElement('div');
     this.label.textContent = name
     this.dom.appendChild(this.label)
+
+    // this.input = document.createElement('input');
+    // this.dom.appendChild(this.input)
 
     if(type == 'input') {
       this.dom.style = "float:left; clear:left; font-size:12px;"

@@ -10,5 +10,6 @@ export default class PropertyBlock extends TaskBlock
 
     let pin = new OutputPin(this.model.name);
     this.content.appendChild(pin.dom);
+    this.outputPins[propertyGetter.name] = pin;
   }
 }

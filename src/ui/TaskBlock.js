@@ -60,7 +60,7 @@ export default class TaskBlock extends Block
     // add pin
     if(this.model.inputs) {
       this.model.inputs.list.forEach(name => {
-        let pin = new InputPin(name);
+        let pin = new InputPin(this.model.inputs.get(name));
         this.content.appendChild(pin.dom);
         this.inputPins[name] = pin;
       })
