@@ -1,6 +1,7 @@
 import ConnectionHelper from './ConnectionHelper'
 import ArithmeticBlock from './ArithmeticBlock';
 import TaskBlock from './TaskBlock';
+import PropertyBlock from './PropertyBlock';
 
 export default class Graph
 {
@@ -46,6 +47,22 @@ export default class Graph
       if(tx+w >= window.innerWidth) {
         tx = indent;
         ty += h;
+      }
+    }
+
+    let getters = LookUp.getGetters();
+    for(let i=0; i<getters.length; ++i) {
+      let getter = getters[i];
+      if(getter.__proto__.constructor.name === 'PropertyGetter') {
+        let block = new PropertyBlock(getter)
+        this.add(block);
+        block.x = tx;
+        block.y = ty + this.container.offsetTop + Math.random()*60-30;
+        tx += w;
+        if(tx+w >= window.innerWidth) {
+          tx = indent;
+          ty += h;
+        }
       }
     }
 

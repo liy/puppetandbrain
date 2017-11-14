@@ -70,18 +70,6 @@ window.LookUp = {
     delete STORE[id]
   },
 
-  addProperty: function(entry, id) {
-    id = create(entry, id)
-    PROPERTIES.push(id);
-    return id;
-  },
-
-  removeProperty: function(id) {
-    let index = PROPERTIES.indexOf(id);
-    PROPERTIES.splice(index, 1);
-    delete STORE[id]
-  },
-
   get: function(id) {
     return STORE[id];
   },
@@ -104,9 +92,9 @@ window.LookUp = {
     })
   },
 
-  getProperties: function() {
-    return PROPERTIES.map(id => {
-      return STORE[id];
+  getGetters: function() {
+    return GETTERS.map(id => {
+      return STORE[id]
     })
   },
 
