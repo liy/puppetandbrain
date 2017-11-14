@@ -6,9 +6,9 @@ export default class InputPin extends DataPin
     super(name, 'input');
     
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    this.path.setAttribute('stroke', '#7dbad6');
-    this.path.setAttribute('stroke-width', 1.5);
-    this.path.setAttribute('stroke-opacity', 0.8);
+    this.path.setAttribute('stroke', '#dbaee6');
+    this.path.setAttribute('stroke-width', 2);
+    this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
 
     this.outputPin = null;

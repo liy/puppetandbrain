@@ -44,8 +44,8 @@ var canvas = document.createElement('canvas');
 appDiv.appendChild(canvas);
 window.renderer = PIXI.autoDetectRenderer({
   autoStart: true,
-  width: 800, 
-  height: 600, 
+  width: window.innerWidth, 
+  height: window.innerHeight, 
   view: canvas,
   // transparent: true,
   antialias: true
@@ -66,7 +66,7 @@ function init() {
     y: 0.5
   }
   donkey.x = 1024/1.5;
-  donkey.y = 768/2;
+  donkey.y = 200;
   Stage.addActor(donkey)
 
   let animation = new Animation();
@@ -232,44 +232,7 @@ function init() {
 
   
   let graph = new Graph();
-  // LookUp.getTasks().forEach(task => {
-  //   let block = graph.createBlock(task);
-  //   block.x = tx;
-
-  //   let row = tx/block.width
-  //   tx = (tx + block.width)%window.innerWidth;
-  //   ty = 
-  // })
-  let tasks = LookUp.getTasks();
-  let w = 225;
-  let tx = 0;
-  let ty = 0;
-  let h = 120;
-  for(let i=0; i<tasks.length; ++i) {
-    let block = new TaskBlock(tasks[i])
-    graph.add(block);
-    block.x = tx;
-    block.y = ty + graph.container.offsetTop + Math.random()*60-30;
-    tx += w;
-    if(tx+w >= window.innerWidth) {
-      tx = 0;
-      ty += h;
-    } 
-  }
-
-  let arr = LookUp.getArithmetics();
-  for(let i=0; i<arr.length; ++i) {
-    let block = new ArithmeticBlock(arr[i])
-    graph.add(block);
-    block.x = tx;
-    block.y = ty + graph.container.offsetTop + Math.random()*60-30;
-    tx += w;
-    if(tx+w >= window.innerWidth) {
-      tx = 0;
-      ty += h;
-    }
-  }
-  graph.refresh();
+  graph.init();
 }
 
 init();

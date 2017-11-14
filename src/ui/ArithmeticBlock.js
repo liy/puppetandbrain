@@ -8,7 +8,7 @@ export default class ArithmeticBlock extends TaskBlock
 
     if(this.model.value) {
       let pin = new OutputPin('value');
-      this.varSection.appendChild(pin.dom);
+      this.content.appendChild(pin.dom);
     }
   }
 }

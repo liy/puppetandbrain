@@ -13,6 +13,8 @@ export default class Actor extends PIXI.Container
 {
   constructor(id) {
     super();
+
+    this.variables = Object.create(null);
     
     // create an entry in the reference look up
     this.id = LookUp.addActor(this, id);
@@ -30,6 +32,10 @@ export default class Actor extends PIXI.Container
 
     this.on('pointerdown', this.pointerDown)
     this.on('pointerup', this.pointerUp)
+  }
+
+  createVariable(name, value) {
+    this.variables[name] = value;
   }
 
   pointerDown(e) {
@@ -65,6 +71,7 @@ export default class Actor extends PIXI.Container
       class: this.__proto__.constructor.name,
       id: this.id,
       name: this.name,
+      variables: this.variables,
       childActors: this.childActors.concat(),
       functions,
     }

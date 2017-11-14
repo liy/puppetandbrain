@@ -6,8 +6,8 @@ export default class ExecutionOutPin extends ExecutionPin
     super(name, 'right')
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    this.path.setAttribute('stroke', '#FFFFFF');
-    this.path.setAttribute('stroke-width', 3);
+    this.path.setAttribute('stroke', '#8ab2d0');
+    this.path.setAttribute('stroke-width', 4);
     this.path.setAttribute('stroke-opacity', 0.8);
     this.path.setAttribute('fill', 'transparent');
   }

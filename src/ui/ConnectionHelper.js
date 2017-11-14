@@ -1,7 +1,7 @@
 class ConnectionHelper
 {
   constructor() {
-
+    this.dataUses = [];
   }
 
   start(graph) {
@@ -38,8 +38,8 @@ class ConnectionHelper
   }
 
   drawOutputConnections() {
-    let dataMap = Object.create(null);
-    let connections = [];
+    let map = Object.create(null);
+    this.dataUses = [];
 
     let tasks = LookUp.getTasks();
     tasks.forEach(task => {
@@ -47,14 +47,15 @@ class ConnectionHelper
       for(let inputName of task.inputs.list) {
         let data = task.inputs.get(inputName);
         if(data && Number.isInteger(data.id)) {
-          if(!dataMap[data.id]) {
-            dataMap[data.id] = {
+          if(!map[data.id]) {
+            map[data.id] = {
               inputs: [],
-              output: null
+              output: null,
+              id: data.id
             }
-            connections.push(dataMap[data.id])
+            this.dataUses.push(map[data.id])
           }
-          dataMap[data.id].inputs.push({
+          map[data.id].inputs.push({
             taskID: task.id,
             name: inputName
           })
@@ -64,14 +65,15 @@ class ConnectionHelper
       for(let outputName of task.outputs.list) {
         let data = task.outputs.get(outputName);
         if(data) {
-          if(!dataMap[data.id]) {
-            dataMap[data.id] = {
+          if(!map[data.id]) {
+            map[data.id] = {
               inputs: [],
-              output: null
+              output: null,
+              id: data.id
             }
-            connections.push(dataMap[data.id])
+            this.dataUses.push(map[data.id])
           }
-          dataMap[data.id].output = {
+          map[data.id].output = {
             taskID: task.id,
             name: outputName
           };
@@ -79,13 +81,13 @@ class ConnectionHelper
       }
     })
 
-    console.log(connections)
-    for(let connInfo of connections) {
-      if(connInfo.inputs.length != 0 && connInfo.output != null) {
-        let outputBlock = this.graph.getBlock(connInfo.output.taskID);
-        let outputPin = outputBlock.outputPins[connInfo.output.name]
-        console.log(connInfo.output.name)
-        for(let inputInfo of connInfo.inputs) {
+    console.log(this.dataUses)
+    for(let use of this.dataUses) {
+      if(use.inputs.length != 0 && use.output != null) {
+        let outputBlock = this.graph.getBlock(use.output.taskID);
+        let outputPin = outputBlock.outputPins[use.output.name]
+        console.log(use.output.name)
+        for(let inputInfo of use.inputs) {
           let inputBlock = this.graph.getBlock(inputInfo.taskID);
 
           let inputPin = inputBlock.inputPins[inputInfo.name]

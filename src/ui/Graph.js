@@ -1,4 +1,6 @@
 import ConnectionHelper from './ConnectionHelper'
+import ArithmeticBlock from './ArithmeticBlock';
+import TaskBlock from './TaskBlock';
 
 export default class Graph
 {
@@ -8,10 +10,50 @@ export default class Graph
 
     this.blocks = [];
     this.map = Object.create(null);
+
+    window.addEventListener('resize', this.resize);
+    this.resize();
+  }
+
+  // TODO: to be removed, the block creation should be handled by loader
+  // block will have their position saved as well.
+  init() {
+    let tasks = LookUp.getTasks();
+    let w = 225;
+    let indent = 50;
+    let tx = indent;
+    let ty = 400;
+    let h = 120;
+    for(let i=0; i<tasks.length; ++i) {
+      let block = new TaskBlock(tasks[i])
+      this.add(block);
+      block.x = tx;
+      block.y = ty + this.container.offsetTop + Math.random()*60-30;
+      tx += w;
+      if(tx+w >= window.innerWidth) {
+        tx = indent;
+        ty += h;
+      } 
+    }
+  
+    let arr = LookUp.getArithmetics();
+    for(let i=0; i<arr.length; ++i) {
+      let block = new ArithmeticBlock(arr[i])
+      this.add(block);
+      block.x = tx;
+      block.y = ty + this.container.offsetTop + Math.random()*60-30;
+      tx += w;
+      if(tx+w >= window.innerWidth) {
+        tx = indent;
+        ty += h;
+      }
+    }
+
+    this.refresh();
   }
 
   add(block) {
-    this.container.appendChild(block.dom)
+    this.container.appendChild(block.elm)
 
     this.blocks.push(block);
     this.map[block.model.id] = block;
@@ -27,5 +69,10 @@ export default class Graph
 
   getLine(pin, b) {
 
+  }
+
+  resize() {
+    this.svg.setAttribute('width', window.innerWidth)
+    this.svg.setAttribute('height', window.innerHeight)
   }
 }
