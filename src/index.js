@@ -248,7 +248,7 @@ function init() {
     let block = new Block(tasks[i])
     graph.add(block);
     block.x = tx;
-    block.y = ty + graph.container.offsetTop;
+    block.y = ty + graph.container.offsetTop + Math.random()*60-30;
     tx += w;
     if(tx+w >= window.innerWidth) {
       tx = 0;
@@ -261,7 +261,7 @@ function init() {
     let block = new ArithmeticBlock(arr[i])
     graph.add(block);
     block.x = tx;
-    block.y = ty + graph.container.offsetTop;
+    block.y = ty + graph.container.offsetTop + Math.random()*60-30;
     tx += w;
     if(tx+w >= window.innerWidth) {
       tx = 0;

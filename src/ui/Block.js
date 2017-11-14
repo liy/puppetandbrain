@@ -22,7 +22,7 @@ export default class Block
     this.dom.style = `min-height:${this.minHeight}px; min-width:${this.minWidth}px; padding-bottom:5px; background:rgba(242, 245,251, 0.6); position:absolute; border-radius:10px; font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;`;
     
     this.title = document.createElement('div');
-    this.title.style = 'user-select:none;cursor:default;background:#c0c4ce; border-radius:10px 10px 0 0; padding:5px 10px;'
+    this.title.style = 'user-select:none;cursor:default;background:rgba(192, 196, 206, 0.7); border-radius:10px 10px 0 0; padding:5px 10px;'
     this.dom.appendChild(this.title);
     let title = this.model.__proto__.constructor.name;
     if(title == 'Call') {
