@@ -22,13 +22,11 @@ import FunctionName from './tasks/FunctionName';
 import Function from './tasks/Function';
 import Wait from './tasks/Wait';
 import Tween from './tasks/Tween';
-import Group from './tasks/Group';
 import Trace from './tasks/Trace';
 import Animation from './tasks/Animation';
 
 import ActivitySerializer from './ActivitySerializer';
 import ActivityLoader from './ActivityLoader';
-import { Accessor, Data } from './Data';
 import Trigger from './objects/Trigger';
 import Branch from './tasks/Branch';
 import {Equal, RandomNumber, LessThan} from './statements/Arithmetic';
@@ -38,6 +36,7 @@ import Graph from './ui/Graph';
 import Block from './ui/Block';
 import ArithmeticBlock from './ui/ArithmeticBlock';
 import TaskBlock from './ui/TaskBlock';
+import PropertyGetter from './getters/PropertyGetter';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
@@ -82,13 +81,13 @@ function init() {
   let onDonkeyExcit = new Function();
   onDonkeyExcit.init({
     actor: donkey,
-    name: 'playAnimation'
+    functionName: 'playAnimation'
   })
-  onDonkeyExcit.outputs.add('animationName', new Data())
+  onDonkeyExcit.outputs.add('animationName')
   onDonkeyExcit.chain(delayAnimation, animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
-  animation.inputs.set('name', onDonkeyExcit.outputs.get('animationName'));
+  animation.inputs.connect('name', onDonkeyExcit.outputs.get('animationName'));
   
 
   // var trigger = new Trigger();
@@ -160,12 +159,12 @@ function init() {
     duration: 3
   })
   // link to donkey's position
-  tween.inputs.set('position', new Property('position', donkey))
+  tween.inputs.connect('position', new PropertyGetter(donkey, 'position'))
   
   let startTask = new Function();
   startTask.init({
     actor: cow,
-    name: FunctionName.GAME_START
+    functionName: FunctionName.GAME_START
   })
 
   let call = new Call();
@@ -174,7 +173,8 @@ function init() {
     callee: donkey,
     functionName: "playAnimation"
   })
-  call.function.outputs.update('animationName', 'interactive');
+  call.variables.animationName = 'interactive'
+  // call.outputs.add('animationName');
   startTask.chain(staticAnimation, wait, trace, walkAnimation, tween)
            .chain({
              executionName: 'complete',
@@ -194,14 +194,14 @@ function init() {
   
   // statements examples
   let less = new LessThan()
-  less.inputs.set('A', new RandomNumber());
-  less.inputs.update('B', 0.5);
+  less.variables.B = 0.5;
+  less.inputs.connect('A', new RandomNumber());
 
   let branch = new Branch();
   branch.init({
     actor: cow
   });
-  branch.inputs.set('condition', less)
+  branch.inputs.connect('condition', less)
 
   let trueTrace = new Trace();
   trueTrace.init({
@@ -219,7 +219,6 @@ function init() {
   branch.execution.set('false', falseTrace)
 
   call.chain(branch)
-
   
   // start the activity when cow and donkey are loaded
   Promise.all([cow.loaded, donkey.loaded]).then(() => {

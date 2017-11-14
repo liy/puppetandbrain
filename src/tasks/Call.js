@@ -1,5 +1,4 @@
 import Task from './Task'
-import { Data } from '../Data';
 
 export default class Call extends Task
 {
@@ -15,22 +14,26 @@ export default class Call extends Task
   init(data) {
     super.init(data);
 
-    this.inputs.add('callee', new Data(data.callee.id));
-    // does not allow dynamic function call yet... Do not want to make it too complicated.
-    // drop down list will do
-    this.functionName = data.functionName
-  }
+    this.variables.callee = data.callee.id;
+    this.variables.functionName = data.functionName;
 
-  get callee() {
-    return LookUp.get(this.inputs.value('callee'))
+    for(let name of this.function.outputs.list) {
+      this.inputs.add(name);
+    }
   }
 
   get function() {
-    return this.callee.functions[this.functionName];
+    return LookUp.get(this.variables.callee).functions[this.variables.functionName];
   }
 
   run() {
     super.run()
+
+    // Update function's variables, which acts like bridge between Call and Function task
+    for(let name of this.inputs.list) {
+      console.log(this.inputs.value(name))
+      this.function.variables[name] = this.inputs.value(name);
+    }
 
     this.function.run();
 

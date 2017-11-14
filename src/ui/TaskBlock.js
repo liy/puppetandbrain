@@ -26,10 +26,10 @@ export default class TaskBlock extends Block
     this.elm.appendChild(this.title);
     let title = this.model.__proto__.constructor.name;
     if(title == 'Call') {
-      title += ' ' + this.model.function.name
+      title += ' ' + this.model.variables.functionName
     }
     else if(title == 'Function') {
-      title += ' ' + this.model.name;
+      title += ' ' + this.model.variables.functionName;
     }
     this.title.textContent = title;
 

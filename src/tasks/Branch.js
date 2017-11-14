@@ -1,5 +1,4 @@
 import Task from "./Task";
-import { Data } from "../Data";
 
 export default class Branch extends Task
 {
@@ -8,12 +7,15 @@ export default class Branch extends Task
     
     this.execution.set('true')
     this.execution.set('false')
+
+    // default to be true
+    this.variables.condition = true;
   }
 
   init(data) {
     super.init(data);
     
-    this.inputs.add('condition', new Data(true));
+    this.inputs.add('condition');
   }
 
   run() {

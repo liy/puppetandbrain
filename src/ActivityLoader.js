@@ -1,6 +1,5 @@
 import JSONLoader from './JSONLoader';
 import Stage from './Stage';
-import {Data} from './Data';
 
 import * as tasks from './tasks'
 import SpineActor from './objects/SpineActor';
@@ -21,21 +20,12 @@ export default class ActivityLoader
 
   load(url) {
     return JSONLoader.load(url).then(pod => {
-      // TODO: data first
-      this.createData(pod);
-
       // TODO: object seconds
       this.createActors(pod)
 
       // TODO: tasks last
       this.createTasks(pod)
     })
-  }
-
-  createData(pod) {
-    for(let id of pod.data) {
-      new Data(pod.store[id].value, id)
-    }
   }
 
   createActors(pod) {

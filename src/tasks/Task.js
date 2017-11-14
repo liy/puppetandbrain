@@ -1,6 +1,6 @@
 import EventEmitter from '../utils/EventEmitter'
 import Execution from './Execution'
-import { DataList } from '../Data';
+import DataList from '../DataList';
 
 export default class Task extends EventEmitter
 {
@@ -9,8 +9,10 @@ export default class Task extends EventEmitter
     
     this.execution = new Execution();
 
-    this.inputs = new DataList();
-    this.outputs = new DataList();
+    this.variables = Object.create(null);
+
+    this.inputs = new DataList(this);
+    this.outputs = new DataList(this);
   }
 
   init(data) {

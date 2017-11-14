@@ -1,16 +1,15 @@
 import Task from './Task';
-import { Data } from '../Data';
 
 export default class Wait extends Task
 {
   constructor() {
     super();
+    this.inputs.add('seconds');
   }
 
   init(data) {
     super.init(data);
-    
-    this.inputs.add('seconds', new Data(data.seconds));
+    this.variables.seconds = data.seconds || 2;
   }
   
   run() {

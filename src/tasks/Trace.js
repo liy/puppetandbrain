@@ -1,5 +1,4 @@
 import Task from './Task'
-import { Data } from '../Data';
 
 export default class Trace extends Task
 {
@@ -11,7 +10,9 @@ export default class Trace extends Task
   init(data) {
     super.init(data);
 
-    this.inputs.add('text', new Data(data.text));
+    this.variables.text = data.text;
+
+    this.inputs.add('text');
   }
   
   run() {

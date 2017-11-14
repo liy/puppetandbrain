@@ -15,16 +15,16 @@ export default class Function extends Task
     super.init(data);
 
     // This is a authoring time static data, needs to be provided when creating activity.
-    this.name = data.name;
-    this.actor.functions[this.name] = this;
+    this.variables.functionName = data.functionName;
+    this.actor.functions[this.variables.functionName] = this;
   }
 
   rename(name) {
     // validate there are no same function names
     if(this.actor.functions[name]) return false;
 
-    delete this.actor.functions[this.name];
-    this.name = name;
+    delete this.actor.functions[this.variables.functionName];
+    this.variables.functionName = name;
     return true
   }
 

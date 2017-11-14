@@ -1,10 +1,14 @@
-import { DataList, Data } from "../Data";
+import DataList from "../DataList";
+
 
 class Operation
 {
   constructor(id) {
     this.id = LookUp.addArithmetic(this, id)
-    this.inputs = new DataList();
+
+    this.variables = Object.create(null);
+
+    this.inputs = new DataList(this);
   }
 
   pod() {
@@ -21,8 +25,8 @@ export class Add extends Operation
   constructor(id) {
     super(id);
 
-    this.inputs.add('A', new Data());
-    this.inputs.add('B', new Data());
+    this.inputs.add('A');
+    this.inputs.add('B');
   }
 
   get value() {
@@ -35,8 +39,8 @@ export class Multiply extends Operation
   constructor(id) {
     super(id);
 
-    this.inputs.add('A', new Data());
-    this.inputs.add('B', new Data());
+    this.inputs.add('A');
+    this.inputs.add('B');
   }
 
   get value() {
@@ -49,8 +53,8 @@ export class Divide extends Operation
   constructor(id) {
     super(id);
 
-    this.inputs.add('A', new Data());
-    this.inputs.add('B', new Data());
+    this.inputs.add('A');
+    this.inputs.add('B');
   }
 
   get value() {
@@ -63,8 +67,8 @@ export class Equal extends Operation
   constructor(id) {
     super(id);
 
-    this.inputs.add('A', new Data());
-    this.inputs.add('B', new Data());
+    this.inputs.add('A');
+    this.inputs.add('B');
   }
 
   get value() {
@@ -77,8 +81,8 @@ export class LessThan extends Operation
   constructor(id) {
     super(id);
 
-    this.inputs.add('A', new Data());
-    this.inputs.add('B', new Data());
+    this.inputs.add('A');
+    this.inputs.add('B');
   }
 
   get value() {
@@ -91,8 +95,8 @@ export class LessEqual extends Operation
   constructor(id) {
     super(id);
 
-    this.inputs.add('A', new Data());
-    this.inputs.add('B', new Data());
+    this.inputs.add('A');
+    this.inputs.add('B');
   }
 
   get value() {

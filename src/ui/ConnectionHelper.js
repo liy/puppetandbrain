@@ -81,7 +81,7 @@ class ConnectionHelper
       }
     })
 
-    console.log(this.dataUses)
+    // console.log(this.dataUses)
     for(let use of this.dataUses) {
       if(use.inputs.length != 0 && use.output != null) {
         let outputBlock = this.graph.getBlock(use.output.taskID);

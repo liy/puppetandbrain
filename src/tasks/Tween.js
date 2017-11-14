@@ -1,5 +1,4 @@
 import Task from './Task';
-import { Data } from '../Data';
 
 export default class Tween extends Task
 {
@@ -9,16 +8,19 @@ export default class Tween extends Task
     // ensure the order
     this.execution.set('default');
     this.execution.set('complete');
+
+    this.inputs.add('duration');
+    this.inputs.add('position');
   }
 
   init(data) {
     super.init(data);
 
-    this.inputs.add('duration', new Data(data.duration || 1));
-    this.inputs.add('position', new Data(data.position || {
+    this.variables.duration = data.duration || 1
+    this.variables.position = data.position || {
       x: this.actor.x+100, 
       y: this.actor.y
-    }));
+    }
   }
 
   run() {
@@ -29,24 +31,4 @@ export default class Tween extends Task
     }});
     this.execution.run();
   }
-
-  // async run() {
-  //   console.log('run', this)
-  //   await this.process();
-  //   this.emit('task.complete') 
-  //   return this.execution.complete
-  // }
-
-  // process() {
-
-  //   let pos = this.inputs.value('position');
-  //   let completePromise = new Promise(resolve => {
-  //     TweenLite.to(this.actor, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: resolve});
-
-  //     // continue normal execution
-  //     this.execution.default ? this.execution.default.run() : Promise.resolve();
-  //   })
-
-  //   return completePromise;
-  // }
 }

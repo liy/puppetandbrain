@@ -1,9 +1,9 @@
 var STORE = Object.create(null);
 var ACTORS = [];
-var DATA = [];
 var TASKS = [];
 var ARITHMETICS = [];
 var PROPERTIES = [];
+var GETTERS = []
 
 function create(entry, id) {
   if(!id) {
@@ -33,19 +33,19 @@ window.LookUp = {
     ACTORS.splice(index, 1);
     delete STORE[id]
   },
-  
-  addData: function(entry, id) {
+
+  addGetter: function(entry, id) {
     id = create(entry, id)
-    DATA.push(id);
+    GETTERS.push(id);
     return id;
   },
-
-  removeData: function(id) {
-    let index = DATA.indexOf(id);
-    DATA.splice(index, 1);
+  
+  removeGetter: function(id) {
+    let index = GETTERS.indexOf(id);
+    GETTERS.splice(index, 1);
     delete STORE[id]
   },
-  
+
   addTask: function(entry, id) {
     id = create(entry, id)
     TASKS.push(id);
@@ -119,7 +119,7 @@ window.LookUp = {
     result.actors = ACTORS.concat()
     result.tasks = TASKS.concat()
     result.arithmetics = ARITHMETICS.concat();
-    result.data = DATA.concat()
+    result.getters = GETTERS.concat();
     
     return result;
   },
