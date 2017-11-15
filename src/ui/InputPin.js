@@ -3,12 +3,21 @@ import VariableGetter from "../getters/VariableGetter";
 
 export default class InputPin extends DataPin
 {
-  constructor(input) {
-    super(input.name);
+  constructor(input, name) {
+    super(name);
     
     this.container.style = "float:left; clear:left; font-size:12px;"
     this.pin.style = `float:left; width:10px; height:10px; background-image: url(${require('../assets/connector-off.svg')}); cursor:pointer; margin-right:5px; margin-top:3px; margin-left:2px`
     this.label.style = "user-select:none; float:left; cursor:default"
+
+    console.log(input)
+    if(input instanceof VariableGetter) {
+      this.inputField = document.createElement('input');
+      this.inputField.value = input.value;
+      this.inputField.style = `margin-left:4px; margin-top:-2px; float:right; width:60px; line-height:12px; font-size:12px; font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;`
+      this.container.appendChild(this.inputField)
+    }
+    
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke', '#5b809e');

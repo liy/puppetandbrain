@@ -62,14 +62,14 @@ export default class TaskBlock extends Block
 
     for(let i=0; i<this.model.inputs.list.length; ++i) {
       let name = this.model.inputs.list[i];
-      let pin = new InputPin(this.model.inputs.get(name))
+      let pin = new InputPin(this.model.inputs.get(name), name)
       row(i+1).appendChild(pin.container);
       this.inputPins[name] = pin;
     }
 
     for(let i=0; i<this.model.outputs.list.length; ++i) {
       let name = this.model.outputs.list[i];
-      let pin = new OutputPin(name);
+      let pin = new OutputPin(name, name);
       row(this.model.execution.nameList.length + i).appendChild(pin.container);
       this.outputPins[name] = pin;
     }
