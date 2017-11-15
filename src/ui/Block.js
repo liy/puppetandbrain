@@ -3,6 +3,8 @@ import ExecutionOutPin from "./ExecutionOutPin";
 import InputPin from "./InputPin";
 import OutputPin from "./OutputPin";
 
+import styles from '../css/Block.scss';
+
 // FIXME: clean up the UI!!!
 
 
@@ -15,6 +17,7 @@ export default class Block
     this.outputPins = Object.create(null);
  
     this.container = document.createElement('div');
+    this.container.className = 'block';
 
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);

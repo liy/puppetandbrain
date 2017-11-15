@@ -1,0 +1,41 @@
+.block
+{
+  cursor: default;
+  user-select:none; 
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-bottom: 5px; 
+  background:rgba(57, 61, 94, 0.8); 
+  color: rgb(224, 224, 224);
+  position: absolute; 
+  border-radius: 4px;
+
+  .title {
+    color: rgb(255, 255, 255);
+    padding:5px 10px;
+  }
+  
+  .row {
+    height:16px; 
+    margin-left:5px; 
+    margin-right:5px; 
+    margin-top:3px;
+  }
+}
+
+.function-block {
+  background:rgba(157, 172, 0, 0.8); 
+}
+
+.call-block {
+  background:rgba(90, 47, 71, 0.8); 
+}
+
+.property-block {
+  background:rgba(80, 112, 134, 0.8);
+  // background:rgba(71, 45, 94, 0.8);  
+}
+
+.arithmetic-block {
+  // background:rgba(71, 45, 94, 0.8);  
+  background:rgba(80, 112, 134, 0.8);
+}

@@ -1,0 +1,27 @@
+.data-pin
+{
+  font-size:12px;
+
+  .icon {
+    width:10px; 
+    height:10px;
+    margin-right:5px; 
+    margin-top:3px; 
+    margin-left:5px;
+    cursor: pointer;
+  }
+
+  .label {
+    margin-right: 3px;
+  }
+
+  input {
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    float:right;
+    line-height:12px; 
+    font-size:12px; 
+    width: 50px;
+    margin-left:4px;
+    margin-top:-2px; 
+  }
+}

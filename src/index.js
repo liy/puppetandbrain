@@ -46,7 +46,7 @@ window.renderer = PIXI.autoDetectRenderer({
   width: window.innerWidth, 
   height: window.innerHeight, 
   view: canvas,
-  // transparent: true,
+  transparent: true,
   antialias: true
 });
 

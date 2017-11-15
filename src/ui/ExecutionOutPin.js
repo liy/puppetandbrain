@@ -4,10 +4,10 @@ export default class ExecutionOutPin extends ExecutionPin
 {
   constructor(name) {
     super(name, 'right')
-    this.spot.style = `float:right; width:15px;height:10px; background-image: url(${require('../assets/execution-out-off.svg')}); cursor:pointer; margin-left:5px; margin-top:3px;`;
+    this.icon.style = `float:right; background-image: url(${require('../assets/execution-out-off.svg')});`;
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    this.path.setAttribute('stroke', '#e1eaff');
+    this.path.setAttribute('stroke', '#cddc39');
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
@@ -15,9 +15,9 @@ export default class ExecutionOutPin extends ExecutionPin
 
   connect(pin) {
     if(typeof pin != ExecutionOutPin) {
-      this.spot.style = `float:right; width:15px;height:10px; background-image: url(${require('../assets/execution-out-on.svg')}); cursor:pointer; margin-left:5px; margin-top:3px;`;
+      this.icon.style = `float:right; background-image: url(${require('../assets/execution-out-on.svg')});`;
       // TODO: clean up
-      pin.spot.style = `float:left; width:15px;height:10px; background-image: url(${require('../assets/execution-in-on.svg')}); cursor:pointer; margin-top:3px`;
+      pin.icon.style = `float:left; background-image: url(${require('../assets/execution-in-on.svg')});`;
 
       this.connectedPin = pin;
       pin.connectedPin = this;

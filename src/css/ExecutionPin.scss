@@ -1,0 +1,13 @@
+.execution-pin {
+  .icon {
+    width:15px;
+    height:10px; 
+    background-image: url(require('../assets/execution-out-off.svg')); 
+    margin-left:3px; 
+    margin-top:3px;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+}

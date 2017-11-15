@@ -14,7 +14,8 @@ export default class TaskBlock extends Block
 
     let minWidth = 200;
     let minHeight = 60;
-    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px; padding-bottom:5px; background:rgba(242, 245,251, 0.7); position:absolute; border-radius:5px; font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;`;    
+
+    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px; `;    
 
     this.inPin = null;
     this.outPins = Object.create(null);
@@ -22,13 +23,15 @@ export default class TaskBlock extends Block
     this.outputPins = Object.create(null);
  
     this.title = document.createElement('div');
-    this.title.style = 'user-select:none; cursor:default; background:rgba(192, 196, 206, 0.85); border-radius:5px 5px 0 0; padding:5px 10px;'
+    this.title.className = 'title'
     this.container.appendChild(this.title);
     let title = this.model.__proto__.constructor.name;
     if(title == 'Call') {
+      this.container.className += ' call-block'
       title += ' Function ' + this.model.variables.functionName
     }
     else if(title == 'Function') {
+      this.container.className += ' function-block'
       title += ' ' + this.model.variables.functionName;
     }
     this.title.textContent = title;
@@ -40,8 +43,7 @@ export default class TaskBlock extends Block
     let row = (i) => {
       if(!rows[i]) {
         rows[i] = document.createElement('div');
-        rows[i].setAttribute('class', 'row');
-        rows[i].style = 'height:16px; margin-left:5px; margin-right:5px; margin-top:3px;';
+        rows[i].className = 'row';
         this.content.appendChild(rows[i]);
       }
       return rows[i]
