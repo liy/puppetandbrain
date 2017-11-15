@@ -7,11 +7,11 @@ export default class InputPin extends DataPin
     super(input.name);
     
     this.container.style = "float:left; clear:left; font-size:12px;"
-    this.pin.style = `float:left; width:11px; height:11px; background-image: url(${require('../assets/connector.svg')}); cursor:pointer`
+    this.pin.style = `float:left; width:10px; height:10px; background-image: url(${require('../assets/connector-off.svg')}); cursor:pointer; margin-right:5px; margin-top:3px; margin-left:2px`
     this.label.style = "user-select:none; float:left; cursor:default"
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    this.path.setAttribute('stroke', '#dbaee6');
+    this.path.setAttribute('stroke', '#5b809e');
     this.path.setAttribute('stroke-width', 2);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
@@ -23,6 +23,11 @@ export default class InputPin extends DataPin
     if(outputPin.inputPins.indexOf(this) == -1) {
       outputPin.inputPins.push(this)
     }
+
+    this.pin.style = `float:left; width:10px; height:10px; background-image: url(${require('../assets/connector-on.svg')}); cursor:pointer; margin-right:5px; margin-top:3px; margin-left:2px`
+    
+    outputPin.pin.style = `float:right; width:10px; height:10px; background-image: url(${require('../assets/connector-on.svg')}); cursor:pointer; margin-left:5px; margin-top:3px;`
+    
 
     this.svg.appendChild(this.path);
     // make input pin aware that it is connected to this output pin

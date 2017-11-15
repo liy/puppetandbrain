@@ -20,6 +20,7 @@ export default class PropertyBlock extends Block
     this.container.appendChild(this.content);
 
     let row = document.createElement('div');
+    row.style = 'height:16px; margin-left:5px; margin-right:5px; margin-top:3px;';
     this.content.appendChild(row);
 
     this.outputPin = new OutputPin(this.model.name);

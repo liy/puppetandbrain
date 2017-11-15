@@ -41,15 +41,17 @@ export default class TaskBlock extends Block
       if(!rows[i]) {
         rows[i] = document.createElement('div');
         rows[i].setAttribute('class', 'row');
-        rows[i].style = 'height:16px';
+        rows[i].style = 'height:16px; margin-left:5px; margin-right:5px; margin-top:3px;';
         this.content.appendChild(rows[i]);
       }
       return rows[i]
     }
 
     // task always have at least 2 pair of exeuctions, in and out
-    this.inPin = new ExecutionInPin();
-    row(0).appendChild(this.inPin.container);
+    if(this.model.__proto__.constructor.name != 'Function') {
+      this.inPin = new ExecutionInPin();
+      row(0).appendChild(this.inPin.container);
+    }
     // out pins
     for(let i=0; i<this.model.execution.nameList.length; ++i) {
       let name = this.model.execution.nameList[i]

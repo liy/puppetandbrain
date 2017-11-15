@@ -34,6 +34,7 @@ export default class ArithmeticBlock extends Block
       if(!rows[i]) {
         rows[i] = document.createElement('div');
         rows[i].setAttribute('class', 'row')
+        rows[i].style = 'height:16px; margin-left:5px; margin-right:5px; margin-top:3px;';
         this.content.appendChild(rows[i]);
       }
       return rows[i]

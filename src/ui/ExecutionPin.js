@@ -15,7 +15,6 @@ export default class ExecutionPin
     this.container.appendChild(this.label)
 
     this.container.style = `float:${location}; clear:${location}; font-size:12px;`
-    this.spot.style = `float:${location}; width:11px;height:11px; background-image: url(${require('../assets/execution.svg')}); border-radius:7.5px; cursor:pointer`;
     this.label.style = `user-select:none; float:${location};cursor:default`
   }
 
