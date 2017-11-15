@@ -6,15 +6,9 @@ export default class InputPin extends DataPin
   constructor(input, name) {
     super(name);
     
+    this.icon.className += ' in-disconnected';
     this.container.style = "float:left; clear:left;"
-    this.icon.style = `float:left;  background-image:url(${require('../assets/connector-off.svg')}); ;`
     this.label.style = "float:left;"
-
-    if(input instanceof VariableGetter) {
-      this.inputField = document.createElement('input');
-      this.inputField.value = input.value;
-      this.container.appendChild(this.inputField)
-    }
     
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke', '#a9c4d2');
@@ -26,15 +20,9 @@ export default class InputPin extends DataPin
   }
 
   connect(outputPin) {
-    if(outputPin.inputPins.indexOf(this) == -1) {
-      outputPin.inputPins.push(this)
-    }
-
-    this.icon.style = `float:left; background-image: url(${require('../assets/connector-on.svg')});`
+    this.icon.className = 'icon in-connected';
+    outputPin.connected(this);
     
-    outputPin.icon.style = `float:right; background-image: url(${require('../assets/connector-on.svg')});`
-    
-
     this.svg.appendChild(this.path);
     // make input pin aware that it is connected to this output pin
     this.outputPin = outputPin;

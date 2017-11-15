@@ -230,7 +230,7 @@ function init() {
   console.log('%c Activity %o ', 'color: white; background-color: black', as.start()); 
 
   
-  let graph = new Graph();
+  window.graph = new Graph();
   graph.init();
 }
 

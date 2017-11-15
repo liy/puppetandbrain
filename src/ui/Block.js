@@ -23,6 +23,9 @@ export default class Block
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
 
+    this._x = 0;
+    this._y = 0;
+
     this.container.addEventListener('mousedown', this.dragstart);
     document.addEventListener('mouseup', this.dragstop);
   }
@@ -42,16 +45,26 @@ export default class Block
   }
 
   dragmove(e) {
-    this.container.style.top = e.clientY + this._dragOffset.y + 'px';
-    this.container.style.left = e.clientX  + this._dragOffset.x + "px";
+    this.x = e.clientX + this._dragOffset.x;
+    this.y = e.clientY + this._dragOffset.y;
   }
 
-  set x(v) {
-    this.container.style.left = v +'px'
+  set x(x) {
+    this._x = x;
+    this.container.style.left = x +'px'
   }
 
-  set y(v) {
-    this.container.style.top = v +'px'
+  set y(y) {
+    this._y = y;
+    this.container.style.top = y +'px'
+  }
+
+  get x() {
+    return this._x;
+  }
+
+  get y() {
+    return this._y;
   }
 
   get width() {

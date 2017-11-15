@@ -5,8 +5,8 @@ export default class OutputPin extends DataPin
   constructor(name) {
     super(name);
 
+    this.icon.className += ' out-disconnected';
     this.container.style = "float:right; clear:right;"
-    this.icon.style = `float:right; background-image: url(${require('../assets/connector-off.svg')}); cursor:pointer; margin-left:5px; margin-top:3px;`
     this.label.style = "float:right;"
 
     this.inputPins = [];
@@ -14,6 +14,13 @@ export default class OutputPin extends DataPin
 
   connect(inputPin) {
     inputPin.connect(this);
+  }
+
+  connected(inputPin) {
+    if(this.inputPins.indexOf(inputPin) == -1) {
+      this.inputPins.push(inputPin)
+    }
+    this.icon.className = 'icon out-connected';
   }
 
   get isConnected() {

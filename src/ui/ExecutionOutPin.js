@@ -4,7 +4,7 @@ export default class ExecutionOutPin extends ExecutionPin
 {
   constructor(name) {
     super(name, 'right')
-    this.icon.style = `float:right; background-image: url(${require('../assets/execution-out-off.svg')});`;
+    this.icon.className += 'out-disconnected';
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke', '#cddc39');
@@ -15,14 +15,11 @@ export default class ExecutionOutPin extends ExecutionPin
 
   connect(pin) {
     if(typeof pin != ExecutionOutPin) {
-      this.icon.style = `float:right; background-image: url(${require('../assets/execution-out-on.svg')});`;
-      // TODO: clean up
-      pin.icon.style = `float:left; background-image: url(${require('../assets/execution-in-on.svg')});`;
-
+      this.icon.className = 'icon out-connected';
       this.connectedPin = pin;
-      pin.connectedPin = this;
-      this.svg.appendChild(this.path);
+      pin.connected(this);
 
+      this.svg.appendChild(this.path);
       this.drawConnection();
     }
   }
@@ -36,8 +33,6 @@ export default class ExecutionOutPin extends ExecutionPin
     let adx = Math.abs(dx);
     let ady = Math.abs(dy);
     let degree = Math.atan2(dy, dx)*180/Math.PI;
-
-    // console.log(dx, dy, degree, Math.sqrt(dx*dx+dy*dy) )
 
     // direct line:
     // 1. degree in range: [-?,?]

@@ -11,6 +11,26 @@
     cursor: pointer;
   }
 
+  .in-connected {
+    float: left;
+    background-image: url('../assets/connector-on.svg');
+  }
+
+  .in-disconnected {
+    float: left;
+    background-image: url('../assets/connector-off.svg');
+  }
+
+  .out-connected {
+    float: right;
+    background-image: url('../assets/connector-on.svg');
+  }
+
+  .out-disconnected {
+    float: right;
+    background-image: url('../assets/connector-off.svg');
+  }
+
   .label {
     margin-right: 3px;
   }

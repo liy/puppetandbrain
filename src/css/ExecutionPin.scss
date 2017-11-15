@@ -1,12 +1,32 @@
 .execution-pin {
   .icon {
     width:15px;
-    height:10px; 
-    background-image: url(require('../assets/execution-out-off.svg')); 
+    height:10px;
     margin-left:3px; 
     margin-top:3px;
+    cursor: pointer;
   }
 
+  .in-connected {
+    float: left;
+    background-image: url('../assets/execution-in-on.svg'); 
+  }
+
+  .in-disconnected {
+    float: left;
+    background-image: url('../assets/execution-in-off.svg'); 
+  }
+
+  .out-connected {
+    float: right;
+    background-image: url('../assets/execution-out-on.svg'); 
+  }
+
+  .out-disconnected {
+    float: right;
+    background-image: url('../assets/execution-out-off.svg'); 
+  }
+  
   .label {
     font-size: 12px;
   }

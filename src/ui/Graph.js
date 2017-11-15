@@ -2,6 +2,8 @@ import ConnectionHelper from './ConnectionHelper'
 import ArithmeticBlock from './ArithmeticBlock';
 import TaskBlock from './TaskBlock';
 import PropertyBlock from './PropertyBlock';
+import Animation from '../tasks/Animation';
+import AnimationBlock from './blocks/AnimationBlock';
 
 export default class Graph
 {
@@ -26,7 +28,13 @@ export default class Graph
     let ty = 400;
     let h = 120;
     for(let i=0; i<tasks.length; ++i) {
-      let block = new TaskBlock(tasks[i])
+      let block;
+      if(tasks[i] instanceof Animation) {
+        block = new AnimationBlock(tasks[i])
+      }
+      else {
+        block = new TaskBlock(tasks[i])
+      }
       this.add(block);
       block.x = tx;
       block.y = ty + this.container.offsetTop + Math.random()*60-30;
@@ -74,6 +82,13 @@ export default class Graph
 
     this.blocks.push(block);
     this.map[block.model.id] = block;
+
+    let json = window.localStorage[block.model.id];
+    if(json) {
+      let pos = JSON.parse(json);
+      block.x = pos.x;
+      block.y = pos.y;
+    }
   }
 
   getBlock(taskID) {
@@ -84,8 +99,14 @@ export default class Graph
     ConnectionHelper.start(this);
   }
 
-  getLine(pin, b) {
-
+  save() {
+    let storage = window.localStorage;
+    for(let block of this.blocks) {
+      storage[block.model.id] = JSON.stringify({
+        x: block.x,
+        y: block.y
+      })
+    }
   }
 
   resize() {

@@ -11,7 +11,7 @@ export default class ExecutionPin
     this.container.className = 'execution-pin';
 
     this.icon =  document.createElement('div');
-    this.icon.className = 'icon'
+    this.icon.className = 'icon in-disconnected'
     this.container.appendChild(this.icon);
 
     this.label = document.createElement('div');
