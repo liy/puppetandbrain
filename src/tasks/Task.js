@@ -48,6 +48,7 @@ export default class Task extends EventEmitter
     return {
       class: this.__proto__.constructor.name,
       id: this.id,
+      variables: this.variables,
       execution: this.execution.pod(),
       actor: this.actor.id,
       inputs: this.inputs.pod(),

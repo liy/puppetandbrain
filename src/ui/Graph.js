@@ -70,7 +70,7 @@ export default class Graph
   }
 
   add(block) {
-    this.container.appendChild(block.elm)
+    this.container.appendChild(block.container)
 
     this.blocks.push(block);
     this.map[block.model.id] = block;

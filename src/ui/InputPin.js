@@ -4,17 +4,17 @@ import VariableGetter from "../getters/VariableGetter";
 export default class InputPin extends DataPin
 {
   constructor(input) {
-    super(input.name, 'input');
+    super(input.name);
     
+    this.container.style = "float:left; clear:left; font-size:12px;"
+    this.pin.style = `float:left; width:11px; height:11px; background-image: url(${require('../assets/connector.svg')}); cursor:pointer`
+    this.label.style = "user-select:none; float:left; cursor:default"
+
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke', '#dbaee6');
     this.path.setAttribute('stroke-width', 2);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
-
-    if(input instanceof VariableGetter) {
-      this.label.textContent = input.value
-    }
 
     this.outputPin = null;
   }

@@ -5,18 +5,18 @@ export default class ExecutionPin
 
     this.svg = document.getElementById('svg');
 
-    this.dom = document.createElement('div');
+    this.container = document.createElement('div');
 
     this.spot =  document.createElement('div');
-    this.dom.appendChild(this.spot);
+    this.container.appendChild(this.spot);
 
     this.label = document.createElement('div');
     this.label.textContent = (name == 'default') ? '' : name;
-    this.dom.appendChild(this.label)
+    this.container.appendChild(this.label)
 
-    this.dom.style = `float:${location}; clear:${location}; font-size:12px; margin-top:5px`
-    this.spot.style = `float:${location}; margin-left:10px; margin-top:6px; margin-right:10px;  width:11px;height:11px; background-image: url(${require('../assets/execution.svg')}); border-radius:7.5px; cursor:pointer`;
-    this.label.style = `user-select:none;margin-top:4px;float:${location};cursor:default`
+    this.container.style = `float:${location}; clear:${location}; font-size:12px;`
+    this.spot.style = `float:${location}; width:11px;height:11px; background-image: url(${require('../assets/execution.svg')}); border-radius:7.5px; cursor:pointer`;
+    this.label.style = `user-select:none; float:${location};cursor:default`
   }
 
   get position() {

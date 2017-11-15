@@ -14,7 +14,7 @@ export default class TaskBlock extends Block
 
     let minWidth = 200;
     let minHeight = 60;
-    this.elm.style = `min-height:${minHeight}px; min-width:${minWidth}px; padding-bottom:5px; background:rgba(242, 245,251, 0.7); position:absolute; border-radius:10px; font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;`;    
+    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px; padding-bottom:5px; background:rgba(242, 245,251, 0.7); position:absolute; border-radius:5px; font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;`;    
 
     this.inPin = null;
     this.outPins = Object.create(null);
@@ -22,56 +22,54 @@ export default class TaskBlock extends Block
     this.outputPins = Object.create(null);
  
     this.title = document.createElement('div');
-    this.title.style = 'user-select:none; cursor:default; background:rgba(192, 196, 206, 0.85); border-radius:10px 10px 0 0; padding:5px 10px;'
-    this.elm.appendChild(this.title);
+    this.title.style = 'user-select:none; cursor:default; background:rgba(192, 196, 206, 0.85); border-radius:5px 5px 0 0; padding:5px 10px;'
+    this.container.appendChild(this.title);
     let title = this.model.__proto__.constructor.name;
     if(title == 'Call') {
-      title += ' ' + this.model.variables.functionName
+      title += ' Function ' + this.model.variables.functionName
     }
     else if(title == 'Function') {
       title += ' ' + this.model.variables.functionName;
     }
     this.title.textContent = title;
 
-    // TODO: clean up!!!
-    if(this.model.execution) {
-      this.execSection = document.createElement('div')
-      this.execSection.style = `height:20px`;
-      this.elm.appendChild(this.execSection);
+    this.content = document.createElement('div');
+    this.container.appendChild(this.content);
 
-      // always have a in execpt function
-      if(this.model.__proto__.constructor.name != 'Function') {
-        let execIn = new ExecutionInPin();
-        this.execSection.appendChild(execIn.dom)
-        this.inPin = execIn;
+    let rows = [];
+    let row = (i) => {
+      if(!rows[i]) {
+        rows[i] = document.createElement('div');
+        rows[i].setAttribute('class', 'row');
+        rows[i].style = 'height:16px';
+        this.content.appendChild(rows[i]);
       }
-
-      for(let name of this.model.execution.nameList) {
-        let out = new ExecutionOutPin(name, 'right');
-        this.execSection.appendChild(out.dom)
-        this.outPins[name] = out;
-      }
+      return rows[i]
     }
 
-    this.content = document.createElement('div')
-    this.content.style = 'margin-left:5px; margin-right:5px; margin-top:5px;'
-    this.elm.appendChild(this.content);
-
-    // add pin
-    if(this.model.inputs) {
-      this.model.inputs.list.forEach(name => {
-        let pin = new InputPin(this.model.inputs.get(name));
-        this.content.appendChild(pin.dom);
-        this.inputPins[name] = pin;
-      })
+    // task always have at least 2 pair of exeuctions, in and out
+    this.inPin = new ExecutionInPin();
+    row(0).appendChild(this.inPin.container);
+    // out pins
+    for(let i=0; i<this.model.execution.nameList.length; ++i) {
+      let name = this.model.execution.nameList[i]
+      let out = new ExecutionOutPin(name);
+      row(i).appendChild(out.container)
+      this.outPins[name] = out;
     }
 
-    if(this.model.outputs) {
-      this.model.outputs.list.forEach(name => {
-        let pin = new OutputPin(name);
-        this.content.appendChild(pin.dom);
-        this.outputPins[name] = pin;
-      })
+    for(let i=0; i<this.model.inputs.list.length; ++i) {
+      let name = this.model.inputs.list[i];
+      let pin = new InputPin(this.model.inputs.get(name))
+      row(i+1).appendChild(pin.container);
+      this.inputPins[name] = pin;
+    }
+
+    for(let i=0; i<this.model.outputs.list.length; ++i) {
+      let name = this.model.outputs.list[i];
+      let pin = new OutputPin(name);
+      row(this.model.execution.nameList.length + i).appendChild(pin.container);
+      this.outputPins[name] = pin;
     }
   }
 

@@ -42,7 +42,6 @@ class ConnectionHelper
   }
 
   drawOutputConnections() {
-
     let entries = LookUp.getTasks().concat(LookUp.getArithmetics());
     entries.forEach(entry => {
       let inputBlock = this.graph.getBlock(entry.id);

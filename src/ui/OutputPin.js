@@ -3,7 +3,11 @@ import DataPin from "./DataPin";
 export default class OutputPin extends DataPin
 {
   constructor(name) {
-    super(name, 'output');
+    super(name);
+
+    this.container.style = "float:right; clear:right; font-size:12px;"
+    this.pin.style = `float:right; width:11px; height:11px; background-image: url(${require('../assets/connector.svg')}); cursor:pointer;`
+    this.label.style = "float:right; user-select:none; cursor:default"
 
     this.inputPins = [];
   }
