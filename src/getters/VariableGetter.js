@@ -2,11 +2,11 @@ import Getter from './Getter'
 
 export default class VariableGetter extends Getter
 {
-  constructor(target, name, id) {
-    super(target, name, id);
+  constructor(node, name, id) {
+    super(node, name, id);
   }
 
   get value() {
-    return this.target.variables[this.name]
+    return this.node.variables[this.name]
   }
 }

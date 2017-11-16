@@ -1,6 +1,7 @@
 import OutputPin from "./OutputPin";
 import Block from "./Block";
 import InputPin from "./InputPin";
+import VariableGetter from "../getters/VariableGetter";
 
 export default class ArithmeticBlock extends Block
 {
@@ -35,9 +36,17 @@ export default class ArithmeticBlock extends Block
 
     for(let i=0; i<this.model.inputs.list.length; ++i) {
       let name = this.model.inputs.list[i];
+      let input = this.model.inputs.get(name);
       let pin = new InputPin(this.model.inputs.get(name))
       row(i).appendChild(pin.container);
       this.inputPins[name] = pin;
+
+      if(input instanceof VariableGetter) {
+        let inputField = document.createElement('input');
+        inputField.value = input.value;
+        pin.inputField = inputField;
+        pin.container.appendChild(inputField)
+      }
     }
 
     let pin = new OutputPin('value');

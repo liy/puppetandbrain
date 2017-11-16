@@ -1,6 +1,4 @@
-import { Operation } from "../tasks/Arithmetic";
 import OutputGetter from "../getters/OutputGetter";
-import PropertyGetter from "../getters/PropertyGetter";
 
 class ConnectionHelper
 {
@@ -42,29 +40,45 @@ class ConnectionHelper
   }
 
   drawOutputConnections() {
-    let entries = LookUp.getTasks().concat(LookUp.getArithmetics());
-    entries.forEach(entry => {
-      let inputBlock = this.graph.getBlock(entry.id);
-      for(let name of entry.inputs.list) {
-        let inputPin = inputBlock.inputPins[name];
-        let linker = entry.inputs.get(name);
-        if(linker instanceof OutputGetter) {
-          let outputBlock = this.graph.getBlock(linker.target.id);
-          let outputPin = outputBlock.outputPins[linker.name]
-          outputPin.connect(inputPin)
-        }
-        else if(linker instanceof Operation){
-          let outputBlock = this.graph.getBlock(linker.id);
-          let outputPin = outputBlock.outputPins['value']
-          outputPin.connect(inputPin)
-        }
-        else if(linker instanceof PropertyGetter) {
-          let outputBlock = this.graph.getBlock(linker.id);
-          let outputPin = outputBlock.outputPins[name]
-          outputPin.connect(inputPin)
-        }
+    // let entries = LookUp.getTasks().concat(LookUp.getArithmetics());
+    // entries.forEach(entry => {
+    //   let inputBlock = this.graph.getBlock(entry.id);
+    //   for(let name of entry.inputs.list) {
+    //     let inputPin = inputBlock.inputPins[name];
+    //     let linker = entry.inputs.get(name);
+
+    //     console.log(linker)
+    //     // let outputBlock = this.graph.getBlock(linker.targetID);
+
+    //     // if(linker instanceof OutputGetter) {
+    //     //   let outputBlock = this.graph.getBlock(linker.target.id);
+    //     //   let outputPin = outputBlock.outputPins[linker.name]
+    //     //   outputPin.connect(inputPin)
+    //     // }
+    //     // else if(linker instanceof Operation){
+    //     //   let outputBlock = this.graph.getBlock(linker.id);
+    //     //   let outputPin = outputBlock.outputPins['value']
+    //     //   outputPin.connect(inputPin)
+    //     // }
+    //     // else if(linker instanceof PropertyGetter) {
+    //     //   let outputBlock = this.graph.getBlock(linker.id);
+    //     //   let outputPin = outputBlock.outputPins[name]
+    //     //   outputPin.connect(inputPin)
+    //     // }
+    //   }
+    // });
+
+    let getters = LookUp.getGetters();
+    for(let getter of getters) {
+      if(getter instanceof OutputGetter) {
+        let outputBlock = this.graph.getBlock(getter.outputNode.id);
+        let inputBlock = this.graph.getBlock(getter.inputNode.id);
+
+        let inputPin = inputBlock.inputPins[getter.inputName];
+        let outputPin = outputBlock.outputPins[getter.outputName];
+        outputPin.connect(inputPin)
       }
-    });
+    }
   }
 }
 

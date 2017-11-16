@@ -1,19 +1,26 @@
-import DataList from "../DataList";
+import Input from "../data/Input";
+import Output from "../data/Ouput";
 
 export class Operation
 {
   constructor(id) {
-    this.id = LookUp.addArithmetic(this, id)
+    this.id = LookUp.addValue(this, id)
 
     this.variables = Object.create(null);
 
-    this.inputs = new DataList(this);
+    this.inputs = new Input(this);
+    this.outputs = new Output();
+  }
+
+  get targetID() {
+    return this.id;
   }
 
   pod() {
     return {
       class: this.__proto__.constructor.name,
       id: this.id,
+      variables: this.variables,
       inputs: this.inputs.pod()
     }
   }
@@ -26,6 +33,8 @@ export class Add extends Operation
 
     this.inputs.add('A');
     this.inputs.add('B');
+
+    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -40,6 +49,8 @@ export class Multiply extends Operation
 
     this.inputs.add('A');
     this.inputs.add('B');
+
+    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -54,6 +65,8 @@ export class Divide extends Operation
 
     this.inputs.add('A');
     this.inputs.add('B');
+    
+    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -68,6 +81,8 @@ export class Equal extends Operation
 
     this.inputs.add('A');
     this.inputs.add('B');
+
+    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -82,6 +97,8 @@ export class LessThan extends Operation
 
     this.inputs.add('A');
     this.inputs.add('B');
+
+    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -96,6 +113,8 @@ export class LessEqual extends Operation
 
     this.inputs.add('A');
     this.inputs.add('B');
+    
+    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -107,6 +126,8 @@ export class RandomNumber extends Operation
 {
   constructor(id) {
     super(id);
+
+    this.outputs.add('value', this.value);
   }
 
   get value() {

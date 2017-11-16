@@ -24,18 +24,18 @@ import Wait from './tasks/Wait';
 import Tween from './tasks/Tween';
 import Trace from './tasks/Trace';
 import Animation from './tasks/Animation';
+import Property from './node/Property';
 
 import ActivitySerializer from './ActivitySerializer';
 import ActivityLoader from './ActivityLoader';
 import Trigger from './objects/Trigger';
 import Branch from './tasks/Branch';
-import {Equal, RandomNumber, LessThan} from './tasks/Arithmetic';
+import {Equal, RandomNumber, LessThan} from './node/Arithmetic';
 import Call from './tasks/Call';
 import Graph from './ui/Graph';
 import Block from './ui/Block';
 import ArithmeticBlock from './ui/ArithmeticBlock';
 import TaskBlock from './ui/TaskBlock';
-import PropertyGetter from './getters/PropertyGetter';
 import OutputGetter from './getters/OutputGetter';
 
 var appDiv = document.getElementById('app');
@@ -90,7 +90,7 @@ function init() {
   onDonkeyExcit.chain(delayAnimation, animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
-  animation.inputs.connect('name', new OutputGetter(onDonkeyExcit, 'animationName'));
+  animation.inputs.connect('name', onDonkeyExcit, 'animationName');
   
 
   // var trigger = new Trigger();
@@ -156,13 +156,15 @@ function init() {
     name: 'walk'
   });
 
+  let positionProperty = new Property(donkey, 'position');
+
   let tween = new Tween(cow);
   tween.init({
     actor: cow,
     duration: 3
   })
   // link to donkey's position
-  tween.inputs.connect('position', new PropertyGetter(donkey, 'position'))
+  tween.inputs.connect('position', positionProperty, 'position')
   
   let startTask = new Function();
   startTask.init({
@@ -198,13 +200,13 @@ function init() {
   // statements examples
   let less = new LessThan()
   less.variables.B = 0.5;
-  less.inputs.connect('A', new RandomNumber());
+  less.inputs.connect('A', new RandomNumber(), 'value');
 
   let branch = new Branch();
   branch.init({
     actor: cow
   });
-  branch.inputs.connect('condition', less)
+  branch.inputs.connect('condition', less, 'value');
 
   let trueTrace = new Trace();
   trueTrace.init({

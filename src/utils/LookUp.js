@@ -1,16 +1,20 @@
+import shortid from 'shortid';
+
 var STORE = Object.create(null);
 var ACTORS = [];
 var TASKS = [];
-var ARITHMETICS = [];
-var PROPERTIES = [];
+var VALUES = [];
 var GETTERS = []
 
 function create(entry, id) {
   if(!id) {
+    // naive way, better to use hash(random + timestamp + machine name + etc).
     while(true) {
-      id = Math.floor(Math.random() * 999)+1;
+      id = Math.floor(Math.random() * 999)+1 + '';
       if(!STORE[id]) break;
     }
+
+    // id = shortid.generate();
   }
   STORE[id] = entry;
   return id;
@@ -58,15 +62,15 @@ window.LookUp = {
     delete STORE[id]
   },
 
-  addArithmetic: function(entry, id) {
+  addValue: function(entry, id) {
     id = create(entry, id)
-    ARITHMETICS.push(id);
+    VALUES.push(id);
     return id;
   },
 
-  removeArithmetic: function(id) {
-    let index = ARITHMETICS.indexOf(id);
-    ARITHMETICS.splice(index, 1);
+  removeValue: function(id) {
+    let index = VALUES.indexOf(id);
+    VALUES.splice(index, 1);
     delete STORE[id]
   },
 
@@ -86,8 +90,8 @@ window.LookUp = {
     })
   },
 
-  getArithmetics: function() {
-    return ARITHMETICS.map(id => {
+  getValues: function() {
+    return VALUES.map(id => {
       return STORE[id];
     })
   },
@@ -106,7 +110,7 @@ window.LookUp = {
     }
     result.actors = ACTORS.concat()
     result.tasks = TASKS.concat()
-    result.arithmetics = ARITHMETICS.concat();
+    result.values = VALUES.concat();
     result.getters = GETTERS.concat();
     
     return result;

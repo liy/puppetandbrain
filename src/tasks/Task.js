@@ -1,6 +1,7 @@
 import EventEmitter from '../utils/EventEmitter'
 import Execution from './Execution'
-import DataList from '../DataList';
+import Input from '../data/Input';
+import Output from '../data/Ouput';
 
 export default class Task extends EventEmitter
 {
@@ -11,13 +12,13 @@ export default class Task extends EventEmitter
 
     this.variables = Object.create(null);
 
-    this.inputs = new DataList(this);
-    this.outputs = new DataList(this);
+    this.inputs = new Input(this);
+    this.outputs = new Output();
   }
 
   init(data) {
     this.id = LookUp.addTask(this, data.id)
-    this.actor = Number.isInteger(data.actor) ? LookUp.get(data.actor) : data.actor;
+    this.actor = (typeof data.actor == 'string') ? LookUp.get(data.actor) : data.actor;
   }
 
   chain(...taskInfoArr) {
@@ -26,7 +27,7 @@ export default class Task extends EventEmitter
       // current.parent = result;
 
       // chain to default execution
-      if(Number.isInteger(current.id)) {
+      if(current.id) {
         result.execution.set('default', current);
         current.parent = result;
         return current

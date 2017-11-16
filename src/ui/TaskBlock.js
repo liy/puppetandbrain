@@ -78,8 +78,8 @@ export default class TaskBlock extends Block
       }
     }
 
-    for(let i=0; i<this.model.outputs.list.length; ++i) {
-      let name = this.model.outputs.list[i];
+    for(let i=0; i<this.model.outputs._names.length; ++i) {
+      let name = this.model.outputs._names[i];
       let pin = new OutputPin(name, name);
       row(this.model.execution.nameList.length + i).appendChild(pin.container);
       this.outputPins[name] = pin;

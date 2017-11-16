@@ -30,6 +30,9 @@ export default class Function extends Task
 
   run() {
     super.run()
+
+    console.log(this.variables, this.outputs)
+
     this.execution.run();
   }
 }

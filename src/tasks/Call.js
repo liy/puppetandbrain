@@ -17,7 +17,7 @@ export default class Call extends Task
     this.variables.callee = data.callee.id;
     this.variables.functionName = data.functionName;
 
-    for(let name of this.function.outputs.list) {
+    for(let name of this.function.outputs._names) {
       this.inputs.add(name);
     }
   }
@@ -29,11 +29,18 @@ export default class Call extends Task
   run() {
     super.run()
 
-    // Update function's variables, which acts like bridge between Call and Function task
+    // // Update function's variables, which acts like bridge between Call and Function task
+    // for(let name of this.inputs.list) {
+    //   // console.log(this.inputs.value(name))
+    //   this.function.variables[name] = this.inputs.value(name);
+    // }
+
+    // Pass the input value to the function's outputs
     for(let name of this.inputs.list) {
-      console.log(this.inputs.value(name))
-      this.function.variables[name] = this.inputs.value(name);
+      // console.log(this.inputs.value(name))
+      this.function.outputs[name] = this.inputs.value(name);
     }
+
 
     this.function.run();
 

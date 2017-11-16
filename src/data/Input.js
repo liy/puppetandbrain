@@ -1,6 +1,7 @@
-import VariableGetter from './getters/VariableGetter'
+import VariableGetter from '../getters/VariableGetter'
+import OutputGetter from '../getters/OutputGetter';
 
-export default class DataList
+export default class Input
 {
   constructor(owner) {
     this.owner = owner;
@@ -22,8 +23,8 @@ export default class DataList
     return this.getters[name].value
   }
 
-  connect(name, getter) {
-    this.getters[name] = getter;
+  connect(name, outputNode, outputName) {
+    this.getters[name] = new OutputGetter(this.owner, name, outputNode, outputName);
   }
 
   pod() {
