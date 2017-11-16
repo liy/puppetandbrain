@@ -19,6 +19,11 @@ export default class Function extends Task
     this.actor.functions[this.variables.functionName] = this;
   }
 
+  fill(pod) {
+    super.fill(pod);
+    this.actor.functions[this.variables.functionName] = this;
+  }
+
   rename(name) {
     // validate there are no same function names
     if(this.actor.functions[name]) return false;

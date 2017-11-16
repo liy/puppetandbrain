@@ -154,7 +154,8 @@ function init() {
     name: 'walk'
   });
 
-  let positionProperty = new Property(donkey, 'position');
+  let positionProperty = new Property();
+  positionProperty.init(donkey, 'position');
 
   let tween = new Tween(cow);
   tween.init({
@@ -179,7 +180,7 @@ function init() {
   call.variables.animationName = 'interactive'
   startTask.chain(staticAnimation, wait, trace, walkAnimation, tween)
            .chain({
-             executionName: 'complete',
+             name: 'complete',
              task: call
             });
   
@@ -190,7 +191,7 @@ function init() {
     text: 'This task run straight after tween started, no waiting for tween completion'
   })
   tween.chain({
-    executionName: 'default',
+    name: 'default',
     task: straightAfterTween
   })
   
@@ -235,7 +236,7 @@ function init() {
 
   
   window.graph = new Graph();
-  graph.init(canvas);
+  graph.init();
 }
 
 // init();
@@ -244,18 +245,20 @@ async function load() {
   var loader = new ActivityLoader();
   await loader.load(require('./assets/activity.json'))
 
-  // let promises = LookUp.getActors().map(actor => {
-  //   return actor.loaded;
-  // })
+  console.log(LookUp.pod())
+  
+  window.graph = new Graph();
+  graph.init();
 
-  // Promise.all(promises).then(() => {
-  //   console.log(LookUp.pod())
 
-  //   // HACK, I know item 35 is a start function
-  //   LookUp.get(21).run().then(() => {
-  //     console.log('all done')
-  //   })
-  // })
+  let promises = LookUp.getActors().map(actor => {
+    return actor.loaded;
+  })
+
+  Promise.all(promises).then(() => {
+    // HACK, I know the item is a start function
+    LookUp.get(854).run()
+  })
 }
 
 load();

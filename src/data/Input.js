@@ -16,8 +16,10 @@ export default class Input
   }
 
   add(name) {
-    this.list.push(name);
-    this.map[name] = new Variable(this.node, name);
+    if(this.list.indexOf(name) == -1) {
+      this.list.push(name);
+      this.map[name] = new Variable(this.node, name);
+    }
     return this;
   }
 
@@ -45,7 +47,8 @@ export default class Input
     let data = [];
     for(let name of this.list) {
       data.push({
-        [name]: this.map[name].id
+        name,
+        id: this.map[name].id
       })
     }
     return data;

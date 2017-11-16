@@ -5,10 +5,15 @@ import * as tasks from './tasks'
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 
+import * as arithmetic from './value/Arithmetic';
+import Property from './value/Property';
+
 const scope = {
   ...tasks,
   SpineActor,
   SpriteActor,
+  ...arithmetic,
+  Property
 }
 
 
@@ -20,11 +25,20 @@ export default class ActivityLoader
 
   load(url) {
     return JSONLoader.load(url).then(pod => {
+      // TESTING
+      console.log('JSON: ',pod)
+
       // TODO: object seconds
       this.createActors(pod)
 
       // TODO: tasks last
       this.createTasks(pod)
+
+      // TODO: create other nodes, eg., value nodes
+      this.createValueNodes(pod)
+
+      // TODO: link input and outputs!!
+      this.connectInputOuput(pod)
     })
   }
 
@@ -51,18 +65,40 @@ export default class ActivityLoader
     for(let id of pod.tasks) {
       let data = pod.store[id];
       let task = new scope[data.class]()
-      console.log(task)
-      // functions will be auto linked with its related actor 
       task.fill(data)
     }
 
-    let tasks = LookUp.getTasks();
-    for(let task of tasks) {
-      for(let exec of pod.store[task.id].execution) {
-        if(exec.name == 'default') {
-          task.chain(LookUp.get(exec.id)) 
-        }
+    // chain the tasks
+    for(let id of pod.tasks) {
+      let data = pod.store[id];
+      let task = LookUp.get(id);
+      for(let execData of data.execution) {
+        task.chain({
+          name: execData.name,
+          task: LookUp.get(execData.id)
+        })
       }
+    }
+  }
+
+  createValueNodes(pod) {
+    for(let id of pod.values) {
+      let data = pod.store[id];
+      let valueNode = new scope[data.class](id)
+      valueNode.fill(data)
+    }
+  }
+
+  connectInputOuput(pod) {
+    // connect the inputs with outputs
+    for(let id of pod.pointers) {
+      let pointerData = pod.store[id];
+      let inputNode = LookUp.get(pointerData.inputNode);
+      let outputNode = LookUp.get(pointerData.outputNode);
+
+      // console.log(pointerData, inputNode, outputNode)
+
+      inputNode.inputs.connect(pointerData.inputName, outputNode, pointerData.outputName)
     }
   }
 }

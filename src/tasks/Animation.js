@@ -4,7 +4,6 @@ export default class Animation extends Task
 {
   constructor() {
     super();
-
   }
 
   init(data) {
@@ -14,7 +13,7 @@ export default class Animation extends Task
 
     this.inputs.add('name');
   }
-
+  
   run() {
     super.run()
 

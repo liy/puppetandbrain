@@ -25,11 +25,27 @@ export default class Task extends EventEmitter
     this.actor = data.actor;
   }
 
+  fill(pod) {
+    this.id = LookUp.addTask(this, pod.id)
+    this.actor = LookUp.get(pod.actor);
+    Object.assign(this.variables, pod.variables);
+
+    // we just need the name to be populated here.
+    // variable access will be auto created. 
+    // Of course some of them will be discarded once 
+    // pointer is added
+    for(let inputData of pod.inputs) {
+      this.inputs.add(inputData.name);
+    }
+
+    // Only need the name. Ouput is dynamically generated!
+    for(let name of pod.outputs) {
+      this.outputs.add(name);
+    }
+  }
+
   chain(...taskInfoArr) {
     return taskInfoArr.reduce((result, current) => {
-      // result.execution.default = current;
-      // current.parent = result;
-
       // chain to default execution
       if(current.id) {
         result.execution.set('default', current);
@@ -38,7 +54,7 @@ export default class Task extends EventEmitter
       }
       else {
         let currentTask = current.task;
-        result.execution.set(current.executionName, currentTask);
+        result.execution.set(current.name, currentTask);
         currentTask.parent = result;
         return currentTask
       }

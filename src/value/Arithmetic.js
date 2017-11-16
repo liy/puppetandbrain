@@ -12,6 +12,10 @@ export class Operation
     this.outputs = new Output(this);
   }
 
+  fill(pod) {
+    Object.assign(this.variables, pod.variables);
+  }
+
   get targetID() {
     return this.id;
   }

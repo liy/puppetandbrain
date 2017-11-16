@@ -18,15 +18,7 @@ export default class Execution
     delete this.options[name];
     this.nameList.splice(name, 1);
   }
-
-  // get default() {
-  //   return this.options['default']
-  // }
-
-  // get complete() {
-  //   return this.options['complete']
-  // }
-
+  
   get(name) {
     return this.options[name];
   }

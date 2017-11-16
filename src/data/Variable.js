@@ -1,3 +1,4 @@
+// should not be serialized!
 export default class Variable
 {
   constructor(node, name) {

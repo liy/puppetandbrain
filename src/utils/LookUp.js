@@ -142,8 +142,11 @@ window.LookUp = {
     result.tasks = TASKS.concat()
     result.values = VALUES.concat();
     result.pointers = POINTERS.concat();
-    result.varibles = VARIABLES.concat();
     result.stage = Stage.actors.concat();
+    // FIXME: in production this should not be serialzied
+    // local variable access is auto linked once the node's variable 
+    // is populated and corresponding input name is added
+    result.variables = VARIABLES.concat();
 
     return result;
   },
