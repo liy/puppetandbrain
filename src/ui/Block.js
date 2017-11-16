@@ -47,6 +47,12 @@ export default class Block
   dragmove(e) {
     this.x = e.clientX + this._dragOffset.x;
     this.y = e.clientY + this._dragOffset.y;
+
+    // FIXME: remove it!!! For testing!!!
+    window.localStorage[this.model.id] = JSON.stringify({
+      x: this.x,
+      y: this.y
+    })
   }
 
   set x(x) {

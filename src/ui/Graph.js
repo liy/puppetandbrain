@@ -35,7 +35,6 @@ export default class Graph
       else {
         block = new TaskBlock(tasks[i])
       }
-      this.add(block);
       block.x = tx;
       block.y = ty + this.container.offsetTop + Math.random()*60-30;
       tx += w;
@@ -43,6 +42,7 @@ export default class Graph
         tx = indent;
         ty += h;
       } 
+      this.add(block);
     }
   
     // let arr = LookUp.getArithmetics();
@@ -85,7 +85,6 @@ export default class Graph
         block = new ArithmeticBlock(valueNode)
       }
 
-      this.add(block);
       block.x = tx;
       block.y = ty + this.container.offsetTop + Math.random()*60-30;
       tx += w;
@@ -93,6 +92,7 @@ export default class Graph
         tx = indent;
         ty += h;
       }
+      this.add(block);
     }
 
     this.refresh();

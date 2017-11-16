@@ -26,7 +26,7 @@ export default class ActivityLoader
   load(url) {
     return JSONLoader.load(url).then(pod => {
       // TESTING
-      console.log('JSON: ',pod)
+      // console.log('JSON: ',pod)
 
       // TODO: object seconds
       this.createActors(pod)

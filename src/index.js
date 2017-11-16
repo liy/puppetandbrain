@@ -245,7 +245,7 @@ async function load() {
   var loader = new ActivityLoader();
   await loader.load(require('./assets/activity.json'))
 
-  console.log(LookUp.pod())
+  console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod()); 
   
   window.graph = new Graph();
   graph.init();
