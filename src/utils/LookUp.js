@@ -4,7 +4,7 @@ var STORE = Object.create(null);
 var ACTORS = [];
 var TASKS = [];
 var VALUES = [];
-var GETTERS = []
+var POINTERS = []
 
 function create(entry, id) {
   if(!id) {
@@ -38,15 +38,15 @@ window.LookUp = {
     delete STORE[id]
   },
 
-  addGetter: function(entry, id) {
+  addPointer: function(entry, id) {
     id = create(entry, id)
-    GETTERS.push(id);
+    POINTERS.push(id);
     return id;
   },
   
-  removeGetter: function(id) {
-    let index = GETTERS.indexOf(id);
-    GETTERS.splice(index, 1);
+  removePointer: function(id) {
+    let index = POINTERS.indexOf(id);
+    POINTERS.splice(index, 1);
     delete STORE[id]
   },
 
@@ -96,8 +96,8 @@ window.LookUp = {
     })
   },
 
-  getGetters: function() {
-    return GETTERS.map(id => {
+  getPointers: function() {
+    return POINTERS.map(id => {
       return STORE[id]
     })
   },
@@ -111,7 +111,7 @@ window.LookUp = {
     result.actors = ACTORS.concat()
     result.tasks = TASKS.concat()
     result.values = VALUES.concat();
-    result.getters = GETTERS.concat();
+    result.pointers = POINTERS.concat();
     
     return result;
   },

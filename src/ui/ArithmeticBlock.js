@@ -1,7 +1,7 @@
 import OutputPin from "./OutputPin";
 import Block from "./Block";
 import InputPin from "./InputPin";
-import VariableGetter from "../getters/VariableGetter";
+import VariableAccessor from "../data/VariableAccessor";
 
 export default class ArithmeticBlock extends Block
 {
@@ -41,7 +41,7 @@ export default class ArithmeticBlock extends Block
       row(i).appendChild(pin.container);
       this.inputPins[name] = pin;
 
-      if(input instanceof VariableGetter) {
+      if(input instanceof VariableAccessor) {
         let inputField = document.createElement('input');
         inputField.value = input.value;
         pin.inputField = inputField;

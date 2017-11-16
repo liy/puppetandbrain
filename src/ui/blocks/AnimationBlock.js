@@ -1,12 +1,12 @@
 import TaskBlock from "../TaskBlock";
-import VariableGetter from "../../getters/VariableGetter";
+import VariableAccessor from "../../data/VariableAccessor";
 
 export default class AnimationBlock extends TaskBlock
 {
   constructor(model) {
     super(model)
 
-    if(model.inputs.get('name') instanceof VariableGetter) {
+    if(model.inputs.get('name') instanceof VariableAccessor) {
       let dropdown = document.createElement('select');
       this.model.actor.getAnimations().then(animations => {
         for(let animation of animations) {

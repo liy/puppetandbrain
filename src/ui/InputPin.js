@@ -1,5 +1,4 @@
 import DataPin from "./DataPin";
-import VariableGetter from "../getters/VariableGetter";
 
 export default class InputPin extends DataPin
 {

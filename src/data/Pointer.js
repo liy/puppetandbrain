@@ -1,7 +1,13 @@
-export default class OutputGetter 
+/**
+ * Point(input of current node) to a ouput of node 
+ * 
+ * @export
+ * @class Pointer
+ */
+export default class Pointer
 {
   constructor(inputNode, inputName, outputNode, outputName, id) {
-    this.id = LookUp.addGetter(this, id);
+    this.id = LookUp.addPointer(this, id);
     this.inputNode = inputNode;
     this.inputName = inputName;
     this.outputNode = outputNode;

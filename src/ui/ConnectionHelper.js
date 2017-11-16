@@ -1,5 +1,3 @@
-import OutputGetter from "../getters/OutputGetter";
-
 class ConnectionHelper
 {
   constructor() {
@@ -68,16 +66,14 @@ class ConnectionHelper
     //   }
     // });
 
-    let getters = LookUp.getGetters();
-    for(let getter of getters) {
-      if(getter instanceof OutputGetter) {
-        let outputBlock = this.graph.getBlock(getter.outputNode.id);
-        let inputBlock = this.graph.getBlock(getter.inputNode.id);
+    let pointers = LookUp.getPointers();
+    for(let pointer of pointers) {
+      let outputBlock = this.graph.getBlock(pointer.outputNode.id);
+      let inputBlock = this.graph.getBlock(pointer.inputNode.id);
 
-        let inputPin = inputBlock.inputPins[getter.inputName];
-        let outputPin = outputBlock.outputPins[getter.outputName];
-        outputPin.connect(inputPin)
-      }
+      let inputPin = inputBlock.inputPins[pointer.inputName];
+      let outputPin = outputBlock.outputPins[pointer.outputName];
+      outputPin.connect(inputPin)
     }
   }
 }

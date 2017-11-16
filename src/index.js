@@ -36,7 +36,6 @@ import Graph from './ui/Graph';
 import Block from './ui/Block';
 import ArithmeticBlock from './ui/ArithmeticBlock';
 import TaskBlock from './ui/TaskBlock';
-import OutputGetter from './getters/OutputGetter';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
