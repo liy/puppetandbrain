@@ -17,7 +17,7 @@ export default class Call extends Task
     this.variables.callee = data.callee.id;
     this.variables.functionName = data.functionName;
 
-    for(let name of this.function.outputs._names) {
+    for(let name of this.function.outputs.names) {
       this.inputs.add(name);
     }
   }
@@ -38,7 +38,7 @@ export default class Call extends Task
     // Pass the input value to the function's outputs
     for(let name of this.inputs.list) {
       // console.log(this.inputs.value(name))
-      this.function.outputs[name] = this.inputs.value(name);
+      this.function.outputs.data[name] = this.inputs.value(name);
     }
 
 

@@ -1,16 +1,18 @@
-import shortid from 'shortid';
+// import shortid from 'shortid';
+import Stage from '../Stage';
 
 var STORE = Object.create(null);
 var ACTORS = [];
 var TASKS = [];
 var VALUES = [];
-var POINTERS = []
+var POINTERS = [];
+var VARIABLES = [];
 
 function create(entry, id) {
   if(!id) {
     // naive way, better to use hash(random + timestamp + machine name + etc).
     while(true) {
-      id = Math.floor(Math.random() * 999)+1 + '';
+      id = Math.floor(Math.random() * 999)+1;
       if(!STORE[id]) break;
     }
 
@@ -26,6 +28,16 @@ function remove(id) {
 
 window.LookUp = {
   store: STORE,
+
+  // fill: function(pod) {
+  //   this.store = pod.store;
+  //   ACTORS = pod.actors;
+  //   TASKS = pod.tasks;
+  //   VALUES = pod.values;
+  //   POINTERS = pod.pointers;
+  //   VARIABLES = pod.varibles;
+  // },
+
   addActor: function(entry, id) {
     id = create(entry, id)
     ACTORS.push(id);
@@ -74,6 +86,18 @@ window.LookUp = {
     delete STORE[id]
   },
 
+  addVariable: function(entry, id) {
+    id = create(entry, id)
+    VARIABLES.push(id);
+    return id;
+  },
+
+  removeVariable: function(id) {
+    let index = VARIABLES.indexOf(id);
+    VARIABLES.splice(index, 1);
+    delete STORE[id]
+  },
+
   get: function(id) {
     return STORE[id];
   },
@@ -102,6 +126,12 @@ window.LookUp = {
     })
   },
 
+  getVariables: function() {
+    return VARIABLES.map(id => {
+      return STORE[id]
+    })
+  },
+
   pod: function() {
     let result = Object.create(null);
     result.store = Object.create(null);
@@ -112,7 +142,9 @@ window.LookUp = {
     result.tasks = TASKS.concat()
     result.values = VALUES.concat();
     result.pointers = POINTERS.concat();
-    
+    result.varibles = VARIABLES.concat();
+    result.stage = Stage.actors.concat();
+
     return result;
   },
 }

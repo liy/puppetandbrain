@@ -21,10 +21,4 @@ export default class Animation extends Task
     this.actor.setAnimation(this.inputs.value('name'));
     this.execution.run();
   }
-
-  pod() {
-    let pod = super.pod();
-    pod.name = this.name;
-    return pod
-  }
 }

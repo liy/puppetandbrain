@@ -30,6 +30,11 @@ export default class SpineActor extends Actor
     })
   }
 
+  fill(pod) {
+    super.fill(pod)
+    this.scale = pod.scale;
+  }
+
   async setAnimation(name, loop=true, track=0) {
     await this.loaded;
     this.spineComponent.setAnimation(name, loop, track);

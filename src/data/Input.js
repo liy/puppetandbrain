@@ -1,37 +1,51 @@
-import VariableAccessor from './VariableAccessor'
+import Variable from './Variable'
 import Pointer from './Pointer';
 
 export default class Input
 {
-  constructor(owner) {
-    this.owner = owner;
-    this.pointers = Object.create(null);
+  constructor(node) {
+    this.node = node;
+    this.map = Object.create(null);
     this.list = [];
+  }
+
+  destroy() {
+    for(let name of this.list) {
+      this.map[name].destroy();
+    }
   }
 
   add(name) {
     this.list.push(name);
-    this.pointers[name] = new VariableAccessor(this.owner, name);
+    this.map[name] = new Variable(this.node, name);
     return this;
   }
 
   get(name) {
-    return this.pointers[name];
+    return this.map[name];
   }
 
   value(name) {
-    return this.pointers[name].value
+    return this.map[name].value
   }
 
   connect(name, outputNode, outputName) {
-    this.pointers[name] = new Pointer(this.owner, name, outputNode, outputName);
+    this.map[name].destroy();
+    this.map[name] = new Pointer(this.node, name, outputNode, outputName);
+  }
+
+  disconnect(name) {
+    // even the element is a variable, it does not matter. 
+    // A new one will be created
+    this.map[name].destroy();
+    this.map[name] = new Variable(this.node, name);
   }
 
   pod() {
     let data = [];
     for(let name of this.list) {
       data.push({
-        [name]: this.pointers[name].id
+        [name]: this.map[name].id
       })
     }
     return data;

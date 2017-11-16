@@ -13,12 +13,16 @@ export default class Task extends EventEmitter
     this.variables = Object.create(null);
 
     this.inputs = new Input(this);
-    this.outputs = new Output();
+    this.outputs = new Output(this);
+  }
+
+  destroy() {
+    LookUp.removeTask(this.id);
   }
 
   init(data) {
     this.id = LookUp.addTask(this, data.id)
-    this.actor = (typeof data.actor == 'string') ? LookUp.get(data.actor) : data.actor;
+    this.actor = data.actor;
   }
 
   chain(...taskInfoArr) {

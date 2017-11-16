@@ -12,10 +12,16 @@ export default class Pointer
     this.inputName = inputName;
     this.outputNode = outputNode;
     this.outputName = outputName;
+    this.outputNode.outputs.connected(this.outputName);
+  }
+
+  destroy() {
+    this.outputNode.outputs.disconnected(this.outputName);
+    LookUp.removePointer(this.id);
   }
 
   get value() {
-    return this.outputNode.outputs[this.outputName]
+    return this.outputNode.outputs.data[this.outputName]
   }
 
   pod() {

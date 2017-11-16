@@ -16,6 +16,7 @@ require('./assets/donkey/donkey.json')
 require('./utils/LookUp')
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
+import Trigger from './objects/Trigger';
 import Stage from './Stage';
 
 import FunctionName from './tasks/FunctionName';
@@ -24,14 +25,12 @@ import Wait from './tasks/Wait';
 import Tween from './tasks/Tween';
 import Trace from './tasks/Trace';
 import Animation from './tasks/Animation';
-import Property from './node/Property';
-
-import ActivitySerializer from './ActivitySerializer';
-import ActivityLoader from './ActivityLoader';
-import Trigger from './objects/Trigger';
 import Branch from './tasks/Branch';
-import {Equal, RandomNumber, LessThan} from './node/Arithmetic';
 import Call from './tasks/Call';
+import Property from './value/Property';
+import {Equal, RandomNumber, LessThan} from './value/Arithmetic';
+
+import ActivityLoader from './ActivityLoader';
 import Graph from './ui/Graph';
 import Block from './ui/Block';
 import ArithmeticBlock from './ui/ArithmeticBlock';
@@ -178,7 +177,6 @@ function init() {
     functionName: "playAnimation"
   })
   call.variables.animationName = 'interactive'
-  // call.outputs.add('animationName');
   startTask.chain(staticAnimation, wait, trace, walkAnimation, tween)
            .chain({
              executionName: 'complete',
@@ -226,62 +224,38 @@ function init() {
   
   // start the activity when cow and donkey are loaded
   Promise.all([cow.loaded, donkey.loaded]).then(() => {
-    startTask.run()
+
+    
+    // serialize everything before game start
+    console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod()); 
+
+    // startTask.run()
   })
 
-  // serialize everything.
-  let as = new ActivitySerializer();
-  console.log('%c Activity %o ', 'color: white; background-color: black', as.start()); 
 
   
   window.graph = new Graph();
   graph.init(canvas);
 }
 
-init();
+// init();
 
-// async function load() {
-//   var loader = new ActivityLoader();
-//   await loader.load(require('./assets/activity.json'))
+async function load() {
+  var loader = new ActivityLoader();
+  await loader.load(require('./assets/activity.json'))
 
-//   let promises = LookUp.getActors().map(actor => {
-//     return actor.loaded;
-//   })
+  // let promises = LookUp.getActors().map(actor => {
+  //   return actor.loaded;
+  // })
 
-//   Promise.all(promises).then(() => {
-//     console.log(LookUp.pod())
+  // Promise.all(promises).then(() => {
+  //   console.log(LookUp.pod())
 
-//     // HACK, I know item 35 is a start function
-//     LookUp.get(21).run().then(() => {
-//       console.log('all done')
-//     })
-//   })
-// }
+  //   // HACK, I know item 35 is a start function
+  //   LookUp.get(21).run().then(() => {
+  //     console.log('all done')
+  //   })
+  // })
+}
 
-// load();
-
-
-// testing connect two div using svg
-// let svg = document.getElementById('svg');
-
-// let outlet1 = document.getElementById('outlet1')
-// let outlet2 = document.getElementById('outlet2')
-
-// let offset = svg.getBoundingClientRect();
-// let a = outlet1.getBoundingClientRect();
-// let b = outlet2.getBoundingClientRect();
-
-// let x1 = (a.left + a.right)  / 2 - offset.left;
-// let y1 = (a.top  + a.bottom) / 2 - offset.top;
-// let x2 = (b.left + b.right)  / 2 - offset.left;
-// let y2 = (b.top  + b.bottom) / 2 - offset.top;
-
-// let path = document.createElementNS('http://www.w3.org/2000/svg','line');
-// path.setAttribute('x1', x1)
-// path.setAttribute('y1', y1)
-// path.setAttribute('x2', x2)
-// path.setAttribute('y2', y2)
-// path.setAttribute('stroke', '#FF0000');
-// path.setAttribute('stroke-width', 3);
-// path.setAttribute('fill', 'transparent');
-// svg.appendChild(path);
+load();

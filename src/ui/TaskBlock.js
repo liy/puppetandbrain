@@ -3,7 +3,7 @@ import ExecutionOutPin from "./ExecutionOutPin";
 import InputPin from "./InputPin";
 import OutputPin from "./OutputPin";
 import Block from "./Block";
-import VariableAccessor from "../data/VariableAccessor";
+import Variable from "../data/Variable";
 
 // FIXME: clean up the UI!!!
 
@@ -70,7 +70,7 @@ export default class TaskBlock extends Block
       row(i+1).appendChild(pin.container);
       this.inputPins[name] = pin;
 
-      if(input instanceof VariableAccessor) {
+      if(input instanceof Variable) {
         let inputField = document.createElement('input');
         inputField.value = input.value;
         pin.inputField = inputField;
@@ -78,8 +78,8 @@ export default class TaskBlock extends Block
       }
     }
 
-    for(let i=0; i<this.model.outputs._names.length; ++i) {
-      let name = this.model.outputs._names[i];
+    for(let i=0; i<this.model.outputs.names.length; ++i) {
+      let name = this.model.outputs.names[i];
       let pin = new OutputPin(name, name);
       row(this.model.execution.nameList.length + i).appendChild(pin.container);
       this.outputPins[name] = pin;

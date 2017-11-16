@@ -29,16 +29,14 @@ export default class ActivityLoader
   }
 
   createActors(pod) {
-    var add = function(container, actorData) {
-      let actor = new scope[actorData.class](actorData.url, actorData.id);
-      actor.x = actorData.position.x;
-      actor.y = actorData.position.y;
-      actor.scale = actorData.scale;
+    var add = function(container, data) {
+      let actor = new scope[data.class](data.url, data.id);
+      actor.fill(data);
       container.addActor(actor);
 
-      for(let i=0; i<actorData.childActors.length; ++i) {
-        let childID = actorData.childActors[i];
-        let childData = actorData.store[childID];
+      for(let i=0; i<data.childActors.length; ++i) {
+        let childID = data.childActors[i];
+        let childData = data.store[childID];
         add(actor, childData)
       }
     }
@@ -53,6 +51,7 @@ export default class ActivityLoader
     for(let id of pod.tasks) {
       let data = pod.store[id];
       let task = new scope[data.class]()
+      console.log(task)
       // functions will be auto linked with its related actor 
       task.fill(data)
     }

@@ -34,6 +34,11 @@ export default class Actor extends PIXI.Container
     this.on('pointerup', this.pointerUp)
   }
 
+  fill(pod) {
+    this.x = pod.position.x;
+    this.y = pod.position.y;
+  }
+
   createVariable(name, value) {
     this.variables[name] = value;
   }

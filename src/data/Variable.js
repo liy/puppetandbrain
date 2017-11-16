@@ -1,15 +1,13 @@
-/**
- * Variable pointer does not needs to be serialized.
- * It just provide a generic way to obtain particular value
- * 
- * @export
- * @class VariableAccessor
- */
-export default class VariableAccessor
+export default class Variable
 {
   constructor(node, name) {
+    this.id = LookUp.addVariable(this)
     this.node = node;
     this.name = name;
+  }
+
+  destroy() {
+    LookUp.removeVariable(this.id);
   }
 
   get value() {
