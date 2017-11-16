@@ -4,7 +4,6 @@ class Stage extends PIXI.Container
 {
   constructor() {
     super();
-
     this.actors = [];
   }
 
@@ -38,6 +37,10 @@ class Stage extends PIXI.Container
     if(id) {
       this.actors.splice(index);
     }
+  }
+
+  set blurEnabled(v) {
+    this.filters = v ? [new PIXI.filters.BlurFilter(2, 1)] : [];
   }
 }
 

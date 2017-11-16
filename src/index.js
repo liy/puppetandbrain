@@ -40,6 +40,7 @@ import OutputGetter from './getters/OutputGetter';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
+
 appDiv.appendChild(canvas);
 window.renderer = PIXI.autoDetectRenderer({
   autoStart: true,
@@ -55,6 +56,8 @@ function render() {
   renderer.render(Stage);
 }
 PIXI.ticker.shared.add(render);
+
+Stage.blurEnabled = true;
 
 
 function init() {
@@ -231,7 +234,7 @@ function init() {
 
   
   window.graph = new Graph();
-  graph.init();
+  graph.init(canvas);
 }
 
 init();

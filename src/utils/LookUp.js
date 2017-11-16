@@ -8,7 +8,7 @@ var GETTERS = []
 function create(entry, id) {
   if(!id) {
     while(true) {
-      id = Math.floor(Math.random() * 99);
+      id = Math.floor(Math.random() * 999)+1;
       if(!STORE[id]) break;
     }
   }
