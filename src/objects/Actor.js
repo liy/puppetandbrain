@@ -42,7 +42,6 @@ export default class Actor extends PIXI.Container
       }
     }
     this.rotation = pod.rotation || 0;
-    console.log(pod.name)
     this.name = pod.name || this.name;
   }
 

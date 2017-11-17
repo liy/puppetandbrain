@@ -26,7 +26,6 @@ export default class Wait extends Task
   run() {
     super.run()
 
-    console.log(this.inputs.value('seconds'))
     this.timeoutID = setTimeout(() => {
       this.execution.run();
     }, this.inputs.value('seconds')*1000);
