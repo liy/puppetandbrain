@@ -8,6 +8,9 @@ export default class Task extends EventEmitter
   constructor(id) {
     super();
     this.id = LookUp.addTask(this, id);
+
+    // default node name to be the class name
+    this.nodeName = this.__proto__.constructor.name;
     
     this.execution = new Execution();
 

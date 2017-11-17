@@ -5,6 +5,8 @@ export default class Tween extends Task
   constructor(id) {
     super(id);
 
+    this.nodeName = "Move"
+
     // ensure the order
     this.execution.set('default');
     this.execution.set('complete');

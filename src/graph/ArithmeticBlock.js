@@ -8,7 +8,7 @@ export default class ArithmeticBlock extends Block
   constructor(model) {
     super(model);
 
-    let minWidth = 120;
+    let minWidth = 130;
     let minHeight = 40;
     this.container.className += ' arithmetic-block'
     this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px;`;    
@@ -19,7 +19,7 @@ export default class ArithmeticBlock extends Block
     this.title = document.createElement('div');
     this.title.className = 'title'
     this.container.appendChild(this.title);
-    this.title.textContent = this.model.__proto__.constructor.name;
+    this.title.textContent = this.model.nodeName;
 
     this.content = document.createElement('div');
     this.container.appendChild(this.content);

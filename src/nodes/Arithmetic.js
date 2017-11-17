@@ -6,6 +6,9 @@ export class Operation
   constructor(id) {
     this.id = LookUp.addValue(this, id);
 
+    // default node name to be the class name
+    this.nodeName = this.__proto__.constructor.name;
+
     this.variables = Object.create(null);
     this.inputs = new Input(this);
     this.outputs = new Output(this);
@@ -78,6 +81,8 @@ export class Equal extends Operation
 {
   constructor(id) {
     super(id);
+    
+    this.nodeName = "="
 
     this.inputs.add('A');
     this.inputs.add('B');
@@ -95,6 +100,8 @@ export class LessThan extends Operation
   constructor(id) {
     super(id);
 
+    this.nodeName = "<"
+
     this.inputs.add('A');
     this.inputs.add('B');
 
@@ -111,6 +118,8 @@ export class LessEqual extends Operation
   constructor(id) {
     super(id);
 
+    this.nodeName = "<="
+
     this.inputs.add('A');
     this.inputs.add('B');
     
@@ -126,6 +135,8 @@ export class RandomNumber extends Operation
 {
   constructor(id) {
     super(id);
+
+    this.nodeName = "Random Number"
 
     this.outputs.add('value', this.value);
   }

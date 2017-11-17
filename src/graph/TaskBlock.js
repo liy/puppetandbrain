@@ -26,7 +26,7 @@ export default class TaskBlock extends Block
     this.title = document.createElement('div');
     this.title.className = 'title'
     this.container.appendChild(this.title);
-    let title = this.model.__proto__.constructor.name;
+    let title = this.model.nodeName;
     if(title == 'Perform') {
       this.container.className += ' perform-block'
       title += ' ' + this.model.actionName

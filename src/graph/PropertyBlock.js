@@ -4,8 +4,8 @@ import Block from "./Block";
 
 export default class PropertyBlock extends Block
 {
-  constructor(propertyGetter) {
-    super(propertyGetter);
+  constructor(node) {
+    super(node);
 
     let minWidth = 200;
     let minHeight = 40;
@@ -15,7 +15,7 @@ export default class PropertyBlock extends Block
     this.title = document.createElement('div');
     this.title.className = 'title'
     this.container.appendChild(this.title);
-    this.title.textContent = `Get ${propertyGetter.name} of ${propertyGetter.target.name}`;
+    this.title.textContent = node.nodeName
 
     this.content = document.createElement('div');
     this.container.appendChild(this.content);
@@ -26,7 +26,7 @@ export default class PropertyBlock extends Block
 
     this.outputPin = new OutputPin(this.model.name);
     row.appendChild(this.outputPin.container);
-    this.outputPins[propertyGetter.name] = this.outputPin;
+    this.outputPins[node.name] = this.outputPin;
   }
 
   dragmove(e) {

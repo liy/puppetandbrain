@@ -8,12 +8,12 @@ export default class Property
   }
 
   init(pod) {
-    
     // Both target and name is authoring time settings.
     this.target = LookUp.auto(pod.target);
     this.name = pod.name;
-
     this.outputs.add(this.name, this.target[this.name]);
+
+    this.nodeName = "Get Actor" + this.target.id + ' ' + this.name.charAt(0).toUpperCase() + this.name.slice(1);
   }
 
   pod() {
