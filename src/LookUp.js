@@ -8,6 +8,8 @@ var VALUES = [];
 var POINTERS = [];
 var VARIABLES = [];
 
+var running = false;
+
 function create(entry, id) {
   if(!id) {
     // naive way, better to use hash(random + timestamp + machine name + etc).
@@ -122,6 +124,16 @@ window.LookUp = {
     return VARIABLES.map(id => {
       return STORE[id]
     })
+  },
+
+  toggle() {
+    if(running) {
+      this.reset();
+    }
+    else {
+      this.start();
+    }
+    running = !running;
   },
 
   start: function() {

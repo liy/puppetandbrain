@@ -239,21 +239,19 @@ function init() {
     // serialize everything before game start
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod()); 
 
-    var reset = function() {
-      LookUp.reset();
+    // var reset = function() {
+    //   LookUp.reset();
 
-      setTimeout(start, 5000);
-    };
-    var start = function() {
-      LookUp.start();
-      setTimeout(reset, 10000);
-    }
+    //   setTimeout(start, 5000);
+    // };
+    // var start = function() {
+    //   LookUp.start();
+    //   setTimeout(reset, 3000);
+    // }
 
-    setTimeout(start, 3000);
+    // setTimeout(start, 3000);
   })
 
-
-  
   window.graph = new Graph();
   graph.init();
 }
@@ -280,3 +278,10 @@ async function load() {
 }
 
 // load();
+
+document.addEventListener('keydown', (e) => {
+  if(e.key == 'F6' || e.key == 'F4' || e.key == 'F8') {
+    e.preventDefault();
+    LookUp.toggle();
+  }
+})

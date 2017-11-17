@@ -25,10 +25,20 @@ export default class Tween extends Task
     }
   }
 
+  destroy() {
+    super.destroy();
+    if(this.tween) this.tween.kill()
+  }
+
+  reset() {
+    super.reset();
+    if(this.tween) this.tween.kill()
+  }
+
   run() {
     super.run()
     let pos = this.inputs.value('position');
-    TweenLite.to(this.owner, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
+    this.tween = TweenLite.to(this.owner, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
       this.execution.run('complete');
     }});
     this.execution.run();
