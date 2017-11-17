@@ -234,29 +234,15 @@ function init() {
   
   // start the activity when cow and donkey are loaded
   Promise.all([cow.loaded, donkey.loaded]).then(() => {
-
-    
     // serialize everything before game start
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod()); 
-
-    // var reset = function() {
-    //   LookUp.reset();
-
-    //   setTimeout(start, 5000);
-    // };
-    // var start = function() {
-    //   LookUp.start();
-    //   setTimeout(reset, 3000);
-    // }
-
-    // setTimeout(start, 3000);
   })
 
   window.graph = new Graph();
   graph.init();
 }
 
-init();
+// init();
 
 async function load() {
   var loader = new ActivityLoader();
@@ -273,14 +259,14 @@ async function load() {
   })
 
   Promise.all(promises).then(() => {
-    LookUp.start();
+
   })
 }
 
-// load();
+load();
 
 document.addEventListener('keydown', (e) => {
-  if(e.key == 'F6' || e.key == 'F4' || e.key == 'F8') {
+  if(e.key == 'F6' || e.key == 'F4') {
     e.preventDefault();
     LookUp.toggle();
   }
