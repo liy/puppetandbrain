@@ -1,4 +1,4 @@
-import JSONLoader from '../JSONLoader';
+import JsonPromise from '../utils/JsonPromise';
 import Actor from './Actor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import SelectionComponent from '../components/SelectionComponent';
@@ -12,7 +12,7 @@ export default class SpineActor extends Actor
 
     this.url = url;
 
-    this.loaded = JSONLoader.load(this.url).then(info => {
+    this.loaded = JsonPromise.load(this.url).then(info => {
       this.addComponent(new PlaceHolderComponent(info.dimension));
       this.addComponent(new SelectionComponent(info.dimension));
       this.addComponent(new DragComponent(info.dimension));

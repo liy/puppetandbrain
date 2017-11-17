@@ -1,5 +1,5 @@
 // import shortid from 'shortid';
-import Stage from '../Stage';
+import Stage from './objects/Stage';
 
 var STORE = Object.create(null);
 var ACTORS = [];
@@ -22,21 +22,8 @@ function create(entry, id) {
   return id;
 }
 
-function remove(id) {
-  delete store[id];
-}
-
 window.LookUp = {
   store: STORE,
-
-  // fill: function(pod) {
-  //   this.store = pod.store;
-  //   ACTORS = pod.actors;
-  //   TASKS = pod.tasks;
-  //   VALUES = pod.values;
-  //   POINTERS = pod.pointers;
-  //   VARIABLES = pod.varibles;
-  // },
 
   addActor: function(entry, id) {
     id = create(entry, id)
@@ -69,8 +56,8 @@ window.LookUp = {
   },
 
   removeTask: function(id) {
-    let index = DATA.indexOf(id);
-    DATA.splice(index, 1);
+    let index = TASKS.indexOf(id);
+    TASKS.splice(index, 1);
     delete STORE[id]
   },
 

@@ -1,4 +1,4 @@
-import Selection from './Selection';
+import Selection from '../utils/Selection';
 
 class Stage extends PIXI.Container
 {

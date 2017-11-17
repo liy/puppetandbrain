@@ -1,5 +1,5 @@
-import TaskBlock from "../TaskBlock";
-import Variable from "../../data/Variable";
+import TaskBlock from "./TaskBlock";
+import Variable from "../data/Variable";
 
 export default class AnimationBlock extends TaskBlock
 {

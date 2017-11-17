@@ -1,7 +1,7 @@
 const filters = require('pixi-filters');
 
 import Component from './Component';
-import Selection from '../Selection';
+import Selection from '../utils/Selection';
 
 // TODO: maybe use a outline filter instead???
 export default class SelectionComponent extends Component

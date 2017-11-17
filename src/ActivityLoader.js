@@ -1,21 +1,14 @@
-import JSONLoader from './JSONLoader';
-import Stage from './Stage';
-
-import * as tasks from './tasks'
+import JsonPromise from './utils/JsonPromise';
+import Stage from './objects/Stage';
+import * as nodes from './nodes'
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 
-import * as arithmetic from './value/Arithmetic';
-import Property from './value/Property';
-
 const scope = {
-  ...tasks,
+  ...nodes,
   SpineActor,
   SpriteActor,
-  ...arithmetic,
-  Property
 }
-
 
 export default class ActivityLoader
 {
@@ -24,20 +17,16 @@ export default class ActivityLoader
   }
 
   load(url) {
-    return JSONLoader.load(url).then(pod => {
-      // TESTING
-      // console.log('JSON: ',pod)
+    return JsonPromise.load(url).then(pod => {
 
-      // TODO: object seconds
       this.createActors(pod)
 
-      // TODO: tasks last
       this.createTasks(pod)
 
-      // TODO: create other nodes, eg., value nodes
+      // create other nodes, eg., value nodes
       this.createValueNodes(pod)
 
-      // TODO: link input and outputs!!
+      // link input and outputs!!
       this.connectInputOuput(pod)
     })
   }
@@ -95,8 +84,6 @@ export default class ActivityLoader
       let pointerData = pod.store[id];
       let inputNode = LookUp.get(pointerData.inputNode);
       let outputNode = LookUp.get(pointerData.outputNode);
-
-      // console.log(pointerData, inputNode, outputNode)
 
       inputNode.inputs.connect(pointerData.inputName, outputNode, pointerData.outputName)
     }

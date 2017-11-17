@@ -13,28 +13,32 @@ require('./assets/donkey/donkey.json')
 
 
 // imports
-require('./utils/LookUp')
+
+// LookUp is a global window variable, save typing!
+require('./LookUp');
+
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import Trigger from './objects/Trigger';
-import Stage from './Stage';
+import Stage from './objects/Stage';
 
-import FunctionName from './tasks/FunctionName';
-import Function from './tasks/Function';
-import Wait from './tasks/Wait';
-import Tween from './tasks/Tween';
-import Trace from './tasks/Trace';
-import Animation from './tasks/Animation';
-import Branch from './tasks/Branch';
-import Call from './tasks/Call';
-import Property from './value/Property';
-import {Equal, RandomNumber, LessThan} from './value/Arithmetic';
+import FunctionName from './nodes/FunctionName';
+import Function from './nodes/Function';
+import Wait from './nodes/Wait';
+import Tween from './nodes/Tween';
+import Trace from './nodes/Trace';
+import Animation from './nodes/Animation';
+import Branch from './nodes/Branch';
+import Call from './nodes/Call';
+import Property from './nodes/Property';
+import {Equal, RandomNumber, LessThan} from './nodes/Arithmetic'
+
 
 import ActivityLoader from './ActivityLoader';
-import Graph from './ui/Graph';
-import Block from './ui/Block';
-import ArithmeticBlock from './ui/ArithmeticBlock';
-import TaskBlock from './ui/TaskBlock';
+import Graph from './graph/Graph';
+import Block from './graph/Block';
+import ArithmeticBlock from './graph/ArithmeticBlock';
+import TaskBlock from './graph/TaskBlock';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');

@@ -1,4 +1,4 @@
-export default class JSONLoader 
+export default class JsonPromise 
 {
   static load(url) {
     return new Promise((resolve, reject) => {

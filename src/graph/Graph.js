@@ -2,8 +2,8 @@ import ConnectionHelper from './ConnectionHelper'
 import ArithmeticBlock from './ArithmeticBlock';
 import TaskBlock from './TaskBlock';
 import PropertyBlock from './PropertyBlock';
-import Animation from '../tasks/Animation';
-import AnimationBlock from './blocks/AnimationBlock';
+import Animation from '../nodes/Animation';
+import AnimationBlock from './AnimationBlock';
 
 export default class Graph
 {

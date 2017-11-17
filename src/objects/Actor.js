@@ -1,4 +1,4 @@
-import Stage from '../Stage';
+import Stage from './Stage';
 import Entity from './Entity';
 import mixin from '../utils/mixin';
 
