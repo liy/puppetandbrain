@@ -1,6 +1,6 @@
 import DataNode from "./DataNode";
 
-export class ArithmeticNode extends DataNode
+class ArithmeticNode extends DataNode
 {
   constructor(id) {
     super(id);
