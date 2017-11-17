@@ -13,8 +13,8 @@ class ConnectionHelper
   drawExecutionConnections() {
     let actors = LookUp.getActors();
     for(let actor of actors) {
-      Object.keys(actor.functions).forEach(funcName => {
-        let func = actor.functions[funcName];
+      Object.keys(actor.actions).forEach(funcName => {
+        let func = actor.actions[funcName];
         let currentBlock = this.graph.map[func.id];
         let nextBlock = this.graph.map[func.execution.get('default').id];
 

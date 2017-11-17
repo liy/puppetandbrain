@@ -7,7 +7,7 @@ export default class Task extends EventEmitter
 {
   constructor(id) {
     super();
-    this.id = LookUp.addTask(this, id)
+    this.id = LookUp.addTask(this, id);
     
     this.execution = new Execution();
 

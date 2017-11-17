@@ -1,9 +1,9 @@
 export Wait from './Wait';
-export Function from './Function';
+export Action from './Action';
 export Tween from './Tween';
 export Trace from './Trace';
 export Animation from './Animation';
-export Call from './Call'
+export Perform from './Perform'
 export Branch from './Branch';
 export Property from './Property';
 

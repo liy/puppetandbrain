@@ -27,13 +27,13 @@ export default class TaskBlock extends Block
     this.title.className = 'title'
     this.container.appendChild(this.title);
     let title = this.model.__proto__.constructor.name;
-    if(title == 'Call') {
-      this.container.className += ' call-block'
-      title += ' Function ' + this.model.functionName
+    if(title == 'Perform') {
+      this.container.className += ' perform-block'
+      title += ' ' + this.model.actionName
     }
-    else if(title == 'Function') {
-      this.container.className += ' function-block'
-      title += ' ' + this.model.functionName;
+    else if(title == 'Action') {
+      this.container.className += ' action-block'
+      title += ' ' + this.model.actionName;
     }
     this.title.textContent = title;
 
@@ -51,7 +51,7 @@ export default class TaskBlock extends Block
     }
 
     // task always have at least 2 pair of exeuctions, in and out
-    if(this.model.__proto__.constructor.name != 'Function') {
+    if(this.model.__proto__.constructor.name != 'Action') {
       this.inPin = new ExecutionInPin();
       row(0).appendChild(this.inPin.container);
     }

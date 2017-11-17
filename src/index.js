@@ -23,13 +23,13 @@ import Trigger from './objects/Trigger';
 import Stage from './objects/Stage';
 
 import FunctionName from './nodes/FunctionName';
-import Function from './nodes/Function';
+import Action from './nodes/Action';
 import Wait from './nodes/Wait';
 import Tween from './nodes/Tween';
 import Trace from './nodes/Trace';
 import Animation from './nodes/Animation';
 import Branch from './nodes/Branch';
-import Call from './nodes/Call';
+import Perform from './nodes/Perform';
 import Property from './nodes/Property';
 import {Equal, RandomNumber, LessThan} from './nodes/Arithmetic'
 
@@ -87,16 +87,16 @@ function init() {
       seconds: 3
     }
   })
-  let onDonkeyExcit = new Function();
-  onDonkeyExcit.init({
+  let donkeyAnimateAction = new Action();
+  donkeyAnimateAction.init({
     actor: donkey,
-    functionName: 'playAnimation'
+    actionName: 'playAnimation'
   })
-  onDonkeyExcit.outputs.add('animationName')
-  onDonkeyExcit.chain(delayAnimation, animation);
+  donkeyAnimateAction.outputs.add('animationName')
+  donkeyAnimateAction.chain(delayAnimation, animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
-  animation.inputs.connect('name', onDonkeyExcit, 'animationName');
+  animation.inputs.connect('name', donkeyAnimateAction, 'animationName');
   
   // Cow
   var cow = new SpineActor(require('./assets/cow/cow.info.json'));
@@ -145,22 +145,24 @@ function init() {
   let tween = new Tween();
   tween.init({
     actor: cow,
-    duration: 3
+    variables: {
+      duration: 3
+    }
   })
   // link to donkey's position
   tween.inputs.connect('position', positionProperty, 'position')
   
-  let startTask = new Function();
+  let startTask = new Action();
   startTask.init({
     actor: cow,
-    functionName: FunctionName.GAME_START
+    actionName: FunctionName.GAME_START
   })
 
-  let call = new Call();
-  call.init({
+  let perform = new Perform();
+  perform.init({
     actor: cow,
     callee: donkey,
-    functionName: "playAnimation",
+    actionName: "playAnimation",
     variables: {
       animationName: 'interactive'
     }
@@ -168,7 +170,7 @@ function init() {
   startTask.chain(staticAnimation, wait, trace, walkAnimation, tween)
            .chain({
              name: 'complete',
-             task: call
+             task: perform
             });
   
   // example of 2 executions
@@ -217,7 +219,7 @@ function init() {
   branch.execution.set('true', trueTrace)
   branch.execution.set('false', falseTrace)
 
-  call.chain(branch)
+  perform.chain(branch)
   
   // start the activity when cow and donkey are loaded
   Promise.all([cow.loaded, donkey.loaded]).then(() => {

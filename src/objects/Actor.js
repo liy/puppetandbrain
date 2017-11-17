@@ -21,10 +21,12 @@ export default class Actor extends PIXI.Container
 
     this.name = 'Actor ' + this.id;
 
-    this.functions = {
-      // TODO: maybe remove default entry task?
-      // [TaskEvent.GAME_START]: new EntryTask({type:TaskEvent.GAME_START})
-    };
+    // this.functions = {
+    //   // TODO: maybe remove default entry task?
+    //   // [TaskEvent.GAME_START]: new EntryTask({type:TaskEvent.GAME_START})
+    // };
+
+    this.actions = Object.create(null);
 
     mixin(this, new Entity(id));
 
