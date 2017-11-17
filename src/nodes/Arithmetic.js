@@ -1,35 +1,6 @@
-import Input from "../data/Input";
-import Output from "../data/Ouput";
+import DataNode from "./DataNode";
 
-export class Operation
-{
-  constructor(id) {
-    this.id = LookUp.addValue(this, id);
-
-    // default node name to be the class name
-    this.nodeName = this.__proto__.constructor.name;
-
-    this.variables = Object.create(null);
-    this.inputs = new Input(this);
-    this.outputs = new Output(this);
-  }
-
-  init(pod={}) {
-    Object.assign(this.variables, pod.variables);
-  }
-
-  pod() {
-    return {
-      class: this.__proto__.constructor.name,
-      id: this.id,
-      variables: this.variables,
-      inputs: this.inputs.pod(),
-      ouputs: this.outputs.pod(),
-    }
-  }
-}
-
-export class Add extends Operation
+export class Add extends DataNode
 {
   constructor(id) {
     super(id);
@@ -45,7 +16,7 @@ export class Add extends Operation
   }
 }
 
-export class Multiply extends Operation
+export class Multiply extends DataNode
 {
   constructor(id) {
     super(id);
@@ -61,7 +32,7 @@ export class Multiply extends Operation
   }
 }
 
-export class Divide extends Operation
+export class Divide extends DataNode
 {
   constructor(id) {
     super(id);
@@ -77,7 +48,7 @@ export class Divide extends Operation
   }
 }
 
-export class Equal extends Operation
+export class Equal extends DataNode
 {
   constructor(id) {
     super(id);
@@ -95,7 +66,7 @@ export class Equal extends Operation
   }
 }
 
-export class LessThan extends Operation
+export class LessThan extends DataNode
 {
   constructor(id) {
     super(id);
@@ -113,7 +84,7 @@ export class LessThan extends Operation
   }
 }
 
-export class LessEqual extends Operation
+export class LessEqual extends DataNode
 {
   constructor(id) {
     super(id);
@@ -131,7 +102,7 @@ export class LessEqual extends Operation
   }
 }
 
-export class RandomNumber extends Operation
+export class RandomNumber extends DataNode
 {
   constructor(id) {
     super(id);

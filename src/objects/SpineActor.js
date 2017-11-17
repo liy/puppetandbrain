@@ -7,10 +7,13 @@ import SpineComponent from '../components/SpineComponent';
 
 export default class SpineActor extends Actor
 {
-  constructor(url, id) {
+  constructor(id) {
     super(id);
+  }
 
-    this.url = url;
+  init(pod) {
+    super.init(pod)
+    this.url = pod.url;
 
     this.loaded = JsonPromise.load(this.url).then(info => {
       this.addComponent(new PlaceHolderComponent(info.dimension));
@@ -30,9 +33,9 @@ export default class SpineActor extends Actor
     })
   }
 
-  fill(pod) {
-    super.fill(pod)
-    this.scale = pod.scale;
+  reset() {
+    super.reset();
+    this.spineComponent.setToSetupPose();
   }
 
   async setAnimation(name, loop=true, track=0) {
@@ -48,15 +51,7 @@ export default class SpineActor extends Actor
   pod() {
     return {
       ...super.pod(),
-      url: this.url,
-      position: {
-        x: this.x,
-        y: this.y,
-      },
-      scale: {
-        x: this.scale.x,
-        y: this.scale.y
-      }
+      url: this.url
     }
   }
 }

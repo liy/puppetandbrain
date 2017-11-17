@@ -8,7 +8,7 @@ export default class AnimationBlock extends TaskBlock
 
     if(model.inputs.get('name') instanceof Variable) {
       let dropdown = document.createElement('select');
-      this.model.actor.getAnimations().then(animations => {
+      this.model.owner.getAnimations().then(animations => {
         for(let animation of animations) {
           let option = document.createElement('option');
           option.setAttribute('value', animation.name)

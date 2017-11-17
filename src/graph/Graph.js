@@ -134,4 +134,8 @@ export default class Graph
     this.svg.setAttribute('width', window.innerWidth)
     this.svg.setAttribute('height', window.innerHeight)
   }
+
+  reset() {
+    
+  }
 }

@@ -124,6 +124,31 @@ window.LookUp = {
     })
   },
 
+  start: function() {
+    for(let id of TASKS) {
+      let task = this.store[id];
+      task.setInitialState();
+    }
+
+    for(let id of ACTORS) {
+      let actor = this.store[id];
+      actor.setInitialState();
+      actor.start();
+    }
+  },
+
+  reset: function() {
+    for(let id of TASKS) {
+      let task = this.store[id];
+      task.reset();
+    }
+
+    for(let id of ACTORS) {
+      let actor = this.store[id];
+      actor.reset();
+    }
+  },
+
   pod: function() {
     let result = Object.create(null);
     result.store = Object.create(null);

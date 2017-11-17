@@ -17,14 +17,14 @@ export default class Action extends Task
     // authoring time thing!
     this.actionName = pod.actionName;
 
-    this.actor.actions[this.actionName] = this;
+    this.owner.actions[this.actionName] = this;
   }
 
   rename(name) {
     // validate there are no same function names
-    if(this.actor.actions[name]) return false;
+    if(this.owner.actions[name]) return false;
 
-    delete this.actor.actions[this.actionName];
+    delete this.owner.actions[this.actionName];
     this.actionName = name;
     return true
   }

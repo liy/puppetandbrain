@@ -1,52 +1,28 @@
-import EventEmitter from '../utils/EventEmitter'
 import Execution from './Execution'
 import Input from '../data/Input';
-import Output from '../data/Ouput';
+import Output from '../data/Output';
+import Node from './Node';
 
-export default class Task extends EventEmitter
+export default class Task extends Node
 {
   constructor(id) {
     super();
     this.id = LookUp.addTask(this, id);
-
-    // default node name to be the class name
-    this.nodeName = this.__proto__.constructor.name;
-    
     this.execution = new Execution();
-
-    this.variables = Object.create(null);
-
-    this.inputs = new Input(this);
-    this.outputs = new Output(this);
   }
 
   destroy() {
     LookUp.removeTask(this.id);
   }
 
-  init(pod) {
-    this.actor = LookUp.auto(pod.actor);
-
-    // Set the variables! I can just do normal ref assignment
-    // But do a property assignment, just be safe...
-    Object.assign(this.variables, pod.variables);
-
-    // we just need the name to be populated here.
-    // variable access will be auto created. 
-    // Of course some of them will be discarded once 
-    // connection is setup(pointer is added)
-    if(pod.inputs) {
-      for(let inputData of pod.inputs) {
-        this.inputs.add(inputData.name);
-      }
+  setInitialState() {
+    this.initialState = {
+      variables: JSON.parse(JSON.stringify(this.variables))
     }
+  }
 
-    // Only need the name. Ouput is dynamically generated!
-    if(pod.outputs) {
-      for(let name of pod.outputs) {
-        this.outputs.add(name);
-      }
-    }
+  reset() {
+    this.variables = this.initialState.variables;
   }
 
   chain(...taskInfoArr) {
@@ -71,14 +47,11 @@ export default class Task extends EventEmitter
   }
 
   pod() {
+    
     return {
-      class: this.__proto__.constructor.name,
+      ...super.pod(),
       id: this.id,
-      variables: this.variables,
       execution: this.execution.pod(),
-      actor: this.actor.id,
-      inputs: this.inputs.pod(),
-      outputs: this.outputs.pod(),
     }
   }
 }

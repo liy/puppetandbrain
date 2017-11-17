@@ -11,7 +11,7 @@ export default class Animation extends Task
   run() {
     super.run()
 
-    this.actor.setAnimation(this.inputs.value('name'));
+    this.owner.setAnimation(this.inputs.value('name'));
     this.execution.run();
   }
 }

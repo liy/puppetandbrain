@@ -22,7 +22,7 @@ import SpriteActor from './objects/SpriteActor';
 import Trigger from './objects/Trigger';
 import Stage from './objects/Stage';
 
-import FunctionName from './nodes/FunctionName';
+import ActionName from './nodes/ActionName';
 import Action from './nodes/Action';
 import Wait from './nodes/Wait';
 import Tween from './nodes/Tween';
@@ -64,33 +64,36 @@ Stage.blurEnabled = true;
 
 function init() {
   // Donkey!  
-  var donkey = new SpineActor(require('./assets/donkey/donkey.info.json'));
-  donkey.scale = {
-    x: 0.5,
-    y: 0.5
-  }
-  donkey.x = 1024/1.5;
-  donkey.y = 200;
+  var donkey = new SpineActor();
+  donkey.init({
+    url: require('./assets/donkey/donkey.info.json'),
+    scale: {
+      x: 0.5,
+      y: 0.5
+    },
+    x: 1024/1.5,
+    y: 200,
+  })
   Stage.addActor(donkey)
 
   let animation = new Animation();
   animation.init({
-    actor: donkey,
+    owner: donkey,
     variables: {
       name: 'walk'
     }
   })
   let delayAnimation = new Wait();
   delayAnimation.init({
-    actor: donkey,
+    owner: donkey,
     variables: {
       seconds: 3
     }
   })
   let donkeyAnimateAction = new Action();
   donkeyAnimateAction.init({
-    actor: donkey,
-    actionName: 'playAnimation'
+    owner: donkey,
+    actionName: 'Play Animation'
   })
   donkeyAnimateAction.outputs.add('animationName')
   donkeyAnimateAction.chain(delayAnimation, animation);
@@ -99,18 +102,21 @@ function init() {
   animation.inputs.connect('name', donkeyAnimateAction, 'animationName');
   
   // Cow
-  var cow = new SpineActor(require('./assets/cow/cow.info.json'));
-  cow.scale = {
-    x: 0.5,
-    y: 0.5
-  }
-  cow.x = 0;
-  cow.y = 768/2;
+  var cow = new SpineActor();
+  cow.init({
+    url: require('./assets/cow/cow.info.json'),
+    scale: {
+      x: 0.5,
+      y: 0.5
+    },
+    x: 0,
+    y: 768/2
+  })
   Stage.addActor(cow)
 
   let staticAnimation = new Animation();
   staticAnimation.init({
-    actor: cow,
+    owner: cow,
     variables: {
       name: 'static'
     }
@@ -118,19 +124,21 @@ function init() {
 
   let wait = new Wait();
   wait.init({
-    actor: cow,
+    owner: cow,
     seconds: 2
   });
 
   let trace = new Trace();
   trace.init({
-    actor: cow,
-    text: 'debug print'
+    owner: cow,
+    variables: {
+      text: 'debug print'
+    }
   })
 
   let walkAnimation = new Animation();
   walkAnimation.init({
-    actor: cow,
+    owner: cow,
     variables: {
       name: 'walk'
     }
@@ -138,13 +146,16 @@ function init() {
 
   let positionProperty = new Property();
   positionProperty.init({
-    target: donkey, 
-    name: 'position'
+    owner: cow,
+    name: 'position',
+    variables: {
+      target: donkey.id
+    }
   });
 
   let tween = new Tween();
   tween.init({
-    actor: cow,
+    owner: cow,
     variables: {
       duration: 3
     }
@@ -154,15 +165,15 @@ function init() {
   
   let startTask = new Action();
   startTask.init({
-    actor: cow,
-    actionName: FunctionName.GAME_START
+    owner: cow,
+    actionName: ActionName.GAME_START
   })
 
   let perform = new Perform();
   perform.init({
-    actor: cow,
+    owner: cow,
     callee: donkey,
-    actionName: "playAnimation",
+    actionName: "Play Animation",
     variables: {
       animationName: 'interactive'
     }
@@ -176,7 +187,7 @@ function init() {
   // example of 2 executions
   let straightAfterTween = new Trace();
   straightAfterTween.init({
-    actor: cow,
+    owner: cow,
     variables: {
       text: 'This task run straight after tween started, no waiting for tween completion'
     }
@@ -188,21 +199,21 @@ function init() {
   
   // statements examples
   let less = new LessThan()
-  less.init()
+  less.init({owner: cow})
   less.variables.B = 0.5;
   let random = new RandomNumber();
-  random.init();
+  random.init({owner: cow});
   less.inputs.connect('A', random, 'value');
 
   let branch = new Branch();
   branch.init({
-    actor: cow
+    owner: cow
   });
   branch.inputs.connect('condition', less, 'value');
 
   let trueTrace = new Trace();
   trueTrace.init({
-    actor: cow,
+    owner: cow,
     variables: {
       text: 'branch to true'
     }
@@ -210,7 +221,7 @@ function init() {
 
   let falseTrace = new Trace();
   falseTrace.init({
-    actor: cow,
+    owner: cow,
     variables: {
       text: 'branch to false'
     }
@@ -228,7 +239,17 @@ function init() {
     // serialize everything before game start
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod()); 
 
-    startTask.run()
+    var reset = function() {
+      LookUp.reset();
+
+      setTimeout(start, 5000);
+    };
+    var start = function() {
+      LookUp.start();
+      setTimeout(reset, 10000);
+    }
+
+    setTimeout(start, 3000);
   })
 
 
@@ -254,8 +275,7 @@ async function load() {
   })
 
   Promise.all(promises).then(() => {
-    // HACK, I know the item is a start function
-    LookUp.get(288).run()
+    LookUp.start();
   })
 }
 

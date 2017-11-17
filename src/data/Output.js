@@ -56,7 +56,7 @@ export default class Output
   }
 
   /**
-   * Ouput is calucated dynamically at the runtime,
+   * Output is calucated dynamically at the runtime,
    * so no need to serailzie the value. Just the names will do
    */
   pod() {

@@ -27,14 +27,14 @@ export default class ActivityLoader
       this.createValueNodes(pod)
 
       // link input and outputs!!
-      this.connectInputOuput(pod)
+      this.connectInputOutput(pod)
     })
   }
 
   createActors(pod) {
     var add = function(container, data) {
-      let actor = new scope[data.class](data.url, data.id);
-      actor.fill(data);
+      let actor = new scope[data.class](data.id);
+      actor.init(data);
       container.addActor(actor);
 
       for(let i=0; i<data.childActors.length; ++i) {
@@ -78,7 +78,7 @@ export default class ActivityLoader
     }
   }
 
-  connectInputOuput(pod) {
+  connectInputOutput(pod) {
     // connect the inputs with outputs
     for(let id of pod.pointers) {
       let pointerData = pod.store[id];

@@ -17,13 +17,13 @@ export default class Perform extends Task
     this.callee = LookUp.auto(pod.callee);
     this.actionName = pod.actionName;
 
-    // Get all the ouputs of the target action, and presented as Call inputs
+    // Get all the outputs of the target action, and presented as Call inputs
     // When task runs, all the Call input value will be assigned to Function's output
     for(let name of this.action.outputs.names) {
       this.inputs.add(name);
     }
 
-    // TODO: think about returns. It is not the same as ouput of a node.
+    // TODO: think about returns. It is not the same as output of a node.
     // returns is a action specific thing.
   }
 

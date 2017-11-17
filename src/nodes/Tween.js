@@ -20,15 +20,15 @@ export default class Tween extends Task
 
     this.variables.duration = this.variables.duration || 1
     this.variables.position = this.variables.position || {
-      x: this.actor.x+100, 
-      y: this.actor.y
+      x: this.owner.x+100, 
+      y: this.owner.y
     }
   }
 
   run() {
     super.run()
     let pos = this.inputs.value('position');
-    TweenLite.to(this.actor, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
+    TweenLite.to(this.owner, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
       this.execution.run('complete');
     }});
     this.execution.run();

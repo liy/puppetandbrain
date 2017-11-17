@@ -19,6 +19,11 @@ export default class SpineComponent extends Component
     this.entity.addChild(this.spine);
   }
 
+  setToSetupPose() {
+    this.spine.state.tracks = [];
+    this.spine.skeleton.setToSetupPose();
+  }
+
   setAnimation(name, loop=true, track=0) {
     this.aniBuffer = {
       name, loop, track

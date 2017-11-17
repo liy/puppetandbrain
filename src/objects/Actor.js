@@ -1,6 +1,7 @@
 import Stage from './Stage';
 import Entity from './Entity';
 import mixin from '../utils/mixin';
+import ActionName from '../nodes/ActionName';
 
 /**
  * Actor shows up on the stage!
@@ -14,31 +15,65 @@ export default class Actor extends PIXI.Container
   constructor(id) {
     super();
 
-    this.variables = Object.create(null);
-    
     // create an entry in the reference look up
     this.id = LookUp.addActor(this, id);
 
+    this.variables = Object.create(null);
+
     this.name = 'Actor ' + this.id;
 
-    // this.functions = {
-    //   // TODO: maybe remove default entry task?
-    //   // [TaskEvent.GAME_START]: new EntryTask({type:TaskEvent.GAME_START})
-    // };
-
     this.actions = Object.create(null);
-
-    mixin(this, new Entity(id));
 
     this.childActors = [];
 
     this.on('pointerdown', this.pointerDown)
     this.on('pointerup', this.pointerUp)
+
+    mixin(this, new Entity());
   }
 
-  fill(pod) {
-    this.x = pod.position.x;
-    this.y = pod.position.y;
+  init(pod) {
+    this.x = pod.x;
+    this.y = pod.y;
+    if(pod.scale) {
+      this.scale = {
+        x: pod.scale.x,
+        y: pod.scale.y
+      }
+    }
+    this.rotation = pod.rotation || 0;
+    this.name = pod.name || this.name;
+  }
+
+  setInitialState() {
+    // setup initial state
+    this.initialState = {
+      variables: JSON.parse(JSON.stringify(this.variables)),
+      x: this.x,
+      y: this.y,
+      scale: {
+        x: this.scale.x,
+        y: this.scale.y
+      },
+      rotation: this.rotation
+    } 
+  }
+
+  start() {
+    if(this.actions[ActionName.GAME_START]) this.actions[ActionName.GAME_START].run();
+  }
+
+  reset() {
+    this.x = this.initialState.x;
+    this.y = this.initialState.y;
+    if(this.initialState.scale) {
+      this.scale = {
+        x: this.initialState.scale.x,
+        y: this.initialState.scale.y
+      }
+    }
+    this.rotation = this.initialState.rotation;
+    this.variables = this.initialState.variables;
   }
 
   createVariable(name, value) {
@@ -46,14 +81,14 @@ export default class Actor extends PIXI.Container
   }
 
   pointerDown(e) {
-    if(this.functions['pointer.down']) {
-      this.functions['pointer.down'].run();
+    if(this.actions[ActionName.POINTER_DOWN]) {
+      this.actions[ActionName.POINTER_DOWN].run();
     }
   }
 
   pointerUp(e) {
-    if(this.functions['pointer.up']) {
-      this.functions['pointer.up'].run();
+    if(this.actions[ActionName.POINTER_UP]) {
+      this.actions[ActionName.POINTER_UP].run();
     }
   }
 
@@ -69,18 +104,24 @@ export default class Actor extends PIXI.Container
   }
   
   pod() {
-    let functions = Object.create(null);
-    for(let key in this.functions) {
-      functions[key] = this.functions[key].id;
+    let actions = Object.create(null);
+    for(let name in this.actions) {
+      actions[name] = this.actions[name].id;
     }
 
     return {
       class: this.__proto__.constructor.name,
       id: this.id,
+      x: this.x,
+      y: this.y,
+      scale: {
+        x: this.scale.x,
+        y: this.scale.y
+      },
       name: this.name,
       variables: this.variables,
       childActors: this.childActors.concat(),
-      functions,
+      actions,
     }
   }
 }
