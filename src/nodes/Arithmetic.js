@@ -4,20 +4,15 @@ import Output from "../data/Ouput";
 export class Operation
 {
   constructor(id) {
-    this.id = LookUp.addValue(this, id)
+    this.id = LookUp.addValue(this, id);
 
     this.variables = Object.create(null);
-
     this.inputs = new Input(this);
     this.outputs = new Output(this);
   }
 
-  fill(pod) {
+  init(pod={}) {
     Object.assign(this.variables, pod.variables);
-  }
-
-  get targetID() {
-    return this.id;
   }
 
   pod() {

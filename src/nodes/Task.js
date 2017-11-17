@@ -5,8 +5,9 @@ import Output from '../data/Ouput';
 
 export default class Task extends EventEmitter
 {
-  constructor() {
+  constructor(id) {
     super();
+    this.id = LookUp.addTask(this, id)
     
     this.execution = new Execution();
 
@@ -20,27 +21,28 @@ export default class Task extends EventEmitter
     LookUp.removeTask(this.id);
   }
 
-  init(data) {
-    this.id = LookUp.addTask(this, data.id)
-    this.actor = data.actor;
-  }
+  init(pod) {
+    this.actor = LookUp.auto(pod.actor);
 
-  fill(pod) {
-    this.id = LookUp.addTask(this, pod.id)
-    this.actor = LookUp.get(pod.actor);
+    // Set the variables! I can just do normal ref assignment
+    // But do a property assignment, just be safe...
     Object.assign(this.variables, pod.variables);
 
     // we just need the name to be populated here.
     // variable access will be auto created. 
     // Of course some of them will be discarded once 
-    // pointer is added
-    for(let inputData of pod.inputs) {
-      this.inputs.add(inputData.name);
+    // connection is setup(pointer is added)
+    if(pod.inputs) {
+      for(let inputData of pod.inputs) {
+        this.inputs.add(inputData.name);
+      }
     }
 
     // Only need the name. Ouput is dynamically generated!
-    for(let name of pod.outputs) {
-      this.outputs.add(name);
+    if(pod.outputs) {
+      for(let name of pod.outputs) {
+        this.outputs.add(name);
+      }
     }
   }
 

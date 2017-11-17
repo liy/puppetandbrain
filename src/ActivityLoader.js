@@ -53,8 +53,8 @@ export default class ActivityLoader
   createTasks(pod) {
     for(let id of pod.tasks) {
       let data = pod.store[id];
-      let task = new scope[data.class]()
-      task.fill(data)
+      let task = new scope[data.class](id)
+      task.init(data)
     }
 
     // chain the tasks
@@ -74,7 +74,7 @@ export default class ActivityLoader
     for(let id of pod.values) {
       let data = pod.store[id];
       let valueNode = new scope[data.class](id)
-      valueNode.fill(data)
+      valueNode.init(data)
     }
   }
 

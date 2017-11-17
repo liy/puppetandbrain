@@ -2,8 +2,8 @@ import Task from './Task';
 
 export default class Tween extends Task
 {
-  constructor() {
-    super();
+  constructor(id) {
+    super(id);
 
     // ensure the order
     this.execution.set('default');
@@ -13,11 +13,11 @@ export default class Tween extends Task
     this.inputs.add('position');
   }
 
-  init(data) {
-    super.init(data);
+  init(pod) {
+    super.init(pod);
 
-    this.variables.duration = data.duration || 1
-    this.variables.position = data.position || {
+    this.variables.duration = this.variables.duration || 1
+    this.variables.position = this.variables.position || {
       x: this.actor.x+100, 
       y: this.actor.y
     }

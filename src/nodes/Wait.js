@@ -2,14 +2,15 @@ import Task from './Task';
 
 export default class Wait extends Task
 {
-  constructor() {
-    super();
+  constructor(id) {
+    super(id);
+    
     this.inputs.add('seconds');
   }
 
-  init(data) {
-    super.init(data);
-    this.variables.seconds = data.seconds || 2;
+  init(pod) {
+    super.init(pod);
+    this.variables.seconds = pod.seconds || 2;
   }
   
   run() {

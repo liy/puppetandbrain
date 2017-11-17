@@ -76,12 +76,16 @@ function init() {
   let animation = new Animation();
   animation.init({
     actor: donkey,
-    name: 'walk'
+    variables: {
+      name: 'walk'
+    }
   })
   let delayAnimation = new Wait();
   delayAnimation.init({
     actor: donkey,
-    seconds: 3
+    variables: {
+      seconds: 3
+    }
   })
   let onDonkeyExcit = new Function();
   onDonkeyExcit.init({
@@ -94,12 +98,6 @@ function init() {
   // Let the animation task name input referencing the function's animaitonName input data
   animation.inputs.connect('name', onDonkeyExcit, 'animationName');
   
-
-  // var trigger = new Trigger();
-  // trigger.x = 100;
-  // trigger.y = 200
-  // Stage.addActor(trigger);
-  
   // Cow
   var cow = new SpineActor(require('./assets/cow/cow.info.json'));
   cow.scale = {
@@ -110,34 +108,12 @@ function init() {
   cow.y = 768/2;
   Stage.addActor(cow)
 
-  // let mouseDownFunction = new Function();
-  // mouseDownFunction.init({
-  //   actor: cow,
-  //   name: FunctionName.POINTER_DOWN
-  // })
-  // let downTrace = new Trace();
-  // downTrace.init({
-  //   actor: cow,
-  //   text: FunctionName.POINTER_DOWN
-  // })
-  // mouseDownFunction.chain(downTrace);
-
-  // let mouseUpFunction = new Function();
-  // mouseUpFunction.init({
-  //   actor: cow,
-  //   name: FunctionName.POINTER_UP
-  // })
-  // let upTrace = new Trace();
-  // upTrace.init({
-  //   actor: cow,
-  //   text: FunctionName.POINTER_UP
-  // })
-  // mouseUpFunction.chain(upTrace);
-
   let staticAnimation = new Animation();
   staticAnimation.init({
     actor: cow,
-    name: 'static'
+    variables: {
+      name: 'static'
+    }
   });
 
   let wait = new Wait();
@@ -155,13 +131,18 @@ function init() {
   let walkAnimation = new Animation();
   walkAnimation.init({
     actor: cow,
-    name: 'walk'
+    variables: {
+      name: 'walk'
+    }
   });
 
   let positionProperty = new Property();
-  positionProperty.init(donkey, 'position');
+  positionProperty.init({
+    target: donkey, 
+    name: 'position'
+  });
 
-  let tween = new Tween(cow);
+  let tween = new Tween();
   tween.init({
     actor: cow,
     duration: 3
@@ -179,9 +160,11 @@ function init() {
   call.init({
     actor: cow,
     callee: donkey,
-    functionName: "playAnimation"
+    functionName: "playAnimation",
+    variables: {
+      animationName: 'interactive'
+    }
   })
-  call.variables.animationName = 'interactive'
   startTask.chain(staticAnimation, wait, trace, walkAnimation, tween)
            .chain({
              name: 'complete',
@@ -192,7 +175,9 @@ function init() {
   let straightAfterTween = new Trace();
   straightAfterTween.init({
     actor: cow,
-    text: 'This task run straight after tween started, no waiting for tween completion'
+    variables: {
+      text: 'This task run straight after tween started, no waiting for tween completion'
+    }
   })
   tween.chain({
     name: 'default',
@@ -201,8 +186,11 @@ function init() {
   
   // statements examples
   let less = new LessThan()
+  less.init()
   less.variables.B = 0.5;
-  less.inputs.connect('A', new RandomNumber(), 'value');
+  let random = new RandomNumber();
+  random.init();
+  less.inputs.connect('A', random, 'value');
 
   let branch = new Branch();
   branch.init({
@@ -213,13 +201,17 @@ function init() {
   let trueTrace = new Trace();
   trueTrace.init({
     actor: cow,
-    text: 'branch to true'
+    variables: {
+      text: 'branch to true'
+    }
   })
 
   let falseTrace = new Trace();
   falseTrace.init({
     actor: cow,
-    text: 'branch to false'
+    variables: {
+      text: 'branch to false'
+    }
   })
 
   branch.execution.set('true', trueTrace)
@@ -234,7 +226,7 @@ function init() {
     // serialize everything before game start
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod()); 
 
-    // startTask.run()
+    startTask.run()
   })
 
 
@@ -243,7 +235,7 @@ function init() {
   graph.init();
 }
 
-// init();
+init();
 
 async function load() {
   var loader = new ActivityLoader();
@@ -261,8 +253,8 @@ async function load() {
 
   Promise.all(promises).then(() => {
     // HACK, I know the item is a start function
-    LookUp.get(854).run()
+    LookUp.get(288).run()
   })
 }
 
-load();
+// load();

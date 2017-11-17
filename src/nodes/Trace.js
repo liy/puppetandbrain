@@ -2,17 +2,10 @@ import Task from './Task'
 
 export default class Trace extends Task
 {
-  constructor() {
-    super();
-
-  }
-
-  init(data) {
-    super.init(data);
-
-    this.variables.text = data.text;
-
-    this.inputs.add('text');
+  constructor(id) {
+    super(id);
+    
+    this.inputs.add('text')
   }
   
   run() {

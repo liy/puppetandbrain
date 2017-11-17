@@ -2,19 +2,14 @@ import Task from "./Task";
 
 export default class Branch extends Task
 {
-  constructor() {
-    super();
+  constructor(id) {
+    super(id);
     
     this.execution.set('true')
     this.execution.set('false')
 
     // default to be true
     this.variables.condition = true;
-  }
-
-  init(data) {
-    super.init(data);
-    
     this.inputs.add('condition');
   }
 

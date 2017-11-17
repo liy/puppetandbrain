@@ -2,14 +2,8 @@ import Task from './Task'
 
 export default class Animation extends Task
 {
-  constructor() {
-    super();
-  }
-
-  init(data) {
-    super.init(data);
-
-    this.variables.name = data.name;
+  constructor(id) {
+    super(id);
 
     this.inputs.add('name');
   }

@@ -85,6 +85,11 @@ window.LookUp = {
     delete STORE[id]
   },
 
+  // Audo figure out whether target is an object or an id and return the target object
+  auto: function(target) {
+    return (typeof target === 'object') ? target : this.get(target);
+  },
+
   get: function(id) {
     return STORE[id];
   },

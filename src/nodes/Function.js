@@ -7,29 +7,25 @@ export default class Function extends Task
    * @param {String} name Function name
    * @memberof Function
    */
-  constructor() {
-    super();
+  constructor(id) {
+    super(id);
   }
 
-  init(data) {
-    super.init(data);
+  init(pod) {
+    super.init(pod);
 
-    // This is a authoring time static data, needs to be provided when creating activity.
-    this.variables.functionName = data.functionName;
-    this.actor.functions[this.variables.functionName] = this;
-  }
+    // authoring time thing!
+    this.functionName = pod.functionName;
 
-  fill(pod) {
-    super.fill(pod);
-    this.actor.functions[this.variables.functionName] = this;
+    this.actor.functions[this.functionName] = this;
   }
 
   rename(name) {
     // validate there are no same function names
     if(this.actor.functions[name]) return false;
 
-    delete this.actor.functions[this.variables.functionName];
-    this.variables.functionName = name;
+    delete this.actor.functions[this.functionName];
+    this.functionName = name;
     return true
   }
 
@@ -37,5 +33,11 @@ export default class Function extends Task
     super.run()
 
     this.execution.run();
+  }
+
+  pod() {
+    let pod = super.pod();
+    pod.functionName = this.functionName;
+    return pod
   }
 }
