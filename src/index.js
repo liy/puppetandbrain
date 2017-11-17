@@ -67,6 +67,7 @@ function init() {
   var donkey = new SpineActor();
   donkey.init({
     url: require('./assets/donkey/donkey.info.json'),
+    name: 'Donkey',
     scale: {
       x: 0.5,
       y: 0.5
@@ -95,7 +96,7 @@ function init() {
     owner: donkey,
     actionName: 'Play Animation'
   })
-  donkeyAnimateAction.outputs.add('animationName')
+  donkeyAnimateAction.outputs.addName('animationName')
   donkeyAnimateAction.chain(delayAnimation, animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
@@ -105,6 +106,7 @@ function init() {
   var cow = new SpineActor();
   cow.init({
     url: require('./assets/cow/cow.info.json'),
+    name: 'Cow',
     scale: {
       x: 0.5,
       y: 0.5
@@ -153,6 +155,8 @@ function init() {
     }
   });
 
+  window.positionProperty = positionProperty;
+
   let tween = new Tween();
   tween.init({
     owner: cow,
@@ -199,8 +203,12 @@ function init() {
   
   // statements examples
   let less = new LessThan()
-  less.init({owner: cow})
-  less.variables.B = 0.5;
+  less.init({
+    owner: cow,
+    variables: {
+      B: 0.5
+    }
+  })
   let random = new RandomNumber();
   random.init({owner: cow});
   less.inputs.connect('A', random, 'value');
@@ -242,7 +250,7 @@ function init() {
   graph.init();
 }
 
-// init();
+init();
 
 async function load() {
   var loader = new ActivityLoader();
@@ -263,7 +271,7 @@ async function load() {
   })
 }
 
-load();
+// load();
 
 document.addEventListener('keydown', (e) => {
   if(e.key == 'F6' || e.key == 'F4') {

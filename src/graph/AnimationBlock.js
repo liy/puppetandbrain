@@ -21,6 +21,10 @@ export default class AnimationBlock extends TaskBlock
         }
       })
       this.inputPins['name'].container.appendChild(dropdown)
+
+      dropdown.addEventListener('change', e => {
+        this.model.initialState.variables['name'] = this.model.variables['name'] = e.target.value
+      });
   
       // TODO: to be removed
       if(this.inputPins['name'].inputField)

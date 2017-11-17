@@ -11,6 +11,22 @@ export default class Output
     this.disconnet();
   }
 
+  addName(name) {
+    if(this.names.indexOf(name) == -1) {
+      this.names.push(name);
+    }
+  }
+
+  assignProperty(name, descriptor) {
+    this.addName(name)
+    Object.defineProperty(this.data, name, descriptor);
+  }
+
+  assignValue(name, value) {
+    this.addName(name)
+    this.data[name] = value;
+  }
+
   /**
    * Delegate real connection job to input and pointer constructor.
    * 
@@ -46,13 +62,6 @@ export default class Output
    */
   disconnected(name) {
     this.pointers.push(pointer)
-  }
-
-  add(name, value) {
-    if(this.names.indexOf(name) == -1) {
-      this.names.push(name);
-    }
-    this.data[name] = value;
   }
 
   /**

@@ -17,7 +17,11 @@ export default class Property extends DataNode
     this.nodeName = 'Get ' + this.name.charAt(0).toUpperCase() + this.name.slice(1);
     
     this.variables.target = this.variables.target || this.owner.id;
-    this.outputs.add(this.name, LookUp.get(this.variables.target)[this.name]);
+    this.outputs.assignProperty(this.name, {
+      get: () => {
+        return LookUp.get(this.variables.target)[this.name]
+      }
+    });
   }
 
   pod() {

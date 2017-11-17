@@ -1,14 +1,29 @@
 import DataNode from "./DataNode";
 
-export class Add extends DataNode
+export class ArithmeticNode extends DataNode
+{
+  constructor(id) {
+    super(id);
+  }
+
+  init(pod) {
+    super.init(pod);
+
+    this.outputs.assignProperty('value', {
+      get: () => {
+        return this.value;
+      }
+    });
+  }
+}
+
+export class Add extends ArithmeticNode
 {
   constructor(id) {
     super(id);
 
     this.inputs.add('A');
     this.inputs.add('B');
-
-    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -16,15 +31,13 @@ export class Add extends DataNode
   }
 }
 
-export class Multiply extends DataNode
+export class Multiply extends ArithmeticNode
 {
   constructor(id) {
     super(id);
 
     this.inputs.add('A');
     this.inputs.add('B');
-
-    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -32,15 +45,13 @@ export class Multiply extends DataNode
   }
 }
 
-export class Divide extends DataNode
+export class Divide extends ArithmeticNode
 {
   constructor(id) {
     super(id);
 
     this.inputs.add('A');
     this.inputs.add('B');
-    
-    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -48,7 +59,7 @@ export class Divide extends DataNode
   }
 }
 
-export class Equal extends DataNode
+export class Equal extends ArithmeticNode
 {
   constructor(id) {
     super(id);
@@ -57,8 +68,6 @@ export class Equal extends DataNode
 
     this.inputs.add('A');
     this.inputs.add('B');
-
-    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -66,7 +75,7 @@ export class Equal extends DataNode
   }
 }
 
-export class LessThan extends DataNode
+export class LessThan extends ArithmeticNode
 {
   constructor(id) {
     super(id);
@@ -75,8 +84,6 @@ export class LessThan extends DataNode
 
     this.inputs.add('A');
     this.inputs.add('B');
-
-    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -84,7 +91,7 @@ export class LessThan extends DataNode
   }
 }
 
-export class LessEqual extends DataNode
+export class LessEqual extends ArithmeticNode
 {
   constructor(id) {
     super(id);
@@ -93,8 +100,6 @@ export class LessEqual extends DataNode
 
     this.inputs.add('A');
     this.inputs.add('B');
-    
-    this.outputs.add('value', this.value);
   }
 
   get value() {
@@ -102,14 +107,12 @@ export class LessEqual extends DataNode
   }
 }
 
-export class RandomNumber extends DataNode
+export class RandomNumber extends ArithmeticNode
 {
   constructor(id) {
     super(id);
 
     this.nodeName = "Random Number"
-
-    this.outputs.add('value', this.value);
   }
 
   get value() {

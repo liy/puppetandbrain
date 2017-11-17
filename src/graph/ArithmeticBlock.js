@@ -46,6 +46,10 @@ export default class ArithmeticBlock extends Block
         inputField.value = input.value;
         pin.inputField = inputField;
         pin.container.appendChild(inputField)
+
+        inputField.addEventListener('change', (e) => {
+          this.model.variables[name] = Number(e.target.value);
+        })
       }
     }
 

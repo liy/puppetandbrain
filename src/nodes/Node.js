@@ -35,7 +35,7 @@ export default class Node
     // Only need the name. Output is dynamically generated!
     if(pod.outputs) {
       for(let name of pod.outputs) {
-        this.outputs.add(name);
+        this.outputs.addName(name);
       }
     }
   }

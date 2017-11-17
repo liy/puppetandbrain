@@ -29,7 +29,7 @@ export default class TaskBlock extends Block
     let title = this.model.nodeName;
     if(title == 'Perform') {
       this.container.className += ' perform-block'
-      title += ' ' + this.model.actionName
+      title = this.model.callee.name + ' Perform '  + this.model.actionName
     }
     else if(title == 'Action') {
       this.container.className += ' action-block'
@@ -75,6 +75,9 @@ export default class TaskBlock extends Block
         inputField.value = input.value;
         pin.inputField = inputField;
         pin.container.appendChild(inputField)
+        inputField.addEventListener('change', (e) => {
+          this.model.initialState.variables[name] = this.model.variables[name] = e.target.value
+        })
       }
     }
 

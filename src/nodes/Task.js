@@ -11,6 +11,12 @@ export default class Task extends Node
     this.execution = new Execution();
   }
 
+  init(pod) {
+    super.init(pod);
+
+    this.setInitialState();
+  }
+
   destroy() {
     LookUp.removeTask(this.id);
   }
