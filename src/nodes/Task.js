@@ -18,6 +18,7 @@ export default class Task extends Node
   }
 
   destroy() {
+    super.destroy();
     LookUp.removeTask(this.id);
   }
 

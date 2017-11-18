@@ -24,6 +24,8 @@ export default class Actor extends PIXI.Container
 
     this.actions = Object.create(null);
 
+    this.nodes = [];
+
     this.childActors = [];
 
     this.on('pointerdown', this.pointerDown)
@@ -102,6 +104,23 @@ export default class Actor extends PIXI.Container
     let index = this.childActors.indexOf(actor.id);
     if(index != -1) this.childActors.splice(index);
   }
+
+  clone() {
+    // clone actor
+    const ns = {
+      className: this.__proto__.constructor.name
+    }
+    console.log(ns.className)
+    let actor = new ns.className();
+    actor.init(this.pod());
+
+    // TODO: clone nodes
+
+
+
+
+    return actor;
+  }
   
   pod() {
     let actions = Object.create(null);
@@ -122,6 +141,9 @@ export default class Actor extends PIXI.Container
       variables: this.variables,
       childActors: this.childActors.concat(),
       actions,
+      nodes: this.nodes.map(node => {
+        return node.id;
+      })
     }
   }
 }

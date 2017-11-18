@@ -4,7 +4,7 @@ import Stage from './objects/Stage';
 var STORE = Object.create(null);
 var ACTORS = [];
 var TASKS = [];
-var VALUES = [];
+var DATA = [];
 var POINTERS = [];
 var VARIABLES = [];
 
@@ -63,15 +63,15 @@ window.LookUp = {
     delete STORE[id]
   },
 
-  addValue: function(entry, id) {
+  addData: function(entry, id) {
     id = create(entry, id)
-    VALUES.push(id);
+    DATA.push(id);
     return id;
   },
 
-  removeValue: function(id) {
-    let index = VALUES.indexOf(id);
-    VALUES.splice(index, 1);
+  removeData: function(id) {
+    let index = DATA.indexOf(id);
+    DATA.splice(index, 1);
     delete STORE[id]
   },
 
@@ -109,7 +109,7 @@ window.LookUp = {
   },
 
   getValues: function() {
-    return VALUES.map(id => {
+    return DATA.map(id => {
       return STORE[id];
     })
   },
@@ -159,6 +159,8 @@ window.LookUp = {
       let actor = this.store[id];
       actor.reset();
     }
+
+    // TODO: re-initialize the destroyed actor
   },
 
   pod: function() {
@@ -169,7 +171,7 @@ window.LookUp = {
     }
     result.actors = ACTORS.concat()
     result.tasks = TASKS.concat()
-    result.values = VALUES.concat();
+    result.data = DATA.concat();
     result.pointers = POINTERS.concat();
     result.stage = Stage.actors.concat();
     // FIXME: in production this should not be serialzied

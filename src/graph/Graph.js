@@ -44,35 +44,6 @@ export default class Graph
       } 
       this.add(block);
     }
-  
-    // let arr = LookUp.getArithmetics();
-    // for(let i=0; i<arr.length; ++i) {
-    //   let block = new ArithmeticBlock(arr[i])
-    //   this.add(block);
-    //   block.x = tx;
-    //   block.y = ty + this.container.offsetTop + Math.random()*60-30;
-    //   tx += w;
-    //   if(tx+w >= window.innerWidth) {
-    //     tx = indent;
-    //     ty += h;
-    //   }
-    // }
-
-    // let getters = LookUp.getGetters();
-    // for(let i=0; i<getters.length; ++i) {
-    //   let getter = getters[i];
-    //   if(getter.__proto__.constructor.name === 'PropertyGetter') {
-    //     let block = new PropertyBlock(getter)
-    //     this.add(block);
-    //     block.x = tx;
-    //     block.y = ty + this.container.offsetTop + Math.random()*60-30;
-    //     tx += w;
-    //     if(tx+w >= window.innerWidth) {
-    //       tx = indent;
-    //       ty += h;
-    //     }
-    //   }
-    // }
 
     let valueNodes = LookUp.getValues();
     for(let i=0; i<valueNodes.length; ++i) {

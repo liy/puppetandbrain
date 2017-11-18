@@ -15,8 +15,14 @@ export default class Node
     this.outputs = new Output(this);
   }
 
+  destroy() {
+    let index = this.owner.nodes.indexOf(this.id);
+    if(index != -1) this.owner.nodes.splice(index, 1);
+  }
+
   init(pod) {
     this.owner = LookUp.auto(pod.owner);
+    this.owner.nodes.push(this);
 
     // Set the variables! I can just do normal ref assignment
     // But do a property assignment, just be safe...
@@ -38,6 +44,18 @@ export default class Node
         this.outputs.addName(name);
       }
     }
+  }
+
+  clone() {
+    let ns = {
+      className: this.__proto__.constructor.name
+    }
+    let node = new ns.className();
+    node.init(this.pod());
+
+
+
+    return node;
   }
 
   pod() {

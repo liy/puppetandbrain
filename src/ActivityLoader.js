@@ -24,7 +24,7 @@ export default class ActivityLoader
       this.createTasks(pod)
 
       // create other nodes, eg., value nodes
-      this.createValueNodes(pod)
+      this.createDataNodes(pod)
 
       // link input and outputs!!
       this.connectInputOutput(pod)
@@ -70,7 +70,7 @@ export default class ActivityLoader
     }
   }
 
-  createValueNodes(pod) {
+  createDataNodes(pod) {
     for(let id of pod.values) {
       let data = pod.store[id];
       let valueNode = new scope[data.class](id)
