@@ -73,7 +73,7 @@ export default class ActivityLoader
   createDataNodes(pod) {
     for(let id of pod.values) {
       let data = pod.store[id];
-      let valueNode = new scope[data.class](id)
+      let valueNode = new [data.class](id)
       valueNode.init(data)
     }
   }

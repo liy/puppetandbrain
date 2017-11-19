@@ -16,6 +16,8 @@ require('./assets/donkey/donkey.json')
 
 // LookUp is a global window variable, save typing!
 require('./LookUp');
+require('./nodes/NodeFactory');
+require('./objects/ActorFactory');
 
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
@@ -46,8 +48,8 @@ var canvas = document.createElement('canvas');
 appDiv.appendChild(canvas);
 window.renderer = PIXI.autoDetectRenderer({
   autoStart: true,
-  width: window.innerWidth, 
-  height: window.innerHeight, 
+  width: window.innerWidth,
+  height: window.innerHeight,
   view: canvas,
   transparent: true,
   antialias: true
@@ -63,7 +65,7 @@ Stage.blurEnabled = true;
 
 
 function init() {
-  // Donkey!  
+  // Donkey!
   var donkey = new SpineActor();
   donkey.init({
     url: require('./assets/donkey/donkey.info.json'),
@@ -101,7 +103,7 @@ function init() {
 
   // Let the animation task name input referencing the function's animaitonName input data
   animation.inputs.connect('name', donkeyAnimateAction, 'animationName');
-  
+
   // Cow
   var cow = new SpineActor();
   cow.init({
@@ -166,7 +168,7 @@ function init() {
   })
   // link to donkey's position
   tween.inputs.connect('position', positionProperty, 'position')
-  
+
   let startTask = new Action();
   startTask.init({
     owner: cow,
@@ -187,7 +189,7 @@ function init() {
              name: 'complete',
              task: perform
             });
-  
+
   // example of 2 executions
   let straightAfterTween = new Trace();
   straightAfterTween.init({
@@ -200,7 +202,7 @@ function init() {
     name: 'default',
     task: straightAfterTween
   })
-  
+
   // statements examples
   let less = new LessThan()
   less.init({
@@ -239,11 +241,11 @@ function init() {
   branch.execution.set('false', falseTrace)
 
   perform.chain(branch)
-  
+
   // start the activity when cow and donkey are loaded
   Promise.all([cow.loaded, donkey.loaded]).then(() => {
     // serialize everything before game start
-    console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod()); 
+    console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
 
   window.graph = new Graph();
@@ -256,8 +258,8 @@ async function load() {
   var loader = new ActivityLoader();
   await loader.load(require('./assets/activity.json'))
 
-  console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod()); 
-  
+  console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
+
   window.graph = new Graph();
   graph.init();
 

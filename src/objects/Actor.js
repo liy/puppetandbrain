@@ -2,10 +2,11 @@ import Stage from './Stage';
 import Entity from './Entity';
 import mixin from '../utils/mixin';
 import ActionName from '../nodes/ActionName';
+import Brain from '../nodes/Brain';
 
 /**
  * Actor shows up on the stage!
- * 
+ *
  * @export
  * @class Actor
  * @extends {PIXI.Container}
@@ -25,6 +26,7 @@ export default class Actor extends PIXI.Container
     this.actions = Object.create(null);
 
     this.nodes = [];
+    this.brain = new Brain();
 
     this.childActors = [];
 
@@ -45,6 +47,8 @@ export default class Actor extends PIXI.Container
     }
     this.rotation = pod.rotation || 0;
     this.name = pod.name || this.name;
+
+    // TODO: handle node construction
   }
 
   setInitialState() {
@@ -58,7 +62,7 @@ export default class Actor extends PIXI.Container
         y: this.scale.y
       },
       rotation: this.rotation
-    } 
+    }
   }
 
   start() {
@@ -105,23 +109,16 @@ export default class Actor extends PIXI.Container
     if(index != -1) this.childActors.splice(index);
   }
 
-  clone() {
-    // clone actor
-    const ns = {
-      className: this.__proto__.constructor.name
-    }
-    console.log(ns.className)
-    let actor = new ns.className();
-    actor.init(this.pod());
-
-    // TODO: clone nodes
-
-
-
-
+  copy() {
+    let actor = ActorFactory.create(this.className);
+    actor.init(this.pod())
     return actor;
   }
-  
+
+  get className() {
+    return this.__proto__.constructor.name;
+  }
+
   pod() {
     let actions = Object.create(null);
     for(let name in this.actions) {
@@ -129,7 +126,7 @@ export default class Actor extends PIXI.Container
     }
 
     return {
-      class: this.__proto__.constructor.name,
+      class: this.className,
       id: this.id,
       x: this.x,
       y: this.y,

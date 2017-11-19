@@ -46,21 +46,22 @@ export default class Node
     }
   }
 
-  clone() {
-    let ns = {
-      className: this.__proto__.constructor.name
-    }
-    let node = new ns.className();
-    node.init(this.pod());
+  get className() {
+    return this.__proto__.constructor.name;
+  }
 
-
-
+  /**
+   * Does not copy the variable and execution connections
+   */
+  copy() {
+    let node = NodeFactory.create(this.className);
+    node.init(this.pod())
     return node;
   }
 
   pod() {
     return {
-      class: this.__proto__.constructor.name,
+      class: this.className,
       id: this.id,
       variables: this.variables,
       owner: this.owner.id,
