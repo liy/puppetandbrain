@@ -47,6 +47,9 @@ export default class Node
         this.outputs.addName(name);
       }
     }
+
+    this.x = pod.x;
+    this.y = pod.y;
   }
 
   get className() {
