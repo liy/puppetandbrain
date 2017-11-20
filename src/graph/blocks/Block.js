@@ -24,10 +24,16 @@ export default class Block
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
-
     this.dragstart = this.dragstart.bind(this)
-    this.container.addEventListener('mousedown', this.dragstart);
-    this.dragstop = this.dragstop.bind(this)
+
+    // this.container.addEventListener('mousedown', this.dragstart);
+    // document.addEventListener('mouseup', this.dragstop);
+
+    this.dragArea = document.createElement('div');
+    this.dragArea.className = 'drag-area';
+    this.container.appendChild(this.dragArea)
+
+    this.dragArea.addEventListener('mousedown', this.dragstart);
     document.addEventListener('mouseup', this.dragstop);
   }
 
@@ -43,7 +49,7 @@ export default class Block
   }
 
   dragstart(e) {
-    e.stopPropagation();
+    // e.stopPropagation();
 
     this._dragOffset = {
       x: this.container.offsetLeft - e.clientX,

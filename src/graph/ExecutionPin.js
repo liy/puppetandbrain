@@ -1,5 +1,7 @@
 require('./ExecutionPin.scss')
 
+import ConnectionHelper from './ConnectionHelper';
+
 export default class ExecutionPin
 {
   constructor(name, location='left') {
@@ -12,6 +14,7 @@ export default class ExecutionPin
 
     this.icon =  document.createElement('div');
     this.icon.className = 'icon in-disconnected'
+    this.icon.style = `float:${location}`
     this.container.appendChild(this.icon);
 
     this.label = document.createElement('div');
@@ -19,8 +22,28 @@ export default class ExecutionPin
     this.label.textContent = (name == 'default') ? '' : name;
     this.container.appendChild(this.label)
 
-    this.container.style = `float:${location}; clear:${location};`
+    this.container.style = `${location}: 5px;`
     this.label.style = `float:${location};`
+
+    this.mousedown = this.mousedown.bind(this);
+    this.mousemove = this.mousemove.bind(this);
+    this.mouseup = this.mouseup.bind(this);
+
+    this.container.addEventListener('mousedown', this.mousedown);
+    this.container.addEventListener('mouseup', this.mouseup);
+  }
+
+  mousedown(e) {
+    document.addEventListener('mousemove', this.mousemove);
+  }
+
+  mousemove(e) {
+    // TODO: create a temp link, between initial execution pin position to current mouse position
+    ConnectionHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY)
+  }
+
+  mouseup(e) {
+    document.removeEventListener('mousemove', this.mousemove)
   }
 
   get position() {

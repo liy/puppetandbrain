@@ -33,6 +33,8 @@ export default class BrainGraph
     this.draw();
 
     this.container.addEventListener('contextmenu', this.openNodeMenu);
+
+    ConnectionHelper.init(this);
   }
 
   destroy() {
