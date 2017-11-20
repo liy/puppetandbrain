@@ -1,7 +1,6 @@
 import OutputPin from "./OutputPin";
 import Block from "./Block";
 import InputPin from "./InputPin";
-import Variable from "../data/Variable";
 
 export default class ArithmeticBlock extends Block
 {
@@ -11,11 +10,11 @@ export default class ArithmeticBlock extends Block
     let minWidth = 130;
     let minHeight = 40;
     this.container.className += ' arithmetic-block'
-    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px;`;    
-    
+    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px;`;
+
     this.inPin = null;
     this.outPins = Object.create(null);
-  
+
     this.title = document.createElement('div');
     this.title.className = 'title'
     this.container.appendChild(this.title);
@@ -34,16 +33,16 @@ export default class ArithmeticBlock extends Block
       return rows[i]
     }
 
-    for(let i=0; i<this.model.inputs.list.length; ++i) {
-      let name = this.model.inputs.list[i];
-      let input = this.model.inputs.get(name);
-      let pin = new InputPin(this.model.inputs.get(name))
+    for(let i=0; i<this.model.inputs.names.length; ++i) {
+      let name = this.model.inputs.names[i];
+      let pointer = this.model.inputs.get(name);
+      let pin = new InputPin(name)
       row(i).appendChild(pin.container);
       this.inputPins[name] = pin;
 
-      if(input instanceof Variable) {
+      if(pointer.isLocalPointer) {
         let inputField = document.createElement('input');
-        inputField.value = input.value;
+        inputField.value = pointer.value;
         pin.inputField = inputField;
         pin.container.appendChild(inputField)
 
@@ -66,7 +65,7 @@ export default class ArithmeticBlock extends Block
       let pin = this.inputPins[name]
       pin.drawConnection();
     })
-    
+
     Object.keys(this.outputPins).forEach(name => {
       let pin = this.outputPins[name]
       pin.drawConnection();

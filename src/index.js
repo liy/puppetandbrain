@@ -41,6 +41,7 @@ import Graph from './graph/Graph';
 import Block from './graph/Block';
 import ArithmeticBlock from './graph/ArithmeticBlock';
 import TaskBlock from './graph/TaskBlock';
+import Pointer from './data/Pointer';
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
@@ -102,7 +103,7 @@ function init() {
   donkeyAnimateAction.chain(delayAnimation, animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
-  animation.inputs.connect('name', donkeyAnimateAction, 'animationName');
+  animation.owner.brain.connectVariable(animation, 'name', donkeyAnimateAction, 'animationName');
 
   // Cow
   var cow = new SpineActor();
@@ -167,7 +168,7 @@ function init() {
     }
   })
   // link to donkey's position
-  tween.inputs.connect('position', positionProperty, 'position')
+  tween.owner.brain.connectVariable(tween, 'position', positionProperty, 'position');
 
   let startTask = new Action();
   startTask.init({
@@ -178,7 +179,7 @@ function init() {
   let perform = new Perform();
   perform.init({
     owner: cow,
-    callee: donkey,
+    target: donkey,
     actionName: "Play Animation",
     variables: {
       animationName: 'interactive'
@@ -213,13 +214,13 @@ function init() {
   })
   let random = new RandomNumber();
   random.init({owner: cow});
-  less.inputs.connect('A', random, 'value');
+  random.owner.brain.connectVariable(less, 'A', random, 'value');
 
   let branch = new Branch();
   branch.init({
     owner: cow
   });
-  branch.inputs.connect('condition', less, 'value');
+  branch.owner.brain.connectVariable(branch, 'condition', less, 'value');
 
   let trueTrace = new Trace();
   trueTrace.init({

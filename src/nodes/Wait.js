@@ -4,8 +4,8 @@ export default class Wait extends Task
 {
   constructor(id) {
     super(id);
-    
-    this.inputs.add('seconds');
+
+    this.inputs.addName('seconds');
   }
 
   init(pod) {
@@ -22,7 +22,7 @@ export default class Wait extends Task
     super.reset();
     clearTimeout(this.timeoutID);
   }
-  
+
   run() {
     super.run()
 

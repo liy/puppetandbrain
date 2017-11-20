@@ -1,45 +1,27 @@
-export default class Execution
+import ArrayMap from "../utils/ArrayMap";
+
+export default class Execution extends ArrayMap
 {
-  constructor() {
-    this.options = Object.create(null);
-    this.nameList = [];
-  }
-
-  set(name, task=null) {
-    // execution names have order.
-    // So only queue the name for the first time.
-    if(this.nameList.indexOf(name) == -1) {
-      this.nameList.push(name)
-    }
-    this.options[name] = task;
-  }
-
-  remove(name) {
-    delete this.options[name];
-    this.nameList.splice(name, 1);
-  }
-  
-  get(name) {
-    return this.options[name];
+  constructor(id) {
+    super();
   }
 
   run(name='default') {
-    if(this.options[name]) {
-      this.options[name].run();
+    if(this.values[name]) {
+      this.values[name].run();
     }
   }
 
+  get names() {
+    return this.getKeys();
+  }
+
   pod() {
-    let executions = [];
-    for(let name of this.nameList) {
-      let data = {
-        name
+    return this.keys.map(name => {
+      return {
+        name,
+        id: this.values[name] ? this.values[name].id : undefined
       }
-      if(this.options[name]) {
-        data.id = this.options[name].id
-      }
-      executions.push(data)
-    }
-    return executions
+    })
   }
 }

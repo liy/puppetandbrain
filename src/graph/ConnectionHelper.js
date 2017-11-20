@@ -27,7 +27,7 @@ class ConnectionHelper
     currentBlock.outPins[outPinName].connect(nextBlock.inPin);
 
     // traverse to next exectuion
-    for(let name of nextBlock.model.execution.nameList) {
+    for(let name of nextBlock.model.execution.names) {
       let current = nextBlock;
       let task = current.model.execution.get(name);
       if(task) {

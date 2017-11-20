@@ -6,7 +6,7 @@ export default class Property extends DataNode
   constructor(id) {
     super(id)
 
-    this.inputs.add('target')
+    this.inputs.addName('target')
   }
 
   init(pod) {
@@ -14,14 +14,16 @@ export default class Property extends DataNode
     // name is authoring time settings.
     this.name = pod.name;
 
-    this.nodeName = 'Get ' + this.name.charAt(0).toUpperCase() + this.name.slice(1);
-    
     this.variables.target = this.variables.target || this.owner.id;
     this.outputs.assignProperty(this.name, {
       get: () => {
         return LookUp.get(this.variables.target)[this.name]
       }
     });
+  }
+
+  get nodeName() {
+    return 'Get ' + this.name.charAt(0).toUpperCase() + this.name.slice(1);
   }
 
   pod() {

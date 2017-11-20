@@ -1,20 +1,22 @@
+import ArrayMap from "../utils/ArrayMap";
+
 export default class Output
 {
   constructor(node) {
     this.node = node;
-    this.names = [];
-    this.pointers = [];
     this.data = Object.create(null);
+
+    // Just keep track of which node is connected to the output
+    // not sure whether it is usefull or not.
+    this.pointers = new ArrayMap();
   }
 
   destroy() {
-    this.disconnet();
+    this.pointers = null;
   }
 
   addName(name) {
-    if(this.names.indexOf(name) == -1) {
-      this.names.push(name);
-    }
+    this.pointers.set(name);
   }
 
   assignProperty(name, descriptor) {
@@ -27,41 +29,16 @@ export default class Output
     this.data[name] = value;
   }
 
-  /**
-   * Delegate real connection job to input and pointer constructor.
-   * 
-   * @param {String} name Output name
-   * @param {Node} inputNode The node owns the input
-   * @param {String} inputName input name
-   */
-  connect(name, inputNode, inputName) {
-    inputNode.inputs.connect(inputName, this, name);
-  }
-
-  /**
-   * Delegate real disconnection job to input and pointer constructor.
-   * @param {*} name 
-   */
-  disconnect(name) {
-    for(let pointer of this.pointers) {
-      pointer.inputNode.inputs.disconnect(pointer.inputName);
-    }
-  }
-
-  /**
-   * Called from Pointer constructor
-   * @param {Pointer} pointer 
-   */
   connected(pointer) {
-    this.pointers.push(pointer)
+    this.pointers.set(pointer.outputName, pointer)
   }
 
-  /**
-   * Called from pointer destroy function
-   * @param {String} name The output name
-   */
-  disconnected(name) {
-    this.pointers.push(pointer)
+  disconnected(outputName) {
+    this.pointers.remove(outputName);
+  }
+
+  get names() {
+    return this.pointers.getKeys();
   }
 
   /**
@@ -69,6 +46,6 @@ export default class Output
    * so no need to serailzie the value. Just the names will do
    */
   pod() {
-    return this.names.concat();
+    return this.pointers.getKeys().concat();
   }
 }

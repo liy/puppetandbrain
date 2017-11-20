@@ -2,7 +2,6 @@ import TaskBlock from "./TaskBlock";
 import OutputPin from "./OutputPin";
 import Block from "./Block";
 import InputPin from "./InputPin";
-import Variable from "../data/Variable";
 
 export default class PropertyBlock extends Block
 {
@@ -12,7 +11,7 @@ export default class PropertyBlock extends Block
     let minWidth = 200;
     let minHeight = 40;
     this.container.className += ' property-block'
-    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px;`;    
+    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px;`;
 
     this.title = document.createElement('div');
     this.title.className = 'title'
@@ -26,16 +25,16 @@ export default class PropertyBlock extends Block
     row.className = 'row'
     this.content.appendChild(row);
 
-    for(let i=0; i<this.model.inputs.list.length; ++i) {
-      let name = this.model.inputs.list[i];
-      let input = this.model.inputs.get(name);
-      let pin = new InputPin(input, name)
+    for(let i=0; i<this.model.inputs.names.length; ++i) {
+      let name = this.model.inputs.names[i];
+      let pointer = this.model.inputs.get(name);
+      let pin = new InputPin(name)
       row.appendChild(pin.container);
       this.inputPins[name] = pin;
 
-      if(input instanceof Variable) {
+      if(pointer.isLocalPointer) {
         let inputField = document.createElement('input');
-        inputField.value = input.value;
+        inputField.value = pointer.value;
         pin.inputField = inputField;
         pin.container.appendChild(inputField)
       }

@@ -3,7 +3,6 @@ import ExecutionOutPin from "./ExecutionOutPin";
 import InputPin from "./InputPin";
 import OutputPin from "./OutputPin";
 import Block from "./Block";
-import Variable from "../data/Variable";
 
 // FIXME: clean up the UI!!!
 
@@ -16,20 +15,20 @@ export default class TaskBlock extends Block
     let minWidth = 200;
     let minHeight = 60;
 
-    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px; `;    
+    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px; `;
 
     this.inPin = null;
     this.outPins = Object.create(null);
     this.inputPins = Object.create(null);
     this.outputPins = Object.create(null);
- 
+
     this.title = document.createElement('div');
     this.title.className = 'title'
     this.container.appendChild(this.title);
     let title = this.model.nodeName;
     if(title == 'Perform') {
       this.container.className += ' perform-block'
-      title = this.model.callee.name + ' Perform '  + this.model.actionName
+      title = this.model.target.name + ' Perform '  + this.model.actionName
     }
     else if(title == 'Action') {
       this.container.className += ' action-block'
@@ -55,24 +54,26 @@ export default class TaskBlock extends Block
       this.inPin = new ExecutionInPin();
       row(0).appendChild(this.inPin.container);
     }
+
     // out pins
-    for(let i=0; i<this.model.execution.nameList.length; ++i) {
-      let name = this.model.execution.nameList[i]
+    for(let i=0; i<this.model.execution.names.length; ++i) {
+      let name = this.model.execution.names[i]
       let out = new ExecutionOutPin(name);
       row(i).appendChild(out.container)
       this.outPins[name] = out;
     }
 
-    for(let i=0; i<this.model.inputs.list.length; ++i) {
-      let name = this.model.inputs.list[i];
-      let input = this.model.inputs.get(name);
-      let pin = new InputPin(input, name)
+    for(let i=0; i<this.model.inputs.names.length; ++i) {
+      let name = this.model.inputs.names[i];
+      let poiner = this.model.inputs.get(name);
+      let pin = new InputPin(name)
       row(i+1).appendChild(pin.container);
       this.inputPins[name] = pin;
 
-      if(input instanceof Variable) {
+      if(poiner.isLocalPointer) {
+        console.warn(poiner)
         let inputField = document.createElement('input');
-        inputField.value = input.value;
+        inputField.value = poiner.value;
         pin.inputField = inputField;
         pin.container.appendChild(inputField)
         inputField.addEventListener('change', (e) => {
@@ -84,7 +85,7 @@ export default class TaskBlock extends Block
     for(let i=0; i<this.model.outputs.names.length; ++i) {
       let name = this.model.outputs.names[i];
       let pin = new OutputPin(name, name);
-      row(this.model.execution.nameList.length + i).appendChild(pin.container);
+      row(this.model.execution.names.length + i).appendChild(pin.container);
       this.outputPins[name] = pin;
     }
   }

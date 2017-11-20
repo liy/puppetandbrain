@@ -1,6 +1,6 @@
 import DataNode from "./DataNode";
 
-class ArithmeticNode extends DataNode
+export class ArithmeticNode extends DataNode
 {
   constructor(id) {
     super(id);
@@ -22,8 +22,8 @@ export class Add extends ArithmeticNode
   constructor(id) {
     super(id);
 
-    this.inputs.add('A');
-    this.inputs.add('B');
+    this.inputs.addName('A');
+    this.inputs.addName('B');
   }
 
   get value() {
@@ -36,8 +36,8 @@ export class Multiply extends ArithmeticNode
   constructor(id) {
     super(id);
 
-    this.inputs.add('A');
-    this.inputs.add('B');
+    this.inputs.addName('A');
+    this.inputs.addName('B');
   }
 
   get value() {
@@ -50,8 +50,8 @@ export class Divide extends ArithmeticNode
   constructor(id) {
     super(id);
 
-    this.inputs.add('A');
-    this.inputs.add('B');
+    this.inputs.addName('A');
+    this.inputs.addName('B');
   }
 
   get value() {
@@ -63,11 +63,13 @@ export class Equal extends ArithmeticNode
 {
   constructor(id) {
     super(id);
-    
-    this.nodeName = "="
 
-    this.inputs.add('A');
-    this.inputs.add('B');
+    this.inputs.addName('A');
+    this.inputs.addName('B');
+  }
+
+  get nodeName() {
+    return "="
   }
 
   get value() {
@@ -80,10 +82,12 @@ export class LessThan extends ArithmeticNode
   constructor(id) {
     super(id);
 
-    this.nodeName = "<"
+    this.inputs.addName('A');
+    this.inputs.addName('B');
+  }
 
-    this.inputs.add('A');
-    this.inputs.add('B');
+  get nodeName() {
+    return "<"
   }
 
   get value() {
@@ -96,10 +100,12 @@ export class LessEqual extends ArithmeticNode
   constructor(id) {
     super(id);
 
-    this.nodeName = "<="
+    this.inputs.addName('A');
+    this.inputs.addName('B');
+  }
 
-    this.inputs.add('A');
-    this.inputs.add('B');
+  get nodeName() {
+    return "<="
   }
 
   get value() {
@@ -111,8 +117,10 @@ export class RandomNumber extends ArithmeticNode
 {
   constructor(id) {
     super(id);
+  }
 
-    this.nodeName = "Random Number"
+  get nodeName() {
+    return "Random Number"
   }
 
   get value() {

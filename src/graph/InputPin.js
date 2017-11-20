@@ -2,13 +2,13 @@ import DataPin from "./DataPin";
 
 export default class InputPin extends DataPin
 {
-  constructor(input, name) {
+  constructor(name) {
     super(name);
-    
+
     this.icon.className += ' in-disconnected';
     this.container.style = "float:left; clear:left;"
     this.label.style = "float:left;"
-    
+
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke', '#a9c4d2');
     this.path.setAttribute('stroke-width', 2);
@@ -21,7 +21,7 @@ export default class InputPin extends DataPin
   connect(outputPin) {
     this.icon.className = 'icon in-connected';
     outputPin.connected(this);
-    
+
     this.svg.appendChild(this.path);
     // make input pin aware that it is connected to this output pin
     this.outputPin = outputPin;
@@ -69,7 +69,7 @@ export default class InputPin extends DataPin
         }
         else {
           let dxsdy = adx*Math.sign(dy)
-          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${dx/2},${dxsdy/2} 0,${(ady-adx)*Math.sign(dy)} L${this.outputPin.position.x-offsetX},${this.outputPin.position.y} l${offsetX},0`);        
+          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${dx/2},${dxsdy/2} 0,${(ady-adx)*Math.sign(dy)} L${this.outputPin.position.x-offsetX},${this.outputPin.position.y} l${offsetX},0`);
         }
       }
     }

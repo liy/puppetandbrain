@@ -5,14 +5,12 @@ export default class Tween extends Task
   constructor(id) {
     super(id);
 
-    this.nodeName = "Move"
-
     // ensure the order
     this.execution.set('default');
     this.execution.set('complete');
 
-    this.inputs.add('duration');
-    this.inputs.add('position');
+    this.inputs.addName('duration');
+    this.inputs.addName('position');
   }
 
   init(pod) {
@@ -20,7 +18,7 @@ export default class Tween extends Task
 
     this.variables.duration = this.variables.duration || 1
     this.variables.position = this.variables.position || {
-      x: this.owner.x+100, 
+      x: this.owner.x+100,
       y: this.owner.y
     }
   }
@@ -33,6 +31,10 @@ export default class Tween extends Task
   reset() {
     super.reset();
     if(this.tween) this.tween.kill()
+  }
+
+  get nodeName() {
+    return "Move";
   }
 
   run() {

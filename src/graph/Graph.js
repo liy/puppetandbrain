@@ -4,6 +4,7 @@ import TaskBlock from './TaskBlock';
 import PropertyBlock from './PropertyBlock';
 import Animation from '../nodes/Animation';
 import AnimationBlock from './AnimationBlock';
+import { ArithmeticNode } from '../nodes/Arithmetic';
 
 export default class Graph
 {
@@ -21,39 +22,26 @@ export default class Graph
   // TODO: to be removed, the block creation should be handled by loader
   // block will have their position saved as well.
   init() {
-    let tasks = LookUp.getTasks();
+    let nodes = LookUp.getNodes();
     let w = 225;
     let indent = 50;
     let tx = indent;
     let ty = 400;
     let h = 120;
-    for(let i=0; i<tasks.length; ++i) {
-      let block;
-      if(tasks[i] instanceof Animation) {
-        block = new AnimationBlock(tasks[i])
-      }
-      else {
-        block = new TaskBlock(tasks[i])
-      }
-      block.x = tx;
-      block.y = ty + this.container.offsetTop + Math.random()*60-30;
-      tx += w;
-      if(tx+w >= window.innerWidth) {
-        tx = indent;
-        ty += h;
-      } 
-      this.add(block);
-    }
 
-    let valueNodes = LookUp.getValues();
-    for(let i=0; i<valueNodes.length; ++i) {
-      let valueNode = valueNodes[i];
+    for(let i=0; i<nodes.length; ++i) {
       let block;
-      if(valueNode.__proto__.constructor.name === 'Property') {
-        block = new PropertyBlock(valueNode)
+      if(nodes[i].className === 'Animation') {
+        block = new AnimationBlock(nodes[i])
+      }
+      else if(nodes[i].className === 'Property') {
+        block = new PropertyBlock(nodes[i])
+      }
+      else if(nodes[i] instanceof ArithmeticNode){
+        block = new ArithmeticBlock(nodes[i])
       }
       else {
-        block = new ArithmeticBlock(valueNode)
+        block = new TaskBlock(nodes[i])
       }
 
       block.x = tx;
@@ -107,6 +95,6 @@ export default class Graph
   }
 
   reset() {
-    
+
   }
 }

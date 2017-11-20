@@ -10,6 +10,7 @@ export Property from './Property';
 // Cannot use export * from './Arithmetic'
 // for some reason, have to mannually export individual one for index
 import * as Arithmetic from './Arithmetic'
+export const ArithmeticNode = Arithmetic.ArithmeticNode;
 export const Add = Arithmetic.Add;
 export const Divide = Arithmetic.Divide;
 export const Multiply = Arithmetic.Multiply;

@@ -1,12 +1,11 @@
 import TaskBlock from "./TaskBlock";
-import Variable from "../data/Variable";
 
 export default class AnimationBlock extends TaskBlock
 {
   constructor(model) {
     super(model)
 
-    if(model.inputs.get('name') instanceof Variable) {
+    if(model.inputs.get('name').isLocalPointer) {
       let dropdown = document.createElement('select');
       this.model.owner.getAnimations().then(animations => {
         for(let animation of animations) {
@@ -16,7 +15,7 @@ export default class AnimationBlock extends TaskBlock
           if(animation.name === this.model.inputs.value('name')) {
             option.setAttribute('selected', 'selected')
           }
-          
+
           dropdown.appendChild(option)
         }
       })
@@ -25,7 +24,7 @@ export default class AnimationBlock extends TaskBlock
       dropdown.addEventListener('change', e => {
         this.model.initialState.variables['name'] = this.model.variables['name'] = e.target.value
       });
-  
+
       // TODO: to be removed
       if(this.inputPins['name'].inputField)
         this.inputPins['name'].container.removeChild(this.inputPins['name'].inputField)

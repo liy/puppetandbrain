@@ -1,13 +1,11 @@
 import Input from "../data/Input";
 import Output from "../data/Output";
+import Execution from "./Execution";
 
 export default class Node
 {
   constructor(id) {
-    // ID will be overriden in sub classes
-    this.id = id;
-    // default node name to be the class name
-    this.nodeName = this.__proto__.constructor.name;
+    this.id = LookUp.addNode(this, id);
 
     this.variables = Object.create(null);
 
@@ -16,8 +14,8 @@ export default class Node
   }
 
   destroy() {
-    let index = this.owner.nodes.indexOf(this.id);
-    if(index != -1) this.owner.nodes.splice(index, 1);
+    this.inputs.destroy();
+    this.outputs.destroy();
   }
 
   init(pod) {
@@ -29,12 +27,12 @@ export default class Node
     if(pod.variables) Object.assign(this.variables, pod.variables);
 
     // we just need the name to be populated here.
-    // variable access will be auto created. 
-    // Of course some of them will be discarded once 
+    // variable access will be auto created.
+    // Of course some of them will be discarded once
     // connection is setup(pointer is added)
     if(pod.inputs) {
       for(let inputData of pod.inputs) {
-        this.inputs.add(inputData.name);
+        this.inputs.addName(inputData.name);
       }
     }
 
@@ -48,6 +46,15 @@ export default class Node
 
   get className() {
     return this.__proto__.constructor.name;
+  }
+
+  get nodeName() {
+    // default node name to be the class name
+    return this.className;
+  }
+
+  get brain() {
+    return this.owner.brain;
   }
 
   /**

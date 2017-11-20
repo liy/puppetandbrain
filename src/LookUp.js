@@ -3,10 +3,9 @@ import Stage from './objects/Stage';
 
 var STORE = Object.create(null);
 var ACTORS = [];
-var TASKS = [];
-var DATA = [];
+var NODES = [];
 var POINTERS = [];
-var VARIABLES = [];
+var BRAINS = [];
 
 var running = false;
 
@@ -32,7 +31,7 @@ window.LookUp = {
     ACTORS.push(id);
     return id;
   },
-  
+
   removeActor: function(id) {
     let index = ACTORS.indexOf(id);
     ACTORS.splice(index, 1);
@@ -44,48 +43,37 @@ window.LookUp = {
     POINTERS.push(id);
     return id;
   },
-  
+
   removePointer: function(id) {
     let index = POINTERS.indexOf(id);
     POINTERS.splice(index, 1);
     delete STORE[id]
   },
 
-  addTask: function(entry, id) {
+  addNode: function(entry, id) {
     id = create(entry, id)
-    TASKS.push(id);
+    NODES.push(id);
     return id;
   },
 
-  removeTask: function(id) {
-    let index = TASKS.indexOf(id);
-    TASKS.splice(index, 1);
+  removeNode: function(id) {
+    let index = NODES.indexOf(id);
+    NODES.splice(index, 1);
     delete STORE[id]
   },
 
-  addData: function(entry, id) {
+  addBrain: function(entry, id) {
     id = create(entry, id)
-    DATA.push(id);
+    BRAINS.push(id);
     return id;
   },
 
-  removeData: function(id) {
-    let index = DATA.indexOf(id);
-    DATA.splice(index, 1);
+  removeBrain: function(id) {
+    let index = BRAINS.indexOf(id);
+    BRAINS.splice(index, 1);
     delete STORE[id]
   },
 
-  addVariable: function(entry, id) {
-    id = create(entry, id)
-    VARIABLES.push(id);
-    return id;
-  },
-
-  removeVariable: function(id) {
-    let index = VARIABLES.indexOf(id);
-    VARIABLES.splice(index, 1);
-    delete STORE[id]
-  },
 
   // Audo figure out whether target is an object or an id and return the target object
   auto: function(target) {
@@ -96,8 +84,8 @@ window.LookUp = {
     return STORE[id];
   },
 
-  getTasks: function() {
-    return TASKS.map(id => {
+  getNodes: function() {
+    return NODES.map(id => {
       return STORE[id];
     })
   },
@@ -108,20 +96,8 @@ window.LookUp = {
     })
   },
 
-  getValues: function() {
-    return DATA.map(id => {
-      return STORE[id];
-    })
-  },
-
   getPointers: function() {
     return POINTERS.map(id => {
-      return STORE[id]
-    })
-  },
-
-  getVariables: function() {
-    return VARIABLES.map(id => {
       return STORE[id]
     })
   },
@@ -137,9 +113,10 @@ window.LookUp = {
   },
 
   start: function() {
-    for(let id of TASKS) {
-      let task = this.store[id];
-      task.setInitialState();
+    for(let id of NODES) {
+      let node = this.store[id];
+      // TODO: to clean up here
+      if(node.setInitialState) node.setInitialState();
     }
 
     for(let id of ACTORS) {
@@ -150,7 +127,7 @@ window.LookUp = {
   },
 
   reset: function() {
-    for(let id of TASKS) {
+    for(let id of NODES) {
       let task = this.store[id];
       task.reset();
     }
@@ -170,14 +147,9 @@ window.LookUp = {
       result.store[id] = this.store[id].pod();
     }
     result.actors = ACTORS.concat()
-    result.tasks = TASKS.concat()
-    result.data = DATA.concat();
+    result.nodes = NODES.concat()
     result.pointers = POINTERS.concat();
     result.stage = Stage.actors.concat();
-    // FIXME: in production this should not be serialzied
-    // local variable access is auto linked once the node's variable 
-    // is populated and corresponding input name is added
-    result.variables = VARIABLES.concat();
 
     return result;
   },

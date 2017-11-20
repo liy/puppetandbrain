@@ -7,7 +7,6 @@ export default class Task extends Node
 {
   constructor(id) {
     super();
-    this.id = LookUp.addTask(this, id);
     this.execution = new Execution();
   }
 
@@ -50,11 +49,11 @@ export default class Task extends Node
   }
 
   run() {
-    console.log('run', this.__proto__.constructor.name, this.id);
+    console.log('run', this.nodeName, this.id);
   }
 
   pod() {
-    
+
     return {
       ...super.pod(),
       id: this.id,
