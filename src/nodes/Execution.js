@@ -5,7 +5,7 @@ export default class Execution extends ArrayMap
   constructor(id) {
     super();
 
-    this.set('default', null);
+    this.set('default')
   }
 
   run(name='default') {

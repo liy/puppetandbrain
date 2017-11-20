@@ -5,6 +5,7 @@ export default class Branch extends Task
   constructor(id) {
     super(id);
 
+    this.execution.remove('default');
     this.execution.set('true')
     this.execution.set('false')
 
