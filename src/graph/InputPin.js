@@ -3,11 +3,11 @@ import DataPin from "./DataPin";
 export default class InputPin extends DataPin
 {
   constructor(name) {
-    super(name);
+    super(name, 'left');
 
     this.icon.className += ' in-disconnected';
     this.container.style = "float:left; clear:left;"
-    this.label.style = "float:left;"
+    // this.label.style = "float:left;"
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke', '#a9c4d2');

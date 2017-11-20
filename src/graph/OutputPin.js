@@ -3,11 +3,11 @@ import DataPin from "./DataPin";
 export default class OutputPin extends DataPin
 {
   constructor(name) {
-    super(name);
+    super(name, 'right');
 
     this.icon.className += ' out-disconnected';
     this.container.style = "float:right; clear:right;"
-    this.label.style = "float:right;"
+    // this.label.style = "float:right;"
 
     this.inputPins = [];
   }

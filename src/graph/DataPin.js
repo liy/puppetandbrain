@@ -2,7 +2,7 @@ require('./DataPin.scss')
 
 export default class DataPin
 {
-  constructor(name) {
+  constructor(name, location) {
     this.name = name;
     this.svg = document.getElementById('svg');
 
@@ -12,11 +12,13 @@ export default class DataPin
     this.icon =  document.createElement('div');
     this.icon.className = 'icon'
     this.container.appendChild(this.icon);
+    this.icon.style = `${location}:5px`
 
     this.label = document.createElement('div');
     this.label.className = 'label'
     this.label.textContent = name;
     this.container.appendChild(this.label)
+    this.label.style = `float:${location}; margin-${location}:20px`
   }
 
   get position() {

@@ -14,16 +14,15 @@ export default class ExecutionPin
 
     this.icon =  document.createElement('div');
     this.icon.className = 'icon in-disconnected'
-    this.icon.style = `float:${location}`
     this.container.appendChild(this.icon);
+    this.icon.style = `${location}:5px`
 
     this.label = document.createElement('div');
     this.label.className = 'label'
     this.label.textContent = (name == 'default') ? '' : name;
     this.container.appendChild(this.label)
 
-    this.container.style = `${location}: 5px;`
-    this.label.style = `float:${location};`
+    this.label.style = `float:${location}; margin-${location}:20px`
 
     this.mousedown = this.mousedown.bind(this);
     this.mousemove = this.mousemove.bind(this);
