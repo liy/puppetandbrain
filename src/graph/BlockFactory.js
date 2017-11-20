@@ -1,4 +1,4 @@
-import * as ns from './blocks'
+import * as BlockClasses from './blocks';
 import { ArithmeticNode } from '../nodes/Arithmetic';
 import TaskBlock from './blocks/TaskBlock';
 import ArithmeticBlock from './blocks/ArithmeticBlock';
@@ -6,7 +6,7 @@ import ArithmeticBlock from './blocks/ArithmeticBlock';
 
 window.BlockFactory = {
   create: function(node) {
-    let blockClass = ns[node.className+'Block']
+    let blockClass = BlockClasses[node.className+'Block']
     if(blockClass) {
       return new blockClass(node);
     }

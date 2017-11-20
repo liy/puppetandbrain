@@ -1,0 +1,15 @@
+#node-menu
+{
+  position: absolute;
+  width: 200px;
+  z-index: 2;
+
+  .menu-item {
+    color: white;
+    width:200px;
+    background: #FF9900;
+    margin-top: 2px;
+    cursor: pointer;
+  }
+}
+

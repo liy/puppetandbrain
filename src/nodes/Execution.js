@@ -4,6 +4,8 @@ export default class Execution extends ArrayMap
 {
   constructor(id) {
     super();
+
+    this.set('default', null);
   }
 
   run(name='default') {
@@ -20,7 +22,7 @@ export default class Execution extends ArrayMap
     return this.keys.map(name => {
       return {
         name,
-        id: this.values[name] ? this.values[name].id : undefined
+        id: this.values[name] ? this.values[name].id : null
       }
     })
   }

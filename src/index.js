@@ -125,7 +125,9 @@ function init() {
   let wait = new Wait();
   wait.init({
     owner: cow,
-    seconds: 2
+    variables: {
+      seconds: 2
+    }
   });
 
   let trace = new Trace();

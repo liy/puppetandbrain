@@ -3,7 +3,7 @@ import Task from './Task'
 export default class Action extends Task
 {
   /**
-   * 
+   *
    * @param {String} name Action name
    * @memberof Action
    */
@@ -16,8 +16,6 @@ export default class Action extends Task
 
     // authoring time thing!
     this.actionName = pod.actionName;
-
-    this.owner.actions[this.actionName] = this;
   }
 
   rename(name) {
@@ -27,6 +25,17 @@ export default class Action extends Task
     delete this.owner.actions[this.actionName];
     this.actionName = name;
     return true
+  }
+
+  set actionName(v) {
+    // remove old actions
+    if(this.owner.actions[this.actionName]) delete this.owner.actions[this.actionName];
+    this._actionName = v;
+    this.owner.actions[this.actionName] = this;
+  }
+
+  get actionName() {
+    return this._actionName;
   }
 
   run() {
