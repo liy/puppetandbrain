@@ -22,7 +22,6 @@
   .title {
     color: rgb(255, 255, 255);
     padding:5px 10px;
-    pointer-events: none;
   }
 
   .row {
@@ -30,13 +29,6 @@
     margin-left:5px;
     margin-right:5px;
     margin-top:3px;
-    z-index: 2;
-  }
-
-  select {
-    width: 60px;
-    height: 20px;
-    margin-top: -2px;
   }
 }
 

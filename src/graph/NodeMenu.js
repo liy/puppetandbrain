@@ -28,6 +28,10 @@ export default class NodeMenu
         this.destroy();
       });
     }
+
+    this.graph.container.addEventListener('mousedown', (e) => {
+      if(e.target == this.graph.container) this.destroy();
+    }, {once: true})
   }
 
   set x(x) {
@@ -36,9 +40,5 @@ export default class NodeMenu
 
   set y(y) {
     this.container.style.top = y +'px'
-  }
-
-  destroy() {
-    this.graph.container.removeChild(this.container);
   }
 }
