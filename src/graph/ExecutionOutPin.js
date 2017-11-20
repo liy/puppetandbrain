@@ -23,7 +23,7 @@ export default class ExecutionOutPin extends ExecutionPin
       this.drawConnection();
     }
   }
-  
+
   drawConnection() {
     if(!this.isConnected) return;
 
@@ -58,7 +58,7 @@ export default class ExecutionOutPin extends ExecutionPin
         }
         else {
           let dxsdy = adx*Math.sign(dy)
-          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${dx/2},${dxsdy/2} 0,${(ady-adx)*Math.sign(dy)} L${this.connectedPin.position.x-offsetX},${this.connectedPin.position.y} l${offsetX},0`);        
+          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${dx/2},${dxsdy/2} 0,${(ady-adx)*Math.sign(dy)} L${this.connectedPin.position.x-offsetX},${this.connectedPin.position.y} l${offsetX},0`);
         }
       }
     }

@@ -11,6 +11,11 @@ export default class Node
 
     this.inputs = new Input(this);
     this.outputs = new Output(this);
+
+    // Not sure whether it is a good idea to record block position here.
+    // It might make sense... node still need a position
+    this.x = 0;
+    this.y = 0;
   }
 
   destroy() {
@@ -20,7 +25,7 @@ export default class Node
 
   init(pod) {
     this.owner = LookUp.auto(pod.owner);
-    this.owner.nodes.push(this);
+    this.owner.brain.addNode(this);
 
     // Set the variables! I can just do normal ref assignment
     // But do a property assignment, just be safe...
@@ -68,12 +73,14 @@ export default class Node
 
   pod() {
     return {
-      class: this.className,
+      className: this.className,
       id: this.id,
       variables: this.variables,
       owner: this.owner.id,
       inputs: this.inputs.pod(),
       outputs: this.outputs.pod(),
+      x: this.x,
+      y: this.y,
     }
   }
 }

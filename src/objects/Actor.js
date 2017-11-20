@@ -25,13 +25,12 @@ export default class Actor extends PIXI.Container
 
     this.actions = Object.create(null);
 
-    this.nodes = [];
-    this.brain = new Brain();
-
     this.childActors = [];
 
     this.on('pointerdown', this.pointerDown)
     this.on('pointerup', this.pointerUp)
+
+    this._clickCounter = 0;
 
     mixin(this, new Entity());
   }
@@ -48,7 +47,7 @@ export default class Actor extends PIXI.Container
     this.rotation = pod.rotation || 0;
     this.name = pod.name || this.name;
 
-    // TODO: handle node construction
+    this.brain = new Brain(this, pod.brain);
   }
 
   setInitialState() {
@@ -90,6 +89,12 @@ export default class Actor extends PIXI.Container
     if(this.actions[ActionName.POINTER_DOWN]) {
       this.actions[ActionName.POINTER_DOWN].run();
     }
+    setTimeout(() => {
+      this._clickCounter = 0;
+    }, 500)
+    if(++this._clickCounter%2 == 0) {
+      this.emit('brain.open')
+    }
   }
 
   pointerUp(e) {
@@ -126,7 +131,7 @@ export default class Actor extends PIXI.Container
     }
 
     return {
-      class: this.className,
+      className: this.className,
       id: this.id,
       x: this.x,
       y: this.y,
@@ -138,9 +143,7 @@ export default class Actor extends PIXI.Container
       variables: this.variables,
       childActors: this.childActors.concat(),
       actions,
-      nodes: this.nodes.map(node => {
-        return node.id;
-      })
+      brain: this.brain.id,
     }
   }
 }

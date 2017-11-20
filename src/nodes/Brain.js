@@ -1,13 +1,22 @@
 import ArrayMap from '../utils/ArrayMap';
 import Pointer from '../data/Pointer';
+import BrainGraph from '../graph/BrainGraph';
+import Stage from '../objects/Stage'
+import Task from './Task';
 
 export default class Brain
 {
-  constructor(id) {
+  constructor(owner, id) {
     this.id = LookUp.addBrain(this, id)
+    this.owner = owner;
 
     this.nodes = new ArrayMap();
     this.pointers = new ArrayMap();
+
+    this.open = this.open.bind(this);
+    this.owner.on('brain.open', this.open);
+
+    this.close = this.close.bind(this);
   }
 
   init(pod) {
@@ -43,6 +52,11 @@ export default class Brain
     }
   }
 
+  destroy() {
+    this.owner.off('brain.open', this.open);
+    LookUp.removeBrain(this.id)
+  }
+
   addNode(node) {
     this.nodes.set(node.id, node);
   }
@@ -71,6 +85,12 @@ export default class Brain
     return this.pointers.getValues();
   }
 
+  getTasks() {
+    return this.getNodes().filter(node => {
+      return node instanceof Task;
+    })
+  }
+
   connectVariable(inputNode, inputName, outputNode, outputName, id) {
     let pointer = new Pointer(inputNode, inputName, outputNode, outputName, id);
     this.pointers.set(pointer.id, pointer);
@@ -85,9 +105,29 @@ export default class Brain
     outputNode.outputs.disconnected(outputName);
   }
 
+  open(e) {
+    this.graph = new BrainGraph(this.owner);
+    this.graph.init()
+    Stage.blurEnabled = true;
+
+    document.addEventListener('keydown', this.close)
+  }
+
+  close(e) {
+    // TODO: find a better way to close brain!
+    // escape
+    if(e.keyCode == 27) {
+      this.graph.destroy();
+      Stage.blurEnabled = false;
+      document.removeEventListener('keydown', this.close)
+    }
+  }
+
   pod() {
     return {
+      className: this.__proto__.constructor.name,
       nodes: this.nodes.getKeys().concat(),
+      owner: this.owner.id,
       pointers: this.pointers.getKeys().concat()
     }
   }

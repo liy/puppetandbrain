@@ -1,21 +1,23 @@
-import ExecutionInPin from "./ExecutionInPin";
-import ExecutionOutPin from "./ExecutionOutPin";
-import InputPin from "./InputPin";
-import OutputPin from "./OutputPin";
+import ExecutionInPin from "../ExecutionInPin";
+import ExecutionOutPin from "../ExecutionOutPin";
+import InputPin from "../InputPin";
+import OutputPin from "../OutputPin";
 
-import styles from '../css/Block.scss';
+import styles from './Block.scss';
+import ArrayMap from "../../utils/ArrayMap";
 
 // FIXME: clean up the UI!!!
 
 
 export default class Block
 {
-  constructor(model) {
-    this.model = model;
+  constructor(node) {
+    this.node = node;
+    this.id = this.node.id;
 
-    this.inputPins = Object.create(null);
-    this.outputPins = Object.create(null);
- 
+    this.inputPins = new ArrayMap();
+    this.outputPins = new ArrayMap();
+
     this.container = document.createElement('div');
     this.container.className = 'block';
 
@@ -23,16 +25,26 @@ export default class Block
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
 
-    this._x = 0;
-    this._y = 0;
-
+    this.dragstart = this.dragstart.bind(this)
     this.container.addEventListener('mousedown', this.dragstart);
+    this.dragstop = this.dragstop.bind(this)
     document.addEventListener('mouseup', this.dragstop);
+  }
+
+  added() {
+    this.container.style.left = this.node.x +'px'
+    this.container.style.top = this.node.y +'px'
+  }
+
+  destroy() {
+    this.container.removeEventListener('mousedown', this.dragstart);
+    document.removeEventListener('mouseup', this.dragstop);
+    document.removeEventListener('mousemove', this.dragmove)
   }
 
   dragstart(e) {
     e.stopPropagation();
-  
+
     this._dragOffset = {
       x: this.container.offsetLeft - e.clientX,
       y: this.container.offsetTop - e.clientY
@@ -49,28 +61,28 @@ export default class Block
     this.y = e.clientY + this._dragOffset.y;
 
     // FIXME: remove it!!! For testing!!!
-    window.localStorage[this.model.id] = JSON.stringify({
+    window.localStorage[this.node.id] = JSON.stringify({
       x: this.x,
       y: this.y
     })
   }
 
   set x(x) {
-    this._x = x;
     this.container.style.left = x +'px'
+    this.node.x = x;
   }
 
   set y(y) {
-    this._y = y;
     this.container.style.top = y +'px'
+    this.node.y = y;
   }
 
   get x() {
-    return this._x;
+    return this.node.x;
   }
 
   get y() {
-    return this._y;
+    return this.node.y;
   }
 
   get width() {

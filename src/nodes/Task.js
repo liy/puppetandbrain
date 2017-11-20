@@ -6,7 +6,7 @@ import Node from './Node';
 export default class Task extends Node
 {
   constructor(id) {
-    super();
+    super(id);
     this.execution = new Execution();
   }
 

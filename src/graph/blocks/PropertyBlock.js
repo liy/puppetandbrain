@@ -1,7 +1,6 @@
-import TaskBlock from "./TaskBlock";
-import OutputPin from "./OutputPin";
+import OutputPin from "../OutputPin";
 import Block from "./Block";
-import InputPin from "./InputPin";
+import InputPin from "../InputPin";
 
 export default class PropertyBlock extends Block
 {
@@ -25,12 +24,12 @@ export default class PropertyBlock extends Block
     row.className = 'row'
     this.content.appendChild(row);
 
-    for(let i=0; i<this.model.inputs.names.length; ++i) {
-      let name = this.model.inputs.names[i];
-      let pointer = this.model.inputs.get(name);
+    for(let i=0; i<this.node.inputs.names.length; ++i) {
+      let name = this.node.inputs.names[i];
+      let pointer = this.node.inputs.get(name);
       let pin = new InputPin(name)
       row.appendChild(pin.container);
-      this.inputPins[name] = pin;
+      this.inputPins.set(name, pin);
 
       if(pointer.isLocalPointer) {
         let inputField = document.createElement('input');
@@ -40,9 +39,9 @@ export default class PropertyBlock extends Block
       }
     }
 
-    this.outputPin = new OutputPin(this.model.name);
+    this.outputPin = new OutputPin(this.node.name);
     row.appendChild(this.outputPin.container);
-    this.outputPins[node.name] = this.outputPin;
+    this.outputPins.set(node.name, this.outputPin);
   }
 
   dragmove(e) {

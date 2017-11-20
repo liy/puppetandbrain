@@ -1,4 +1,4 @@
-require('../css/DataPin.scss')
+require('./DataPin.scss')
 
 export default class DataPin
 {

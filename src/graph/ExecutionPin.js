@@ -1,4 +1,4 @@
-require('../css/ExecutionPin.scss')
+require('./ExecutionPin.scss')
 
 export default class ExecutionPin
 {

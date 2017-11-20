@@ -3,6 +3,7 @@ import Stage from './objects/Stage';
 import * as nodes from './nodes'
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
+import DataNode from './nodes/DataNode';
 
 const scope = {
   ...nodes,
@@ -18,22 +19,15 @@ export default class ActivityLoader
 
   load(url) {
     return JsonPromise.load(url).then(pod => {
-
       this.createActors(pod)
-
-      this.createTasks(pod)
-
-      // create other nodes, eg., value nodes
-      this.createDataNodes(pod)
-
-      // link input and outputs!!
-      this.connectInputOutput(pod)
+      // create nodes; link execution, input and outputs
+      this.createBrains(pod)
     })
   }
 
   createActors(pod) {
     var add = function(container, data) {
-      let actor = new scope[data.class](data.id);
+      let actor = new scope[data.className](data.id);
       actor.init(data);
       container.addActor(actor);
 
@@ -50,42 +44,33 @@ export default class ActivityLoader
     }
   }
 
-  createTasks(pod) {
-    for(let id of pod.tasks) {
+  createBrains(pod) {
+    for(let id of pod.nodes) {
       let data = pod.store[id];
-      let task = new scope[data.class](id)
-      task.init(data)
+      let node = new scope[data.className](id)
+      node.init(data)
     }
 
     // chain the tasks
-    for(let id of pod.tasks) {
+    for(let id of pod.nodes) {
+      let node = LookUp.get(id);
+      if (node instanceof DataNode) continue;
       let data = pod.store[id];
-      let task = LookUp.get(id);
       for(let execData of data.execution) {
-        task.chain({
+        node.chain({
           name: execData.name,
           task: LookUp.get(execData.id)
         })
       }
     }
-  }
 
-  createDataNodes(pod) {
-    for(let id of pod.values) {
-      let data = pod.store[id];
-      let valueNode = new [data.class](id)
-      valueNode.init(data)
-    }
-  }
-
-  connectInputOutput(pod) {
     // connect the inputs with outputs
     for(let id of pod.pointers) {
       let pointerData = pod.store[id];
       let inputNode = LookUp.get(pointerData.inputNode);
       let outputNode = LookUp.get(pointerData.outputNode);
 
-      inputNode.inputs.connect(pointerData.inputName, outputNode, pointerData.outputName)
+      inputNode.brain.connectVariable(inputNode, pointerData.inputName, outputNode, pointerData.outputName, id)
     }
   }
 }

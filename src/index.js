@@ -18,6 +18,7 @@ require('./assets/donkey/donkey.json')
 require('./LookUp');
 require('./nodes/NodeFactory');
 require('./objects/ActorFactory');
+require('./graph/BlockFactory');
 
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
@@ -37,11 +38,7 @@ import {Equal, RandomNumber, LessThan} from './nodes/Arithmetic'
 
 
 import ActivityLoader from './ActivityLoader';
-import Graph from './graph/Graph';
-import Block from './graph/Block';
-import ArithmeticBlock from './graph/ArithmeticBlock';
-import TaskBlock from './graph/TaskBlock';
-import Pointer from './data/Pointer';
+
 
 var appDiv = document.getElementById('app');
 var canvas = document.createElement('canvas');
@@ -61,8 +58,6 @@ function render() {
   renderer.render(Stage);
 }
 PIXI.ticker.shared.add(render);
-
-Stage.blurEnabled = true;
 
 
 function init() {
@@ -248,33 +243,24 @@ function init() {
     // serialize everything before game start
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
-
-  window.graph = new Graph();
-  graph.init();
 }
 
-init();
+// init();
 
 async function load() {
   var loader = new ActivityLoader();
   await loader.load(require('./assets/activity.json'))
-
-  console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
-
-  window.graph = new Graph();
-  graph.init();
-
 
   let promises = LookUp.getActors().map(actor => {
     return actor.loaded;
   })
 
   Promise.all(promises).then(() => {
-
+    console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
 }
 
-// load();
+load();
 
 document.addEventListener('keydown', (e) => {
   if(e.key == 'F6' || e.key == 'F4') {

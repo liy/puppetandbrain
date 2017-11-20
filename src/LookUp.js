@@ -1,5 +1,6 @@
 // import shortid from 'shortid';
 import Stage from './objects/Stage';
+import Task from './nodes/Task';
 
 var STORE = Object.create(null);
 var ACTORS = [];
@@ -102,6 +103,12 @@ window.LookUp = {
     })
   },
 
+  getTasks: function() {
+    return this.getNodes().filter(node => {
+      return node instanceof Task;
+    })
+  },
+
   toggle() {
     if(running) {
       this.reset();
@@ -115,8 +122,7 @@ window.LookUp = {
   start: function() {
     for(let id of NODES) {
       let node = this.store[id];
-      // TODO: to clean up here
-      if(node.setInitialState) node.setInitialState();
+      if(node instanceof Task) node.setInitialState();
     }
 
     for(let id of ACTORS) {
@@ -128,8 +134,8 @@ window.LookUp = {
 
   reset: function() {
     for(let id of NODES) {
-      let task = this.store[id];
-      task.reset();
+      let node = this.store[id];
+      if(node instanceof Task) node.reset();
     }
 
     for(let id of ACTORS) {

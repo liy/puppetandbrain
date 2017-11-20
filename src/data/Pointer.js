@@ -28,13 +28,12 @@ export default class Pointer
   }
 
   get value() {
-    console.log(this.target)
     return this.target[this.targetName]
   }
 
   pod() {
     return {
-      class: this.__proto__.constructor.name,
+      className: this.__proto__.constructor.name,
       inputNode: this.inputNode.id,
       inputName: this.inputName,
       // only record the information below if pointer points to another node
