@@ -2,10 +2,17 @@ require('./ExecutionPin.scss')
 
 import ConnectionHelper from './ConnectionHelper';
 
+/**
+ * interaction drawing behaivour is in the out pin to in pin style
+ */
 export default class ExecutionPin
 {
-  constructor(name, location='left') {
-    this.connectedPin = null
+  constructor(node, name, location='left') {
+    this.node = node;
+    this.connectedPin = null;
+    this.name = name;
+
+    this.type = (location == 'left') ? 'input' : 'ouput';
 
     this.svg = document.getElementById('svg');
 
@@ -24,25 +31,35 @@ export default class ExecutionPin
 
     this.label.style = `float:${location}; margin-${location}:20px`
 
-    this.mousedown = this.mousedown.bind(this);
-    this.mousemove = this.mousemove.bind(this);
-    this.mouseup = this.mouseup.bind(this);
+    this.mouseDown = this.mouseDown.bind(this);
+    this.mouseMove = this.mouseMove.bind(this);
+    this.mouseUp = this.mouseUp.bind(this);
+    this.targetMouseUp = this.targetMouseUp.bind(this);
 
-    this.container.addEventListener('mousedown', this.mousedown);
-    this.container.addEventListener('mouseup', this.mouseup);
+    this.container.addEventListener('mousedown', this.mouseDown);
+    this.container.addEventListener('mouseup', this.targetMouseUp);
   }
 
-  mousedown(e) {
-    document.addEventListener('mousemove', this.mousemove);
+  mouseDown(e) {
+    document.addEventListener('mousemove', this.mouseMove);
+    document.addEventListener('mouseup', this.mouseUp);
+
+    ConnectionHelper.start(this, e);
   }
 
-  mousemove(e) {
+  mouseMove(e) {
     // TODO: create a temp link, between initial execution pin position to current mouse position
-    ConnectionHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY)
+    ConnectionHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
   }
 
-  mouseup(e) {
-    document.removeEventListener('mousemove', this.mousemove)
+  mouseUp(e) {
+    document.removeEventListener('mousemove', this.mouseMove)
+    document.removeEventListener('mouseup', this.mouseUp);
+    ConnectionHelper.stop(e)
+  }
+
+  targetMouseUp(e) {
+    ConnectionHelper.tryConnect(this)
   }
 
   get position() {

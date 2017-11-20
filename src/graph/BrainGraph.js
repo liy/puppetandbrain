@@ -71,7 +71,6 @@ export default class BrainGraph
     for(let pointer of pointers) {
       let outputBlock = this.getBlock(pointer.outputNode.id);
       let inputBlock = this.getBlock(pointer.inputNode.id);
-      console.log(pointer.inputNode)
       let inputPin = inputBlock.inputPins.get(pointer.inputName);
       let outputPin = outputBlock.outputPins.get(pointer.outputName);
       outputPin.connect(inputPin)
@@ -107,6 +106,13 @@ export default class BrainGraph
     menu.init()
     menu.x = e.clientX;
     menu.y = e.clientY;
+  }
+
+  refresh() {
+    while(this.svg.lastChild) {
+      this.svg.removeChild(this.svg.lastChild)
+    }
+    this.draw();
   }
 
   resize() {

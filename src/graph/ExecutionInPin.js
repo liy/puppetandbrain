@@ -1,9 +1,10 @@
 import ExecutionPin from "./ExecutionPin";
+import ConnectionHelper from './ConnectionHelper';
 
 export default class ExecutionInPin extends ExecutionPin
 {
-  constructor() {
-    super('')
+  constructor(node) {
+    super(node, '', 'left')
 
     this.connectedPin = null
   }
@@ -17,9 +18,32 @@ export default class ExecutionInPin extends ExecutionPin
     this.connectedPin = outPin;
   }
 
+  disconnect() {
+    this.connectedPin = null;
+    this.icon.className = 'icon in-disconnected';
+  }
+
   drawConnection() {
     if(this.connectedPin) {
       this.connectedPin.drawConnection();
     }
+  }
+
+  mouseDown(e) {
+    document.addEventListener('mousemove', this.mouseMove);
+    document.addEventListener('mouseup', this.mouseUp);
+
+    ConnectionHelper.start(this, e);
+  }
+
+  mouseMove(e) {
+    // TODO: create a temp link, between initial execution pin position to current mouse position
+    ConnectionHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
+  }
+
+  mouseUp(e) {
+    document.removeEventListener('mousemove', this.mouseMove)
+    document.removeEventListener('mouseup', this.mouseUp);
+    ConnectionHelper.stop(e)
   }
 }

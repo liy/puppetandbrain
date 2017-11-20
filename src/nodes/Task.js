@@ -36,13 +36,19 @@ export default class Task extends Node
       // chain to default execution
       if(current.id) {
         result.execution.set('default', current);
-        current.parent = result;
+        current.parent = {
+          name: 'default',
+          task: result,
+        }
         return current
       }
       else {
         let currentTask = current.task;
         result.execution.set(current.name, currentTask);
-        currentTask.parent = result;
+        currentTask.parent = {
+          name: current.name,
+          task: result,
+        };
         return currentTask
       }
     }, this);
@@ -57,6 +63,7 @@ export default class Task extends Node
     return {
       ...super.pod(),
       id: this.id,
+      parent: this.parent,
       execution: this.execution.pod(),
     }
   }

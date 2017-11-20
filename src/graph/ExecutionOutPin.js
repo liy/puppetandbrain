@@ -1,9 +1,10 @@
 import ExecutionPin from "./ExecutionPin";
+import ConnectionHelper from './ConnectionHelper';
 
 export default class ExecutionOutPin extends ExecutionPin
 {
-  constructor(name) {
-    super(name, 'right')
+  constructor(node, name) {
+    super(node, name, 'right')
     this.icon.className += ' out-disconnected';
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -22,6 +23,11 @@ export default class ExecutionOutPin extends ExecutionPin
       this.svg.appendChild(this.path);
       this.drawConnection();
     }
+  }
+
+  disconnect() {
+    this.connectedPin = null;
+    this.icon.className = 'icon out-disconnected';
   }
 
   drawConnection() {

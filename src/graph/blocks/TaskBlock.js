@@ -50,14 +50,14 @@ export default class TaskBlock extends Block
 
     // task always have at least 2 pair of exeuctions, in and out
     if(this.node.__proto__.constructor.name != 'Action') {
-      this.inPin = new ExecutionInPin();
+      this.inPin = new ExecutionInPin(this.node);
       row(0).appendChild(this.inPin.container);
     }
 
     // out pins
     for(let i=0; i<this.node.execution.names.length; ++i) {
       let name = this.node.execution.names[i]
-      let out = new ExecutionOutPin(name);
+      let out = new ExecutionOutPin(this.node, name);
       row(i).appendChild(out.container)
       this.outPins.set(name, out);
     }
