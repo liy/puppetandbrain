@@ -7,16 +7,20 @@ export default class ExecutionInPin extends ExecutionPin
     super(block, '', 'left')
   }
 
-  getConnectedPin() {
-    let parentTask = this.node.parent;
-    if(!parentTask) return null;
+  getConnectedPins() {
+    // let parentTask = this.node.parent;
+    // if(!parentTask) return null;
 
-    let block = this.graph.getBlock(parentTask.id);
-    return block.outPins.get(this.node.parentExecutionName);
+    // let block = this.graph.getBlock(parentTask.id);
+    // return block.outPins.get(this.node.parentExecutionName);
+    return this.node.callers.getValues().map(caller => {
+      let block = this.graph.getBlock(caller.task.id);
+      return block.outPins.get(caller.executionName);
+    })
   }
 
   get isConnected() {
-    return this.getConnectedPin() != null;
+    return this.getConnectedPins().length != 0
   }
 
   refresh() {
@@ -24,9 +28,9 @@ export default class ExecutionInPin extends ExecutionPin
   }
 
   drawConnection() {
-    let connectedPin = this.getConnectedPin();
-    if(connectedPin) {
-      connectedPin.drawConnection();
+    let connectedPins = this.getConnectedPins();
+    for(let pin of connectedPins) {
+      pin.drawConnection();
     }
   }
 
@@ -38,14 +42,15 @@ export default class ExecutionInPin extends ExecutionPin
   removeConnection(e) {
     super.removeConnection(e);
 
-    let parentNode = this.node.parent;
-    let parentExecutionName = this.node.parentExecutionName;
-    this.node.disconnectParent(this.node.parentExecutionName)
+    // disconnect all parent connections
+    let callers = this.node.callers.getValues().concat();
+    for(let caller of callers) {
+      this.node.disconnectParent(caller.task, caller.executionName);
 
-    if(parentNode) {
-      let parentBlock = this.graph.getBlock(parentNode.id);
-      parentBlock.outPins.get(parentExecutionName).refresh();
+      let callerBlock = this.graph.getBlock(caller.task.id);
+      callerBlock.outPins.get(caller.executionName).refresh();
     }
+
     this.refresh();
   }
 }

@@ -23,6 +23,10 @@ export default class Task extends Node
     LookUp.removeTask(this.id);
   }
 
+  get hasIn() {
+    return true;
+  }
+
   setInitialState() {
     this.initialState = {
       variables: JSON.parse(JSON.stringify(this.variables))
@@ -34,19 +38,20 @@ export default class Task extends Node
   }
 
   connectNext(target, executionName='default') {
-    // Remove existing connection information
-    if(target.parent) {
-      target.parent.execution.set(target.parentExecutionName, null);
-    }
+    // Remove old target connection information
     let oldTarget = this.execution.get(executionName);
     if(oldTarget) {
-      oldTarget.parent = null;
-      oldTarget.parentExecutionName = null;
+      oldTarget.callers.remove(this.id)
     }
 
     this.execution.set(executionName, target)
-    target.parent = this;
-    target.parentExecutionName = executionName;
+    // target.parent = this;
+    // target.parentExecutionName = executionName;
+
+    target.callers.set(this.id, {
+      executionName: executionName,
+      task: this
+    })
 
     return target;
   }
@@ -57,13 +62,12 @@ export default class Task extends Node
   }
 
   disconnectNext(target, executionName='default') {
-    target.parent = null;
-    target.parentExecutionName = null;
+    target.callers.remove(this.id)
     this.execution.set(executionName, null)
   }
 
-  disconnectParent(parentExecutionName) {
-    if(this.parent) this.parent.disconnectNext(this, parentExecutionName);
+  disconnectParent(parent, parentExecutionName) {
+    parent.disconnectNext(this, parentExecutionName);
   }
 
   run() {
@@ -75,9 +79,14 @@ export default class Task extends Node
       ...super.pod(),
       id: this.id,
       execution: this.execution.pod(),
-      // parent information is not used in building the graph.
-      parent: this.parent ? this.parent.id : null,
-      parentExecutionName: this.parentExecutionName,
+      // TODO: remove this
+      // caller information is not used in building the graph, just for debugging
+      callers: this.callers.getValues().map(caller => {
+        return {
+          executionName: caller.executionName,
+          task: caller.task.id
+        }
+      })
     }
   }
 }

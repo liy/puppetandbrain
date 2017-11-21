@@ -38,6 +38,7 @@ import {Equal, RandomNumber, LessThan} from './nodes/Operator'
 
 
 import ActivityLoader from './ActivityLoader';
+import Keyboard from './nodes/Keyboard';
 
 
 var appDiv = document.getElementById('app');
@@ -97,6 +98,15 @@ function init() {
   donkeyAnimateAction.outputs.addName('animationName')
   donkeyAnimateAction.connectNext(delayAnimation)
                      .connectNext(animation)
+
+  let keyboard = new Keyboard();
+  keyboard.init({
+    owner: donkey,
+    variables: {
+      key:'1'
+    }
+  })
+  keyboard.connectNext(animation);
 
   // Let the animation task name input referencing the function's animaitonName input data
   animation.owner.brain.connectVariable(animation, 'name', donkeyAnimateAction, 'animationName');

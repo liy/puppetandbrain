@@ -24,7 +24,7 @@ export default class TaskBlock extends Block
     }
 
     // task always have at least 2 pair of exeuctions, in and out
-    if(this.node.className != 'Action') {
+    if(this.node.hasIn) {
       this.inPin = new ExecutionInPin(this);
       row(0).appendChild(this.inPin.container);
     }

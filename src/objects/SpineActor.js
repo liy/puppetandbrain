@@ -38,9 +38,13 @@ export default class SpineActor extends Actor
     this.spineComponent.setToSetupPose();
   }
 
-  async setAnimation(name, loop=true, track=0) {
-    await this.loaded;
-    this.spineComponent.setAnimation(name, loop, track);
+  setAnimation(name, loop=true, track=0) {
+    this.loaded.then(() => {
+      this.spineComponent.setAnimation(name, loop, track);
+    }).catch(e => {
+      // TODO: find a generic way to handle error
+      console.error(e);
+    })
   }
 
   async getAnimations() {

@@ -30,7 +30,7 @@ export default class SpineComponent extends Component
     };
 
     if(this.spine) {
-      this.spine.state.setAnimation(this.aniBuffer.track, this.aniBuffer.name, this.aniBuffer.loop);
+      this.spine.state.setAnimation(this.aniBuffer.track, this.aniBuffer.name, this.aniBuffer.loop)
     }
   }
 

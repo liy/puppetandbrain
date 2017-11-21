@@ -89,7 +89,7 @@ class ConnectionHelper
 
     let sourceNode = outPin.node;
     let targetNode = inPin.node;
-    let targetParentNode = targetNode.parent;
+    // old target will have the execution pin disconnected
     let oldTargetNode = sourceNode.execution.get(outPin.name);
 
     sourceNode.connectNext(targetNode, outPin.name)
@@ -98,7 +98,6 @@ class ConnectionHelper
     // refresh specific out pin.
     this.graph.getBlock(sourceNode.id).refreshExecutionPins()
     this.graph.getBlock(targetNode.id).refreshExecutionPins()
-    if(targetParentNode) this.graph.getBlock(targetParentNode.id).refreshExecutionPins()
     if(oldTargetNode) this.graph.getBlock(oldTargetNode.id).refreshExecutionPins()
   }
 

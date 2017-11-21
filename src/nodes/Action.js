@@ -42,6 +42,10 @@ export default class Action extends Task
     return 'Action ' + this.actionName;
   }
 
+  get hasIn() {
+    return false;
+  }
+
   run() {
     super.run()
 
