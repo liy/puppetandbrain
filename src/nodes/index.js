@@ -7,15 +7,15 @@ export Perform from './Perform'
 export Branch from './Branch';
 export Property from './Property';
 
-// Cannot use export * from './Arithmetic'
+// Cannot use export * from './Operator'
 // for some reason, have to mannually export individual one for index
-import * as Arithmetic from './Arithmetic'
-export const ArithmeticNode = Arithmetic.ArithmeticNode;
-export const Add = Arithmetic.Add;
-export const Divide = Arithmetic.Divide;
-export const Multiply = Arithmetic.Multiply;
-export const Equal = Arithmetic.Equal;
-export const LessEqual = Arithmetic.LessEqual;
-export const LessThan = Arithmetic.LessThan;
-export const RandomNumber = Arithmetic.RandomNumber;
+import * as Operators from './Operator'
+export const Operator = Operators.Operator;
+export const Add = Operators.Add;
+export const Divide = Operators.Divide;
+export const Multiply = Operators.Multiply;
+export const Equal = Operators.Equal;
+export const LessEqual = Operators.LessEqual;
+export const LessThan = Operators.LessThan;
+export const RandomNumber = Operators.RandomNumber;
 

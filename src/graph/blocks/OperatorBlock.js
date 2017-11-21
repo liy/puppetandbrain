@@ -2,14 +2,14 @@ import OutputPin from "../OutputPin";
 import Block from "./Block";
 import InputPin from "../InputPin";
 
-export default class ArithmeticBlock extends Block
+export default class OperatorBlock extends Block
 {
   constructor(node, graph) {
     super(node, graph);
 
     let minWidth = 130;
     let minHeight = 40;
-    this.container.className += ' arithmetic-block'
+    this.container.className += ' operator-block'
     this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px;`;
 
     let rows = [];

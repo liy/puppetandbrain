@@ -1,6 +1,6 @@
 import DataNode from "./DataNode";
 
-export class ArithmeticNode extends DataNode
+export class Operator extends DataNode
 {
   constructor(id) {
     super(id);
@@ -17,7 +17,7 @@ export class ArithmeticNode extends DataNode
   }
 }
 
-export class Add extends ArithmeticNode
+export class Add extends Operator
 {
   constructor(id) {
     super(id);
@@ -31,7 +31,7 @@ export class Add extends ArithmeticNode
   }
 }
 
-export class Multiply extends ArithmeticNode
+export class Multiply extends Operator
 {
   constructor(id) {
     super(id);
@@ -47,7 +47,7 @@ export class Multiply extends ArithmeticNode
   }
 }
 
-export class Divide extends ArithmeticNode
+export class Divide extends Operator
 {
   constructor(id) {
     super(id);
@@ -61,7 +61,7 @@ export class Divide extends ArithmeticNode
   }
 }
 
-export class Equal extends ArithmeticNode
+export class Equal extends Operator
 {
   constructor(id) {
     super(id);
@@ -79,7 +79,7 @@ export class Equal extends ArithmeticNode
   }
 }
 
-export class LessThan extends ArithmeticNode
+export class LessThan extends Operator
 {
   constructor(id) {
     super(id);
@@ -97,7 +97,7 @@ export class LessThan extends ArithmeticNode
   }
 }
 
-export class LessEqual extends ArithmeticNode
+export class LessEqual extends Operator
 {
   constructor(id) {
     super(id);
@@ -115,7 +115,7 @@ export class LessEqual extends ArithmeticNode
   }
 }
 
-export class RandomNumber extends ArithmeticNode
+export class RandomNumber extends Operator
 {
   constructor(id) {
     super(id);

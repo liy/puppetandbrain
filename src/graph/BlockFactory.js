@@ -1,7 +1,7 @@
 import * as BlockClasses from './blocks';
-import { ArithmeticNode } from '../nodes/Arithmetic';
+import { Operator } from '../nodes/Operator';
 import TaskBlock from './blocks/TaskBlock';
-import ArithmeticBlock from './blocks/ArithmeticBlock';
+import OperatorBlock from './blocks/OperatorBlock';
 
 
 window.BlockFactory = {
@@ -10,8 +10,8 @@ window.BlockFactory = {
     if(blockClass) {
       return new blockClass(node, graph);
     }
-    else if(node instanceof ArithmeticNode) {
-      return new ArithmeticBlock(node, graph)
+    else if(node instanceof Operator) {
+      return new OperatorBlock(node, graph)
     }
     else {
       return new TaskBlock(node, graph);

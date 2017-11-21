@@ -34,7 +34,7 @@ import Animation from './nodes/Animation';
 import Branch from './nodes/Branch';
 import Perform from './nodes/Perform';
 import Property from './nodes/Property';
-import {Equal, RandomNumber, LessThan} from './nodes/Arithmetic'
+import {Equal, RandomNumber, LessThan} from './nodes/Operator'
 
 
 import ActivityLoader from './ActivityLoader';
