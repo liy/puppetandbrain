@@ -3,13 +3,13 @@ require('./BrainGraph.scss')
 import ConnectionHelper from './ConnectionHelper'
 import ArrayMap from '../utils/ArrayMap';
 import NodeMenu from './NodeMenu';
+import Stage from '../objects/Stage'
 
 
 export default class BrainGraph
 {
   constructor(actor) {
     this.container = document.getElementById('graph');
-    this.container.style = "visibility:visible"
 
     this.actor = actor;
     this.brain = this.actor.brain;
@@ -30,11 +30,8 @@ export default class BrainGraph
       this.addBlock(block)
     }
 
-    this.draw();
-
-    this.container.addEventListener('contextmenu', this.openNodeMenu);
-
     ConnectionHelper.init(this);
+    this.draw();
   }
 
   destroy() {
@@ -48,8 +45,48 @@ export default class BrainGraph
       block.destroy();
     }
 
-    this.container.removeEventListener('contextmenu', this.openNodeMenu);
     this.container.style = "visibility:hidden"
+    this.container.removeEventListener('contextmenu', this.openNodeMenu);
+    this.container.removeEventListener('mousedown', this.mousedown)
+    document.removeEventListener('keydown', this.keydown)
+  }
+
+  open() {
+    this.container.style = "visibility:visible"
+    Stage.blurEnabled = true;
+
+    this.container.addEventListener('contextmenu', this.openNodeMenu);
+
+    this.dbClicks = 0;
+    this.mousedown = this.mousedown.bind(this);
+    this.container.addEventListener('mousedown', this.mousedown);
+
+    this.keydown = this.keydown.bind(this)
+    document.addEventListener('keydown', this.keydown);
+  }
+
+  close() {
+    this.destroy();
+    Stage.blurEnabled = false;
+  }
+
+  mousedown(e) {
+    if(e.target == this.container) {
+      if(++this.dbClicks%2 == 0) {
+        this.close();
+        return;
+      }
+      setTimeout(() => {
+        this.dbClicks = 0;
+      }, 300)
+    }
+  }
+
+  keydown(e) {
+    // escape
+    if(e.keyCode == 27) {
+      this.close();
+    }
   }
 
   draw() {

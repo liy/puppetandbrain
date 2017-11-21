@@ -91,7 +91,7 @@ export default class Actor extends PIXI.Container
     }
     setTimeout(() => {
       this._clickCounter = 0;
-    }, 500)
+    }, 300)
     if(++this._clickCounter%2 == 0) {
       this.emit('brain.open')
     }

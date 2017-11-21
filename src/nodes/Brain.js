@@ -1,7 +1,6 @@
 import ArrayMap from '../utils/ArrayMap';
 import Pointer from '../data/Pointer';
 import BrainGraph from '../graph/BrainGraph';
-import Stage from '../objects/Stage'
 import Task from './Task';
 
 export default class Brain
@@ -13,10 +12,8 @@ export default class Brain
     this.nodes = new ArrayMap();
     this.pointers = new ArrayMap();
 
-    this.open = this.open.bind(this);
-    this.owner.on('brain.open', this.open);
-
-    this.close = this.close.bind(this);
+    this.openBrainGraph = this.openBrainGraph.bind(this);
+    this.owner.on('brain.open', this.openBrainGraph);
   }
 
   init(pod) {
@@ -53,7 +50,7 @@ export default class Brain
   }
 
   destroy() {
-    this.owner.off('brain.open', this.open);
+    this.owner.off('brain.open', this.openBrainGraph);
     LookUp.removeBrain(this.id)
   }
 
@@ -105,22 +102,10 @@ export default class Brain
     outputNode.outputs.disconnected(outputName);
   }
 
-  open(e) {
+  openBrainGraph(e) {
     this.graph = new BrainGraph(this.owner);
     this.graph.init()
-    Stage.blurEnabled = true;
-
-    document.addEventListener('keydown', this.close)
-  }
-
-  close(e) {
-    // TODO: find a better way to close brain!
-    // escape
-    if(e.keyCode == 27) {
-      this.graph.destroy();
-      Stage.blurEnabled = false;
-      document.removeEventListener('keydown', this.close)
-    }
+    this.graph.open();
   }
 
   pod() {
