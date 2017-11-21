@@ -95,6 +95,12 @@ window.NodeFactory = {
       'Random Number': {
         className: 'RandomNumber'
       },
+      'Key Down': {
+        className: 'KeyDown',
+        variables: {
+          key: 'S'
+        }
+      }
     }
   }
 }

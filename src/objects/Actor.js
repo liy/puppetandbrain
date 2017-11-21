@@ -68,7 +68,7 @@ export default class Actor extends PIXI.Container
     if(this.actions[ActionName.GAME_START]) this.actions[ActionName.GAME_START].run();
   }
 
-  reset() {
+  terminate() {
     this.x = this.initialState.x;
     this.y = this.initialState.y;
     if(this.initialState.scale) {

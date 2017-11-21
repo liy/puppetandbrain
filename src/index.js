@@ -35,10 +35,10 @@ import Branch from './nodes/Branch';
 import Perform from './nodes/Perform';
 import Property from './nodes/Property';
 import {Equal, RandomNumber, LessThan} from './nodes/Operator'
+import KeyDown from './nodes/KeyDown';
 
 
 import ActivityLoader from './ActivityLoader';
-import Keyboard from './nodes/Keyboard';
 
 
 var appDiv = document.getElementById('app');
@@ -99,7 +99,7 @@ function init() {
   donkeyAnimateAction.connectNext(delayAnimation)
                      .connectNext(animation)
 
-  let keyboard = new Keyboard();
+  let keyboard = new KeyDown();
   keyboard.init({
     owner: donkey,
     variables: {

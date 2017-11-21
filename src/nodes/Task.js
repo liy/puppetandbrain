@@ -33,7 +33,7 @@ export default class Task extends Node
     }
   }
 
-  reset() {
+  terminate() {
     this.variables = this.initialState.variables;
   }
 

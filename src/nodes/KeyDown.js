@@ -1,6 +1,6 @@
 import Task from "./Task";
 
-export default class Keyboard extends Task
+export default class KeyDown extends Task
 {
   constructor(id) {
     super(id);
@@ -10,14 +10,18 @@ export default class Keyboard extends Task
     this.keydown = this.keydown.bind(this)
   }
 
-  init(pod) {
-    super.init(pod);
+  destroy() {
+    super.destroy();
+    document.removeEventListener('keydown', this.keydown)
+  }
 
+  prestart() {
+    super.prestart();
     document.addEventListener('keydown', this.keydown)
   }
 
-  destroy() {
-    super.destroy();
+  terminate() {
+    super.terminate()
     document.removeEventListener('keydown', this.keydown)
   }
 
@@ -26,15 +30,9 @@ export default class Keyboard extends Task
   }
 
   keydown(e) {
-    // FIXME: make sure it only wrong when game is running!!!
-    if(e.key == this.variables.key) {
+    if(e.key.toLowerCase() == this.variables.key.toLowerCase()) {
       super.run();
-      try {
-        this.execution.run();
-      }
-      catch(e) {
-        console.log('test')
-      }
+      this.execution.run();
     }
   }
 }

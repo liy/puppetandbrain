@@ -28,8 +28,8 @@ export default class Tween extends Task
     if(this.tween) this.tween.kill()
   }
 
-  reset() {
-    super.reset();
+  terminate() {
+    super.terminate();
     if(this.tween) this.tween.kill()
   }
 

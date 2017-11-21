@@ -33,8 +33,8 @@ export default class SpineActor extends Actor
     })
   }
 
-  reset() {
-    super.reset();
+  terminate() {
+    super.terminate();
     this.spineComponent.setToSetupPose();
   }
 

@@ -52,6 +52,14 @@ export default class Node
     this.y = pod.y;
   }
 
+  prestart() {
+
+  }
+
+  terminate() {
+
+  }
+
   get className() {
     return this.__proto__.constructor.name;
   }

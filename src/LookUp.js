@@ -111,7 +111,7 @@ window.LookUp = {
 
   toggle() {
     if(running) {
-      this.reset();
+      this.terminate();
     }
     else {
       this.start();
@@ -122,6 +122,7 @@ window.LookUp = {
   start: function() {
     for(let id of NODES) {
       let node = this.store[id];
+      node.prestart();
       if(node instanceof Task) node.setInitialState();
     }
 
@@ -132,15 +133,15 @@ window.LookUp = {
     }
   },
 
-  reset: function() {
+  terminate: function() {
     for(let id of NODES) {
       let node = this.store[id];
-      if(node instanceof Task) node.reset();
+      if(node instanceof Task) node.terminate();
     }
 
     for(let id of ACTORS) {
       let actor = this.store[id];
-      actor.reset();
+      actor.terminate();
     }
 
     // TODO: re-initialize the destroyed actor

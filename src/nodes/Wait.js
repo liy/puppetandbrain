@@ -18,8 +18,8 @@ export default class Wait extends Task
     clearTimeout(this.timeoutID);
   }
 
-  reset() {
-    super.reset();
+  terminate() {
+    super.terminate();
     clearTimeout(this.timeoutID);
   }
 

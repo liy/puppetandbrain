@@ -6,6 +6,7 @@ export Animation from './Animation';
 export Perform from './Perform'
 export Branch from './Branch';
 export Property from './Property';
+export KeyDown from './KeyDown';
 
 // Cannot use export * from './Operator'
 // for some reason, have to mannually export individual one for index

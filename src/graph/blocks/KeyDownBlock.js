@@ -1,6 +1,6 @@
 import TaskBlock from "./TaskBlock";
 
-export default class KeyboardBlock extends TaskBlock
+export default class KeyDownBlock extends TaskBlock
 {
   constructor(node, graph) {
     super(node, graph);
