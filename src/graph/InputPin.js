@@ -44,6 +44,7 @@ export default class InputPin extends DataPin
     if(!this.isConnected) {
       this.icon.className = 'icon in-disconnected';
       if(this.svg.contains(this.path)) this.svg.removeChild(this.path);
+      this.inputField.value = this.getPointer().value
       this.container.appendChild(this.inputField);
       return;
     }
