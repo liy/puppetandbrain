@@ -2,12 +2,14 @@ import Execution from './Execution'
 import Input from '../data/Input';
 import Output from '../data/Output';
 import Node from './Node';
+import ArrayMap from '../utils/ArrayMap';
 
 export default class Task extends Node
 {
   constructor(id) {
     super(id);
     this.execution = new Execution();
+    this.callers = new ArrayMap();
   }
 
   init(pod) {
