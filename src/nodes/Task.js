@@ -46,10 +46,14 @@ export default class Task extends Node
     }
 
     this.execution.set(executionName, target)
-    // target.parent = this;
-    // target.parentExecutionName = executionName;
 
-    target.callers.set(this.id, {
+    // Note that caller's key is combination of
+    // the caller's id and its execution name.
+    // this because same caller can have multiple
+    // executions connected to this task. Caller's
+    // id cannot identify the actual execution information.
+    // Combine both id and exeuction name can solve the issue
+    target.callers.set(this.id+'.'+executionName, {
       executionName: executionName,
       task: this
     })
@@ -63,7 +67,9 @@ export default class Task extends Node
   }
 
   disconnectNext(target, executionName='default') {
-    target.callers.remove(this.id)
+    // Note the combination of id and exeuciton name is used
+    // for removing the caller information.
+    target.callers.remove(this.id+'.'+executionName)
     this.execution.set(executionName, null)
   }
 

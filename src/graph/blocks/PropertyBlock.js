@@ -22,14 +22,20 @@ export default class PropertyBlock extends Block
       this.inputPins.set(name, pin);
     }
 
-    this.outputPin = new OutputPin(this, this.node.name);
-    row.appendChild(this.outputPin.container);
-    this.outputPins.set(node.name, this.outputPin);
+    let outputPin = new OutputPin(this, this.node.name);
+    row.appendChild(outputPin.container);
+    this.outputPins.set(node.name, outputPin);
   }
 
   dragmove(e) {
     super.dragmove(e);
 
-    this.outputPin.drawConnection();
+    // output input pins
+    for(let pin of this.inputPins.getValues()) {
+      pin.drawConnection();
+    }
+    for(let pin of this.outputPins.getValues()){
+      pin.drawConnection();
+    }
   }
 }
