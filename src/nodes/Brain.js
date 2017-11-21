@@ -91,6 +91,14 @@ export default class Brain
   connectVariable(inputNode, inputName, outputNode, outputName, id) {
     let pointer = new Pointer(inputNode, inputName, outputNode, outputName, id);
     this.pointers.set(pointer.id, pointer);
+
+    // remove pointer from old output node of the target input node
+    let oldPointer = inputNode.inputs.get(inputName);
+    if(oldPointer.outputNode) oldPointer.outputNode.outputs.disconnected(oldPointer);
+    // destroy old pointer
+    oldPointer.destroy()
+
+    // Make new connection
     inputNode.inputs.connected(pointer);
     outputNode.outputs.connected(pointer);
   }

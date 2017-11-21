@@ -1,5 +1,7 @@
 require('./DataPin.scss')
 
+import ConnectionHelper from './ConnectionHelper';
+
 export default class DataPin
 {
   constructor(block, name, location) {
@@ -23,7 +25,16 @@ export default class DataPin
     this.label.className = 'label'
     this.label.textContent = name;
     this.container.appendChild(this.label)
-    this.label.style = `float:${location}; margin-${location}:20px`
+    this.label.style = `float:${location}; margin-${location}:20px`;
+
+
+    this.mouseDown = this.mouseDown.bind(this);
+    this.mouseMove = this.mouseMove.bind(this);
+    this.mouseUp = this.mouseUp.bind(this);
+    this.targetMouseUp = this.targetMouseUp.bind(this);
+
+    this.container.addEventListener('mousedown', this.mouseDown);
+    this.container.addEventListener('mouseup', this.targetMouseUp);
   }
 
   get position() {
@@ -33,5 +44,26 @@ export default class DataPin
       x: (rect.left + rect.right)/2 - offset.left,
       y: (rect.top + rect.bottom)/2 - offset.top
     }
+  }
+
+  mouseDown(e) {
+    document.addEventListener('mousemove', this.mouseMove);
+    document.addEventListener('mouseup', this.mouseUp);
+
+    ConnectionHelper.startDataPin(this, e);
+  }
+
+  mouseUp(e) {
+    document.removeEventListener('mousemove', this.mouseMove)
+    document.removeEventListener('mouseup', this.mouseUp);
+    ConnectionHelper.stop(e)
+  }
+
+  mouseMove(e) {
+    ConnectionHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
+  }
+
+  targetMouseUp(e) {
+    ConnectionHelper.tryConnectData(this)
   }
 }

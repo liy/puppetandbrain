@@ -41,7 +41,9 @@ export class Multiply extends ArithmeticNode
   }
 
   get value() {
-    return this.inputs.value('A') * this.inputs.value('B');
+    let v = this.inputs.value('A') * this.inputs.value('B');
+    console.warn(v)
+    return v;
   }
 }
 

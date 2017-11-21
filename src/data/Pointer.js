@@ -24,7 +24,7 @@ export default class Pointer
   }
 
   destroy() {
-    if(this.id) LookUp.removePointer(id);
+    if(this.id) LookUp.removePointer(this.id);
   }
 
   get value() {

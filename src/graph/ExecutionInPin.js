@@ -34,7 +34,7 @@ export default class ExecutionInPin extends ExecutionPin
     document.addEventListener('mousemove', this.mouseMove);
     document.addEventListener('mouseup', this.mouseUp);
 
-    ConnectionHelper.start(this, e);
+    ConnectionHelper.startExecutionPin(this, e);
   }
 
   mouseMove(e) {

@@ -1,20 +1,32 @@
 class ConnectionHelper
 {
   constructor() {
+    this.svg = document.getElementById('svg');
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
+  }
+
+  init(graph) {
+    this.graph = graph;
+    this.brain = this.graph.brain;
+  }
+
+  startExecutionPin(pin, e) {
     this.path.setAttribute('stroke', '#cddc39');
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
 
-    this.svg = document.getElementById('svg');
+    this.svg.appendChild(this.path);
+    this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
+    this.startPin = pin;
   }
 
-  init(graph) {
-    this.graph = graph;
-  }
+  startDataPin(pin, e) {
+    this.path.setAttribute('stroke', '#a9c4d2');
+    this.path.setAttribute('stroke-width', 2);
+    this.path.setAttribute('stroke-opacity', 1);
+    this.path.setAttribute('fill', 'transparent');
 
-  start(pin, e) {
     this.svg.appendChild(this.path);
     this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
     this.startPin = pin;
@@ -64,14 +76,14 @@ class ConnectionHelper
     }
   }
 
-  tryConnect(pin) {
+  tryConnectExecution(pin) {
     if(this.startPin.node == pin.node) return;
 
     // You can only connect inpin to outpin or other way around.
     if(this.startPin.type != pin.type) {
       let outPin = pin;
       let inPin = this.startPin;
-      if(outPin.type == 'input') {
+      if(outPin.type == 'in') {
         outPin = this.startPin;
         inPin = pin;
       }
@@ -90,6 +102,32 @@ class ConnectionHelper
       if(targetParentNode) this.graph.getBlock(targetParentNode.id).refreshExecutionPins()
       if(oldTargetNode) this.graph.getBlock(oldTargetNode.id).refreshExecutionPins()
     }
+  }
+
+  tryConnectData(pin) {
+    if(this.startPin.type == pin.type) return;
+
+    let outputPin = pin;
+    let inputPin = this.startPin;
+    if(outputPin.type == 'input') {
+      outputPin = this.startPin;
+      inputPin = pin;
+    }
+
+    let pointer = inputPin.node.inputs.get(inputPin.name);
+    let outputNode = pointer.outputNode;
+
+    this.brain.connectVariable(inputPin.node, inputPin.name, outputPin.node, outputPin.name);
+
+    console.log(outputNode)
+    // Refresh the removed old output pin.
+    if(outputNode) {
+      let block = this.graph.getBlock(outputNode.id);
+      block.outputPins.get(pointer.outputName).refresh();
+    }
+
+    inputPin.refresh();
+    outputPin.refresh();
   }
 }
 

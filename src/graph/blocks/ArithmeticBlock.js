@@ -24,8 +24,7 @@ export default class ArithmeticBlock extends Block
 
     for(let i=0; i<this.node.inputs.names.length; ++i) {
       let name = this.node.inputs.names[i];
-      let pointer = this.node.inputs.get(name);
-      let pin = new InputPin(this, pointer, name)
+      let pin = new InputPin(this, name)
       row(i).appendChild(pin.container);
       this.inputPins.set(name, pin);
 

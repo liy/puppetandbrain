@@ -2,9 +2,9 @@ import DataPin from "./DataPin";
 
 export default class InputPin extends DataPin
 {
-  constructor(block, pointer, name) {
+  constructor(block, name) {
     super(block, name, 'left');
-    this.pointer = pointer;
+    this.type = 'input'
 
     this.icon.className = 'icon in-disconnected';
 
@@ -13,17 +13,28 @@ export default class InputPin extends DataPin
     this.path.setAttribute('stroke-width', 2);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
+
+    this.addLocalInputs();
+  }
+
+  getPointer() {
+    return this.node.inputs.get(this.name);
   }
 
   // TODO: better genertic methods!!
   addLocalInputs() {
-    if(this.pointer.isLocalPointer) {
+    let pointer = this.getPointer();
+    if(pointer.isLocalPointer) {
       this.inputField = document.createElement('input');
-      this.inputField.value = this.pointer.value;
+      this.inputField.value = pointer.value;
       this.container.appendChild(this.inputField)
       // The listener will be removed if inputField is no longer reachable.
       this.inputField.addEventListener('change', (e) => {
-        this.node.initialState.variables[name] = this.node.variables[name] = e.target.value
+        this.node.variables[this.name] = e.target.value;
+        console.log(this.node, this.node.variables[this.name])
+        if(this.node.initialState) {
+          this.node.initialState.variables[this.name] = e.target.value;
+        }
       })
     }
   }
@@ -35,7 +46,8 @@ export default class InputPin extends DataPin
   refresh() {
     if(!this.isConnected) {
       this.icon.className = 'icon in-disconnected';
-      this.svg.removeChild(this.path);
+      if(this.svg.contains(this.path)) this.svg.removeChild(this.path);
+
       if(this.inputField && this.container.contains(this.inputField)) {
         this.container.removeChild(this.inputField);
       }
@@ -50,12 +62,16 @@ export default class InputPin extends DataPin
   }
 
   getOutputPin() {
-    if(this.pointer.isLocalPointer) return null;
-    return this.graph.getBlock(this.pointer.outputNode.id).outputPins.get(this.pointer.outputName);
+    let pointer = this.getPointer();
+
+    if(pointer.isLocalPointer) return null;
+    return this.graph.getBlock(pointer.outputNode.id).outputPins.get(pointer.outputName);
   }
 
   drawConnection() {
-    if(this.pointer.isLocalPointer) return null;
+    let pointer = this.getPointer();
+    if(pointer.isLocalPointer) return;
+
 
     let outputPin = this.getOutputPin();
 

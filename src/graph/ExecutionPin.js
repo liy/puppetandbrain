@@ -13,7 +13,7 @@ export default class ExecutionPin
     this.graph = this.block.graph;
     this.name = name;
 
-    this.type = (location == 'left') ? 'input' : 'ouput';
+    this.type = (location == 'left') ? 'in' : 'out';
 
     this.svg = document.getElementById('svg');
 
@@ -45,7 +45,7 @@ export default class ExecutionPin
     document.addEventListener('mousemove', this.mouseMove);
     document.addEventListener('mouseup', this.mouseUp);
 
-    ConnectionHelper.start(this, e);
+    ConnectionHelper.startExecutionPin(this, e);
   }
 
   mouseMove(e) {
@@ -60,7 +60,7 @@ export default class ExecutionPin
   }
 
   targetMouseUp(e) {
-    ConnectionHelper.tryConnect(this)
+    ConnectionHelper.tryConnectExecution(this)
   }
 
   get position() {

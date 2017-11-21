@@ -1,14 +1,23 @@
 import DataPin from "./DataPin";
+import ConnectionHelper from './ConnectionHelper';
 
 export default class OutputPin extends DataPin
 {
   constructor(block, name) {
     super(block, name, 'right');
+    this.type = 'output'
 
     this.icon.className = 'icon out-disconnected';
   }
 
+  getPointer() {
+    this.node.inputs.get(this.name);
+  }
+
   get isConnected() {
+    console.log(this)
+    // The output will have multiple connections, as there might be
+    // other inputs referencing this output.
     return this.node.outputs.connections.get(this.name).length != 0
   }
 
@@ -21,7 +30,7 @@ export default class OutputPin extends DataPin
     let pointers = this.node.outputs.connections.get(this.name).getValues();
     return pointers.map(pointer => {
       let inputBlock = this.graph.getBlock(pointer.inputNode.id);
-      inputBlock.inputPins.get(pointer.inputName)
+      return inputBlock.inputPins.get(pointer.inputName)
     });
   }
 
@@ -32,5 +41,9 @@ export default class OutputPin extends DataPin
       let inputBlock = this.graph.getBlock(pointer.inputNode.id);
       inputBlock.inputPins.get(pointer.inputName).drawConnection();
     }
+  }
+
+  mouseMove(e) {
+    ConnectionHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
   }
 }

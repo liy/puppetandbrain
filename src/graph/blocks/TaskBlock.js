@@ -32,7 +32,6 @@ export default class TaskBlock extends Block
     // out pins
     for(let i=0; i<this.node.execution.names.length; ++i) {
       let executionName = this.node.execution.names[i]
-      console.log(executionName)
       let out = new ExecutionOutPin(this, executionName);
       row(i).appendChild(out.container)
       // TODO: to be moved to refresh
@@ -41,8 +40,7 @@ export default class TaskBlock extends Block
 
     for(let i=0; i<this.node.inputs.names.length; ++i) {
       let name = this.node.inputs.names[i];
-      let pointer = this.node.inputs.get(name);
-      let pin = new InputPin(this, pointer, name)
+      let pin = new InputPin(this, name)
       row(i+1).appendChild(pin.container);
       this.inputPins.set(name, pin);
     }
