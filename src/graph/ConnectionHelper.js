@@ -84,20 +84,14 @@ class ConnectionHelper
       // Then old next node parent is set to null
       // Finally, setup new connection
       if(targetNode.parent) {
-        this.graph.getBlock(targetNode.parent.task.id).outPins.get(targetNode.parent.name).disconnect();
-        targetNode.parent.task.execution.set(targetNode.parent.name, null);
+        this.graph.getBlock(targetNode.parent.id).outPins.get(targetNode.parentExecutionName).disconnect();
       }
-      let oldNextNode = sourceNode.execution.get(outPin.name);
-      if(oldNextNode) {
-        this.graph.getBlock(oldNextNode.id).inPin.disconnect();
-        oldNextNode.parent = null;
+      let oldTarget = sourceNode.execution.get(outPin.name);
+      if(oldTarget) {
+        this.graph.getBlock(oldTarget.id).inPin.disconnect();
       }
 
-      sourceNode.execution.set(outPin.name, targetNode)
-      targetNode.parent = {
-        name: outPin.name,
-        task: sourceNode
-      }
+      sourceNode.connectNext(targetNode, outPin.name)
 
       this.graph.refresh();
     }

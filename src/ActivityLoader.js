@@ -57,10 +57,7 @@ export default class ActivityLoader
       if (node instanceof DataNode) continue;
       let data = pod.store[id];
       for(let execData of data.execution) {
-        node.chain({
-          name: execData.name,
-          task: LookUp.get(execData.id)
-        })
+        node.connectNext(LookUp.get(execData.id), execData.name)
       }
     }
 

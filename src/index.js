@@ -95,7 +95,8 @@ function init() {
     actionName: 'Play Animation'
   })
   donkeyAnimateAction.outputs.addName('animationName')
-  donkeyAnimateAction.chain(delayAnimation, animation);
+  donkeyAnimateAction.connectNext(delayAnimation)
+                     .connectNext(animation)
 
   // Let the animation task name input referencing the function's animaitonName input data
   animation.owner.brain.connectVariable(animation, 'name', donkeyAnimateAction, 'animationName');
@@ -182,11 +183,12 @@ function init() {
       animationName: 'interactive'
     }
   })
-  startTask.chain(staticAnimation, wait, trace, walkAnimation, tween)
-           .chain({
-             name: 'complete',
-             task: perform
-            });
+  startTask.connectNext(staticAnimation)
+           .connectNext(wait)
+           .connectNext(trace)
+           .connectNext(walkAnimation)
+           .connectNext(tween)
+           .connectNext(perform, 'complete')
 
   // example of 2 executions
   let straightAfterTween = new Trace();
@@ -196,10 +198,7 @@ function init() {
       text: 'This task run straight after tween started, no waiting for tween completion'
     }
   })
-  tween.chain({
-    name: 'default',
-    task: straightAfterTween
-  })
+  tween.connectNext(straightAfterTween, 'default')
 
   // statements examples
   let less = new LessThan()
@@ -238,7 +237,7 @@ function init() {
   branch.execution.set('true', trueTrace)
   branch.execution.set('false', falseTrace)
 
-  perform.chain(branch)
+  perform.connectNext(branch)
 
   // start the activity when cow and donkey are loaded
   Promise.all([cow.loaded, donkey.loaded]).then(() => {
@@ -247,7 +246,7 @@ function init() {
   })
 }
 
-// init();
+init();
 
 async function load() {
   var loader = new ActivityLoader();
@@ -262,7 +261,7 @@ async function load() {
   })
 }
 
-load();
+// load();
 
 document.addEventListener('keydown', (e) => {
   if(e.key == 'F6' || e.key == 'F4') {
