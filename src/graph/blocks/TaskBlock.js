@@ -5,38 +5,13 @@ import OutputPin from "../OutputPin";
 import Block from "./Block";
 import ArrayMap from "../../utils/ArrayMap";
 
-// FIXME: clean up the UI!!!
-
-
 export default class TaskBlock extends Block
 {
-  constructor(node) {
-    super(node)
-
-    let minWidth = 200;
-    let minHeight = 60;
-
-    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px; `;
+  constructor(node, graph) {
+    super(node, graph)
 
     this.inPin = null;
     this.outPins = new ArrayMap();
-
-    this.title = document.createElement('div');
-    this.title.className = 'title'
-    this.container.appendChild(this.title);
-    let title = this.node.nodeName;
-    if(title == 'Perform') {
-      this.container.className += ' perform-block'
-      title = this.node.target.name + ' Perform '  + this.node.actionName
-    }
-    else if(title == 'Action') {
-      this.container.className += ' action-block'
-      title += ' ' + this.node.actionName;
-    }
-    this.title.textContent = title;
-
-    this.content = document.createElement('div');
-    this.container.appendChild(this.content);
 
     let rows = [];
     let row = (i) => {
@@ -49,40 +24,31 @@ export default class TaskBlock extends Block
     }
 
     // task always have at least 2 pair of exeuctions, in and out
-    if(this.node.__proto__.constructor.name != 'Action') {
-      this.inPin = new ExecutionInPin(this.node);
+    if(this.node.className != 'Action') {
+      this.inPin = new ExecutionInPin(this);
       row(0).appendChild(this.inPin.container);
     }
 
     // out pins
     for(let i=0; i<this.node.execution.names.length; ++i) {
-      let name = this.node.execution.names[i]
-      let out = new ExecutionOutPin(this.node, name);
+      let executionName = this.node.execution.names[i]
+      let out = new ExecutionOutPin(this, executionName);
       row(i).appendChild(out.container)
-      this.outPins.set(name, out);
+      // TODO: to be moved to refresh
+      this.outPins.set(executionName, out);
     }
 
     for(let i=0; i<this.node.inputs.names.length; ++i) {
       let name = this.node.inputs.names[i];
-      let poiner = this.node.inputs.get(name);
-      let pin = new InputPin(name)
+      let pointer = this.node.inputs.get(name);
+      let pin = new InputPin(this, pointer, name)
       row(i+1).appendChild(pin.container);
       this.inputPins.set(name, pin);
-
-      if(poiner.isLocalPointer) {
-        let inputField = document.createElement('input');
-        inputField.value = poiner.value;
-        pin.inputField = inputField;
-        pin.container.appendChild(inputField)
-        inputField.addEventListener('change', (e) => {
-          this.node.initialState.variables[name] = this.node.variables[name] = e.target.value
-        })
-      }
     }
 
     for(let i=0; i<this.node.outputs.names.length; ++i) {
       let name = this.node.outputs.names[i];
-      let pin = new OutputPin(name, name);
+      let pin = new OutputPin(this, name);
       row(this.node.execution.names.length + i).appendChild(pin.container);
       this.outputPins.set(name, pin);
     }

@@ -3,8 +3,11 @@ import ConnectionHelper from './ConnectionHelper';
 
 export default class ExecutionInPin extends ExecutionPin
 {
-  constructor(node) {
-    super(node, '', 'left')
+  constructor(block) {
+    super(block, '', 'left')
+
+    this.parentTask = this.node.parent;
+    this.parentExecutionName = this.node.parentExecutionName;
 
     this.connectedPin = null
   }

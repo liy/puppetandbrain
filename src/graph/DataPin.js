@@ -2,12 +2,17 @@ require('./DataPin.scss')
 
 export default class DataPin
 {
-  constructor(name, location) {
+  constructor(block, name, location) {
+    this.block = block;
+    this.node = this.block.node;
+    this.graph = this.block.graph;
     this.name = name;
+
     this.svg = document.getElementById('svg');
 
     this.container = document.createElement('div');
-    this.container.className = 'data-pin'
+    this.container.className = 'data-pin';
+    this.container.style = `float:${location}; clear:${location};`
 
     this.icon =  document.createElement('div');
     this.icon.className = 'icon'

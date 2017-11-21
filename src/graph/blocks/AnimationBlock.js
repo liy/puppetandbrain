@@ -2,8 +2,8 @@ import TaskBlock from "./TaskBlock";
 
 export default class AnimationBlock extends TaskBlock
 {
-  constructor(node) {
-    super(node)
+  constructor(node, graph) {
+    super(node, graph)
 
     if(node.inputs.get('name').isLocalPointer) {
       let dropdown = document.createElement('select');

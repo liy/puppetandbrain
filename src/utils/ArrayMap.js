@@ -39,4 +39,8 @@ export default class ArrayMap
       return this.values[key];
     })
   }
+
+  get length() {
+    return this.keys.length;
+  }
 }

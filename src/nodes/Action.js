@@ -38,6 +38,10 @@ export default class Action extends Task
     return this._actionName;
   }
 
+  get nodeName() {
+    return 'Action ' + this.actionName;
+  }
+
   run() {
     super.run()
 

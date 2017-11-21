@@ -2,34 +2,35 @@ import DataPin from "./DataPin";
 
 export default class OutputPin extends DataPin
 {
-  constructor(name) {
-    super(name, 'right');
+  constructor(block, name) {
+    super(block, name, 'right');
 
-    this.icon.className += ' out-disconnected';
-    this.container.style = "float:right; clear:right;"
-    // this.label.style = "float:right;"
-
-    this.inputPins = [];
-  }
-
-  connect(inputPin) {
-    inputPin.connect(this);
-  }
-
-  connected(inputPin) {
-    if(this.inputPins.indexOf(inputPin) == -1) {
-      this.inputPins.push(inputPin)
-    }
-    this.icon.className = 'icon out-connected';
+    this.icon.className = 'icon out-disconnected';
   }
 
   get isConnected() {
-    return this.inputPins.length != 0
+    return this.node.outputs.connections.get(this.name).length != 0
+  }
+
+  refresh() {
+    this.icon.className = this.isConnected ? 'icon out-connected' : 'icon out-disconnected';
+    this.drawConnection();
+  }
+
+  getInputPins() {
+    let pointers = this.node.outputs.connections.get(this.name).getValues();
+    return pointers.map(pointer => {
+      let inputBlock = this.graph.getBlock(pointer.inputNode.id);
+      inputBlock.inputPins.get(pointer.inputName)
+    });
   }
 
   drawConnection() {
-    for(let inputPin of this.inputPins) {
-      inputPin.drawConnection();
+    let pointers = this.node.outputs.connections.get(this.name).getValues();
+    for(let pointer of pointers) {
+      // inputPin.drawConnection();
+      let inputBlock = this.graph.getBlock(pointer.inputNode.id);
+      inputBlock.inputPins.get(pointer.inputName).drawConnection();
     }
   }
 }

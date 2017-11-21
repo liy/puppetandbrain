@@ -99,7 +99,7 @@ export default class Brain
     let pointer = inputNode.get(inputName);
     this.pointers.remove(pointer.id);
     inputNode.inputs.disconnected(inputName);
-    outputNode.outputs.disconnected(outputName);
+    outputNode.outputs.disconnected(pointer);
   }
 
   openBrainGraph(e) {

@@ -2,36 +2,40 @@ import ExecutionInPin from "../ExecutionInPin";
 import ExecutionOutPin from "../ExecutionOutPin";
 import InputPin from "../InputPin";
 import OutputPin from "../OutputPin";
-
-import styles from './Block.scss';
 import ArrayMap from "../../utils/ArrayMap";
 
-// FIXME: clean up the UI!!!
-
+import styles from './Block.scss';
 
 export default class Block
 {
-  constructor(node) {
+  constructor(node, graph) {
     this.node = node;
+    this.graph = graph;
     this.id = this.node.id;
 
     this.inputPins = new ArrayMap();
     this.outputPins = new ArrayMap();
 
     this.container = document.createElement('div');
-    this.container.className = 'block';
+    this.container.className = `block ${this.node.className.toLowerCase()}-block`;
+    this.container.style = `min-width:${200}px; min-height:${60}px;`;
 
-    this.dragstart = this.dragstart.bind(this);
-    this.dragstop = this.dragstop.bind(this);
-    this.dragmove = this.dragmove.bind(this);
-    this.dragstart = this.dragstart.bind(this)
-
-    // this.container.addEventListener('mousedown', this.dragstart);
-    // document.addEventListener('mouseup', this.dragstop);
+    this.title = document.createElement('div');
+    this.title.className = 'title'
+    this.container.appendChild(this.title);
+    this.title.textContent = this.node.nodeName;
 
     this.dragArea = document.createElement('div');
     this.dragArea.className = 'drag-area';
     this.container.appendChild(this.dragArea)
+
+    this.content = document.createElement('div');
+    this.container.appendChild(this.content);
+
+    this.dragstart = this.dragstart.bind(this);
+    this.dragstop = this.dragstop.bind(this);
+    this.dragmove = this.dragmove.bind(this);
+
 
     this.dragArea.addEventListener('mousedown', this.dragstart);
     document.addEventListener('mouseup', this.dragstop);
@@ -43,14 +47,12 @@ export default class Block
   }
 
   destroy() {
-    this.container.removeEventListener('mousedown', this.dragstart);
+    this.dragArea.removeEventListener('mousedown', this.dragstart);
     document.removeEventListener('mouseup', this.dragstop);
     document.removeEventListener('mousemove', this.dragmove)
   }
 
   dragstart(e) {
-    // e.stopPropagation();
-
     this._dragOffset = {
       x: this.container.offsetLeft - e.clientX,
       y: this.container.offsetTop - e.clientY
@@ -65,12 +67,6 @@ export default class Block
   dragmove(e) {
     this.x = e.clientX + this._dragOffset.x;
     this.y = e.clientY + this._dragOffset.y;
-
-    // FIXME: remove it!!! For testing!!!
-    window.localStorage[this.node.id] = JSON.stringify({
-      x: this.x,
-      y: this.y
-    })
   }
 
   set x(x) {

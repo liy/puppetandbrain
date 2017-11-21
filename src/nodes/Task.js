@@ -31,36 +31,6 @@ export default class Task extends Node
     this.variables = this.initialState.variables;
   }
 
-  // chain(...taskInfoArr) {
-  //   return taskInfoArr.reduce((result, current) => {
-  //     // chain to default execution
-  //     if(current.id) {
-  //       result.execution.set('default', current);
-  //       // current.parent = {
-  //       //   name: 'default',
-  //       //   task: result,
-  //       // }
-  //       current.parent = result;
-  //       current.parentExecutionName = 'default'
-
-  //       result.connectNext('default', current);
-
-  //       return current
-  //     }
-  //     else {
-  //       let currentTask = current.task;
-  //       result.execution.set(current.name, currentTask);
-  //       // currentTask.parent = {
-  //       //   name: current.name,
-  //       //   task: result,
-  //       // };
-  //       currentTask.parent = result;
-  //       currentTask.parentExecutionName = current.name;
-  //       return currentTask
-  //     }
-  //   }, this);
-  // }
-
   connectNext(target, executionName='default') {
     // Remove existing connection information
     if(target.parent) {
@@ -92,9 +62,10 @@ export default class Task extends Node
     return {
       ...super.pod(),
       id: this.id,
+      execution: this.execution.pod(),
+      // parent information is not used in building the graph.
       parent: this.parent ? this.parent.id : null,
       parentExecutionName: this.parentExecutionName,
-      execution: this.execution.pod(),
     }
   }
 }

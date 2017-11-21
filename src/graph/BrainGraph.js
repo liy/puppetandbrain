@@ -26,7 +26,7 @@ export default class BrainGraph
 
   init() {
     for(let node of this.brain.getNodes()) {
-      let block = BlockFactory.create(node);
+      let block = BlockFactory.create(node, this);
       this.addBlock(block)
     }
 
@@ -110,7 +110,8 @@ export default class BrainGraph
       let inputBlock = this.getBlock(pointer.inputNode.id);
       let inputPin = inputBlock.inputPins.get(pointer.inputName);
       let outputPin = outputBlock.outputPins.get(pointer.outputName);
-      outputPin.connect(inputPin)
+      inputPin.refresh();
+      outputPin.refresh();
     }
   }
 
@@ -132,7 +133,7 @@ export default class BrainGraph
       x: x,
       y: y
     })
-    let block = BlockFactory.create(node)
+    let block = BlockFactory.create(node, this)
     this.addBlock(block);
   }
 

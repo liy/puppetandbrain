@@ -3,8 +3,11 @@ import ConnectionHelper from './ConnectionHelper';
 
 export default class ExecutionOutPin extends ExecutionPin
 {
-  constructor(node, name) {
-    super(node, name, 'right')
+  constructor(block, executionName) {
+    super(block, executionName, 'right');
+
+    this.targetTask = this.node.execution.get(executionName);
+
     this.icon.className += ' out-disconnected';
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');

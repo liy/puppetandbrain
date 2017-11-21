@@ -246,7 +246,7 @@ function init() {
   })
 }
 
-init();
+// init();
 
 async function load() {
   var loader = new ActivityLoader();
@@ -261,7 +261,7 @@ async function load() {
   })
 }
 
-// load();
+load();
 
 document.addEventListener('keydown', (e) => {
   if(e.key == 'F6' || e.key == 'F4') {

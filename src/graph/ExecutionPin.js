@@ -7,10 +7,10 @@ import ConnectionHelper from './ConnectionHelper';
  */
 export default class ExecutionPin
 {
-  constructor(node, name, location='left') {
-    this.node = node;
+  constructor(block, name, location='left') {
+    this.block = block;
+    this.node = block.node;
     this.connectedPin = null;
-    this.name = name;
 
     this.type = (location == 'left') ? 'input' : 'ouput';
 
