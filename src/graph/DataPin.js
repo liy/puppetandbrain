@@ -32,9 +32,11 @@ export default class DataPin
     this.mouseMove = this.mouseMove.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
     this.targetMouseUp = this.targetMouseUp.bind(this);
+    this.removeConnections = this.removeConnections.bind(this);
 
-    this.container.addEventListener('mousedown', this.mouseDown);
-    this.container.addEventListener('mouseup', this.targetMouseUp);
+    this.icon.addEventListener('mousedown', this.mouseDown);
+    this.icon.addEventListener('mouseup', this.targetMouseUp);
+    this.icon.addEventListener('contextmenu', this.removeConnections);
   }
 
   get position() {
@@ -47,6 +49,9 @@ export default class DataPin
   }
 
   mouseDown(e) {
+    // only left mouse
+    if(e.which != 1) return;
+
     document.addEventListener('mousemove', this.mouseMove);
     document.addEventListener('mouseup', this.mouseUp);
 
@@ -54,6 +59,9 @@ export default class DataPin
   }
 
   mouseUp(e) {
+    // only left mouse
+    if(e.which != 1) return;
+
     document.removeEventListener('mousemove', this.mouseMove)
     document.removeEventListener('mouseup', this.mouseUp);
     ConnectionHelper.stop(e)
@@ -64,6 +72,14 @@ export default class DataPin
   }
 
   targetMouseUp(e) {
+    // only left mouse
+    if(e.which != 1) return;
+
     ConnectionHelper.tryConnectData(this)
+  }
+
+  removeConnections(e) {
+    e.preventDefault();
+    e.stopPropagation();
   }
 }

@@ -54,6 +54,16 @@ export default class Task extends Node
     return parent;
   }
 
+  disconnectNext(target, executionName='default') {
+    target.parent = null;
+    target.parentExecutionName = null;
+    this.execution.set(executionName, null)
+  }
+
+  disconnectParent(parentExecutionName) {
+    if(this.parent) this.parent.disconnectNext(this, parentExecutionName);
+  }
+
   run() {
     console.log('run', this.nodeName, this.id);
   }

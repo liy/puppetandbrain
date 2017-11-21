@@ -24,19 +24,16 @@ export default class InputPin extends DataPin
   // TODO: better genertic methods!!
   addLocalInputs() {
     let pointer = this.getPointer();
-    if(pointer.isLocalPointer) {
-      this.inputField = document.createElement('input');
-      this.inputField.value = pointer.value;
-      this.container.appendChild(this.inputField)
-      // The listener will be removed if inputField is no longer reachable.
-      this.inputField.addEventListener('change', (e) => {
-        this.node.variables[this.name] = e.target.value;
-        console.log(this.node, this.node.variables[this.name])
-        if(this.node.initialState) {
-          this.node.initialState.variables[this.name] = e.target.value;
-        }
-      })
-    }
+    this.inputField = document.createElement('input');
+    this.inputField.value = pointer.value;
+    if(pointer.isLocalPointer) this.container.appendChild(this.inputField)
+    // The listener will be removed if inputField is no longer reachable.
+    this.inputField.addEventListener('change', (e) => {
+      this.node.variables[this.name] = e.target.value;
+      if(this.node.initialState) {
+        this.node.initialState.variables[this.name] = e.target.value;
+      }
+    })
   }
 
   get isConnected() {
@@ -47,11 +44,12 @@ export default class InputPin extends DataPin
     if(!this.isConnected) {
       this.icon.className = 'icon in-disconnected';
       if(this.svg.contains(this.path)) this.svg.removeChild(this.path);
-
-      if(this.inputField && this.container.contains(this.inputField)) {
-        this.container.removeChild(this.inputField);
-      }
+      this.container.appendChild(this.inputField);
       return;
+    }
+
+    if(this.inputField && this.container.contains(this.inputField)) {
+      this.container.removeChild(this.inputField);
     }
 
     this.addLocalInputs();
@@ -66,6 +64,14 @@ export default class InputPin extends DataPin
 
     if(pointer.isLocalPointer) return null;
     return this.graph.getBlock(pointer.outputNode.id).outputPins.get(pointer.outputName);
+  }
+
+  removeConnections(e) {
+    super.removeConnections(e);
+    let outPin = this.getOutputPin();
+    this.graph.brain.disconnectVariable(this.getPointer());
+    this.refresh();
+    if(outPin)outPin.refresh();
   }
 
   drawConnection() {

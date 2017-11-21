@@ -37,6 +37,14 @@ export default class Block
     this.dragmove = this.dragmove.bind(this);
 
     this.dragArea.addEventListener('mousedown', this.dragstart);
+    // stop right click on block
+    this.dragArea.addEventListener('contextmenu', e => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // TODO: show menu for the block
+    })
+
     document.addEventListener('mouseup', this.dragstop);
   }
 

@@ -36,12 +36,17 @@ export default class ExecutionPin
     this.mouseMove = this.mouseMove.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
     this.targetMouseUp = this.targetMouseUp.bind(this);
+    this.removeConnection = this.removeConnection.bind(this);
 
     this.container.addEventListener('mousedown', this.mouseDown);
     this.container.addEventListener('mouseup', this.targetMouseUp);
+    this.container.addEventListener('contextmenu', this.removeConnection);
   }
 
   mouseDown(e) {
+    // only left mouse
+    if(e.which != 1) return;
+
     document.addEventListener('mousemove', this.mouseMove);
     document.addEventListener('mouseup', this.mouseUp);
 
@@ -54,13 +59,24 @@ export default class ExecutionPin
   }
 
   mouseUp(e) {
+    // only left mouse
+    if(e.which != 1) return;
+
     document.removeEventListener('mousemove', this.mouseMove)
     document.removeEventListener('mouseup', this.mouseUp);
     ConnectionHelper.stop(e)
   }
 
   targetMouseUp(e) {
+    // only left mouse
+    if(e.which != 1) return;
+
     ConnectionHelper.tryConnectExecution(this)
+  }
+
+  removeConnection(e) {
+    e.preventDefault();
+    e.stopPropagation();
   }
 
   get position() {

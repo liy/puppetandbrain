@@ -77,31 +77,29 @@ class ConnectionHelper
   }
 
   tryConnectExecution(pin) {
-    if(this.startPin.node == pin.node) return;
-
     // You can only connect inpin to outpin or other way around.
-    if(this.startPin.type != pin.type) {
-      let outPin = pin;
-      let inPin = this.startPin;
-      if(outPin.type == 'in') {
-        outPin = this.startPin;
-        inPin = pin;
-      }
+    if(this.startPin.type == pin.type) return;
 
-      let sourceNode = outPin.node;
-      let targetNode = inPin.node;
-      let targetParentNode = targetNode.parent;
-      let oldTargetNode = sourceNode.execution.get(outPin.name);
-
-      sourceNode.connectNext(targetNode, outPin.name)
-
-      // Only need to refresh 4 nodes' execution pins. You could go further only
-      // refresh specific out pin.
-      this.graph.getBlock(sourceNode.id).refreshExecutionPins()
-      this.graph.getBlock(targetNode.id).refreshExecutionPins()
-      if(targetParentNode) this.graph.getBlock(targetParentNode.id).refreshExecutionPins()
-      if(oldTargetNode) this.graph.getBlock(oldTargetNode.id).refreshExecutionPins()
+    let outPin = pin;
+    let inPin = this.startPin;
+    if(outPin.type == 'in') {
+      outPin = this.startPin;
+      inPin = pin;
     }
+
+    let sourceNode = outPin.node;
+    let targetNode = inPin.node;
+    let targetParentNode = targetNode.parent;
+    let oldTargetNode = sourceNode.execution.get(outPin.name);
+
+    sourceNode.connectNext(targetNode, outPin.name)
+
+    // Only need to refresh 4 nodes' execution pins. You could go further only
+    // refresh specific out pin.
+    this.graph.getBlock(sourceNode.id).refreshExecutionPins()
+    this.graph.getBlock(targetNode.id).refreshExecutionPins()
+    if(targetParentNode) this.graph.getBlock(targetParentNode.id).refreshExecutionPins()
+    if(oldTargetNode) this.graph.getBlock(oldTargetNode.id).refreshExecutionPins()
   }
 
   tryConnectData(pin) {
@@ -119,7 +117,6 @@ class ConnectionHelper
 
     this.brain.connectVariable(inputPin.node, inputPin.name, outputPin.node, outputPin.name);
 
-    console.log(outputNode)
     // Refresh the removed old output pin.
     if(outputNode) {
       let block = this.graph.getBlock(outputNode.id);

@@ -30,21 +30,22 @@ export default class ExecutionInPin extends ExecutionPin
     }
   }
 
-  mouseDown(e) {
-    document.addEventListener('mousemove', this.mouseMove);
-    document.addEventListener('mouseup', this.mouseUp);
-
-    ConnectionHelper.startExecutionPin(this, e);
-  }
-
   mouseMove(e) {
     // TODO: create a temp link, between initial execution pin position to current mouse position
     ConnectionHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
   }
 
-  mouseUp(e) {
-    document.removeEventListener('mousemove', this.mouseMove)
-    document.removeEventListener('mouseup', this.mouseUp);
-    ConnectionHelper.stop(e)
+  removeConnection(e) {
+    super.removeConnection(e);
+
+    let parentNode = this.node.parent;
+    let parentExecutionName = this.node.parentExecutionName;
+    this.node.disconnectParent(this.node.parentExecutionName)
+
+    if(parentNode) {
+      let parentBlock = this.graph.getBlock(parentNode.id);
+      parentBlock.outPins.get(parentExecutionName).refresh();
+    }
+    this.refresh();
   }
 }

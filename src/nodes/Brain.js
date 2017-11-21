@@ -89,25 +89,28 @@ export default class Brain
   }
 
   connectVariable(inputNode, inputName, outputNode, outputName, id) {
-    let pointer = new Pointer(inputNode, inputName, outputNode, outputName, id);
-    this.pointers.set(pointer.id, pointer);
-
     // remove pointer from old output node of the target input node
     let oldPointer = inputNode.inputs.get(inputName);
     if(oldPointer.outputNode) oldPointer.outputNode.outputs.disconnected(oldPointer);
     // destroy old pointer
+    this.pointers.remove(oldPointer.id);
     oldPointer.destroy()
 
+    let pointer = new Pointer(inputNode, inputName, outputNode, outputName, id);
+    this.pointers.set(pointer.id, pointer);
     // Make new connection
     inputNode.inputs.connected(pointer);
     outputNode.outputs.connected(pointer);
   }
 
-  disconnectVariable(inputNode, inputName, outputNode, outputName) {
-    let pointer = inputNode.get(inputName);
+  disconnectVariable(pointer) {
+    if(pointer.isLocalPointer) return;
+
+    pointer.inputNode.inputs.disconnect(pointer.inputName);
+    pointer.outputNode.outputs.disconnected(pointer);
+
     this.pointers.remove(pointer.id);
-    inputNode.inputs.disconnected(inputName);
-    outputNode.outputs.disconnected(pointer);
+    pointer.destroy();
   }
 
   openBrainGraph(e) {

@@ -78,6 +78,16 @@ export default class ExecutionOutPin extends ExecutionPin
         }
       }
     }
+  }
 
+  removeConnection(e) {
+    super.removeConnection(e);
+
+    let targetTask = this.node.execution.get(this.name);
+    if(targetTask) {
+      this.node.disconnectNext(targetTask, this.name);
+      this.graph.getBlock(targetTask.id).inPin.refresh();
+    }
+    this.refresh();
   }
 }

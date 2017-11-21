@@ -46,4 +46,14 @@ export default class OutputPin extends DataPin
   mouseMove(e) {
     ConnectionHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
   }
+
+  removeConnections(e) {
+    super.removeConnections(e);
+    let inputPins = this.getInputPins();
+    for(let inputPin of inputPins) {
+      this.graph.brain.disconnectVariable(inputPin.getPointer());
+      inputPin.refresh();
+    }
+    this.refresh();
+  }
 }
