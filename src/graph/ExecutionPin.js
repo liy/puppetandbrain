@@ -10,7 +10,8 @@ export default class ExecutionPin
   constructor(block, name, location='left') {
     this.block = block;
     this.node = block.node;
-    this.connectedPin = null;
+    this.graph = this.block.graph;
+    this.name = name;
 
     this.type = (location == 'left') ? 'input' : 'ouput';
 
@@ -69,9 +70,5 @@ export default class ExecutionPin
       x: (rect.left + rect.right)/2 - offset.left,
       y: (rect.top + rect.bottom)/2 - offset.top
     }
-  }
-
-  get isConnected() {
-    return this.connectedPin != null;
   }
 }

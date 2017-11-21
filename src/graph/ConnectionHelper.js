@@ -78,22 +78,17 @@ class ConnectionHelper
 
       let sourceNode = outPin.node;
       let targetNode = inPin.node;
-
-      // Remove existing, note that targetNode parent execution is set to null first. As the old next node's parent might be target node
-      // Therefore, the target node's parent's next node must be set to null first
-      // Then old next node parent is set to null
-      // Finally, setup new connection
-      if(targetNode.parent) {
-        this.graph.getBlock(targetNode.parent.id).outPins.get(targetNode.parentExecutionName).disconnect();
-      }
-      let oldTarget = sourceNode.execution.get(outPin.name);
-      if(oldTarget) {
-        this.graph.getBlock(oldTarget.id).inPin.disconnect();
-      }
+      let targetParentNode = targetNode.parent;
+      let oldTargetNode = sourceNode.execution.get(outPin.name);
 
       sourceNode.connectNext(targetNode, outPin.name)
 
-      this.graph.refresh();
+      // Only need to refresh 4 nodes' execution pins. You could go further only
+      // refresh specific out pin.
+      this.graph.getBlock(sourceNode.id).refreshExecutionPins()
+      this.graph.getBlock(targetNode.id).refreshExecutionPins()
+      if(targetParentNode) this.graph.getBlock(targetParentNode.id).refreshExecutionPins()
+      if(oldTargetNode) this.graph.getBlock(oldTargetNode.id).refreshExecutionPins()
     }
   }
 }

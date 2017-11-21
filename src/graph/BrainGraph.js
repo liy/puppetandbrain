@@ -92,14 +92,13 @@ export default class BrainGraph
   draw() {
     // draw exeuctions
     for(let task of this.brain.getTasks()) {
-      let block = this.getBlock(task.id);
+      // refresh in pin, only update the in pin icon status
+      let taskBlock = this.getBlock(task.id);
+      if(taskBlock.inPin) taskBlock.inPin.refresh();
 
       for(let name of task.execution.names) {
-        let nextNode = task.execution.get(name);
-        if(nextNode) {
-          let nextBlock = this.getBlock(nextNode.id);
-          block.outPins.get(name).connect(nextBlock.inPin);
-        }
+        // refresh out pins of current node
+        taskBlock.outPins.get(name).refresh()
       }
     }
 

@@ -36,7 +36,6 @@ export default class Block
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
 
-
     this.dragArea.addEventListener('mousedown', this.dragstart);
     document.addEventListener('mouseup', this.dragstop);
   }

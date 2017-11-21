@@ -6,8 +6,6 @@ export default class ExecutionOutPin extends ExecutionPin
   constructor(block, executionName) {
     super(block, executionName, 'right');
 
-    this.targetTask = this.node.execution.get(executionName);
-
     this.icon.className += ' out-disconnected';
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -17,28 +15,37 @@ export default class ExecutionOutPin extends ExecutionPin
     this.path.setAttribute('fill', 'transparent');
   }
 
-  connect(pin) {
-    if(typeof pin != ExecutionOutPin) {
-      this.icon.className = 'icon out-connected';
-      this.connectedPin = pin;
-      pin.connected(this);
+  getConnectedPin() {
+    let targetTask = this.node.execution.get(this.name);
+    if(!targetTask) return null;
 
+    let block = this.graph.getBlock(targetTask.id);
+    return block.inPin
+  }
+
+  get isConnected() {
+    return this.getConnectedPin() != null;
+  }
+
+  refresh() {
+    if(this.isConnected) {
+      this.icon.className = 'icon out-connected';
       this.svg.appendChild(this.path);
       this.drawConnection();
     }
-  }
-
-  disconnect() {
-    this.connectedPin = null;
-    this.icon.className = 'icon out-disconnected';
+    else {
+      this.icon.className = 'icon out-disconnected';
+      if(this.svg.contains(this.path)) this.svg.removeChild(this.path);
+    }
   }
 
   drawConnection() {
-    if(!this.isConnected) return;
+    let connectedPin = this.getConnectedPin();
+    if(!connectedPin) return;
 
     let offsetX = 20;
-    let dx = (this.connectedPin.position.x-offsetX) - (this.position.x+offsetX);
-    let dy = this.connectedPin.position.y - this.position.y;
+    let dx = (connectedPin.position.x-offsetX) - (this.position.x+offsetX);
+    let dy = connectedPin.position.y - this.position.y;
     let adx = Math.abs(dx);
     let ady = Math.abs(dy);
     let degree = Math.atan2(dy, dx)*180/Math.PI;
@@ -48,28 +55,29 @@ export default class ExecutionOutPin extends ExecutionPin
     // AND
     // 2. distance ?
     if(Math.abs(degree) < 45 && adx < 50 ) {
-      this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 L${this.connectedPin.position.x-offsetX},${this.connectedPin.position.y} l${offsetX},0`);
+      this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 L${connectedPin.position.x-offsetX},${connectedPin.position.y} l${offsetX},0`);
     }
     else {
       if(dx >= 0) {
         if(adx > ady) {
-          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${ady/2},${dy/2} ${adx-ady},0 ${ady/2},${dy/2} L${this.connectedPin.position.x-offsetX},${this.connectedPin.position.y} l${offsetX},0`);
+          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${ady/2},${dy/2} ${adx-ady},0 ${ady/2},${dy/2} L${connectedPin.position.x-offsetX},${connectedPin.position.y} l${offsetX},0`);
         }
         else {
           // dx with sign of dy
           let dxsdy = adx*Math.sign(dy)
-          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${adx/2},${dxsdy/2}, 0,${(ady-adx)*Math.sign(dy)} ${adx/2},${dxsdy/2} L${this.connectedPin.position.x-offsetX},${this.connectedPin.position.y} l${offsetX},0`);
+          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${adx/2},${dxsdy/2}, 0,${(ady-adx)*Math.sign(dy)} ${adx/2},${dxsdy/2} L${connectedPin.position.x-offsetX},${connectedPin.position.y} l${offsetX},0`);
         }
       }
       else {
         if(adx > ady) {
-          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${-ady/2},${dy/2} ${-(adx-ady)},0 L${this.connectedPin.position.x-offsetX},${this.connectedPin.position.y} l${offsetX},0`);
+          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${-ady/2},${dy/2} ${-(adx-ady)},0 L${connectedPin.position.x-offsetX},${connectedPin.position.y} l${offsetX},0`);
         }
         else {
           let dxsdy = adx*Math.sign(dy)
-          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${dx/2},${dxsdy/2} 0,${(ady-adx)*Math.sign(dy)} L${this.connectedPin.position.x-offsetX},${this.connectedPin.position.y} l${offsetX},0`);
+          this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${dx/2},${dxsdy/2} 0,${(ady-adx)*Math.sign(dy)} L${connectedPin.position.x-offsetX},${connectedPin.position.y} l${offsetX},0`);
         }
       }
     }
+
   }
 }

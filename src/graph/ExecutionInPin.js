@@ -5,30 +5,28 @@ export default class ExecutionInPin extends ExecutionPin
 {
   constructor(block) {
     super(block, '', 'left')
-
-    this.parentTask = this.node.parent;
-    this.parentExecutionName = this.node.parentExecutionName;
-
-    this.connectedPin = null
   }
 
-  connect(outPin) {
-    outPin.connect(this)
+  getConnectedPin() {
+    let parentTask = this.node.parent;
+    if(!parentTask) return null;
+
+    let block = this.graph.getBlock(parentTask.id);
+    return block.outPins.get(this.node.parentExecutionName);
   }
 
-  connected(outPin) {
-    this.icon.className = 'icon in-connected';
-    this.connectedPin = outPin;
+  get isConnected() {
+    return this.getConnectedPin() != null;
   }
 
-  disconnect() {
-    this.connectedPin = null;
-    this.icon.className = 'icon in-disconnected';
+  refresh() {
+    this.icon.className = this.isConnected ? 'icon in-connected' : 'icon in-disconnected';
   }
 
   drawConnection() {
-    if(this.connectedPin) {
-      this.connectedPin.drawConnection();
+    let connectedPin = this.getConnectedPin();
+    if(connectedPin) {
+      connectedPin.drawConnection();
     }
   }
 
