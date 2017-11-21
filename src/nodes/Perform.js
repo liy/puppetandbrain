@@ -33,7 +33,7 @@ export default class Perform extends Task
 
     // Pass the input value to the action's outputs
     for(let name of this.inputs.names) {
-      this.action.outputs.data[name] = this.inputs.value(name);
+      this.action.outputs.assignValue(name, this.inputs.value(name));
     }
 
     this.action.run();

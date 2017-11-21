@@ -100,6 +100,12 @@ window.NodeFactory = {
         variables: {
           key: 'S'
         }
+      },
+      'Loop': {
+        className: 'Loop',
+        variables: {
+          times: 5
+        }
       }
     }
   }

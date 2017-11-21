@@ -57,7 +57,8 @@ export default class Node
   }
 
   terminate() {
-
+    // when game stops, make all values undefined
+    this.outputs.clearValues();
   }
 
   get className() {

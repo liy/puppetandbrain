@@ -34,6 +34,7 @@ export default class Task extends Node
   }
 
   terminate() {
+    super.terminate();
     this.variables = this.initialState.variables;
   }
 

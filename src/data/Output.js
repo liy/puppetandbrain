@@ -5,6 +5,9 @@ export default class Output
   constructor(node) {
     this.node = node;
     this.data = Object.create(null);
+    // keep track of what type of the data is, property or value
+    // value type will be reset to undefined when game stop
+    this.types = Object.create(null);
 
     // Just keep track of which node is connected to the output
     // {
@@ -25,11 +28,13 @@ export default class Output
   }
 
   assignProperty(name, descriptor) {
+    this.types[name] = 'property';
     this.addName(name)
     Object.defineProperty(this.data, name, descriptor);
   }
 
   assignValue(name, value) {
+    this.types[name] = 'value';
     this.addName(name)
     this.data[name] = value;
   }
@@ -45,6 +50,15 @@ export default class Output
 
   get names() {
     return this.connections.getKeys();
+  }
+
+  clearValues() {
+    // reset value to be undefined
+    let names = Object.keys(this.types);
+    for(let name of names) {
+      if(this.types[name] == 'value')
+        this.data[name] = undefined;
+    }
   }
 
   /**
