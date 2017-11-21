@@ -10,9 +10,6 @@ window.BlockFactory = {
     if(blockClass) {
       return new blockClass(node, graph);
     }
-    else if(node instanceof Operator) {
-      return new OperatorBlock(node, graph)
-    }
     else {
       return new TaskBlock(node, graph);
     }
