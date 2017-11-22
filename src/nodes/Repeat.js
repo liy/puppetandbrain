@@ -1,6 +1,6 @@
 import Task from './Task'
 
-export default class Loop extends Task
+export default class Repeat extends Task
 {
   constructor(id) {
     super(id);
@@ -10,22 +10,16 @@ export default class Loop extends Task
     this.execution.set('completed');
     this.execution.set('body');
 
-    this.inputs.addName('limit');
+    this.inputs.addName('times');
     this.outputs.addName('index');
-  }
-
-  prestart() {
-    this.index = 0;
   }
 
   run() {
     super.run()
-    this.outputs.assignValue('index', this.index);
-    if(++this.index > this.inputs.value('limit')) {
-      this.execution.run('completed')
-    }
-    else {
+    for(let i=0; i<this.inputs.value('times'); ++i) {
+      this.outputs.assignValue('index', this.index);
       this.execution.run('body')
     }
+    this.execution.run('completed')
   }
 }

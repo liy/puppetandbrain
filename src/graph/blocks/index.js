@@ -20,3 +20,4 @@ export TraceBlock from './TraceBlock';
 export WaitBlock from './WaitBlock';
 export KeyDownBlock from './KeyDownBlock';
 export LoopBlock from './LoopBlock';
+export RepeatBlock from './RepeatBlock';

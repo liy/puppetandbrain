@@ -104,7 +104,13 @@ window.NodeFactory = {
       'Loop': {
         className: 'Loop',
         variables: {
-          times: 5
+          times: 3
+        }
+      },
+      'Repeat': {
+        className: 'Repeat',
+        variables: {
+          times: 3
         }
       }
     }
