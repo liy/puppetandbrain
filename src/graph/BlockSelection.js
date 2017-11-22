@@ -3,6 +3,7 @@ class BlockSelection
   constructor() {
     this.enabled = false;
     this.keydown = this.keydown.bind(this);
+    this.downOnEmptySpace = this.downOnEmptySpace.bind(this);
   }
 
   init(graph) {
@@ -18,9 +19,11 @@ class BlockSelection
     this.enabled = !this.enabled;
     if(this.enabled) {
       document.addEventListener('keydown', this.keydown);
+      this.graph.container.addEventListener('mousedown', this.downOnEmptySpace);
     }
     else {
       document.removeEventListener('keydown', this.keydown);
+      this.graph.container.removeEventListener('mousedown', this.downOnEmptySpace);
     }
   }
 
@@ -38,6 +41,17 @@ class BlockSelection
     }
     this.selected = block;
     this.selected.container.classList.add('block-selected')
+  }
+  
+  downOnEmptySpace(e) {
+    if(e.target == this.graph.container) this.deselectAll();;
+  }
+
+  deselectAll() {
+    if(this.selected) {
+      this.selected.container.classList.remove('block-selected')
+      this.selected = null;
+    }
   }
 
   delete() {
