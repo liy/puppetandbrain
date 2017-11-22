@@ -1,6 +1,6 @@
 import OperatorBlock from "./OperatorBlock";
 
-export default class RandomNumber extends OperatorBlock
+export default class RandomNumberBlock extends OperatorBlock
 {
   constructor(node, graph) {
     super(node, graph);

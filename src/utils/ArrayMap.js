@@ -40,6 +40,10 @@ export default class ArrayMap
     })
   }
 
+  contains(key) {
+    return key in this;
+  }
+
   get length() {
     return this.keys.length;
   }

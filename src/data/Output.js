@@ -24,18 +24,23 @@ export default class Output
   }
 
   addName(name) {
-    this.connections.set(name, new ArrayMap());
+    // Only set name and associated array map once
+    // Otherwise you are force to make sure addName has to be called before any assignment
+    // Which is not ideal, you will forget to addName....
+    if(!this.connections.contains(name)) {
+      this.connections.set(name, new ArrayMap());
+    }
   }
 
-  // Make sure addName called first! In order to record connection information
   assignProperty(name, descriptor) {
     this.types[name] = 'property';
+    this.addName(name);
     Object.defineProperty(this.data, name, descriptor);
   }
 
-  // Make sure addName called first! In order to record connection information
   assignValue(name, value) {
     this.types[name] = 'value';
+    this.addName(name);
     this.data[name] = value;
   }
 
@@ -50,6 +55,10 @@ export default class Output
 
   get names() {
     return this.connections.getKeys();
+  }
+
+  isConnected(name) {
+    return this.connections.get(name).length != 0;
   }
 
   clearValues() {
