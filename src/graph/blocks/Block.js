@@ -61,8 +61,8 @@ export default class Block
   }
 
   dragstart(e) {
-    BlockSelection.select(this);
-    BlockSelection.delete()
+    // BlockSelection.select(this);
+    // BlockSelection.delete()
 
     this._dragOffset = {
       x: this.container.offsetLeft - e.clientX,
