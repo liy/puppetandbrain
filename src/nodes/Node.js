@@ -22,6 +22,8 @@ export default class Node
     this.inputs.destroy();
     this.outputs.destroy();
     LookUp.removeNode(this.id);
+    // remove the node from the brain
+    this.owner.brain.removeNode(this.id);
   }
 
   init(pod) {

@@ -58,17 +58,7 @@ export default class Block
     this.dragArea.removeEventListener('mousedown', this.dragstart);
     document.removeEventListener('mouseup', this.dragstop);
     document.removeEventListener('mousemove', this.dragmove);
-  }
-
-  delete() {
-    this.destroy();
-    // disconnect all variable pins
-    for(let pin of this.inputPins.getValues()) {
-      pin.removeConnections();
-    }
-    for(let pin of this.outputPins.getValues()) {
-      pin.removeConnections();
-    }
+    BrainGraph.removeBlock(this);
   }
 
   dragstart(e) {

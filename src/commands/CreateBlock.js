@@ -4,11 +4,11 @@ export default class CreateBlock extends Command
 {
   constructor(owner, pod, x, y) {
     super();
-    console.log(owner)
     this.owner = owner;
     this.pod = pod;
     this.x = x;
     this.y = y;
+    // When redo, use this node id
     this.nodeID = undefined;
 
     this.push();
@@ -23,17 +23,14 @@ export default class CreateBlock extends Command
       y: this.y
     })
 
-    let block = BlockFactory.create(node, BrainGraph)
-    BrainGraph.addBlock(block);
-
     this.nodeID = node.id;
+
+    BlockFactory.create(node, BrainGraph)
   }
 
   undo() {
     let block = BrainGraph.getBlock(this.nodeID);
-    block.delete();
-    BrainGraph.removeBlock(block);
-    this.owner.brain.removeNode(block.node);
+    BrainGraph.destroyBlock(block);
   }
 
   redo() {

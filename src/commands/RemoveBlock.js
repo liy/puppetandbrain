@@ -2,8 +2,9 @@ import Command from './Command';
 
 export default class RemoveBlock extends Command
 {
-  constructor() {
+  constructor(block) {
     super();
+    this.block = block;
   }
   
   porcess() {

@@ -45,9 +45,6 @@ class BrainGraph
     while(this.svg.lastChild) {
       this.svg.removeChild(this.svg.lastChild)
     }
-    while(this.blockContainer.lastChild) {
-      this.blockContainer.removeChild(this.blockContainer.lastChild)
-    }
     for(let block of this.blocks.getValues()) {
       block.destroy();
     }
@@ -113,18 +110,32 @@ class BrainGraph
     this.blockContainer.appendChild(block.container);
   }
 
+  // remove it visually
   removeBlock(block) {
     this.blocks.remove(block.id);
     this.blockContainer.removeChild(block.container);
+  }
+
+  // destroy node and block all together and its connections, also remove it visually
+  destroyBlock(block) {
+    // disconnect all variable pins
+    for(let pin of block.inputPins.getValues()) {
+      pin.removeConnections();
+    }
+    for(let pin of block.outputPins.getValues()) {
+      pin.removeConnections();
+    }
+    // destroy block and remove it from the graph
+    block.destroy();
+    // destroy the node and remove from the brain
+    block.node.destroy();
   }
 
   getBlock(id) {
     return this.blocks.get(id);
   }
 
-  createBlock(pod, x, y) {
-    Commander.create('CreateBlock', this.brain.owner, pod, x, y).process();
-  }
+  
 
   openNodeMenu(e) {
     if(e.target == this.container) e.preventDefault();
