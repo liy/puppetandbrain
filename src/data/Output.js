@@ -27,15 +27,15 @@ export default class Output
     this.connections.set(name, new ArrayMap());
   }
 
+  // Make sure addName called first! In order to record connection information
   assignProperty(name, descriptor) {
     this.types[name] = 'property';
-    this.addName(name)
     Object.defineProperty(this.data, name, descriptor);
   }
 
+  // Make sure addName called first! In order to record connection information
   assignValue(name, value) {
     this.types[name] = 'value';
-    this.addName(name)
     this.data[name] = value;
   }
 
