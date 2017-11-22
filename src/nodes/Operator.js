@@ -42,7 +42,6 @@ export class Multiply extends Operator
 
   get value() {
     let v = this.inputs.value('A') * this.inputs.value('B');
-    console.warn(v)
     return v;
   }
 }

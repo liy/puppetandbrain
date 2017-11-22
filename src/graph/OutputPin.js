@@ -10,12 +10,7 @@ export default class OutputPin extends DataPin
     this.icon.className = 'icon out-disconnected';
   }
 
-  getPointer() {
-    this.node.inputs.get(this.name);
-  }
-
   get isConnected() {
-    console.log(this)
     // The output will have multiple connections, as there might be
     // other inputs referencing this output.
     return this.node.outputs.connections.get(this.name).length != 0

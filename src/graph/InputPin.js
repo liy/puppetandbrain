@@ -72,13 +72,12 @@ export default class InputPin extends DataPin
     let outPin = this.getOutputPin();
     this.graph.brain.disconnectVariable(this.getPointer());
     this.refresh();
-    if(outPin)outPin.refresh();
+    if(outPin) outPin.refresh();
   }
 
   drawConnection() {
     let pointer = this.getPointer();
     if(pointer.isLocalPointer) return;
-
 
     let outputPin = this.getOutputPin();
 

@@ -3,6 +3,7 @@ import ExecutionOutPin from "../ExecutionOutPin";
 import InputPin from "../InputPin";
 import OutputPin from "../OutputPin";
 import ArrayMap from "../../utils/ArrayMap";
+import BlockSelection from '../BlockSelection';
 
 import styles from './Block.scss';
 
@@ -48,18 +49,21 @@ export default class Block
     document.addEventListener('mouseup', this.dragstop);
   }
 
-  added() {
-    this.container.style.left = this.node.x +'px'
-    this.container.style.top = this.node.y +'px'
-  }
-
   destroy() {
     this.dragArea.removeEventListener('mousedown', this.dragstart);
     document.removeEventListener('mouseup', this.dragstop);
     document.removeEventListener('mousemove', this.dragmove)
   }
 
+  added() {
+    this.container.style.left = this.node.x +'px'
+    this.container.style.top = this.node.y +'px'
+  }
+
   dragstart(e) {
+    BlockSelection.select(this);
+    BlockSelection.delete()
+
     this._dragOffset = {
       x: this.container.offsetLeft - e.clientX,
       y: this.container.offsetTop - e.clientY
