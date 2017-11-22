@@ -21,6 +21,7 @@ export default class Node
   destroy() {
     this.inputs.destroy();
     this.outputs.destroy();
+    LookUp.removeNode(this.id);
   }
 
   init(pod) {

@@ -18,11 +18,6 @@ export default class Task extends Node
     this.setInitialState();
   }
 
-  destroy() {
-    super.destroy();
-    LookUp.removeTask(this.id);
-  }
-
   get hasIn() {
     return true;
   }

@@ -36,11 +36,11 @@ export default class ExecutionPin
     this.mouseMove = this.mouseMove.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
     this.targetMouseUp = this.targetMouseUp.bind(this);
-    this.removeConnection = this.removeConnection.bind(this);
+    this.rightMouseDown = this.rightMouseDown.bind(this);
 
     this.container.addEventListener('mousedown', this.mouseDown);
     this.container.addEventListener('mouseup', this.targetMouseUp);
-    this.container.addEventListener('contextmenu', this.removeConnection);
+    this.container.addEventListener('contextmenu', this.rightMouseDown);
   }
 
   mouseDown(e) {
@@ -74,9 +74,10 @@ export default class ExecutionPin
     ConnectionHelper.tryConnectExecution(this)
   }
 
-  removeConnection(e) {
+  rightMouseDown(e) {
     e.preventDefault();
     e.stopPropagation();
+    this.removeConnections();
   }
 
   get position() {

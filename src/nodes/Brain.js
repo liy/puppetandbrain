@@ -66,6 +66,11 @@ export default class Brain
     return node;
   }
 
+  removeNode(node) {
+    this.nodes.remove(node.id);
+    node.destroy();
+  }
+
   getNode(id) {
     return this.nodes.get(id);
   }

@@ -53,6 +53,15 @@ export default class TaskBlock extends Block
     }
   }
 
+  delete() {
+    super.delete();
+    // disconnect all executions pins
+    if(this.inPin) this.inPin.removeConnections();
+    for(let pin of this.outPins.getValues()) {
+      pin.removeConnections();
+    }
+  }
+
   refreshExecutionPins() {
     if(this.inPin) this.inPin.refresh();
     for(let pin of this.outPins.getValues()) {

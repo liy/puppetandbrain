@@ -80,9 +80,7 @@ export default class ExecutionOutPin extends ExecutionPin
     }
   }
 
-  removeConnection(e) {
-    super.removeConnection(e);
-
+  removeConnections() {
     let targetTask = this.node.execution.get(this.name);
     if(targetTask) {
       this.node.disconnectNext(targetTask, this.name);

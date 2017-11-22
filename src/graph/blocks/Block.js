@@ -12,6 +12,7 @@ export default class Block
   constructor(node, graph) {
     this.node = node;
     this.graph = graph;
+    this.brain = this.node.brain;
     this.id = this.node.id;
 
     this.inputPins = new ArrayMap();
@@ -52,7 +53,18 @@ export default class Block
   destroy() {
     this.dragArea.removeEventListener('mousedown', this.dragstart);
     document.removeEventListener('mouseup', this.dragstop);
-    document.removeEventListener('mousemove', this.dragmove)
+    document.removeEventListener('mousemove', this.dragmove);
+  }
+
+  delete() {
+    this.destroy();
+    // disconnect all variable pins
+    for(let pin of this.inputPins.getValues()) {
+      pin.removeConnections();
+    }
+    for(let pin of this.outputPins.getValues()) {
+      pin.removeConnections();
+    }
   }
 
   added() {
@@ -61,8 +73,7 @@ export default class Block
   }
 
   dragstart(e) {
-    // BlockSelection.select(this);
-    // BlockSelection.delete()
+    BlockSelection.select(this);
 
     this._dragOffset = {
       x: this.container.offsetLeft - e.clientX,

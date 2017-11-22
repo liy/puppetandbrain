@@ -1,5 +1,6 @@
 require('./BrainGraph.scss')
 
+import BlockSelection from './BlockSelection';
 import ConnectionHelper from './ConnectionHelper'
 import ArrayMap from '../utils/ArrayMap';
 import NodeMenu from './NodeMenu';
@@ -30,6 +31,7 @@ export default class BrainGraph
       this.addBlock(block)
     }
 
+    BlockSelection.init(this);
     ConnectionHelper.init(this);
     this.draw();
   }
@@ -63,11 +65,14 @@ export default class BrainGraph
 
     this.keydown = this.keydown.bind(this)
     document.addEventListener('keydown', this.keydown);
+
+    BlockSelection.toggle();
   }
 
   close() {
     this.destroy();
     Stage.blurEnabled = false;
+    BlockSelection.toggle();
   }
 
   mousedown(e) {
@@ -118,6 +123,11 @@ export default class BrainGraph
     this.blocks.set(block.id, block);
     this.blockContainer.appendChild(block.container);
     block.added();
+  }
+
+  removeBlock(block) {
+    this.blocks.remove(block.id);
+    this.blockContainer.removeChild(block.container);
   }
 
   getBlock(id) {

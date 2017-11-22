@@ -67,8 +67,7 @@ export default class InputPin extends DataPin
     return this.graph.getBlock(pointer.outputNode.id).outputPins.get(pointer.outputName);
   }
 
-  removeConnections(e) {
-    super.removeConnections(e);
+  removeConnections() {
     let outPin = this.getOutputPin();
     this.graph.brain.disconnectVariable(this.getPointer());
     this.refresh();

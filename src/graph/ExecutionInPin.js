@@ -39,9 +39,7 @@ export default class ExecutionInPin extends ExecutionPin
     ConnectionHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
   }
 
-  removeConnection(e) {
-    super.removeConnection(e);
-
+  removeConnections() {
     // disconnect all parent connections
     let callers = this.node.callers.getValues().concat();
     for(let caller of callers) {
