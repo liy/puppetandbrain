@@ -1,13 +1,11 @@
-export default class CreateNode
+import Command from './Command';
+
+export default class RemoveBlock extends Command
 {
   constructor() {
     super();
   }
-
-  init(data) {
-    super.init();
-  }
-
+  
   porcess() {
     
   }

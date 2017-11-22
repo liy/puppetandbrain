@@ -19,7 +19,7 @@ export default class ExecutionOutPin extends ExecutionPin
     let targetTask = this.node.execution.get(this.name);
     if(!targetTask) return null;
 
-    let block = this.graph.getBlock(targetTask.id);
+    let block = BrainGraph.getBlock(targetTask.id);
     return block.inPin
   }
 
@@ -84,7 +84,7 @@ export default class ExecutionOutPin extends ExecutionPin
     let targetTask = this.node.execution.get(this.name);
     if(targetTask) {
       this.node.disconnectNext(targetTask, this.name);
-      this.graph.getBlock(targetTask.id).inPin.refresh();
+      BrainGraph.getBlock(targetTask.id).inPin.refresh();
     }
     this.refresh();
   }

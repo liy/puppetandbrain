@@ -7,7 +7,6 @@ export default class DataPin
   constructor(block, name, location) {
     this.block = block;
     this.node = this.block.node;
-    this.graph = this.block.graph;
     this.name = name;
 
     this.svg = document.getElementById('svg');

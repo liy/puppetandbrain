@@ -89,11 +89,13 @@ export default class Actor extends PIXI.Container
     if(this.actions[ActionName.POINTER_DOWN]) {
       this.actions[ActionName.POINTER_DOWN].run();
     }
+    
+    // Open brain graph
     setTimeout(() => {
       this._clickCounter = 0;
     }, 300)
     if(++this._clickCounter%2 == 0) {
-      this.emit('brain.open')
+      Commander.create('OpenGraph', this.brain).process();
     }
   }
 

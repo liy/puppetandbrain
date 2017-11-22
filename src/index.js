@@ -19,6 +19,9 @@ require('./LookUp');
 require('./nodes/NodeFactory');
 require('./objects/ActorFactory');
 require('./graph/BlockFactory');
+require('./commands/History');
+require('./commands/Commander');
+require('./graph/BrainGraph')
 
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';

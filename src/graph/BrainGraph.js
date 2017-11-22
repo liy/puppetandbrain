@@ -1,42 +1,47 @@
 require('./BrainGraph.scss')
 
 import BlockSelection from './BlockSelection';
-import ConnectionHelper from './ConnectionHelper'
 import ArrayMap from '../utils/ArrayMap';
 import NodeMenu from './NodeMenu';
 import Stage from '../objects/Stage'
 
-
-export default class BrainGraph
+class BrainGraph
 {
-  constructor(actor) {
+  constructor() {
     this.container = document.getElementById('graph');
-
-    this.actor = actor;
-    this.brain = this.actor.brain;
     this.blockContainer = document.getElementById('block-container');
     this.svg = document.getElementById('svg');
+    this.dbClicks = 0;
+  }
 
+  open(brain) {
+    this.brain = brain;
     this.blocks = new ArrayMap();
 
+    this.resize = this.resize.bind(this);
+    this.keydown = this.keydown.bind(this)
+    this.mousedown = this.mousedown.bind(this);
+    this.openNodeMenu = this.openNodeMenu.bind(this)
+
+    this.container.style = "visibility:visible"
+    Stage.blurEnabled = true;
+
+    this.container.addEventListener('contextmenu', this.openNodeMenu);
+    this.container.addEventListener('mousedown', this.mousedown);
+    document.addEventListener('keydown', this.keydown);
     window.addEventListener('resize', this.resize);
     this.resize();
 
-    this.openNodeMenu = this.openNodeMenu.bind(this)
-  }
+    BlockSelection.toggle();
 
-  init() {
     for(let node of this.brain.getNodes()) {
-      let block = BlockFactory.create(node, this);
-      this.addBlock(block)
+      BlockFactory.create(node, this);
     }
 
-    BlockSelection.init(this);
-    ConnectionHelper.init(this);
     this.draw();
   }
 
-  destroy() {
+  close() {
     while(this.svg.lastChild) {
       this.svg.removeChild(this.svg.lastChild)
     }
@@ -48,37 +53,21 @@ export default class BrainGraph
     }
 
     this.container.style = "visibility:hidden"
+   
     this.container.removeEventListener('contextmenu', this.openNodeMenu);
-    this.container.removeEventListener('mousedown', this.mousedown)
-    document.removeEventListener('keydown', this.keydown)
-  }
+    this.container.removeEventListener('mousedown', this.mousedown);
+    document.removeEventListener('keydown', this.keydown);
+    window.removeEventListener('resize', this.resize);
 
-  open() {
-    this.container.style = "visibility:visible"
-    Stage.blurEnabled = true;
-
-    this.container.addEventListener('contextmenu', this.openNodeMenu);
-
-    this.dbClicks = 0;
-    this.mousedown = this.mousedown.bind(this);
-    this.container.addEventListener('mousedown', this.mousedown);
-
-    this.keydown = this.keydown.bind(this)
-    document.addEventListener('keydown', this.keydown);
-
-    BlockSelection.toggle();
-  }
-
-  close() {
-    this.destroy();
     Stage.blurEnabled = false;
     BlockSelection.toggle();
   }
 
+
   mousedown(e) {
     if(e.target == this.container) {
       if(++this.dbClicks%2 == 0) {
-        this.close();
+        Commander.create('CloseGraph', this.brain).process();
         return;
       }
       setTimeout(() => {
@@ -90,7 +79,7 @@ export default class BrainGraph
   keydown(e) {
     // escape
     if(e.keyCode == 27) {
-      this.close();
+      Commander.create('CloseGraph', this.brain).process();
     }
   }
 
@@ -122,7 +111,6 @@ export default class BrainGraph
   addBlock(block) {
     this.blocks.set(block.id, block);
     this.blockContainer.appendChild(block.container);
-    block.added();
   }
 
   removeBlock(block) {
@@ -135,15 +123,7 @@ export default class BrainGraph
   }
 
   createBlock(pod, x, y) {
-    let node = NodeFactory.create(pod.className);
-    node.init({
-      ...pod,
-      owner: this.actor,
-      x: x,
-      y: y
-    })
-    let block = BlockFactory.create(node, this)
-    this.addBlock(block);
+    Commander.create('CreateBlock', this.brain.owner, pod, x, y).process();
   }
 
   openNodeMenu(e) {
@@ -167,3 +147,5 @@ export default class BrainGraph
     this.svg.setAttribute('height', window.innerHeight)
   }
 }
+
+window.BrainGraph = new BrainGraph();

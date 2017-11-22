@@ -1,12 +1,10 @@
-import History from './History';
-
 export default class Command
 {
   constructor() {
-
+    this.passThrough = false;
   }
 
-  init(data) {
+  push() {
     History.push(this);
   }
 

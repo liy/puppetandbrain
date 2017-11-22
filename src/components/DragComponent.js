@@ -26,6 +26,9 @@ export default class DragComponent extends Component
       x: this.entity.x - p.x,
       y: this.entity.y - p.y
     }
+
+    // crete move command, when move update it with new position
+    this.moveCommand = Commander.create('MoveActor', this.entity);
   }
 
   dragmove(e) {
@@ -39,5 +42,8 @@ export default class DragComponent extends Component
 
   dragend() {
     this.data = null;
+    
+    // update entity's new position
+    if(this.moveCommand) this.moveCommand.process()
   }
 }

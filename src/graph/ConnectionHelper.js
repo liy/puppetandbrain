@@ -5,11 +5,6 @@ class ConnectionHelper
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
   }
 
-  init(graph) {
-    this.graph = graph;
-    this.brain = this.graph.brain;
-  }
-
   startExecutionPin(pin, e) {
     this.path.setAttribute('stroke', '#cddc39');
     this.path.setAttribute('stroke-width', 3);
@@ -96,9 +91,9 @@ class ConnectionHelper
 
     // Only need to refresh 4 nodes' execution pins. You could go further only
     // refresh specific out pin.
-    this.graph.getBlock(sourceNode.id).refreshExecutionPins()
-    this.graph.getBlock(targetNode.id).refreshExecutionPins()
-    if(oldTargetNode) this.graph.getBlock(oldTargetNode.id).refreshExecutionPins()
+    BrainGraph.getBlock(sourceNode.id).refreshExecutionPins()
+    BrainGraph.getBlock(targetNode.id).refreshExecutionPins()
+    if(oldTargetNode) BrainGraph.getBlock(oldTargetNode.id).refreshExecutionPins()
   }
 
   tryConnectData(pin) {
@@ -114,11 +109,11 @@ class ConnectionHelper
     let pointer = inputPin.node.inputs.get(inputPin.name);
     let outputNode = pointer.outputNode;
 
-    this.brain.connectVariable(inputPin.node, inputPin.name, outputPin.node, outputPin.name);
+    BrainGraph.brain.connectVariable(inputPin.node, inputPin.name, outputPin.node, outputPin.name);
 
     // Refresh the removed old output pin.
     if(outputNode) {
-      let block = this.graph.getBlock(outputNode.id);
+      let block = BrainGraph.getBlock(outputNode.id);
       block.outputPins.get(pointer.outputName).refresh();
     }
 

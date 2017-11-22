@@ -1,6 +1,5 @@
 import ArrayMap from '../utils/ArrayMap';
 import Pointer from '../data/Pointer';
-import BrainGraph from '../graph/BrainGraph';
 import Task from './Task';
 
 export default class Brain
@@ -8,12 +7,8 @@ export default class Brain
   constructor(owner, id) {
     this.id = LookUp.addBrain(this, id)
     this.owner = owner;
-
     this.nodes = new ArrayMap();
     this.pointers = new ArrayMap();
-
-    this.openBrainGraph = this.openBrainGraph.bind(this);
-    this.owner.on('brain.open', this.openBrainGraph);
   }
 
   init(pod) {
@@ -50,7 +45,6 @@ export default class Brain
   }
 
   destroy() {
-    this.owner.off('brain.open', this.openBrainGraph);
     LookUp.removeBrain(this.id)
   }
 
@@ -116,12 +110,6 @@ export default class Brain
 
     this.pointers.remove(pointer.id);
     pointer.destroy();
-  }
-
-  openBrainGraph(e) {
-    this.graph = new BrainGraph(this.owner);
-    this.graph.init()
-    this.graph.open();
   }
 
   pod() {

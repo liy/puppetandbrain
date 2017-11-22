@@ -5,13 +5,13 @@ import OperatorBlock from './blocks/OperatorBlock';
 
 
 window.BlockFactory = {
-  create: function(node, graph) {
+  create: function(node) {
     let blockClass = BlockClasses[node.className+'Block']
     if(blockClass) {
-      return new blockClass(node, graph);
+      return new blockClass(node);
     }
     else {
-      return new TaskBlock(node, graph);
+      return new TaskBlock(node);
     }
   }
 }

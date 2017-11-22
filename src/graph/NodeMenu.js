@@ -2,16 +2,15 @@ require('./NodeMenu.scss')
 
 export default class NodeMenu
 {
-  constructor(graph) {
-    this.graph = graph;
+  constructor() {
     this.container = document.createElement('div');
     this.container.setAttribute('id', 'node-menu');
 
-    this.graph.container.appendChild(this.container);
+    BrainGraph.container.appendChild(this.container);
   }
 
   destroy() {
-    this.graph.container.removeChild(this.container);
+    BrainGraph.container.removeChild(this.container);
   }
 
   init() {
@@ -24,13 +23,13 @@ export default class NodeMenu
       this.container.appendChild(item);
 
       item.addEventListener('click', e => {
-        this.graph.createBlock(pod, e.clientX, e.clientY);
+        BrainGraph.createBlock(pod, e.clientX, e.clientY);
         this.destroy();
       });
     }
 
-    this.graph.container.addEventListener('mousedown', (e) => {
-      if(e.target == this.graph.container) this.destroy();
+    BrainGraph.container.addEventListener('mousedown', (e) => {
+      if(e.target == BrainGraph.container) this.destroy();
     }, {once: true})
   }
 

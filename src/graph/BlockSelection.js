@@ -6,24 +6,15 @@ class BlockSelection
     this.downOnEmptySpace = this.downOnEmptySpace.bind(this);
   }
 
-  init(graph) {
-    this.graph = graph;
-    this.brain = this.graph.brain;
-  }
-
-  destroy() {
-    document.removeEventListener('keydown', this.keydown);
-  }
-
   toggle() {
     this.enabled = !this.enabled;
     if(this.enabled) {
       document.addEventListener('keydown', this.keydown);
-      this.graph.container.addEventListener('mousedown', this.downOnEmptySpace);
+      BrainGraph.container.addEventListener('mousedown', this.downOnEmptySpace);
     }
     else {
       document.removeEventListener('keydown', this.keydown);
-      this.graph.container.removeEventListener('mousedown', this.downOnEmptySpace);
+      BrainGraph.container.removeEventListener('mousedown', this.downOnEmptySpace);
     }
   }
 
@@ -44,7 +35,7 @@ class BlockSelection
   }
   
   downOnEmptySpace(e) {
-    if(e.target == this.graph.container) this.deselectAll();;
+    if(e.target == BrainGraph.container) this.deselectAll();;
   }
 
   deselectAll() {
@@ -56,8 +47,8 @@ class BlockSelection
 
   delete() {
     this.selected.delete();
-    this.graph.removeBlock(this.selected)
-    this.brain.removeNode(this.selected.node);
+    BrainGraph.removeBlock(this.selected)
+    BrainGraph.brain.removeNode(this.selected.node);
   }
 }
 

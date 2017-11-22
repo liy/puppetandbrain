@@ -24,7 +24,7 @@ export default class OutputPin extends DataPin
   getInputPins() {
     let pointers = this.node.outputs.connections.get(this.name).getValues();
     return pointers.map(pointer => {
-      let inputBlock = this.graph.getBlock(pointer.inputNode.id);
+      let inputBlock = BrainGraph.getBlock(pointer.inputNode.id);
       return inputBlock.inputPins.get(pointer.inputName)
     });
   }
@@ -33,7 +33,7 @@ export default class OutputPin extends DataPin
     let pointers = this.node.outputs.connections.get(this.name).getValues();
     for(let pointer of pointers) {
       // inputPin.drawConnection();
-      let inputBlock = this.graph.getBlock(pointer.inputNode.id);
+      let inputBlock = BrainGraph.getBlock(pointer.inputNode.id);
       inputBlock.inputPins.get(pointer.inputName).drawConnection();
     }
   }
@@ -45,7 +45,7 @@ export default class OutputPin extends DataPin
   removeConnections() {
     let inputPins = this.getInputPins();
     for(let inputPin of inputPins) {
-      this.graph.brain.disconnectVariable(inputPin.getPointer());
+      BrainGraph.brain.disconnectVariable(inputPin.getPointer());
       inputPin.refresh();
     }
     this.refresh();

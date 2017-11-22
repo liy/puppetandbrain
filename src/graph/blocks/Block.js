@@ -9,9 +9,8 @@ import styles from './Block.scss';
 
 export default class Block
 {
-  constructor(node, graph) {
+  constructor(node) {
     this.node = node;
-    this.graph = graph;
     this.brain = this.node.brain;
     this.id = this.node.id;
 
@@ -48,6 +47,11 @@ export default class Block
     })
 
     document.addEventListener('mouseup', this.dragstop);
+
+    // append block to stage
+    BrainGraph.addBlock(this);
+    this.container.style.left = this.node.x +'px'
+    this.container.style.top = this.node.y +'px'
   }
 
   destroy() {
@@ -65,11 +69,6 @@ export default class Block
     for(let pin of this.outputPins.getValues()) {
       pin.removeConnections();
     }
-  }
-
-  added() {
-    this.container.style.left = this.node.x +'px'
-    this.container.style.top = this.node.y +'px'
   }
 
   dragstart(e) {

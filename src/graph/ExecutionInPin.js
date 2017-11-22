@@ -8,13 +8,8 @@ export default class ExecutionInPin extends ExecutionPin
   }
 
   getConnectedPins() {
-    // let parentTask = this.node.parent;
-    // if(!parentTask) return null;
-
-    // let block = this.graph.getBlock(parentTask.id);
-    // return block.outPins.get(this.node.parentExecutionName);
     return this.node.callers.getValues().map(caller => {
-      let block = this.graph.getBlock(caller.task.id);
+      let block = BrainGraph.getBlock(caller.task.id);
       return block.outPins.get(caller.executionName);
     })
   }
@@ -45,7 +40,7 @@ export default class ExecutionInPin extends ExecutionPin
     for(let caller of callers) {
       this.node.disconnectParent(caller.task, caller.executionName);
 
-      let callerBlock = this.graph.getBlock(caller.task.id);
+      let callerBlock = BrainGraph.getBlock(caller.task.id);
       callerBlock.outPins.get(caller.executionName).refresh();
     }
 
