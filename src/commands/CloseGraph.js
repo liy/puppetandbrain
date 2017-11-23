@@ -14,7 +14,10 @@ export default class CloseGraph extends Command
   }
 
   undo() {
-    BrainGraph.open(LookUp.get(this.brainID));
+    let brain = LookUp.get(this.brainID);
+    BrainGraph.open(brain);
+    // make sure its owner is selected
+    brain.owner.getComponent('SelectionComponent').select();
   }
 
   redo() {

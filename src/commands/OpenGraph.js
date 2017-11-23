@@ -9,7 +9,10 @@ export default class OpenGraph extends Command
   }
 
   process() {
-    BrainGraph.open(LookUp.get(this.brainID));
+    let brain = LookUp.get(this.brainID);
+    BrainGraph.open(brain);
+    // make sure its owner is selected
+    brain.owner.getComponent('SelectionComponent').select();
     return this;
   }
 
