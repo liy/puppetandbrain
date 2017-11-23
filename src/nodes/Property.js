@@ -5,6 +5,8 @@ export default class Property extends DataNode
 {
   constructor(id) {
     super(id)
+
+    this.inputs.addInput('target')
   }
 
   init(pod) {

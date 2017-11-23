@@ -19,6 +19,12 @@ class History
     if(cmd) {
       this.undos.push(cmd)
       this.redos = [];
+
+      // cap the number of undo to be 200
+      // TODO: maybe allow more?
+      if(this.undos.length > 200) {
+        this.undos.shift();
+      }
     }
   }
 
