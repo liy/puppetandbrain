@@ -44,11 +44,12 @@ export default class OutputPin extends DataPin
   }
 
   removeConnections() {
-    let inputPins = this.getInputPins();
-    for(let inputPin of inputPins) {
-      inputPin.pointer.disconnect();
-      inputPin.refresh();
-    }
-    this.refresh();
+    // let inputPins = this.getInputPins();
+    // for(let inputPin of inputPins) {
+    //   inputPin.pointer.disconnect();
+    //   inputPin.refresh();
+    // }
+    // this.refresh();
+    History.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).process());
   }
 }

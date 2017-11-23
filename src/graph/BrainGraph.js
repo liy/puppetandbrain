@@ -121,12 +121,15 @@ class BrainGraph
   // destroy node and block all together and its connections, also remove it visually
   deleteBlock(block) {
     // disconnect all execution pins, if it has any
-    if(block.inPin) block.inPin.removeConnections();
+    if(block.inPin) {
+      Commander.create('RemoveParentExecution', block.node).process();
+    }
     if(block.outPins) {
       for(let pin of block.outPins.getValues()) {
-        pin.removeConnections();
+        Commander.create('RemoveExecution', pin.node, pin.name).process();        
       }
     }
+    // FIXME: use command!!!!!
     // disconnect all variable pins
     for(let pin of block.inputPins.getValues()) {
       pin.removeConnections();

@@ -16,8 +16,10 @@ class History
   }
 
   push(cmd) {
-    this.undos.push(cmd)
-    this.redos = [];
+    if(cmd) {
+      this.undos.push(cmd)
+      this.redos = [];
+    }
   }
 
   undo() {

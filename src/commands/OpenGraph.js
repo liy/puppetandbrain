@@ -6,12 +6,11 @@ export default class OpenGraph extends Command
     super();
     this.passThrough = true;
     this.brain = brain;
-
-    // this.push();
   }
 
   process() {
     BrainGraph.open(this.brain);
+    return this;
   }
 
   undo() {

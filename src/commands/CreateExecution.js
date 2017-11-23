@@ -4,21 +4,21 @@ export default class CreateExecution extends Command
 {
   constructor(source, executionName, target) {
     super();
-    this.source = source;
+    this.sourceID = source.id;
     this.executionName = executionName;
-    this.target = target;
+    this.targetID = target.id;
 
-    this.oldTarget = this.source.execution.get(executionName);
+    this.oldTargetID = source.execution.get(executionName).id;
 
     this.push();
   }
 
   process() {
-    this.source.connectNext(this.target, this.executionName);
+    LookUp.get(this.sourceID).connectNext(LookUp.get(this.targetID), this.executionName);
   }
 
   undo() {
-    this.source.connectNext(this.oldTarget, this.executionName);
+    LookUp.get(this.sourceID).connectNext(LookUp.get(this.oldTargetID), this.executionName);
     BrainGraph.refresh()
   }
 

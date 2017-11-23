@@ -46,7 +46,7 @@ class BlockSelection
   }
 
   delete() {
-    Commander.create('DeleteBlock', this.selected).process();
+    History.push(Commander.create('DeleteBlock', this.selected).process());
   }
 }
 

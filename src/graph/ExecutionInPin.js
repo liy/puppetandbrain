@@ -34,16 +34,11 @@ export default class ExecutionInPin extends ExecutionPin
     ConnectionHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
   }
 
-  removeConnections() {
-    // disconnect all parent connections
-    let callers = this.node.callers.getValues().concat();
-    for(let caller of callers) {
-      this.node.disconnectParent(caller.task, caller.executionName);
+  rightMouseDown(e) {
+    super.rightMouseDown(e)
 
-      let callerBlock = BrainGraph.getBlock(caller.task.id);
-      callerBlock.outPins.get(caller.executionName).refresh();
-    }
-
-    this.refresh();
+    // Loop through all callers to remove execution, note that process
+    // does not refresh, manual refresh has to be made
+    History.push(Commander.create('RemoveParentExecution', this.node).process());
   }
 }

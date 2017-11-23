@@ -14,7 +14,7 @@ export default class MoveActor extends Command
     this.newY = this.actor.y;
 
     if(Math.abs(this.oldX - this.newX) > 1 && Math.abs(this.oldY - this.newY) > 1) {
-      // this.push();
+      History.push(this);
     }
   }
 

@@ -4,28 +4,28 @@ export default class CreateBlock extends Command
 {
   constructor(owner, pod, x, y) {
     super();
-    this.owner = owner;
+    this.ownerID = owner.id;
     this.pod = pod;
     this.x = x;
     this.y = y;
     // When redo, use this node id
     this.nodeID = undefined;
-
-    // this.push();
   }
 
   process() {
     let node = NodeFactory.create(this.pod.className, this.nodeID);
     node.init({
       ...this.pod,
-      owner: this.owner,
+      owner: LookUp.get(this.ownerID),
       x: this.x,
       y: this.y
     })
 
     this.nodeID = node.id;
 
-    BlockFactory.create(node, BrainGraph)
+    BlockFactory.create(node, BrainGraph);
+
+    return this;
   }
 
   undo() {

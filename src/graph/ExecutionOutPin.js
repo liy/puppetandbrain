@@ -80,12 +80,9 @@ export default class ExecutionOutPin extends ExecutionPin
     }
   }
 
-  removeConnections() {
-    let targetTask = this.node.execution.get(this.name);
-    if(targetTask) {
-      this.node.disconnectNext(targetTask, this.name);
-      BrainGraph.getBlock(targetTask.id).inPin.refresh();
-    }
-    this.refresh();
+  rightMouseDown(e) {
+    super.rightMouseDown(e)
+
+    History.push(Commander.create('RemoveExecution', this.node, this.name).process());
   }
 }

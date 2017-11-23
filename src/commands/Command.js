@@ -4,10 +4,6 @@ export default class Command
     this.passThrough = false;
   }
 
-  push() {
-    History.push(this);
-  }
-
   process() {
 
   }

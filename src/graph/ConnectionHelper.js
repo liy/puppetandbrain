@@ -107,16 +107,7 @@ class ConnectionHelper
       inputPin = pin;
     }
 
-    let oldOutput = inputPin.pointer.connect(outputPin.output)
-
-    // Refresh the removed old output pin.
-    if(oldOutput) {
-      let block = BrainGraph.getBlock(oldOutput.node.id);
-      block.outputPins.get(oldOutput.name).refresh();
-    }
-
-    inputPin.refresh();
-    outputPin.refresh();
+    History.push(Commander.create('CreateDataLink', inputPin.node.id, inputPin.name, outputPin.node.id, outputPin.name).process())
   }
 }
 

@@ -4,17 +4,20 @@ export default class DeleteBlock extends Command
 {
   constructor(block) {
     super();
-    this.block = block;
-
-    this.push();
+    this.blockID = block.id;
   }
   
   process() {
     // get detailed pod information of the node.
     // which includes all the input and output pointer information nested in the pod
     this.pod = this.block.node.pod(true);
+    // TODO: may be instead of call functions, include command here??!?
     BrainGraph.deleteBlock(this.block);
-    console.log(this.pod)
+    return this;
+  }
+
+  get block() {
+    return BrainGraph.getBlock(this.blockID);
   }
 
   undo() {
@@ -51,11 +54,12 @@ export default class DeleteBlock extends Command
       }
     }
 
-    this.block = BlockFactory.create(node);
+    BlockFactory.create(node);
     BrainGraph.refresh();
   }
 
   redo() {
     this.process();
+    BrainGraph.refresh();
   }
 }

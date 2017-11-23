@@ -77,7 +77,6 @@ export default class ExecutionPin
   rightMouseDown(e) {
     e.preventDefault();
     e.stopPropagation();
-    this.removeConnections();
   }
 
   get position() {

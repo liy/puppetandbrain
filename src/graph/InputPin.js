@@ -1,4 +1,5 @@
 import DataPin from "./DataPin";
+import Command from "../commands/Command";
 
 export default class InputPin extends DataPin
 {
@@ -61,11 +62,9 @@ export default class InputPin extends DataPin
     return BrainGraph.getBlock(this.pointer.output.node.id).outputPins.get(this.pointer.output.name);
   }
 
+  // FIXME: remove this function!!!
   removeConnections() {
-    let outputPin = this.getOutputPin();
-    this.pointer.disconnect();
-    this.refresh();
-    if(outputPin) outputPin.refresh();
+    History.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).process());
   }
 
   drawConnection() {
