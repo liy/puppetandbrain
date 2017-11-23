@@ -23,7 +23,7 @@ export default class NodeMenu
       this.container.appendChild(item);
 
       item.addEventListener('click', e => {
-        Commander.create('CreateBlock', BrainGraph.brain.owner, pod, e.clientX, e.clientY).process();
+        History.push(Commander.create('CreateBlock', BrainGraph.brain.owner, pod, e.clientX, e.clientY).process());
         this.destroy();
       });
     }
