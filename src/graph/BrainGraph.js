@@ -24,7 +24,6 @@ class BrainGraph
     this.openNodeMenu = this.openNodeMenu.bind(this)
 
     this.container.style = "visibility:visible"
-    Stage.blurEnabled = true;
 
     this.container.addEventListener('contextmenu', this.openNodeMenu);
     this.container.addEventListener('mousedown', this.mousedown);
@@ -32,6 +31,7 @@ class BrainGraph
     window.addEventListener('resize', this.resize);
     this.resize();
 
+    Stage.blurEnabled = true;
     BlockSelection.toggle();
 
     for(let node of this.brain.getNodes()) {
@@ -64,7 +64,7 @@ class BrainGraph
   mousedown(e) {
     if(e.target == this.container) {
       if(++this.dbClicks%2 == 0) {
-        Commander.create('CloseGraph', this.brain).process();
+        History.push(Commander.create('CloseGraph', this.brain.id).process());
         return;
       }
       setTimeout(() => {
@@ -76,27 +76,20 @@ class BrainGraph
   keydown(e) {
     // escape
     if(e.keyCode == 27) {
-      Commander.create('CloseGraph', this.brain).process();
+      History.push(Commander.create('CloseGraph', this.brain.id).process());
     }
   }
 
   draw() {
-    for(let task of this.brain.getTasks()) {
-      
-    }
-
     for(let block of this.blocks.getValues()) {
-
       // draw exeuctions
       // refresh in pin, only update the in pin icon status
       if(block.inPin) block.inPin.refresh();
-
       if(block.outPins) {
         block.outPins.getValues().forEach(pin => {
           pin.refresh();
         })
       }
-
       // draw variable connection
       block.inputPins.getValues().forEach(pin => {
         pin.refresh();
@@ -112,6 +105,10 @@ class BrainGraph
     this.blockContainer.appendChild(block.container);
   }
 
+  getBlock(id) {
+    return this.blocks.get(id);
+  }
+
   // remove it visually
   removeBlock(block) {
     this.blocks.remove(block.id);
@@ -122,14 +119,13 @@ class BrainGraph
   deleteBlock(block) {
     // disconnect all execution pins, if it has any
     if(block.inPin) {
-      Commander.create('RemoveParentExecution', block.node).process();
+      Commander.create('RemoveParentExecution', block.node.id).process();
     }
     if(block.outPins) {
       for(let pin of block.outPins.getValues()) {
         Commander.create('RemoveExecution', pin.node, pin.name).process();        
       }
     }
-    // FIXME: use command!!!!!
     // disconnect all variable pins
     for(let pin of block.inputPins.getValues()) {
       Commander.create('RemoveInputDataLink', pin.node.id, pin.name).process();
@@ -141,10 +137,6 @@ class BrainGraph
     block.destroy();
     // destroy the node and remove from the brain
     block.node.destroy();
-  }
-
-  getBlock(id) {
-    return this.blocks.get(id);
   }
 
   openNodeMenu(e) {

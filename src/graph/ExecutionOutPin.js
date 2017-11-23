@@ -1,5 +1,5 @@
 import ExecutionPin from "./ExecutionPin";
-import ConnectionHelper from './ConnectionHelper';
+import ConnectHelper from './ConnectHelper';
 
 export default class ExecutionOutPin extends ExecutionPin
 {

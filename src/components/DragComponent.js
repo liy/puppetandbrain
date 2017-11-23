@@ -35,6 +35,8 @@ export default class DragComponent extends Component
       y: this.entity.y - p.y
     }
 
+    console.warn('1!!!!!!!!!!!!!!!')
+
     // crete move command, when move update it with new position
     this.moveCommand = Commander.create('MoveActor', this.entity);
   }

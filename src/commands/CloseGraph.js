@@ -2,20 +2,19 @@ import Command from './Command';
 
 export default class CloseGraph extends Command
 {
-  constructor(brain) {
+  constructor(brainID) {
     super();
     this.passThrough = true;
-    this.brain = brain;
-
-    // this.push();
+    this.brainID = brainID;
   }
 
   process() {
     BrainGraph.close();
+    return this;
   }
 
   undo() {
-    BrainGraph.open(this.brain);
+    BrainGraph.open(LookUp.get(this.brainID));
   }
 
   redo() {

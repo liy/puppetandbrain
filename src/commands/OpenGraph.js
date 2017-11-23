@@ -2,14 +2,14 @@ import Command from './Command';
 
 export default class OpenGraph extends Command
 {
-  constructor(brain) {
+  constructor(brainID) {
     super();
     this.passThrough = true;
-    this.brain = brain;
+    this.brainID = brainID;
   }
 
   process() {
-    BrainGraph.open(this.brain);
+    BrainGraph.open(LookUp.get(this.brainID));
     return this;
   }
 

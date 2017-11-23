@@ -1,5 +1,5 @@
 import DataPin from "./DataPin";
-import ConnectionHelper from './ConnectionHelper';
+import ConnectHelper from './ConnectHelper';
 
 export default class OutputPin extends DataPin
 {
@@ -40,7 +40,7 @@ export default class OutputPin extends DataPin
   }
 
   mouseMove(e) {
-    ConnectionHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
+    ConnectHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
   }
 
   rightMouseDown(e) {

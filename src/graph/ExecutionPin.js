@@ -1,6 +1,6 @@
 require('./ExecutionPin.scss')
 
-import ConnectionHelper from './ConnectionHelper';
+import ConnectHelper from './ConnectHelper';
 
 /**
  * interaction drawing behaivour is in the out pin to in pin style
@@ -50,12 +50,12 @@ export default class ExecutionPin
     document.addEventListener('mousemove', this.mouseMove);
     document.addEventListener('mouseup', this.mouseUp);
 
-    ConnectionHelper.startExecutionPin(this, e);
+    ConnectHelper.startExecutionPin(this, e);
   }
 
   mouseMove(e) {
     // TODO: create a temp link, between initial execution pin position to current mouse position
-    ConnectionHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
+    ConnectHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
   }
 
   mouseUp(e) {
@@ -64,14 +64,14 @@ export default class ExecutionPin
 
     document.removeEventListener('mousemove', this.mouseMove)
     document.removeEventListener('mouseup', this.mouseUp);
-    ConnectionHelper.stop(e)
+    ConnectHelper.stop(e)
   }
 
   targetMouseUp(e) {
     // only left mouse
     if(e.which != 1) return;
 
-    ConnectionHelper.tryConnectExecution(this)
+    ConnectHelper.connectExecutionPin(this)
   }
 
   rightMouseDown(e) {

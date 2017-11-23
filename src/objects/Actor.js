@@ -100,7 +100,7 @@ export default class Actor extends PIXI.Container
       this._clickCounter = 0;
     }, 300)
     if(++this._clickCounter%2 == 0) {
-      Commander.create('OpenGraph', this.brain).process();
+      History.push(Commander.create('OpenGraph', this.brain.id).process());
     }
   }
 

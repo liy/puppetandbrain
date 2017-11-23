@@ -2,10 +2,11 @@ import Command from "./Command";
 
 export default class RemoveParentExecution extends Command
 {
-  constructor(sourceNode) {
+  constructor(sourceNodeID) {
     super();
 
-    this.sourceNodeID = sourceNode.id;
+    this.sourceNodeID = sourceNodeID;
+    let sourceNode = LookUp.get(this.sourceNodeID );
     this.callers = sourceNode.callers.getValues().map(caller => {
       return {
         id: caller.task.id,

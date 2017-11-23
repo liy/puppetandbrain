@@ -4,27 +4,34 @@ export default class MoveActor extends Command
 {
   constructor(actor) {
     super();
-    this.actor = actor;
-    this.oldX = this.actor.x;
-    this.oldY = this.actor.y;
+    // Note that, I'm using id here! Not reference.
+    this.actorID = actor.id;
+    this.oldX = actor.x;
+    this.oldY = actor.y;
   }
 
   process() {
-    this.newX = this.actor.x;
-    this.newY = this.actor.y;
+    let actor = LookUp.get(this.actorID);
+    this.newX = actor.x;
+    this.newY = actor.y;
 
+    // epsilon to decide whether the command needs to be pushed to history
+    // This solve the double click cause tiny movement results a move command issue.
     if(Math.abs(this.oldX - this.newX) > 1 && Math.abs(this.oldY - this.newY) > 1) {
+      console.warn('!!!!')
       History.push(this);
     }
   }
 
   undo() {
-    this.actor.x = this.oldX;
-    this.actor.y = this.oldY;
+    let actor = LookUp.get(this.actorID);
+    actor.x = this.oldX;
+    actor.y = this.oldY;
   }
 
   redo() {
-    this.actor.x = this.newX;
-    this.actor.y = this.newY;
+    let actor = LookUp.get(this.actorID);
+    actor.x = this.newX;
+    actor.y = this.newY;
   }
 }

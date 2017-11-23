@@ -1,4 +1,4 @@
-class ConnectionHelper
+class ConnectHelper
 {
   constructor() {
     this.svg = document.getElementById('svg');
@@ -73,7 +73,7 @@ class ConnectionHelper
     this.dragType = 'data'
   }
 
-  tryConnectExecution(pin) {
+  connectExecutionPin(pin) {
     // You can only connect inpin to outpin or other way around.
     if(this.startPin.type == pin.type || this.dragType == 'data') return;
 
@@ -83,13 +83,12 @@ class ConnectionHelper
       outPin = this.startPin;
       inPin = pin;
     }
-    
-    // sourceNode.connectNext(targetNode, outPin.name)
+
     History.push(Commander.create('CreateExecution', outPin.node.id, outPin.name, inPin.node.id).process());
 
   }
 
-  tryConnectData(pin) {
+  connectDataPin(pin) {
     if(this.startDataPin.type == pin.type || this.dragType == 'execution') return;
 
     let outputPin = pin;
@@ -103,4 +102,4 @@ class ConnectionHelper
   }
 }
 
-export default new ConnectionHelper();
+export default new ConnectHelper();

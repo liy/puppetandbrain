@@ -1,5 +1,5 @@
 import ExecutionPin from "./ExecutionPin";
-import ConnectionHelper from './ConnectionHelper';
+import ConnectHelper from './ConnectHelper';
 
 export default class ExecutionInPin extends ExecutionPin
 {
@@ -30,8 +30,8 @@ export default class ExecutionInPin extends ExecutionPin
   }
 
   mouseMove(e) {
-    // TODO: create a temp link, between initial execution pin position to current mouse position
-    ConnectionHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
+    // create a temp link, between initial execution pin position to current mouse position
+    ConnectHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
   }
 
   rightMouseDown(e) {
@@ -39,6 +39,6 @@ export default class ExecutionInPin extends ExecutionPin
 
     // Loop through all callers to remove execution, note that process
     // does not refresh, manual refresh has to be made
-    History.push(Commander.create('RemoveParentExecution', this.node).process());
+    History.push(Commander.create('RemoveParentExecution', this.node.id).process());
   }
 }

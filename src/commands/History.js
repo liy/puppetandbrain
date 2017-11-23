@@ -29,7 +29,7 @@ class History
     cmd.undo();
     this.redos.push(cmd);
 
-    if(cmd.passThrough) this.undo();
+    // if(cmd.passThrough) this.undo();
   }
 
   redo() {
@@ -38,7 +38,7 @@ class History
     cmd.redo();
     this.undos.push(cmd);
 
-    if(cmd.passThrough) this.redo();
+    // if(cmd.passThrough) this.redo();
   }
 
   clear() {

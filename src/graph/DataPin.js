@@ -1,6 +1,6 @@
 require('./DataPin.scss')
 
-import ConnectionHelper from './ConnectionHelper';
+import ConnectHelper from './ConnectHelper';
 
 export default class DataPin
 {
@@ -54,7 +54,7 @@ export default class DataPin
     document.addEventListener('mousemove', this.mouseMove);
     document.addEventListener('mouseup', this.mouseUp);
 
-    ConnectionHelper.startDataPin(this, e);
+    ConnectHelper.startDataPin(this, e);
   }
 
   mouseUp(e) {
@@ -63,18 +63,18 @@ export default class DataPin
 
     document.removeEventListener('mousemove', this.mouseMove)
     document.removeEventListener('mouseup', this.mouseUp);
-    ConnectionHelper.stop(e)
+    ConnectHelper.stop(e)
   }
 
   mouseMove(e) {
-    ConnectionHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
+    ConnectHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
   }
 
   targetMouseUp(e) {
     // only left mouse
     if(e.which != 1) return;
 
-    ConnectionHelper.tryConnectData(this)
+    ConnectHelper.connectDataPin(this)
   }
 
   rightMouseDown(e) {
