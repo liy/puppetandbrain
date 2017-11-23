@@ -33,12 +33,13 @@ export default class OutputList extends ArrayMap
   }
 
   assignValue(name, value) {
-    this.get(name).assignValue(name, descriptor);
+    this.get(name).assignValue(name, value);
   }
 
   clearValues() {
     // reset value data to be undefined
-    for(let output of this.values) {
+    for(let name of this.names) {
+      let output = this.outputs[name];
       if(output.type == 'value') {
         this.data[output.name] = undefined;
       }
