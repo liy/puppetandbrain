@@ -9,6 +9,9 @@ export default class Repeat extends Task
     this.execution.remove('default');
     this.execution.set('completed');
     this.execution.set('body');
+
+    this.inputs.addInput('times');
+    this.outputs.addOutput('index');
   }
 
   run() {

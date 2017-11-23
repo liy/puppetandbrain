@@ -8,6 +8,9 @@ export default class Tween extends Task
     // ensure the order
     this.execution.set('default');
     this.execution.set('complete');
+
+    this.inputs.addInput('position')
+    this.inputs.addInput('duration')
   }
 
   init(pod) {

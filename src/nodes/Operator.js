@@ -4,11 +4,8 @@ export class Operator extends DataNode
 {
   constructor(id) {
     super(id);
-  }
 
-  init(pod) {
-    super.init(pod);
-
+    this.outputs.addOutput('value')
     this.outputs.assignProperty('value', {
       get: () => {
         return this.value;
@@ -21,6 +18,9 @@ export class Add extends Operator
 {
   constructor(id) {
     super(id);
+
+    this.inputs.addInput('A');
+    this.inputs.addInput('B');
   }
 
   get value() {
@@ -32,6 +32,9 @@ export class Multiply extends Operator
 {
   constructor(id) {
     super(id);
+    
+    this.inputs.addInput('A');
+    this.inputs.addInput('B');
   }
 
   get value() {
@@ -44,6 +47,9 @@ export class Divide extends Operator
 {
   constructor(id) {
     super(id);
+    
+    this.inputs.addInput('A');
+    this.inputs.addInput('B');
   }
 
   get value() {
@@ -55,6 +61,9 @@ export class Equal extends Operator
 {
   constructor(id) {
     super(id);
+    
+    this.inputs.addInput('A');
+    this.inputs.addInput('B');
   }
 
   get nodeName() {
@@ -70,6 +79,9 @@ export class LessThan extends Operator
 {
   constructor(id) {
     super(id);
+    
+    this.inputs.addInput('A');
+    this.inputs.addInput('B');
   }
 
   get nodeName() {
@@ -85,6 +97,9 @@ export class LessEqual extends Operator
 {
   constructor(id) {
     super(id);
+    
+    this.inputs.addInput('A');
+    this.inputs.addInput('B');
   }
 
   get nodeName() {
@@ -100,6 +115,9 @@ export class RandomNumber extends Operator
 {
   constructor(id) {
     super(id);
+    
+    this.inputs.addInput('A');
+    this.inputs.addInput('B');
   }
 
   get nodeName() {

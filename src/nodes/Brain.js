@@ -8,7 +8,6 @@ export default class Brain
     this.id = LookUp.addBrain(this, id)
     this.owner = owner;
     this.nodes = new ArrayMap();
-    this.pointers = new ArrayMap();
   }
 
   init(pod) {
@@ -76,51 +75,17 @@ export default class Brain
     return this.nodes.getValues();
   }
 
-  getPointer(id) {
-    return this.pointers.get(id);
-  }
-
-  getPointers() {
-    return this.pointers.getValues();
-  }
-
   getTasks() {
     return this.getNodes().filter(node => {
       return node instanceof Task;
     })
   }
 
-  // connectVariable(inputNode, inputName, outputNode, outputName, id) {
-  //   // remove pointer from old output node of the target input node
-  //   let oldPointer = inputNode.inputs.get(inputName);
-  //   if(oldPointer.outputNode) oldPointer.outputNode.outputs.disconnected(oldPointer);
-  //   // destroy old pointer
-  //   this.pointers.remove(oldPointer.id);
-  //   oldPointer.destroy()
-
-  //   let pointer = new Pointer(inputNode, inputName, outputNode, outputName, id);
-  //   this.pointers.set(pointer.id, pointer);
-  //   // Make new connection
-  //   inputNode.inputs.connected(pointer);
-  //   outputNode.outputs.connected(pointer);
-  // }
-
-  // disconnectVariable(pointer) {
-  //   if(pointer.isLocalPointer) return;
-
-  //   pointer.inputNode.inputs.disconnect(pointer.inputName);
-  //   pointer.outputNode.outputs.disconnected(pointer);
-
-  //   this.pointers.remove(pointer.id);
-  //   pointer.destroy();
-  // }
-
   pod() {
     return {
       className: this.__proto__.constructor.name,
       nodes: this.nodes.getKeys().concat(),
       owner: this.owner.id,
-      pointers: this.pointers.getKeys().concat()
     }
   }
 }

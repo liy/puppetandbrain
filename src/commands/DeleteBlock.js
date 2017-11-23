@@ -14,35 +14,43 @@ export default class DeleteBlock extends Command
     // which includes all the input and output pointer information nested in the pod
     this.pod = this.block.node.pod(true);
     BrainGraph.deleteBlock(this.block);
+    console.log(this.pod)
   }
 
   undo() {
-    console.log(this.pod)
     let node = NodeFactory.create(this.pod.className, this.pod.id);
     node.init(this.pod);
+
     // connect executions
     if(this.pod.execution) {
       for(let exec of this.pod.execution) {
-        // if it has no next execution
-        if(exec.id) node.connectNext(LookUp.get(exec.id), exec.executionName);
+        if(exec.id) node.connectNext(LookUp.get(exec.id), exec.executionName)
       }
     }
     if(this.pod.callers) {
       for(let caller of this.pod.callers) {
-        node.connectParent(LookUp.get(caller.id), caller.executionName)
+        if(caller.id) node.connectParent(LookUp.get(caller.id), caller.executionName);
       }
     }
-    // connect inputs variables
-    for(let pointer of this.pod.inputs) {
-      // Make connection if it is a output connector(id is not undefined)
-      if(pointer.id) {
-        BrainGraph.brain.connectVariable(LookUp.get(pointer.inputNode), pointer.inputName, LookUp.get(pointer.outputNode), pointer.outputName, pointer.id);    
+
+    // connect inputs
+    for(let inputPod of this.pod.inputs) {
+      // if it is an output pointer
+      if(inputPod.output) {
+        let node = LookUp.get(inputPod.inputNode);
+        let output = LookUp.get(inputPod.output.node).outputs.get(inputPod.output.name);
+        node.inputs.get(inputPod.inputName).connect(output, inputPod.id);
       }
     }
-    // connect variables
-    for(let pointer of this.pod.outputs) {
-      BrainGraph.brain.connectVariable(LookUp.get(pointer.inputNode), pointer.inputName, LookUp.get(pointer.outputNode), pointer.outputName, pointer.id);    
+    // connect outputs
+    for(let outputPod of this.pod.outputs) {
+      let output = node.outputs.get(outputPod.name);
+      for(let pointerPod of outputPod.connections) {
+        let input = LookUp.get(pointerPod.inputNode).inputs.get(pointerPod.inputName);
+        input.connect(output, pointerPod.id)
+      }
     }
+
     this.block = BlockFactory.create(node);
     BrainGraph.refresh();
   }

@@ -5,6 +5,7 @@ export default class KeyDown extends Task
   constructor(id) {
     super(id);
 
+    this.inputs.addInput('key');
     this.keydown = this.keydown.bind(this)
   }
 

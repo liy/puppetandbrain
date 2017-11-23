@@ -8,6 +8,8 @@ export default class Branch extends Task
     this.execution.remove('default');
     this.execution.set('true')
     this.execution.set('false')
+
+    this.inputs.addInput('condition');
   }
 
   run() {

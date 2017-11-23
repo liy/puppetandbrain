@@ -37,8 +37,8 @@ export default class InputList extends ArrayMap
   }
 
   pod() {
-    return this.pointers.map(pointer => {
-      return pointer.pod()
+    return this.names.map(name => {
+      return this.pointers[name].pod()
     })
   }
 }

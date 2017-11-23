@@ -9,7 +9,8 @@ export default class PropertyBlock extends Block
 
     let minWidth = 200;
     let minHeight = 40;
-    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px;`;
+    this.container.style.minWidth = `${minWidth}px`;
+    this.container.style.minHeight = `${minHeight}px`;
 
     let row = document.createElement('div');
     row.className = 'row'

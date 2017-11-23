@@ -7,7 +7,6 @@ import OperatorBlock from './blocks/OperatorBlock';
 window.BlockFactory = {
   create: function(node) {
     let blockClass = BlockClasses[node.className+'Block']
-    console.log(BlockClasses)
     if(blockClass) {
       return new blockClass(node);
     }

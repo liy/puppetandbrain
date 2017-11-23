@@ -11,9 +11,11 @@ export default class Property extends DataNode
     super.init(pod);
     // name is authoring time settings.
     this.name = pod.name;
-
     this.variables.target = this.variables.target || this.owner.id;
-    this.outputs.get(this.name).assignProperty(this.name, {
+
+    // dynamic output
+    this.outputs.addOutput(this.name);
+    this.outputs.assignProperty(this.name, {
       get: () => {
         return LookUp.get(this.variables.target)[this.name]
       }

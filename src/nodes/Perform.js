@@ -20,7 +20,7 @@ export default class Perform extends Task
     // Get all the outputs of the target action, and presented as Call inputs
     // When task runs, all the Call input value will be assigned to Function's output
     for(let name of this.action.outputs.names) {
-      this.inputs.addName(name);
+      this.inputs.addInput(name);
     }
   }
 

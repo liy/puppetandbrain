@@ -81,27 +81,29 @@ class BrainGraph
   }
 
   draw() {
-    // draw exeuctions
     for(let task of this.brain.getTasks()) {
-      // refresh in pin, only update the in pin icon status
-      let taskBlock = this.getBlock(task.id);
-      if(taskBlock.inPin) taskBlock.inPin.refresh();
-
-      for(let name of task.execution.names) {
-        // refresh out pins of current node
-        taskBlock.outPins.get(name).refresh()
-      }
+      
     }
 
-    // draw variable connection
-    let pointers = this.brain.getPointers();
-    for(let pointer of pointers) {
-      let outputBlock = this.getBlock(pointer.outputNode.id);
-      let inputBlock = this.getBlock(pointer.inputNode.id);
-      let inputPin = inputBlock.inputPins.get(pointer.inputName);
-      let outputPin = outputBlock.outputPins.get(pointer.outputName);
-      inputPin.refresh();
-      outputPin.refresh();
+    for(let block of this.blocks.getValues()) {
+
+      // draw exeuctions
+      // refresh in pin, only update the in pin icon status
+      if(block.inPin) block.inPin.refresh();
+
+      if(block.outPins) {
+        block.outPins.getValues().forEach(pin => {
+          pin.refresh();
+        })
+      }
+
+      // draw variable connection
+      block.inputPins.getValues().forEach(pin => {
+        pin.refresh();
+      })
+      block.outputPins.getValues().forEach(pin => {
+        pin.refresh();
+      })
     }
   }
 

@@ -20,9 +20,12 @@ export default class OutputList extends ArrayMap
   }
 
   addOutput(name) {
-    if(!this.contains(name)) {
-      this.set(name, new Output(this.node, this.data, name));
+    let output = this.get(name);
+    if(!output) {
+      output = new Output(this.node, this.data, name)
+      this.set(name, output);
     }
+    return output;
   }
 
   assignProperty(name, descriptor) {
@@ -43,8 +46,8 @@ export default class OutputList extends ArrayMap
   }
 
   pod() {
-    return this.outputs.map(output => {
-      return output.pod();
+    return this.names.map(name => {
+      return this.outputs[name].pod();
     })
   }
 }

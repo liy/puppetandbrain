@@ -34,14 +34,24 @@ export default class Node
     // But do a property assignment, just be safe...
     if(pod.variables) Object.assign(this.variables, pod.variables);
 
-    // Only need the name. It will be connected once input is setup.
-    for(let outputPod of pod.outputs) {
-      this.outputs.addOutput(outputPod.name);
+    // Since there are "Action" node which has dynamic ouputs
+    // I cannot make input and ouput connections in initialization process
+    // The data connection has to be made separately!
+    //
+    // we just need the name to be populated here.
+    // variable access will be auto created.
+    // Of course some of them will be discarded once
+    // connection is setup(pointer is added)
+    if(pod.inputs) {
+      for(let pointerPod of pod.inputs) {
+        this.inputs.addInput(pointerPod.inputName)
+      }
     }
 
-    for(let pointerPod of pod.inputs) {
-      let input = this.inputs.addInput(pointerPod.inputName)
-      input.init(pointerPod);
+    if(pod.outputs) {
+      for(let outputPod of pod.outputs) {
+        this.outputs.addOutput(outputPod.name);
+      }
     }
 
     this.x = pod.x;

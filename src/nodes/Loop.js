@@ -9,6 +9,8 @@ export default class Loop extends Task
     this.execution.remove('default');
     this.execution.set('completed');
     this.execution.set('body');
+
+    this.inputs.addInput('limit');
   }
 
   prestart() {

@@ -35,7 +35,7 @@ export default class Task extends Node
     // Remove old target connection information
     let oldTarget = this.execution.get(executionName);
     if(oldTarget) {
-      oldTarget.callers.remove(this.id)
+      oldTarget.callers.remove(this.id+'.'+executionName)
     }
 
     this.execution.set(executionName, target)

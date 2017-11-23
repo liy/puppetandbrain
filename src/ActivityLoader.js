@@ -57,17 +57,17 @@ export default class ActivityLoader
       if (node instanceof DataNode) continue;
       let data = pod.store[id];
       for(let execData of data.execution) {
-        node.connectNext(LookUp.get(execData.id), execData.name)
+        if(execData.id) node.connectNext(LookUp.get(execData.id), execData.executionName)
       }
     }
 
     // connect the inputs with outputs
     for(let id of pod.pointers) {
-      let pointerData = pod.store[id];
-      let inputNode = LookUp.get(pointerData.inputNode);
-      let outputNode = LookUp.get(pointerData.outputNode);
+      let pointerPod = pod.store[id];
+      let inputNode = LookUp.get(pointerPod.inputNode);
 
-      inputNode.brain.connectVariable(inputNode, pointerData.inputName, outputNode, pointerData.outputName, id)
+      let pointer = inputNode.inputs.get(pointerPod.inputName);
+      pointer.init(pointerPod)
     }
   }
 }

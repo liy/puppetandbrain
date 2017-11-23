@@ -10,8 +10,8 @@ export default class OperatorBlock extends Block
     let minWidth = 130;
     let minHeight = 40;
     this.container.className += ' operator-block'
-    this.container.style = `min-height:${minHeight}px; min-width:${minWidth}px;`;
-
+    this.container.style.minWidth = `${minWidth}px`;
+    this.container.style.minHeight = `${minHeight}px`;
     let rows = [];
     let row = (i) => {
       if(!rows[i]) {

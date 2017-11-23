@@ -79,6 +79,40 @@ function init() {
   })
   Stage.addActor(donkey)
 
+  let animation = new Animation();
+  animation.init({
+    owner: donkey,
+    variables: {
+      name: 'walk'
+    }
+  })
+  let delayAnimation = new Wait();
+  delayAnimation.init({
+    owner: donkey,
+    variables: {
+      seconds: 3
+    }
+  })
+  let donkeyAnimateAction = new Action();
+  donkeyAnimateAction.init({
+    owner: donkey,
+    actionName: 'Play Animation'
+  })
+  donkeyAnimateAction.outputs.addOutput('animationName')
+  donkeyAnimateAction.connectNext(delayAnimation)
+                     .connectNext(animation)
+
+  let keyboard = new KeyDown();
+  keyboard.init({
+    owner: donkey,
+    variables: {
+      key:'1'
+    }
+  })
+  keyboard.connectNext(animation);
+
+  animation.inputs.get('name').connect(donkeyAnimateAction.outputs.get('animationName'));
+
   // Cow
   var cow = new SpineActor();
   cow.init({
@@ -93,6 +127,129 @@ function init() {
   })
   Stage.addActor(cow)
 
+  let staticAnimation = new Animation();
+  staticAnimation.init({
+    owner: cow,
+    variables: {
+      name: 'static'
+    }
+  });
+
+  let wait = new Wait();
+  wait.init({
+    owner: cow,
+    variables: {
+      seconds: 2
+    }
+  });
+
+  let trace = new Trace();
+  trace.init({
+    owner: cow,
+    variables: {
+      text: 'debug print'
+    }
+  })
+
+  let walkAnimation = new Animation();
+  walkAnimation.init({
+    owner: cow,
+    variables: {
+      name: 'walk'
+    }
+  });
+
+  let positionProperty = new Property();
+  positionProperty.init({
+    owner: cow,
+    name: 'position',
+    variables: {
+      target: donkey.id
+    }
+  });
+
+  window.positionProperty = positionProperty;
+
+  let tween = new Tween();
+  tween.init({
+    owner: cow,
+    variables: {
+      duration: 3
+    }
+  })
+  // link to donkey's position
+  tween.inputs.get('position').connect(positionProperty.outputs.get('position'))
+
+  let startTask = new Action();
+  startTask.init({
+    owner: cow,
+    actionName: ActionName.GAME_START
+  })
+
+  let perform = new Perform();
+  perform.init({
+    owner: cow,
+    target: donkey,
+    actionName: "Play Animation",
+    variables: {
+      animationName: 'interactive'
+    }
+  })
+  startTask.connectNext(staticAnimation)
+           .connectNext(wait)
+           .connectNext(trace)
+           .connectNext(walkAnimation)
+           .connectNext(tween)
+           .connectNext(perform, 'complete')
+
+  // example of 2 executions
+  let straightAfterTween = new Trace();
+  straightAfterTween.init({
+    owner: cow,
+    variables: {
+      text: 'This task run straight after tween started, no waiting for tween completion'
+    }
+  })
+  tween.connectNext(straightAfterTween, 'default')
+
+  // statements examples
+  let less = new LessThan()
+  less.init({
+    owner: cow,
+    variables: {
+      B: 0.5
+    }
+  })
+  let random = new RandomNumber();
+  random.init({owner: cow});
+  less.inputs.get('A').connect(random.outputs.get('value'))
+
+  let branch = new Branch();
+  branch.init({
+    owner: cow
+  });
+  branch.inputs.get('condition').connect(less.outputs.get('value'))
+
+  let trueTrace = new Trace();
+  trueTrace.init({
+    owner: cow,
+    variables: {
+      text: 'branch to true'
+    }
+  })
+
+  let falseTrace = new Trace();
+  falseTrace.init({
+    owner: cow,
+    variables: {
+      text: 'branch to false'
+    }
+  })
+
+  branch.connectNext(trueTrace, 'true')
+  branch.connectNext(falseTrace, 'false')
+
+  perform.connectNext(branch)
 
   // start the activity when cow and donkey are loaded
   Promise.all([cow.loaded, donkey.loaded]).then(() => {
@@ -101,7 +258,7 @@ function init() {
   })
 }
 
-init();
+// init();
 
 async function load() {
   var loader = new ActivityLoader();
@@ -116,7 +273,7 @@ async function load() {
   })
 }
 
-// load();
+load();
 
 document.addEventListener('keydown', (e) => {
   if(e.key == 'F6' || e.key == 'F4') {
