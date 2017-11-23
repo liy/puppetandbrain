@@ -117,7 +117,14 @@ class BrainGraph
   }
 
   // destroy node and block all together and its connections, also remove it visually
-  destroyBlock(block) {
+  deleteBlock(block) {
+    // disconnect all execution pins, if it has any
+    if(block.inPin) block.inPin.removeConnections();
+    if(block.outPins) {
+      for(let pin of block.outPins.getValues()) {
+        pin.removeConnections();
+      }
+    }
     // disconnect all variable pins
     for(let pin of block.inputPins.getValues()) {
       pin.removeConnections();
@@ -134,8 +141,6 @@ class BrainGraph
   getBlock(id) {
     return this.blocks.get(id);
   }
-
-  
 
   openNodeMenu(e) {
     if(e.target == this.container) e.preventDefault();

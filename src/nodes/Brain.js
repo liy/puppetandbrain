@@ -45,7 +45,11 @@ export default class Brain
   }
 
   destroy() {
-    LookUp.removeBrain(this.id)
+    LookUp.removeBrain(this.id);
+    let nodes = this.nodes.getValues().concat();
+    for(let node of nodes) {
+      node.destroy();
+    }
   }
 
   addNode(node) {

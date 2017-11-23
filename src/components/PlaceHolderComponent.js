@@ -25,11 +25,20 @@ export default class PlaceHolderComponent extends Component
     this.hourGlass.scale.y = this.hourGlass.scale.x = s
   }
 
+  destroy() {
+    super.destroy();
+    clearInterval(this.intervalID);
+  }
+
   async added() {
     // show progress
     this.tickEnabled = true;
     this.entity.addChild(this.bg);
     this.entity.addChild(this.hourGlass);
+
+    this.intervalID = setInterval(() => {
+      this.targetRotation += Math.PI;
+    }, 1000);
     
     // wait until it is loaded
     await this.entity.loaded
@@ -37,9 +46,7 @@ export default class PlaceHolderComponent extends Component
     this.entity.removeChild(this.hourGlass)
     this.tickEnabled = false;
 
-    setInterval(() => {
-      this.targetRotation += Math.PI;
-    }, 1000);
+    clearInterval(this.intervalID);
   }
 
   tick() {

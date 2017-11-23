@@ -52,8 +52,8 @@ export default class Action extends Task
     this.execution.run();
   }
 
-  pod() {
-    let pod = super.pod();
+  pod(detail=false) {
+    let pod = super.pod(detail);
     pod.actionName = this.actionName;
     return pod
   }

@@ -7,7 +7,7 @@ export default class CloseGraph extends Command
     this.passThrough = true;
     this.brain = brain;
 
-    this.push();
+    // this.push();
   }
 
   process() {

@@ -35,7 +35,7 @@ window.LookUp = {
 
   removeActor: function(id) {
     let index = ACTORS.indexOf(id);
-    ACTORS.splice(index, 1);
+    if(index != -1) ACTORS.splice(index, 1);
     delete STORE[id]
   },
 
@@ -47,7 +47,7 @@ window.LookUp = {
 
   removePointer: function(id) {
     let index = POINTERS.indexOf(id);
-    POINTERS.splice(index, 1);
+    if(index != -1) POINTERS.splice(index, 1);
     delete STORE[id]
   },
 
@@ -59,7 +59,7 @@ window.LookUp = {
 
   removeNode: function(id) {
     let index = NODES.indexOf(id);
-    NODES.splice(index, 1);
+    if(index != -1) NODES.splice(index, 1);
     delete STORE[id]
   },
 
@@ -71,7 +71,7 @@ window.LookUp = {
 
   removeBrain: function(id) {
     let index = BRAINS.indexOf(id);
-    BRAINS.splice(index, 1);
+    if(index != -1) BRAINS.splice(index, 1);
     delete STORE[id]
   },
 

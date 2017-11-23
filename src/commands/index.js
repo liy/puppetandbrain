@@ -1,5 +1,5 @@
 export CreateBlock from './CreateBlock';
-export RemoveBlock from './RemoveBlock';
+export DeleteBlock from './DeleteBlock';
 
 export OpenGraph from './OpenGraph';
 export CloseGraph from './CloseGraph';

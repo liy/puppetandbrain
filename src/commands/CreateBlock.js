@@ -11,7 +11,7 @@ export default class CreateBlock extends Command
     // When redo, use this node id
     this.nodeID = undefined;
 
-    this.push();
+    // this.push();
   }
 
   process() {
@@ -30,7 +30,7 @@ export default class CreateBlock extends Command
 
   undo() {
     let block = BrainGraph.getBlock(this.nodeID);
-    BrainGraph.destroyBlock(block);
+    BrainGraph.deleteBlock(block);
   }
 
   redo() {

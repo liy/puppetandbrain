@@ -22,6 +22,14 @@ export default class SelectionComponent extends Component
     this.hoverOutline = new filters.OutlineFilter(2, 0xCCCCCC)
   }
 
+  destroy() {
+    super.destroy();
+    this.entity.off('mousedown', this.mousedown);
+    this.entity.off('mouseover', this.mouseover);
+    this.entity.off('mouseout', this.mouseout);
+    this.entity.off('touchstart', this.touchstart);
+  }
+
   added() {
     this.entity.interactive = true;
     this.entity.on('mousedown', this.mousedown);

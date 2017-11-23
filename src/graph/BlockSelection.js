@@ -46,9 +46,7 @@ class BlockSelection
   }
 
   delete() {
-    this.selected.delete();
-    BrainGraph.removeBlock(this.selected)
-    BrainGraph.brain.removeNode(this.selected.node);
+    Commander.create('DeleteBlock', this.selected).process();
   }
 }
 

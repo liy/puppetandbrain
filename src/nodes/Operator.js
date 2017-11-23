@@ -21,9 +21,6 @@ export class Add extends Operator
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addName('A');
-    this.inputs.addName('B');
   }
 
   get value() {
@@ -35,9 +32,6 @@ export class Multiply extends Operator
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addName('A');
-    this.inputs.addName('B');
   }
 
   get value() {
@@ -50,9 +44,6 @@ export class Divide extends Operator
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addName('A');
-    this.inputs.addName('B');
   }
 
   get value() {
@@ -64,9 +55,6 @@ export class Equal extends Operator
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addName('A');
-    this.inputs.addName('B');
   }
 
   get nodeName() {
@@ -82,9 +70,6 @@ export class LessThan extends Operator
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addName('A');
-    this.inputs.addName('B');
   }
 
   get nodeName() {
@@ -100,9 +85,6 @@ export class LessEqual extends Operator
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addName('A');
-    this.inputs.addName('B');
   }
 
   get nodeName() {

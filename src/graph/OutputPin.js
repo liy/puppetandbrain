@@ -13,7 +13,7 @@ export default class OutputPin extends DataPin
   get isConnected() {
     // The output will have multiple connections, as there might be
     // other inputs referencing this output.
-    return this.node.outputs.isConnected;
+    return this.node.outputs.get(this.name).isConnected;
   }
 
   refresh() {

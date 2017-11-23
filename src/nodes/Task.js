@@ -1,6 +1,4 @@
 import Execution from './Execution'
-import Input from '../data/Input';
-import Output from '../data/Output';
 import Node from './Node';
 import ArrayMap from '../utils/ArrayMap';
 
@@ -76,17 +74,16 @@ export default class Task extends Node
     console.log('run', this.nodeName, this.id);
   }
 
-  pod() {
+  pod(detail=false) {
     return {
-      ...super.pod(),
+      ...super.pod(detail),
       id: this.id,
       execution: this.execution.pod(),
-      // TODO: remove this
-      // caller information is not used in building the graph, just for debugging
+      // This is used when redo block deletion to connect parent nodes 
       callers: this.callers.getValues().map(caller => {
         return {
           executionName: caller.executionName,
-          task: caller.task.id
+          id: caller.task.id
         }
       })
     }

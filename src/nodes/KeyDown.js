@@ -5,8 +5,6 @@ export default class KeyDown extends Task
   constructor(id) {
     super(id);
 
-    // TODO: make it authoring time variable!!!
-    this.inputs.addName('key');
     this.keydown = this.keydown.bind(this)
   }
 

@@ -27,10 +27,8 @@ export default class Actor extends PIXI.Container
 
     this.childActors = [];
 
-    this.on('pointerdown', this.pointerDown)
-    this.on('pointerup', this.pointerUp)
-
     this._clickCounter = 0;
+    this.on('pointerdown', this.pointerDown)
 
     mixin(this, new Entity());
   }
@@ -48,6 +46,17 @@ export default class Actor extends PIXI.Container
     this.name = pod.name || this.name;
 
     this.brain = new Brain(this, pod.brain);
+  }
+
+  destroy() {
+    // destroy all components
+    Object.keys(this.components).forEach(name => {
+      this.components[name].destroy();
+    })
+
+    LookUp.removeActor(this.id);
+    this.off('pointerdown', this.pointerDown);
+    this.brain.destroy();
   }
 
   setInitialState() {
@@ -86,22 +95,12 @@ export default class Actor extends PIXI.Container
   }
 
   pointerDown(e) {
-    if(this.actions[ActionName.POINTER_DOWN]) {
-      this.actions[ActionName.POINTER_DOWN].run();
-    }
-    
     // Open brain graph
     setTimeout(() => {
       this._clickCounter = 0;
     }, 300)
     if(++this._clickCounter%2 == 0) {
       Commander.create('OpenGraph', this.brain).process();
-    }
-  }
-
-  pointerUp(e) {
-    if(this.actions[ActionName.POINTER_UP]) {
-      this.actions[ActionName.POINTER_UP].run();
     }
   }
 

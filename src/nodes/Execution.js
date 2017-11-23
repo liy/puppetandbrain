@@ -21,7 +21,7 @@ export default class Execution extends ArrayMap
   pod() {
     return this.keys.map(name => {
       return {
-        name,
+        executionName: name,
         id: this.values[name] ? this.values[name].id : null
       }
     })

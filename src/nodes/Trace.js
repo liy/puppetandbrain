@@ -4,8 +4,6 @@ export default class Trace extends Task
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addName('text')
   }
 
   get nodeName() {

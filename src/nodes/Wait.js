@@ -4,8 +4,6 @@ export default class Wait extends Task
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addName('seconds');
   }
 
   init(pod) {

@@ -5,6 +5,10 @@ export default class Component extends PIXI.utils.EventEmitter
     this.entity = null;
   }
 
+  destroy() {
+    PIXI.ticker.shared.remove(this.tick, this)
+  }
+
   added() {
 
   }

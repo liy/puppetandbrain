@@ -10,6 +10,14 @@ export default class DragComponent extends Component
     this.dragend = this.dragend.bind(this);
   }
 
+  destroy() {
+    super.destroy();
+    this.entity.off('pointerdown', this.dragstart)
+    this.entity.off('pointermove', this.dragmove)
+    this.entity.off('pointerup', this.dragend)
+    this.entity.off('pointerupoutside', this.dragend)
+  }
+
   added() {
     this.entity.interctive = true;
 

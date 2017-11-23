@@ -5,7 +5,7 @@ export default class Animation extends Task
   constructor(id) {
     super(id);
 
-    this.inputs.addName('name');
+    this.inputs.addInput('name');
   }
 
   run() {

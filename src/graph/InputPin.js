@@ -5,6 +5,7 @@ export default class InputPin extends DataPin
   constructor(block, name) {
     super(block, name, 'left');
     this.type = 'input'
+    this.pointer = this.node.inputs.get(this.name);
 
     this.icon.className = 'icon in-disconnected';
 
@@ -17,16 +18,11 @@ export default class InputPin extends DataPin
     this.addLocalInputs();
   }
 
-  getPointer() {
-    return this.node.inputs.get(this.name);
-  }
-
   // TODO: better genertic methods!!
   addLocalInputs() {
-    let pointer = this.getPointer();
     this.inputField = document.createElement('input');
-    this.inputField.value = pointer.value;
-    if(pointer.isLocalPointer) this.container.appendChild(this.inputField)
+    this.inputField.value = this.pointer.value;
+    if(!this.pointer.isOutputPointer) this.container.appendChild(this.inputField)
     // The listener will be removed if inputField is no longer reachable.
     this.inputField.addEventListener('change', (e) => {
       this.node.variables[this.name] = e.target.value;
@@ -44,7 +40,7 @@ export default class InputPin extends DataPin
     if(!this.isConnected) {
       this.icon.className = 'icon in-disconnected';
       if(this.svg.contains(this.path)) this.svg.removeChild(this.path);
-      this.inputField.value = this.getPointer().value
+      this.inputField.value = this.pointer.value
       this.container.appendChild(this.inputField);
       return;
     }
@@ -61,22 +57,19 @@ export default class InputPin extends DataPin
   }
 
   getOutputPin() {
-    let pointer = this.getPointer();
-
-    if(pointer.isLocalPointer) return null;
-    return BrainGraph.getBlock(pointer.outputNode.id).outputPins.get(pointer.outputName);
+    if(this.pointer.isLocalPointer) return null;
+    return BrainGraph.getBlock(this.pointer.outputNode.id).outputPins.get(this.pointer.outputName);
   }
 
   removeConnections() {
     let outPin = this.getOutputPin();
-    BrainGraph.brain.disconnectVariable(this.getPointer());
+    BrainGraph.brain.disconnectVariable(this.pointer);
     this.refresh();
     if(outPin) outPin.refresh();
   }
 
   drawConnection() {
-    let pointer = this.getPointer();
-    if(pointer.isLocalPointer) return;
+    if(!this.pointer.isOutputPointer) return;
 
     let outputPin = this.getOutputPin();
 

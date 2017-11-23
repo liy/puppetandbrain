@@ -5,8 +5,6 @@ export default class Property extends DataNode
 {
   constructor(id) {
     super(id)
-
-    this.inputs.addName('target')
   }
 
   init(pod) {
@@ -15,7 +13,7 @@ export default class Property extends DataNode
     this.name = pod.name;
 
     this.variables.target = this.variables.target || this.owner.id;
-    this.outputs.assignProperty(this.name, {
+    this.outputs.get(this.name).assignProperty(this.name, {
       get: () => {
         return LookUp.get(this.variables.target)[this.name]
       }
@@ -26,9 +24,9 @@ export default class Property extends DataNode
     return 'Get ' + this.name.charAt(0).toUpperCase() + this.name.slice(1);
   }
 
-  pod() {
+  pod(detail=false) {
     return {
-      ...super.pod(),
+      ...super.pod(detail),
       name: this.name,
     }
   }

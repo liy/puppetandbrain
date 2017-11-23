@@ -45,8 +45,8 @@ export default class Perform extends Task
     return this.target.name + ' Perform '  + this.actionName;
   }
 
-  pod() {
-    let pod = super.pod();
+  pod(detail=false) {
+    let pod = super.pod(detail);
     pod.target = this.target.id;
     pod.actionName = this.actionName;
     return pod;

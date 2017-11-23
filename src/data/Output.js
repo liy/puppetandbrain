@@ -2,79 +2,62 @@ import ArrayMap from "../utils/ArrayMap";
 
 export default class Output
 {
-  constructor(node) {
+  constructor(node, data, name) {
     this.node = node;
-    this.data = Object.create(null);
-    // keep track of what type of the data is, property or value
-    // value type will be reset to undefined when game stop
-    this.types = Object.create(null);
-
-    // Just keep track of which node is connected to the output
-    // {
-    //    [output name]: pointer arrayMap {
-    //      id: pointer.id,
-    //      pointer: pointer
-    //    }
-    // }
-    this.connections = new ArrayMap();
-  }
-
-  destroy() {
-    this.connections = null;
-  }
-
-  addName(name) {
-    // Only set name and associated array map once
-    // Otherwise you are force to make sure addName has to be called before any assignment
-    // Which is not ideal, you will forget to addName....
-    if(!this.connections.contains(name)) {
-      this.connections.set(name, new ArrayMap());
-    }
+    this.data = data;
+    this.name = name;
+    this.type = undefined;
+    this.connections = Object.create(null);
   }
 
   assignProperty(name, descriptor) {
-    this.types[name] = 'property';
-    this.addName(name);
+    this.type = 'property';
     Object.defineProperty(this.data, name, descriptor);
   }
 
   assignValue(name, value) {
-    this.types[name] = 'value';
-    this.addName(name);
+    this.type = 'value';
     this.data[name] = value;
   }
 
-  connected(pointer) {
-    let pointers = this.connections.get(pointer.outputName);
-    pointers.set(pointer.id, pointer);
+  connect(pointer) {
+    this.connections[pointer.id] = pointer;
   }
 
-  disconnected(pointer) {
-    this.connections.get(pointer.outputName).remove(pointer.id);
+  disconnect(pointer) {
+    delete this.connections[pointer.id];
   }
 
-  get names() {
-    return this.connections.getKeys();
+  contains(id) {
+    return id in this.connections;
   }
 
-  isConnected(name) {
-    return this.connections.get(name).length != 0;
+  get isConnected() {
+    return Object.keys(this.connections).length != 0;
   }
 
-  clearValues() {
-    // reset value to be undefined
-    let names = Object.keys(this.types);
-    for(let name of names) {
-      if(this.types[name] == 'value')
-        this.data[name] = undefined;
-    }
+  getPointer(id) {
+    return this.connections[id];
   }
 
-  /**
-   * Output is calucated dynamically at the runtime,
-   * so no need to serailzie the value. Just the names will do
-   */
+  getPointers() {
+    return Object.keys(this.connections).map(id => {
+      return this.connections[id];
+    })
+  }
+
   pod() {
-    return this.connections.getKeys().concat();
+    return {
+      node: this.node.id,
+      name: this.name,
+      type: this.type,
+      connections: this.getPointers().map(pointer => {
+        return {
+          id: pointer.id,
+          inputNode: pointer.inputNode.id,
+          inputName: pointer.inputName,
+        }
+      })
+    }
   }
 }

@@ -1,5 +1,5 @@
-import Input from "../data/Input";
-import Output from "../data/Output";
+import InputList from "../data/InputList";
+import OutputList from "../data/OutputList";
 import Execution from "./Execution";
 
 export default class Node
@@ -9,8 +9,8 @@ export default class Node
 
     this.variables = Object.create(null);
 
-    this.inputs = new Input(this);
-    this.outputs = new Output(this);
+    this.inputs = new InputList(this);
+    this.outputs = new OutputList(this);
 
     // Not sure whether it is a good idea to record block position here.
     // It might make sense... node still need a position
@@ -34,21 +34,14 @@ export default class Node
     // But do a property assignment, just be safe...
     if(pod.variables) Object.assign(this.variables, pod.variables);
 
-    // we just need the name to be populated here.
-    // variable access will be auto created.
-    // Of course some of them will be discarded once
-    // connection is setup(pointer is added)
-    if(pod.inputs) {
-      for(let inputData of pod.inputs) {
-        this.inputs.addName(inputData.name);
-      }
+    // Only need the name. It will be connected once input is setup.
+    for(let outputPod of pod.outputs) {
+      this.outputs.addOutput(outputPod.name);
     }
 
-    // Only need the name. Output is dynamically generated!
-    if(pod.outputs) {
-      for(let name of pod.outputs) {
-        this.outputs.addName(name);
-      }
+    for(let pointerPod of pod.inputs) {
+      let input = this.inputs.addInput(pointerPod.inputName)
+      input.init(pointerPod);
     }
 
     this.x = pod.x;
@@ -86,14 +79,14 @@ export default class Node
     return node;
   }
 
-  pod() {
+  pod(detail=false) {
     return {
       className: this.className,
       id: this.id,
       variables: this.variables,
       owner: this.owner.id,
-      inputs: this.inputs.pod(),
-      outputs: this.outputs.pod(),
+      inputs: this.inputs.pod(detail),
+      outputs: this.outputs.pod(detail),
       x: this.x,
       y: this.y,
     }
