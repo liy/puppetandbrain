@@ -132,10 +132,10 @@ class BrainGraph
     // FIXME: use command!!!!!
     // disconnect all variable pins
     for(let pin of block.inputPins.getValues()) {
-      pin.removeConnections();
+      Commander.create('RemoveInputDataLink', pin.node.id, pin.name).process();
     }
     for(let pin of block.outputPins.getValues()) {
-      pin.removeConnections();
+      Commander.create('RemoveOutputDataLink', pin.node.id, pin.name).process();
     }
     // destroy block and remove it from the graph
     block.destroy();

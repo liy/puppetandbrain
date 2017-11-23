@@ -80,6 +80,5 @@ export default class DataPin
   rightMouseDown(e) {
     e.preventDefault();
     e.stopPropagation();
-    this.removeConnections();
   }
 }

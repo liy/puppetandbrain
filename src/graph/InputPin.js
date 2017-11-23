@@ -62,8 +62,8 @@ export default class InputPin extends DataPin
     return BrainGraph.getBlock(this.pointer.output.node.id).outputPins.get(this.pointer.output.name);
   }
 
-  // FIXME: remove this function!!!
-  removeConnections() {
+  rightMouseDown(e) {
+    super.rightMouseDown(e);
     History.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).process());
   }
 

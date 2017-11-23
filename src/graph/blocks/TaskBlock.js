@@ -34,7 +34,6 @@ export default class TaskBlock extends Block
       let executionName = this.node.execution.names[i]
       let out = new ExecutionOutPin(this, executionName);
       row(i).appendChild(out.container)
-      // TODO: to be moved to refresh
       this.outPins.set(executionName, out);
     }
 
@@ -53,14 +52,14 @@ export default class TaskBlock extends Block
     }
   }
 
-  delete() {
-    super.delete();
-    // disconnect all executions pins
-    if(this.inPin) this.inPin.removeConnections();
-    for(let pin of this.outPins.getValues()) {
-      pin.removeConnections();
-    }
-  }
+  // delete() {
+  //   super.delete();
+  //   // disconnect all executions pins
+  //   if(this.inPin) this.inPin.removeConnections();
+  //   for(let pin of this.outPins.getValues()) {
+  //     pin.removeConnections();
+  //   }
+  // }
 
   refreshExecutionPins() {
     if(this.inPin) this.inPin.refresh();

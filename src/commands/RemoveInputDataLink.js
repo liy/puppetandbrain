@@ -8,8 +8,10 @@ export default class RemoveInputDataLink extends Command
     this.inputNodeID = inputNodeID;
     this.inputNodeName = inputNodeName;
     let pointer = this.inputNode.inputs.get(this.inputNodeName);
-    this.outputNodeID = pointer.output.node.id;
-    this.outputNodeName = pointer.output.name;
+    if(pointer.output) {
+      this.outputNodeID = pointer.output.node.id;
+      this.outputNodeName = pointer.output.name;
+    }
   }
 
   get inputNode() {
@@ -21,6 +23,8 @@ export default class RemoveInputDataLink extends Command
   }
 
   process() {
+    if(!this.pointer.output) return null;
+
     let pointer = this.inputNode.inputs.get(this.inputNodeName);
     
     let inputPin = BrainGraph.getBlock(this.inputNodeID).inputPins.get(this.inputNodeName);

@@ -5,28 +5,6 @@ class ConnectionHelper
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
   }
 
-  startExecutionPin(pin, e) {
-    this.path.setAttribute('stroke', '#cddc39');
-    this.path.setAttribute('stroke-width', 3);
-    this.path.setAttribute('stroke-opacity', 1);
-    this.path.setAttribute('fill', 'transparent');
-
-    this.svg.appendChild(this.path);
-    this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
-    this.startPin = pin;
-  }
-
-  startDataPin(pin, e) {
-    this.path.setAttribute('stroke', '#a9c4d2');
-    this.path.setAttribute('stroke-width', 2);
-    this.path.setAttribute('stroke-opacity', 1);
-    this.path.setAttribute('fill', 'transparent');
-
-    this.svg.appendChild(this.path);
-    this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
-    this.startPin = pin;
-  }
-
   drawLine(x1, y1, x2, y2) {
     let offsetX = 20;
     let dx = (x1-offsetX) - (x2+offsetX);
@@ -71,9 +49,33 @@ class ConnectionHelper
     }
   }
 
+  startExecutionPin(pin, e) {
+    this.path.setAttribute('stroke', '#cddc39');
+    this.path.setAttribute('stroke-width', 3);
+    this.path.setAttribute('stroke-opacity', 1);
+    this.path.setAttribute('fill', 'transparent');
+
+    this.svg.appendChild(this.path);
+    this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
+    this.startPin = pin;
+    this.dragType = 'execution'
+  }
+
+  startDataPin(pin, e) {
+    this.path.setAttribute('stroke', '#a9c4d2');
+    this.path.setAttribute('stroke-width', 2);
+    this.path.setAttribute('stroke-opacity', 1);
+    this.path.setAttribute('fill', 'transparent');
+
+    this.svg.appendChild(this.path);
+    this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
+    this.startPin = pin;
+    this.dragType = 'data'
+  }
+
   tryConnectExecution(pin) {
     // You can only connect inpin to outpin or other way around.
-    if(this.startPin.type == pin.type) return;
+    if(this.startPin.type == pin.type || this.dragType == 'data') return;
 
     let outPin = pin;
     let inPin = this.startPin;
@@ -81,24 +83,14 @@ class ConnectionHelper
       outPin = this.startPin;
       inPin = pin;
     }
-
-    let sourceNode = outPin.node;
-    let targetNode = inPin.node;
-    // old target will have the execution pin disconnected
-    let oldTargetNode = sourceNode.execution.get(outPin.name);
-
+    
     // sourceNode.connectNext(targetNode, outPin.name)
-    Commander.create('CreateExecution', sourceNode, outPin.name, targetNode).process();
+    History.push(Commander.create('CreateExecution', outPin.node.id, outPin.name, inPin.node.id).process());
 
-    // Only need to refresh 4 nodes' execution pins. You could go further only
-    // refresh specific out pin.
-    BrainGraph.getBlock(sourceNode.id).refreshExecutionPins()
-    BrainGraph.getBlock(targetNode.id).refreshExecutionPins()
-    if(oldTargetNode) BrainGraph.getBlock(oldTargetNode.id).refreshExecutionPins()
   }
 
   tryConnectData(pin) {
-    if(this.startPin.type == pin.type) return;
+    if(this.startDataPin.type == pin.type || this.dragType == 'execution') return;
 
     let outputPin = pin;
     let inputPin = this.startPin;

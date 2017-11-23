@@ -41,7 +41,7 @@ export default class ArrayMap
   }
 
   contains(key) {
-    return key in this;
+    return key in this.values;
   }
 
   get length() {

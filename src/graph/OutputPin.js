@@ -43,13 +43,8 @@ export default class OutputPin extends DataPin
     ConnectionHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
   }
 
-  removeConnections() {
-    // let inputPins = this.getInputPins();
-    // for(let inputPin of inputPins) {
-    //   inputPin.pointer.disconnect();
-    //   inputPin.refresh();
-    // }
-    // this.refresh();
+  rightMouseDown(e) {
+    super.rightMouseDown(e);
     History.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).process());
   }
 }

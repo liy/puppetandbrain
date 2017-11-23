@@ -2,23 +2,38 @@ import Command from "./Command";
 
 export default class CreateExecution extends Command
 {
-  constructor(source, executionName, target) {
+  constructor(sourceNodeID, executionName, targetNodeID) {
     super();
-    this.sourceID = source.id;
+    this.sourceNodeID = sourceNodeID;
     this.executionName = executionName;
-    this.targetID = target.id;
+    this.targetNodeID = targetNodeID;
 
-    this.oldTargetID = source.execution.get(executionName).id;
-
-    this.push();
+    // Check if source node is isolated
+    let oldTargetNode = LookUp.get(this.sourceNodeID).execution.get(executionName);
+    if(oldTargetNode) {
+      this.oldTargetID = oldTargetNode.id;
+    }
   }
 
   process() {
-    LookUp.get(this.sourceID).connectNext(LookUp.get(this.targetID), this.executionName);
+    LookUp.get(this.sourceNodeID).connectNext(LookUp.get(this.targetNodeID), this.executionName);
+    
+    // Only need to refresh 4 nodes' execution pins. You could go further only
+    // refresh specific out pin.
+    BrainGraph.getBlock(this.sourceNodeID).outPins.get(this.executionName).refresh();
+    BrainGraph.getBlock(this.targetNodeID).inPin.refresh();
+    if(this.oldTargetID) BrainGraph.getBlock(this.oldTargetID).inPin.refresh();
+
+    return this;
   }
 
   undo() {
-    LookUp.get(this.sourceID).connectNext(LookUp.get(this.oldTargetID), this.executionName);
+    if(this.oldTargetID) {
+      LookUp.get(this.sourceNodeID).connectNext(LookUp.get(this.oldTargetID), this.executionName);
+    }
+    else {
+      LookUp.get(this.sourceNodeID).disconnectNext(LookUp.get(this.targetNodeID), this.executionName);
+    }
     BrainGraph.refresh()
   }
 
