@@ -34,12 +34,13 @@ export default class Task extends Node
   connectNext(target, executionName='default') {
     // Remove old target connection information
     let oldTarget = this.execution.get(executionName);
-    if(oldTarget) {
-      oldTarget.callers.remove(this.id+'.'+executionName)
-    }
+    if(oldTarget) this.disconnectNext(oldTarget, executionName);
 
+    // setup new connection to target
     this.execution.set(executionName, target)
 
+    // Make the target knows that it is connected by this task
+    // 
     // Note that caller's key is combination of
     // the caller's id and its execution name.
     // this because same caller can have multiple

@@ -8,7 +8,7 @@ export default class Command
     History.push(this);
   }
 
-  porcess() {
+  process() {
 
   }
 

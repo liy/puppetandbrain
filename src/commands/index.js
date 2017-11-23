@@ -1,3 +1,6 @@
+export RemoveExecution from "./RemoveExecution";
+export CreateExecution from "./CreateExecution";
+
 export CreateBlock from './CreateBlock';
 export DeleteBlock from './DeleteBlock';
 

@@ -87,7 +87,8 @@ class ConnectionHelper
     // old target will have the execution pin disconnected
     let oldTargetNode = sourceNode.execution.get(outPin.name);
 
-    sourceNode.connectNext(targetNode, outPin.name)
+    // sourceNode.connectNext(targetNode, outPin.name)
+    Commander.create('CreateExecution', sourceNode, outPin.name, targetNode).process();
 
     // Only need to refresh 4 nodes' execution pins. You could go further only
     // refresh specific out pin.
