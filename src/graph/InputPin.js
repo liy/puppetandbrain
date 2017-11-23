@@ -57,15 +57,15 @@ export default class InputPin extends DataPin
   }
 
   getOutputPin() {
-    if(this.pointer.isLocalPointer) return null;
-    return BrainGraph.getBlock(this.pointer.outputNode.id).outputPins.get(this.pointer.outputName);
+    if(!this.pointer.isOutputPointer) return null;
+    return BrainGraph.getBlock(this.pointer.output.node.id).outputPins.get(this.pointer.output.name);
   }
 
   removeConnections() {
-    let outPin = this.getOutputPin();
-    BrainGraph.brain.disconnectVariable(this.pointer);
+    let outputPin = this.getOutputPin();
+    this.pointer.disconnect();
     this.refresh();
-    if(outPin) outPin.refresh();
+    if(outputPin) outputPin.refresh();
   }
 
   drawConnection() {

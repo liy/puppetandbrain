@@ -106,15 +106,12 @@ class ConnectionHelper
       inputPin = pin;
     }
 
-    let pointer = inputPin.node.inputs.get(inputPin.name);
-    let outputNode = pointer.outputNode;
-
-    BrainGraph.brain.connectVariable(inputPin.node, inputPin.name, outputPin.node, outputPin.name);
+    let oldOutput = inputPin.pointer.connect(outputPin.output)
 
     // Refresh the removed old output pin.
-    if(outputNode) {
-      let block = BrainGraph.getBlock(outputNode.id);
-      block.outputPins.get(pointer.outputName).refresh();
+    if(oldOutput) {
+      let block = BrainGraph.getBlock(oldOutput.node.id);
+      block.outputPins.get(oldOutput.name).refresh();
     }
 
     inputPin.refresh();

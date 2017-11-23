@@ -90,30 +90,30 @@ export default class Brain
     })
   }
 
-  connectVariable(inputNode, inputName, outputNode, outputName, id) {
-    // remove pointer from old output node of the target input node
-    let oldPointer = inputNode.inputs.get(inputName);
-    if(oldPointer.outputNode) oldPointer.outputNode.outputs.disconnected(oldPointer);
-    // destroy old pointer
-    this.pointers.remove(oldPointer.id);
-    oldPointer.destroy()
+  // connectVariable(inputNode, inputName, outputNode, outputName, id) {
+  //   // remove pointer from old output node of the target input node
+  //   let oldPointer = inputNode.inputs.get(inputName);
+  //   if(oldPointer.outputNode) oldPointer.outputNode.outputs.disconnected(oldPointer);
+  //   // destroy old pointer
+  //   this.pointers.remove(oldPointer.id);
+  //   oldPointer.destroy()
 
-    let pointer = new Pointer(inputNode, inputName, outputNode, outputName, id);
-    this.pointers.set(pointer.id, pointer);
-    // Make new connection
-    inputNode.inputs.connected(pointer);
-    outputNode.outputs.connected(pointer);
-  }
+  //   let pointer = new Pointer(inputNode, inputName, outputNode, outputName, id);
+  //   this.pointers.set(pointer.id, pointer);
+  //   // Make new connection
+  //   inputNode.inputs.connected(pointer);
+  //   outputNode.outputs.connected(pointer);
+  // }
 
-  disconnectVariable(pointer) {
-    if(pointer.isLocalPointer) return;
+  // disconnectVariable(pointer) {
+  //   if(pointer.isLocalPointer) return;
 
-    pointer.inputNode.inputs.disconnect(pointer.inputName);
-    pointer.outputNode.outputs.disconnected(pointer);
+  //   pointer.inputNode.inputs.disconnect(pointer.inputName);
+  //   pointer.outputNode.outputs.disconnected(pointer);
 
-    this.pointers.remove(pointer.id);
-    pointer.destroy();
-  }
+  //   this.pointers.remove(pointer.id);
+  //   pointer.destroy();
+  // }
 
   pod() {
     return {

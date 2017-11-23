@@ -26,7 +26,7 @@ export default class Pointer
 
   connect(output, id) {
     // remove old output related connection
-    this.disconnect();
+    let oldOutput = this.disconnect();
 
     // Only output pointer will have id
     this.id = LookUp.addPointer(this, id);
@@ -36,9 +36,12 @@ export default class Pointer
     // Make pointer points to the output data and name
     this.target = this.output.data;
     this.targetName = this.output.name;
+
+    return oldOutput
   }
 
   disconnect() {
+    let oldOutput = this.output;
     if(this.output) {
       this.output.disconnect(this);
       LookUp.removePointer(this.id);
@@ -48,6 +51,7 @@ export default class Pointer
       this.target = this.inputNode.variables;
       this.targetName = this.inputName;
     }
+    return oldOutput;
   }
   
   destroy() {

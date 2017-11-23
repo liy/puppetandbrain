@@ -6,6 +6,7 @@ export default class OutputPin extends DataPin
   constructor(block, name) {
     super(block, name, 'right');
     this.type = 'output'
+    this.output = this.node.outputs.get(this.name);
 
     this.icon.className = 'icon out-disconnected';
   }
@@ -13,7 +14,7 @@ export default class OutputPin extends DataPin
   get isConnected() {
     // The output will have multiple connections, as there might be
     // other inputs referencing this output.
-    return this.node.outputs.get(this.name).isConnected;
+    return this.output.isConnected;
   }
 
   refresh() {
@@ -22,7 +23,7 @@ export default class OutputPin extends DataPin
   }
 
   getInputPins() {
-    let pointers = this.node.outputs.connections.get(this.name).getValues();
+    let pointers = this.output.getPointers();
     return pointers.map(pointer => {
       let inputBlock = BrainGraph.getBlock(pointer.inputNode.id);
       return inputBlock.inputPins.get(pointer.inputName)
@@ -30,7 +31,7 @@ export default class OutputPin extends DataPin
   }
 
   drawConnection() {
-    let pointers = this.node.outputs.connections.get(this.name).getValues();
+    let pointers = this.output.getPointers();
     for(let pointer of pointers) {
       // inputPin.drawConnection();
       let inputBlock = BrainGraph.getBlock(pointer.inputNode.id);
@@ -45,7 +46,7 @@ export default class OutputPin extends DataPin
   removeConnections() {
     let inputPins = this.getInputPins();
     for(let inputPin of inputPins) {
-      BrainGraph.brain.disconnectVariable(inputPin.getPointer());
+      inputPin.pointer.disconnect();
       inputPin.refresh();
     }
     this.refresh();
