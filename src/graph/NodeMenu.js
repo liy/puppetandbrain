@@ -28,8 +28,8 @@ export default class NodeMenu
       });
     }
 
-    BrainGraph.container.addEventListener('mousedown', (e) => {
-      if(e.target == BrainGraph.container) this.destroy();
+    BrainGraph.container.addEventListener('mousedown', e => {
+      if(e.target.className != 'menu-item') this.destroy();
     }, {once: true})
   }
 

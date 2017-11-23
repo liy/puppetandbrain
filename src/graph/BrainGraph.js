@@ -140,12 +140,15 @@ class BrainGraph
   }
 
   openNodeMenu(e) {
-    if(e.target == this.container) e.preventDefault();
+    if(e.target == this.container) {
+      e.stopPropagation();
+      e.preventDefault();
 
-    let menu = new NodeMenu(this);
-    menu.init()
-    menu.x = e.clientX;
-    menu.y = e.clientY;
+      let menu = new NodeMenu(this);
+      menu.init()
+      menu.x = e.clientX;
+      menu.y = e.clientY;
+    }
   }
 
   refresh() {
