@@ -85,7 +85,6 @@ export default class InputPin extends DataPin
     // 1. degree in range: [-?,?]
     // AND
     // 2. distance ?
-    console.log(degree, adx)
     if(Math.abs(degree) < 45 && adx < 50 ) {
       this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 L${outputPin.position.x-offsetX},${outputPin.position.y} l${offsetX},0`);
     }

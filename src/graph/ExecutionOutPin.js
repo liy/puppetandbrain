@@ -13,6 +13,10 @@ export default class ExecutionOutPin extends ExecutionPin
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
+
+    this.path.addEventListener('mousedown', e => {
+      console.log('test line interaction')
+    })
   }
 
   getConnectedPin() {

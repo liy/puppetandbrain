@@ -115,9 +115,6 @@ export class RandomNumber extends Operator
 {
   constructor(id) {
     super(id);
-    
-    this.inputs.addInput('A');
-    this.inputs.addInput('B');
   }
 
   get nodeName() {

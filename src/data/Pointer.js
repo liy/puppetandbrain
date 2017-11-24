@@ -70,6 +70,10 @@ export default class Pointer extends EventEmitter
     return this.target[this.targetName];
   }
 
+  get properties() {
+    return this.output ? this.output.properties : null;
+  }
+
   pod() {
     return {
       className: this.__proto__.constructor.name,

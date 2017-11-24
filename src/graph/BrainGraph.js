@@ -25,8 +25,8 @@ class BrainGraph
 
     this.container.style = "visibility:visible"
 
-    this.container.addEventListener('contextmenu', this.openNodeMenu);
-    this.container.addEventListener('mousedown', this.mousedown);
+    this.svg.addEventListener('contextmenu', this.openNodeMenu);
+    this.svg.addEventListener('mousedown', this.mousedown);
     document.addEventListener('keydown', this.keydown);
     window.addEventListener('resize', this.resize);
     this.resize();
@@ -51,8 +51,8 @@ class BrainGraph
 
     this.container.style = "visibility:hidden"
    
-    this.container.removeEventListener('contextmenu', this.openNodeMenu);
-    this.container.removeEventListener('mousedown', this.mousedown);
+    this.svg.removeEventListener('contextmenu', this.openNodeMenu);
+    this.svg.removeEventListener('mousedown', this.mousedown);
     document.removeEventListener('keydown', this.keydown);
     window.removeEventListener('resize', this.resize);
 
@@ -62,7 +62,7 @@ class BrainGraph
 
 
   mousedown(e) {
-    if(e.target == this.container) {
+    if(e.target == this.svg) {
       if(++this.dbClicks%2 == 0) {
         History.push(Commander.create('CloseGraph', this.brain.id).process());
         return;
@@ -140,7 +140,7 @@ class BrainGraph
   }
 
   openNodeMenu(e) {
-    if(e.target == this.container) {
+    if(e.target == this.svg) {
       e.stopPropagation();
       e.preventDefault();
 

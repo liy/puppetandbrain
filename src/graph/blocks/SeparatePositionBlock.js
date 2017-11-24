@@ -1,10 +1,13 @@
 import Block from "./Block";
 import InputPin from "../InputPin";
 
-export default class SeparateBlock extends Block
+export default class SeparatePositionBlock extends Block
 {
   constructor(node, graph) {
     super(node, graph);
+
+    this.node.outputs.addOutput('x');
+    this.node.outputs.addOutput('y');
 
     let rows = [];
     let row = (i) => {

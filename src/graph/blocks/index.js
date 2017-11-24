@@ -21,4 +21,4 @@ export WaitBlock from './WaitBlock';
 export KeyDownBlock from './KeyDownBlock';
 export LoopBlock from './LoopBlock';
 export RepeatBlock from './RepeatBlock';
-export SeparateBlock from './SeparateBlock';
+export SeparatePositionBlock from './SeparatePositionBlock';

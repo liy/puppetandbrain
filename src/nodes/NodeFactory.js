@@ -2,7 +2,6 @@ import * as ns from './'
 
 window.NodeFactory = {
   create: function(className, id) {
-    console.log(ns, className)
     return new ns[className](id);
   },
 

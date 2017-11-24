@@ -50,7 +50,7 @@ class ConnectHelper
   }
 
   startExecutionPin(pin, e) {
-    this.path.setAttribute('stroke', '#cddc39');
+    this.path.setAttribute('stroke', '#FFF');
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
@@ -89,7 +89,7 @@ class ConnectHelper
   }
 
   connectDataPin(pin) {
-    if(this.startDataPin.type == pin.type || this.dragType == 'execution') return;
+    if(this.startPin.type == pin.type || this.dragType == 'execution') return;
 
     let outputPin = pin;
     let inputPin = this.startPin;
