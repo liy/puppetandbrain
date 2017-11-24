@@ -1,0 +1,15 @@
+body {
+  margin:0; 
+  background-color:#151515;
+  overflow:hidden;
+}
+
+#add-actor {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 100px;
+  height: 100px;
+  background-image: url('./assets/add-actor.svg');
+  cursor: pointer;
+}

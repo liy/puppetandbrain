@@ -5,14 +5,36 @@ require('./assets/cow/cow.png')
 require('./assets/cow/cow2.png')
 require('./assets/cow/cow3.png')
 require('./assets/cow/cow.json')
+
 require('./assets/donkey/donkey.atlas')
 require('./assets/donkey/donkey.png')
 require('./assets/donkey/donkey2.png')
 require('./assets/donkey/donkey.json')
 
+require('./assets/chicken/chicken.atlas')
+require('./assets/chicken/chicken.png')
+require('./assets/chicken/chicken2.png')
+require('./assets/chicken/chicken.json')
+
+require('./assets/horse/horse.atlas')
+require('./assets/horse/horse.png')
+require('./assets/horse/horse2.png')
+require('./assets/horse/horse.json')
+
+require('./assets/pig/pig.atlas')
+require('./assets/pig/pig.png')
+require('./assets/pig/pig2.png')
+require('./assets/pig/pig.json')
+
+require('./assets/sheep/sheep.atlas')
+require('./assets/sheep/sheep.png')
+require('./assets/sheep/sheep2.png')
+require('./assets/sheep/sheep.json')
+
 
 
 // imports
+require('./index.scss')
 
 // LookUp is a global window variable, save typing!
 require('./LookUp');
@@ -44,14 +66,12 @@ import KeyDown from './nodes/KeyDown';
 import ActivityLoader from './ActivityLoader';
 
 
-var appDiv = document.getElementById('app');
-var canvas = document.createElement('canvas');
+var canvas = document.getElementById('canvas');
 
-appDiv.appendChild(canvas);
 window.renderer = PIXI.autoDetectRenderer({
   autoStart: true,
-  width: window.innerWidth,
-  height: window.innerHeight,
+  width: window.innerWidth-1,
+  height: window.innerHeight-1,
   view: canvas,
   transparent: true,
   antialias: true
@@ -274,43 +294,37 @@ async function load() {
 
 // load();
 
+
+const ACTORS = [
+  require('./assets/chicken/chicken.info.json'),
+  require('./assets/cow/cow.info.json'),
+  require('./assets/donkey/donkey.info.json'),
+  require('./assets/horse/horse.info.json'),
+  require('./assets/pig/pig.info.json'),
+  require('./assets/sheep/sheep.info.json'),
+  // require('./assets/cow/cow.info.json'),
+  // require('./assets/cow/cow.info.json'),
+]
+
 function simpleInit() {
-  // Donkey!
-  var donkey = new SpineActor();
-  donkey.init({
-    url: require('./assets/donkey/donkey.info.json'),
-    name: 'Donkey',
-    scale: {
-      x: 0.5,
-      y: 0.5
-    },
-    x: window.innerWidth/2,
-    y: window.innerHeight/2,
-  })
-  Stage.addActor(donkey)
+  Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).process();
 
-  // Cow
-  var cow = new SpineActor();
-  cow.init({
-    url: require('./assets/cow/cow.info.json'),
-    name: 'Cow',
-    scale: {
-      x: 0.5,
-      y: 0.5
-    },
-    x: window.innerWidth/5,
-    y: window.innerHeight/2,
+  let promises = Stage.actors.map(actor => {
+    return actor.loaded;
   })
-  Stage.addActor(cow)
-
   // start the activity when cow and donkey are loaded
-  Promise.all([cow.loaded, donkey.loaded]).then(() => {
+  Promise.all(promises).then(() => {
     // serialize everything before game start
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
 }
 
 simpleInit();
+
+let actorAddBtn = document.getElementById('add-actor');
+actorAddBtn.addEventListener('mousedown', e => {
+  History.push(Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).process());
+})
 
 // prevent default context menu for the whole site
 document.addEventListener('contextmenu', event => event.preventDefault());

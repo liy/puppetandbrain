@@ -8,7 +8,19 @@ class Selection
 {
   constructor() {
     this.selected = [];
+    this.enabled = true;
 
+    document.addEventListener('keydown', this.keydown.bind(this));
+  }
+
+  keydown(e) {
+    if(!this.enabled) return;
+
+    switch(e.keyCode) {
+      case 46:
+        this.delete();
+        break;
+    }
   }
 
   add(target) {
@@ -31,6 +43,12 @@ class Selection
     this.selected.forEach(entity => {
       entity.getComponent('SelectionComponent').deselect(entity)
     })
+  }
+
+  delete() {
+    if(this.selected[0]) {
+      History.push(Commander.create('DeleteActor', this.selected[0].id).process());
+    }
   }
 }
 

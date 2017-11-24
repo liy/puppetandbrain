@@ -13,3 +13,5 @@ export OpenGraph from './OpenGraph';
 export CloseGraph from './CloseGraph';
 
 export MoveActor from './MoveActor';
+export CreateActor from './CreateActor';
+export DeleteActor from './DeleteActor';

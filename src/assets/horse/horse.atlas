@@ -1,0 +1,292 @@
+
+horse.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 2, 1607
+  size: 694, 437
+  orig: 694, 437
+  offset: 0, 0
+  index: -1
+ear1
+  rotate: false
+  xy: 1658, 747
+  size: 117, 203
+  orig: 117, 203
+  offset: 0, 0
+  index: -1
+ear2
+  rotate: false
+  xy: 1751, 1215
+  size: 95, 209
+  orig: 95, 209
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 1623, 114
+  size: 160, 188
+  orig: 160, 188
+  offset: 0, 0
+  index: -1
+face2
+  rotate: false
+  xy: 1835, 323
+  size: 160, 188
+  orig: 160, 188
+  offset: 0, 0
+  index: -1
+face3
+  rotate: false
+  xy: 1785, 117
+  size: 160, 188
+  orig: 160, 188
+  offset: 0, 0
+  index: -1
+hair
+  rotate: true
+  xy: 1664, 307
+  size: 182, 169
+  orig: 182, 169
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 342, 37
+  size: 279, 389
+  orig: 279, 389
+  offset: 0, 0
+  index: -1
+leg1
+  rotate: false
+  xy: 1777, 513
+  size: 165, 509
+  orig: 165, 509
+  offset: 0, 0
+  index: -1
+leg1_2
+  rotate: false
+  xy: 1848, 1024
+  size: 170, 509
+  orig: 170, 509
+  offset: 0, 0
+  index: -1
+leg1_3
+  rotate: false
+  xy: 1862, 1535
+  size: 174, 509
+  orig: 174, 509
+  offset: 0, 0
+  index: -1
+leg1_4
+  rotate: true
+  xy: 1118, 108
+  size: 194, 503
+  orig: 194, 503
+  offset: 0, 0
+  index: -1
+leg1_5
+  rotate: true
+  xy: 623, 12
+  size: 280, 493
+  orig: 280, 493
+  offset: 0, 0
+  index: -1
+leg1_6
+  rotate: false
+  xy: 2, 2
+  size: 338, 424
+  orig: 338, 424
+  offset: 0, 0
+  index: -1
+leg2
+  rotate: false
+  xy: 265, 428
+  size: 249, 599
+  orig: 249, 599
+  offset: 0, 0
+  index: -1
+leg2_2
+  rotate: true
+  xy: 1261, 1789
+  size: 255, 599
+  orig: 255, 599
+  offset: 0, 0
+  index: -1
+leg2_3
+  rotate: false
+  xy: 2, 428
+  size: 261, 599
+  orig: 261, 599
+  offset: 0, 0
+  index: -1
+leg2_4
+  rotate: true
+  xy: 634, 1264
+  size: 260, 580
+  orig: 260, 580
+  offset: 0, 0
+  index: -1
+leg2_5
+  rotate: true
+  xy: 698, 1708
+  size: 336, 561
+  orig: 336, 561
+  offset: 0, 0
+  index: -1
+leg2_6
+  rotate: false
+  xy: 733, 623
+  size: 382, 455
+  orig: 382, 455
+  offset: 0, 0
+  index: -1
+leg3
+  rotate: true
+  xy: 1261, 1607
+  size: 180, 587
+  orig: 180, 587
+  offset: 0, 0
+  index: -1
+leg3_2
+  rotate: true
+  xy: 634, 1080
+  size: 182, 587
+  orig: 182, 587
+  offset: 0, 0
+  index: -1
+leg3_3
+  rotate: true
+  xy: 1258, 1426
+  size: 179, 587
+  orig: 179, 587
+  offset: 0, 0
+  index: -1
+leg3_4
+  rotate: false
+  xy: 516, 452
+  size: 215, 602
+  orig: 215, 602
+  offset: 0, 0
+  index: -1
+leg3_5
+  rotate: false
+  xy: 332, 1056
+  size: 300, 549
+  orig: 300, 549
+  offset: 0, 0
+  index: -1
+leg4
+  rotate: true
+  xy: 1223, 952
+  size: 176, 548
+  orig: 176, 548
+  offset: 0, 0
+  index: -1
+leg4_2
+  rotate: true
+  xy: 1117, 491
+  size: 182, 548
+  orig: 182, 548
+  offset: 0, 0
+  index: -1
+leg4_3
+  rotate: true
+  xy: 1114, 304
+  size: 185, 548
+  orig: 185, 548
+  offset: 0, 0
+  index: -1
+leg4_4
+  rotate: true
+  xy: 698, 1526
+  size: 180, 558
+  orig: 180, 558
+  offset: 0, 0
+  index: -1
+leg4_5
+  rotate: true
+  xy: 1117, 675
+  size: 275, 539
+  orig: 275, 539
+  offset: 0, 0
+  index: -1
+leg4_7
+  rotate: true
+  xy: 733, 294
+  size: 327, 379
+  orig: 327, 379
+  offset: 0, 0
+  index: -1
+neck
+  rotate: false
+  xy: 2, 1029
+  size: 328, 576
+  orig: 328, 576
+  offset: 0, 0
+  index: -1
+tail
+  rotate: true
+  xy: 1223, 1130
+  size: 294, 526
+  orig: 294, 526
+  offset: 0, 0
+  index: -1
+
+horse2.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face4
+  rotate: true
+  xy: 1688, 344
+  size: 160, 188
+  orig: 160, 188
+  offset: 0, 0
+  index: -1
+leg1_7
+  rotate: true
+  xy: 1341, 154
+  size: 350, 345
+  orig: 350, 345
+  offset: 0, 0
+  index: -1
+leg2_7
+  rotate: false
+  xy: 2, 71
+  size: 373, 433
+  orig: 373, 433
+  offset: 0, 0
+  index: -1
+leg3_6
+  rotate: false
+  xy: 706, 49
+  size: 322, 455
+  orig: 322, 455
+  offset: 0, 0
+  index: -1
+leg3_7
+  rotate: false
+  xy: 1030, 71
+  size: 309, 433
+  orig: 309, 433
+  offset: 0, 0
+  index: -1
+leg4_6
+  rotate: false
+  xy: 377, 55
+  size: 327, 449
+  orig: 327, 449
+  offset: 0, 0
+  index: -1
+mouth
+  rotate: false
+  xy: 1341, 2
+  size: 166, 150
+  orig: 166, 150
+  offset: 0, 0
+  index: -1

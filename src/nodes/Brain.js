@@ -10,6 +10,7 @@ export default class Brain
     this.nodes = new ArrayMap();
   }
 
+  // FIXME: never used!!!!!
   init(pod) {
     // create and init nodes
     for(let id of pod.nodes) {
@@ -73,6 +74,18 @@ export default class Brain
 
   getNodes() {
     return this.nodes.getValues();
+  }
+
+  getPointers() {
+    let nodes = this.nodes.getValues();
+    let pointers = [];
+    for(let node of nodes) {
+      for(let name of node.inputs.names) {
+        let pointer = node.inputs.get(name);
+        if(pointer.isOutputPointer) pointers.push(pointer); 
+      }
+    }
+    return pointers;
   }
 
   getTasks() {
