@@ -30,6 +30,14 @@ export default class Task extends Node
     super.terminate();
     this.variables = this.initialState.variables;
   }
+  
+  onExecutionConnected() {
+
+  }
+
+  onExecutionDisconnected() {
+
+  }
 
   connectNext(target, executionName='default') {
     // Remove old target connection information
@@ -50,7 +58,10 @@ export default class Task extends Node
     target.callers.set(this.id+'.'+executionName, {
       executionName: executionName,
       task: this
-    })
+    });
+
+    this.onExecutionConnected();
+    target.onExecutionConnected();
 
     return target;
   }
@@ -64,7 +75,10 @@ export default class Task extends Node
     // Note the combination of id and exeuciton name is used
     // for removing the caller information.
     target.callers.remove(this.id+'.'+executionName)
-    this.execution.set(executionName, null)
+    this.execution.set(executionName, null);
+    
+    this.onExecutionDisconnected();
+    target.onExecutionDisconnected();
   }
 
   disconnectParent(parent, parentExecutionName) {

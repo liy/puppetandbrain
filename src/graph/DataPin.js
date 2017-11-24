@@ -18,13 +18,15 @@ export default class DataPin
     this.icon =  document.createElement('div');
     this.icon.className = 'icon'
     this.container.appendChild(this.icon);
-    this.icon.style = `${location}:5px`
+    // this.icon.style = `${location}:5px`
+    this.icon.style = `${location}:-12px`
 
     this.label = document.createElement('div');
     this.label.className = 'label'
     this.label.textContent = name;
     this.container.appendChild(this.label)
-    this.label.style = `float:${location}; margin-${location}:20px`;
+    // this.label.style = `float:${location}; margin-${location}:20px`;
+    this.label.style = `float:${location}; margin-${location}:2px`
 
 
     this.mouseDown = this.mouseDown.bind(this);

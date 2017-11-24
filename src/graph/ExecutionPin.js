@@ -23,14 +23,16 @@ export default class ExecutionPin
     this.icon =  document.createElement('div');
     this.icon.className = 'icon in-disconnected'
     this.container.appendChild(this.icon);
-    this.icon.style = `${location}:5px`
+    // this.icon.style = `${location}:5px`
+    this.icon.style = `${location}:-17px`
 
     this.label = document.createElement('div');
     this.label.className = 'label'
     this.label.textContent = (name == 'default') ? '' : name;
     this.container.appendChild(this.label)
 
-    this.label.style = `float:${location}; margin-${location}:20px`
+    // this.label.style = `float:${location}; margin-${location}:20px`
+    this.label.style = `float:${location}; margin-${location}:2px`
 
     this.mouseDown = this.mouseDown.bind(this);
     this.mouseMove = this.mouseMove.bind(this);

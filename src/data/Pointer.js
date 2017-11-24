@@ -1,7 +1,11 @@
+import EventEmitter from '../utils/EventEmitter';
+
 // input
-export default class Pointer
+export default class Pointer extends EventEmitter
 {
   constructor(inputNode, inputName) {
+    super();
+
     this.inputNode = inputNode;
     this.inputName = inputName;
     // by default it is a local variable pointer
@@ -37,6 +41,8 @@ export default class Pointer
     this.target = this.output.data;
     this.targetName = this.output.name;
 
+    this.emit('input.connected', this);
+
     return oldOutput
   }
 
@@ -50,6 +56,8 @@ export default class Pointer
 
       this.target = this.inputNode.variables;
       this.targetName = this.inputName;
+
+      this.emit('input.disconnected', this);
     }
     return oldOutput;
   }

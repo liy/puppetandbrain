@@ -59,10 +59,7 @@ export default class EventEmitter
       for(let i=0; i<listeners.length; ++i) {
         // note that every listener gets a complete new event object instance. Just in case they modified the event 
         // during event dispatching
-        listeners[i]({
-          ...data,
-          type
-        });
+        listeners[i](data, type);
       }
     }
   }

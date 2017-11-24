@@ -21,4 +21,5 @@ export Property from './Property';
 export KeyDown from './KeyDown';
 export Loop from './Loop';
 export Repeat from './Repeat';
+export Separate from './Separate';
 

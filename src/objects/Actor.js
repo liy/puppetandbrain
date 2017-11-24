@@ -94,6 +94,14 @@ export default class Actor extends PIXI.Container
     this.variables[name] = value;
   }
 
+  get position() {
+    let p = super.position;
+    return {
+      x: p.x,
+      y: p.y
+    }
+  }
+
   pointerDown(e) {
     // Open brain graph
     setTimeout(() => {
