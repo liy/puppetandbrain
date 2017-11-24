@@ -1,3 +1,4 @@
+import OutputPin from "../OutputPin";
 import Block from "./Block";
 import InputPin from "../InputPin";
 
@@ -24,6 +25,13 @@ export default class SeparatePositionBlock extends Block
       let pin = new InputPin(this, name)
       row(i).appendChild(pin.container);
       this.inputPins.set(name, pin);
+    }
+
+    for(let i=0; i<this.node.outputs.names.length; ++i) {
+      let name = this.node.outputs.names[i];
+      let pin = new OutputPin(this, name);
+      row(i).appendChild(pin.container);
+      this.outputPins.set(name, pin);
     }
   }
 

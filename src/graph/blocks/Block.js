@@ -19,7 +19,7 @@ export default class Block
 
     this.container = document.createElement('div');
     this.container.className = `block ${this.node.className.toLowerCase()}-block`;
-    this.container.style = `min-width:${200}px; min-height:${60}px;`;
+    this.container.style = `min-width:${100}px; min-height:${100}px;`;
 
     this.title = document.createElement('div');
     this.title.className = 'title'
@@ -104,5 +104,9 @@ export default class Block
 
   get height() {
     return this.container.getClientRects().height;
+  }
+  
+  get className() {
+    return this.__proto__.constructor.name;
   }
 }

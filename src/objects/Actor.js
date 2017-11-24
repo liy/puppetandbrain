@@ -3,6 +3,7 @@ import Entity from './Entity';
 import mixin from '../utils/mixin';
 import ActionName from '../nodes/ActionName';
 import Brain from '../nodes/Brain';
+import Action from '../nodes/Action';
 
 /**
  * Actor shows up on the stage!
@@ -24,6 +25,7 @@ export default class Actor extends PIXI.Container
     this.name = 'Actor ' + this.id;
 
     this.actions = Object.create(null);
+    this.customActions = Object.create(null);
 
     this.childActors = [];
 

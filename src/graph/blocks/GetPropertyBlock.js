@@ -2,10 +2,10 @@ import OutputPin from "../OutputPin";
 import Block from "./Block";
 import InputPin from "../InputPin";
 
-export default class PropertyBlock extends Block
+export default class GetPropertyBlock extends Block
 {
-  constructor(node, graph) {
-    super(node, graph);
+  constructor(name, node) {
+    super(node);
 
     let minWidth = 200;
     let minHeight = 40;
@@ -23,9 +23,9 @@ export default class PropertyBlock extends Block
       this.inputPins.set(name, pin);
     }
 
-    let outputPin = new OutputPin(this, this.node.name);
+    let outputPin = new OutputPin(this, name);
     row.appendChild(outputPin.container);
-    this.outputPins.set(node.name, outputPin);
+    this.outputPins.set(name, outputPin);
   }
 
   dragmove(e) {

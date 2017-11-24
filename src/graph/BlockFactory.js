@@ -6,12 +6,8 @@ import OperatorBlock from './blocks/OperatorBlock';
 
 window.BlockFactory = {
   create: function(node) {
+    // node and block are 1 to 1 mapping
     let blockClass = BlockClasses[node.className+'Block']
-    if(blockClass) {
-      return new blockClass(node);
-    }
-    else {
-      return new TaskBlock(node);
-    }
+    return new blockClass(node);
   }
 }

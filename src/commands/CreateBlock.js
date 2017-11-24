@@ -1,10 +1,11 @@
 import Command from './Command';
+import BlockSelection from '../graph/BlockSelection'
 
 export default class CreateBlock extends Command
 {
-  constructor(owner, pod, x, y) {
+  constructor(pod, ownerID, x, y) {
     super();
-    this.ownerID = owner.id;
+    this.ownerID = ownerID;
     this.pod = pod;
     this.x = x;
     this.y = y;
@@ -13,6 +14,15 @@ export default class CreateBlock extends Command
   }
 
   process() {
+    // Check there are existing Action with same name
+    if(this.pod.className == 'Action') {
+      let existingAction = LookUp.get(this.ownerID).actions[this.pod.actionName];
+      if(existingAction) {
+        BlockSelection.select(BrainGraph.getBlock(existingAction.id));
+        return null;
+      }
+    }
+
     let node = NodeFactory.create(this.pod.className, this.nodeID);
     node.init({
       ...this.pod,
@@ -23,7 +33,7 @@ export default class CreateBlock extends Command
 
     this.nodeID = node.id;
 
-    BlockFactory.create(node, BrainGraph);
+    BlockFactory.create(node);
 
     return this;
   }

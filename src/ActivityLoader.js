@@ -47,7 +47,7 @@ export default class ActivityLoader
   createBrains(pod) {
     for(let id of pod.nodes) {
       let data = pod.store[id];
-      let node = new scope[data.className](id)
+      let node = NodeFactory.create(data.className, id)
       node.init(data)
     }
 

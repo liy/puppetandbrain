@@ -14,7 +14,7 @@ export class Operator extends DataNode
   }
 }
 
-export class Add extends Operator
+export class Addition extends Operator
 {
   constructor(id) {
     super(id);

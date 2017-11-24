@@ -1,8 +1,8 @@
-import PropertyBlock from "./PropertyBlock";
+import GetPropertyBlock from "./GetPropertyBlock";
 
-export default class GetRotationBlock extends PropertyBlock
+export default class GetRotationBlock extends GetPropertyBlock
 {
-  constructor(node, graph) {
-    super(node, graph);
+  constructor(node) {
+    super('rotation', node);
   }
 }

@@ -1,12 +1,12 @@
-import Output from "../data/Output";
 import DataNode from "./DataNode";
 
-export default class Property extends DataNode
+// Dynamic property getter. Maybe not useful?
+export default class GetProperty extends DataNode
 {
   constructor(id) {
     super(id)
 
-    this.inputs.addInput('target')
+    this.inputs.addInput('target');
   }
 
   init(pod) {

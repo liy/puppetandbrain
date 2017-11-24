@@ -1,4 +1,171 @@
 require('./NodeMenu.scss')
+import ActionName from '../nodes/ActionName';
+
+const ITEMS = [
+  {
+    itemName: 'Wait',
+    nodePod: {
+      className: 'Wait',
+      variables: {
+        seconds: 1
+      }
+    }
+  },
+  {
+    itemName: 'Game Start',
+    nodePod: {
+      className: 'Action',
+      actionName: ActionName.GAME_START
+    }
+  },
+  {
+    itemName: 'Move',
+    nodePod: {
+      className: 'Tween'
+    }
+  },
+  {
+    itemName: 'Print',
+    nodePod: {
+      className: 'Trace',
+      variables: {
+        text: 'Print out a message'
+      }
+    }
+  },
+  {
+    itemName: 'Animation',
+    nodePod: {
+      className: 'Animation',
+      variables: {
+      itemName: 'static',
+      }
+    }
+  },
+  {
+    itemName: 'Branch',
+    nodePod: {
+      className: 'Branch',
+      variables: {
+        condition: true
+      }
+    }
+  },
+  {
+    itemName: 'Get Position',
+    nodePod: {
+      className: 'GetPosition',
+      name: 'position',
+    }
+  },
+  {
+    itemName: 'Get Rotation',
+    nodePod: {
+      className: 'GetRotation',
+      name: 'rotation',
+    }
+  },
+
+  {
+    itemName: '+ Addition',
+    nodePod: {
+      className: 'Addition',
+      variables: {
+        A: 1,
+        B: 1
+      },
+    }
+  },
+  {
+    itemName: '/ Divide',
+    nodePod: {
+      className: 'Divide',
+      variables: {
+        A: 4,
+        B: 2,
+      },
+    }
+  },
+  {
+    itemName: '* Multiply',
+    nodePod: {
+      className: 'Multiply',
+      variables: {
+        A: 2,
+        B: 3,
+      },
+    }
+  },
+  {
+    itemName: '= Equal',
+    nodePod: {
+      className: 'Equal',
+      variables: {
+        A: 1,
+        B: 1,
+      },
+    }
+  },
+  {
+    itemName: '<= Less Equal',
+    nodePod: {
+      className: 'LessEqual',
+      variables: {
+        A: 1,
+        B: 2,
+      },
+    }
+  },
+  {
+    itemName: '< Less Than',
+    nodePod: {
+      className: 'LessThan',
+      variables: {
+        A: 1,
+        B: 2,
+      },
+    }
+  },
+  {
+    itemName: 'Random Number',
+    nodePod: {
+      className: 'RandomNumber',
+    }
+  },
+  {
+    itemName: 'Key Down',
+    nodePod: {
+      className: 'KeyDown',
+      variables: {
+        key: 'S'
+      }
+    }
+  },
+  {
+    itemName: 'Loop',
+    nodePod: {
+      className: 'Loop',
+      variables: {
+        limit: 3
+      }
+    }
+  },
+  {
+    itemName: 'Repeat',
+    nodePod: {
+      className: 'Repeat',
+      variables: {
+        times: 3
+      }
+    }
+  },
+  {
+    itemName: 'Separate Position',
+    nodePod: {
+      className: 'SeparatePosition',
+    }
+  }
+]
 
 export default class NodeMenu
 {
@@ -14,29 +181,33 @@ export default class NodeMenu
   }
 
   init() {
-    let pods = NodeFactory.getNodePods();
-
+    let entries = ITEMS.concat();
     // get all actors' actions
     for(let actor of LookUp.getActors()) {
-      for(let actionName of Object.keys(actor.actions)) {
-        pods[actionName] = {
-          className: 'Perform',
-          owner: BrainGraph.brain.owner,
-          target: actor,
-          actionName: actionName
-        }
+      if(actor == BrainGraph.brain.owner) continue;
+      
+      for(let actionName of Object.keys(actor.customActions)) {
+        entries.push({
+          itemName: `Perform ${actionName}`,
+          nodePod: {
+            className: 'Perform',
+            owner: BrainGraph.brain.owner,
+            target: actor,
+            actionName: actionName
+          }
+        })
+        
       }
     }
 
-    for(let name of Object.keys(pods)) {
-      let pod = pods[name];
+    for(let entry of entries) {
       let item = document.createElement('div');
       item.className = 'menu-item';
-      item.textContent = name;
+      item.textContent = entry.itemName;
       this.container.appendChild(item);
 
       item.addEventListener('click', e => {
-        History.push(Commander.create('CreateBlock', BrainGraph.brain.owner, pod, this.x, this.y).process());
+        History.push(Commander.create('CreateBlock', entry.nodePod, BrainGraph.brain.owner.id, this.x, this.y).process());
         this.destroy();
       });
     }

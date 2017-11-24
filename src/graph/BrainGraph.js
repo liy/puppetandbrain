@@ -35,7 +35,7 @@ class BrainGraph
     BlockSelection.toggle();
 
     for(let node of this.brain.getNodes()) {
-      BlockFactory.create(node, this);
+      BlockFactory.create(node);
     }
 
     this.draw();
@@ -82,6 +82,7 @@ class BrainGraph
 
   draw() {
     for(let block of this.blocks.getValues()) {
+      console.log(block.node.nodeName)
       // draw exeuctions
       // refresh in pin, only update the in pin icon status
       if(block.inPin) block.inPin.refresh();

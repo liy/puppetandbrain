@@ -36,7 +36,7 @@ import Trace from './nodes/Trace';
 import Animation from './nodes/Animation';
 import Branch from './nodes/Branch';
 import Perform from './nodes/Perform';
-import Property from './nodes/Property';
+import GetPosition from './nodes/GetPosition';
 import {Equal, RandomNumber, LessThan} from './nodes/Operator'
 import KeyDown from './nodes/KeyDown';
 
@@ -159,16 +159,15 @@ function init() {
     }
   });
 
-  let positionProperty = new Property();
-  positionProperty.init({
+  let getPosition = new GetPosition();
+  getPosition.init({
     owner: cow,
-    name: 'position',
     variables: {
       target: donkey.id
     }
   });
 
-  window.positionProperty = positionProperty;
+  window.getPosition = getPosition;
 
   let tween = new Tween();
   tween.init({
@@ -178,7 +177,7 @@ function init() {
     }
   })
   // link to donkey's position
-  tween.inputs.get('position').connect(positionProperty.outputs.get('position'))
+  tween.inputs.get('position').connect(getPosition.outputs.get('position'))
 
   let startTask = new Action();
   startTask.init({
@@ -273,7 +272,45 @@ async function load() {
   })
 }
 
-load();
+// load();
+
+function simpleInit() {
+  // Donkey!
+  var donkey = new SpineActor();
+  donkey.init({
+    url: require('./assets/donkey/donkey.info.json'),
+    name: 'Donkey',
+    scale: {
+      x: 0.5,
+      y: 0.5
+    },
+    x: window.innerWidth/2,
+    y: window.innerHeight/2,
+  })
+  Stage.addActor(donkey)
+
+  // Cow
+  var cow = new SpineActor();
+  cow.init({
+    url: require('./assets/cow/cow.info.json'),
+    name: 'Cow',
+    scale: {
+      x: 0.5,
+      y: 0.5
+    },
+    x: window.innerWidth/5,
+    y: window.innerHeight/2,
+  })
+  Stage.addActor(cow)
+
+  // start the activity when cow and donkey are loaded
+  Promise.all([cow.loaded, donkey.loaded]).then(() => {
+    // serialize everything before game start
+    console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
+  })
+}
+
+simpleInit();
 
 // prevent default context menu for the whole site
 document.addEventListener('contextmenu', event => event.preventDefault());
