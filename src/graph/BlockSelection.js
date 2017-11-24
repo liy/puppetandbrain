@@ -1,3 +1,6 @@
+
+import ActorSelection from '../objects/ActorSelection'
+
 class BlockSelection
 {
   constructor() {
@@ -16,6 +19,7 @@ class BlockSelection
       document.removeEventListener('keydown', this.keydown);
       BrainGraph.container.removeEventListener('mousedown', this.downOnEmptySpace);
     }
+    ActorSelection.enabled = !this.enabled;
   }
 
   keydown(e) {

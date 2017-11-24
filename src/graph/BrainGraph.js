@@ -2,7 +2,7 @@ require('./BrainGraph.scss')
 
 import BlockSelection from './BlockSelection';
 import ArrayMap from '../utils/ArrayMap';
-import NodeMenu from './NodeMenu';
+import BlockMenu from './BlockMenu';
 import Stage from '../objects/Stage'
 
 class BrainGraph
@@ -21,11 +21,11 @@ class BrainGraph
     this.resize = this.resize.bind(this);
     this.keydown = this.keydown.bind(this)
     this.mousedown = this.mousedown.bind(this);
-    this.openNodeMenu = this.openNodeMenu.bind(this)
+    this.openBlockMenu = this.openBlockMenu.bind(this)
 
     this.container.style = "visibility:visible"
 
-    this.svg.addEventListener('contextmenu', this.openNodeMenu);
+    this.svg.addEventListener('contextmenu', this.openBlockMenu);
     this.svg.addEventListener('mousedown', this.mousedown);
     document.addEventListener('keydown', this.keydown);
     window.addEventListener('resize', this.resize);
@@ -51,7 +51,7 @@ class BrainGraph
 
     this.container.style = "visibility:hidden"
    
-    this.svg.removeEventListener('contextmenu', this.openNodeMenu);
+    this.svg.removeEventListener('contextmenu', this.openBlockMenu);
     this.svg.removeEventListener('mousedown', this.mousedown);
     document.removeEventListener('keydown', this.keydown);
     window.removeEventListener('resize', this.resize);
@@ -140,12 +140,12 @@ class BrainGraph
     block.node.destroy();
   }
 
-  openNodeMenu(e) {
+  openBlockMenu(e) {
     if(e.target == this.svg) {
       e.stopPropagation();
       e.preventDefault();
 
-      let menu = new NodeMenu(this);
+      let menu = new BlockMenu(this);
       menu.init()
       menu.x = e.clientX;
       menu.y = e.clientY;

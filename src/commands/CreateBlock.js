@@ -3,12 +3,17 @@ import BlockSelection from '../graph/BlockSelection'
 
 export default class CreateBlock extends Command
 {
-  constructor(pod, ownerID, x, y) {
+  constructor(pod, ownerID, x, y, autoConnect=null) {
     super();
     this.ownerID = ownerID;
     this.pod = pod;
     this.x = x;
     this.y = y;
+
+    // FIXME: find a better way to handle auto connect!!!!
+    // for auto connect created block
+    this.autoConnect = autoConnect;
+
     // When redo, use this node id
     this.nodeID = undefined;
   }
@@ -33,7 +38,18 @@ export default class CreateBlock extends Command
 
     this.nodeID = node.id;
 
-    BlockFactory.create(node);
+    let block = BlockFactory.create(node);
+
+    if(this.autoConnect) {
+      let sourceNode = LookUp.get(this.autoConnect.node);
+      if(this.autoConnect.connectParent) {
+        sourceNode.connectParent(node, this.autoConnect.executionName)
+      }
+      else {
+        sourceNode.connectNext(node, this.autoConnect.executionName)
+      }
+      BrainGraph.refresh();
+    }
 
     return this;
   }

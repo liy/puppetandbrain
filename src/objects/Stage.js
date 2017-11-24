@@ -1,4 +1,4 @@
-import Selection from '../utils/Selection';
+import ActorSelection from '../objects/ActorSelection';
 import ActionName from '../nodes/ActionName'
 
 class Stage extends PIXI.Container
@@ -19,7 +19,7 @@ class Stage extends PIXI.Container
     catcher.drawRect(0, 0, width, height);
     catcher.endFill();
     this.addChild(catcher);
-    catcher.on('mousedown', Selection.deselectAll.bind(Selection));
+    catcher.on('mousedown', ActorSelection.deselectAll.bind(ActorSelection));
   }
 
   addActor(actor) {

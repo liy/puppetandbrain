@@ -4,7 +4,7 @@
  * 
  * @class Selection
  */
-class Selection
+class ActorSelection
 {
   constructor() {
     this.selected = [];
@@ -52,4 +52,4 @@ class Selection
   }
 }
 
-export default new Selection();
+export default new ActorSelection();

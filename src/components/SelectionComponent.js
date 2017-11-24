@@ -1,7 +1,7 @@
 const filters = require('pixi-filters');
 
 import Component from './Component';
-import Selection from '../utils/Selection';
+import ActorSelection from '../objects/ActorSelection';
 
 // TODO: maybe use a outline filter instead???
 export default class SelectionComponent extends Component
@@ -44,14 +44,14 @@ export default class SelectionComponent extends Component
     if(!this.entity.loaded) return;
 
     // TODO: handle muti-selection
-    Selection.set(this.entity);
+    ActorSelection.set(this.entity);
 
     this.selected = true;
     this.entity.filters = [this.selectOutline];
   }
 
   deselect() {
-    Selection.remove(this.entity);
+    ActorSelection.remove(this.entity);
     this.entity.alpha = 1
 
     this.selected = false;

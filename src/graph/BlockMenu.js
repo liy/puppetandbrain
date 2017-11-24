@@ -1,4 +1,4 @@
-require('./NodeMenu.scss')
+require('./BlockMenu.scss')
 import ActionName from '../nodes/ActionName';
 
 const ITEMS = [
@@ -167,11 +167,11 @@ const ITEMS = [
   }
 ]
 
-export default class NodeMenu
+export default class BlockMenu
 {
   constructor() {
     this.container = document.createElement('div');
-    this.container.setAttribute('id', 'node-menu');
+    this.container.setAttribute('id', 'block-menu');
 
     BrainGraph.container.appendChild(this.container);
   }
@@ -180,7 +180,7 @@ export default class NodeMenu
     BrainGraph.container.removeChild(this.container);
   }
 
-  init() {
+  init(autoConnect) {
     let entries = ITEMS.concat();
     // get all actors' actions
     for(let actor of LookUp.getActors()) {
@@ -207,7 +207,7 @@ export default class NodeMenu
       this.container.appendChild(item);
 
       item.addEventListener('click', e => {
-        History.push(Commander.create('CreateBlock', entry.nodePod, BrainGraph.brain.owner.id, this.x, this.y).process());
+        History.push(Commander.create('CreateBlock', entry.nodePod, BrainGraph.brain.owner.id, this.x, this.y, autoConnect).process());
         this.destroy();
       });
     }

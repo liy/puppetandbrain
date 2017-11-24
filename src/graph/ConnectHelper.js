@@ -1,3 +1,5 @@
+import BlockMenu from './BlockMenu'
+
 class ConnectHelper
 {
   constructor() {
@@ -44,8 +46,21 @@ class ConnectHelper
   }
 
   stop(e) {
-    if(this.svg.contains(this.path)) {
-      this.svg.removeChild(this.path);
+    if(e.target == this.path) {
+      let connectParent = this.startPin.type == 'in';
+      let menu = new BlockMenu();
+      menu.init({
+        connectParent,
+        node: this.startPin.node.id,
+        executionName: connectParent ? 'default' : this.startPin.name
+      })
+      menu.x = e.clientX;
+      menu.y = e.clientY;
+    }
+    else {
+      if(this.svg.contains(this.path)) {
+        this.svg.removeChild(this.path);
+      }
     }
   }
 
@@ -85,7 +100,6 @@ class ConnectHelper
     }
 
     History.push(Commander.create('CreateExecution', outPin.node.id, outPin.name, inPin.node.id).process());
-
   }
 
   connectDataPin(pin) {

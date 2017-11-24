@@ -34,6 +34,7 @@ export default class DeleteActor extends Command
   }
 
   undo() {
+    // FIXIME: Better way to handle this
     let actor = new SpineActor(this.actorPod.id);
     actor.init(this.actorPod);
     Stage.addActor(actor)
