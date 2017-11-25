@@ -6,22 +6,20 @@ export default class Output extends EventEmitter
   constructor(node, data, name) {
     super();
 
-    this.properties = [];
-
     this.node = node;
     this.data = data;
     this.name = name;
-    this.type = undefined;
+    this.isValue = true;
     this.connections = Object.create(null);
   }
 
   assignProperty(name, descriptor) {
-    this.type = 'property';
+    this.isValue = false;
     Object.defineProperty(this.data, name, descriptor);
   }
 
   assignValue(name, value) {
-    this.type = 'value';
+    this.isValue = true;    
     this.data[name] = value;
   }
 
@@ -53,17 +51,19 @@ export default class Output extends EventEmitter
     })
   }
 
-  get breakable() {
-    return this.properties.length >= 2;
-  }
-
-  pod() {
-    return {
+  pod(detail) {
+    let pod = {
       node: this.node.id,
       name: this.name,
-      type: this.type,
-      properties: this.properties,
-      connections: this.getPointers().map(pointer => {
+      isValue: this.isValue,
+    }
+    // ActivityLoader does not require information who connects to this output.
+    // Because it just loops through all pointers, connect them all.
+    // On the other hand, DeleteBlock command require connections as it does not
+    // have access to a simple flat pointers array. It has to replies on the connections
+    // informatin to reconnect the other block's inputs with deleted outputs.
+    if(detail) {
+      pod.connections = this.getPointers().map(pointer => {
         return {
           id: pointer.id,
           inputNode: pointer.inputNode.id,
@@ -71,5 +71,6 @@ export default class Output extends EventEmitter
         }
       })
     }
+    return pod;
   }
 }

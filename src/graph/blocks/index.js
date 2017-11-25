@@ -6,6 +6,7 @@ export EqualBlock from './EqualBlock';
 export LessEqualBlock from './LessEqualBlock';
 export LessThanBlock from './LessThanBlock';
 export RandomNumberBlock from './RandomNumberBlock';
+export BreakBlock from './BreakBlock';
 
 export TaskBlock from './TaskBlock';
 export AnimationBlock from './AnimationBlock';
@@ -21,5 +22,4 @@ export RepeatBlock from './RepeatBlock';
 export GetPropertyBlock from './GetPropertyBlock';
 export GetPositionBlock from './GetPositionBlock';
 export GetRotationBlock from './GetRotationBlock';
-export SeparatePositionBlock from './SeparatePositionBlock';
 export MakePositionBlock from './MakePositionBlock';

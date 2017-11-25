@@ -13,8 +13,8 @@ export default class GetPosition extends DataNode
 
     this.variables.target = this.owner.id;
 
-    this.outputs.addOutput('position');
-    this.outputs.assignProperty('position', {
+    let output = this.outputs.addOutput('position');
+    output.assignProperty('position', {
       get: () => {
         return LookUp.get(this.variables.target)['position']
       }

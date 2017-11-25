@@ -10,13 +10,11 @@ export default class OutputList extends ArrayMap
     this.data = Object.create(null);
     // A shortcut but not read only, I assume no one will touch it...
     this.names = this.keys;
-    this.outputs = this.values;
   }
 
   destroy() {
     // FIXME: how to destroy? what means of destroy a output list?
     // probably because you are destroy the whole node?
-    this.outputs = null;
   }
 
   addOutput(name) {
@@ -29,33 +27,26 @@ export default class OutputList extends ArrayMap
   }
 
   assignProperty(name, descriptor) {
-    this.addOutput(name);
-    this.get(name).assignProperty(name, descriptor);
+    this.addOutput(name).assignProperty(name, descriptor);
   }
 
   assignValue(name, value) {
-    this.addOutput(name);
-    this.get(name).assignValue(name, value);
+    this.addOutput(name).assignValue(name, value);
   }
 
   clearValues() {
     // reset value data to be undefined
     for(let name of this.names) {
-      let output = this.outputs[name];
-      if(output.type == 'value') {
+      let output = this.values[name];
+      if(output.isValue) {
         this.data[output.name] = undefined;
       }
     }
   }
 
   pod(detail) {
-    if(detail) {
-      return this.names.map(name => {
-        return this.outputs[name].pod();
-      })
-    }
-    else {
-      return this.names
-    }
+    return this.names.map(name => {
+      return this.values[name].pod(detail);
+    })
   }
 }
