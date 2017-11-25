@@ -43,6 +43,7 @@ export default class Node
     // Of course some of them will be discarded once
     // connection is setup(pointer is added)
     if(pod.inputs) {
+      console.log(pod)
       for(let pointerPod of pod.inputs) {
         this.inputs.addInput(pointerPod.inputName)
       }
@@ -95,7 +96,7 @@ export default class Node
       id: this.id,
       variables: this.variables,
       owner: this.owner.id,
-      inputs: this.inputs.pod(detail),
+      inputs: this.inputs.pod(),
       outputs: this.outputs.pod(detail),
       x: this.x,
       y: this.y,

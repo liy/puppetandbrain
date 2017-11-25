@@ -18,7 +18,6 @@ export default class MoveBlock extends Command
     // epsilon to decide whether the command needs to be pushed to history
     // This solve the double click cause tiny movement results a move command issue.
     if(Math.abs(this.oldX - this.newX) > 1 && Math.abs(this.oldY - this.newY) > 1) {
-      console.warn('push move block!!!')
       History.push(this);
     }
   }

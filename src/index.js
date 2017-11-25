@@ -292,7 +292,7 @@ async function load() {
   })
 }
 
-// load();
+load();
 
 
 const ACTORS = [
@@ -319,7 +319,7 @@ function simpleInit() {
   })
 }
 
-simpleInit();
+// simpleInit();
 
 let actorAddBtn = document.getElementById('add-actor');
 actorAddBtn.addEventListener('mousedown', e => {
