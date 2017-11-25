@@ -69,10 +69,18 @@ export default class Block
       y: this.container.offsetTop - e.clientY
     }
     document.addEventListener('mousemove', this.dragmove)
+
+    this.moveCommand = Commander.create('MoveBlock', this);
   }
 
   dragstop(e) {
-    document.removeEventListener('mousemove', this.dragmove)
+    document.removeEventListener('mousemove', this.dragmove);
+
+    // Since dragstop is listening on document, have to make sure only the dragging block push the movecommand
+    if(e.target == this.dragArea) {
+      // process and push to history
+      if(this.moveCommand) this.moveCommand.process()
+    }
   }
 
   dragmove(e) {

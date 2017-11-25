@@ -8,6 +8,7 @@ export RemoveOutputDataLink from './RemoveOutputDataLink';
 
 export CreateBlock from './CreateBlock';
 export DeleteBlock from './DeleteBlock';
+export MoveBlock from './MoveBlock';
 
 export OpenGraph from './OpenGraph';
 export CloseGraph from './CloseGraph';

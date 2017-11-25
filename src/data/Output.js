@@ -53,6 +53,10 @@ export default class Output extends EventEmitter
     })
   }
 
+  get breakable() {
+    return this.properties.length >= 2;
+  }
+
   pod() {
     return {
       node: this.node.id,

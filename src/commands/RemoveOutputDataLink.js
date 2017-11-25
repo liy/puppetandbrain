@@ -32,7 +32,7 @@ export default class RemoveOutputDataLink extends Command
     for(let pod of this.pointerPods) {
       // so we grab the pointer from the node, and restore it using the pointer pod
       let pointer = LookUp.get(pod.inputNode).inputs.get(pod.inputName);
-      pointer.init(pod);
+      pointer.set(pod);
     }
     BrainGraph.refresh();
   }

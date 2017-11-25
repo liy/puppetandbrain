@@ -68,7 +68,7 @@ export default class ActivityLoader
       let inputNode = LookUp.get(pointerPod.inputNode);
 
       let pointer = inputNode.inputs.get(pointerPod.inputName);
-      pointer.init(pointerPod)
+      pointer.set(pointerPod)
     }
   }
 }

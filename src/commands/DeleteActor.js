@@ -13,19 +13,10 @@ export default class DeleteActor extends Command
   }
 
   process() {
-    console.log(this.actorID)
     let actor = LookUp.get(this.actorID);
-    this.actorPod = actor.pod();
+    this.pod = actor.pod(true);
 
-    let nodes = actor.brain.getNodes();
-    this.nodePods = nodes.map(node => {
-      return node.pod();
-    })
-
-    let pointers = actor.brain.getPointers();
-    this.pointerPods = pointers.map(pointer => {
-      return pointer.pod();
-    })
+    console.log(this.pod)
 
     actor.destroy();
     Stage.removeActor(actor);
@@ -34,31 +25,31 @@ export default class DeleteActor extends Command
   }
 
   undo() {
-    // FIXIME: Better way to handle this
-    let actor = new SpineActor(this.actorPod.id);
-    actor.init(this.actorPod);
+    let actor = new SpineActor(this.pod.id);
+    actor.init(this.pod);
     Stage.addActor(actor)
 
     // create and init nodes
-    for(let nodePod of this.nodePods) {
+    for(let nodePod of this.pod.brain.nodes) {
       let node = new NodeFactory.create(nodePod.className, nodePod.id)
       node.init(nodePod);
     }
 
-    // chain the tasks
-    for(let nodePod of this.nodePods) {
+    // connect the tasks
+    for(let nodePod of this.pod.brain.nodes) {
+      // data node, has no exectuion
+      if (!nodePod.execution) continue;
       let node = LookUp.get(nodePod.id);
-      if (node instanceof DataNode) continue;
       for(let execData of nodePod.execution) {
         if(execData.id) node.connectNext(LookUp.get(execData.id), execData.executionName)
       }
     }
 
     // connect the inputs with outputs
-    for(let pointerPod of this.pointerPods) {
+    for(let pointerPod of this.pod.brain.pointers) {
       let inputNode = LookUp.get(pointerPod.inputNode);
       let pointer = inputNode.inputs.get(pointerPod.inputName);
-      pointer.init(pointerPod)
+      pointer.set(pointerPod)
     }
   }
 

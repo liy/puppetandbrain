@@ -36,21 +36,22 @@ export default class DeleteBlock extends Command
       }
     }
 
-    // connect inputs
-    for(let inputPod of this.pod.inputs) {
-      // if it is an output pointer
-      if(inputPod.output) {
-        let node = LookUp.get(inputPod.inputNode);
-        let output = LookUp.get(inputPod.output.node).outputs.get(inputPod.output.name);
-        node.inputs.get(inputPod.inputName).connect(output, inputPod.id);
-      }
+    // connect inputs directly using pointer pod
+    for(let pointerPod of this.pod.inputs) {
+      let inputNode = LookUp.get(pointerPod.inputNode);
+      let pointer = inputNode.inputs.get(pointerPod.inputName);
+      pointer.set(pointerPod)
     }
-    // connect outputs
+
+    // loop through all the outputs and connect all the inputs(pointer) connected to this
+    // output, manually WITHOUT using pointer pod.
     for(let outputPod of this.pod.outputs) {
       let output = node.outputs.get(outputPod.name);
-      for(let pointerPod of outputPod.connections) {
-        let input = LookUp.get(pointerPod.inputNode).inputs.get(pointerPod.inputName);
-        input.connect(output, pointerPod.id)
+      // note connection not a qulified pointer pod. Resursive issue...
+      // Just loop through all the inputs connected to current output, and connect them!
+      for(let connection of outputPod.connections) {
+        let pointer = LookUp.get(connection.inputNode).inputs.get(connection.inputName);
+        pointer.connect(output, connection.id)
       }
     }
 

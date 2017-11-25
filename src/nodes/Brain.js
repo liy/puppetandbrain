@@ -22,14 +22,6 @@ export default class Brain
     this.nodes.set(node.id, node);
   }
 
-  createNode(nodeName, pod) {
-    let node = new NodeFactory.create(nodeName);
-    node.init(pod);
-    this.nodes.set(node.id, node);
-
-    return node;
-  }
-
   removeNode(id) {
     this.nodes.remove(id);
   }

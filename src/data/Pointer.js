@@ -15,7 +15,7 @@ export default class Pointer extends EventEmitter
     this.targetName = this.inputName;
   }
 
-  init(pod) {
+  set(pod) {
     // output pointer, connect to the output
     if(pod.id) {
       // find the output
