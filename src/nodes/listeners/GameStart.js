@@ -5,12 +5,14 @@ export default class GameStart extends EventListener
 {
   constructor(id) {
     super(id);
+
+    this.start = this.start.bind(this)
     Stage.on('game.start', this.start)
   }
 
   destroy() {
     super.destroy();
-    Stage.on('game.start', this.start)
+    Stage.off('game.start', this.start)
   }
 
   start(e) {
