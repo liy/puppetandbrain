@@ -109,43 +109,43 @@ window.LookUp = {
     })
   },
 
-  toggle() {
-    if(running) {
-      this.terminate();
-    }
-    else {
-      this.start();
-    }
-    running = !running;
-  },
+  // toggle() {
+  //   if(running) {
+  //     this.terminate();
+  //   }
+  //   else {
+  //     this.start();
+  //   }
+  //   running = !running;
+  // },
 
-  start: function() {
-    for(let id of NODES) {
-      let node = this.store[id];
-      node.prestart();
-      if(node instanceof Task) node.setInitialState();
-    }
+  // start: function() {
+  //   for(let id of NODES) {
+  //     let node = this.store[id];
+  //     node.prestart();
+  //     if(node instanceof Task) node.setInitialState();
+  //   }
 
-    for(let id of ACTORS) {
-      let actor = this.store[id];
-      actor.setInitialState();
-      actor.start();
-    }
-  },
+  //   for(let id of ACTORS) {
+  //     let actor = this.store[id];
+  //     actor.setInitialState();
+  //     actor.start();
+  //   }
+  // },
 
-  terminate: function() {
-    for(let id of NODES) {
-      let node = this.store[id];
-      if(node instanceof Task) node.terminate();
-    }
+  // terminate: function() {
+  //   for(let id of NODES) {
+  //     let node = this.store[id];
+  //     if(node instanceof Task) node.terminate();
+  //   }
 
-    for(let id of ACTORS) {
-      let actor = this.store[id];
-      actor.terminate();
-    }
+  //   for(let id of ACTORS) {
+  //     let actor = this.store[id];
+  //     actor.terminate();
+  //   }
 
-    // TODO: re-initialize the destroyed actor
-  },
+  //   // TODO: re-initialize the destroyed actor
+  // },
 
   pod: function() {
     let result = Object.create(null);

@@ -11,21 +11,35 @@ export default class Action extends Task
     super(id);
   }
 
-  destroy() {
-    super.destroy();
-    delete this.owner.actions[this.actionName]
-  }
-
   init(pod) {
     super.init(pod);
 
     // authoring time thing!
-    this.actionName = pod.actionName;
+    // this.actionName = pod.actionName;
+  }
+
+  rename(name) {
+    // validate there are no same function names
+    if(this.owner.actions[name]) return false;
+
+    delete this.owner.actions[this.actionName];
+    this.actionName = name;
+    return true
+  }
+
+  set actionName(v) {
+    // remove old actions
+    if(this.owner.actions[this.actionName]) delete this.owner.actions[this.actionName];
+    this._actionName = v;
     this.owner.actions[this.actionName] = this;
   }
 
+  get actionName() {
+    return this._actionName;
+  }
+
   get nodeName() {
-    return this.actionName;
+    return 'Action ' + this.actionName;
   }
 
   get hasIn() {
@@ -34,11 +48,12 @@ export default class Action extends Task
 
   run() {
     super.run()
+
     this.execution.run();
   }
 
-  pod() {
-    let pod = super.pod();
+  pod(detail=false) {
+    let pod = super.pod(detail);
     pod.actionName = this.actionName;
     return pod
   }

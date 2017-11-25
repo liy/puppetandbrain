@@ -45,7 +45,6 @@ export default class CreateBlock extends Command
   }
 
   getCreatedNode() {
-    console.log(LookUp.get(this.nodeID), this.nodeID)
     return LookUp.get(this.nodeID);
   }
 

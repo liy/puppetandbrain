@@ -11,7 +11,6 @@ export BreakBlock from './BreakBlock';
 export TaskBlock from './TaskBlock';
 export AnimationBlock from './AnimationBlock';
 export TweenBlock from './TweenBlock';
-export ActionBlock from './ActionBlock';
 export BranchBlock from './BranchBlock';
 export PerformBlock from './PerformBlock';
 export TraceBlock from './TraceBlock';
@@ -23,3 +22,7 @@ export GetPropertyBlock from './GetPropertyBlock';
 export GetPositionBlock from './GetPositionBlock';
 export GetRotationBlock from './GetRotationBlock';
 export MakePositionBlock from './MakePositionBlock';
+export ActionBlock from './ActionBlock';
+
+// listener blocks
+export GameStartBlock from './GameStartBlock';

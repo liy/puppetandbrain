@@ -29,7 +29,6 @@ export default
         let firstOutput = createdNode.outputs.get(createdNode.outputs.names[0]);
         if(firstOutput) {
           console.log(pin.node, pin.name, createdNode, firstOutput.name)
-          // sourceNode.inputs.get(dataName).connect(firstOutput)
           History.push(Commander.create('CreateDataLink', pin.node.id, pin.name, createdNode.id, firstOutput.name).process())
         }
       }

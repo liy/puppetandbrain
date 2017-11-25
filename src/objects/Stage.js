@@ -1,16 +1,17 @@
 import ActorSelection from '../objects/ActorSelection';
-import ActionName from '../nodes/ActionName'
 
 class Stage extends PIXI.Container
 {
   constructor() {
     super();
+    this.running = false;
     this.actors = [];
   }
 
   init(width, height) {
     this.stageWidth = width;
     this.stageHeight = height;
+
 
     // For deselection
     let catcher = new PIXI.Graphics();
@@ -38,6 +39,26 @@ class Stage extends PIXI.Container
     if(id) {
       this.actors.splice(index);
     }
+  }
+
+  toggle() {
+    if(this.running) {
+      this.stop();
+    }
+    else {
+      this.start();
+    }
+  }
+
+  start() {
+    this.running = true;
+    this.emit('game.prestart')
+    this.emit('game.start')
+  }
+
+  stop() {
+    this.running = false;
+    this.emit('game.stop')
   }
 
   set blurEnabled(v) {

@@ -1,7 +1,6 @@
 import Stage from './Stage';
 import Entity from './Entity';
 import mixin from '../utils/mixin';
-import ActionName from '../nodes/ActionName';
 import Brain from '../nodes/Brain';
 import Action from '../nodes/Action';
 
@@ -25,13 +24,17 @@ export default class Actor extends PIXI.Container
     this.name = 'Actor ' + this.id;
 
     this.actions = Object.create(null);
-    this.customActions = Object.create(null);
 
     // TODO: make this feature next version?
     this.childActors = [];
 
     this._clickCounter = 0;
-    this.on('pointerdown', this.pointerDown)
+    this.on('pointerdown', this.pointerdown)
+
+    this.setInitialState = this.setInitialState.bind(this);
+    this.terminate = this.terminate.bind(this);
+    Stage.on('game.prestart', this.setInitialState);
+    Stage.on('game.stop', this.terminate);
 
     mixin(this, new Entity());
   }
@@ -62,7 +65,9 @@ export default class Actor extends PIXI.Container
     })
 
     LookUp.removeActor(this.id);
-    this.off('pointerdown', this.pointerDown);
+    this.off('pointerdown', this.pointerdown);
+    Stage.off('game.prestart', this.setInitialState);
+    Stage.off('game.stop', this.terminate);
     this.brain.destroy();
   }
 
@@ -78,10 +83,6 @@ export default class Actor extends PIXI.Container
       },
       rotation: this.rotation
     }
-  }
-
-  start() {
-    if(this.actions[ActionName.GAME_START]) this.actions[ActionName.GAME_START].run();
   }
 
   terminate() {
@@ -109,7 +110,7 @@ export default class Actor extends PIXI.Container
     }
   }
 
-  pointerDown(e) {
+  pointerdown(e) {
     // Open brain graph
     setTimeout(() => {
       this._clickCounter = 0;

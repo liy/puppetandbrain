@@ -1,5 +1,6 @@
 import ArrayMap from "../utils/ArrayMap";
 import Output from "./Output";
+import Stage from '../objects/Stage'
 
 export default class OutputList extends ArrayMap
 {
@@ -10,11 +11,16 @@ export default class OutputList extends ArrayMap
     this.data = Object.create(null);
     // A shortcut but not read only, I assume no one will touch it...
     this.names = this.keys;
+
+    // when game stops, make all values undefined
+    this.clearValues = this.clearValues.bind(this);
+    Stage.on('game.stop', this.clearValues);
   }
 
   destroy() {
     // FIXME: how to destroy? what means of destroy a output list?
     // probably because you are destroy the whole node?
+    Stage.off('game.stop', this.clearValues);
   }
 
   addOutput(name) {

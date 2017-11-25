@@ -1,8 +1,7 @@
 import Command from './Command';
 import SpineActor from '../objects/SpineActor';
 import Stage from '../objects/Stage'
-import Action from '../nodes/Action';
-import ActionName from '../nodes/ActionName';
+import GameStart from '../nodes/listeners/GameStart';
 
 export default class CreateActor extends Command
 {
@@ -27,10 +26,9 @@ export default class CreateActor extends Command
     Stage.addActor(actor)
 
     // Add default game start action
-    let action = new Action();
-    action.init({
+    let gameStart = new GameStart();
+    gameStart.init({
       owner: actor,
-      actionName: ActionName.GAME_START,
       x: 50,
       y: 50
     })

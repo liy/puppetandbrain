@@ -1,6 +1,6 @@
-import Task from "./Task";
+import EventListener from "./EventListener";
 
-export default class KeyDown extends Task
+export default class KeyDown extends EventListener
 {
   constructor(id) {
     super(id);
@@ -22,10 +22,6 @@ export default class KeyDown extends Task
   terminate() {
     super.terminate()
     document.removeEventListener('keydown', this.keydown)
-  }
-
-  get hasIn() {
-    return false;
   }
 
   keydown(e) {

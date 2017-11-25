@@ -58,15 +58,6 @@ export default class Node
     this.y = pod.y;
   }
 
-  prestart() {
-
-  }
-
-  terminate() {
-    // when game stops, make all values undefined
-    this.outputs.clearValues();
-  }
-
   get className() {
     return this.__proto__.constructor.name;
   }

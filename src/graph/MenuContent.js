@@ -1,8 +1,13 @@
-import ActionName from '../nodes/ActionName';
-
 // FIXME: find a better way to build this.
 // Maybe include the entry in Node static variable?
 export default [
+  {
+    itemName: 'Action',
+    nodePod: {
+      className: 'Action',
+      actionName: ''
+    }
+  },
   {
     itemName: 'Wait',
     nodePod: {
@@ -15,8 +20,7 @@ export default [
   {
     itemName: 'Game Start',
     nodePod: {
-      className: 'Action',
-      actionName: ActionName.GAME_START
+      className: 'GameStart',
     }
   },
   {
