@@ -10,40 +10,6 @@ export default class Brain
     this.nodes = new ArrayMap();
   }
 
-  // FIXME: never used!!!!!
-  init(pod) {
-    // create and init nodes
-    for(let id of pod.nodes) {
-      let nodeData = pod.store[id];
-      let node = new NodeFactory.create(nodeData.class, nodeData.id)
-      node.init(nodeData);
-      this.addNode(node);
-    }
-
-    // chain the tasks
-    for(let id of pod.nodes) {
-      let nodeData = pod.store[id];
-      // Make sure the node has exeuction. It could be a data node has no exeuction
-      if(nodeData.execution) {
-        let task = LookUp.get(id);
-        for(let execData of data.execution) {
-          task.chain({
-            name: execData.name,
-            task: LookUp.get(execData.id)
-          })
-        }
-      }
-    }
-
-    // connect the inputs with outputs
-    for(let id of pod.pointers) {
-      let pointerData = pod.store[id];
-      let inputNode = LookUp.get(pointerData.inputNode);
-      let outputNode = LookUp.get(pointerData.outputNode);
-      new Pointer(inputNode, pointerData.inputName, outputNode, pointerData.outputName, id)
-    }
-  }
-
   destroy() {
     LookUp.removeBrain(this.id);
     let nodes = this.nodes.getValues().concat();
@@ -94,11 +60,28 @@ export default class Brain
     })
   }
 
-  pod() {
-    return {
+  pod(detail=false) {
+    let pod = {
       className: this.__proto__.constructor.name,
-      nodes: this.nodes.getKeys().concat(),
-      owner: this.owner.id,
+      id: this.id,
+      // Note that the owner is not here.
+      // This is because in brain is created in Actor,
+      // does not need owner information.
+      // Plus, in the future a Brain instance can be populated
+      // with different brain pod.
     }
+
+    if(detail) {
+      pod.nodes = this.nodes.getValues().map(node => {
+        return node.pod(detail)
+      })
+      pod.pointers = this.getPointers().map(pointer => {
+        return pointer.pod();
+      })
+    }
+    else {
+      pod.nodes = this.nodes.getKeys().concat()
+    }
+    return pod;
   }
 }

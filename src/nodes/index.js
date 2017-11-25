@@ -12,6 +12,7 @@ export const LessEqual = Operators.LessEqual;
 export const LessThan = Operators.LessThan;
 export const RandomNumber = Operators.RandomNumber;
 export SeparatePosition from './SeparatePosition';
+export MakePosition from './MakePosition';
 
 export Wait from './Wait';
 export Action from './Action';

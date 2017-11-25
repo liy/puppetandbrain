@@ -1,5 +1,6 @@
 import DataNode from "./DataNode";
 
+// FIXME: find a better way to handle type parsing!!
 export class Operator extends DataNode
 {
   constructor(id) {
@@ -24,7 +25,7 @@ export class Addition extends Operator
   }
 
   get value() {
-    return this.inputs.value('A') + this.inputs.value('B');
+    return Number(this.inputs.value('A')) + Number(this.inputs.value('B'));
   }
 }
 
@@ -38,8 +39,7 @@ export class Multiply extends Operator
   }
 
   get value() {
-    let v = this.inputs.value('A') * this.inputs.value('B');
-    return v;
+    return Number(this.inputs.value('A')) * Number(this.inputs.value('B'));
   }
 }
 
@@ -53,7 +53,7 @@ export class Divide extends Operator
   }
 
   get value() {
-    return this.inputs.value('A') / this.inputs.value('B');
+    return Number(this.inputs.value('A')) / Number(this.inputs.value('B'));
   }
 }
 
@@ -71,7 +71,7 @@ export class Equal extends Operator
   }
 
   get value() {
-    return this.inputs.value('A') === this.inputs.value('B');
+    return Number(this.inputs.value('A')) === Number(Number(this.inputs.value('B')));
   }
 }
 
@@ -89,7 +89,7 @@ export class LessThan extends Operator
   }
 
   get value() {
-    return this.inputs.value('A') < this.inputs.value('B');
+    return Number(this.inputs.value('A')) < Number(this.inputs.value('B'));
   }
 }
 
@@ -107,7 +107,7 @@ export class LessEqual extends Operator
   }
 
   get value() {
-    return this.inputs.value('A') <= this.inputs.value('B');
+    return Number(this.inputs.value('A')) <= Number(this.inputs.value('B'));
   }
 }
 

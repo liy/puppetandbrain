@@ -89,7 +89,7 @@ export default class Node
     return node;
   }
 
-  pod(detail=false) {
+  pod(detail) {
     return {
       className: this.className,
       id: this.id,

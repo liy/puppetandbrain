@@ -40,6 +40,9 @@ export default class Tween extends Task
   run() {
     super.run()
     let pos = this.inputs.value('position');
+
+    console.log(this.owner.position, pos)
+
     this.tween = TweenLite.to(this.owner, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
       this.execution.run('complete');
     }});

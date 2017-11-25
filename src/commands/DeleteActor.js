@@ -41,7 +41,6 @@ export default class DeleteActor extends Command
 
     // create and init nodes
     for(let nodePod of this.nodePods) {
-      console.log(nodePod)
       let node = new NodeFactory.create(nodePod.className, nodePod.id)
       node.init(nodePod);
     }

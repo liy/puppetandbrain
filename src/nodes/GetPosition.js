@@ -11,6 +11,8 @@ export default class GetPosition extends DataNode
   init(pod) {
     super.init(pod);
 
+    this.variables.target = this.owner.id;
+
     this.outputs.addOutput('position');
     this.outputs.assignProperty('position', {
       get: () => {

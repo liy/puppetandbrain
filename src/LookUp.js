@@ -151,12 +151,13 @@ window.LookUp = {
     let result = Object.create(null);
     result.store = Object.create(null);
     for(let id in this.store) {
-      result.store[id] = this.store[id].pod();
+      result.store[id] = this.store[id].pod(false);
     }
-    result.actors = ACTORS.concat()
-    result.nodes = NODES.concat()
-    result.pointers = POINTERS.concat();
-    result.stage = Stage.actors.concat();
+    result.actors = ACTORS;
+    result.nodes = NODES;
+    result.pointers = POINTERS;
+    result.brains = BRAINS;
+    result.stage = Stage.actors;
 
     return result;
   },

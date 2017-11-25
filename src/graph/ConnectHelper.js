@@ -49,13 +49,17 @@ class ConnectHelper
     if(e.target == this.path) {
       let connectParent = this.startPin.type == 'in';
       let menu = new BlockMenu();
-      menu.init({
+      menu.x = e.clientX;
+      menu.y = e.clientY;
+      menu.open({
         connectParent,
         node: this.startPin.node.id,
         executionName: connectParent ? 'default' : this.startPin.name
+      }).then(() => {
+        if(this.svg.contains(this.path)) {
+          this.svg.removeChild(this.path);
+        }
       })
-      menu.x = e.clientX;
-      menu.y = e.clientY;
     }
     else {
       if(this.svg.contains(this.path)) {

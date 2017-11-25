@@ -52,10 +52,9 @@ export default class SpineActor extends Actor
     return this.spineComponent.getAnimations();
   }
 
-  pod() {
-    return {
-      ...super.pod(),
-      url: this.url
-    }
+  pod(detail) {
+    let pod = super.pod(detail);
+    pod.url = this.url;
+    return pod;
   }
 }

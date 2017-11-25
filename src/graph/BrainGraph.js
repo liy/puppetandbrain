@@ -146,7 +146,7 @@ class BrainGraph
       e.preventDefault();
 
       let menu = new BlockMenu(this);
-      menu.init()
+      menu.open()
       menu.x = e.clientX;
       menu.y = e.clientY;
     }

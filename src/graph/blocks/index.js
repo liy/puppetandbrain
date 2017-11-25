@@ -22,3 +22,4 @@ export GetPropertyBlock from './GetPropertyBlock';
 export GetPositionBlock from './GetPositionBlock';
 export GetRotationBlock from './GetRotationBlock';
 export SeparatePositionBlock from './SeparatePositionBlock';
+export MakePositionBlock from './MakePositionBlock';

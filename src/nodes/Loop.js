@@ -11,6 +11,8 @@ export default class Loop extends Task
     this.execution.set('body');
 
     this.inputs.addInput('limit');
+
+    this.outputs.addOutput('index');
   }
 
   prestart() {
@@ -20,7 +22,7 @@ export default class Loop extends Task
   run() {
     super.run()
     this.outputs.assignValue('index', this.index);
-    if(++this.index > this.inputs.value('limit')) {
+    if(++this.index > parseInt(this.inputs.value('limit'))) {
       this.execution.run('completed')
     }
     else {

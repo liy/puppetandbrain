@@ -27,6 +27,7 @@ export default class Actor extends PIXI.Container
     this.actions = Object.create(null);
     this.customActions = Object.create(null);
 
+    // TODO: make this feature next version?
     this.childActors = [];
 
     this._clickCounter = 0;
@@ -47,7 +48,11 @@ export default class Actor extends PIXI.Container
     this.rotation = pod.rotation || 0;
     this.name = pod.name || this.name;
 
-    this.brain = new Brain(this, pod.brain);
+    // Create empty brain but with exisitng ID if there is one.
+    // in the future I might allow actors to sharing same brain.
+    // therefore, I decide to use separated step to populate the 
+    // content of the brain.
+    this.brain = new Brain(this, pod.brainID);
   }
 
   destroy() {
@@ -135,13 +140,8 @@ export default class Actor extends PIXI.Container
     return this.__proto__.constructor.name;
   }
 
-  pod() {
-    let actions = Object.create(null);
-    for(let name in this.actions) {
-      actions[name] = this.actions[name].id;
-    }
-
-    return {
+  pod(detail=false) {
+    let pod = {
       className: this.className,
       id: this.id,
       x: this.x,
@@ -153,8 +153,13 @@ export default class Actor extends PIXI.Container
       name: this.name,
       variables: this.variables,
       childActors: this.childActors.concat(),
-      actions,
-      brain: this.brain.id,
+      brainID: this.brain.id,
     }
+
+    if(detail) {
+      pod.brain = this.brain.pod(detail);
+    } 
+
+    return pod;
   }
 }

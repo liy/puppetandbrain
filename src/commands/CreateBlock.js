@@ -40,7 +40,7 @@ export default class CreateBlock extends Command
 
     let block = BlockFactory.create(node);
 
-    if(this.autoConnect) {
+    if(this.autoConnect && node.execution) {
       let sourceNode = LookUp.get(this.autoConnect.node);
       if(this.autoConnect.connectParent) {
         sourceNode.connectParent(node, this.autoConnect.executionName)

@@ -21,37 +21,38 @@ export default class ActivityLoader
     return JsonPromise.load(url).then(pod => {
       this.createActors(pod)
       // create nodes; link execution, input and outputs
-      this.createBrains(pod)
+      this.fillBrains(pod)
     })
   }
 
   createActors(pod) {
-    var add = function(container, data) {
-      let actor = new scope[data.className](data.id);
-      actor.init(data);
+    // Handles nested actors.
+    var add = function(container, actorPod) {
+      let actor = new scope[actorPod.className](actorPod.id);
+      actor.init(actorPod);
       container.addActor(actor);
 
-      for(let i=0; i<data.childActors.length; ++i) {
-        let childID = data.childActors[i];
-        let childData = data.store[childID];
+      for(let i=0; i<actorPod.childActors.length; ++i) {
+        let childID = actorPod.childActors[i];
+        let childData = actorPod.store[childID];
         add(actor, childData)
       }
     }
 
     for(let id of pod.stage) {
-      let data = pod.store[id];
-      add(Stage, data)
+      let actorPod = pod.store[id];
+      add(Stage, actorPod)
     }
   }
 
-  createBrains(pod) {
+  fillBrains(pod) {
     for(let id of pod.nodes) {
       let data = pod.store[id];
       let node = NodeFactory.create(data.className, id)
       node.init(data)
     }
 
-    // chain the tasks
+    // connect the tasks
     for(let id of pod.nodes) {
       let node = LookUp.get(id);
       if (node instanceof DataNode) continue;
