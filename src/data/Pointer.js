@@ -19,8 +19,8 @@ export default class Pointer extends EventEmitter
     // output pointer, connect to the output
     if(pod.id) {
       // find the output
-      this.output = LookUp.auto(pod.output.node).outputs.get(pod.output.name);
-      this.connect(this.output, pod.id);
+      let output = LookUp.get(pod.output.node).outputs.get(pod.output.name);
+      this.connect(output, pod.id);
     }
   }
 

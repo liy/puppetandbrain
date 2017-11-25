@@ -15,7 +15,7 @@ export default class BlockMenu
     BrainGraph.container.removeChild(this.container);
   }
 
-  open(autoConnect) {
+  open() {
     // wait until user pick the block to create....
     return new Promise(resolve => {
       let entries = MenuContent.concat();
@@ -44,15 +44,24 @@ export default class BlockMenu
         this.container.appendChild(item);
   
         item.addEventListener('click', e => {
-          History.push(Commander.create('CreateBlock', entry.nodePod, BrainGraph.brain.owner.id, this.x, this.y, autoConnect).process());
           this.destroy();
-          resolve();
+          let command = Commander.create('CreateBlock', entry.nodePod, BrainGraph.brain.owner.id, this.x, this.y).process();
+          History.push(command);
+          // Make sure there is a block created.
+          if(command) {
+            resolve(command.getCreatedNode());
+          }
+          else {
+            resolve();
+          }
         });
       }
   
       BrainGraph.container.addEventListener('mousedown', e => {
-        if(e.target.className != 'menu-item') this.destroy();
-        resolve();
+        if(e.target.className != 'menu-item') {
+          this.destroy();
+          resolve();
+        }
       }, {once: true})
     })
   }

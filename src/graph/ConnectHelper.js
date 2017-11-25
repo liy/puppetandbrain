@@ -1,4 +1,5 @@
-import BlockMenu from './BlockMenu'
+import BlockMenu from './BlockMenu';
+import AutoConnect from './AutoConnect';
 
 class ConnectHelper
 {
@@ -45,26 +46,18 @@ class ConnectHelper
     }
   }
 
-  stop(e) {
+  async stop(e) {
     if(e.target == this.path) {
-      let connectParent = this.startPin.type == 'in';
       let menu = new BlockMenu();
       menu.x = e.clientX;
       menu.y = e.clientY;
-      menu.open({
-        connectParent,
-        node: this.startPin.node.id,
-        executionName: connectParent ? 'default' : this.startPin.name
-      }).then(() => {
-        if(this.svg.contains(this.path)) {
-          this.svg.removeChild(this.path);
-        }
-      })
+      let createdNode = await menu.open();
+      // TODO: auto connect here
+      if(createdNode) AutoConnect.process(this.startPin, createdNode);
     }
-    else {
-      if(this.svg.contains(this.path)) {
-        this.svg.removeChild(this.path);
-      }
+
+    if(this.svg.contains(this.path)) {
+      this.svg.removeChild(this.path);
     }
   }
 
