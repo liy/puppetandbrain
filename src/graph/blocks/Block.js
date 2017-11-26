@@ -39,6 +39,8 @@ export default class Block
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
+    this.showInputs = this.showInputs.bind(this);
+    this.hideInputs = this.hideInputs.bind(this);
 
     document.addEventListener('mouseup', this.dragstop);
     this.dragArea.addEventListener('mousedown', this.dragstart);
@@ -48,6 +50,8 @@ export default class Block
       e.stopPropagation();
       // TODO: show menu for the block
     })
+    this.container.addEventListener('mouseover', this.showInputs)
+    this.container.addEventListener('mouseout', this.hideInputs)
 
     // append block to stage
     BrainGraph.addBlock(this);
@@ -56,6 +60,8 @@ export default class Block
   }
 
   destroy() {
+    this.container.removeEventListener('mouseover', this.showInputs)
+    this.container.removeEventListener('mouseout', this.hideInputs)
     this.dragArea.removeEventListener('mousedown', this.dragstart);
     document.removeEventListener('mouseup', this.dragstop);
     document.removeEventListener('mousemove', this.dragmove);
