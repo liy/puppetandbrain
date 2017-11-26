@@ -16,35 +16,52 @@ export default class InputPin extends DataPin
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
 
-    this.addLocalInputs();
+    // default input element
+    this.inputElement = document.createElement('input');
+    this.inputElement.value = this.pointer.value || '' ;
+    this.inputElement.addEventListener('change', e => {
+      console.warn(e.target.value);
+      this.node.variables[this.name] = e.target.value;
+      if(this.node.initialState) {
+        this.node.initialState.variables[this.name] = e.target.value;
+      }
+      this.updateInputElement();
+    })
+    this.updateInputElement();
   }
 
-  // TODO: better genertic methods!!
-  addLocalInputs(element) {
-    // this.element.value = this.pointer.value;
-    // if(!this.pointer.isOutputPointer) this.container.appendChild(this.element)
-    // // The listener will be removed if element is no longer reachable.
-    // this.element.addEventListener('change', (e) => {
-    //   this.node.variables[this.name] = e.target.value;
-    //   if(this.node.initialState) {
-    //     this.node.initialState.variables[this.name] = e.target.value;
-    //   }
-    // })
+  updateInputElement() {
+    if(this.container.contains(this.inputElement)){
+      this.container.removeChild(this.inputElement)
+    }
+
+    // local variable pointer
+    if(!this.pointer.isOutputPointer) {
+      this.container.appendChild(this.inputElement);
+      // the local value is empty
+        console.log(Boolean(this.pointer.value) , this.pointer.value === 0)
+      if(this.pointer.value || this.pointer.value === 0) {
+        this.icon.className = 'icon in-local';
+      }
+      else {
+        console.log('!!!!!')
+        this.icon.className = 'icon in-disconnected';
+      }
+    }
   }
 
   showInput() {
-    // if(this.element) {
-    //   this.element.style.visibility = 'visible';
-    //   this.label.style.visibility = 'hidden'
-    // }
+    if(this.inputElement) {
+      this.inputElement.style.visibility = 'visible';
+      this.label.style.visibility = 'hidden'
+    }
   }
 
   hideInput() {
-    // if(this.element) {
-      // console.log('!!!')
-      // this.label.style.visibility = 'visible';
-      // this.element.style.visibility = 'hidden';
-    // }
+    this.label.style.visibility = 'visible';
+    if(this.inputElement) {
+      this.inputElement.style.visibility = 'hidden';
+    }
   }
 
   get isConnected() {
@@ -55,16 +72,10 @@ export default class InputPin extends DataPin
     if(!this.isConnected) {
       this.icon.className = 'icon in-disconnected';
       if(this.svg.contains(this.path)) this.svg.removeChild(this.path);
-      this.element.value = this.pointer.value
-      this.container.appendChild(this.element);
       return;
     }
 
-    if(this.element && this.container.contains(this.element)) {
-      this.container.removeChild(this.element);
-    }
-
-    this.addLocalInputs();
+    this.updateInputElement();
 
     this.svg.appendChild(this.path);
     this.icon.className = 'icon in-connected';

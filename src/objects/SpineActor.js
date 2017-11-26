@@ -34,8 +34,8 @@ export default class SpineActor extends Actor
     })
   }
 
-  terminate() {
-    super.terminate();
+  gameStop() {
+    super.gameStop();
     this.spineComponent.setToSetupPose();
   }
 

@@ -86,6 +86,8 @@ class ConnectHelper
   }
 
   connectExecutionPin(pin) {
+    // might happens
+    if(!this.startPin) return;
     // You can only connect inpin to outpin or other way around.
     if(this.startPin.type == pin.type || this.dragType == 'data') return;
 
