@@ -51,6 +51,8 @@ export default class InputPin extends DataPin
   }
 
   showInput() {
+    if(this.pointer.isOutputPointer) return;
+    
     if(this.inputElement) {
       this.inputElement.style.visibility = 'visible';
       this.label.style.visibility = 'hidden'

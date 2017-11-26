@@ -5,6 +5,8 @@ export default class ExecutionInPin extends ExecutionPin
 {
   constructor(block) {
     super(block, '', 'left')
+    // Move to close to the body a little bit
+    this.icon.style.left = '-24px'
   }
 
   getConnectedPins() {
