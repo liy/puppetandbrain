@@ -29,7 +29,7 @@ export default class ExecutionInPin extends ExecutionPin
     }
   }
 
-  mouseMove(e) {
+  pointerMove(e) {
     // create a temp link, between initial execution pin position to current mouse position
     ConnectHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
   }

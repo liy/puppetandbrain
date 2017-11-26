@@ -34,42 +34,60 @@ export default class ExecutionPin
     // this.label.style = `float:${location}; margin-${location}:20px`
     this.label.style = `float:${location}; margin-${location}:2px`
 
-    this.mouseDown = this.mouseDown.bind(this);
-    this.mouseMove = this.mouseMove.bind(this);
-    this.mouseUp = this.mouseUp.bind(this);
-    this.targetMouseUp = this.targetMouseUp.bind(this);
+    this.pointerDown = this.pointerDown.bind(this);
+    this.pointerMove = this.pointerMove.bind(this);
+    this.pointerUp = this.pointerUp.bind(this);
+    this.targetPointerUp = this.targetPointerUp.bind(this);
     this.rightMouseDown = this.rightMouseDown.bind(this);
 
-    this.container.addEventListener('mousedown', this.mouseDown);
-    this.container.addEventListener('mouseup', this.targetMouseUp);
+    
+    // document.addEventListener('touchmove', (e => {
+    //   console.log('!!!!')
+    // }));
+
+    
+    this.container.addEventListener('touchstart', this.pointerDown);
+    this.container.addEventListener('touchend', this.targetPointerUp);
+    
+    this.container.addEventListener('mousedown', this.pointerDown);
+    this.container.addEventListener('mouseup', this.targetPointerUp);
     this.container.addEventListener('contextmenu', this.rightMouseDown);
   }
 
-  mouseDown(e) {
+  pointerDown(e) {
+    console.log(e)
     // only left mouse
-    if(e.which != 1) return;
+    if(e.which != 1 && e.which != 0) return;
 
-    document.addEventListener('mousemove', this.mouseMove);
-    document.addEventListener('mouseup', this.mouseUp);
+    document.addEventListener('mousemove', this.pointerMove);
+    document.addEventListener('touchmove', this.pointerMove);
+    document.addEventListener('touchup', this.pointerUp);
+    document.addEventListener('mouseup', this.pointerUp);
 
     ConnectHelper.startExecutionPin(this, e);
   }
 
-  mouseMove(e) {
-    // TODO: create a temp link, between initial execution pin position to current mouse position
-    ConnectHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
+  pointerMove(e) {
+    e.preventDefault();
+    // TODO: Handle touches
+    let sx = e.clientX ? e.clientX : e.touches[0].clientX 
+    let sy = e.clientY ? e.clientY : e.touches[0].clientY 
+    // create a temp link, between initial execution pin position to current mouse position
+    ConnectHelper.drawLine(sx, sy, this.position.x, this.position.y);
   }
 
-  mouseUp(e) {
+  pointerUp(e) {
     // only left mouse
-    if(e.which != 1) return;
+    if(e.which != 1 && e.which != 0) return;
 
-    document.removeEventListener('mousemove', this.mouseMove)
-    document.removeEventListener('mouseup', this.mouseUp);
+    document.removeEventListener('mousemove', this.pointerMove)
+    document.removeEventListener('touchmove', this.pointerMove);
+    document.removeEventListener('touchup', this.pointerUp);
+    document.removeEventListener('mouseup', this.pointerUp);
     ConnectHelper.stop(e)
   }
 
-  targetMouseUp(e) {
+  targetPointerUp(e) {
     // only left mouse
     if(e.which != 1) return;
 
