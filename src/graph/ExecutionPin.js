@@ -24,7 +24,7 @@ export default class ExecutionPin
     this.icon.className = 'icon in-disconnected'
     this.container.appendChild(this.icon);
     // this.icon.style = `${location}:5px`
-    this.icon.style = `${location}:-17px`
+    this.icon.style = `${location}:-26px`
 
     this.label = document.createElement('div');
     this.label.className = 'label'
@@ -32,7 +32,7 @@ export default class ExecutionPin
     this.container.appendChild(this.label)
 
     // this.label.style = `float:${location}; margin-${location}:20px`
-    this.label.style = `float:${location}; margin-${location}:2px`
+    this.label.style = `float:${location}; margin-${location}:10px`
 
     this.pointerDown = this.pointerDown.bind(this);
     this.pointerMove = this.pointerMove.bind(this);

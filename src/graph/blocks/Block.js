@@ -18,8 +18,7 @@ export default class Block
     this.outputPins = new ArrayMap();
 
     this.container = document.createElement('div');
-    this.container.className = `block ${this.node.className.toLowerCase()}-block`;
-    this.container.style = `min-width:${100}px; min-height:${100}px;`;
+    this.container.className = `block-container`;
 
     this.title = document.createElement('div');
     this.title.className = 'title'
@@ -31,22 +30,24 @@ export default class Block
     this.container.appendChild(this.dragArea)
 
     this.content = document.createElement('div');
+    this.content.className = `content ${this.node.className.toLowerCase()}-block`;
     this.container.appendChild(this.content);
+
+    
+    this.rows = [];
 
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
 
+    document.addEventListener('mouseup', this.dragstop);
     this.dragArea.addEventListener('mousedown', this.dragstart);
     // stop right click on block
     this.dragArea.addEventListener('contextmenu', e => {
       e.preventDefault();
       e.stopPropagation();
-
       // TODO: show menu for the block
     })
-
-    document.addEventListener('mouseup', this.dragstop);
 
     // append block to stage
     BrainGraph.addBlock(this);
@@ -83,6 +84,27 @@ export default class Block
     }
   }
 
+  showInputs() {
+    for(let inputPin of this.inputPins.getValues()) {
+      inputPin.showInput();
+    }
+  }
+
+  hideInputs() {
+    for(let inputPin of this.inputPins.getValues()) {
+      inputPin.hideInput();
+    }
+  }
+
+  getRow(i) {
+    if(!this.rows[i]) {
+      this.rows[i] = document.createElement('div');
+      this.rows[i].className = 'row';
+      this.content.appendChild(this.rows[i]);
+    }
+    return this.rows[i]
+  }
+
   dragmove(e) {
     this.x = e.clientX + this._dragOffset.x;
     this.y = e.clientY + this._dragOffset.y;
@@ -114,6 +136,14 @@ export default class Block
     return this.container.getClientRects().height;
   }
   
+  set minWidth(v) {
+    this.content.style.minWidth = `${v}px`
+  }
+
+  set minHeight(v) {
+    this.content.style.minHeight = `${v}px`
+  }
+
   get className() {
     return this.__proto__.constructor.name;
   }

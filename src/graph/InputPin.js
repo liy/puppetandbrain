@@ -20,17 +20,31 @@ export default class InputPin extends DataPin
   }
 
   // TODO: better genertic methods!!
-  addLocalInputs() {
-    this.inputField = document.createElement('input');
-    this.inputField.value = this.pointer.value;
-    if(!this.pointer.isOutputPointer) this.container.appendChild(this.inputField)
-    // The listener will be removed if inputField is no longer reachable.
-    this.inputField.addEventListener('change', (e) => {
-      this.node.variables[this.name] = e.target.value;
-      if(this.node.initialState) {
-        this.node.initialState.variables[this.name] = e.target.value;
-      }
-    })
+  addLocalInputs(element) {
+    // this.element.value = this.pointer.value;
+    // if(!this.pointer.isOutputPointer) this.container.appendChild(this.element)
+    // // The listener will be removed if element is no longer reachable.
+    // this.element.addEventListener('change', (e) => {
+    //   this.node.variables[this.name] = e.target.value;
+    //   if(this.node.initialState) {
+    //     this.node.initialState.variables[this.name] = e.target.value;
+    //   }
+    // })
+  }
+
+  showInput() {
+    // if(this.element) {
+    //   this.element.style.visibility = 'visible';
+    //   this.label.style.visibility = 'hidden'
+    // }
+  }
+
+  hideInput() {
+    // if(this.element) {
+      // console.log('!!!')
+      // this.label.style.visibility = 'visible';
+      // this.element.style.visibility = 'hidden';
+    // }
   }
 
   get isConnected() {
@@ -41,13 +55,13 @@ export default class InputPin extends DataPin
     if(!this.isConnected) {
       this.icon.className = 'icon in-disconnected';
       if(this.svg.contains(this.path)) this.svg.removeChild(this.path);
-      this.inputField.value = this.pointer.value
-      this.container.appendChild(this.inputField);
+      this.element.value = this.pointer.value
+      this.container.appendChild(this.element);
       return;
     }
 
-    if(this.inputField && this.container.contains(this.inputField)) {
-      this.container.removeChild(this.inputField);
+    if(this.element && this.container.contains(this.element)) {
+      this.container.removeChild(this.element);
     }
 
     this.addLocalInputs();
@@ -108,6 +122,15 @@ export default class InputPin extends DataPin
           this.path.setAttribute('d', `M${this.position.x},${this.position.y} l${offsetX},0 ${dx/2},${dxsdy/2} 0,${(ady-adx)*Math.sign(dy)} L${outputPin.position.x-offsetX},${outputPin.position.y} l${offsetX},0`);
         }
       }
+    }
+  }
+
+  get position() {
+    let offset = this.svg.getBoundingClientRect();
+    let rect = this.icon.getBoundingClientRect();
+    return {
+      x: (rect.left + rect.right)/2 - offset.left - 3,
+      y: (rect.top + rect.bottom)/2 - offset.top
     }
   }
 }

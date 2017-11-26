@@ -32,19 +32,23 @@ class BlockSelection
 
   select(block) {
     if(this.selected) {
-      this.selected.container.classList.remove('block-selected')
+      this.selected.hideInputs();
+      this.selected.content.classList.remove('block-selected')
     }
     this.selected = block;
-    this.selected.container.classList.add('block-selected')
+    this.selected.content.classList.add('block-selected');
+    this.selected.showInputs();
+    
   }
   
   downOnEmptySpace(e) {
-    if(e.target == BrainGraph.container) this.deselectAll();;
+    if(e.target == BrainGraph.svg) this.deselectAll();;
   }
 
   deselectAll() {
     if(this.selected) {
-      this.selected.container.classList.remove('block-selected')
+      this.selected.hideInputs();
+      this.selected.content.classList.remove('block-selected')
       this.selected = null;
     }
   }

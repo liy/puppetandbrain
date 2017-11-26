@@ -2,7 +2,8 @@ import TaskBlock from "./TaskBlock";
 
 export default class ActionBlock extends TaskBlock
 {
-  constructor(node, graph) {
-    super(node, graph);
+  constructor(node) {
+    super(node);
+    this.content.classList.add('action-block');
   }
 }

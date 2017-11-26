@@ -9,7 +9,7 @@ class ConnectHelper
   }
 
   drawLine(x1, y1, x2, y2) {
-    let offsetX = 20;
+    let offsetX = 8;
     let dx = (x1-offsetX) - (x2+offsetX);
     let dy = y1 - y2;
     let adx = Math.abs(dx);
@@ -62,7 +62,7 @@ class ConnectHelper
   }
 
   startExecutionPin(pin, e) {
-    this.path.setAttribute('stroke', '#FFF');
+    this.path.setAttribute('stroke', '#e1eaff');
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');

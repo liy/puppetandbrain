@@ -1,13 +1,38 @@
-.block
+.block-container
 {
   cursor: default;
   user-select:none;
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding-bottom: 5px;
-  background:rgba(57, 61, 94, 0.8);
-  color: rgb(224, 224, 224);
   position: absolute;
-  border-radius: 4px;
+
+  .title {
+    color: rgb(255, 255, 255);
+    padding:5px 10px;
+    text-align: center;
+  }
+
+  .content {
+    // min-width: 120px;
+    // min-height: 60px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    background:rgba(57, 61, 94, 0.8);
+    color: rgb(224, 224, 224);
+    border-radius: 12px;    
+    border: 2px solid rgba(99, 99, 99, 0.0);
+    box-shadow: 0 0 5px rgb(99, 99, 99);
+    
+
+    .row { 
+      // background-color: rgba($color: #a53583, $alpha: 0.3);
+      line-height: 22px;
+      height:22px;
+      width: 100%;
+      margin-top:1px;
+      margin-bottom:1px;
+    }
+  }
 
   .drag-area {
     position: absolute;
@@ -19,37 +44,31 @@
     z-index: 0;
   }
 
-  .title {
-    color: rgb(255, 255, 255);
-    padding:5px 10px;
+  .block-selected {
+    // box-shadow: inset 0px 0px 0px 2px #FFF;
+    border: 2px solid rgba(255, 255, 255, 1.0);
   }
-
-  .row {
-    height:16px;
-    margin-left:5px;
-    margin-right:5px;
-    margin-top:3px;
+  
+  .action-block {
+    background:rgba(157, 172, 0, 0.8);
+  }
+  
+  .listener-block {
+    background:rgba(157, 172, 0, 0.8);
+  }
+  
+  .perform-block {
+    background:rgba(90, 47, 71, 0.8);
+  }
+  
+  .property-block {
+    background:rgba(80, 112, 134, 0.8);
+    // background:rgba(71, 45, 94, 0.8);
+  }
+  
+  .operator-block {
+    // background:rgba(71, 45, 94, 0.8);
+    background:rgba(80, 112, 134, 0.8);
   }
 }
 
-.block-selected {
-  box-shadow: inset 0px 0px 0px 2px #FFF;
-}
-
-.listener-block {
-  background:rgba(157, 172, 0, 0.8);
-}
-
-.perform-block {
-  background:rgba(90, 47, 71, 0.8);
-}
-
-.property-block {
-  background:rgba(80, 112, 134, 0.8);
-  // background:rgba(71, 45, 94, 0.8);
-}
-
-.operator-block {
-  // background:rgba(71, 45, 94, 0.8);
-  background:rgba(80, 112, 134, 0.8);
-}

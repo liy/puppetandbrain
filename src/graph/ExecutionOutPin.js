@@ -47,7 +47,7 @@ export default class ExecutionOutPin extends ExecutionPin
     let connectedPin = this.getConnectedPin();
     if(!connectedPin) return;
 
-    let offsetX = 10;
+    let offsetX = 8;
     let dx = (connectedPin.position.x-offsetX) - (this.position.x+offsetX);
     let dy = connectedPin.position.y - this.position.y;
     let adx = Math.abs(dx);
@@ -88,5 +88,14 @@ export default class ExecutionOutPin extends ExecutionPin
     super.rightMouseDown(e)
 
     History.push(Commander.create('RemoveExecution', this.node, this.name).process());
+  }
+
+  get position() {
+    let offset = this.svg.getBoundingClientRect();
+    let rect = this.icon.getBoundingClientRect();
+    return {
+      x: (rect.left + rect.right)/2 - offset.left + 2,
+      y: (rect.top + rect.bottom)/2 - offset.top
+    }
   }
 }

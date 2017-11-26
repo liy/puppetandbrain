@@ -10,56 +10,37 @@ export default class TaskBlock extends Block
   constructor(node) {
     super(node)
 
-    this.inPin = null;
-    this.outPins = new ArrayMap();
-
-    let rows = [];
-    let row = (i) => {
-      if(!rows[i]) {
-        rows[i] = document.createElement('div');
-        rows[i].className = 'row';
-        this.content.appendChild(rows[i]);
-      }
-      return rows[i]
-    }
+    this.minWidth = 120;
 
     // task always have at least 2 pair of exeuctions, in and out
     if(this.node.hasIn) {
       this.inPin = new ExecutionInPin(this);
-      row(0).appendChild(this.inPin.container);
+      this.getRow(0).appendChild(this.inPin.container);
     }
 
     // out pins
+    this.outPins = new ArrayMap();
     for(let i=0; i<this.node.execution.names.length; ++i) {
       let executionName = this.node.execution.names[i]
       let out = new ExecutionOutPin(this, executionName);
-      row(i).appendChild(out.container)
+      this.getRow(i).appendChild(out.container)
       this.outPins.set(executionName, out);
     }
 
     for(let i=0; i<this.node.inputs.names.length; ++i) {
       let name = this.node.inputs.names[i];
       let pin = new InputPin(this, name)
-      row(i+1).appendChild(pin.container);
+      this.getRow(i+1).appendChild(pin.container);
       this.inputPins.set(name, pin);
     }
 
     for(let i=0; i<this.node.outputs.names.length; ++i) {
       let name = this.node.outputs.names[i];
       let pin = new OutputPin(this, name);
-      row(this.node.execution.names.length + i).appendChild(pin.container);
+      this.getRow(this.node.execution.names.length + i).appendChild(pin.container);
       this.outputPins.set(name, pin);
     }
   }
-
-  // delete() {
-  //   super.delete();
-  //   // disconnect all executions pins
-  //   if(this.inPin) this.inPin.removeConnections();
-  //   for(let pin of this.outPins.getValues()) {
-  //     pin.removeConnections();
-  //   }
-  // }
 
   refreshExecutionPins() {
     if(this.inPin) this.inPin.refresh();

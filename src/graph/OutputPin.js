@@ -47,4 +47,13 @@ export default class OutputPin extends DataPin
     super.rightMouseDown(e);
     History.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).process());
   }
+
+  get position() {
+    let offset = this.svg.getBoundingClientRect();
+    let rect = this.icon.getBoundingClientRect();
+    return {
+      x: (rect.left + rect.right)/2 - offset.left + 3,
+      y: (rect.top + rect.bottom)/2 - offset.top
+    }
+  }
 }
