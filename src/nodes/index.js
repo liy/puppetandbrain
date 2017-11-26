@@ -29,11 +29,13 @@ export GetRotation from './GetRotation';
 
 // listeners
 export GameStart from './listeners/GameStart'
+export Ticker from './listeners/Ticker'
 export KeyDown from './listeners/KeyDown'
 export KeyUp from './listeners/KeyUp'
 export PointerDown from './listeners/PointerDown'
 export PointerMove from './listeners/PointerMove'
 export PointerOver from './listeners/PointerOver'
+export PointerOut from './listeners/PointerOut'
 export PointerUp from './listeners/PointerUp'
 export SwitchDown from './listeners/SwitchDown'
 export SwitchUp from './listeners/SwitchUp'

@@ -1,6 +1,6 @@
 import Listener from "./Listener";
 
-export default class PointerDown extends Listener
+export default class PointerOut extends Listener
 {
   constructor(id) {
     super(id);
@@ -10,23 +10,23 @@ export default class PointerDown extends Listener
   }
 
   get nodeName() {
-    return 'Touch Hover'
+    return 'Touch Unhover'
   }
 
   destroy() {
     super.destroy();
-    this.owner.off('pointerover', this.over, this)
+    this.owner.off('pointerout', this.out, this)
   }
 
   prestart() {
-    this.owner.on('pointerover', this.over, this)
+    this.owner.on('pointerout', this.out, this)
   }
 
   stop() {
-    this.owner.off('pointerover', this.over, this)
+    this.owner.off('pointerout', this.out, this)
   }
 
-  over(e) {
+  out(e) {
     super.run();
     this.execution.run();
   }

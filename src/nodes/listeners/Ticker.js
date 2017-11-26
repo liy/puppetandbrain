@@ -4,29 +4,31 @@ export default class Ticker extends Listener
 {
   constructor(id) {
     super(id);
-    Stage.on('game.start', this.start)
-    Stage.on('game.stop', this.stop)
+  
+    Stage.on('game.start', this.start, this)
+    Stage.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
-    Stage.off('game.start', this.start)
+
+    Stage.off('game.start', this.start, this)
+    Stage.off('game.stop', this.stop, this)
   }
 
   get nodeName() {
-    return 'Tick'
+    return 'Game Tick'
   }
 
   start() {
-    PIXI.ticker.shared.add(this.tick);
+    PIXI.ticker.shared.add(this.tick, this);
   }
 
   stop() {
-    PIXI.ticker.shared.remove(this.tick);
+    PIXI.ticker.shared.remove(this.tick, this);
   }
 
   tick(e) {
-    super.run();
     this.execution.run()
   }
 }

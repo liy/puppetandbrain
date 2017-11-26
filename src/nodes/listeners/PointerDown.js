@@ -4,7 +4,13 @@ export default class PointerDown extends Listener
 {
   constructor(id) {
     super(id);
+
     this.down = this.down.bind(this);
+    this.prestart = this.prestart.bind(this);
+    this.stop = this.stop.bind(this);
+
+    Stage.on('game.prestart', this.prestart)
+    Stage.on('game.stop', this.stop)
   }
 
   get nodeName() {
@@ -17,12 +23,10 @@ export default class PointerDown extends Listener
   }
 
   prestart() {
-    super.prestart();
     this.owner.on('pointerdown', this.down)
   }
 
-  terminate() {
-    super.terminate()
+  stop() {
     this.owner.off('pointerdown', this.down)
   }
 

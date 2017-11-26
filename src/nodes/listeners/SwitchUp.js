@@ -5,7 +5,7 @@ export default class SwitchUp extends KeyUp
   constructor(id) {
     super(id);
 
-    this.keyup = this.keyup.bind(this)
+    this.inputs.remove('key')
     this.outputs.addOutput('which')
   }
 

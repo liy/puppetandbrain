@@ -19,6 +19,10 @@ export default class BlockMenu
     // wait until user pick the block to create....
     return new Promise(resolve => {
       let entries = MenuContent.concat();
+      // TODO: temp sort...
+      entries.sort((a, b) => {
+        return a.itemName.localeCompare(b.itemName);
+      });
       // get all actors' actions
       for(let actor of LookUp.getActors()) {
         if(actor == BrainGraph.brain.owner) continue;

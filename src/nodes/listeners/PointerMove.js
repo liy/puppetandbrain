@@ -4,7 +4,12 @@ export default class PointerMove extends Listener
 {
   constructor(id) {
     super(id);
-    this.pointermove = this.pointermove.bind(this);
+    this.move = this.move.bind(this);
+    this.prestart = this.prestart.bind(this);
+    this.stop = this.stop.bind(this);
+
+    Stage.on('game.prestart', this.prestart)
+    Stage.on('game.stop', this.stop)
   }
 
   get nodeName() {
@@ -13,20 +18,18 @@ export default class PointerMove extends Listener
 
   destroy() {
     super.destroy();
-    this.owner.removeEventListener('pointermove', this.pointermove)
+    this.owner.off('pointermove', this.move)
   }
 
   prestart() {
-    super.prestart();
-    this.owner.addEventListener('pointermove', this.pointermove)
+    this.owner.on('pointermove', this.move)
   }
 
-  terminate() {
-    super.terminate()
-    this.owner.removeEventListener('pointermove', this.pointermove)
+  stop() {
+    this.owner.off('pointermove', this.move)
   }
 
-  pointermove(e) {
+  move(e) {
     super.run();
     this.execution.run();
   }

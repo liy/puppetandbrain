@@ -5,7 +5,7 @@ export default class SwitchDown extends KeyDown
   constructor(id) {
     super(id);
 
-    this.keydown = this.keydown.bind(this)
+    this.inputs.remove('key')
     this.outputs.addOutput('which')
   }
 

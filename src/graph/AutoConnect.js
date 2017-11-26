@@ -35,7 +35,7 @@ export default
       else {
         let firstInput = createdNode.inputs.get(createdNode.inputs.names[0]);
         if(firstInput) {
-          History.push(Commander.create('CreateDataLink', createdNode.id, firstOutput.name, pin.node.id, pin.name).process())
+          History.push(Commander.create('CreateDataLink', createdNode.id, firstInput.inputName, pin.node.id, pin.name).process())
         }
       }
     }

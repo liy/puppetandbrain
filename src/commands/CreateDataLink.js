@@ -10,7 +10,8 @@ export default class CreateDataLink extends Command
     this.outputNodeID = outputNodeID;
     this.outputName = outputName;
     
-    this.oldPointerPod = this.inputNode.inputs.get(this.inputName).pod();
+    let oldPointer = this.inputNode.inputs.get(this.inputName);
+    if(oldPointer) this.oldPointerPod = oldPointer.pod();
   }
 
   get inputNode() {
@@ -47,7 +48,7 @@ export default class CreateDataLink extends Command
     pointer.disconnect();
     // note that this pointer could be local pointer
     // when undo better to disconnect first before set the pointer to the old pointer pod.
-    pointer.set(this.oldPointerPod);
+    if(this.oldPointerPod) pointer.set(this.oldPointerPod);
     BrainGraph.refresh()
   }
 

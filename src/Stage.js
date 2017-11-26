@@ -6,6 +6,13 @@ class Stage extends PIXI.Container
     super();
     this.running = false;
     this.actors = [];
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key == 'F6' || e.key == 'F4') {
+        e.preventDefault();
+        this.toggle();
+      }
+    })
   }
 
   init(width, height) {

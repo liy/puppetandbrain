@@ -15,9 +15,7 @@ export default class GameStart extends Listener
   }
 
   start(e) {
-    if(e.key.toLowerCase() == this.variables.key.toLowerCase()) {
-      super.run();
-      this.execution.run();
-    }
+    super.run();
+    this.execution.run();
   }
 }

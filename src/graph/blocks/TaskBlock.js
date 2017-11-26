@@ -7,8 +7,8 @@ import ArrayMap from "../../utils/ArrayMap";
 
 export default class TaskBlock extends Block
 {
-  constructor(node, graph) {
-    super(node, graph)
+  constructor(node) {
+    super(node)
 
     this.inPin = null;
     this.outPins = new ArrayMap();

@@ -70,6 +70,7 @@ function render() {
 PIXI.ticker.shared.add(render);
 
 
+
 async function load() {
   var loader = new ActivityLoader();
   await loader.load(require('./assets/activity.json'))
@@ -119,10 +120,3 @@ actorAddBtn.addEventListener('mousedown', e => {
 
 // prevent default context menu for the whole site
 document.addEventListener('contextmenu', event => event.preventDefault());
-
-document.addEventListener('keydown', (e) => {
-  if(e.key == 'F6' || e.key == 'F4') {
-    e.preventDefault();
-    LookUp.toggle();
-  }
-})

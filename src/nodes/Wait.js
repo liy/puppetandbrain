@@ -5,8 +5,7 @@ export default class Wait extends Task
   constructor(id) {
     super(id);
 
-    this.terminate = this.terminate.bind(this);
-    Stage.on('game.stop', this.terminate)
+    Stage.on('game.stop', this.stop, this)
 
     this.inputs.addInput('seconds')
   }
@@ -19,11 +18,10 @@ export default class Wait extends Task
   destroy() {
     super.destroy();
     clearTimeout(this.timeoutID);
-    Stage.off('game.stop', this.terminate)
+    Stage.off('game.stop', this.stop)
   }
 
-  terminate() {
-    super.terminate();
+  stop() {
     clearTimeout(this.timeoutID);
   }
 

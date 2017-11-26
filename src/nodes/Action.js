@@ -1,5 +1,8 @@
 import Task from './Task'
 
+/**
+ * User defined action
+ */
 export default class Action extends Task
 {
   /**

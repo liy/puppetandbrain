@@ -18,12 +18,6 @@ export default [
     }
   },
   {
-    itemName: 'Game Start',
-    nodePod: {
-      className: 'GameStart',
-    }
-  },
-  {
     itemName: 'Move',
     nodePod: {
       className: 'Tween'
@@ -138,15 +132,6 @@ export default [
     }
   },
   {
-    itemName: 'Key Down',
-    nodePod: {
-      className: 'KeyDown',
-      variables: {
-        key: 'S'
-      }
-    }
-  },
-  {
     itemName: 'Loop',
     nodePod: {
       className: 'Loop',
@@ -180,5 +165,86 @@ export default [
     nodePod: {
       className: 'MakePosition',
     }
-  }
+  },
+
+
+  // listener blocks!
+  {
+    itemName: 'Game Start',
+    nodePod: {
+      className: 'GameStart',
+    }
+  },
+  {
+    itemName: 'Game Tick',
+    nodePod: {
+      className: 'Ticker',
+    }
+  },
+  {
+    itemName: 'Key Down',
+    nodePod: {
+      className: 'KeyDown',
+      variables: {
+        key: 'S'
+      }
+    }
+  },
+  {
+    itemName: 'Key Up',
+    nodePod: {
+      className: 'KeyUp',
+      variables: {
+        key: 'S'
+      }
+    }
+  },
+  {
+    itemName: 'Touch Down',
+    nodePod: {
+      className: 'PointerDown',
+    }
+  },
+  {
+    itemName: 'Touch Move',
+    nodePod: {
+      className: 'PointerMove',
+    }
+  },
+  {
+    itemName: 'Touch Hover',
+    nodePod: {
+      className: 'PointerOver',
+    }
+  },
+  {
+    itemName: 'Touch Unhover',
+    nodePod: {
+      className: 'PointerOut',
+    }
+  },
+  {
+    itemName: 'Touch Over',
+    nodePod: {
+      className: 'PointerOver',
+    }
+  },
+  {
+    itemName: 'Touch Up',
+    nodePod: {
+      className: 'PointerUp',
+    }
+  },
+  {
+    itemName: 'Switch Down',
+    nodePod: {
+      className: 'SwitchDown',
+    }
+  },
+  {
+    itemName: 'Switch Up',
+    nodePod: {
+      className: 'SwitchUp',
+    }
+  },
 ]

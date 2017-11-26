@@ -4,7 +4,12 @@ export default class PointerUp extends Listener
 {
   constructor(id) {
     super(id);
-    this.pointerup = this.pointerup.bind(this)
+    this.up = this.up.bind(this);
+    this.prestart = this.prestart.bind(this);
+    this.stop = this.stop.bind(this);
+
+    Stage.on('game.prestart', this.prestart)
+    Stage.on('game.stop', this.stop)
   }
 
   get nodeName() {
@@ -13,20 +18,18 @@ export default class PointerUp extends Listener
 
   destroy() {
     super.destroy();
-    this.owner.removeEventListener('pointerup', this.pointerup)
+    this.owner.off('pointerup', this.up)
   }
 
   prestart() {
-    super.prestart();
-    this.owner.addEventListener('pointerup', this.pointerup)
+    this.owner.on('pointerup', this.up)
   }
 
-  terminate() {
-    super.terminate()
-    this.owner.removeEventListener('pointerup', this.pointerup)
+  stop() {
+    this.owner.off('pointerup', this.up)
   }
 
-  pointerup(e) {
+  up(e) {
     super.run();
     this.execution.run();
   }

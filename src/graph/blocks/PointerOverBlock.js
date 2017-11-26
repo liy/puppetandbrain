@@ -1,6 +1,6 @@
 import ListenerBlock from "./ListenerBlock";
 
-export default class KeyDownBlock extends ListenerBlock
+export default class PointerOverBlock extends ListenerBlock
 {
   constructor(node) {
     super(node);

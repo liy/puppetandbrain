@@ -7,6 +7,11 @@ export default class KeyDown extends Listener
 
     this.inputs.addInput('key');
     this.keydown = this.keydown.bind(this)
+    this.prestart = this.prestart.bind(this);
+    this.stop = this.stop.bind(this);
+
+    Stage.on('game.prestart', this.prestart)
+    Stage.on('game.stop', this.stop)
   }
 
   destroy() {
@@ -15,12 +20,10 @@ export default class KeyDown extends Listener
   }
 
   prestart() {
-    super.prestart();
     document.addEventListener('keydown', this.keydown)
   }
 
-  terminate() {
-    super.terminate()
+  stop() {
     document.removeEventListener('keydown', this.keydown)
   }
 

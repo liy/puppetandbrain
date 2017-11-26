@@ -1,9 +1,8 @@
-import TaskBlock from "./TaskBlock";
+import ListenerBlock from "./ListenerBlock";
 
-export default class GameStartBlock extends TaskBlock
+export default class GameStartBlock extends ListenerBlock
 {
-  constructor(node, graph) {
-    super(node, graph);
-    this.container.classList.add('listener-block')
+  constructor(node) {
+    super(node);
   }
 }
