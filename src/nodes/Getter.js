@@ -6,17 +6,17 @@ export default class Getter extends DataNode
     super(id);
 
     this.variableName = null;
-    this.target = null;
+    this.targetBrain = null;
   }
 
   init(pod) {
     super.init(pod);
 
-    this.target = LookUp.auto(pod.target);
+    this.targetBrain = LookUp.auto(pod.targetBrain);
     this.variableName = pod.variableName;
     this.outputs.addOutput(this.variableName).assignProperty(this.variableName, {
       get: () => {
-        return this.target.variables[this.variableName];
+        return this.targetBrain.variables[this.variableName];
       }
     });
   }
@@ -28,7 +28,7 @@ export default class Getter extends DataNode
   pod(detail) {
     let pod = super.pod(detail);
     pod.variableName = this.variableName;
-    pod.target = this.target.id;
+    pod.targetBrain = this.targetBrain.id;
     return pod;
   }
 }

@@ -39,23 +39,25 @@ export default class BlockMenu
       }
 
       // Populate all the variable getter and setter for this actor
-      for(let name of Object.keys(BrainGraph.brain.owner.variables)) {
-        let target = BrainGraph.brain.owner;
+      let brain = BrainGraph.brain;
+      for(let name of Object.keys(brain.variables)) {
         entries.push({
-          itemName: `Get ${target.name} ${name}`,
+          itemName: `Get ${brain.owner.name} ${name}`,
           nodePod: {
             className: 'Getter',
+            // Note that, owner is the node's owner
             owner: BrainGraph.brain.owner,
-            target: target,
+            targetBrain: brain,
             variableName: name
           }
         })
         entries.push({
-          itemName: `Set ${target.name} ${name}`,
+          itemName: `Set ${brain.owner.name} ${name}`,
           nodePod: {
             className: 'Setter',
+            // Note that, owner is the node's owner
             owner: BrainGraph.brain.owner,
-            target: target,
+            targetBrain: brain,
             variableName: name
           }
         })

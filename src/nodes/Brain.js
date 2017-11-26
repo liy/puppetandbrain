@@ -8,6 +8,13 @@ export default class Brain
     this.id = LookUp.addBrain(this, id)
     this.owner = owner;
     this.nodes = new ArrayMap();
+
+    this.variables = Object.create(null);
+    // FIXME: for testing purpose!!!
+    this.variables['test'] = 'test!'
+
+    Stage.off('game.prestart', this.setInitialState, this);
+    Stage.off('game.stop', this.stop, this);
   }
 
   destroy() {
@@ -16,6 +23,22 @@ export default class Brain
     for(let node of nodes) {
       node.destroy();
     }
+  }
+
+  setInitialState() {
+    // setup initial state
+    this.initialState = {
+      // deep clone...
+      variables: JSON.parse(JSON.stringify(this.variables)),
+    }
+  }
+
+  stop() {
+    this.variables = this.initialState.variables;
+  }
+
+  createVariable(name, value) {
+    this.variables[name] = value;
   }
 
   addNode(node) {
@@ -56,6 +79,7 @@ export default class Brain
     let pod = {
       className: this.__proto__.constructor.name,
       id: this.id,
+      variables: this.variables,
       // Note that the owner is not here.
       // This is because in brain is created in Actor,
       // does not need owner information.

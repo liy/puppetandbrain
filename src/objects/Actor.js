@@ -18,9 +18,6 @@ export default class Actor extends PIXI.Container
     // create an entry in the reference look up
     this.id = LookUp.addActor(this, id);
 
-    this.variables = Object.create(null);
-    this.variables['test'] = 'test!'
-
     this.name = 'Actor ' + this.id;
 
     this.actions = Object.create(null);
@@ -31,10 +28,8 @@ export default class Actor extends PIXI.Container
     this._clickCounter = 0;
     this.on('pointerup', this.dbClick, this)
 
-    this.setInitialState = this.setInitialState.bind(this);
-    this.terminate = this.terminate.bind(this);
-    Stage.on('game.prestart', this.setInitialState);
-    Stage.on('game.stop', this.terminate);
+    Stage.on('game.prestart', this.gamePrestart, this);
+    Stage.on('game.stop', this.gameStop, this);
 
     mixin(this, new Entity());
   }
@@ -65,16 +60,15 @@ export default class Actor extends PIXI.Container
     })
 
     LookUp.removeActor(this.id);
-    this.off('pointerup', this.dbClick);
-    Stage.off('game.prestart', this.setInitialState);
-    Stage.off('game.stop', this.terminate);
+    this.off('pointerup', this.dbClick, this);
+    Stage.off('game.prestart', this.gamePrestart, this);
+    Stage.off('game.stop', this.gameStop, this);
     this.brain.destroy();
   }
 
-  setInitialState() {
+  gamePrestart() {
     // setup initial state
     this.initialState = {
-      variables: JSON.parse(JSON.stringify(this.variables)),
       x: this.x,
       y: this.y,
       scale: {
@@ -85,7 +79,7 @@ export default class Actor extends PIXI.Container
     }
   }
 
-  terminate() {
+  gameStop() {
     this.x = this.initialState.x;
     this.y = this.initialState.y;
     if(this.initialState.scale) {
@@ -96,10 +90,6 @@ export default class Actor extends PIXI.Container
     }
     this.rotation = this.initialState.rotation;
     this.variables = this.initialState.variables;
-  }
-
-  createVariable(name, value) {
-    this.variables[name] = value;
   }
 
   get position() {
@@ -152,7 +142,6 @@ export default class Actor extends PIXI.Container
         y: this.scale.y
       },
       name: this.name,
-      variables: this.variables,
       childActors: this.childActors.concat(),
       brainID: this.brain.id,
     }

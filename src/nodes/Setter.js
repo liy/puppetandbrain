@@ -6,13 +6,13 @@ export default class Setter extends Task
     super(id);
 
     this.variableName = null;
-    this.target = null;
+    this.targetBrain = null;
   }
 
   init(pod) {
     super.init(pod);
 
-    this.target = LookUp.auto(pod.target);
+    this.targetBrain = LookUp.auto(pod.targetBrain);
     this.variableName = pod.variableName;
 
     this.inputs.addInput(this.variableName);
@@ -20,7 +20,7 @@ export default class Setter extends Task
     this.outputs.addOutput(this.variableName)
     this.outputs.assignProperty(this.variableName, {
       get: () => {
-        return this.target.variables[this.variableName];
+        return this.targetBrain.variables[this.variableName];
       }
     });
   }
@@ -28,7 +28,7 @@ export default class Setter extends Task
   run() {
     super.run();
 
-    this.target.variables[this.variableName] = this.inputs.value(this.variableName);
+    this.targetBrain.variables[this.variableName] = this.inputs.value(this.variableName);
 
     this.execution.run();
   }
@@ -40,7 +40,7 @@ export default class Setter extends Task
   pod(detail) {
     let pod = super.pod(detail);
     pod.variableName = this.variableName;
-    pod.target = this.target.id;
+    pod.targetBrain = this.targetBrain.id;
     return pod;
   }
 }
