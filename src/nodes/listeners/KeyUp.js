@@ -1,6 +1,6 @@
-import EventListener from "./EventListener";
+import Listener from "./Listener";
 
-export default class KeyUp extends EventListener
+export default class KeyUp extends Listener
 {
   constructor(id) {
     super(id);

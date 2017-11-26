@@ -3,7 +3,6 @@ require('./BrainGraph.scss')
 import BlockSelection from './BlockSelection';
 import ArrayMap from '../utils/ArrayMap';
 import BlockMenu from './BlockMenu';
-import Stage from '../objects/Stage'
 
 class BrainGraph
 {

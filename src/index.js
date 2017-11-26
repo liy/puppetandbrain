@@ -44,10 +44,10 @@ require('./graph/BlockFactory');
 require('./commands/History');
 require('./commands/Commander');
 require('./graph/BrainGraph')
+require('./Stage')
 
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
-import Stage from './objects/Stage';
 
 import ActivityLoader from './ActivityLoader';
 

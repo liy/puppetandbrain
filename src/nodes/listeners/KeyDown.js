@@ -1,6 +1,6 @@
-import EventListener from "./EventListener";
+import Listener from "./Listener";
 
-export default class KeyDown extends EventListener
+export default class KeyDown extends Listener
 {
   constructor(id) {
     super(id);

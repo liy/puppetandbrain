@@ -1,6 +1,6 @@
-import EventListener from "./EventListener";
+import Listener from "./Listener";
 
-export default class PointerMove extends EventListener
+export default class PointerMove extends Listener
 {
   constructor(id) {
     super(id);

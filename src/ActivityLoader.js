@@ -1,5 +1,4 @@
 import JsonPromise from './utils/JsonPromise';
-import Stage from './objects/Stage';
 import * as nodes from './nodes'
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';

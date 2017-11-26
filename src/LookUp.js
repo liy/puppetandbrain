@@ -1,5 +1,4 @@
 // import shortid from 'shortid';
-import Stage from './objects/Stage';
 import Task from './nodes/Task';
 
 var STORE = Object.create(null);

@@ -1,7 +1,6 @@
-import EventListener from "./EventListener";
-import Stage from '../../objects/Stage';
+import Listener from "./Listener";
 
-export default class Ticker extends EventListener
+export default class Ticker extends Listener
 {
   constructor(id) {
     super(id);

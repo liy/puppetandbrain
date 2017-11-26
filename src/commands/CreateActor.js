@@ -1,6 +1,5 @@
 import Command from './Command';
 import SpineActor from '../objects/SpineActor';
-import Stage from '../objects/Stage'
 import GameStart from '../nodes/listeners/GameStart';
 
 export default class CreateActor extends Command

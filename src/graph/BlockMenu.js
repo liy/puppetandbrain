@@ -23,7 +23,7 @@ export default class BlockMenu
       for(let actor of LookUp.getActors()) {
         if(actor == BrainGraph.brain.owner) continue;
         
-        for(let actionName of Object.keys(actor.customActions)) {
+        for(let actionName of Object.keys(actor.actions)) {
           entries.push({
             itemName: `Perform ${actionName}`,
             nodePod: {

@@ -1,10 +1,10 @@
-import EventListener from "./EventListener";
+import Listener from "./Listener";
 
-export default class PointerDown extends EventListener
+export default class PointerDown extends Listener
 {
   constructor(id) {
     super(id);
-    this.pointerdown = this.pointerdown.bind(this);
+    this.down = this.down.bind(this);
   }
 
   get nodeName() {
@@ -13,20 +13,20 @@ export default class PointerDown extends EventListener
 
   destroy() {
     super.destroy();
-    this.owner.removeEventListener('pointerdown', this.pointerdown)
+    this.owner.off('pointerdown', this.down)
   }
 
   prestart() {
     super.prestart();
-    this.owner.addEventListener('pointerdown', this.pointerdown)
+    this.owner.on('pointerdown', this.down)
   }
 
   terminate() {
     super.terminate()
-    this.owner.removeEventListener('pointerdown', this.pointerdown)
+    this.owner.off('pointerdown', this.down)
   }
 
-  pointerdown(e) {
+  down(e) {
     super.run();
     this.execution.run();
   }

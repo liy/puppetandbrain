@@ -1,10 +1,6 @@
-import EventEmitter from '../utils/EventEmitter'
-
-export default class Entity extends EventEmitter
+export default class Entity
 {
   constructor() {
-    super();
-
     this.components = Object.create(null);
   }
 

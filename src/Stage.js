@@ -1,4 +1,4 @@
-import ActorSelection from '../objects/ActorSelection';
+import ActorSelection from './objects/ActorSelection';
 
 class Stage extends PIXI.Container
 {
@@ -66,4 +66,4 @@ class Stage extends PIXI.Container
   }
 }
 
-export default new Stage();
+window.Stage = new Stage();

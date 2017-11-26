@@ -1,4 +1,3 @@
-import Stage from './Stage';
 import Entity from './Entity';
 import mixin from '../utils/mixin';
 import Brain from '../nodes/Brain';
@@ -29,7 +28,7 @@ export default class Actor extends PIXI.Container
     this.childActors = [];
 
     this._clickCounter = 0;
-    this.on('pointerdown', this.pointerdown)
+    this.on('pointerup', this.dbClick, this)
 
     this.setInitialState = this.setInitialState.bind(this);
     this.terminate = this.terminate.bind(this);
@@ -65,7 +64,7 @@ export default class Actor extends PIXI.Container
     })
 
     LookUp.removeActor(this.id);
-    this.off('pointerdown', this.pointerdown);
+    this.off('pointerup', this.dbClick);
     Stage.off('game.prestart', this.setInitialState);
     Stage.off('game.stop', this.terminate);
     this.brain.destroy();
@@ -110,7 +109,7 @@ export default class Actor extends PIXI.Container
     }
   }
 
-  pointerdown(e) {
+  dbClick(e) {
     // Open brain graph
     setTimeout(() => {
       this._clickCounter = 0;

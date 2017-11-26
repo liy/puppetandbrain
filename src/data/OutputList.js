@@ -1,6 +1,5 @@
 import ArrayMap from "../utils/ArrayMap";
 import Output from "./Output";
-import Stage from '../objects/Stage'
 
 export default class OutputList extends ArrayMap
 {

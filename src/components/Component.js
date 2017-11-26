@@ -1,7 +1,7 @@
-export default class Component extends PIXI.utils.EventEmitter
+export default class Component
 {
   constructor() {
-    super();
+    // super();
     this.entity = null;
   }
 
