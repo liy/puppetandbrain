@@ -16,6 +16,7 @@ export default class SpineActor extends Actor
     this.url = pod.url;
 
     this.loaded = JsonPromise.load(this.url).then(info => {
+      this.name = info.name;
       this.addComponent(new PlaceHolderComponent(info.dimension));
       this.addComponent(new SelectionComponent(info.dimension));
       this.addComponent(new DragComponent(info.dimension));

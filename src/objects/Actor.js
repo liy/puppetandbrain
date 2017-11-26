@@ -19,6 +19,7 @@ export default class Actor extends PIXI.Container
     this.id = LookUp.addActor(this, id);
 
     this.variables = Object.create(null);
+    this.variables['test'] = 'test!'
 
     this.name = 'Actor ' + this.id;
 

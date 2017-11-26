@@ -13,6 +13,10 @@ export const LessThan = Operators.LessThan;
 export const RandomNumber = Operators.RandomNumber;
 export Break from './Break';
 export MakePosition from './MakePosition';
+export GetProperty from './GetProperty';
+export GetPosition from './GetPosition';
+export GetRotation from './GetRotation';
+export Getter from './Getter';
 
 export Wait from './Wait';
 export Action from './Action';
@@ -23,9 +27,7 @@ export Animation from './Animation';
 export Branch from './Branch';
 export Loop from './Loop';
 export Repeat from './Repeat';
-export GetProperty from './GetProperty';
-export GetPosition from './GetPosition';
-export GetRotation from './GetRotation';
+export Setter from './Setter';
 
 // listeners
 export GameStart from './listeners/GameStart'

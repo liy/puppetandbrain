@@ -19,10 +19,7 @@ export default class BlockMenu
     // wait until user pick the block to create....
     return new Promise(resolve => {
       let entries = MenuContent.concat();
-      // TODO: temp sort...
-      entries.sort((a, b) => {
-        return a.itemName.localeCompare(b.itemName);
-      });
+
       // get all actors' actions
       for(let actor of LookUp.getActors()) {
         if(actor == BrainGraph.brain.owner) continue;
@@ -40,6 +37,34 @@ export default class BlockMenu
           
         }
       }
+
+      // Populate all the variable getter and setter for this actor
+      for(let name of Object.keys(BrainGraph.brain.owner.variables)) {
+        let target = BrainGraph.brain.owner;
+        entries.push({
+          itemName: `Get ${target.name} ${name}`,
+          nodePod: {
+            className: 'Getter',
+            owner: BrainGraph.brain.owner,
+            target: target,
+            variableName: name
+          }
+        })
+        entries.push({
+          itemName: `Set ${target.name} ${name}`,
+          nodePod: {
+            className: 'Setter',
+            owner: BrainGraph.brain.owner,
+            target: target,
+            variableName: name
+          }
+        })
+      }
+
+      // TODO: temp sort...
+      entries.sort((a, b) => {
+        return a.itemName.localeCompare(b.itemName);
+      });
   
       for(let entry of entries) {
         let item = document.createElement('div');

@@ -7,6 +7,8 @@ export LessEqualBlock from './LessEqualBlock';
 export LessThanBlock from './LessThanBlock';
 export RandomNumberBlock from './RandomNumberBlock';
 export BreakBlock from './BreakBlock';
+export GetterBlock from './GetterBlock';
+export SetterBlock from './SetterBlock';
 
 export TaskBlock from './TaskBlock';
 export AnimationBlock from './AnimationBlock';
