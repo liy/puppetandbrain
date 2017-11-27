@@ -47,7 +47,8 @@ export default class ExecutionOutPin extends ExecutionPin
     let connectedPin = this.getConnectedPin();
     if(!connectedPin) return;
 
-    let offsetX = 8;
+    // Note the brain graph scale!!!!
+    let offsetX = 8 * BrainGraph.scale;
     let dx = (connectedPin.position.x-offsetX) - (this.position.x+offsetX);
     let dy = connectedPin.position.y - this.position.y;
     let adx = Math.abs(dx);

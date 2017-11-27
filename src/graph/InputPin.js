@@ -96,7 +96,8 @@ export default class InputPin extends DataPin
 
     let outputPin = this.getOutputPin();
 
-    let offsetX = -8;
+    // Note the brain graph zoom scale!!!
+    let offsetX = -8 * BrainGraph.scale;
     let dx = (outputPin.position.x-offsetX) - (this.position.x+offsetX);
     let dy = outputPin.position.y - this.position.y;
     let adx = Math.abs(dx);
