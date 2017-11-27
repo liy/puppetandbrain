@@ -41,7 +41,7 @@ export default class ExecutionInPin extends ExecutionPin
 
     // Loop through all callers to remove execution, note that process
     // does not refresh, manual refresh has to be made
-    History.push(Commander.create('RemoveParentExecution', this.node.id).process());
+    History.push(Commander.create('RemoveParentExecution', this.node.id).processAndSave());
   }
 
   get position() {

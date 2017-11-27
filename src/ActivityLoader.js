@@ -24,6 +24,12 @@ export default class ActivityLoader
     })
   }
 
+  parse(pod) {
+    this.createActors(pod)
+    // create nodes; link execution, input and outputs
+    this.fillBrains(pod)
+  }
+
   createActors(pod) {
     // Handles nested actors.
     var add = function(container, actorPod) {

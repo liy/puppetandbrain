@@ -39,6 +39,6 @@ export default class RemoveParentExecution extends Command
   }
 
   redo() {
-    this.process();
+    this.processAndSave();
   }
 }

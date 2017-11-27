@@ -53,6 +53,6 @@ export default class CreateDataLink extends Command
   }
 
   redo() {
-    this.process();
+    this.processAndSave();
   }
 }

@@ -9,8 +9,8 @@ export default class Pointer extends EventEmitter
     this.inputNode = inputNode;
     this.inputName = inputName;
     // by default it is a local variable pointer
-    this.output = undefined;
-    this.id = undefined;
+    this.output = null;
+    this.id = null;
     this.target = this.inputNode.variables;
     this.targetName = this.inputName;
   }
@@ -25,7 +25,7 @@ export default class Pointer extends EventEmitter
   }
 
   get isOutputPointer() {
-    return this.output != undefined;
+    return this.output != null;
   }
 
   connect(output, id) {
@@ -51,8 +51,8 @@ export default class Pointer extends EventEmitter
     if(this.output) {
       this.output.disconnect(this);
       LookUp.removePointer(this.id);
-      this.id = undefined;
-      this.output = undefined;
+      this.id = null;
+      this.output = null;
 
       this.target = this.inputNode.variables;
       this.targetName = this.inputName;
@@ -78,7 +78,7 @@ export default class Pointer extends EventEmitter
       // only record the information below if pointer points to another node
       // undefined field will be removed when serailized
       id: this.id,
-      output: this.output ? this.output.pod() : undefined
+      output: this.output ? this.output.pod() : null
     }
   }
 }

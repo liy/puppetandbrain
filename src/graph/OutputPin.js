@@ -45,7 +45,7 @@ export default class OutputPin extends DataPin
 
   rightMouseDown(e) {
     super.rightMouseDown(e);
-    History.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).process());
+    History.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).processAndSave());
   }
 
   get position() {

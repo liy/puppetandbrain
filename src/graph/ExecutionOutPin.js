@@ -88,7 +88,7 @@ export default class ExecutionOutPin extends ExecutionPin
   rightMouseDown(e) {
     super.rightMouseDown(e)
 
-    History.push(Commander.create('RemoveExecution', this.node, this.name).process());
+    History.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
   }
 
   get position() {

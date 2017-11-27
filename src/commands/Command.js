@@ -9,8 +9,13 @@ export default class Command
     this.passThrough = false;
   }
 
-  process() {
+  processAndSave() {
+    let command = this.process();
+    // if(command) LookUp.save();
+    return command;
+  }
 
+  process() {
   }
 
   undo() {

@@ -51,6 +51,14 @@ import SpriteActor from './objects/SpriteActor';
 
 import ActivityLoader from './ActivityLoader';
 
+firebase.initializeApp({
+  apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
+  authDomain: "puppet-brain.firebaseapp.com",
+  databaseURL: "https://puppet-brain.firebaseio.com",
+  projectId: "puppet-brain",
+  storageBucket: "puppet-brain.appspot.com",
+  messagingSenderId: "392290034997"
+});
 
 var canvas = document.getElementById('canvas');
 
@@ -71,9 +79,13 @@ PIXI.ticker.shared.add(render);
 
 
 
-async function load() {
+async function load(activityID) {
+  // TODO: get data from firestore
+  let snapshot = await firebase.firestore().collection('activities').doc(activityID).get();
   var loader = new ActivityLoader();
-  await loader.load(require('./assets/activity.json'))
+  // await loader.load(require('./assets/activity.json'))
+  loader.parse(snapshot.data())
+  LookUp.setActivityID(activityID);
 
   let promises = LookUp.getActors().map(actor => {
     return actor.loaded;
@@ -83,8 +95,6 @@ async function load() {
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
 }
-
-load();
 
 
 const ACTORS = [
@@ -111,12 +121,33 @@ function simpleInit() {
   })
 }
 
-// simpleInit();
 
 let actorAddBtn = document.getElementById('add-actor');
 actorAddBtn.addEventListener('mousedown', e => {
-  History.push(Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).process());
+  History.push(Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).processAndSave());
 })
 
 // prevent default context menu for the whole site
 document.addEventListener('contextmenu', event => event.preventDefault());
+
+
+let idDiv = document.getElementById('activity-id');
+idDiv.addEventListener('mousedown', e => {
+  document.execCommand('copy')
+})
+idDiv.addEventListener("copy", e => {
+  e.preventDefault();
+  if (e.clipboardData) {
+    e.clipboardData.setData("text/plain", idDiv.textContent);
+    console.log(e.clipboardData.getData("text"))
+  }
+});
+
+// TODO: check url
+let activityID = window.location.href.split('#')[1];
+if(activityID) {
+  load(activityID);
+}
+else {
+  simpleInit();
+}

@@ -20,7 +20,8 @@ export default class Actor extends PIXI.Container
 
     this.name = 'Actor ' + this.id;
 
-    this.actions = Object.create(null);
+    // this.actions = Object.create(null);
+    this.actions = {};
 
     // TODO: make this feature next version?
     this.childActors = [];

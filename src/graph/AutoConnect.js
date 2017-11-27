@@ -20,7 +20,7 @@ export default
       else if(!targetNode.hasIn){
         return;
       }
-      History.push(Commander.create('CreateExecution', sourceNode.id, executionName, targetNode.id).process());
+      History.push(Commander.create('CreateExecution', sourceNode.id, executionName, targetNode.id).processAndSave());
     }
     // If dragging from data pin, connect data pin only
     else if(!isExecutionPin){
@@ -29,13 +29,13 @@ export default
         let firstOutput = createdNode.outputs.get(createdNode.outputs.names[0]);
         if(firstOutput) {
           console.log(pin.node, pin.name, createdNode, firstOutput.name)
-          History.push(Commander.create('CreateDataLink', pin.node.id, pin.name, createdNode.id, firstOutput.name).process())
+          History.push(Commander.create('CreateDataLink', pin.node.id, pin.name, createdNode.id, firstOutput.name).processAndSave())
         }
       }
       else {
         let firstInput = createdNode.inputs.get(createdNode.inputs.names[0]);
         if(firstInput) {
-          History.push(Commander.create('CreateDataLink', createdNode.id, firstInput.inputName, pin.node.id, pin.name).process())
+          History.push(Commander.create('CreateDataLink', createdNode.id, firstInput.inputName, pin.node.id, pin.name).processAndSave())
         }
       }
     }

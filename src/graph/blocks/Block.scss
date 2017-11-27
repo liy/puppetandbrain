@@ -9,6 +9,41 @@
     color: rgb(255, 255, 255);
     padding:5px 10px;
     text-align: center;
+
+    input {
+      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      color: rgb(255, 255, 255);
+      text-align: center;
+
+      position: absolute;
+      width: 100%;
+      border: none;
+      outline: none;
+      // background:transparent;
+      background-color: #797979;
+      left: 0;
+      top: -15px;
+    }
+
+    ::placeholder {
+      color:rgb(143, 143, 143);
+    }
+
+    .input-error-hint {
+      font-size: 12px;
+      position: absolute;
+      right: -105px;
+      top: -17px;
+      text-align: left;
+      color: #dc0000;
+      width: 100px;
+      visibility: hidden;
+    }
+    
+    // input:hover {
+    //   background-color: #797979;
+    // }
   }
 
   .content {
@@ -50,7 +85,7 @@
   }
   
   .action-block {
-    background:rgba(208, 228, 0, 0.8);
+    background:rgba(236, 193, 0, 0.8);
   }
   
   .listener-block {

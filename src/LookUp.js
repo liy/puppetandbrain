@@ -1,13 +1,16 @@
 // import shortid from 'shortid';
 import Task from './nodes/Task';
 
-var STORE = Object.create(null);
+// var STORE = Object.create(null);
+var STORE = {};
 var ACTORS = [];
 var NODES = [];
 var POINTERS = [];
 var BRAINS = [];
 
 var running = false;
+var activityID = null;
+var creating = false;
 
 function create(entry, id) {
   if(!id) {
@@ -23,8 +26,55 @@ function create(entry, id) {
   return id;
 }
 
+document.addEventListener('keydown', e => {
+  if(e.keyCode == 83 && e.ctrlKey) {
+    e.preventDefault();
+
+    LookUp.save();
+  }
+})
+
 window.LookUp = {
   store: STORE,
+
+  setActivityID: function(id) {
+    activityID = id;
+    document.getElementById('activity-id').textContent = activityID;
+  },
+
+  save: function() {
+    let pod = this.pod();
+    if(activityID) {
+      console.log('saving!')
+      firebase.firestore().collection('activities').doc(activityID).set(pod).then(result => {
+        console.info('Done update activity: ', result)
+      }).catch(error => {
+        console.error('Error update activity: ', error)
+      })
+    }
+    else {
+      if(creating) {
+        console.info('Waiting for creating activity...')
+        return;
+      } 
+
+      creating = true;
+      console.log(pod)
+      // let test = {
+      //   nested: {
+      //     names: ['testing', 'what']
+      //   }
+      // }
+      firebase.firestore().collection('activities').add(pod).then(docRef => {
+        this.setActivityID(docRef.id)
+        creating = false;
+        console.info('Done create activity: ', docRef)
+      }).catch(error => {
+        console.error('Error create activity: ', error)
+        creating = false;
+      })
+    }
+  },
 
   addActor: function(entry, id) {
     id = create(entry, id)
@@ -147,8 +197,8 @@ window.LookUp = {
   // },
 
   pod: function() {
-    let result = Object.create(null);
-    result.store = Object.create(null);
+    let result = {};
+    result.store = {};
     for(let id in this.store) {
       result.store[id] = this.store[id].pod(false);
     }

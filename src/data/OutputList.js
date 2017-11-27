@@ -7,11 +7,12 @@ export default class OutputList extends ArrayMap
     super();
     this.node = node;
     // One place to holds all temporary output data
-    this.data = Object.create(null);
+    // this.data = Object.create(null);
+    this.data = {};
     // A shortcut but not read only, I assume no one will touch it...
     this.names = this.keys;
 
-    // when game stops, make all values undefined
+    // when game stops, make all values null
     this.clearValues = this.clearValues.bind(this);
     Stage.on('game.stop', this.clearValues);
   }
@@ -40,11 +41,11 @@ export default class OutputList extends ArrayMap
   }
 
   clearValues() {
-    // reset value data to be undefined
+    // reset value data to be null
     for(let name of this.names) {
       let output = this.values[name];
       if(output.isValue) {
-        this.data[output.name] = undefined;
+        this.data[output.name] = null;
       }
     }
   }

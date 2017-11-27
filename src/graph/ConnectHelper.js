@@ -98,7 +98,7 @@ class ConnectHelper
       inPin = pin;
     }
 
-    History.push(Commander.create('CreateExecution', outPin.node.id, outPin.name, inPin.node.id).process());
+    History.push(Commander.create('CreateExecution', outPin.node.id, outPin.name, inPin.node.id).processAndSave());
   }
 
   connectDataPin(pin) {
@@ -111,7 +111,7 @@ class ConnectHelper
       inputPin = pin;
     }
 
-    History.push(Commander.create('CreateDataLink', inputPin.node.id, inputPin.name, outputPin.node.id, outputPin.name).process())
+    History.push(Commander.create('CreateDataLink', inputPin.node.id, inputPin.name, outputPin.node.id, outputPin.name).processAndSave())
   }
 }
 

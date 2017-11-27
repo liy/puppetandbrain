@@ -1,7 +1,8 @@
 export default class ArrayMap
 {
   constructor() {
-    this.values = Object.create(null);
+    // this.values = Object.create(null);
+    this.values = {};
     this.keys = [];
   }
 

@@ -76,7 +76,7 @@ export default class BlockMenu
   
         item.addEventListener('click', e => {
           this.destroy();
-          let command = Commander.create('CreateBlock', entry.nodePod, BrainGraph.brain.owner.id, this.x, this.y).process();
+          let command = Commander.create('CreateBlock', entry.nodePod, BrainGraph.brain.owner.id, this.x, this.y).processAndSave();
           History.push(command);
           // Make sure there is a block created.
           if(command) {

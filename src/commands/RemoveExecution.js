@@ -6,7 +6,7 @@ export default class RemoveExecution extends Command
     super();
 
     let targetNode = sourceNode.execution.get(executionName);
-    this.targetID = targetNode ? targetNode.id : undefined;
+    this.targetID = targetNode ? targetNode.id : null;
     
     this.sourceID = sourceNode.id;
     this.executionName = executionName;
@@ -31,6 +31,6 @@ export default class RemoveExecution extends Command
   }
 
   redo() {
-    this.process();
+    this.processAndSave();
   }
 }

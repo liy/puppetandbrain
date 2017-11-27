@@ -13,7 +13,7 @@ export default class CreateBlock extends Command
     this.y = (y - BrainGraph.translateY) / BrainGraph.scale;
 
     // When redo, use this node id
-    this.nodeID = undefined;
+    this.nodeID = null;
   }
 
   process() {
@@ -51,6 +51,6 @@ export default class CreateBlock extends Command
   }
 
   redo() {
-    this.process();
+    this.processAndSave();
   }
 }

@@ -9,7 +9,8 @@ export default class Brain
     this.owner = owner;
     this.nodes = new ArrayMap();
 
-    this.variables = Object.create(null);
+    // this.variables = Object.create(null);
+    this.variables = {};
     // FIXME: for testing purpose!!!
     this.variables['test'] = 'test!'
 

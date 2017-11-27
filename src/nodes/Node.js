@@ -7,7 +7,8 @@ export default class Node
   constructor(id) {
     this.id = LookUp.addNode(this, id);
 
-    this.variables = Object.create(null);
+    // this.variables = Object.create(null);
+    this.variables = {};
 
     this.inputs = new InputList(this);
     this.outputs = new OutputList(this);

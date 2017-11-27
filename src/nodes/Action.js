@@ -21,12 +21,23 @@ export default class Action extends Task
     // this.actionName = pod.actionName;
   }
 
-  rename(name) {
+  isValidActionName(name) {
+    if(this.owner.actions[name] == this) return true;
+
+    console.log(this.owner.actions)
+
+    return !(String.trim(name) == '' || this.owner.actions[name] != null)
+  }
+
+  updateActionName(name) {
+    name = String.trim(name);
     // validate there are no same function names
-    if(this.owner.actions[name]) return false;
+    if(!this.isValidActionName(name)) return false;
 
     delete this.owner.actions[this.actionName];
     this.actionName = name;
+
+    console.log(this.owner.actions)
     return true
   }
 

@@ -39,10 +39,10 @@ export default class RemoveInputDataLink extends Command
   }
 
   undo() {
-    Commander.create('CreateDataLink', this.inputNodeID, this.inputNodeName, this.outputNodeID, this.outputNodeName).process()
+    Commander.create('CreateDataLink', this.inputNodeID, this.inputNodeName, this.outputNodeID, this.outputNodeName).processAndSave()
   }
 
   redo() {
-    this.process();
+    this.processAndSave();
   }
 }

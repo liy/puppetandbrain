@@ -15,6 +15,8 @@ class BrainGraph
     this.scale = 1;
     this.translateX = 0;
     this.translateY = 0;
+    this.zoomX = 0;
+    this.zoomY = 0;
 
 
     this.startPan = this.startPan.bind(this);
@@ -23,17 +25,22 @@ class BrainGraph
     this.svg.addEventListener('mousedown', this.startPan);
     document.addEventListener('mouseup', this.stopPan);
     document.addEventListener('wheel', e => {
+      let ox = e.clientX * this.scale ;
+      let oy = e.clientY * this.scale  
       if(e.deltaY<0) {
         this.scale += 0.05;
-        this.scale = Math.min(this.scale, 3)
+        this.scale = Math.min(this.scale, 2)
       }
       else {
         this.scale -= 0.05;
         this.scale = Math.max(this.scale, 0.2);
       }
 
-      // this.translateX += e.offsetX;
-      // this.translateY += e.offsetY;
+      // FIXME: implement zoom towards a point!!!
+      // this.zoomX = e.clientX/this.scale - e.clientX
+      // this.zoomY = e.clientY/this.scale - e.clientY
+
+
       this.updateTransform();
     })
   }
@@ -53,7 +60,7 @@ class BrainGraph
   }
 
   updateTransform() {
-    this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale})`;
+    this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale})  translate(${this.zoomX}px, ${this.zoomY}px)`;
     this.refresh();
   }
 
@@ -176,6 +183,7 @@ class BrainGraph
     for(let pin of block.outputPins.getValues()) {
       Commander.create('RemoveOutputDataLink', pin.node.id, pin.name).process();
     }
+    
     // destroy block and remove it from the graph
     block.destroy();
     // destroy the node and remove from the brain

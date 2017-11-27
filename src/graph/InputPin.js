@@ -40,9 +40,11 @@ export default class InputPin extends DataPin
       this.container.appendChild(this.inputElement);
       if(this.pointer.value || this.pointer.value === 0) {
         this.icon.className = 'icon in-local';
+        console.log('local data')
       }
       else {
         this.icon.className = 'icon in-disconnected';
+        console.log('no data')
       }
     }
   }
@@ -88,7 +90,7 @@ export default class InputPin extends DataPin
 
   rightMouseDown(e) {
     super.rightMouseDown(e);
-    History.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).process());
+    History.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).processAndSave());
   }
 
   drawConnection() {

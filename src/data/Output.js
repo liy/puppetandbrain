@@ -10,7 +10,8 @@ export default class Output extends EventEmitter
     this.data = data;
     this.name = name;
     this.isValue = true;
-    this.connections = Object.create(null);
+    // this.connections = Object.create(null);
+    this.connections = {};
   }
 
   assignProperty(name, descriptor) {

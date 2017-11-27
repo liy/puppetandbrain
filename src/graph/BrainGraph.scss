@@ -15,3 +15,11 @@
   // Make sure the font is scrip on transformations!
   -webkit-font-smoothing: subpixel-antialiased;
 }
+
+// For testing purpose only do not add width and height for block-container!!!
+// #block-container {
+//   position: absolute;
+//   width: 1px;
+//   height: 1px;
+//   background-color:rgb(255, 0, 0);
+// }

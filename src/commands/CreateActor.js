@@ -7,7 +7,7 @@ export default class CreateActor extends Command
   constructor(url) {
     super();
     this.url = url;
-    this.actorID = undefined;
+    this.actorID = null;
   }
 
   process() {
@@ -44,6 +44,6 @@ export default class CreateActor extends Command
   }
 
   redo() {
-    this.process();
+    this.processAndSave();
   }
 }
