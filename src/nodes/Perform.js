@@ -14,8 +14,9 @@ export default class Perform extends Task
   init(pod) {
     super.init(pod);
 
+    // TODO: target is really not needed
     this.target = LookUp.auto(pod.target);
-    this.actionName = pod.actionName;
+    this.actionID = pod.actionID;
 
     // Get all the outputs of the target action, and presented as Call inputs
     // When task runs, all the Call input value will be assigned to Function's output
@@ -25,7 +26,11 @@ export default class Perform extends Task
   }
 
   get action() {
-    return this.target.actions[this.actionName];
+    return LookUp.get(this.actionID);
+  }
+
+  get actionName() {
+    return this.action.actionName;
   }
 
   run() {
@@ -48,7 +53,7 @@ export default class Perform extends Task
   pod(detail=false) {
     let pod = super.pod(detail);
     pod.target = this.target.id;
-    pod.actionName = this.actionName;
+    pod.actionID = this.action.id;
     return pod;
   }
 }

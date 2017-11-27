@@ -20,7 +20,9 @@ export default class PerformBlock extends TaskBlock
     if(++this.clicks % 2 == 0) {
       BrainGraph.close();
       BrainGraph.open(this.node.target.brain);
-      BlockSelection.select(BrainGraph.getBlock(this.node.action.id))
+      BlockSelection.select(BrainGraph.getBlock(this.node.action.id));
+      // Select the actor as well!
+      this.node.action.owner.getComponent('SelectionComponent').select();
     }
   }
 }

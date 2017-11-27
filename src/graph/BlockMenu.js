@@ -31,7 +31,7 @@ export default class BlockMenu
               className: 'Perform',
               owner: BrainGraph.brain.owner,
               target: actor,
-              actionName: actionName
+              actionID: actor.actions[actionName].id
             }
           })
           

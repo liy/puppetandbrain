@@ -12,7 +12,6 @@ export default class ActionBlock extends TaskBlock
     this.title.appendChild(this.inputField);
     if(node.actionName) {
       this.inputField.value = node.actionName;
-      this.inputField.style.background = 'none'
     }
     else {
       this.inputField.focus();
@@ -29,7 +28,6 @@ export default class ActionBlock extends TaskBlock
         this.hint.style.visibility = 'visible';
         return;
       }
-      this.inputField.style.background = 'none'
     })
     this.inputField.addEventListener('keyup', e=> {
       if(!this.node.isValidActionName(e.target.value)) {
@@ -41,13 +39,14 @@ export default class ActionBlock extends TaskBlock
     })
 
     this.container.addEventListener('mouseover', e => {
-      this.inputField.style.backgroundColor = '#797979'
+      this.inputField.classList.add('input-hover')
     })
     this.container.addEventListener('mouseout', e => {
-      if(this.node.isValidActionName(this.inputField.value)) 
-        this.inputField.style.background = 'none';
+      if(this.node.isValidActionName(this.inputField.value)) {
+        this.inputField.classList.remove('input-hover')
+      }
       else {
-        this.inputField.style.backgroundColor = '#797979'
+        this.inputField.classList.add('input-hover')
       }
     })
   }
