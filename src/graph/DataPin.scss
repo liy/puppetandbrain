@@ -56,12 +56,30 @@
     left: 5px;
     visibility: hidden;
     border: none; 
+
+    color: rgb(0, 0, 0);
+    border-radius: 10px;    
+
+    border: none;
+    outline: none;
+    background-color: rgba(177, 177, 177, 0.3);
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   select {
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:12px;
     position: absolute;
+    visibility: hidden;
+    color: rgb(0, 0, 0);
+    margin-top: 3px;
     left: 5px;
     min-width: 50px;
-    visibility: hidden;
+    line-height: 16px;
+    border: none;
+    outline: none;
+    background-color: rgba(177, 177, 177, 0.3);
+    border-radius: 10px;
   }
 }
