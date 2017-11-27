@@ -13,8 +13,8 @@ class BrainGraph
     this.dbClicks = 0;
 
     this.scale = 1;
-    this._tx = 0;
-    this._ty = 0;
+    this.translateX = 0;
+    this.translateY = 0;
 
 
     this.startPan = this.startPan.bind(this);
@@ -32,8 +32,8 @@ class BrainGraph
         this.scale = Math.max(this.scale, 0.2);
       }
 
-      // this._tx += e.offsetX;
-      // this._ty += e.offsetY;
+      // this.translateX += e.offsetX;
+      // this.translateY += e.offsetY;
       this.updateTransform();
     })
   }
@@ -43,8 +43,8 @@ class BrainGraph
   }
 
   onPan(e) {
-    this._tx += e.movementX;
-    this._ty += e.movementY;
+    this.translateX += e.movementX;
+    this.translateY += e.movementY;
     this.updateTransform();
   }
 
@@ -53,7 +53,7 @@ class BrainGraph
   }
 
   updateTransform() {
-    this.blockContainer.style.transform = `translate(${this._tx}px, ${this._ty}px) scale(${this.scale}, ${this.scale}) `;
+    this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale}) `;
     this.refresh();
   }
 

@@ -9,7 +9,7 @@ export default class ExecutionOutPin extends ExecutionPin
     this.icon.className += ' out-disconnected';
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    this.path.setAttribute('stroke', '#cddc39');
+    this.path.setAttribute('stroke', '#d0e400');
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');

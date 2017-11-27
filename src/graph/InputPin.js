@@ -11,7 +11,7 @@ export default class InputPin extends DataPin
     this.icon.className = 'icon in-disconnected';
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    this.path.setAttribute('stroke', '#a9c4d2');
+    this.path.setAttribute('stroke', '#98c6de');
     this.path.setAttribute('stroke-width', 2);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
@@ -20,7 +20,6 @@ export default class InputPin extends DataPin
     this.inputElement = document.createElement('input');
     this.inputElement.value = this.pointer.value || '' ;
     this.inputElement.addEventListener('change', e => {
-      console.warn(e.target.value);
       this.node.variables[this.name] = e.target.value;
       if(this.node.initialState) {
         this.node.initialState.variables[this.name] = e.target.value;
@@ -37,14 +36,12 @@ export default class InputPin extends DataPin
 
     // local variable pointer
     if(!this.pointer.isOutputPointer) {
+      this.inputElement.value = this.pointer.value;
       this.container.appendChild(this.inputElement);
-      // the local value is empty
-        console.log(Boolean(this.pointer.value) , this.pointer.value === 0)
       if(this.pointer.value || this.pointer.value === 0) {
         this.icon.className = 'icon in-local';
       }
       else {
-        console.log('!!!!!')
         this.icon.className = 'icon in-disconnected';
       }
     }
@@ -71,13 +68,13 @@ export default class InputPin extends DataPin
   }
 
   refresh() {
+    this.updateInputElement();
+
     if(!this.isConnected) {
       this.icon.className = 'icon in-disconnected';
       if(this.svg.contains(this.path)) this.svg.removeChild(this.path);
       return;
     }
-
-    this.updateInputElement();
 
     this.svg.appendChild(this.path);
     this.icon.className = 'icon in-connected';

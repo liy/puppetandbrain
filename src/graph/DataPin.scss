@@ -47,12 +47,15 @@
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     float: right;
     font-size:12px;
-    // min-width: 30px;
+    // (row height - line height) *0.5
+    margin-top: 3px;
+    line-height: 16px;
     max-width: 40%;
     margin-left: 4px;
     text-align: center;
     left: 5px;
     visibility: hidden;
+    border: none; 
   }
 
   select {
