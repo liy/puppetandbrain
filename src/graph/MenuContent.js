@@ -37,7 +37,7 @@ export default [
     nodePod: {
       className: 'Animation',
       variables: {
-      itemName: 'static',
+        name: 'static',
       }
     }
   },

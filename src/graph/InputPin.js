@@ -40,7 +40,6 @@ export default class InputPin extends DataPin
       this.container.appendChild(this.inputElement);
       if(this.pointer.value || this.pointer.value === 0) {
         this.icon.className = 'icon in-local';
-        console.log('local data')
       }
       else {
         this.icon.className = 'icon in-disconnected';
