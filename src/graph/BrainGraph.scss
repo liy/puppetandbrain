@@ -7,4 +7,11 @@
   visibility: hidden;
   top:0;
   left:0;
+
+  // https://stackoverflow.com/questions/14677490/blurry-text-after-using-css-transform-scale-in-chrome
+  backface-visibility: hidden;
+  // This stop text jittering!!!
+  transform: translateZ(0);  
+  // Make sure the font is scrip on transformations!
+  -webkit-font-smoothing: subpixel-antialiased;
 }

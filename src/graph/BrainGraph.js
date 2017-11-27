@@ -53,7 +53,7 @@ class BrainGraph
   }
 
   updateTransform() {
-    this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale}) `;
+    this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale})`;
     this.refresh();
   }
 
