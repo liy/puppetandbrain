@@ -18,7 +18,7 @@ export default class Action extends Task
     super.init(pod);
 
     // authoring time thing!
-    // this.actionName = pod.actionName;
+    this.actionName = pod.actionName;
   }
 
   isValidActionName(name) {

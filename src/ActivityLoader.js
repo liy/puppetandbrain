@@ -51,10 +51,23 @@ export default class ActivityLoader
   }
 
   fillBrains(pod) {
+    let performs = [];
     for(let id of pod.nodes) {
       let data = pod.store[id];
       let node = NodeFactory.create(data.className, id)
+      // delay perform node initialization,
+      // since they depend on Action nodes to be initialized first
+      if(data.className ==  'Perform') {
+        performs.push(data);
+        continue;
+      }
       node.init(data)
+    }
+
+    // initilaize perform node
+    for(let data of performs) {
+      let node = LookUp.get(data.id);
+      node.init(data);
     }
 
     // connect the tasks
