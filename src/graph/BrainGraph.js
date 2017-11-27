@@ -11,6 +11,50 @@ class BrainGraph
     this.blockContainer = document.getElementById('block-container');
     this.svg = document.getElementById('svg');
     this.dbClicks = 0;
+
+    this.scale = 1;
+    this._tx = 0;
+    this._ty = 0;
+
+
+    this.startPan = this.startPan.bind(this);
+    this.onPan = this.onPan.bind(this);
+    this.stopPan = this.stopPan.bind(this);
+    this.svg.addEventListener('mousedown', this.startPan);
+    document.addEventListener('mouseup', this.stopPan);
+    document.addEventListener('wheel', e => {
+      if(e.deltaY<0) {
+        this.scale += 0.05;
+        this.scale = Math.min(this.scale, 3)
+      }
+      else {
+        this.scale -= 0.05;
+        this.scale = Math.max(this.scale, 0.2);
+      }
+
+      // this._tx += e.offsetX;
+      // this._ty += e.offsetY;
+      this.updateTransform();
+    })
+  }
+
+  startPan(e) {
+    this.svg.addEventListener('mousemove', this.onPan);
+  }
+
+  onPan(e) {
+    this._tx += e.movementX;
+    this._ty += e.movementY;
+    this.updateTransform();
+  }
+
+  stopPan(e) {
+    this.svg.removeEventListener('mousemove', this.onPan);
+  }
+
+  updateTransform() {
+    this.blockContainer.style.transform = `translate(${this._tx}px, ${this._ty}px) scale(${this.scale}, ${this.scale}) `;
+    this.refresh();
   }
 
   open(brain) {

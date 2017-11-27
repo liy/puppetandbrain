@@ -18,7 +18,7 @@ export default class Block
     this.outputPins = new ArrayMap();
 
     this.container = document.createElement('div');
-    this.container.className = `block-container`;
+    this.container.className = `block`;
 
     this.title = document.createElement('div');
     this.title.className = 'title'
@@ -71,9 +71,10 @@ export default class Block
   dragstart(e) {
     BlockSelection.select(this);
 
+
     this._dragOffset = {
-      x: this.container.offsetLeft - e.clientX,
-      y: this.container.offsetTop - e.clientY
+      x: (this.container.getBoundingClientRect().left - e.clientX),
+      y: (this.container.getBoundingClientRect().top - e.clientY)
     }
     document.addEventListener('mousemove', this.dragmove)
 
@@ -112,8 +113,9 @@ export default class Block
   }
 
   dragmove(e) {
-    this.x = e.clientX + this._dragOffset.x;
-    this.y = e.clientY + this._dragOffset.y;
+    // Make sure all of the values are in client coordincate system. Then apply a scale
+    this.x = (e.clientX - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale ;
+    this.y = (e.clientY - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale ;
   }
 
   set x(x) {
