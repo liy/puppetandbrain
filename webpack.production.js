@@ -1,11 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+
+ 
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
-    filename: 'index.js',
+    filename: 'index-[hash].js',
     // Where to put the final 'compiled' file
     path: path.join(__dirname, 'dist'),
   },
@@ -53,6 +56,14 @@ module.exports = {
       filename: 'index.html',
       inject: 'body',
       template: './src/index.html'
+    }),
+    new UglifyJSPlugin({ 
+      uglifyOptions: {
+        sourceMap: true,
+        mangle: {
+          keep_fnames: true,
+        }
+      }
     })
   ],
   

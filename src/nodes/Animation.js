@@ -10,7 +10,6 @@ export default class Animation extends Task
 
   init(pod) {
     super.init(pod)
-    console.log(pod.variables)
   }
 
   run() {

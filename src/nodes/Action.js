@@ -22,9 +22,7 @@ export default class Action extends Task
   }
 
   isValidActionName(name) {
-    if(this.owner.actions[name] == this) return true;
-
-    console.log(this.owner.actions)
+    if(String.trim(name) != '' && this.owner.actions[name] == this) return true;
 
     return !(String.trim(name) == '' || this.owner.actions[name] != null)
   }
@@ -37,7 +35,6 @@ export default class Action extends Task
     delete this.owner.actions[this.actionName];
     this.actionName = name;
 
-    console.log(this.owner.actions)
     return true
   }
 

@@ -88,14 +88,12 @@ async function load(activityID) {
   loader.parse(snapshot.data())
   LookUp.setActivityID(activityID);
 
-  new AddActorButton();
-
   let promises = LookUp.getActors().map(actor => {
     return actor.loaded;
   })
 
   Promise.all(promises).then(() => {
-    let addActorButton = new AddActorButton();
+    new AddActorButton();
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
 }
@@ -108,20 +106,18 @@ const ACTORS = [
   require('./assets/horse/horse.info.json'),
   require('./assets/pig/pig.info.json'),
   require('./assets/sheep/sheep.info.json'),
-  // require('./assets/cow/cow.info.json'),
-  // require('./assets/cow/cow.info.json'),
 ]
 
 function simpleInit() {
   Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).process();
 
-  new AddActorButton();
 
   let promises = Stage.actors.map(actor => {
     return actor.loaded;
   })
   // start the activity when cow and donkey are loaded
   Promise.all(promises).then(() => {
+    new AddActorButton();
     // serialize everything before game start
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })

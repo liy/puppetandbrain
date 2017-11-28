@@ -44,9 +44,11 @@ export default class ActionBlock extends TaskBlock
     this.container.addEventListener('mouseout', e => {
       if(this.node.isValidActionName(this.inputField.value)) {
         this.inputField.classList.remove('input-hover')
+        this.hint.style.visibility = 'hidden'
       }
       else {
         this.inputField.classList.add('input-hover')
+        this.hint.style.visibility = 'visible'
       }
     })
   }

@@ -1,5 +1,14 @@
 require('./AddActorButton.scss');
 
+const ACTORS = [
+  require('../assets/chicken/chicken.info.json'),
+  require('../assets/cow/cow.info.json'),
+  require('../assets/donkey/donkey.info.json'),
+  require('../assets/horse/horse.info.json'),
+  require('../assets/pig/pig.info.json'),
+  require('../assets/sheep/sheep.info.json'),
+]
+
 export default class AddActorButton
 {
   constructor() {

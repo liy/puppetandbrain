@@ -3,6 +3,7 @@ import { Operator } from '../nodes/Operator';
 import TaskBlock from './blocks/TaskBlock';
 import OperatorBlock from './blocks/OperatorBlock';
 
+window.BlockClasses = BlockClasses;
 
 window.BlockFactory = {
   create: function(node) {
