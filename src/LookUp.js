@@ -8,7 +8,6 @@ var NODES = [];
 var POINTERS = [];
 var BRAINS = [];
 
-var running = false;
 var activityID = null;
 var creating = false;
 

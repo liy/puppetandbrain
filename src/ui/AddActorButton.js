@@ -12,7 +12,7 @@ const ACTORS = [
 export default class AddActorButton
 {
   constructor() {
-    this.element = document.getElementById('add-actor');
+    this.element = document.getElementById('add-actor-button');
     this.element.style.visibility = 'visible'
 
     this.element.addEventListener('mousedown', e => {

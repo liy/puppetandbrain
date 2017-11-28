@@ -51,6 +51,7 @@ import SpriteActor from './objects/SpriteActor';
 
 import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
+import DebugButton from './ui/DebugButton';
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
@@ -94,6 +95,7 @@ async function load(activityID) {
 
   Promise.all(promises).then(() => {
     new AddActorButton();
+    new DebugButton();
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
 }
@@ -118,6 +120,7 @@ function simpleInit() {
   // start the activity when cow and donkey are loaded
   Promise.all(promises).then(() => {
     new AddActorButton();
+    new DebugButton();
     // serialize everything before game start
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
