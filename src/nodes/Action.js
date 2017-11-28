@@ -27,7 +27,7 @@ export default class Action extends Task
   }
 
   addPerform(perform) {
-    this.performs.add(perform.id);
+    this.performs.push(perform.id);
   }
 
   removePerform(perform) {
