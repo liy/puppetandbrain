@@ -50,6 +50,7 @@ import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 
 import ActivityLoader from './ActivityLoader';
+import AddActorButton from './ui/AddActorButton';
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
@@ -87,11 +88,14 @@ async function load(activityID) {
   loader.parse(snapshot.data())
   LookUp.setActivityID(activityID);
 
+  new AddActorButton();
+
   let promises = LookUp.getActors().map(actor => {
     return actor.loaded;
   })
 
   Promise.all(promises).then(() => {
+    let addActorButton = new AddActorButton();
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
 }
@@ -111,6 +115,8 @@ const ACTORS = [
 function simpleInit() {
   Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).process();
 
+  new AddActorButton();
+
   let promises = Stage.actors.map(actor => {
     return actor.loaded;
   })
@@ -122,32 +128,57 @@ function simpleInit() {
 }
 
 
-let actorAddBtn = document.getElementById('add-actor');
-actorAddBtn.addEventListener('mousedown', e => {
-  History.push(Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).processAndSave());
-})
-
 // prevent default context menu for the whole site
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 let idDiv = document.getElementById('activity-id');
 idDiv.addEventListener('mousedown', e => {
-  document.execCommand('copy')
-})
-idDiv.addEventListener("copy", e => {
   e.preventDefault();
-  if (e.clipboardData) {
-    e.clipboardData.setData("text/plain", idDiv.textContent);
-    console.log(e.clipboardData.getData("text"))
-  }
-});
+  let range = document.createRange();
+  range.selectNode(idDiv);
+  window.getSelection().addRange(range);
+  document.execCommand('copy');
+  window.getSelection().removeAllRanges();
+})
+// idDiv.addEventListener("copy", e => {
+//   e.preventDefault();
+//   console.log('!!!')
+//   if (e.clipboardData) {
+//     e.clipboardData.setData("text/plain", idDiv.textContent);
+//     console.log(e.clipboardData.getData("text"))
+//   }
+// });
 
-// TODO: check url
-let activityID = window.location.href.split('#')[1];
-if(activityID) {
-  load(activityID);
-}
-else {
-  simpleInit();
-}
+// Persist the sign in token in local machine, probably in local storage or something in browser... whatever.
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                .then(function() {
+                  return firebase.auth().signInAnonymously()
+                })
+                .catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.error(errorCode, errorMessage)
+                });
+
+firebase.auth().onAuthStateChanged(user => {
+  // sign in
+  if(user) {
+    LookUp.user = user;
+
+    // TODO: check url
+    let activityID = window.location.href.split('#')[1];
+    if(activityID) {
+      load(activityID);
+    }
+    else {
+      simpleInit();
+    }
+  }
+  // sign out
+  else {
+    LookUp.user = null;
+  }
+})
+

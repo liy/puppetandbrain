@@ -36,6 +36,7 @@ document.addEventListener('keydown', e => {
 
 window.LookUp = {
   store: STORE,
+  user: null,
 
   setActivityID: function(id) {
     activityID = id;
@@ -43,9 +44,16 @@ window.LookUp = {
   },
 
   save: function() {
+    if(!this.user.uid) {
+      console.error('User id cannot be null', this.user.uid); 
+      return;
+    }
+
     let pod = this.pod();
+    pod.userID = this.user.uid;
+
     if(activityID) {
-      console.log('saving!')
+      console.log('saving existing activity!')
       firebase.firestore().collection('activities').doc(activityID).set(pod).then(result => {
         console.info('Done update activity: ', result)
       }).catch(error => {
@@ -53,6 +61,7 @@ window.LookUp = {
       })
     }
     else {
+      console.log('creating new activity!')
       if(creating) {
         console.info('Waiting for creating activity...')
         return;
@@ -69,6 +78,7 @@ window.LookUp = {
         this.setActivityID(docRef.id)
         creating = false;
         console.info('Done create activity: ', docRef)
+        window.location.href += '#' + docRef.id;
       }).catch(error => {
         console.error('Error create activity: ', error)
         creating = false;
