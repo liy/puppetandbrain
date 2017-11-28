@@ -8,7 +8,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
-    filename: 'index-[hash].js',
+    filename: 'index.js',
     // Where to put the final 'compiled' file
     path: path.join(__dirname, 'dist'),
   },
