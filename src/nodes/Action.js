@@ -26,6 +26,11 @@ export default class Action extends Task
     this.actionName = pod.actionName;
   }
 
+  destroy() {
+    delete this.owner.actions[this.actionName];
+    super.destroy();
+  }
+
   addPerform(perform) {
     this.performs.push(perform.id);
   }
