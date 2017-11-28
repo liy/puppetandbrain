@@ -12,6 +12,11 @@ export default class Action extends Task
    */
   constructor(id) {
     super(id);
+
+    // Keep track of all the perform nodes are calling this actiions
+    // If this action is deleted, all of them will be delete
+    // undo redo as well
+    this.performs = [];
   }
 
   init(pod) {
@@ -19,6 +24,15 @@ export default class Action extends Task
 
     // authoring time thing!
     this.actionName = pod.actionName;
+  }
+
+  addPerform(perform) {
+    this.performs.add(perform.id);
+  }
+
+  removePerform(perform) {
+    let index = this.performs.indexOf(perform.id);
+    this.performs.splice(index, 1);
   }
 
   isValidActionName(name) {

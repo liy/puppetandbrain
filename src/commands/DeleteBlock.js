@@ -2,9 +2,9 @@ import Command from './Command';
 
 export default class DeleteBlock extends Command
 {
-  constructor(block) {
+  constructor(blockID) {
     super();
-    this.blockID = block.id;
+    this.blockID = blockID;
   }
   
   process() {

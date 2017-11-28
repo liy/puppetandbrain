@@ -11,12 +11,19 @@ export default class Perform extends Task
     super(id);
   }
 
+  destroy() {
+    super.destroy();
+    // Just incase the action has already been detroyed
+    if(this.action) this.action.removePerform();
+  }
+
   init(pod) {
     super.init(pod);
 
     // TODO: target is really not needed
     this.target = LookUp.auto(pod.target);
     this.actionID = pod.actionID;
+    this.action.addPerform(this);
 
     // Get all the outputs of the target action, and presented as Call inputs
     // When task runs, all the Call input value will be assigned to Function's output
