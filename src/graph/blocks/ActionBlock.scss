@@ -1,0 +1,64 @@
+
+.block
+{
+  .action-block {
+    background:rgba(236, 193, 0, 0.8);
+    padding-top: 6px;
+    // padding-bottom: 28px;
+    padding-bottom: 30px;
+  }
+
+  .title input {
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 22px;    
+
+    position: absolute;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    left: 0;
+    top: -15px;
+  }
+
+  .title:hover input {
+    background-color: rgba(177, 177, 177, 0.5);
+  }
+
+  .add-output-input {
+    position: absolute;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    float: right;
+    font-size:12px;
+    max-width: 60%;
+    text-align: center;
+    border: none; 
+
+    color: #f5f5f5;
+    border-radius: 10px;    
+
+    border: none;
+    outline: none;
+    background-color: rgba(121, 121, 121, 0.6);
+    bottom: 10px;
+    right: 28px;
+    visibility: hidden;
+  }
+
+  .add-output-button {
+    position: absolute;
+    bottom: 10px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    background-image: url('../../assets/add-output.svg');
+    cursor: pointer;
+  }
+}
+
+.block:hover .add-output-input{
+  visibility: visible;
+}

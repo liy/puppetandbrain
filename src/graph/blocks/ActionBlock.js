@@ -1,4 +1,7 @@
 import TaskBlock from "./TaskBlock";
+import OutputPin from "../OutputPin";
+import AddOutputField from "../gadgets/AddOutputField";
+require('./ActionBlock.scss');
 
 export default class ActionBlock extends TaskBlock
 {
@@ -18,7 +21,7 @@ export default class ActionBlock extends TaskBlock
     }
     this.hint = document.createElement('label');
     this.hint.className = 'input-error-hint'
-    this.hint.textContent = 'Action name must be unique and not empty!'
+    this.hint.textContent = 'Must be unique and not empty!'
     this.title.appendChild(this.hint);
 
     this.inputField.addEventListener('change', e => {
@@ -39,11 +42,11 @@ export default class ActionBlock extends TaskBlock
     })
 
     this.container.addEventListener('mouseover', e => {
-      this.inputField.classList.add('input-hover')
+      // this.inputField.classList.add('input-hover')
     })
     this.container.addEventListener('mouseout', e => {
       if(this.node.isValidActionName(this.inputField.value)) {
-        this.inputField.classList.remove('input-hover')
+        // this.inputField.classList.remove('input-hover')
         this.hint.style.visibility = 'hidden'
       }
       else {
@@ -51,5 +54,17 @@ export default class ActionBlock extends TaskBlock
         this.hint.style.visibility = 'visible'
       }
     })
+
+    this.node.outputs.on('output.added', this.addOutput.bind(this));
+
+    // add output button
+    this.addOutputField = new AddOutputField(this.node);
+    this.content.appendChild(this.addOutputField.element);
+  }
+
+  addOutput(name) {
+    let pin = new OutputPin(this, name);
+    this.getRow(this.node.execution.names.length + this.node.outputs.length-1).appendChild(pin.container);
+    this.outputPins.set(name, pin);
   }
 }

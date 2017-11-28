@@ -1,6 +1,7 @@
 import Command from './Command';
 import SpineActor from '../objects/SpineActor';
 import GameStart from '../nodes/listeners/GameStart';
+import Animation from '../nodes/Animation';
 
 export default class CreateActor extends Command
 {
@@ -31,6 +32,18 @@ export default class CreateActor extends Command
       x: 50,
       y: 50
     })
+
+    let animation = new Animation();
+    animation.init({
+      owner: actor,
+      x: 250,
+      y: 50,
+      variables: {
+        name: 'attention'
+      }
+    })
+
+    gameStart.connectNext(animation)
 
     this.actorID = actor.id;
 

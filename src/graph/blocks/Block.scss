@@ -26,10 +26,6 @@
       top: -15px;
     }
 
-    .input-hover {
-      background-color: rgba(177, 177, 177, 0.5);
-    }
-
     ::placeholder {
       color:rgb(143, 143, 143);
     }
@@ -86,28 +82,6 @@
   .block-selected {
     // box-shadow: inset 0px 0px 0px 2px #FFF;
     border: 2px solid rgba(255, 255, 255, 1.0);
-  }
-  
-  .action-block {
-    background:rgba(236, 193, 0, 0.8);
-  }
-  
-  .listener-block {
-    background:rgba(190, 207, 0, 0.8);
-  }
-  
-  .perform-block {
-    background:rgba(90, 47, 71, 0.8);
-  }
-  
-  .property-block {
-    background:rgba(80, 112, 134, 0.8);
-    // background:rgba(71, 45, 94, 0.8);
-  }
-  
-  .operator-block {
-    // background:rgba(71, 45, 94, 0.8);
-    background:rgba(80, 112, 134, 0.8);
   }
 }
 

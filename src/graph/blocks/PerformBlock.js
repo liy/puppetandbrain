@@ -1,5 +1,6 @@
 import TaskBlock from "./TaskBlock";
 import BlockSelection from '../BlockSelection';
+require('./PerformBlock.scss')
 
 export default class PerformBlock extends TaskBlock
 {

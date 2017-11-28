@@ -1,4 +1,5 @@
 import TaskBlock from "./TaskBlock";
+require('./ListenerBlock.scss')
 
 export default class ListenerBlock extends TaskBlock
 {

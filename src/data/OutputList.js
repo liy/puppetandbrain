@@ -1,16 +1,19 @@
 import ArrayMap from "../utils/ArrayMap";
 import Output from "./Output";
+import EventEmitter from "../utils/EventEmitter";
 
-export default class OutputList extends ArrayMap
+export default class OutputList extends EventEmitter
 {
   constructor(node) {
     super();
     this.node = node;
+    // contains all the outputs
+    this.list = new ArrayMap();
     // One place to holds all temporary output data
     // this.data = Object.create(null);
     this.data = {};
     // A shortcut but not read only, I assume no one will touch it...
-    this.names = this.keys;
+    this.names = this.list.keys;
 
     // when game stops, make all values null
     this.clearValues = this.clearValues.bind(this);
@@ -23,11 +26,37 @@ export default class OutputList extends ArrayMap
     Stage.off('game.stop', this.clearValues);
   }
 
+  get(name) {
+    return this.list.get(name);
+  }
+
+  remove(name) {
+    this.list.remove(name);
+  }
+
+  getKeys() {
+    return this.list.getKeys;
+  }
+
+  getValues() {
+    return this.list.getValues();
+  }
+
+  
+  contains(key) {
+    return this.list.contains(key);
+  }
+
+  get length() {
+    return this.list.length;
+  }
+
   addOutput(name) {
-    let output = this.get(name);
+    let output = this.list.get(name);
     if(!output) {
       output = new Output(this.node, this.data, name)
-      this.set(name, output);
+      this.list.set(name, output);
+      this.emit('output.added', name)
     }
     return output;
   }
@@ -43,7 +72,7 @@ export default class OutputList extends ArrayMap
   clearValues() {
     // reset value data to be null
     for(let name of this.names) {
-      let output = this.values[name];
+      let output = this.list.values[name];
       if(output.isValue) {
         this.data[output.name] = null;
       }
@@ -52,7 +81,7 @@ export default class OutputList extends ArrayMap
 
   pod(detail) {
     return this.names.map(name => {
-      return this.values[name].pod(detail);
+      return this.list.values[name].pod(detail);
     })
   }
 }

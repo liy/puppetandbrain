@@ -17,15 +17,6 @@ export default class CreateBlock extends Command
   }
 
   process() {
-    // Check there are existing Action with same name
-    if(this.pod.className == 'Action') {
-      let existingAction = LookUp.get(this.ownerID).actions[this.pod.actionName];
-      if(existingAction) {
-        BlockSelection.select(BrainGraph.getBlock(existingAction.id));
-        return null;
-      }
-    }
-
     let node = NodeFactory.create(this.pod.className, this.nodeID);
     node.init({
       ...this.pod,
