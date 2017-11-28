@@ -62,6 +62,8 @@ firebase.initializeApp({
   messagingSenderId: "392290034997"
 });
 
+document.getElementById('app-version').textContent = APP_VERSION;
+
 var canvas = document.getElementById('canvas');
 
 window.renderer = PIXI.autoDetectRenderer({

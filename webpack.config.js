@@ -53,6 +53,9 @@ module.exports = {
       filename: 'index.html',
       inject: 'body',
       template: './src/index.html'
+    }),
+    new webpack.DefinePlugin({
+      APP_VERSION: JSON.stringify(require("./package.json").version)
     })
   ],
   
