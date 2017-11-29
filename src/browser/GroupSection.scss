@@ -1,0 +1,24 @@
+.group-section {
+  background-color: rgba(240, 182, 192, 0.644);
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  // grid-template-rows: repeat(5, 1fr);
+  grid-row-gap: 20px;
+  grid-column-gap: 30px;
+
+  padding-bottom: 30px;
+}
+
+.group-name {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: rgb(36, 36, 36);
+  line-height: 50px;
+
+  padding-left: 15px;
+}

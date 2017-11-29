@@ -4,8 +4,8 @@ import ArrayMap from "../utils/ArrayMap";
 export default class DummyBlock
 {
   constructor(data) {
-    this.inputPins = new ArrayMap();
-    this.outputPins = new ArrayMap();
+    this.data = data;
+    this.rows = [];
 
     this.gridBox = document.createElement('div');
     this.gridBox.className = `grid-box`;
@@ -17,7 +17,7 @@ export default class DummyBlock
     this.title = document.createElement('div');
     this.title.className = 'title'
     this.element.appendChild(this.title);
-    this.title.textContent = data.nodeName;
+    this.title.textContent = this.data.nodeName;
 
     this.dragArea = document.createElement('div');
     this.dragArea.className = 'drag-area';
@@ -31,7 +31,31 @@ export default class DummyBlock
     this.content.style.width = 50 + Math.floor(Math.random()*70) + 'px'
     this.content.style.height = 90 + Math.floor(Math.random()*50) + 'px'
 
-    this.rows = [];
+
+    if(this.data.in) {
+      let pin = new DummyExecutionPin('', 'left');
+      this.getRow(0).appendChild(pin.container);
+    }
+
+    // out pins
+    for(let i=0; i<this.data.out.length; ++i) {
+      let executionName = this.data.out[i]
+      let pin = new DummyExecutionPin(executionName, 'right');
+      this.getRow(i).appendChild(pin.container)
+    }
+
+    for(let i=0; i<this.data.inputs.length; ++i) {
+      let name = this.data.inputs[i];
+      let pin = new InputPin(name, 'left')
+      this.getRow(i+1).appendChild(pin.container);
+    }
+
+    for(let i=0; i<this.data.outputs.length; ++i) {
+      let name = this.data.outputs[i];
+      let pin = new OutputPin(name, 'right');
+      this.getRow(this.data.out.length + i).appendChild(pin.container);
+    }
+
   }
 
   getRow(i) {

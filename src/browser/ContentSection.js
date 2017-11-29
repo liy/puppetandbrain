@@ -1,7 +1,6 @@
 require('./ContentSection.scss')
 import DummyBlock from "./DummyBlock";
-import GroupName from './GroupName';
-import GroupGrid from './GroupGrid';
+import GroupSection from './GroupSection';
 
 export default class ContentSection
 {
@@ -18,11 +17,9 @@ export default class ContentSection
     this.scroll.appendChild(this.content);
 
     // 5 groups
-    for(let i=0; i<1; ++i) {
-      let groupName = new GroupName('group'+i);
-      this.content.appendChild(groupName.element);
-      let groupGrid = new GroupGrid();
-      this.content.appendChild(groupGrid.element);
+    for(let i=0; i<5; ++i) {
+      let group = new GroupSection('Group ' + i);
+      this.content.appendChild(group.element);
     }
   }
 }
