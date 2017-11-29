@@ -2,7 +2,7 @@ require('./BrainGraph.scss')
 
 import BlockSelection from './BlockSelection';
 import ArrayMap from '../utils/ArrayMap';
-import BlockMenu from './BlockMenu';
+import BlockMenu from '../browser/BlockMenu';
 
 class BrainGraph
 {
@@ -61,6 +61,7 @@ class BrainGraph
 
   updateTransform() {
     this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale})  translate(${this.zoomX}px, ${this.zoomY}px)`;
+    // FIXME: might have performance issue!!!!
     this.refresh();
   }
 

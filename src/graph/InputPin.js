@@ -68,6 +68,7 @@ export default class InputPin extends DataPin
     return this.getOutputPin() != null;
   }
 
+  // FIXME: fix the drawing and refreshing! They are a messsssss
   refresh() {
     this.updateInputElement();
 

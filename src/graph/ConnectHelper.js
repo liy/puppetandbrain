@@ -1,4 +1,4 @@
-import BlockMenu from './BlockMenu';
+import BlockMenu from '../browser/BlockMenu';
 import AutoConnect from './AutoConnect';
 
 class ConnectHelper
@@ -102,6 +102,8 @@ class ConnectHelper
   }
 
   connectDataPin(pin) {
+    // might happens
+    if(!this.startPin) return;
     if(this.startPin.type == pin.type || this.dragType == 'execution') return;
 
     let outputPin = pin;
