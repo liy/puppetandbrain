@@ -52,6 +52,7 @@ import SpriteActor from './objects/SpriteActor';
 import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
+import Browser from './browser/Browser';
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
@@ -142,14 +143,6 @@ idDiv.addEventListener('mousedown', e => {
   document.execCommand('copy');
   window.getSelection().removeAllRanges();
 })
-// idDiv.addEventListener("copy", e => {
-//   e.preventDefault();
-//   console.log('!!!')
-//   if (e.clipboardData) {
-//     e.clipboardData.setData("text/plain", idDiv.textContent);
-//     console.log(e.clipboardData.getData("text"))
-//   }
-// });
 
 // Persist the sign in token in local machine, probably in local storage or something in browser... whatever.
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -183,3 +176,6 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
+let browser = new Browser();
+document.body.appendChild(browser.element);
+browser.init();

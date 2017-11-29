@@ -1,0 +1,28 @@
+.search-section {
+  height: 62px;
+  
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+
+  background-color: rgba(59, 29, 29, 0.5);
+}
+
+.search-input {
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  padding-right: 15px; 
+  border-radius: 22px;
+  min-width: 200px;
+
+  position: absolute;
+  text-align: left;
+
+  color: rgb(255, 255, 255);
+  border: none;
+  outline: none;
+  background-color: rgba(177, 177, 177, 0.5);
+}

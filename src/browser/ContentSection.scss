@@ -1,0 +1,17 @@
+.content-section {
+  width: 100%;
+  background-color: rgba(172, 110, 196, 0.774);
+}
+
+.grid-section {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  
+
+  background-color: rgba(167, 61, 119, 0.774);
+}
+

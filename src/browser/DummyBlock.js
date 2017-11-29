@@ -1,30 +1,33 @@
-import ArrayMap from "../../utils/ArrayMap";
+require('./DummyBlock.scss')
+import ArrayMap from "../utils/ArrayMap";
 
 export default class DummyBlock
 {
   constructor(data) {
-    this.node = node;
-    this.brain = this.node.brain;
-    this.id = this.node.id;
-
     this.inputPins = new ArrayMap();
     this.outputPins = new ArrayMap();
 
-    this.container = document.createElement('div');
-    this.container.className = `block`;
+    this.gridBox = document.createElement('div');
+    this.gridBox.className = `grid-box`;
+
+    this.element = document.createElement('div');
+    this.element.className = `block dummy-block`;
+    this.gridBox.appendChild(this.element);
 
     this.title = document.createElement('div');
     this.title.className = 'title'
-    this.container.appendChild(this.title);
+    this.element.appendChild(this.title);
     this.title.textContent = data.nodeName;
 
     this.dragArea = document.createElement('div');
     this.dragArea.className = 'drag-area';
-    this.container.appendChild(this.dragArea)
+    this.element.appendChild(this.dragArea)
 
     this.content = document.createElement('div');
-    this.content.className = `content ${data.className}-block`;
-    this.container.appendChild(this.content);
+    this.content.className = `content task-block`;
+    this.element.appendChild(this.content);
+    this.content.style.minWidth = '100px';
+    this.content.style.minHeight = '100px';
 
     this.rows = [];
   }
