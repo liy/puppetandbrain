@@ -1,17 +1,42 @@
+
 .content-section {
-  width: 100%;
   background-color: rgba(172, 110, 196, 0.774);
 }
 
+// TODO: media query for different resolutions.
 .grid-section {
+  // offset the content
+  --top-gap: 100px;
+  --bottom-gap: 50px;
+  // offset the y postion so the items does
+  // start covered by header section
+  padding-top: var(--top-gap);
+  // allow extra space to allow user know
+  // it is the end of the scroll
+  padding-bottom: var(--bottom-gap);
+
+  // The actual scrollable height will be window.innerHeight - the gaps.
+  height: calc(100vh - var(--top-gap) - var(--bottom-gap));
+  // TODO: may be use javascript to handle scroll in the future
+  // make it compatible with other browser?
+  overflow-y: scroll;
+
+  // Just in case you have huge monitor
   max-width: 1000px;
   margin: 0 auto;
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  
+
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-row-gap: 20px;
+  grid-column-gap: 30px;
 
   background-color: rgba(167, 61, 119, 0.774);
 }
 
+// hide scroll bar
+::-webkit-scrollbar {
+  display: none;
+}

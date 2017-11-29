@@ -26,8 +26,10 @@ export default class DummyBlock
     this.content = document.createElement('div');
     this.content.className = `content task-block`;
     this.element.appendChild(this.content);
-    this.content.style.minWidth = '100px';
-    this.content.style.minHeight = '100px';
+    // this.content.style.minWidth = '100px';
+    // this.content.style.minHeight = '100px';
+    this.content.style.width = 50 + Math.floor(Math.random()*70) + 'px'
+    this.content.style.height = 90 + Math.floor(Math.random()*50) + 'px'
 
     this.rows = [];
   }

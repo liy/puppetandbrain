@@ -7,13 +7,14 @@ export default class ContentSection
     this.element = document.createElement('div');
     this.element.className = 'content-section';
 
-    this.grid = document.createElement('div');
-    this.grid.className = 'grid-section';
-    this.element.appendChild(this.grid);
+    this.gridSection = document.createElement('div');
+    this.gridSection.className = 'grid-section';
+    // this.gridSection.style.overflowY = 'scroll';
+    this.element.appendChild(this.gridSection);
 
     this.blocks = [];
 
-    for(let i=0; i<31; ++i) {
+    for(let i=0; i<10; ++i) {
       let block = new DummyBlock({
         nodeName: 'test'
       });
@@ -22,7 +23,7 @@ export default class ContentSection
   }
 
   addBlock(block) {
-    this.grid.appendChild(block.gridBox);
+    this.gridSection.appendChild(block.gridBox);
     this.blocks.push(block);
   }
 }
