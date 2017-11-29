@@ -1,10 +1,13 @@
+// for hide the scrollbar
+.browser-content-scroll-wrapper {
+  // width: 100%;
+  overflow: hidden;
+  position: relative;
 
-.content-section {
-  background-color: rgba(172, 110, 196, 0.774);
+  background-color: rgba(83, 106, 235, 0.774);
 }
 
-// TODO: media query for different resolutions.
-.grid-section {
+.browser-content-scroll {
   // offset the content
   --top-gap: 100px;
   --bottom-gap: 50px;
@@ -14,27 +17,24 @@
   // allow extra space to allow user know
   // it is the end of the scroll
   padding-bottom: var(--bottom-gap);
-
   // The actual scrollable height will be window.innerHeight - the gaps.
   height: calc(100vh - var(--top-gap) - var(--bottom-gap));
-  // TODO: may be use javascript to handle scroll in the future
-  // make it compatible with other browser?
+  
+  // Change this to hide the scrollbar
+  // https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll
+  padding-right: 17px;
+  width: 100%;
   overflow-y: scroll;
+}
 
-  // Just in case you have huge monitor
+.browser-content {
+  // centre
   max-width: 1000px;
   margin: 0 auto;
 
-
-
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-row-gap: 20px;
-  grid-column-gap: 30px;
-
-  background-color: rgba(167, 61, 119, 0.774);
+  background-color: rgba(167, 61, 119, 0.603);
 }
+
 
 // hide scroll bar
 ::-webkit-scrollbar {
