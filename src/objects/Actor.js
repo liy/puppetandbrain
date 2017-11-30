@@ -52,6 +52,16 @@ export default class Actor extends PIXI.Container
     // therefore, I decide to use separated step to populate the 
     // content of the brain.
     this.brain = new Brain(this, pod.brainID);
+
+    this.initialState = {
+      x: this.x,
+      y: this.y,
+      scale: {
+        x: this.scale.x,
+        y: this.scale.y
+      },
+      rotation: this.rotation
+    }
   }
 
   destroy() {
