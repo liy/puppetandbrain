@@ -48,7 +48,7 @@ export default class ExecutionInPin extends ExecutionPin
     let offset = this.svg.getBoundingClientRect();
     let rect = this.icon.getBoundingClientRect();
     return {
-      x: (rect.left + rect.right)/2 - offset.left - 4,
+      x: (rect.left + rect.right)/2 - offset.left - 4*BrainGraph.scale,
       y: (rect.top + rect.bottom)/2 - offset.top
     }
   }

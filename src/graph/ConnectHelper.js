@@ -10,7 +10,7 @@ class ConnectHelper
   }
 
   drawLine(x1, y1, x2, y2) {
-    let offsetX = 8;
+    let offsetX = 8 * BrainGraph.scale;
     let dx = (x1-offsetX) - (x2+offsetX);
     let dy = y1 - y2;
     let adx = Math.abs(dx);

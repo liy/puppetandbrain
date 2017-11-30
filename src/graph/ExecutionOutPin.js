@@ -95,7 +95,7 @@ export default class ExecutionOutPin extends ExecutionPin
     let offset = this.svg.getBoundingClientRect();
     let rect = this.icon.getBoundingClientRect();
     return {
-      x: (rect.left + rect.right)/2 - offset.left + 2,
+      x: (rect.left + rect.right)/2 - offset.left + 3*BrainGraph.scale,
       y: (rect.top + rect.bottom)/2 - offset.top
     }
   }

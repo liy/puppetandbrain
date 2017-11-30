@@ -52,7 +52,7 @@ export default class OutputPin extends DataPin
     let offset = this.svg.getBoundingClientRect();
     let rect = this.icon.getBoundingClientRect();
     return {
-      x: (rect.left + rect.right)/2 - offset.left + 3,
+      x: (rect.left + rect.right)/2 - offset.left + 4*BrainGraph.scale,
       y: (rect.top + rect.bottom)/2 - offset.top
     }
   }
