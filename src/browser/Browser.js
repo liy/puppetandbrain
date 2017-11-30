@@ -26,6 +26,7 @@ export default class Browser
   }
 
   open(x, y) {
+    BrainGraph.blur = true;
     this.element.style.opacity = 0;
     this.tween = TweenLite.to(this.element.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
       this.element.style.opacity = 1.0;
@@ -46,6 +47,7 @@ export default class Browser
     TweenLite.to(opacity, 0.13, {value: 0, ease:Quad.easeIn, onUpdate: () => {
       this.element.style.opacity = opacity.value;
     }, onComplete: () => {
+      BrainGraph.blur = false;
       this.element.removeChild(this.contentSection.element);
       this.element.removeChild(this.header);
       this.header.removeChild(this.searchSection.element);

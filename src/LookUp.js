@@ -48,9 +48,6 @@ window.LookUp = {
       return;
     }
 
-    // STOP the game first
-    if(Stage.running) Stage.stop();
-
     let pod = this.pod();
     pod.userID = this.user.uid;
 

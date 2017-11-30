@@ -19,6 +19,7 @@ class BrainGraph
     this.zoomX = 0;
     this.zoomY = 0;
 
+    this.tween = null;
 
     this.startPan = this.startPan.bind(this);
     this.onPan = this.onPan.bind(this);
@@ -71,6 +72,8 @@ class BrainGraph
     this.brain = brain;
     this.blocks = new ArrayMap();
 
+    document.getElementById('control').classList.add('blur')
+
     this.resize = this.resize.bind(this);
     this.keydown = this.keydown.bind(this)
     this.mousedown = this.mousedown.bind(this);
@@ -100,13 +103,14 @@ class BrainGraph
   }
 
   close() {
+    document.getElementById('control').classList.remove('blur')
     this.svg.removeEventListener('contextmenu', this.openBlockMenu);
     this.svg.removeEventListener('mousedown', this.mousedown);
     document.removeEventListener('keydown', this.keydown);
     window.removeEventListener('resize', this.resize);
     
     let opacity = {value: 1};
-    TweenLite.to(opacity, 0.13, {value: 0, ease:Quad.easeIn, onUpdate: () => {
+    this.tween = TweenLite.to(opacity, 0.13, {value: 0, ease:Quad.easeIn, onUpdate: () => {
       this.container.style.opacity = opacity.value;
     }, onComplete: () => {
       while(this.svg.lastChild) {
@@ -121,10 +125,25 @@ class BrainGraph
       Stage.blurEnabled = false;
       BlockSelection.toggle();
     }})
-    
-    
   }
 
+  switchTo(brain) {
+    while(this.svg.hasChildNodes()) {
+      this.svg.removeChild(this.svg.lastChild)
+    }
+    for(let block of this.blocks.getValues()) {
+      block.destroy();
+    }
+
+    this.brain = brain;
+    this.blocks = new ArrayMap();
+
+    for(let node of this.brain.getNodes()) {
+      BlockFactory.create(node);
+    }
+
+    this.draw();
+  }
 
   mousedown(e) {
     if(e.target == this.svg) {
@@ -216,6 +235,15 @@ class BrainGraph
       // menu.y = e.clientY;
       let browser = new BlockBrowser();
       browser.open(e.clientX, e.clientY);
+    }
+  }
+
+  set blur(v) {
+    if(v) {
+      this.container.classList.add('blur')
+    }
+    else {
+      this.container.classList.remove('blur')
     }
   }
 

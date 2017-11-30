@@ -157,6 +157,10 @@ export default class Actor extends PIXI.Container
       brainID: this.brain.id,
     }
 
+    // FIXME: find a better way to handle saving
+    // if game still running, override pod with initial state
+    if(Stage.running) Object.assign(pod, this.initialState);
+
     if(detail) {
       pod.brain = this.brain.pod(detail);
     } 

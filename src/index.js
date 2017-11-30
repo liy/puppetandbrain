@@ -188,8 +188,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 let idDiv = document.getElementById('activity-id');
 idDiv.addEventListener('mousedown', e => {
   e.preventDefault();
+  e.stopImmediatePropagation();
+
   let range = document.createRange();
-  range.selectNode(idDiv);
+  range.selectNodeContents(idDiv);
   window.getSelection().addRange(range);
   document.execCommand('copy');
   window.getSelection().removeAllRanges();

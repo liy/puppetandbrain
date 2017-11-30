@@ -35,6 +35,7 @@ export default [
     },
     in: true,
     out: ['default'],
+    inputs: ['position', 'duration'],
     outputs: [],
     minWidth: 120,
   },
@@ -383,17 +384,6 @@ export default [
     category: 'Event',
     pod: {
       className: 'PointerOut',
-    },
-    in: false,
-    out: ['default'],
-    outputs: [],
-    minWidth: 100,
-  },
-  {
-    name: 'Touch Over',
-    category: 'Event',
-    pod: {
-      className: 'PointerOver',
     },
     in: false,
     out: ['default'],

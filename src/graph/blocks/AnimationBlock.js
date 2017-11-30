@@ -6,7 +6,7 @@ export default class AnimationBlock extends TaskBlock
     super(node)
 
     let nameInput = this.inputPins.get('name');
-    nameInput.container.removeChild(nameInput.inputElement)
+    if(nameInput.container.contains(nameInput.inputElement))nameInput.container.removeChild(nameInput.inputElement)
 
     let pointer = node.inputs.get('name');
     let dropdown = nameInput.inputElement = document.createElement('select');
