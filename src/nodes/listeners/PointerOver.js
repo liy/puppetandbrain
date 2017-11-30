@@ -1,6 +1,6 @@
 import Listener from "./Listener";
 
-export default class PointerDown extends Listener
+export default class PointerOver extends Listener
 {
   constructor(id) {
     super(id);

@@ -12,21 +12,24 @@ export default class PlaySound extends Task
     // sound complete execution
     this.execution.set('complete');
 
-    this.stop = this.stop.bind(this)
+    this.stop = this.stop.bind(this);
+    this.complete = this.complete.bind(this);
+
     Stage.on('game.stop', this.stop)
   }
 
   destroy() {
     super.destroy();
-    if(this.audio) this.audio.stop();
+    if(this.audio) {
+      this.audio.pause();
+      this.audio.removeEventListener('ended', this.complete);
+    }
     Stage.off('game.stop', this.stop)
   }
 
   run() {
     this.audio = new Audio(this.soundName);
-    this.audio.addEventListener('ended', () => {
-      this.execution.run('complete')
-    },{once: true})
+    this.audio.addEventListener('ended', this.complete, {once: true})
 
     this.audio.play();
     this.outputs.assignValue('audio', this.audio);
@@ -34,8 +37,15 @@ export default class PlaySound extends Task
     this.execution.run();
   }
 
+  complete() {
+    this.execution.run('complete')
+  }
+
   stop() {
-    this.audio.pause();
+    if(this.audio) {
+      this.audio.pause();
+      this.audio.removeEventListener('ended', this.complete);
+    }
   }
 
   get nodeName() {

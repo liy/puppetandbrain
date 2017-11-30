@@ -24,18 +24,20 @@ export default class ActivityLoader
     })
   }
 
-  parse(pod) {
-    this.createActors(pod)
+  async parse(pod) {
+    await this.createActors(pod);
     // create nodes; link execution, input and outputs
-    this.fillBrains(pod)
+    this.fillBrains(pod);
   }
 
   createActors(pod) {
+    let promises = [];
     // Handles nested actors.
     var add = function(container, actorPod) {
       let actor = new scope[actorPod.className](actorPod.id);
       actor.init(actorPod);
       container.addActor(actor);
+      promises.push(actor.loaded);
 
       for(let i=0; i<actorPod.childActors.length; ++i) {
         let childID = actorPod.childActors[i];
@@ -48,6 +50,8 @@ export default class ActivityLoader
       let actorPod = pod.store[id];
       add(Stage, actorPod)
     }
+
+    return Promise.all(promises);
   }
 
   fillBrains(pod) {
