@@ -86,7 +86,7 @@ export default [
     pod: {
       className: 'PlaySound',
       variables: {
-        name: 'sound name',
+        name: 'sound url',
       }
     },
     in: true,

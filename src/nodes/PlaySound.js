@@ -5,8 +5,8 @@ export default class PlaySound extends Task
   constructor(id) {
     super(id);
 
-    this.inputs.addInput('sound name');
-    this.variables['sound name'] = 'chicken-walk.mp3';
+    this.inputs.addInput('sound url');
+    this.variables['sound url'] = 'chicken-walk.mp3';
 
     this.outputs.addOutput('audio');
     // sound complete execution
@@ -54,7 +54,7 @@ export default class PlaySound extends Task
   
   // TODO: remove this hack!!!
   get soundName() {
-    let name = this.inputs.value('sound name');
+    let name = this.inputs.value('sound url');
     console.warn(name);
     let ext = name.split('.').pop();
     if(ext != 'mp3') {
