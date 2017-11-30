@@ -11,7 +11,7 @@ export default class Command
 
   processAndSave() {
     let command = this.process();
-    // if(command) LookUp.save();
+    if(command) LookUp.save();
     return command;
   }
 
