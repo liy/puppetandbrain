@@ -28,6 +28,7 @@ export default class CreateBlock extends Command
     this.nodeID = node.id;
 
     let block = BlockFactory.create(node);
+    BlockSelection.select(block);
 
     return this;
   }

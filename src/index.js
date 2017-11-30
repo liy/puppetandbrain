@@ -174,7 +174,3 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
-
-// let browser = new BlockBrowser();
-// document.body.appendChild(browser.element);
-// browser.open();

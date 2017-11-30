@@ -51,9 +51,9 @@ class ConnectHelper
     if(e.target == this.svg || e.target == this.path) {
 
       console.log('waht1', this.svg.contains(this.path))
-      let browser = new BlockBrowser();
+      var browser = new BlockBrowser();
       let createdNode = await browser.open(e.clientX, e.clientY);
-      console.log('waht1', this.svg.contains(this.path))
+
       // TODO: auto connect here
       if(createdNode) AutoConnect.process(this.startPin, createdNode);
     }

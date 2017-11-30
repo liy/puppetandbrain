@@ -7,7 +7,6 @@ export default class DebugButton
     this.element.style.visibility = 'visible';
 
     Stage.on('game.start', () => {
-      console.log('!')
       this.element.className = 'debug-stop'
     }, this)
 
