@@ -212,7 +212,7 @@ export default [
     pod: {
       className: 'Loop',
       variables: {
-        limit: 3
+        condition: true
       }
     },
     in: true,
