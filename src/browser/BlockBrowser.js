@@ -22,15 +22,15 @@ export default class BlockBrowser extends Browser
         resolve();
       })
 
-      let collecion = BlockCollection.concat();
+      let collection = BlockCollection.concat();
 
+      // Populate the performs
       for(let actor of LookUp.getActors()) {
         if(actor == BrainGraph.brain.owner) continue;
         
         for(let actionName of Object.keys(actor.actions)) {
           let action = actor.actions[actionName];
-          console.log(action)
-          collecion.push({
+          collection.push({
             name: `Perform ${actionName}`,
             category: 'Action',
             pod: {
@@ -49,7 +49,43 @@ export default class BlockBrowser extends Browser
         }
       }
 
-      for(let info of collecion) {
+       // Populate all the variable getter and setter for this actor
+       let brain = BrainGraph.brain;
+       for(let name of Object.keys(brain.variables)) {
+        console.log(name)
+        collection.push({
+          name: `Get ${brain.owner.name} ${name}`,
+          category: 'Property',
+          pod: {
+            className: 'Getter',
+            // Note that, owner is the node's owner
+            owner: BrainGraph.brain.owner,
+            targetBrain: brain,
+            variableName: name
+          },
+          in: false,
+          out: [],
+          outputs: [name],
+          minWidth: 100,
+        })
+        collection.push({
+          name: `Set ${brain.owner.name} ${name}`,
+          category: 'Property',
+          pod: {
+            className: 'Setter',
+            // Note that, owner is the node's owner
+            owner: BrainGraph.brain.owner,
+            targetBrain: brain,
+            variableName: name
+          },
+          in: true,
+          out: ['default'],
+          outputs: [name],
+          minWidth: 100,
+        })
+       }
+
+      for(let info of collection) {
         let group = this.getGroup(info.category);
         let block = new DummyBlock(info);
         group.addBlock(block);

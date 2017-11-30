@@ -10,11 +10,6 @@ export default class Wait extends Task
     this.inputs.addInput('seconds')
   }
 
-  init(pod) {
-    super.init(pod);
-    this.variables.seconds = pod.seconds || 2;
-  }
-
   destroy() {
     super.destroy();
     clearTimeout(this.timeoutID);

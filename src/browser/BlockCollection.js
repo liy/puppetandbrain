@@ -39,6 +39,20 @@ export default [
     minWidth: 120,
   },
   {
+    name: 'Flip',
+    category: 'Animation',
+    pod: {
+      className: 'Flip',
+      variables: {
+        direction: 'x'
+      }
+    },
+    in: true,
+    out: ['default'],
+    outputs: [],
+    minWidth: 120,
+  },
+  {
     name: 'Print',
     category: 'Debug',
     pod: {
@@ -64,6 +78,20 @@ export default [
     in: true,
     out: ['default'],
     outputs: [],
+    minWidth: 120,
+  },
+  {
+    name: 'Play Sound',
+    category: 'Animation',
+    pod: {
+      className: 'PlaySound',
+      variables: {
+        name: 'sound name',
+      }
+    },
+    in: true,
+    out: ['default', 'complete'],
+    outputs: ['audio'],
     minWidth: 120,
   },
   {
@@ -403,6 +431,17 @@ export default [
     in: false,
     out: ['default'],
     outputs: [],
+    minWidth: 100,
+  },
+  {
+    name: 'Animation Event',
+    category: 'Event',
+    pod: {
+      className: 'AnimationEvent',
+    },
+    in: false,
+    out: ['default'],
+    outputs: ['event name'],
     minWidth: 100,
   },
 ]

@@ -28,6 +28,8 @@ export Branch from './Branch';
 export Loop from './Loop';
 export Repeat from './Repeat';
 export Setter from './Setter';
+export PlaySound from './PlaySound';
+export Flip from './Flip';
 
 // listeners
 export GameStart from './listeners/GameStart'
@@ -41,3 +43,4 @@ export PointerOut from './listeners/PointerOut'
 export PointerUp from './listeners/PointerUp'
 export SwitchDown from './listeners/SwitchDown'
 export SwitchUp from './listeners/SwitchUp'
+export AnimationEvent from './listeners/AnimationEvent'

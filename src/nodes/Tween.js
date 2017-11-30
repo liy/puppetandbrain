@@ -12,8 +12,8 @@ export default class Tween extends Task
     this.inputs.addInput('position');
     this.inputs.addInput('duration');
 
-    this.terminate = this.terminate.bind(this);
-    Stage.on('game.stop', this.terminate)
+    this.stop = this.stop.bind(this);
+    Stage.on('game.stop', this.stop)
   }
 
   init(pod) {
@@ -28,11 +28,11 @@ export default class Tween extends Task
 
   destroy() {
     super.destroy();
-    Stage.off('game.stop', this.terminate)
+    Stage.off('game.stop', this.stop)
     if(this.tween) this.tween.kill()
   }
 
-  terminate() {
+  stop() {
     if(this.tween) this.tween.kill()
   }
 

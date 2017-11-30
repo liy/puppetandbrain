@@ -24,6 +24,10 @@ export default class SpineComponent extends Component
     this.spine.skeleton.setToSetupPose();
   }
 
+  get state() {
+    return this.spine.state;
+  }
+
   setAnimation(name, loop=true, track=0) {
     this.aniBuffer = {
       name, loop, track

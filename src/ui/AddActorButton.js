@@ -7,7 +7,10 @@ const ACTORS = [
   require('../assets/horse/horse.info.json'),
   require('../assets/pig/pig.info.json'),
   require('../assets/sheep/sheep.info.json'),
+  require('../assets/goat/goat.info.json'),
+  require('../assets/duck/duck.info.json'),
 ]
+
 
 export default class AddActorButton
 {

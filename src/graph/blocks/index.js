@@ -24,6 +24,8 @@ export GetPositionBlock from './GetPositionBlock';
 export GetRotationBlock from './GetRotationBlock';
 export MakePositionBlock from './MakePositionBlock';
 export ActionBlock from './ActionBlock';
+export PlaySoundBlock from './PlaySoundBlock';
+export FlipBlock from './FlipBlock';
 
 // listener blocks
 export GameStartBlock from './GameStartBlock';
@@ -37,3 +39,4 @@ export PointerOutBlock from './PointerOutBlock'
 export PointerUpBlock from './PointerUpBlock'
 export SwitchDownBlock from './SwitchDownBlock'
 export SwitchUpBlock from './SwitchUpBlock'
+export AnimationEventBlock from './AnimationEventBlock'

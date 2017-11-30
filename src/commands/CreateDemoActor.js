@@ -2,8 +2,9 @@ import Command from './Command';
 import SpineActor from '../objects/SpineActor';
 import GameStart from '../nodes/listeners/GameStart';
 import Animation from '../nodes/Animation';
+import PlaySound from '../nodes/PlaySound';
 
-export default class CreateActor extends Command
+export default class CreateDemoActor extends Command
 {
   constructor(url) {
     super();
@@ -11,11 +12,10 @@ export default class CreateActor extends Command
     this.actorID = null;
   }
 
-  process() {
+  async process() {
     var actor = new SpineActor(this.actorID);
     actor.init({
       url: this.url,
-      name: 'Donkey',
       scale: {
         x: 0.5,
         y: 0.5
@@ -25,6 +25,10 @@ export default class CreateActor extends Command
     })
     Stage.addActor(actor)
 
+    // wait until it finishes loading
+    // as we will fetching actor information
+    await actor.loaded;
+
     // Add default game start action
     let gameStart = new GameStart();
     gameStart.init({
@@ -32,6 +36,31 @@ export default class CreateActor extends Command
       x: 50,
       y: 50
     })
+
+    let animation = new Animation();
+    animation.init({
+      owner: actor,
+      x: 250,
+      y: 50,
+      variables: {
+        name: 'walk'
+      }
+    })
+
+    let playSound = new PlaySound();
+    playSound.init({
+      owner: actor,
+      x: 500,
+      y: 50,
+      variables: {
+        'sound name': actor.name + '-walk.mp3'
+      }
+    })
+
+    gameStart.connectNext(animation)
+    animation.connectNext(playSound);
+    // keep play the sound!
+    playSound.connectNext(playSound, 'complete');
 
     this.actorID = actor.id;
 
