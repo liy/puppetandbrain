@@ -3,6 +3,7 @@ require('./BrainGraph.scss')
 import BlockSelection from './BlockSelection';
 import ArrayMap from '../utils/ArrayMap';
 import BlockMenu from '../browser/BlockMenu';
+import BlockBrowser from '../browser/BlockBrowser';
 
 class BrainGraph
 {
@@ -24,7 +25,8 @@ class BrainGraph
     this.stopPan = this.stopPan.bind(this);
     this.svg.addEventListener('mousedown', this.startPan);
     document.addEventListener('mouseup', this.stopPan);
-    document.addEventListener('wheel', e => {
+    this.container.addEventListener('wheel', e => {
+
       let ox = e.clientX * this.scale ;
       let oy = e.clientY * this.scale  
       if(e.deltaY<0) {
@@ -196,10 +198,12 @@ class BrainGraph
       e.stopPropagation();
       e.preventDefault();
 
-      let menu = new BlockMenu(this);
-      menu.open()
-      menu.x = e.clientX;
-      menu.y = e.clientY;
+      // let menu = new BlockMenu(this);
+      // menu.open()
+      // menu.x = e.clientX;
+      // menu.y = e.clientY;
+      let browser = new BlockBrowser();
+      browser.open(e.clientX, e.clientY);
     }
   }
 

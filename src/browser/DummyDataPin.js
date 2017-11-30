@@ -1,8 +1,5 @@
-require('./DataPin.scss')
-
-import ConnectHelper from './ConnectHelper';
-
 require('../graph/DataPin.scss')
+require('./DummyDataPin.scss')
 
 export default class DummyDataPin
 {
@@ -14,7 +11,7 @@ export default class DummyDataPin
     this.container.style = `float:${location}; clear:${location};`
 
     this.icon =  document.createElement('div');
-    this.icon.className = 'icon'
+    this.icon.className = 'icon in-disconnected'
     this.container.appendChild(this.icon);
     this.icon.style = `${location}:-22px`
 

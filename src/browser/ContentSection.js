@@ -15,11 +15,9 @@ export default class ContentSection
     this.content = document.createElement('div');
     this.content.className = 'browser-content';
     this.scroll.appendChild(this.content);
+  }
 
-    // 5 groups
-    for(let i=0; i<5; ++i) {
-      let group = new GroupSection('Group ' + i);
-      this.content.appendChild(group.element);
-    }
+  addGroup(group) {
+    this.content.appendChild(group.element);
   }
 }

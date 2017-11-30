@@ -1,9 +1,15 @@
 require('./DummyBlock.scss')
 import ArrayMap from "../utils/ArrayMap";
+import DummyExecutionPin from './DummyExecutionPin';
+import DummyDataPin from './DummyDataPin';
+import DataPin from '../graph/DataPin';
+import EventEmitter from '../utils/EventEmitter';
 
-export default class DummyBlock
+export default class DummyBlock extends EventEmitter
 {
   constructor(data) {
+    super();
+
     this.data = data;
     this.rows = [];
 
@@ -11,26 +17,22 @@ export default class DummyBlock
     this.gridBox.className = `grid-box`;
 
     this.element = document.createElement('div');
-    this.element.className = `block dummy-block`;
+    this.element.className = 'dummy-block';
     this.gridBox.appendChild(this.element);
 
     this.title = document.createElement('div');
-    this.title.className = 'title'
+    this.title.className = 'dummy-title'
     this.element.appendChild(this.title);
-    this.title.textContent = this.data.nodeName;
-
-    this.dragArea = document.createElement('div');
-    this.dragArea.className = 'drag-area';
-    this.element.appendChild(this.dragArea)
+    this.title.textContent = this.data.name;
 
     this.content = document.createElement('div');
-    this.content.className = `content task-block`;
+    this.content.className = `dummy-content ${data.pod.className.toLowerCase()}-block`;
     this.element.appendChild(this.content);
-    // this.content.style.minWidth = '100px';
-    // this.content.style.minHeight = '100px';
-    this.content.style.width = 50 + Math.floor(Math.random()*70) + 'px'
-    this.content.style.height = 90 + Math.floor(Math.random()*50) + 'px'
+    this.content.style.minWidth = data.minWidth+'px';
 
+    this.hitArea = document.createElement('div');
+    this.hitArea.className = 'hit-area';
+    this.element.appendChild(this.hitArea)
 
     if(this.data.in) {
       let pin = new DummyExecutionPin('', 'left');
@@ -44,24 +46,44 @@ export default class DummyBlock
       this.getRow(i).appendChild(pin.container)
     }
 
-    for(let i=0; i<this.data.inputs.length; ++i) {
-      let name = this.data.inputs[i];
-      let pin = new InputPin(name, 'left')
+    // usually it is from the variable.
+    let inputNames = [];
+    if(this.data.pod.variables) {
+      inputNames = inputNames.concat(Object.keys(this.data.pod.variables));
+    }
+    if(this.data.inputs) {
+      inputNames = inputNames.concat(this.data.inputs);
+    }
+    for(let i=0; i<inputNames.length; ++i) {
+      let name = inputNames[i];
+      let pin = new DummyDataPin(name, 'left')
       this.getRow(i+1).appendChild(pin.container);
     }
 
     for(let i=0; i<this.data.outputs.length; ++i) {
       let name = this.data.outputs[i];
-      let pin = new OutputPin(name, 'right');
+      let pin = new DummyDataPin(name, 'right');
       this.getRow(this.data.out.length + i).appendChild(pin.container);
     }
 
+    this.mousedown = this.mousedown.bind(this);
+    // Note the capture phase I'm using, I stop the propagation immediately which stop other
+    // elements receiving mouse down event. So that I can eaily assume that only hit area will
+    // receive this mouse down event.
+    this.hitArea.addEventListener('mousedown', this.mousedown, true);
+  }
+
+  mousedown(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    this.emit('block.chosen', this.data.pod);
   }
 
   getRow(i) {
     if(!this.rows[i]) {
       this.rows[i] = document.createElement('div');
-      this.rows[i].className = 'row';
+      this.rows[i].className = 'dummy-row';
       this.content.appendChild(this.rows[i]);
     }
     return this.rows[i]

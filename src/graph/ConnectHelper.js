@@ -1,5 +1,6 @@
 import BlockMenu from '../browser/BlockMenu';
 import AutoConnect from './AutoConnect';
+import BlockBrowser from '../browser/BlockBrowser';
 
 class ConnectHelper
 {
@@ -47,22 +48,24 @@ class ConnectHelper
   }
 
   async stop(e) {
-    if(e.target == this.path) {
-      let menu = new BlockMenu();
-      menu.x = e.clientX;
-      menu.y = e.clientY;
-      let createdNode = await menu.open();
+    if(e.target == this.svg || e.target == this.path) {
+
+      console.log('waht1', this.svg.contains(this.path))
+      let browser = new BlockBrowser();
+      let createdNode = await browser.open(e.clientX, e.clientY);
+      console.log('waht1', this.svg.contains(this.path))
       // TODO: auto connect here
       if(createdNode) AutoConnect.process(this.startPin, createdNode);
     }
 
+    console.log('waht', this.svg.contains(this.path))
     if(this.svg.contains(this.path)) {
       this.svg.removeChild(this.path);
     }
   }
 
   startExecutionPin(pin, e) {
-    this.path.setAttribute('stroke', '#e1eaff');
+    this.path.setAttribute('stroke', '#c6d4f7');
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');

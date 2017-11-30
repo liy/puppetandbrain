@@ -1,4 +1,5 @@
 require('../graph/ExecutionPin.scss')
+require('./DummyExecutionPin.scss')
 
 /**
  * interaction drawing behaivour is in the out pin to in pin style

@@ -2,249 +2,407 @@
 // Maybe include the entry in Node static variable?
 export default [
   {
-    itemName: 'Action',
-    nodePod: {
+    name: 'Action',
+    category: 'Action',
+    pod: {
       className: 'Action',
-      actionName: ''
-    }
+      actionName: '',
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 120,
   },
   {
-    itemName: 'Wait',
-    nodePod: {
+    name: 'Wait',
+    category: 'Flow Control',
+    pod: {
       className: 'Wait',
       variables: {
         seconds: 1
       }
-    }
+    },
+    in: true,
+    out: ['default'],
+    outputs: [],
+    minWidth: 120,
   },
   {
-    itemName: 'Move',
-    nodePod: {
+    name: 'Move',
+    category: 'Animation',
+    pod: {
       className: 'Tween'
-    }
+    },
+    in: true,
+    out: ['default'],
+    outputs: [],
+    minWidth: 120,
   },
   {
-    itemName: 'Print',
-    nodePod: {
+    name: 'Print',
+    category: 'Debug',
+    pod: {
       className: 'Trace',
       variables: {
         text: 'Print out a message'
       }
-    }
+    },
+    in: true,
+    out: ['default'],
+    outputs: [],
+    minWidth: 120,
   },
   {
-    itemName: 'Animation',
-    nodePod: {
+    name: 'Animation',
+    category: 'Animation',
+    pod: {
       className: 'Animation',
       variables: {
         name: 'static',
       }
-    }
+    },
+    in: true,
+    out: ['default'],
+    outputs: [],
+    minWidth: 120,
   },
   {
-    itemName: 'Branch',
-    nodePod: {
+    name: 'Branch',
+    category: 'Flow Control',
+    pod: {
       className: 'Branch',
       variables: {
         condition: true
       }
-    }
+    },
+    in: true,
+    out: ['true', 'false'],
+    outputs: [],
+    minWidth: 120,
   },
   {
-    itemName: 'Get Position',
-    nodePod: {
+    name: 'Get Position',
+    category: 'Property',
+    pod: {
       className: 'GetPosition',
       name: 'position',
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['position'],
+    minWidth: 100,
   },
   {
-    itemName: 'Get Rotation',
-    nodePod: {
+    name: 'Get Rotation',
+    category: 'Property',
+    pod: {
       className: 'GetRotation',
       name: 'rotation',
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['rotation'],
+    minWidth: 100,
   },
 
   {
-    itemName: '+ Addition',
-    nodePod: {
+    name: '+ Addition',
+    category: 'Math',
+    pod: {
       className: 'Addition',
       variables: {
         A: 1,
         B: 1
       },
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['value'],
+    minWidth: 90,
   },
   {
-    itemName: '/ Divide',
-    nodePod: {
+    name: '/ Divide',
+    category: 'Math',
+    pod: {
       className: 'Divide',
       variables: {
         A: 4,
         B: 2,
       },
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['value'],
+    minWidth: 90,
   },
   {
-    itemName: '* Multiply',
-    nodePod: {
+    name: '* Multiply',
+    category: 'Math',
+    pod: {
       className: 'Multiply',
       variables: {
         A: 2,
         B: 3,
       },
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['value'],
+    minWidth: 90,
   },
   {
-    itemName: '= Equal',
-    nodePod: {
+    name: '= Equal',
+    category: 'Math',
+    pod: {
       className: 'Equal',
       variables: {
         A: 1,
         B: 1,
       },
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['value'],
+    minWidth: 90,
   },
   {
-    itemName: '<= Less Equal',
-    nodePod: {
+    name: '<= Less Equal',
+    category: 'Math',
+    pod: {
       className: 'LessEqual',
       variables: {
         A: 1,
         B: 2,
       },
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['value'],
+    minWidth: 90,
   },
   {
-    itemName: '< Less Than',
-    nodePod: {
+    name: '< Less Than',
+    category: 'Math',
+    pod: {
       className: 'LessThan',
       variables: {
         A: 1,
         B: 2,
       },
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['value'],
+    minWidth: 90,
   },
   {
-    itemName: 'Random Number',
-    nodePod: {
+    name: 'Random Number',
+    category: 'Math',
+    pod: {
       className: 'RandomNumber',
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['value'],
+    minWidth: 90,
   },
   {
-    itemName: 'Loop',
-    nodePod: {
+    name: 'Loop',
+    category: 'Flow Control',
+    pod: {
       className: 'Loop',
       variables: {
         limit: 3
       }
-    }
+    },
+    in: true,
+    out: ['body', 'completed'],
+    outputs: ['times'],
+    minWidth: 120,
   },
   {
-    itemName: 'Repeat',
-    nodePod: {
+    name: 'Repeat',
+    category: 'Flow Control',
+    pod: {
       className: 'Repeat',
       variables: {
         times: 3
       }
-    }
+    },
+    in: true,
+    out: ['body', 'completed'],
+    outputs: ['times'],
+    minWidth: 120,
   },
   {
-    itemName: 'Break Position',
-    nodePod: {
+    name: 'Break Position',
+    category: 'Utilities',
+    pod: {
       className: 'Break',
       outputs: [{
         name: 'x'
       },{
         name: 'y'
       }]
-    }
+    },
+    in: false,
+    out: [],
+    outputs: ['x', 'y'],
+    minWidth: 100,
   },
   {
-    itemName: 'Make Position',
-    nodePod: {
+    name: 'Make Position',
+    category: 'Utilities',
+    pod: {
       className: 'MakePosition',
-    }
+      variables: {
+        x: 0,
+        y: 0,
+      }
+    },
+    in: false,
+    out: [],
+    outputs: ['position'],
   },
 
 
   // listener blocks!
   {
-    itemName: 'Game Start',
-    nodePod: {
+    name: 'Game Start',
+    category: 'Event',
+    pod: {
       className: 'GameStart',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Game Tick',
-    nodePod: {
+    name: 'Game Tick',
+    category: 'Event',
+    pod: {
       className: 'Ticker',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Key Down',
-    nodePod: {
+    name: 'Key Down',
+    category: 'Event',
+    pod: {
       className: 'KeyDown',
       variables: {
         key: 'S'
       }
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Key Up',
-    nodePod: {
+    name: 'Key Up',
+    category: 'Event',
+    pod: {
       className: 'KeyUp',
       variables: {
         key: 'S'
       }
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Touch Down',
-    nodePod: {
+    name: 'Touch Down',
+    category: 'Event',
+    pod: {
       className: 'PointerDown',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Touch Move',
-    nodePod: {
+    name: 'Touch Move',
+    category: 'Event',
+    pod: {
       className: 'PointerMove',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Touch Hover',
-    nodePod: {
+    name: 'Touch Hover',
+    category: 'Event',
+    pod: {
       className: 'PointerOver',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Touch Unhover',
-    nodePod: {
+    name: 'Touch Unhover',
+    category: 'Event',
+    pod: {
       className: 'PointerOut',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Touch Over',
-    nodePod: {
+    name: 'Touch Over',
+    category: 'Event',
+    pod: {
       className: 'PointerOver',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Touch Up',
-    nodePod: {
+    name: 'Touch Up',
+    category: 'Event',
+    pod: {
       className: 'PointerUp',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Switch Down',
-    nodePod: {
+    name: 'Switch Down',
+    category: 'Event',
+    pod: {
       className: 'SwitchDown',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
   {
-    itemName: 'Switch Up',
-    nodePod: {
+    name: 'Switch Up',
+    category: 'Event',
+    pod: {
       className: 'SwitchUp',
-    }
+    },
+    in: false,
+    out: ['default'],
+    outputs: [],
+    minWidth: 100,
   },
 ]

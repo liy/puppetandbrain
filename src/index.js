@@ -52,7 +52,6 @@ import SpriteActor from './objects/SpriteActor';
 import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
-import Browser from './browser/Browser';
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
@@ -176,6 +175,6 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-let browser = new Browser();
-document.body.appendChild(browser.element);
-browser.init();
+// let browser = new BlockBrowser();
+// document.body.appendChild(browser.element);
+// browser.open();
