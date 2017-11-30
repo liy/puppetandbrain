@@ -6,7 +6,15 @@
       "**/node_modules/**"
     ],
     "headers": [{
-        "source": "**/*.@(json|info.json|atlas|png|jpg|mp3|ogg)",
+        "source": "**/*.@(json|info.json|atlas|png|jpg)",
+        "headers": [{
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(mp3|ogg)",
         "headers": [{
             "key": "Access-Control-Allow-Origin",
             "value": "*"
