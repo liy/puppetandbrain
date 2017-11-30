@@ -92,25 +92,37 @@ class BrainGraph
     }
 
     this.draw();
+
+    this.container.style.opacity = 0;
+    this.tween = TweenLite.to(this.container.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
+      this.container.style.opacity = 1.0;
+    }});
   }
 
   close() {
-    while(this.svg.lastChild) {
-      this.svg.removeChild(this.svg.lastChild)
-    }
-    for(let block of this.blocks.getValues()) {
-      block.destroy();
-    }
-
-    this.container.style = "visibility:hidden"
-   
     this.svg.removeEventListener('contextmenu', this.openBlockMenu);
     this.svg.removeEventListener('mousedown', this.mousedown);
     document.removeEventListener('keydown', this.keydown);
     window.removeEventListener('resize', this.resize);
-
-    Stage.blurEnabled = false;
-    BlockSelection.toggle();
+    
+    let opacity = {value: 1};
+    TweenLite.to(opacity, 0.13, {value: 0, ease:Quad.easeIn, onUpdate: () => {
+      this.container.style.opacity = opacity.value;
+    }, onComplete: () => {
+      while(this.svg.lastChild) {
+        this.svg.removeChild(this.svg.lastChild)
+      }
+      for(let block of this.blocks.getValues()) {
+        block.destroy();
+      }
+  
+      this.container.style = "visibility:hidden"
+  
+      Stage.blurEnabled = false;
+      BlockSelection.toggle();
+    }})
+    
+    
   }
 
 
