@@ -6,7 +6,6 @@ export default class PlaySound extends Task
     super(id);
 
     this.inputs.addInput('sound url');
-    this.variables['sound url'] = 'chicken-walk.mp3';
 
     this.outputs.addOutput('audio');
     // sound complete execution
@@ -16,6 +15,11 @@ export default class PlaySound extends Task
     this.complete = this.complete.bind(this);
 
     Stage.on('game.stop', this.stop)
+  }
+
+  init(pod) {
+    super.init(pod);
+    this.variables['sound url'] = this.owner.name+'-walk.mp3';
   }
 
   destroy() {
