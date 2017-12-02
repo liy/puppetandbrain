@@ -12,7 +12,7 @@ export default class AnimationEvent extends Listener
     super.destroy();
   }
 
-  nodeName() {
+  get nodeName() {
     return 'Animation Event'
   }
 
