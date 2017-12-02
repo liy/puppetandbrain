@@ -19,7 +19,6 @@ export default class PlaySound extends Task
 
   init(pod) {
     super.init(pod);
-    this.variables['sound url'] = this.owner.name+'-walk.mp3';
   }
 
   destroy() {
@@ -32,7 +31,7 @@ export default class PlaySound extends Task
   }
 
   run() {
-    this.audio = new Audio(this.soundName);
+    this.audio = new Audio(this.inputs.value('sound url'));
     this.audio.addEventListener('ended', this.complete, {once: true})
 
     this.audio.play();
@@ -54,16 +53,5 @@ export default class PlaySound extends Task
 
   get nodeName() {
     return 'Play Sound'
-  }
-  
-  // TODO: remove this hack!!!
-  get soundName() {
-    let name = this.inputs.value('sound url');
-    console.warn(name);
-    let ext = name.split('.').pop();
-    if(ext != 'mp3') {
-      name += '.mp3';
-    }
-    return name;
   }
 }

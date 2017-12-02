@@ -12,6 +12,10 @@ export default class AnimationEvent extends Listener
     super.destroy();
   }
 
+  nodeName() {
+    return 'Animation Event'
+  }
+
   init(pod) {
     super.init(pod);
 
@@ -19,8 +23,7 @@ export default class AnimationEvent extends Listener
     if(spineComponent) {
       spineComponent.state.addListener({
         event: (i, event) => {
-        let eventName = event.stringValue.trim().split('.')[0]
-        this.outputs.assignValue('event name', eventName);
+        this.outputs.assignValue('event name', event.stringValue.trim());
         this.run();
         }
       })

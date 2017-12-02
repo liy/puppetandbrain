@@ -1,0 +1,76 @@
+
+mice.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 2, 4
+  size: 152, 104
+  orig: 152, 104
+  offset: 0, 0
+  index: -1
+ear-left
+  rotate: false
+  xy: 156, 27
+  size: 69, 81
+  orig: 69, 81
+  offset: 0, 0
+  index: -1
+ear-right
+  rotate: false
+  xy: 227, 40
+  size: 70, 68
+  orig: 70, 68
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 384, 48
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+tail-1
+  rotate: false
+  xy: 299, 45
+  size: 83, 22
+  orig: 83, 22
+  offset: 0, 0
+  index: -1
+tail-2
+  rotate: false
+  xy: 156, 2
+  size: 85, 23
+  orig: 85, 23
+  offset: 0, 0
+  index: -1
+tail-3
+  rotate: false
+  xy: 299, 69
+  size: 83, 39
+  orig: 83, 39
+  offset: 0, 0
+  index: -1
+tail-4
+  rotate: false
+  xy: 384, 58
+  size: 72, 50
+  orig: 72, 50
+  offset: 0, 0
+  index: -1
+whisker-left
+  rotate: false
+  xy: 243, 7
+  size: 32, 31
+  orig: 32, 31
+  offset: 0, 0
+  index: -1
+whisker-right
+  rotate: false
+  xy: 458, 75
+  size: 32, 33
+  orig: 32, 33
+  offset: 0, 0
+  index: -1

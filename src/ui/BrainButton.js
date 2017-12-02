@@ -11,6 +11,8 @@ export default class BrainButton
     })
 
     this.element.addEventListener('mousedown', e => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
       let brain = ActorSelection.selected[0].brain;
       BrainGraph.open(brain)
     })

@@ -15,6 +15,8 @@ export default class DebugButton
     }, this)
 
     this.element.addEventListener('mousedown', e => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
       Stage.toggle();
     })
   }

@@ -1,0 +1,11 @@
+{
+  "id": "mice.json",
+  "name": "mice",
+  "dimension": {
+    "x": 256,
+    "y": 256
+  },
+  "events": [
+    
+  ]
+}

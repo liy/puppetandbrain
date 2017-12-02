@@ -3,12 +3,15 @@ import SpineActor from '../objects/SpineActor';
 import GameStart from '../nodes/listeners/GameStart';
 import Animation from '../nodes/Animation';
 import PlaySound from '../nodes/PlaySound';
+import AnimationEvent from '../nodes/listeners/AnimationEvent';
+
+
 
 export default class CreateDemoActor extends Command
 {
-  constructor(url) {
+  constructor() {
     super();
-    this.url = url;
+    this.url = require('../assets/cat/cat.info.json');
     this.actorID = null;
   }
 
@@ -43,7 +46,7 @@ export default class CreateDemoActor extends Command
       x: 250,
       y: 50,
       variables: {
-        name: 'walk'
+        name: 'run'
       }
     })
 
@@ -53,7 +56,24 @@ export default class CreateDemoActor extends Command
       x: 500,
       y: 50,
       variables: {
-        'sound name': actor.name + '-walk.mp3'
+        'sound url': 'Jambalaya Loop.ogg'
+      }
+    })
+
+    let animationEvent = new AnimationEvent();
+    animationEvent.init({
+      owner: actor,
+      x: 50,
+      y: 250
+    })
+
+    let playEventSound = new PlaySound();
+    playEventSound.init({
+      owner: actor,
+      x: 250,
+      y: 250,
+      variables: {
+        'sound url': 'Jambalaya Loop.ogg'
       }
     })
 
@@ -61,6 +81,10 @@ export default class CreateDemoActor extends Command
     animation.connectNext(playSound);
     // keep play the sound!
     playSound.connectNext(playSound, 'complete');
+
+    animationEvent.connectNext(playEventSound);
+    // play event sound
+    playEventSound.inputs.get('sound url').connect(animationEvent.outputs.get('event name'));
 
     this.actorID = actor.id;
 

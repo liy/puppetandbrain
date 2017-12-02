@@ -32,6 +32,17 @@ export default class CreateActor extends Command
       y: 50
     })
 
+    let animation = new Animation();
+    animation.init({
+      owner: actor,
+      x: 250,
+      y: 50,
+      variables: {
+        name: 'idle'
+      }
+    })
+    gameStart.connectNext(animation)
+
     this.actorID = actor.id;
 
     return this;

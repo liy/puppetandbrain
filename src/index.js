@@ -82,6 +82,18 @@ require('./assets/goat/walk-interact-goat-2.mp3')
 require('./assets/goat/attention-goat-1.mp3')
 require('./assets/goat/goat.atlas')
 
+require('./assets/cat/cat.json')
+require('./assets/cat/cat.png')
+require('./assets/cat/cat.atlas')
+require('./assets/cat/boing.mp3')
+
+require('./assets/mice/mice.json')
+require('./assets/mice/mice.png')
+require('./assets/mice/mice.atlas')
+
+//sound
+require('./assets/sounds/Jambalaya Loop.mp3')
+require('./assets/sounds/Jambalaya Loop.ogg')
 
 // imports
 require('./index.scss')
@@ -154,19 +166,8 @@ async function load(activityID) {
 }
 
 
-const ACTORS = [
-  require('./assets/chicken/chicken.info.json'),
-  // require('./assets/cow/cow.info.json'),
-  // require('./assets/donkey/donkey.info.json'),
-  // require('./assets/horse/horse.info.json'),
-  // require('./assets/pig/pig.info.json'),
-  // require('./assets/sheep/sheep.info.json'),
-  // require('./assets/goat/goat.info.json'),
-  // require('./assets/duck/duck.info.json'),
-]
-
 function simpleInit() {
-  Commander.create('CreateDemoActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).process();
+  Commander.create('CreateDemoActor').process();
 
 
   let promises = Stage.actors.map(actor => {
