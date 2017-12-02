@@ -161,6 +161,7 @@ async function load(activityID) {
   Promise.all(promises).then(() => {
     new AddActorButton();
     new DebugButton();
+    new BrainButton();
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
 }

@@ -7,7 +7,8 @@ export default class BrainButton
     this.element = document.getElementById('brain-button');
 
     ActorSelection.on('actor.selection.change', selected => {
-        this.element.style.visibility = (selected.length != 0) ? 'visible' : 'hidden';
+      console.log(selected.length)
+      this.element.style.visibility = (selected.length != 0) ? 'visible' : 'hidden';
     })
 
     this.element.addEventListener('mousedown', e => {
