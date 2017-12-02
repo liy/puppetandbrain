@@ -1,12 +1,16 @@
+import EventEmitter from "../utils/EventEmitter";
+
 // TODO: to be simplified
 /**
  * Hold selection state
  * 
  * @class Selection
  */
-class ActorSelection
+class ActorSelection extends EventEmitter
 {
   constructor() {
+    super();
+
     this.selected = [];
     this.enabled = true;
 
@@ -31,12 +35,14 @@ class ActorSelection
     let i = this.selected.indexOf(target);
     if(i != -1) {
       this.selected.splice(i, 1);
+      this.emit('actor.selection.change', this.selected);
     }
   }
 
   set(target) {
     this.deselectAll();
     this.selected = [target];
+    this.emit('actor.selection.change', this.selected);
   }
 
   deselectAll() {

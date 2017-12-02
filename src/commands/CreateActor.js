@@ -15,7 +15,6 @@ export default class CreateActor extends Command
     var actor = new SpineActor(this.actorID);
     actor.init({
       url: this.url,
-      name: 'Donkey',
       scale: {
         x: 0.5,
         y: 0.5

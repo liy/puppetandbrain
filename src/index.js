@@ -102,6 +102,7 @@ import SpriteActor from './objects/SpriteActor';
 import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
+import BrainButton from './ui/BrainButton';
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
@@ -155,13 +156,13 @@ async function load(activityID) {
 
 const ACTORS = [
   require('./assets/chicken/chicken.info.json'),
-  require('./assets/cow/cow.info.json'),
-  require('./assets/donkey/donkey.info.json'),
-  require('./assets/horse/horse.info.json'),
-  require('./assets/pig/pig.info.json'),
-  require('./assets/sheep/sheep.info.json'),
-  require('./assets/goat/goat.info.json'),
-  require('./assets/duck/duck.info.json'),
+  // require('./assets/cow/cow.info.json'),
+  // require('./assets/donkey/donkey.info.json'),
+  // require('./assets/horse/horse.info.json'),
+  // require('./assets/pig/pig.info.json'),
+  // require('./assets/sheep/sheep.info.json'),
+  // require('./assets/goat/goat.info.json'),
+  // require('./assets/duck/duck.info.json'),
 ]
 
 function simpleInit() {
@@ -175,6 +176,7 @@ function simpleInit() {
   Promise.all(promises).then(() => {
     new AddActorButton();
     new DebugButton();
+    new BrainButton();
     // serialize everything before game start
     console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
   })
