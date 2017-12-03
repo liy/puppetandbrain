@@ -30,13 +30,11 @@ export FlipBlock from './FlipBlock';
 // listener blocks
 export GameStartBlock from './GameStartBlock';
 export TickerBlock from './TickerBlock'
-export KeyDownBlock from './KeyDownBlock'
-export KeyUpBlock from './KeyUpBlock'
+export KeyboardBlock from './KeyboardBlock'
 export PointerDownBlock from './PointerDownBlock'
 export PointerMoveBlock from './PointerMoveBlock'
 export PointerOverBlock from './PointerOverBlock'
 export PointerOutBlock from './PointerOutBlock'
 export PointerUpBlock from './PointerUpBlock'
-export SwitchDownBlock from './SwitchDownBlock'
-export SwitchUpBlock from './SwitchUpBlock'
+export SwitchAccessBlock from './SwitchAccessBlock'
 export AnimationEventBlock from './AnimationEventBlock'

@@ -319,30 +319,16 @@ export default [
     minWidth: 100,
   },
   {
-    name: 'Key Down',
+    name: 'Keyboard',
     category: 'Event',
     pod: {
-      className: 'KeyDown',
+      className: 'Keyboard',
       variables: {
         key: 'S'
       }
     },
     in: false,
-    out: ['default'],
-    outputs: [],
-    minWidth: 100,
-  },
-  {
-    name: 'Key Up',
-    category: 'Event',
-    pod: {
-      className: 'KeyUp',
-      variables: {
-        key: 'S'
-      }
-    },
-    in: false,
-    out: ['default'],
+    out: ['key down', 'key up'],
     outputs: [],
     minWidth: 100,
   },
@@ -402,25 +388,18 @@ export default [
     minWidth: 100,
   },
   {
-    name: 'Switch Down',
+    name: 'Switch Access',
     category: 'Event',
     pod: {
-      className: 'SwitchDown',
+      className: 'SwitchAccess',
+      variables: {
+        debounce: 0,
+        'pre-acceptance': 0,
+      }
     },
     in: false,
-    out: ['default'],
-    outputs: [],
-    minWidth: 100,
-  },
-  {
-    name: 'Switch Up',
-    category: 'Event',
-    pod: {
-      className: 'SwitchUp',
-    },
-    in: false,
-    out: ['default'],
-    outputs: [],
+    out: ['switch down', 'switch up'],
+    outputs: ['which'],
     minWidth: 100,
   },
   {
