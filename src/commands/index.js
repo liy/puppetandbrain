@@ -18,6 +18,6 @@ export CreateActor from './CreateActor';
 export DeleteActor from './DeleteActor';
 export CreateDemoActor from './CreateDemoActor';
 
-// export CreateVariable from './CreateVariable';
-// export RenameVariable from './RenameVariable';
+export CreateVariable from './CreateVariable';
+export RenameVariable from './RenameVariable';
 export DeleteVariable from './DeleteVariable';

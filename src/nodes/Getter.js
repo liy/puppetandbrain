@@ -25,6 +25,13 @@ export default class Getter extends DataNode
     });
   }
 
+  destroy() {
+    super.destroy();
+    // de-register from variable
+    let index = this.variable.getters.indexOf(this)
+    if(index != -1) this.variable.getters.splice(index, 1)
+  }
+
   get variableName() {
     return this.variable.name;
   }

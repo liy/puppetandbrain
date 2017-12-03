@@ -21,6 +21,10 @@ export default class Variable extends EventEmitter
     this.initialData = pod.data;
   }
 
+  get inUse() {
+    return this.getters.length != 0 || this.setters.length != 0;
+  }
+
   set(data) {
     this.data = data;
     this.initialData = data;

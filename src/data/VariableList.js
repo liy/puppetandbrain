@@ -26,6 +26,7 @@ export default class VariableList extends ArrayMap
   }
 
   rename(name, newName) {
+    if(newName === '') return false;
     if(this.contains(newName)) return false;
 
     let variable = this.get(name);

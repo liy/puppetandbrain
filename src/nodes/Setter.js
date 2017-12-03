@@ -28,6 +28,13 @@ export default class Setter extends Task
       }
     });
   }
+  
+  destroy() {
+    super.destroy();
+    // de-register from variable
+    let index = this.variable.setters.indexOf(this)
+    if(index != -1) this.variable.setters.splice(index, 1)
+  }
 
   get variableName() {
     return this.variable.name;
