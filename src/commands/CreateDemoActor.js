@@ -23,8 +23,8 @@ export default class CreateDemoActor extends Command
         x: 0.5,
         y: 0.5
       },
-      x: Math.random() * Stage.stageWidth,
-      y: Math.random() * Stage.stageHeight,
+      x: Stage.stageWidth/2,
+      y: Stage.stageHeight/2,
     })
     Stage.addActor(actor)
 

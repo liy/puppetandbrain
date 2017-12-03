@@ -3,6 +3,7 @@ import * as nodes from './nodes'
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import DataNode from './nodes/DataNode';
+import Variable from './data/Variable';
 
 const scope = {
   ...nodes,
@@ -55,6 +56,16 @@ export default class ActivityLoader
   }
 
   fillBrains(pod) {
+    // FIXME: create all variables first
+    for(let id of pod.variables) {
+      let variablePod = pod.store[id];
+      let variable = new Variable(id)
+      variable.init(variablePod);
+      // put the variable into its brain
+      let brain = LookUp.get(variablePod.brain);
+      brain.variables.add(variable);
+    }
+
     let performs = [];
     for(let id of pod.nodes) {
       let data = pod.store[id];

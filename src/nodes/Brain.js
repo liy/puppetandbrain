@@ -1,6 +1,8 @@
 import ArrayMap from '../utils/ArrayMap';
 import Pointer from '../data/Pointer';
 import Task from './Task';
+import VariableList from '../data/VariableList';
+import Variable from '../data/Variable';
 
 export default class Brain
 {
@@ -9,13 +11,9 @@ export default class Brain
     this.owner = owner;
     this.nodes = new ArrayMap();
 
-    // this.variables = Object.create(null);
-    this.variables = {};
-    // FIXME: for testing purpose!!!
-    this.variables['test'] = 'test!'
+    this.variables = new VariableList(this);
 
-    Stage.off('game.prestart', this.setInitialState, this);
-    Stage.off('game.stop', this.stop, this);
+    Stage.on('game.stop', this.stop, this);
   }
 
   destroy() {
@@ -24,18 +22,13 @@ export default class Brain
     for(let node of nodes) {
       node.destroy();
     }
+    Stage.off('game.stop', this.stop, this);
   }
 
-  setInitialState() {
-    // setup initial state
-    this.initialState = {
-      // deep clone...
-      variables: JSON.parse(JSON.stringify(this.variables)),
-    }
-  }
 
   stop() {
-    this.variables = this.initialState.variables;
+    // reset back to initial data
+    this.variables.reset()
   }
 
   createVariable(name, value) {
@@ -80,7 +73,7 @@ export default class Brain
     let pod = {
       className: this.__proto__.constructor.name,
       id: this.id,
-      variables: this.variables,
+      variables: this.variables.pod(),
       // Note that the owner is not here.
       // This is because in brain is created in Actor,
       // does not need owner information.

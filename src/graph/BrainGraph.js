@@ -4,6 +4,7 @@ import BlockSelection from './BlockSelection';
 import ArrayMap from '../utils/ArrayMap';
 import BlockMenu from '../browser/BlockMenu';
 import BlockBrowser from '../browser/BlockBrowser';
+import VariablePanel from './gadgets/VariablePanel';
 
 class BrainGraph
 {
@@ -11,6 +12,10 @@ class BrainGraph
     this.container = document.getElementById('graph');
     this.blockContainer = document.getElementById('block-container');
     this.svg = document.getElementById('svg');
+
+    this.variablePanel = new VariablePanel();
+    this.container.appendChild(this.variablePanel.element);
+
     this.dbClicks = 0;
 
     this.scale = 1;
@@ -27,7 +32,6 @@ class BrainGraph
     this.svg.addEventListener('mousedown', this.startPan);
     document.addEventListener('mouseup', this.stopPan);
     this.container.addEventListener('wheel', e => {
-
       let ox = e.clientX * this.scale ;
       let oy = e.clientY * this.scale  
       if(e.deltaY<0) {
@@ -45,7 +49,8 @@ class BrainGraph
 
 
       this.updateTransform();
-    })
+    });
+
   }
 
   startPan(e) {
@@ -71,6 +76,7 @@ class BrainGraph
   open(brain) {
     this.brain = brain;
     this.blocks = new ArrayMap();
+    this.variablePanel.open(this.brain);
 
     document.getElementById('control').classList.add('blur')
 
@@ -103,6 +109,7 @@ class BrainGraph
   }
 
   close() {
+
     document.getElementById('control').classList.remove('blur')
     this.svg.removeEventListener('contextmenu', this.openBlockMenu);
     this.svg.removeEventListener('mousedown', this.mousedown);
@@ -120,6 +127,8 @@ class BrainGraph
         block.destroy();
       }
   
+      this.variablePanel.clear();
+      
       this.container.style = "visibility:hidden"
   
       Stage.blurEnabled = false;

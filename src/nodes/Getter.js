@@ -5,7 +5,6 @@ export default class Getter extends DataNode
   constructor(id) {
     super(id);
 
-    this.variableName = null;
     this.targetBrain = null;
   }
 
@@ -13,12 +12,20 @@ export default class Getter extends DataNode
     super.init(pod);
 
     this.targetBrain = LookUp.auto(pod.targetBrain);
-    this.variableName = pod.variableName;
-    this.outputs.addOutput(this.variableName).assignProperty(this.variableName, {
+    // use variable id instead of name, as name will be changed by user
+    this.variableID = pod.variableID;
+    this.variable = LookUp.get(this.variableID);
+
+    // Note the output key is the variable id!!!
+    this.outputs.addOutput(this.variableID).assignProperty(this.variableID, {
       get: () => {
-        return this.targetBrain.variables[this.variableName];
+        return this.variable.data;
       }
     });
+  }
+
+  get variableName() {
+    return this.variable.name;
   }
 
   get nodeName() {
@@ -27,8 +34,10 @@ export default class Getter extends DataNode
 
   pod(detail) {
     let pod = super.pod(detail);
-    pod.variableName = this.variableName;
     pod.targetBrain = this.targetBrain.id;
+    pod.variableID = this.variableID;
+    // TODO: not sure this is useful or not.
+    pod.variableName = this.variableName;
     return pod;
   }
 }

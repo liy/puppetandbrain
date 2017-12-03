@@ -1,0 +1,81 @@
+
+#variable-panel-container {
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  
+
+  #variable-panel {
+    background-color: rgba(73, 73, 73, 0.432);
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+  } 
+
+  .variable-panel-entry {
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .variable-panel-entry:first-child {
+    margin-top: 0;
+  }
+
+  .variable-panel-title {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: #d6d6d6;
+    float: left;
+    text-align: left;
+  }
+
+  .add-variable-button {
+    width: 16px;
+    height: 16px;
+    background-image: url('../../assets/add-output.svg');
+    cursor: pointer;
+    float: right;
+    // veritcal centre
+    margin-top: 2px;
+  }
+
+  .variable-name-input {
+    font-size: 14px;
+
+    width: 30%;
+    float: left;
+    text-align: left;
+    color: #d6d6d6;
+
+    border: none;
+    outline: none;
+    background: none;
+  }
+
+  .variable-data-input {
+    font-size: 14px;
+    width: 60%;
+    float: right;
+    text-align: left;
+
+    color: #000000;
+    border-radius: 10px;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    
+    border: none;
+    outline: none;
+    background-color: rgba(199, 199, 199, 0.6);
+  }
+}

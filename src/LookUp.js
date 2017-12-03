@@ -7,6 +7,7 @@ var ACTORS = [];
 var NODES = [];
 var POINTERS = [];
 var BRAINS = [];
+var VARIABLES = [];
 
 var activityID = null;
 var creating = false;
@@ -133,6 +134,17 @@ window.LookUp = {
     delete STORE[id]
   },
 
+  addVariable: function(entry, id) {
+    id = create(entry, id)
+    VARIABLES.push(id);
+    return id;
+  },
+
+  removeVariable: function(id) {
+    let index = VARIABLES.indexOf(id);
+    if(index != -1) VARIABLES.splice(index, 1);
+    delete STORE[id]
+  },
 
   // Audo figure out whether target is an object or an id and return the target object
   auto: function(target) {
@@ -177,6 +189,7 @@ window.LookUp = {
     result.nodes = NODES;
     result.pointers = POINTERS;
     result.brains = BRAINS;
+    result.variables = VARIABLES;
     result.stage = Stage.actors;
 
     return result;

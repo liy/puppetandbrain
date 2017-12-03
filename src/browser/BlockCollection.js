@@ -260,7 +260,7 @@ export default [
     },
     in: true,
     out: ['body', 'completed'],
-    outputs: ['times'],
+    outputs: ['index'],
     minWidth: 120,
   },
   {
