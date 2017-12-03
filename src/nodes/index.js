@@ -30,6 +30,8 @@ export Repeat from './Repeat';
 export Setter from './Setter';
 export PlaySound from './PlaySound';
 export Flip from './Flip';
+export TweenUp from './TweenUp';
+export TweenRight from './TweenRight';
 
 // listeners
 export GameStart from './listeners/GameStart'

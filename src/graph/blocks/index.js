@@ -26,6 +26,8 @@ export MakePositionBlock from './MakePositionBlock';
 export ActionBlock from './ActionBlock';
 export PlaySoundBlock from './PlaySoundBlock';
 export FlipBlock from './FlipBlock';
+export TweenRightBlock from './TweenRightBlock';
+export TweenUpBlock from './TweenUpBlock';
 
 // listener blocks
 export GameStartBlock from './GameStartBlock';

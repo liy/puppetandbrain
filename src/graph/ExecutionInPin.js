@@ -50,7 +50,7 @@ export default class ExecutionInPin extends ExecutionPin
     return {
       // ignore the last operand, just some trial and error offset
       x: (rect.left + rect.right)/2 - offset.left - 4*BrainGraph.scale,
-      y: (rect.top + rect.bottom)/2 - offset.top + 1
+      y: (rect.top + rect.bottom)/2 - offset.top
     }
   }
 }

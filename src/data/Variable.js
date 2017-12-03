@@ -14,7 +14,6 @@ export default class Variable extends EventEmitter
 
   init(pod) {
     this._name = pod.name;
-    console.warn('init variable brain: ' + pod.brain);
     this.brain = LookUp.auto(pod.brain);
     // if the type is an actor, the data will be an id
     this.data = pod.data;

@@ -104,7 +104,7 @@ export default class ExecutionPin
     let rect = this.icon.getBoundingClientRect();
     return {
       x: (rect.left + rect.right)/2 - offset.left,
-      y: (rect.top + rect.bottom)/2 - offset.top
+      y: (rect.top + rect.bottom)/2
     }
   }
 }

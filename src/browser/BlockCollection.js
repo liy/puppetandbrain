@@ -40,6 +40,30 @@ export default [
     minWidth: 120,
   },
   {
+    name: 'Move Right',
+    category: 'Animation',
+    pod: {
+      className: 'TweenRight'
+    },
+    in: true,
+    out: ['default'],
+    inputs: ['steps', 'duration'],
+    outputs: [],
+    minWidth: 120,
+  },
+  {
+    name: 'Move Up',
+    category: 'Animation',
+    pod: {
+      className: 'TweenUp'
+    },
+    in: true,
+    out: ['default'],
+    inputs: ['steps', 'duration'],
+    outputs: [],
+    minWidth: 120,
+  },
+  {
     name: 'Flip',
     category: 'Animation',
     pod: {
