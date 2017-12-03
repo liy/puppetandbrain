@@ -5,6 +5,7 @@ export default class CreateVariable extends Command
   constructor(brainID) {
     super();
     this.brainID = brainID;
+    this.variableID = null;
   }
 
   get variables() {
@@ -12,13 +13,14 @@ export default class CreateVariable extends Command
   }
 
   process() {
-    this.variable = this.variables.create();
-    BrainGraph.variablePanel.refresh();
+    let variable = this.variables.create(this.variableID);
+    this.variableID = variable.id;
+    BrainGraph.variablePanel.appendVariableEntry(variable)
     return this;
   }
 
   undo() {
-    Commander.create('DeleteVariable', this.brainID, this.variable.id).processAndSave();
+    Commander.create('DeleteVariable', this.brainID, this.variableID).processAndSave();
     // indicate it is removed... just in case
     this.variable = null;
   }

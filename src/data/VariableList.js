@@ -44,7 +44,8 @@ export default class VariableList extends ArrayMap
     let variable = new Variable();
     variable.init({
       name: name,
-      brain: this.brain
+      brain: this.brain,
+      data: null,
     })
     return this.add(variable);
   }

@@ -26,7 +26,7 @@
     .title {
       font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
-      color: #d6d6d6;
+      color: hsl(221, 100%, 83%);
       float: left;
       text-align: left;
     }
@@ -61,7 +61,7 @@
       .name-input {
         font-size: 14px;
     
-        width: 30%;
+        width: 40%;
         float: left;
         text-align: left;
         color: #d6d6d6;
@@ -73,7 +73,7 @@
     
       .data-input {
         font-size: 14px;
-        width: 50%;
+        width: 40%;
         float: left;
         text-align: left;
     

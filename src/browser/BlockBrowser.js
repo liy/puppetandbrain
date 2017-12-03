@@ -26,7 +26,7 @@ export default class BlockBrowser extends Browser
 
       // Populate the performs
       for(let actor of LookUp.getActors()) {
-        if(actor == BrainGraph.brain.owner) continue;
+        // if(actor == BrainGraph.brain.owner) continue;
         
         for(let actionName of Object.keys(actor.actions)) {
           let action = actor.actions[actionName];
