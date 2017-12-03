@@ -15,6 +15,7 @@ export default class Getter extends DataNode
     // use variable id instead of name, as name will be changed by user
     this.variableID = pod.variableID;
     this.variable = LookUp.get(this.variableID);
+    this.variable.getters.push(this)
 
     // Note the output key is the variable id!!!
     this.outputs.addOutput(this.variableID).assignProperty(this.variableID, {

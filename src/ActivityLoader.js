@@ -56,7 +56,7 @@ export default class ActivityLoader
   }
 
   fillBrains(pod) {
-    // FIXME: create all variables first
+    // create all the variables first
     for(let id of pod.variables) {
       let variablePod = pod.store[id];
       let variable = new Variable(id)

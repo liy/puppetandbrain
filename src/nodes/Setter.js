@@ -15,6 +15,7 @@ export default class Setter extends Task
     // use variable id instead of name, as name will be changed by user
     this.variableID = pod.variableID;
     this.variable = LookUp.get(this.variableID);
+    this.variable.setters.push(this)
 
     this.inputs.addInput(this.variableID);
 

@@ -22,7 +22,7 @@ export default class VariablePanel
 
     for(let variable of this.variables.getValues()) {
       console.log(variable)
-      this.appendEntry(variable);
+      this.appendVariableEntry(variable);
     }
   }
 
@@ -47,14 +47,16 @@ export default class VariablePanel
     while(this.panel.lastChild) {
       this.panel.removeChild(this.panel.lastChild);
     }
+    // FIXME: find a better way. Keep track of the variable DOM entries!!!(Be careful with the listener)
+    this.appendTitle();
   }
 
   createVariable() {
     let variable = this.variables.create();
-    this.appendEntry(variable);
+    this.appendVariableEntry(variable);
   }
 
-  appendEntry(variable) {
+  appendVariableEntry(variable) {
     let entry = document.createElement('div');
     entry.className = 'variable-panel-entry';
     this.panel.appendChild(entry);
@@ -68,6 +70,10 @@ export default class VariablePanel
     dataInput.className = 'variable-data-input';
     dataInput.value = variable.initialData;
     entry.appendChild(dataInput);
+    
+    let deleteVariableBtn = document.createElement('div');
+    deleteVariableBtn.className = 'delete-variable-button';
+    entry.appendChild(deleteVariableBtn)
 
     // The listeners should cleared once it is removed from the dom tree.
     nameInput.addEventListener('change', e => {
@@ -82,6 +88,10 @@ export default class VariablePanel
       if(String.trim(e.target.value) != '') {
         this.variables.get(variable.name).set(e.target.value);
       }
+    })
+
+    deleteVariableBtn.addEventListener('click', e => {
+      History.push(Commander.create('DeleteVariable', this.brain.id, variable.id).processAndSave())
     })
   }
 

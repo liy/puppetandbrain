@@ -6,10 +6,15 @@ export default class Variable extends EventEmitter
   constructor(id) {
     super();
     this.id = LookUp.addVariable(this, id);
+
+    // Keep track of getter and setter nodes using this variable. For variable deletion use.
+    this.getters = [];
+    this.setters = [];
   }
 
   init(pod) {
     this._name = pod.name;
+    console.warn('init variable brain: ' + pod.brain);
     this.brain = LookUp.auto(pod.brain);
     // if the type is an actor, the data will be an id
     this.data = pod.data;
