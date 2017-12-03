@@ -25,6 +25,9 @@ export default class DeleteVariable extends Command
     BrainGraph.variablePanel.refresh();
 
     // Get all and delete the getters and setters related to this variable
+    // Note that I put the actual deletion in separate loop.
+    // Just because I need the actual original pod of the nodes. Delete block
+    // would have changed the data(e.g., execution input output link )
     for(let getter of this.variable.getters) {
       this.getterPods.push(getter.pod(true));
     }
@@ -49,7 +52,8 @@ export default class DeleteVariable extends Command
     // Variable panel needs to be updated to have the undo result
     BrainGraph.variablePanel.refresh();
 
-    // re-create the nodes and blocks first
+    // re-create the nodes and blocks first. Getting ready for execution 
+    // and variable linking!
     for(let pod of this.getterPods) {
       let node = NodeFactory.create(pod.className, pod.id);
       node.init(pod);
@@ -58,6 +62,10 @@ export default class DeleteVariable extends Command
       let node = NodeFactory.create(pod.className, pod.id);
       node.init(pod);
     }
+
+    // Check DeleteBlock command for a simpler version of recovering 
+    // execution connection and output input link...
+    // Here is basically multiple undo of the DeleteBlock
 
     // connect setter's execution
     for(let pod of this.setterPods) {
@@ -69,8 +77,6 @@ export default class DeleteVariable extends Command
         if(caller.id) node.connectParent(LookUp.get(caller.id), caller.executionName);
       }
     }
-
-    // Check Delete block for detail...
     
     // connect setter inputs directly using pointer
     for(let pod of this.setterPods) {
