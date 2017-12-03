@@ -11,6 +11,7 @@ export const Equal = Operators.Equal;
 export const LessEqual = Operators.LessEqual;
 export const LessThan = Operators.LessThan;
 export const RandomNumber = Operators.RandomNumber;
+export const RandomInteger = Operators.RandomInteger;
 export Break from './Break';
 export MakePosition from './MakePosition';
 export GetProperty from './GetProperty';

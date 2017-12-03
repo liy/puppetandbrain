@@ -260,6 +260,21 @@ export default [
     minWidth: 90,
   },
   {
+    name: 'Random Integer',
+    category: 'Math',
+    pod: {
+      className: 'RandomInteger',
+      variables: {
+        min: 0,
+        max: 10,
+      }
+    },
+    in: false,
+    out: [],
+    outputs: ['value'],
+    minWidth: 100,
+  },
+  {
     name: 'Loop',
     category: 'Flow Control',
     pod: {

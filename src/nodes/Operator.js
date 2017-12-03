@@ -127,3 +127,23 @@ export class RandomNumber extends Operator
     return Math.random();
   }
 }
+
+export class RandomInteger extends Operator
+{
+  constructor(id) {
+    super(id);
+
+    this.inputs.addInput('min');
+    this.inputs.addInput('max');
+  }
+
+  get nodeName() {
+    return "Random Integer"
+  }
+
+  get value() {
+    let min = parseInt(this.inputs.value('min'));
+    let max = parseInt(this.inputs.value('max'));
+    return  Math.floor(min + Math.random()*(max-min + 1));
+  }
+}

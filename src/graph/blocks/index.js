@@ -6,6 +6,7 @@ export EqualBlock from './EqualBlock';
 export LessEqualBlock from './LessEqualBlock';
 export LessThanBlock from './LessThanBlock';
 export RandomNumberBlock from './RandomNumberBlock';
+export RandomIntegerBlock from './RandomIntegerBlock';
 export BreakBlock from './BreakBlock';
 export GetterBlock from './GetterBlock';
 export SetterBlock from './SetterBlock';
