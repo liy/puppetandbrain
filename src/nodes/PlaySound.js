@@ -9,7 +9,7 @@ export default class PlaySound extends Task
 
     this.outputs.addOutput('audio');
     // sound complete execution
-    this.execution.set('complete');
+    this.execution.set('completed');
 
     this.stop = this.stop.bind(this);
     this.complete = this.complete.bind(this);
@@ -41,7 +41,7 @@ export default class PlaySound extends Task
   }
 
   complete() {
-    this.execution.run('complete')
+    this.execution.run('completed')
   }
 
   stop() {

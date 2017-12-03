@@ -80,7 +80,7 @@ export default class CreateDemoActor extends Command
     gameStart.connectNext(animation)
     animation.connectNext(playSound);
     // keep play the sound!
-    playSound.connectNext(playSound, 'complete');
+    playSound.connectNext(playSound, 'completed');
 
     animationEvent.connectNext(playEventSound);
     // play event sound

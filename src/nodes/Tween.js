@@ -7,7 +7,7 @@ export default class Tween extends Task
 
     // ensure the order
     this.execution.set('default');
-    this.execution.set('complete');
+    this.execution.set('completed');
 
     this.inputs.addInput('position');
     this.inputs.addInput('duration');
@@ -44,10 +44,8 @@ export default class Tween extends Task
     super.run()
     let pos = this.inputs.value('position');
 
-    console.log(this.owner.position, pos)
-
     this.tween = TweenLite.to(this.owner, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
-      this.execution.run('complete');
+      this.execution.run('completed');
     }});
     this.execution.run();
   }

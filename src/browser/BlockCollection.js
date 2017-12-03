@@ -91,7 +91,7 @@ export default [
       }
     },
     in: true,
-    out: ['default', 'complete'],
+    out: ['default', 'completed'],
     outputs: ['audio'],
     minWidth: 120,
   },
@@ -400,7 +400,7 @@ export default [
     in: false,
     out: ['switch down', 'switch up'],
     outputs: ['which'],
-    minWidth: 100,
+    minWidth: 130,
   },
   {
     name: 'Animation Event',

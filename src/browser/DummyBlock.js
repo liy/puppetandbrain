@@ -5,6 +5,7 @@ import DummyDataPin from './DummyDataPin';
 import DataPin from '../graph/DataPin';
 import EventEmitter from '../utils/EventEmitter';
 
+// FIXME: I need a better way to handle the block layout!!!
 export default class DummyBlock extends EventEmitter
 {
   constructor(data) {
@@ -34,10 +35,12 @@ export default class DummyBlock extends EventEmitter
     this.hitArea.className = 'hit-area';
     this.element.appendChild(this.hitArea)
 
+
     if(this.data.in) {
       let pin = new DummyExecutionPin('', 'left');
       this.getRow(0).appendChild(pin.container);
     }
+    this.getRow(0)
 
     // out pins
     for(let i=0; i<this.data.out.length; ++i) {
@@ -57,7 +60,14 @@ export default class DummyBlock extends EventEmitter
     for(let i=0; i<inputNames.length; ++i) {
       let name = inputNames[i];
       let pin = new DummyDataPin(name, 'left')
-      this.getRow(i+1).appendChild(pin.container);
+      // Always avoid first row, for input. Looks better
+      // data node
+      if(this.data.out.length == 0){
+        this.getRow(i).appendChild(pin.container);
+      }
+      else {
+        this.getRow(i+1).appendChild(pin.container);
+      }
     }
 
     for(let i=0; i<this.data.outputs.length; ++i) {
