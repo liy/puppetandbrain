@@ -53,7 +53,6 @@ export default class InputPin extends DataPin
       this.label.style.visibility = 'visible'
     }
 
-    console.log(this.name, this.pointer.value)
     // update icon
     if(!this.isConnected) {
       if(this.pointer.value) {
@@ -85,7 +84,7 @@ export default class InputPin extends DataPin
   }
 
   get isConnected() {
-    return this.getOutputPin() != null;
+    return this.pointer.isConnected;
   }
 
   // FIXME: fix the drawing and refreshing! They are a messsssss
@@ -123,8 +122,6 @@ export default class InputPin extends DataPin
     let adx = Math.abs(dx);
     let ady = Math.abs(dy);
     let degree = Math.atan2(-dy, -dx)*180/Math.PI;
-
-    // console.log(dx, dy, degree, Math.sqrt(dx*dx+dy*dy) )
 
     // direct line:
     // 1. degree in range: [-?,?]

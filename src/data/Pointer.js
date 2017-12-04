@@ -28,6 +28,10 @@ export default class Pointer extends EventEmitter
     return this.output != null;
   }
 
+  get isConnected() {
+    return this.output != null;
+  }
+
   connect(output, id) {
     // remove old output related connection
     let oldOutput = this.disconnect();

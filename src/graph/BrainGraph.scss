@@ -16,6 +16,10 @@
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
+#svg {
+  pointer-events: none;
+}
+
 // For testing purpose only do not add width and height for block-container!!!
 // #block-container {
 //   position: absolute;

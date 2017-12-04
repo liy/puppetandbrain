@@ -29,7 +29,7 @@ class BrainGraph
     this.startPan = this.startPan.bind(this);
     this.onPan = this.onPan.bind(this);
     this.stopPan = this.stopPan.bind(this);
-    this.svg.addEventListener('mousedown', this.startPan);
+    this.container.addEventListener('mousedown', this.startPan);
     document.addEventListener('mouseup', this.stopPan);
     this.container.addEventListener('wheel', e => {
       let ox = e.clientX * this.scale ;
@@ -54,7 +54,9 @@ class BrainGraph
   }
 
   startPan(e) {
-    this.svg.addEventListener('mousemove', this.onPan);
+    if(e.target == this.container) {
+      this.container.addEventListener('mousemove', this.onPan);
+    }
   }
 
   onPan(e) {
@@ -64,7 +66,7 @@ class BrainGraph
   }
 
   stopPan(e) {
-    this.svg.removeEventListener('mousemove', this.onPan);
+    this.container.removeEventListener('mousemove', this.onPan);
   }
 
   updateTransform() {
@@ -87,8 +89,8 @@ class BrainGraph
 
     this.container.style = "visibility:visible"
 
-    this.svg.addEventListener('contextmenu', this.openBlockMenu);
-    this.svg.addEventListener('mousedown', this.mousedown);
+    this.container.addEventListener('contextmenu', this.openBlockMenu);
+    this.container.addEventListener('mousedown', this.mousedown);
     document.addEventListener('keydown', this.keydown);
     window.addEventListener('resize', this.resize);
     this.resize();
@@ -111,8 +113,8 @@ class BrainGraph
   close() {
 
     document.getElementById('control').classList.remove('blur')
-    this.svg.removeEventListener('contextmenu', this.openBlockMenu);
-    this.svg.removeEventListener('mousedown', this.mousedown);
+    this.container.removeEventListener('contextmenu', this.openBlockMenu);
+    this.container.removeEventListener('mousedown', this.mousedown);
     document.removeEventListener('keydown', this.keydown);
     window.removeEventListener('resize', this.resize);
     
@@ -155,7 +157,7 @@ class BrainGraph
   }
 
   mousedown(e) {
-    if(e.target == this.svg) {
+    if(e.target == this.container) {
       if(++this.dbClicks%2 == 0) {
         History.push(Commander.create('CloseGraph', this.brain.id).process());
         return;
@@ -234,7 +236,8 @@ class BrainGraph
   }
 
   openBlockMenu(e) {
-    if(e.target == this.svg) {
+    console.log(e.target)
+    if(e.target == this.container) {
       e.stopPropagation();
       e.preventDefault();
 

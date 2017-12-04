@@ -7,9 +7,24 @@ class ConnectHelper
   constructor() {
     this.svg = document.getElementById('svg');
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    
+    this.snapTarget = null;
+
+    this.linkSound = new Audio(require('../assets/sounds/link.mp3'))
   }
 
   drawLine(x1, y1, x2, y2) {
+    if(this.snapTarget) {
+      if((this.snapTarget.type == 'input' && this.startPin.type == 'output') || (this.snapTarget.type == 'in' && this.startPin.type == 'out')) {
+        x1 = this.snapTarget.position.x;
+        y1 = this.snapTarget.position.y
+      }
+      else if((this.snapTarget.type == 'output' && this.startPin.type == 'input') || (this.snapTarget.type == 'out' && this.startPin.type == 'in')) {
+        x2 = this.snapTarget.position.x
+        y2 = this.snapTarget.position.y
+      }
+    }
+
     let offsetX = 8 * BrainGraph.scale;
     let dx = (x1-offsetX) - (x2+offsetX);
     let dy = y1 - y2;
@@ -48,9 +63,8 @@ class ConnectHelper
   }
 
   async stop(e) {
-    if(e.target == this.svg || e.target == this.path) {
+    if(e.target == BrainGraph.container) {
 
-      console.log('waht1', this.svg.contains(this.path))
       var browser = new BlockBrowser();
       let createdNode = await browser.open(e.clientX, e.clientY);
 
@@ -58,13 +72,13 @@ class ConnectHelper
       if(createdNode) AutoConnect.process(this.startPin, createdNode);
     }
 
-    console.log('waht', this.svg.contains(this.path))
     if(this.svg.contains(this.path)) {
       this.svg.removeChild(this.path);
     }
   }
 
   startExecutionPin(pin, e) {
+    this.startPin = pin;
     this.path.setAttribute('stroke', '#c6d4f7');
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
@@ -72,11 +86,11 @@ class ConnectHelper
 
     this.svg.appendChild(this.path);
     this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
-    this.startPin = pin;
     this.dragType = 'execution'
   }
 
   startDataPin(pin, e) {
+    this.startPin = pin;
     this.path.setAttribute('stroke', '#a9c4d2');
     this.path.setAttribute('stroke-width', 2);
     this.path.setAttribute('stroke-opacity', 1);
@@ -84,7 +98,6 @@ class ConnectHelper
 
     this.svg.appendChild(this.path);
     this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
-    this.startPin = pin;
     this.dragType = 'data'
   }
 
@@ -101,6 +114,8 @@ class ConnectHelper
       inPin = pin;
     }
 
+    this.linkSound.play()
+
     History.push(Commander.create('CreateExecution', outPin.node.id, outPin.name, inPin.node.id).processAndSave());
   }
 
@@ -115,6 +130,8 @@ class ConnectHelper
       outputPin = this.startPin;
       inputPin = pin;
     }
+
+    this.linkSound.play()
 
     History.push(Commander.create('CreateDataLink', inputPin.node.id, inputPin.name, outputPin.node.id, outputPin.name).processAndSave())
   }

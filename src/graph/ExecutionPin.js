@@ -34,6 +34,8 @@ export default class ExecutionPin
     // this.label.style = `float:${location}; margin-${location}:20px`
     this.label.style = `float:${location}; margin-${location}:10px`
 
+    this.pointerOver = this.pointerOver.bind(this)
+    this.pointerOut = this.pointerOut.bind(this)
     this.pointerDown = this.pointerDown.bind(this);
     this.pointerMove = this.pointerMove.bind(this);
     this.pointerUp = this.pointerUp.bind(this);
@@ -46,6 +48,9 @@ export default class ExecutionPin
     // }));
 
     
+    this.container.addEventListener('mouseover', this.pointerOver);
+    this.container.addEventListener('mouseout', this.pointerOut);
+
     this.container.addEventListener('touchstart', this.pointerDown);
     this.container.addEventListener('touchend', this.targetPointerUp);
     
@@ -59,12 +64,12 @@ export default class ExecutionPin
     // only left mouse
     if(e.which != 1 && e.which != 0) return;
 
+    ConnectHelper.startExecutionPin(this, e);
+    
     document.addEventListener('mousemove', this.pointerMove);
     document.addEventListener('touchmove', this.pointerMove);
     document.addEventListener('touchup', this.pointerUp);
     document.addEventListener('mouseup', this.pointerUp);
-
-    ConnectHelper.startExecutionPin(this, e);
   }
 
   pointerMove(e) {
@@ -85,6 +90,14 @@ export default class ExecutionPin
     document.removeEventListener('touchup', this.pointerUp);
     document.removeEventListener('mouseup', this.pointerUp);
     ConnectHelper.stop(e)
+  }
+
+  pointerOver(e) {
+    ConnectHelper.snapTarget = this;
+  }
+
+  pointerOut(e) {
+    ConnectHelper.snapTarget = null;
   }
 
   targetPointerUp(e) {

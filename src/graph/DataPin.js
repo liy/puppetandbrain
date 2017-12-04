@@ -28,6 +28,8 @@ export default class DataPin
     // this.label.style = `float:${location}; margin-${location}:20px`;
     this.label.style = `float:${location}; margin-${location}:10px`
 
+    this.pointerOver = this.pointerOver.bind(this)
+    this.pointerOut = this.pointerOut.bind(this)
 
     this.mouseDown = this.mouseDown.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
@@ -35,6 +37,9 @@ export default class DataPin
     this.targetMouseUp = this.targetMouseUp.bind(this);
     this.rightMouseDown = this.rightMouseDown.bind(this);
 
+    this.container.addEventListener('mouseover', this.pointerOver);
+    this.container.addEventListener('mouseout', this.pointerOut);
+    
     this.icon.addEventListener('mousedown', this.mouseDown);
     this.icon.addEventListener('mouseup', this.targetMouseUp);
     this.icon.addEventListener('contextmenu', this.rightMouseDown);
@@ -53,10 +58,10 @@ export default class DataPin
     // only left mouse
     if(e.which != 1) return;
 
+    ConnectHelper.startDataPin(this, e);
+
     document.addEventListener('mousemove', this.mouseMove);
     document.addEventListener('mouseup', this.mouseUp);
-
-    ConnectHelper.startDataPin(this, e);
   }
 
   mouseUp(e) {
@@ -70,6 +75,14 @@ export default class DataPin
 
   mouseMove(e) {
     ConnectHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
+  }
+
+  pointerOver(e) {
+    ConnectHelper.snapTarget = this;
+  }
+
+  pointerOut(e) {
+    ConnectHelper.snapTarget = null;
   }
 
   targetMouseUp(e) {

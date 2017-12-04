@@ -12,6 +12,8 @@ class History
     this.undoBtn.addEventListener('click', this.undo)
     this.redoBtn.addEventListener('click', this.redo)
     this.updateButton()
+
+    this.enabled = true;
   }
 
   set blur(v) {
