@@ -203,9 +203,10 @@ idDiv.addEventListener('mousedown', e => {
 
   let range = document.createRange();
   range.selectNodeContents(temp);
+  // https://stackoverflow.com/questions/43260617/selection-addrange-is-deprecated-and-will-be-removed-from-chrome
+  window.getSelection().removeAllRanges();
   window.getSelection().addRange(range);
   document.execCommand('copy');
-  window.getSelection().removeAllRanges();
 
   document.body.removeChild(temp)
 
