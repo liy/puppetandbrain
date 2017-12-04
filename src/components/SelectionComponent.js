@@ -18,8 +18,8 @@ export default class SelectionComponent extends Component
 
     this.selected = false;
 
-    this.selectOutline = new filters.OutlineFilter(3, 0xFF0000)
-    this.hoverOutline = new filters.OutlineFilter(3, 0xFF9900)
+    this.selectOutline = new filters.OutlineFilter(4, 0x0084ff)
+    this.hoverOutline = new filters.OutlineFilter(1, 0x000000)
   }
 
   destroy() {

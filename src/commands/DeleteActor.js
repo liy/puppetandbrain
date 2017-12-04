@@ -14,7 +14,7 @@ export default class DeleteActor extends Command
     let actor = LookUp.get(this.actorID);
     this.pod = actor.pod(true);
 
-    console.log(this.pod)
+    actor.getComponent('SelectionComponent').deselect(actor)
 
     actor.destroy();
     Stage.removeActor(actor);
