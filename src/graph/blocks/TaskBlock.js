@@ -42,9 +42,9 @@ export default class TaskBlock extends Block
     }
 
     this.node.on('task.start', task => {
-      this.content.classList.add('glow');
+      this.content.classList.add('run');
       setTimeout(() => {
-        this.content.classList.remove('glow');
+        this.content.classList.remove('run');
       }, 500);
     })
   }

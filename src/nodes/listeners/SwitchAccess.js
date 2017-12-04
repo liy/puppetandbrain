@@ -25,6 +25,9 @@ export default class SwitchAccess extends Listener
   }
 
   prestart() {
+    // FIXME: if this block is deleted and redo, while game is running
+    // the event will not be registered.
+    // perhaps use promise??
     this.switch.on('switch.down', this.switchdown)
     this.switch.on('switch.up', this.switchup)
   }
