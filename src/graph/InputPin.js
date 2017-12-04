@@ -8,7 +8,7 @@ export default class InputPin extends DataPin
     this.type = 'input'
     this.pointer = this.node.inputs.get(this.name);
 
-    this.icon.className = 'icon in-disconnected';
+    this.icon.className = 'icon';
 
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke', '#98c6de');
@@ -19,6 +19,7 @@ export default class InputPin extends DataPin
     // default input element
     this.inputElement = document.createElement('input');
     this.inputElement.value = this.pointer.value || '' ;
+    this.container.appendChild(this.inputElement);
     this.inputElement.addEventListener('change', e => {
       this.node.variables[this.name] = e.target.value;
       if(this.node.initialState) {
@@ -29,26 +30,45 @@ export default class InputPin extends DataPin
     this.updateInputElement();
   }
 
+  setInputElement(element) {
+    this.container.removeChild(this.inputElement);
+
+    this.inputElement = element;
+    this.container.appendChild(this.inputElement);
+  }
+
   updateInputElement() {
-    if(this.container.contains(this.inputElement)){
-      this.container.removeChild(this.inputElement)
+    if(this.block.isHover) {
+      if(this.pointer.isOutputPointer) {
+        this.inputElement.style.visibility = 'hidden';
+        this.label.style.visibility = 'visible'
+      }
+      else {
+        this.inputElement.style.visibility = 'visible';
+        this.label.style.visibility = 'hidden'
+      }
+    }
+    else {
+      this.inputElement.style.visibility = 'hidden';
+      this.label.style.visibility = 'visible'
     }
 
-    // local variable pointer
-    if(!this.pointer.isOutputPointer) {
-      this.inputElement.value = this.pointer.value;
-      this.container.appendChild(this.inputElement);
-      if(this.pointer.value || this.pointer.value === 0) {
+    console.log(this.name, this.pointer.value)
+    // update icon
+    if(!this.isConnected) {
+      if(this.pointer.value) {
         this.icon.className = 'icon in-local';
       }
       else {
         this.icon.className = 'icon in-disconnected';
-        console.log('no data')
       }
+    }
+    else {
+      this.icon.className = 'icon in-connected';
     }
   }
 
-  showInput() {
+  blockover() {
     if(this.pointer.isOutputPointer) return;
     
     if(this.inputElement) {
@@ -57,7 +77,7 @@ export default class InputPin extends DataPin
     }
   }
 
-  hideInput() {
+  blockout() {
     this.label.style.visibility = 'visible';
     if(this.inputElement) {
       this.inputElement.style.visibility = 'hidden';
@@ -73,14 +93,12 @@ export default class InputPin extends DataPin
     this.updateInputElement();
 
     if(!this.isConnected) {
-      this.icon.className = 'icon in-disconnected';
       if(this.svg.contains(this.path)) this.svg.removeChild(this.path);
-      return;
     }
-
-    this.svg.appendChild(this.path);
-    this.icon.className = 'icon in-connected';
-    this.drawConnection();
+    else {
+      this.svg.appendChild(this.path);
+      this.drawConnection();
+    }
   }
 
   getOutputPin() {

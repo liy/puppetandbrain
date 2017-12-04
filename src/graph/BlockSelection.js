@@ -32,12 +32,10 @@ class BlockSelection
 
   select(block) {
     if(this.selected) {
-      this.selected.hideInputs();
       this.selected.content.classList.remove('block-selected')
     }
     this.selected = block;
     this.selected.content.classList.add('block-selected');
-    this.selected.showInputs();
     
   }
   
@@ -47,7 +45,6 @@ class BlockSelection
 
   deselectAll() {
     if(this.selected) {
-      this.selected.hideInputs();
       this.selected.content.classList.remove('block-selected')
       this.selected = null;
     }

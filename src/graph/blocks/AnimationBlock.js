@@ -6,10 +6,10 @@ export default class AnimationBlock extends TaskBlock
     super(node)
 
     let nameInput = this.inputPins.get('name');
-    if(nameInput.container.contains(nameInput.inputElement))nameInput.container.removeChild(nameInput.inputElement)
 
     let pointer = node.inputs.get('name');
-    let dropdown = nameInput.inputElement = document.createElement('select');
+    let dropdown = document.createElement('select');
+    nameInput.setInputElement(dropdown);
     this.node.owner.getAnimations().then(animations => {
       nameInput.updateInputElement();
 
@@ -35,6 +35,5 @@ export default class AnimationBlock extends TaskBlock
       this.node.initialState.variables['name'] = this.node.variables['name'] = e.target.value
       nameInput.updateInputElement();
     });
-    nameInput.container.appendChild(dropdown);
   }
 }

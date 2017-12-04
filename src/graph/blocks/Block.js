@@ -39,8 +39,8 @@ export default class Block
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
-    this.showInputs = this.showInputs.bind(this);
-    this.hideInputs = this.hideInputs.bind(this);
+    this.mouseover = this.mouseover.bind(this);
+    this.mouseout = this.mouseout.bind(this);
 
     document.addEventListener('mouseup', this.dragstop);
     this.dragArea.addEventListener('mousedown', this.dragstart);
@@ -50,18 +50,20 @@ export default class Block
       e.stopPropagation();
       // TODO: show menu for the block
     })
-    this.container.addEventListener('mouseover', this.showInputs)
-    this.container.addEventListener('mouseout', this.hideInputs)
+    this.container.addEventListener('mouseover', this.mouseover)
+    this.container.addEventListener('mouseout', this.mouseout)
 
     // append block to stage
     BrainGraph.addBlock(this);
     this.container.style.left = this.node.x +'px'
     this.container.style.top = this.node.y +'px'
+
+    this.isHover = false;
   }
 
   destroy() {
-    this.container.removeEventListener('mouseover', this.showInputs)
-    this.container.removeEventListener('mouseout', this.hideInputs)
+    this.container.removeEventListener('mouseover', this.mouseover)
+    this.container.removeEventListener('mouseout', this.mouseout)
     this.dragArea.removeEventListener('mousedown', this.dragstart);
     document.removeEventListener('mouseup', this.dragstop);
     document.removeEventListener('mousemove', this.dragmove);
@@ -91,15 +93,17 @@ export default class Block
     }
   }
 
-  showInputs() {
+  mouseover() {
+    this.isHover = true;
     for(let inputPin of this.inputPins.getValues()) {
-      inputPin.showInput();
+      inputPin.blockover();
     }
   }
 
-  hideInputs() {
+  mouseout() {
+    this.isHover = false;
     for(let inputPin of this.inputPins.getValues()) {
-      inputPin.hideInput();
+      inputPin.blockout();
     }
   }
 

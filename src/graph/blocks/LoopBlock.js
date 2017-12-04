@@ -14,5 +14,6 @@ export default class LoopBlock extends TaskBlock
     checkbox.addEventListener('click', e => {
       checkbox.value = this.node.variables['condition'] = !this.node.variables['condition'];
     })
+    pin.updateInputElement();
   }
 }
