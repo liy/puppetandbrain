@@ -40,6 +40,13 @@ export default class TaskBlock extends Block
       this.getRow(this.node.execution.names.length + i).appendChild(pin.container);
       this.outputPins.set(name, pin);
     }
+
+    this.node.on('task.start', task => {
+      this.content.classList.add('glow');
+      setTimeout(() => {
+        this.content.classList.remove('glow');
+      }, 500);
+    })
   }
 
   refreshExecutionPins() {

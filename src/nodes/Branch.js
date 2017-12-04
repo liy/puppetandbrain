@@ -13,6 +13,8 @@ export default class Branch extends Task
   }
 
   run() {
+    super.run();
+    
     let condition = this.inputs.value('condition');
     if(condition === 'true' || condition === true ) {
       this.execution.run('true')

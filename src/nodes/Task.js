@@ -6,7 +6,7 @@ export default class Task extends Node
 {
   constructor(id) {
     super(id);
-    this.execution = new Execution();
+    this.execution = new Execution(this);
     this.callers = new ArrayMap();
   }
 
@@ -72,7 +72,8 @@ export default class Task extends Node
   }
 
   run() {
-    console.log('run', this.nodeName, this.id);
+    this.emit('task.start', this);
+    // console.log('run', this.nodeName, this.id);
   }
 
   pod(detail=false) {

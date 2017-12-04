@@ -2,7 +2,7 @@ import ArrayMap from "../utils/ArrayMap";
 
 export default class Execution extends ArrayMap
 {
-  constructor(id) {
+  constructor() {
     super();
 
     this.set('default')

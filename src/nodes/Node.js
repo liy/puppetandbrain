@@ -1,10 +1,12 @@
 import InputList from "../data/InputList";
 import OutputList from "../data/OutputList";
 import Execution from "./Execution";
+import EventEmitter from "../utils/EventEmitter";
 
-export default class Node
+export default class Node extends EventEmitter
 {
   constructor(id) {
+    super();
     this.id = LookUp.addNode(this, id);
 
     // this.variables = Object.create(null);

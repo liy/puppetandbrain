@@ -17,6 +17,8 @@ export default class Flip extends Task
   }
 
   run() {
+    super.run();
+    
     let dir = this.inputs.value('direction').toLowerCase();
     if(dir == 'y' || dir == 'vertical') {
       // this.owner.scale.y *= -1;

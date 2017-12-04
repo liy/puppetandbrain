@@ -31,6 +31,8 @@ export default class PlaySound extends Task
   }
 
   run() {
+    super.run();
+    
     this.audio = new Audio(this.inputs.value('sound url'));
     this.audio.addEventListener('ended', this.complete, {once: true})
 
