@@ -14,6 +14,18 @@ class History
     this.updateButton()
   }
 
+  set blur(v) {
+    this.enabled = !v;
+    if(v) {
+      this.redoBtn.classList.add('blur');
+      this.undoBtn.classList.add('blur');
+    }
+    else {
+      this.redoBtn.classList.remove('blur');
+      this.undoBtn.classList.remove('blur');
+    }
+  }
+
   keydown(e) {
     if(e.keyCode == '90' && e.ctrlKey) {
       this.undo();
@@ -38,7 +50,7 @@ class History
   }
 
   undo() {
-    if(this.undos.length == 0) return;
+    if(this.undos.length == 0 || !this.enabled) return;
 
     let cmd = this.undos.pop();
     cmd.undo();
@@ -51,13 +63,13 @@ class History
   }
 
   redo() {
-    if(this.redos.length == 0) return;
+    if(this.redos.length == 0  || !this.enabled) return;
     let cmd = this.redos.pop();
     cmd.redo();
     this.undos.push(cmd);
 
     LookUp.save();
-    
+
     // if(cmd.passThrough) this.redo();
     this.updateButton()
   }
