@@ -4,6 +4,14 @@ class History
     this.undos = [];
     this.redos = [];
     document.addEventListener('keydown', this.keydown.bind(this));
+    
+    this.undoBtn = document.getElementById('undo-button');
+    this.redoBtn = document.getElementById('redo-button');
+    this.undo = this.undo.bind(this);
+    this.redo = this.redo.bind(this);
+    this.undoBtn.addEventListener('click', this.undo)
+    this.redoBtn.addEventListener('click', this.redo)
+    this.updateButton()
   }
 
   keydown(e) {
@@ -25,6 +33,7 @@ class History
       if(this.undos.length > 200) {
         this.undos.shift();
       }
+      this.updateButton()
     }
   }
 
@@ -36,6 +45,7 @@ class History
     this.redos.push(cmd);
 
     // if(cmd.passThrough) this.undo();
+    this.updateButton()
   }
 
   redo() {
@@ -45,11 +55,34 @@ class History
     this.undos.push(cmd);
 
     // if(cmd.passThrough) this.redo();
+    this.updateButton()
   }
 
   clear() {
     this.undos = [];
     this.redos = [];
+
+    this.updateButton()
+  }
+
+  updateButton() {
+    if(this.undos.length == 0) {
+      this.undoBtn.style.opacity = 0.2;
+      this.undoBtn.style.cursor = 'default'
+    }
+    else {
+      this.undoBtn.style.opacity = 1;
+      this.undoBtn.style.cursor = 'pointer'
+    }
+
+    if(this.redos.length == 0) {
+      this.redoBtn.style.opacity = 0.2;
+      this.redoBtn.style.cursor = 'default'
+    }
+    else {
+      this.redoBtn.style.opacity = 1;
+      this.redoBtn.style.cursor = 'pointer'
+    }
   }
 }
 

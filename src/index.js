@@ -194,11 +194,20 @@ idDiv.addEventListener('mousedown', e => {
   e.preventDefault();
   e.stopImmediatePropagation();
 
+  let temp = document.createElement('div');
+  temp.style.position = 'absolute';
+  temp.style.bottom = '-999px';
+  temp.textContent = window.location.href;
+  document.body.appendChild(temp)
+
   let range = document.createRange();
-  range.selectNodeContents(idDiv);
+  range.selectNodeContents(temp);
   window.getSelection().addRange(range);
   document.execCommand('copy');
   window.getSelection().removeAllRanges();
+
+  document.body.removeChild(temp)
+
 })
 
 // Persist the sign in token in local machine, probably in local storage or something in browser... whatever.

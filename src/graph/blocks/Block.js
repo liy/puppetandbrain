@@ -87,7 +87,7 @@ export default class Block
     // Since dragstop is listening on document, have to make sure only the dragging block push the movecommand
     if(e.target == this.dragArea) {
       // process and push to history
-      if(this.moveCommand) this.moveCommand.processAndSave()
+      if(this.moveCommand) History.push(this.moveCommand.processAndSave());
     }
   }
 

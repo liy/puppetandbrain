@@ -52,6 +52,6 @@ export default class DragComponent extends Component
     this.data = null;
     
     // update entity's new position
-    if(this.moveCommand) this.moveCommand.processAndSave()
+    if(this.moveCommand) History.push(this.moveCommand.processAndSave());
   }
 }
