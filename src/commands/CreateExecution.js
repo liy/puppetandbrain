@@ -38,7 +38,7 @@ export default class CreateExecution extends Command
   }
 
   redo() {
-    this.processAndSave();
+    this.process();
     BrainGraph.refresh()
   }
 }

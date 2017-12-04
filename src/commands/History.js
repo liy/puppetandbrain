@@ -44,6 +44,8 @@ class History
     cmd.undo();
     this.redos.push(cmd);
 
+    LookUp.save();
+
     // if(cmd.passThrough) this.undo();
     this.updateButton()
   }
@@ -54,6 +56,8 @@ class History
     cmd.redo();
     this.undos.push(cmd);
 
+    LookUp.save();
+    
     // if(cmd.passThrough) this.redo();
     this.updateButton()
   }

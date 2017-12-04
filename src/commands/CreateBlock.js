@@ -43,6 +43,6 @@ export default class CreateBlock extends Command
   }
 
   redo() {
-    this.processAndSave();
+    this.process();
   }
 }

@@ -20,7 +20,7 @@ export default class CreateVariable extends Command
   }
 
   undo() {
-    Commander.create('DeleteVariable', this.brainID, this.variableID).processAndSave();
+    Commander.create('DeleteVariable', this.brainID, this.variableID).process();
     // indicate it is removed... just in case
     this.variable = null;
   }

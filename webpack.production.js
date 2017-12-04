@@ -59,9 +59,13 @@ module.exports = {
     }),
     new UglifyJSPlugin({ 
       uglifyOptions: {
-        sourceMap: true,
+        sourceMap: false,
         mangle: {
           keep_fnames: true,
+        },
+        // remove console
+        compress: {
+          drop_console: true
         }
       }
     }),

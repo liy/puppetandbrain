@@ -55,6 +55,6 @@ export default class CreateActor extends Command
   }
 
   redo() {
-    this.processAndSave();
+    this.process();
   }
 }

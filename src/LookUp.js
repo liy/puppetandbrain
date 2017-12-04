@@ -1,5 +1,6 @@
 // import shortid from 'shortid';
 import Task from './nodes/Task';
+import Delay from './switch/Delay';
 
 // var STORE = Object.create(null);
 var STORE = {};
@@ -10,7 +11,10 @@ var BRAINS = [];
 var VARIABLES = [];
 
 var activityID = null;
+var ownerID = null;
 var creating = false;
+
+var delaySave = new Delay();
 
 function create(entry, id) {
   if(!id) {
@@ -38,52 +42,65 @@ window.LookUp = {
   store: STORE,
   user: null,
 
+  setOwnerID: function(id) {
+    ownerID = id;
+  },
+
   setActivityID: function(id) {
     activityID = id;
     document.getElementById('activity-id').textContent = activityID;
   },
 
-  save: function() {
+  save: async function() {
     if(!this.user.uid) {
       console.error('User id cannot be null', this.user.uid); 
       return;
     }
 
+    // Wait for 3 second then start saving
+    delaySave.cancel();
+    await delaySave.wait(3000);
+
     let pod = this.pod();
+    // Set the new activity's owner to be the user
     pod.userID = this.user.uid;
 
-    if(activityID) {
-      console.log('saving existing activity!')
-      firebase.firestore().collection('activities').doc(activityID).set(pod).then(result => {
-        console.info('Done update activity: ', result)
+    // If it is brand activity created locally and also make sure
+    // the activity owned by the user
+    if(activityID && ownerID == this.user.uid) {
+      console.log('Updating activity...')
+      await firebase.firestore().collection('activities').doc(activityID).set(pod).then(() => {
+        console.info('Successfully updating activity')
       }).catch(error => {
-        console.error('Error update activity: ', error)
+        console.error('Error updating activity: ', error)
       })
     }
     else {
-      console.log('creating new activity!')
+      console.log('Creating new activity...')
       if(creating) {
-        console.info('Waiting for creating activity...')
+        console.info('Waiting for activity creation...')
         return;
-      } 
+      }
 
       creating = true;
-      console.log(pod)
-      // let test = {
-      //   nested: {
-      //     names: ['testing', 'what']
-      //   }
-      // }
-      firebase.firestore().collection('activities').add(pod).then(docRef => {
-        this.setActivityID(docRef.id)
+      await firebase.firestore().collection('activities').add(pod).then(docRef => {
+        this.setActivityID(docRef.id);
+        this.setOwnerID(this.user.uid);
         creating = false;
-        console.info('Done create activity: ', docRef)
-        window.location.href += '#' + docRef.id;
+        console.info('Sucessfully creating activity')
+        window.location.href = window.location.href.split('#')[0] + '#' + docRef.id;
       }).catch(error => {
-        console.error('Error create activity: ', error)
+        console.error('Error creating activity: ', error)
         creating = false;
       })
     }
+
+    // activity look up for the user
+    firebase.firestore().collection('users').doc(this.user.uid).set({
+      activities: {[activityID]: {
+        updated: firebase.firestore.FieldValue.serverTimestamp()
+      }}
+    }, {merge: true})
   },
 
   addActor: function(entry, id) {

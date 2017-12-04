@@ -150,9 +150,10 @@ async function load(activityID) {
   // TODO: get data from firestore
   let snapshot = await firebase.firestore().collection('activities').doc(activityID).get();
   var loader = new ActivityLoader();
-  // await loader.load(require('./assets/activity.json'))
-  loader.parse(snapshot.data())
+  let pod = snapshot.data();
+  loader.parse(pod)
   LookUp.setActivityID(activityID);
+  LookUp.setOwnerID(pod.userID);
 
   let promises = LookUp.getActors().map(actor => {
     return actor.loaded;

@@ -31,6 +31,6 @@ export default class RemoveExecution extends Command
   }
 
   redo() {
-    this.processAndSave();
+    this.process();
   }
 }

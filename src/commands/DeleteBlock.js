@@ -60,7 +60,7 @@ export default class DeleteBlock extends Command
   }
 
   redo() {
-    this.processAndSave();
+    this.process();
     BrainGraph.refresh();
   }
 }

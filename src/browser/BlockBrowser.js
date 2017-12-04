@@ -17,7 +17,6 @@ export default class BlockBrowser extends Browser
 
     return new Promise((resolve, reject) => {
       this.contentSection.element.addEventListener('mousedown', e => {
-        console.log('?!')
         this.close();
         resolve();
       })

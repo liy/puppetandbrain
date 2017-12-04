@@ -43,6 +43,6 @@ export default class RemoveInputDataLink extends Command
   }
 
   redo() {
-    this.processAndSave();
+    this.process();
   }
 }

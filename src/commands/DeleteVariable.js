@@ -132,7 +132,7 @@ export default class DeleteVariable extends Command
   }
 
   redo() {
-    this.processAndSave();
+    this.process();
     BrainGraph.refresh();
   }
 }

@@ -98,6 +98,6 @@ export default class CreateDemoActor extends Command
   }
 
   redo() {
-    this.processAndSave();
+    this.process();
   }
 }

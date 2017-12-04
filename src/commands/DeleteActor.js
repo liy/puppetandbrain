@@ -52,6 +52,6 @@ export default class DeleteActor extends Command
   }
 
   redo() {
-    this.processAndSave();
+    this.process();
   }
 }
