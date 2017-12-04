@@ -1,9 +1,9 @@
 export default class Debounce
 {
-  constructor(debounce) {
+  constructor(access) {
     this.timeoutIDs = {};
     this.map = {};
-    this.debounce = debounce || 0;
+    this.access = access;
   }
 
   filter(id) {
@@ -14,7 +14,7 @@ export default class Debounce
     clearTimeout(this.timeoutIDs[id]);
     this.timeoutIDs[id] = setTimeout(() => {
       this.map[id] = false;
-    }, this.debounce);
+    }, Number(this.access.inputs.value('debounce'))*1000);
 
     return pass;
   }

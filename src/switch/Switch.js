@@ -4,8 +4,9 @@ import EventEmitter from '../utils/EventEmitter';
 
 export default class Switch extends EventEmitter
 {
-  constructor(debounce=0, preAcceptance=0){
+  constructor(access){
     super();
+    this.access = access;
     this.enabled = true;
 
     // physical device id mapping
@@ -17,7 +18,7 @@ export default class Switch extends EventEmitter
       51: 'right'
     }
 
-    this.debounce = new Debounce(debounce);
+    this.debounce = new Debounce(access);
 
     this.switchDownMap = Object.create(null);
 
@@ -33,7 +34,7 @@ export default class Switch extends EventEmitter
     this.keydown = this.keydown.bind(this);
     this.keyup = this.keyup.bind(this);
     // Add pre-acceptance filter, auto trigger keydown or keyup when pre-acceptanec is processed.
-    this.preAcceptance = new PreAcceptance(preAcceptance, this.keydown, this.keyup)
+    this.preAcceptance = new PreAcceptance(access, this.keydown, this.keyup)
   }
 
   destroy() {

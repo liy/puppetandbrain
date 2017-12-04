@@ -20,18 +20,16 @@ export default class SwitchAccess extends Listener
 
     Stage.on('game.prestart', this.prestart, this)
     Stage.on('game.stop', this.stop, this)
+
+    this.switch = new Switch(this);
   }
 
   prestart() {
-    // Everything is in second!
-    this.switch = new Switch( Number(this.inputs.value('debounce'))*1000, Number(this.inputs.value('pre-acceptance'))*1000);
     this.switch.on('switch.down', this.switchdown)
     this.switch.on('switch.up', this.switchup)
   }
 
   stop() {
-    // TODO: maybe just disable it?
-    this.switch.destroy();
     this.switch.off('switch.down', this.switchdown)
     this.switch.off('switch.up', this.switchup)
   }
@@ -53,4 +51,6 @@ export default class SwitchAccess extends Listener
     this.outputs.assignValue('which', data.which);
     this.execution.run('switch up');
   }
+
+
 }

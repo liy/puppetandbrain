@@ -2,8 +2,8 @@ import Delay from './Delay';
 
 export default class PreAcceptance
 {
-  constructor(preAcceptance, keyDown, keyUp) {
-    this.preAcceptance = preAcceptance;
+  constructor(access, keyDown, keyUp) {
+    this.access = access;
     this.keyDown = keyDown;
     this.keyUp = keyUp;
 
@@ -36,9 +36,10 @@ export default class PreAcceptance
     this.keyFilter[e.keyCode] = true;
     
     // if preAccetance is 0 or not defined, no need to wait
-    if(!!this.preAcceptance) {
+    let preAcceptance = Number(this.access.inputs.value('pre-acceptance'))*1000;
+    if(!!preAcceptance) {
       let delay = this.delays[e.keyCode] = new Delay();
-      await delay.wait(this.preAcceptance);
+      await delay.wait(preAcceptance);
     }
     
     this.keyDownMap[e.keyCode] = true;

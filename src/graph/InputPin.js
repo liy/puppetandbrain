@@ -18,7 +18,12 @@ export default class InputPin extends DataPin
 
     // default input element
     this.inputElement = document.createElement('input');
-    this.inputElement.value = this.pointer.value || '' ;
+    if(this.pointer.value || this.pointer.value == 0) {
+      this.inputElement.value = this.pointer.value
+    }
+    else {
+      this.inputElement.value = ''
+    }
     this.container.appendChild(this.inputElement);
     this.inputElement.addEventListener('change', e => {
       this.node.variables[this.name] = e.target.value;
