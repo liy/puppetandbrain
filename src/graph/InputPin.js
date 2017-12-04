@@ -60,7 +60,7 @@ export default class InputPin extends DataPin
 
     // update icon
     if(!this.isConnected) {
-      if(this.pointer.value) {
+      if(this.pointer.value || this.pointer.value == 0) {
         this.icon.className = 'icon in-local';
       }
       else {
