@@ -76,14 +76,14 @@ export default class DummyBlock extends EventEmitter
       this.getRow(this.data.out.length + i).appendChild(pin.container);
     }
 
-    this.mousedown = this.mousedown.bind(this);
+    this.pointerdown = this.pointerdown.bind(this);
     // Note the capture phase I'm using, I stop the propagation immediately which stop other
     // elements receiving mouse down event. So that I can eaily assume that only hit area will
     // receive this mouse down event.
-    this.hitArea.addEventListener('mousedown', this.mousedown, true);
+    this.hitArea.addEventListener('mousedown', this.pointerdown, true);
   }
 
-  mousedown(e) {
+  pointerdown(e) {
     e.preventDefault();
     e.stopPropagation();
     

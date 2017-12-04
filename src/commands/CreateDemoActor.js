@@ -50,13 +50,17 @@ export default class CreateDemoActor extends Command
       }
     })
 
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
     let playSound = new PlaySound();
     playSound.init({
       owner: actor,
       x: 500,
       y: 50,
       variables: {
-        'sound url': 'Jambalaya Loop.ogg'
+        'sound url': 'Jambalaya Loop.ogg',
+        // On mobile play sound require a user interaciton so enable loop by default
+        'loop': isMobile
       }
     })
 
@@ -66,21 +70,25 @@ export default class CreateDemoActor extends Command
       x: 50,
       y: 250
     })
-
+    
     let playEventSound = new PlaySound();
     playEventSound.init({
       owner: actor,
       x: 250,
       y: 250,
       variables: {
-        'sound url': 'Jambalaya Loop.ogg'
+        'sound url': '',
+        'loop': false
       }
     })
 
     gameStart.connectNext(animation)
     animation.connectNext(playSound);
-    // keep play the sound!
-    playSound.connectNext(playSound, 'completed');
+    // on desktop use recursion 
+    if(!isMobile) {
+      // keep play the sound!
+      playSound.connectNext(playSound, 'completed');
+    }
 
     animationEvent.connectNext(playEventSound);
     // play event sound

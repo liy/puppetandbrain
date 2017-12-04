@@ -6,6 +6,7 @@ export default class PlaySound extends Task
     super(id);
 
     this.inputs.addInput('sound url');
+    this.inputs.addInput('loop');
 
     this.outputs.addOutput('audio');
     // sound complete execution
@@ -15,10 +16,6 @@ export default class PlaySound extends Task
     this.complete = this.complete.bind(this);
 
     Stage.on('game.stop', this.stop)
-  }
-
-  init(pod) {
-    super.init(pod);
   }
 
   destroy() {
@@ -34,6 +31,8 @@ export default class PlaySound extends Task
     super.run();
     
     this.audio = new Audio(this.inputs.value('sound url'));
+    this.audio.loop = Boolean(this.inputs.value('loop'));
+    console.log(this.audio.loop)
     this.audio.addEventListener('ended', this.complete, {once: true})
 
     this.audio.play();

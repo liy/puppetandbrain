@@ -18,6 +18,9 @@ class BrainGraph
 
     this.dbClicks = 0;
 
+    this.lastTouchX = 0;
+    this.lastTouchY = 0;
+
     this.scale = 1;
     this.translateX = 0;
     this.translateY = 0;
@@ -30,7 +33,9 @@ class BrainGraph
     this.onPan = this.onPan.bind(this);
     this.stopPan = this.stopPan.bind(this);
     this.container.addEventListener('mousedown', this.startPan);
+    this.container.addEventListener('touchstart', this.startPan);
     document.addEventListener('mouseup', this.stopPan);
+    document.addEventListener('touchend', this.stopPan);
     this.container.addEventListener('wheel', e => {
       let ox = e.clientX * this.scale ;
       let oy = e.clientY * this.scale  
@@ -54,19 +59,35 @@ class BrainGraph
   }
 
   startPan(e) {
+    if(e.which == 0) {
+      this.lastTouchX = e.touches[0].clientX 
+      this.lastTouchY = e.touches[0].clientY 
+    }
+
     if(e.target == this.container) {
       this.container.addEventListener('mousemove', this.onPan);
+      this.container.addEventListener('touchmove', this.onPan);
     }
   }
 
   onPan(e) {
-    this.translateX += e.movementX;
-    this.translateY += e.movementY;
+    if(e.touches) {
+      this.translateX += e.touches[0].clientX - this.lastTouchX
+      this.translateY += e.touches[0].clientY - this.lastTouchY
+      
+      this.lastTouchX = e.touches[0].clientX 
+      this.lastTouchY = e.touches[0].clientY 
+    }
+    else {
+      this.translateX += e.movementX;
+      this.translateY += e.movementY;
+    }
     this.updateTransform();
   }
 
   stopPan(e) {
     this.container.removeEventListener('mousemove', this.onPan);
+    this.container.removeEventListener('touchmove', this.onPan);
   }
 
   updateTransform() {
@@ -84,13 +105,13 @@ class BrainGraph
 
     this.resize = this.resize.bind(this);
     this.keydown = this.keydown.bind(this)
-    this.mousedown = this.mousedown.bind(this);
+    this.pointerdown = this.pointerdown.bind(this);
     this.openBlockMenu = this.openBlockMenu.bind(this)
 
     this.container.style = "visibility:visible"
 
     this.container.addEventListener('contextmenu', this.openBlockMenu);
-    this.container.addEventListener('mousedown', this.mousedown);
+    this.container.addEventListener('mousedown', this.pointerdown);
     document.addEventListener('keydown', this.keydown);
     window.addEventListener('resize', this.resize);
     this.resize();
@@ -114,7 +135,7 @@ class BrainGraph
 
     document.getElementById('control').classList.remove('blur')
     this.container.removeEventListener('contextmenu', this.openBlockMenu);
-    this.container.removeEventListener('mousedown', this.mousedown);
+    this.container.removeEventListener('mousedown', this.pointerdown);
     document.removeEventListener('keydown', this.keydown);
     window.removeEventListener('resize', this.resize);
     
@@ -156,8 +177,15 @@ class BrainGraph
     this.draw();
   }
 
-  mousedown(e) {
-    if(e.target == this.container) {
+  pointerdown(e) {
+    let target = e.target;
+    if(e.which == 0) {
+      let touch = e.changedTouches[0];
+      target = document.elementFromPoint(touch.clientX, touch.clientY);
+    }
+    if(target == this.container) {
+      e.preventDefault();
+      
       if(++this.dbClicks%2 == 0) {
         History.push(Commander.create('CloseGraph', this.brain.id).process());
         return;
@@ -236,7 +264,6 @@ class BrainGraph
   }
 
   openBlockMenu(e) {
-    console.log(e.target)
     if(e.target == this.container) {
       e.stopPropagation();
       e.preventDefault();

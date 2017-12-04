@@ -16,6 +16,8 @@ export default class DataPin
     this.container.style = `float:${location}; clear:${location};`
 
     this.icon =  document.createElement('div');
+    // FIXME: hack for touches, get the pin from dom element
+    this.icon.pin = this;
     this.icon.className = 'icon'
     this.container.appendChild(this.icon);
     // this.icon.style = `${location}:5px`
@@ -31,18 +33,21 @@ export default class DataPin
     this.pointerOver = this.pointerOver.bind(this)
     this.pointerOut = this.pointerOut.bind(this)
 
-    this.mouseDown = this.mouseDown.bind(this);
-    this.mouseMove = this.mouseMove.bind(this);
-    this.mouseUp = this.mouseUp.bind(this);
-    this.targetMouseUp = this.targetMouseUp.bind(this);
-    this.rightMouseDown = this.rightMouseDown.bind(this);
+    this.pointerDown = this.pointerDown.bind(this);
+    this.pointerMove = this.pointerMove.bind(this);
+    this.pointerUp = this.pointerUp.bind(this);
+    this.targetPointerUp = this.targetPointerUp.bind(this);
+    this.onContextMenu = this.onContextMenu.bind(this);
 
     this.container.addEventListener('mouseover', this.pointerOver);
     this.container.addEventListener('mouseout', this.pointerOut);
     
-    this.icon.addEventListener('mousedown', this.mouseDown);
-    this.icon.addEventListener('mouseup', this.targetMouseUp);
-    this.icon.addEventListener('contextmenu', this.rightMouseDown);
+    // add listener to icon prevent interfere with input field drag 
+    this.icon.addEventListener('mousedown', this.pointerDown);
+    this.icon.addEventListener('mouseup', this.targetPointerUp);
+    this.icon.addEventListener('touchstart', this.pointerDown);
+    this.icon.addEventListener('touchend', this.targetPointerUp);
+    this.icon.addEventListener('contextmenu', this.onContextMenu);
   }
 
   get position() {
@@ -54,27 +59,50 @@ export default class DataPin
     }
   }
 
-  mouseDown(e) {
+  pointerDown(e) {
+    ConnectHelper.snapTarget = null;
     // only left mouse
-    if(e.which != 1) return;
+    if(e.which == 1 || e.which == 0) {
 
-    ConnectHelper.startDataPin(this, e);
-
-    document.addEventListener('mousemove', this.mouseMove);
-    document.addEventListener('mouseup', this.mouseUp);
+      ConnectHelper.startDataPin(this, e);
+      
+      document.addEventListener('mousemove', this.pointerMove);
+      document.addEventListener('mouseup', this.pointerUp);
+      document.addEventListener('touchmove', this.pointerMove);
+      document.addEventListener('touchend', this.pointerUp);
+    }
   }
 
-  mouseUp(e) {
+  pointerUp(e) {
     // only left mouse
-    if(e.which != 1) return;
-
-    document.removeEventListener('mousemove', this.mouseMove)
-    document.removeEventListener('mouseup', this.mouseUp);
-    ConnectHelper.stop(e)
+    if(e.which == 1 || e.which == 0) {
+      document.removeEventListener('mousemove', this.pointerMove)
+      document.removeEventListener('mouseup', this.pointerUp);
+      document.removeEventListener('touchmove', this.pointerMove);
+      document.removeEventListener('touchend', this.pointerUp);
+      ConnectHelper.stop(e)
+    }
   }
 
-  mouseMove(e) {
-    ConnectHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
+  updateSnapTarget(e) {
+    if(e.changedTouches) {
+      let touch = e.changedTouches[0];
+      let target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if(target.pin) {
+        ConnectHelper.snapTarget = target.pin;
+      }
+      else {
+        ConnectHelper.snapTarget = null;
+      }
+    }
+  }
+
+  pointerMove(e) {
+    this.updateSnapTarget(e);
+
+    let sx = e.clientX ? e.clientX : e.touches[0].clientX 
+    let sy = e.clientY ? e.clientY : e.touches[0].clientY 
+    ConnectHelper.drawLine(this.position.x, this.position.y, sx, sy);
   }
 
   pointerOver(e) {
@@ -85,14 +113,18 @@ export default class DataPin
     ConnectHelper.snapTarget = null;
   }
 
-  targetMouseUp(e) {
-    // only left mouse
-    if(e.which != 1) return;
-
-    ConnectHelper.connectDataPin(this)
+  targetPointerUp(e) {
+    if(e.which == 1) {
+      ConnectHelper.connectDataPin(this)
+    }
+    else if(e.which == 0){
+      let touch = e.changedTouches[0];
+      let target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if(target.pin) ConnectHelper.connectDataPin(target.pin)
+    }
   }
 
-  rightMouseDown(e) {
+  onContextMenu(e) {
     e.preventDefault();
     e.stopPropagation();
   }

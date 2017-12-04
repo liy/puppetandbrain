@@ -77,6 +77,23 @@ class ConnectHelper
     }
   }
 
+  async touchStop(e) {
+    let touch = e.changedTouches[0];
+    let target = document.elementFromPoint(touch.clientX, touch.clientY);
+    if(target == BrainGraph.container) {
+
+      var browser = new BlockBrowser();
+      let createdNode = await browser.open(touch.clientX, touch.clientY);
+
+      // TODO: auto connect here
+      if(createdNode) AutoConnect.process(this.startPin, createdNode);
+    }
+
+    if(this.svg.contains(this.path)) {
+      this.svg.removeChild(this.path);
+    }
+}
+
   startExecutionPin(pin, e) {
     this.startPin = pin;
     this.path.setAttribute('stroke', '#c6d4f7');
@@ -85,7 +102,9 @@ class ConnectHelper
     this.path.setAttribute('fill', 'transparent');
 
     this.svg.appendChild(this.path);
-    this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
+    let sx = e.clientX ? e.clientX : e.touches[0].clientX 
+    let sy = e.clientY ? e.clientY : e.touches[0].clientY 
+    this.drawLine(sx, sy, sx, sy);
     this.dragType = 'execution'
   }
 
@@ -97,7 +116,9 @@ class ConnectHelper
     this.path.setAttribute('fill', 'transparent');
 
     this.svg.appendChild(this.path);
-    this.drawLine(e.clientX, e.clientY, e.clientX, e.clientY);
+    let sx = e.clientX ? e.clientX : e.touches[0].clientX 
+    let sy = e.clientY ? e.clientY : e.touches[0].clientY 
+    this.drawLine(sx, sy, sx, sy);
     this.dragType = 'data'
   }
 

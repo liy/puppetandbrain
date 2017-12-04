@@ -43,7 +43,9 @@ export default class Block
     this.mouseout = this.mouseout.bind(this);
 
     document.addEventListener('mouseup', this.dragstop);
+    document.addEventListener('touchend', this.dragstop);
     this.dragArea.addEventListener('mousedown', this.dragstart);
+    this.dragArea.addEventListener('touchstart', this.dragstart);
     // stop right click on block
     this.dragArea.addEventListener('contextmenu', e => {
       e.preventDefault();
@@ -65,26 +67,32 @@ export default class Block
     this.container.removeEventListener('mouseover', this.mouseover)
     this.container.removeEventListener('mouseout', this.mouseout)
     this.dragArea.removeEventListener('mousedown', this.dragstart);
+    this.dragArea.removeEventListener('touchstart', this.dragstart);
     document.removeEventListener('mouseup', this.dragstop);
+    document.removeEventListener('touchend', this.dragstop);
     document.removeEventListener('mousemove', this.dragmove);
+    document.removeEventListener('touchmove', this.dragmove);
     BrainGraph.removeBlock(this);
   }
 
   dragstart(e) {
     BlockSelection.select(this);
 
-
+    let sx = e.clientX ? e.clientX : e.touches[0].clientX;
+    let sy = e.clientY ? e.clientY : e.touches[0].clientY;
     this._dragOffset = {
-      x: (this.container.getBoundingClientRect().left - e.clientX),
-      y: (this.container.getBoundingClientRect().top - e.clientY)
+      x: (this.container.getBoundingClientRect().left - sx),
+      y: (this.container.getBoundingClientRect().top - sy)
     }
     document.addEventListener('mousemove', this.dragmove)
+    document.addEventListener('touchmove', this.dragmove)
 
     this.moveCommand = Commander.create('MoveBlock', this);
   }
 
   dragstop(e) {
     document.removeEventListener('mousemove', this.dragmove);
+    document.removeEventListener('touchmove', this.dragmove);
 
     // Since dragstop is listening on document, have to make sure only the dragging block push the movecommand
     if(e.target == this.dragArea) {
@@ -117,9 +125,11 @@ export default class Block
   }
 
   dragmove(e) {
+    let sx = e.clientX ? e.clientX : e.touches[0].clientX;
+    let sy = e.clientY ? e.clientY : e.touches[0].clientY;
     // Make sure all of the values are in client coordincate system. Then apply a scale
-    this.x = (e.clientX - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale ;
-    this.y = (e.clientY - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale ;
+    this.x = (sx - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale ;
+    this.y = (sy - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale ;
   }
 
   set x(x) {

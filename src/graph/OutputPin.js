@@ -39,12 +39,16 @@ export default class OutputPin extends DataPin
     }
   }
 
-  mouseMove(e) {
-    ConnectHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
+  pointerMove(e) {
+    this.updateSnapTarget(e);
+    
+    let sx = e.clientX ? e.clientX : e.touches[0].clientX 
+    let sy = e.clientY ? e.clientY : e.touches[0].clientY
+    ConnectHelper.drawLine(sx, sy, this.position.x, this.position.y);
   }
 
-  rightMouseDown(e) {
-    super.rightMouseDown(e);
+  onContextMenu(e) {
+    super.onContextMenu(e);
     History.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).processAndSave());
   }
 

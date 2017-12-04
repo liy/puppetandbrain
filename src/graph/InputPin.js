@@ -110,8 +110,8 @@ export default class InputPin extends DataPin
     return BrainGraph.getBlock(this.pointer.output.node.id).outputPins.get(this.pointer.output.name);
   }
 
-  rightMouseDown(e) {
-    super.rightMouseDown(e);
+  onContextMenu(e) {
+    super.onContextMenu(e);
     History.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).processAndSave());
   }
 

@@ -32,12 +32,16 @@ export default class ExecutionInPin extends ExecutionPin
   }
 
   pointerMove(e) {
+    this.updateSnapTarget(e);
+
+    let sx = e.clientX ? e.clientX : e.touches[0].clientX 
+    let sy = e.clientY ? e.clientY : e.touches[0].clientY 
     // create a temp link, between initial execution pin position to current mouse position
-    ConnectHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
+    ConnectHelper.drawLine(this.position.x, this.position.y, sx, sy);
   }
 
-  rightMouseDown(e) {
-    super.rightMouseDown(e)
+  onContextMenu(e) {
+    super.onContextMenu(e)
 
     // Loop through all callers to remove execution, note that process
     // does not refresh, manual refresh has to be made

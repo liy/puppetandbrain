@@ -21,6 +21,8 @@ export default class ExecutionPin
     this.container.className = 'execution-pin';
 
     this.icon =  document.createElement('div');
+    // FIXME: hack for touches, get the pin from dom element
+    this.icon.pin = this;
     this.icon.className = 'icon in-disconnected'
     this.container.appendChild(this.icon);
     // this.icon.style = `${location}:5px`
@@ -40,14 +42,10 @@ export default class ExecutionPin
     this.pointerMove = this.pointerMove.bind(this);
     this.pointerUp = this.pointerUp.bind(this);
     this.targetPointerUp = this.targetPointerUp.bind(this);
-    this.rightMouseDown = this.rightMouseDown.bind(this);
-
+    this.onContextMenu = this.onContextMenu.bind(this);
     
-    // document.addEventListener('touchmove', (e => {
-    //   console.log('!!!!')
-    // }));
-
-    
+    this.container.addEventListener('touchenter', this.pointerOver);
+    this.container.addEventListener('touchleave', this.pointerOut);
     this.container.addEventListener('mouseover', this.pointerOver);
     this.container.addEventListener('mouseout', this.pointerOut);
 
@@ -56,24 +54,38 @@ export default class ExecutionPin
     
     this.container.addEventListener('mousedown', this.pointerDown);
     this.container.addEventListener('mouseup', this.targetPointerUp);
-    this.container.addEventListener('contextmenu', this.rightMouseDown);
+    this.container.addEventListener('contextmenu', this.onContextMenu);
   }
 
   pointerDown(e) {
-    console.log(e)
+    ConnectHelper.snapTarget = null;
     // only left mouse
-    if(e.which != 1 && e.which != 0) return;
+    if(e.which == 1 || e.which == 0) {
+      ConnectHelper.startExecutionPin(this, e);
+      
+      document.addEventListener('mousemove', this.pointerMove);
+      document.addEventListener('touchmove', this.pointerMove);
+      document.addEventListener('touchend', this.pointerUp);
+      document.addEventListener('mouseup', this.pointerUp);
+    }
+  }
 
-    ConnectHelper.startExecutionPin(this, e);
-    
-    document.addEventListener('mousemove', this.pointerMove);
-    document.addEventListener('touchmove', this.pointerMove);
-    document.addEventListener('touchup', this.pointerUp);
-    document.addEventListener('mouseup', this.pointerUp);
+  updateSnapTarget(e) {
+    if(e.changedTouches) {
+      let touch = e.changedTouches[0];
+      let target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if(target.pin) {
+        ConnectHelper.snapTarget = target.pin;
+      }
+      else {
+        ConnectHelper.snapTarget = null;
+      }
+    }
   }
 
   pointerMove(e) {
-    e.preventDefault();
+    this.updateSnapTarget(e);
+
     // TODO: Handle touches
     let sx = e.clientX ? e.clientX : e.touches[0].clientX 
     let sy = e.clientY ? e.clientY : e.touches[0].clientY 
@@ -83,13 +95,20 @@ export default class ExecutionPin
 
   pointerUp(e) {
     // only left mouse
-    if(e.which != 1 && e.which != 0) return;
+    if(e.which == 1 || e.which == 0) {
+      
+      document.removeEventListener('mousemove', this.pointerMove)
+      document.removeEventListener('touchmove', this.pointerMove);
+      document.removeEventListener('touchend', this.pointerUp);
+      document.removeEventListener('mouseup', this.pointerUp);
 
-    document.removeEventListener('mousemove', this.pointerMove)
-    document.removeEventListener('touchmove', this.pointerMove);
-    document.removeEventListener('touchup', this.pointerUp);
-    document.removeEventListener('mouseup', this.pointerUp);
-    ConnectHelper.stop(e)
+      if(e.which == 1) {
+        ConnectHelper.stop(e)
+      }
+      else {
+        ConnectHelper.touchStop(e)
+      }
+    }
   }
 
   pointerOver(e) {
@@ -102,12 +121,17 @@ export default class ExecutionPin
 
   targetPointerUp(e) {
     // only left mouse
-    if(e.which != 1) return;
-
-    ConnectHelper.connectExecutionPin(this)
+    if(e.which == 1) {
+      ConnectHelper.connectExecutionPin(this)
+    }
+    else if(e.which == 0){
+      let touch = e.changedTouches[0];
+      let target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if(target.pin) ConnectHelper.connectExecutionPin(target.pin)
+    }
   }
 
-  rightMouseDown(e) {
+  onContextMenu(e) {
     e.preventDefault();
     e.stopPropagation();
   }

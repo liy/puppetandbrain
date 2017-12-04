@@ -85,8 +85,8 @@ export default class ExecutionOutPin extends ExecutionPin
     }
   }
 
-  rightMouseDown(e) {
-    super.rightMouseDown(e)
+  onContextMenu(e) {
+    super.onContextMenu(e)
 
     History.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
   }

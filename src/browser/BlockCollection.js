@@ -112,6 +112,7 @@ export default [
       className: 'PlaySound',
       variables: {
         name: 'sound url',
+        loop: false,
       }
     },
     in: true,
