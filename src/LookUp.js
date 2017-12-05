@@ -59,7 +59,7 @@ window.LookUp = {
 
     // Wait for 3 second then start saving
     delaySave.cancel();
-    await delaySave.wait(3000);
+    await delaySave.wait(6000);
 
     let pod = this.pod();
     // Set the new activity's owner to be the user
