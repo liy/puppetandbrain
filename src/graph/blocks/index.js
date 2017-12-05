@@ -30,7 +30,9 @@ export FlipBlock from './FlipBlock';
 export FlipLeftBlock from './FlipLeftBlock';
 export FlipRightBlock from './FlipRightBlock';
 export TweenRightBlock from './TweenRightBlock';
+export TweenLeftBlock from './TweenLeftBlock';
 export TweenUpBlock from './TweenUpBlock';
+export TweenDownBlock from './TweenDownBlock';
 
 // listener blocks
 export GameStartBlock from './GameStartBlock';

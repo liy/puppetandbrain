@@ -25,10 +25,14 @@ export default class FlipLeft extends Task
     if(this.tween) this.tween.kill()
   }
 
+  get nodeName() {
+    return 'Flip Left'
+  }
+
   run() {
     super.run();
     
-    this.tween = TweenLite.to(this.owner.scale, 0.2, {x:-this.scaleX, ease:Quad.easeIn})
+    this.tween = TweenLite.to(this.owner.scale, 0.15, {x:-this.scaleX, ease:Quad.easeIn})
     this.execution.run();
   }
 }

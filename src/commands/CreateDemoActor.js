@@ -10,6 +10,7 @@ import {Equal} from '../nodes/Operator';
 import FlipLeft from '../nodes/FlipLeft';
 import FlipRight from '../nodes/FlipRight';
 import TweenRight from '../nodes/TweenRight';
+import TweenLeft from '../nodes/TweenLeft';
 import utils from '../utils/utils';
 
 
@@ -119,13 +120,9 @@ export default class CreateDemoActor extends Command
       y: 521,
     })
 
-    let moveLeft = new TweenRight();
+    let moveLeft = new TweenLeft();
     moveLeft.init({
       owner: actor,
-      variables: {
-        steps: -1,
-        duration: 1,
-      },
       x: 827,
       y: 398,
     })
@@ -133,10 +130,6 @@ export default class CreateDemoActor extends Command
     let moveRight = new TweenRight();
     moveRight.init({
       owner: actor,
-      variables: {
-        steps: 1,
-        duration: 1,
-      },
       x: 833,
       y: 561,
     })

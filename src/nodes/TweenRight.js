@@ -9,9 +9,6 @@ export default class TweenRight extends Task
     this.execution.set('default');
     this.execution.set('completed');
 
-    this.inputs.addInput('steps');
-    this.inputs.addInput('duration');
-
     this.stop = this.stop.bind(this);
     Stage.on('game.stop', this.stop)
   }
@@ -39,14 +36,13 @@ export default class TweenRight extends Task
 
   run() {
     super.run()
-    let steps = this.inputs.value('steps');
 
     let pos = {
-      x: this.owner.position.x + window.innerWidth/10 * Number(steps),
+      x: this.owner.position.x + window.innerWidth/10,
       y: this.owner.position.y
     }
 
-    this.tween = TweenLite.to(this.owner, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
+    this.tween = TweenLite.to(this.owner, 1, {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
       this.execution.run('completed');
     }});
     this.execution.run();

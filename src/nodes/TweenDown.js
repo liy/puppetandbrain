@@ -31,7 +31,7 @@ export default class TweenUp extends Task
   }
 
   get nodeName() {
-    return "Move Up";
+    return "Move Down";
   }
 
   run() {
@@ -40,7 +40,7 @@ export default class TweenUp extends Task
 
     let pos = {
       x: this.owner.position.x ,
-      y: this.owner.position.y + window.innerHeight/10
+      y: this.owner.position.y - window.innerHeight/10
     }
 
     this.tween = TweenLite.to(this.owner, 1, {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {

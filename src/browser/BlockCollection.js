@@ -46,8 +46,20 @@ export default [
       className: 'TweenRight'
     },
     in: true,
-    out: ['default'],
-    inputs: ['steps', 'duration'],
+    out: ['default', 'completed'],
+    inputs: [],
+    outputs: [],
+    minWidth: 120,
+  },
+  {
+    name: 'Move Left',
+    category: 'Animation',
+    pod: {
+      className: 'TweenLeft'
+    },
+    in: true,
+    out: ['default', 'completed'],
+    inputs: [],
     outputs: [],
     minWidth: 120,
   },
@@ -58,8 +70,20 @@ export default [
       className: 'TweenUp'
     },
     in: true,
-    out: ['default'],
-    inputs: ['steps', 'duration'],
+    out: ['default', 'completed'],
+    inputs: [],
+    outputs: [],
+    minWidth: 120,
+  },
+  {
+    name: 'Move Down',
+    category: 'Animation',
+    pod: {
+      className: 'TweenDown'
+    },
+    in: true,
+    out: ['default', 'completed'],
+    inputs: [],
     outputs: [],
     minWidth: 120,
   },
@@ -133,7 +157,7 @@ export default [
     pod: {
       className: 'PlaySound',
       variables: {
-        name: 'sound url',
+        'sound url': '',
         loop: false,
       }
     },
@@ -386,13 +410,13 @@ export default [
     pod: {
       className: 'Keyboard',
       variables: {
-        key: 'S'
+        code: 'Space'
       }
     },
     in: false,
     out: ['key down', 'key up'],
     outputs: [],
-    minWidth: 100,
+    minWidth: 125,
   },
   {
     name: 'Touch Down',

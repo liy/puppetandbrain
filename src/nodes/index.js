@@ -34,7 +34,9 @@ export Flip from './Flip';
 export FlipLeft from './FlipLeft';
 export FlipRight from './FlipRight';
 export TweenUp from './TweenUp';
+export TweenDown from './TweenDown';
 export TweenRight from './TweenRight';
+export TweenLeft from './TweenLeft';
 
 // listeners
 export GameStart from './listeners/GameStart'

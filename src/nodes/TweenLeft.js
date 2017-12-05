@@ -1,6 +1,6 @@
 import Task from './Task';
 
-export default class TweenUp extends Task
+export default class TweenLeft extends Task
 {
   constructor(id) {
     super(id);
@@ -31,16 +31,15 @@ export default class TweenUp extends Task
   }
 
   get nodeName() {
-    return "Move Up";
+    return "Move Left";
   }
 
   run() {
     super.run()
-    let steps = this.inputs.value('steps');
 
     let pos = {
-      x: this.owner.position.x ,
-      y: this.owner.position.y + window.innerHeight/10
+      x: this.owner.position.x - window.innerWidth/10,
+      y: this.owner.position.y
     }
 
     this.tween = TweenLite.to(this.owner, 1, {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {

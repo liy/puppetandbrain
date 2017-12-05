@@ -28,12 +28,12 @@ export default class Flip extends Task
     if(dir == 'y' || dir == 'vertical') {
       // this.owner.scale.y *= -1;
       let s = this.owner.scale.y;
-      this.tween = TweenLite.to(this.owner.scale, 0.2, {y:s*-1, ease:Quad.easeIn})
+      this.tween = TweenLite.to(this.owner.scale, 0.15, {y:s*-1, ease:Quad.easeIn})
     }
     else {
       // this.owner.scale.x *= -1;
       let s = this.owner.scale.x;
-      this.tween = TweenLite.to(this.owner.scale, 0.2, {x:s*-1, ease:Quad.easeIn})
+      this.tween = TweenLite.to(this.owner.scale, 0.15, {x:s*-1, ease:Quad.easeIn})
     }
     this.execution.run();
   }

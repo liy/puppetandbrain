@@ -9,7 +9,8 @@ export default class Keyboard extends Listener
     this.execution.set('key down');
     this.execution.set('key up');
 
-    this.inputs.addInput('key');
+    // it actually holds the keycode
+    this.inputs.addInput('code');
 
     this.keydown = this.keydown.bind(this)
     this.keyup = this.keyup.bind(this)
@@ -37,14 +38,14 @@ export default class Keyboard extends Listener
   }
 
   keydown(e) {
-    if(e.key.toLowerCase() == this.inputs.value('key').toLowerCase()) {
+    if(e.code == this.inputs.value('code')) {
       super.run();
       this.execution.run('key down');
     }
   }
 
   keyup(e) {
-    if(e.key.toLowerCase() == this.inputs.value('key').toLowerCase()) {
+    if(e.code == this.inputs.value('code')) {
       super.run();
       this.execution.run('key up');
     }

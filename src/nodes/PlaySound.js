@@ -32,7 +32,6 @@ export default class PlaySound extends Task
     
     this.audio = new Audio(this.inputs.value('sound url'));
     this.audio.loop = Boolean(this.inputs.value('loop'));
-    console.log(this.audio.loop)
     this.audio.addEventListener('ended', this.complete, {once: true})
 
     this.audio.play();
