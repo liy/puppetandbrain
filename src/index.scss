@@ -82,3 +82,18 @@ body {
   background-repeat: no-repeat;
   background-position: center; 
 }
+
+#at {
+  position: absolute;
+  user-select: none;
+  // cursor: pointer;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+
+  background-image: url('./assets/at.svg');
+  background-repeat: no-repeat;
+  background-position: center; 
+}
