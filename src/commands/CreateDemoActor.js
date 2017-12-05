@@ -11,6 +11,7 @@ import FlipLeft from '../nodes/FlipLeft';
 import FlipRight from '../nodes/FlipRight';
 import TweenRight from '../nodes/TweenRight';
 import TweenLeft from '../nodes/TweenLeft';
+import Keyboard from '../nodes/listeners/Keyboard';
 import utils from '../utils/utils';
 
 
@@ -92,7 +93,7 @@ export default class CreateDemoActor extends Command
     switchAccess.init({
       owner: actor,
       x: 50,
-      y: 463,
+      y: 532,
       variables: {
         debounce: 0,
         'pre-acceptance': 0
@@ -103,35 +104,35 @@ export default class CreateDemoActor extends Command
     branch.init({
       owner: actor,
       x: 383,
-      y: 463,
+      y: 532,
     })
 
     let flipLeft = new FlipLeft();
     flipLeft.init({
       owner: actor,
       x: 590,
-      y: 434,
+      y: 488,
     })
 
     let flipRight = new FlipRight();
     flipRight.init({
       owner: actor,
       x: 590,
-      y: 521,
+      y: 611,
     })
 
     let moveLeft = new TweenLeft();
     moveLeft.init({
       owner: actor,
-      x: 827,
-      y: 398,
+      x: 820,
+      y: 437,
     })
 
     let moveRight = new TweenRight();
     moveRight.init({
       owner: actor,
-      x: 833,
-      y: 561,
+      x: 820,
+      y: 661,
     })
 
     let equal = new Equal();
@@ -141,7 +142,27 @@ export default class CreateDemoActor extends Command
         B: 'left'
       },
       x: 240,
-      y: 540,
+      y: 600,
+    })
+
+    let leftKey = new Keyboard();
+    leftKey.init({
+      owner: actor,
+      variables: {
+        code: 'ArrowLeft'
+      },
+      x: 50,
+      y: 406,
+    })
+
+    let rightKey = new Keyboard();
+    rightKey.init({
+      owner: actor,
+      variables: {
+        code: 'ArrowRight'
+      },
+      x: 50,
+      y: 717,
     })
 
     gameStart.connectNext(animation)
@@ -158,6 +179,8 @@ export default class CreateDemoActor extends Command
     branch.connectNext(flipRight, 'false')
     flipLeft.connectNext(moveLeft);
     flipRight.connectNext(moveRight);
+    rightKey.connectNext(flipRight, 'key down')
+    leftKey.connectNext(flipLeft, 'key down')
 
 
     // play event sound
