@@ -95,6 +95,14 @@ require('./assets/mice/mice.atlas')
 require('./assets/sounds/Jambalaya Loop.mp3')
 require('./assets/sounds/Jambalaya Loop.ogg')
 
+
+
+
+
+// favicons
+require("./assets/favicon-192.png")
+require('./manifest.json')
+
 // imports
 require('./index.scss')
 

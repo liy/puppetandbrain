@@ -2,7 +2,21 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="user-scalable=0">     
+    <!-- stop reszing -->
+    <meta name="viewport" content="user-scalable=0">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Android manifest -->
+    <link rel="manifest" href="/manifest.json"/>
+    <!-- iOS Home screen icons -->
+    <!-- <link href="http://gravatar.duoshuo.com/userimage/16788663/f995dca7217eb6b9280911fa933e0f2e.png?size=192" rel="apple-touch-icon" type="image/png"> -->
+    <!-- <link href="https://cn.gravatar.com/userimage/16788663/f995dca7217eb6b9280911fa933e0f2e.png?size=192" rel="apple-touch-icon" type="image/png"> -->
+    <link href="/favicon-192.png" rel="apple-touch-icon" type="image/png">
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="/favicon-192.png"/>
+
     <title>Puppet and Brain</title>
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
