@@ -31,6 +31,8 @@ export Repeat from './Repeat';
 export Setter from './Setter';
 export PlaySound from './PlaySound';
 export Flip from './Flip';
+export FlipLeft from './FlipLeft';
+export FlipRight from './FlipRight';
 export TweenUp from './TweenUp';
 export TweenRight from './TweenRight';
 

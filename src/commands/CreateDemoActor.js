@@ -4,6 +4,12 @@ import GameStart from '../nodes/listeners/GameStart';
 import Animation from '../nodes/Animation';
 import PlaySound from '../nodes/PlaySound';
 import AnimationEvent from '../nodes/listeners/AnimationEvent';
+import SwitchAccess from '../nodes/listeners/SwitchAccess';
+import Branch from '../nodes/Branch';
+import {Equal} from '../nodes/Operator';
+import FlipLeft from '../nodes/FlipLeft';
+import FlipRight from '../nodes/FlipRight';
+import TweenRight from '../nodes/TweenRight';
 
 
 
@@ -82,6 +88,70 @@ export default class CreateDemoActor extends Command
       }
     })
 
+    let switchAccess = new SwitchAccess();
+    switchAccess.init({
+      owner: actor,
+      x: 50,
+      y: 463,
+      variables: {
+        debounce: 0,
+        'pre-acceptance': 0
+      }
+    })
+
+    let branch = new Branch();
+    branch.init({
+      owner: actor,
+      x: 383,
+      y: 463,
+    })
+
+    let flipLeft = new FlipLeft();
+    flipLeft.init({
+      owner: actor,
+      x: 590,
+      y: 434,
+    })
+
+    let flipRight = new FlipRight();
+    flipRight.init({
+      owner: actor,
+      x: 590,
+      y: 521,
+    })
+
+    let moveLeft = new TweenRight();
+    moveLeft.init({
+      owner: actor,
+      variables: {
+        steps: -1,
+        duration: 1,
+      },
+      x: 827,
+      y: 398,
+    })
+
+    let moveRight = new TweenRight();
+    moveRight.init({
+      owner: actor,
+      variables: {
+        steps: 1,
+        duration: 1,
+      },
+      x: 833,
+      y: 561,
+    })
+
+    let equal = new Equal();
+    equal.init({
+      owner: actor,
+      variables: {
+        B: 'left'
+      },
+      x: 240,
+      y: 540,
+    })
+
     gameStart.connectNext(animation)
     animation.connectNext(playSound);
     // on desktop use recursion 
@@ -89,10 +159,19 @@ export default class CreateDemoActor extends Command
       // keep play the sound!
       playSound.connectNext(playSound, 'completed');
     }
-
     animationEvent.connectNext(playEventSound);
+
+    switchAccess.connectNext(branch, 'switch down')
+    branch.connectNext(flipLeft, 'true')
+    branch.connectNext(flipRight, 'false')
+    flipLeft.connectNext(moveLeft);
+    flipRight.connectNext(moveRight);
+
+
     // play event sound
     playEventSound.inputs.get('sound url').connect(animationEvent.outputs.get('event name'));
+    equal.inputs.get('A').connect(switchAccess.outputs.get('which'));
+    branch.inputs.get('condition').connect(equal.outputs.get('value'));
 
     this.actorID = actor.id;
 

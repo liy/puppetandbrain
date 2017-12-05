@@ -12,6 +12,11 @@ export default class Flip extends Task
     this.inputs.addInput('direction');
   }
 
+  destroy() {
+    super.destroy();
+    Stage.off('game.stop', this.stop);
+  }
+
   stop() {
     if(this.tween) this.tween.kill()
   }

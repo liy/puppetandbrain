@@ -78,6 +78,28 @@ export default [
     minWidth: 120,
   },
   {
+    name: 'Flip Left',
+    category: 'Animation',
+    pod: {
+      className: 'FlipLeft',
+    },
+    in: true,
+    out: ['default'],
+    outputs: [],
+    minWidth: 120,
+  },
+  {
+    name: 'Flip Right',
+    category: 'Animation',
+    pod: {
+      className: 'FlipRight',
+    },
+    in: true,
+    out: ['default'],
+    outputs: [],
+    minWidth: 120,
+  },
+  {
     name: 'Print',
     category: 'Debug',
     pod: {
