@@ -29,6 +29,11 @@ export default class PlaySound extends Task
 
   run() {
     super.run();
+
+    // stop any looping sound...
+    if(this.audio && this.audio.loop) {
+      this.audio.pause();
+    }
     
     this.audio = new Audio(this.inputs.value('sound url'));
     this.audio.loop = Boolean(this.inputs.value('loop'));
