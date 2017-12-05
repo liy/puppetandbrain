@@ -5,7 +5,6 @@ export default class OutputPin extends DataPin
 {
   constructor(block, name) {
     super(block, name, 'right');
-    this.type = 'output'
     this.output = this.node.outputs.get(this.name);
 
     this.icon.className = 'icon out-disconnected';
@@ -39,12 +38,17 @@ export default class OutputPin extends DataPin
     }
   }
 
-  pointerMove(e) {
-    this.updateSnapTarget(e);
-    
-    let sx = e.clientX ? e.clientX : e.touches[0].clientX 
-    let sy = e.clientY ? e.clientY : e.touches[0].clientY
-    ConnectHelper.drawLine(sx, sy, this.position.x, this.position.y);
+  mouseMove(e) {
+    ConnectHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
+  }
+
+  touchMove(e) {
+    // TODO: double check the difference between e.changedTouches vs e.touches
+    let touch = e.changedTouches[0];
+    if(touch) {
+      ConnectHelper.touchMove(touch);
+      ConnectHelper.drawLine(touch.clientX, touch.clientY, this.position.x, this.position.y);
+    }
   }
 
   onContextMenu(e) {

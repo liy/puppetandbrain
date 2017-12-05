@@ -1,4 +1,3 @@
-import BlockMenu from '../browser/BlockMenu';
 import AutoConnect from './AutoConnect';
 import BlockBrowser from '../browser/BlockBrowser';
 
@@ -8,20 +7,48 @@ class ConnectHelper
     this.svg = document.getElementById('svg');
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     
-    this.snapTarget = null;
+    this._snapPin = null;
 
     this.linkSound = new Audio(require('../assets/sounds/link.mp3'))
   }
 
+  get snapPin() {
+    return this._snapPin;
+  }
+
+  touchMove(touch) {
+    let target = document.elementFromPoint(touch.clientX, touch.clientY);
+    // first time
+    if(this.startPin && this.startPin.canConnect(target.pin)) {
+      // first time, play snap sound
+      if(this._snapPin != target.pin) this.linkSound.play();
+      this._snapPin = target.pin;
+    }
+    else {
+      this._snapPin = null;
+    }
+  }
+
+  mouseOver(pin) {
+    if(this.startPin && this.startPin.canConnect(pin)) {
+      this.linkSound.play();
+    }
+    this._snapPin = pin;
+  }
+
+  mouseOut() {
+    this._snapPin = null;
+  }
+
   drawLine(x1, y1, x2, y2) {
-    if(this.snapTarget) {
-      if((this.snapTarget.type == 'input' && this.startPin.type == 'output') || (this.snapTarget.type == 'in' && this.startPin.type == 'out')) {
-        x1 = this.snapTarget.position.x;
-        y1 = this.snapTarget.position.y
+    if(this.startPin.canConnect(this.snapPin)) {
+      if(this.snapPin.flow == 'in') {
+        x1 = this.snapPin.position.x;
+        y1 = this.snapPin.position.y
       }
-      else if((this.snapTarget.type == 'output' && this.startPin.type == 'input') || (this.snapTarget.type == 'out' && this.startPin.type == 'in')) {
-        x2 = this.snapTarget.position.x
-        y2 = this.snapTarget.position.y
+      else if(this.snapPin.flow == 'out' ) {
+        x2 = this.snapPin.position.x
+        y2 = this.snapPin.position.y
       }
     }
 
@@ -63,21 +90,25 @@ class ConnectHelper
   }
 
   async stop(e) {
-    if(e.target == BrainGraph.container) {
+    this._snapPin = null;
 
+    if(e.target == BrainGraph.container) {
       var browser = new BlockBrowser();
       let createdNode = await browser.open(e.clientX, e.clientY);
 
-      // TODO: auto connect here
       if(createdNode) AutoConnect.process(this.startPin, createdNode);
     }
 
     if(this.svg.contains(this.path)) {
       this.svg.removeChild(this.path);
     }
+
+    this.startPin = null;
   }
 
   async touchStop(e) {
+    this._snapPin = null;
+
     let touch = e.changedTouches[0];
     let target = document.elementFromPoint(touch.clientX, touch.clientY);
     if(target == BrainGraph.container) {
@@ -92,7 +123,9 @@ class ConnectHelper
     if(this.svg.contains(this.path)) {
       this.svg.removeChild(this.path);
     }
-}
+
+    this.startPin = null;
+  }
 
   startExecutionPin(pin, e) {
     this.startPin = pin;
@@ -100,12 +133,11 @@ class ConnectHelper
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
-
     this.svg.appendChild(this.path);
+
     let sx = e.clientX ? e.clientX : e.touches[0].clientX 
     let sy = e.clientY ? e.clientY : e.touches[0].clientY 
     this.drawLine(sx, sy, sx, sy);
-    this.dragType = 'execution'
   }
 
   startDataPin(pin, e) {
@@ -114,47 +146,43 @@ class ConnectHelper
     this.path.setAttribute('stroke-width', 2);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
-
     this.svg.appendChild(this.path);
+
     let sx = e.clientX ? e.clientX : e.touches[0].clientX 
     let sy = e.clientY ? e.clientY : e.touches[0].clientY 
     this.drawLine(sx, sy, sx, sy);
-    this.dragType = 'data'
   }
 
   connectExecutionPin(pin) {
     // might happens
-    if(!this.startPin) return;
-    // You can only connect inpin to outpin or other way around.
-    if(this.startPin.type == pin.type || this.dragType == 'data') return;
-
-    let outPin = pin;
-    let inPin = this.startPin;
-    if(outPin.type == 'in') {
-      outPin = this.startPin;
-      inPin = pin;
+    if(this.startPin && this.startPin.canConnect(pin)) {
+      let outPin = pin;
+      let inPin = this.startPin;
+      if(outPin.flow == 'in') {
+        outPin = this.startPin;
+        inPin = pin;
+      }
+  
+      this.linkSound.play()
+  
+      History.push(Commander.create('CreateExecution', outPin.node.id, outPin.name, inPin.node.id).processAndSave());
     }
-
-    this.linkSound.play()
-
-    History.push(Commander.create('CreateExecution', outPin.node.id, outPin.name, inPin.node.id).processAndSave());
   }
 
   connectDataPin(pin) {
     // might happens
-    if(!this.startPin) return;
-    if(this.startPin.type == pin.type || this.dragType == 'execution') return;
-
-    let outputPin = pin;
-    let inputPin = this.startPin;
-    if(outputPin.type == 'input') {
-      outputPin = this.startPin;
-      inputPin = pin;
+    if(this.startPin && this.startPin.canConnect(pin)) {
+      let outputPin = pin;
+      let inputPin = this.startPin;
+      if(outputPin.flow == 'in') {
+        outputPin = this.startPin;
+        inputPin = pin;
+      }
+  
+      this.linkSound.play()
+  
+      History.push(Commander.create('CreateDataLink', inputPin.node.id, inputPin.name, outputPin.node.id, outputPin.name).processAndSave())
     }
-
-    this.linkSound.play()
-
-    History.push(Commander.create('CreateDataLink', inputPin.node.id, inputPin.name, outputPin.node.id, outputPin.name).processAndSave())
   }
 }
 

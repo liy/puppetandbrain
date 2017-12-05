@@ -5,7 +5,6 @@ export default class InputPin extends DataPin
 {
   constructor(block, name) {
     super(block, name, 'left');
-    this.type = 'input'
     this.pointer = this.node.inputs.get(this.name);
 
     this.icon.className = 'icon';

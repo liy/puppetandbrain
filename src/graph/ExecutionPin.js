@@ -13,7 +13,8 @@ export default class ExecutionPin
     this.graph = this.block.graph;
     this.name = name;
 
-    this.type = (location == 'left') ? 'in' : 'out';
+    this.type = 'execution';
+    this.flow = (location == 'left') ? 'in' : 'out';
 
     this.svg = document.getElementById('svg');
 
@@ -36,97 +37,99 @@ export default class ExecutionPin
     // this.label.style = `float:${location}; margin-${location}:20px`
     this.label.style = `float:${location}; margin-${location}:10px`
 
-    this.pointerOver = this.pointerOver.bind(this)
-    this.pointerOut = this.pointerOut.bind(this)
-    this.pointerDown = this.pointerDown.bind(this);
-    this.pointerMove = this.pointerMove.bind(this);
-    this.pointerUp = this.pointerUp.bind(this);
-    this.targetPointerUp = this.targetPointerUp.bind(this);
+    this.mouseOver = this.mouseOver.bind(this)
+    this.mouseOut = this.mouseOut.bind(this)
+    this.mouseDown = this.mouseDown.bind(this);
+    this.mouseMove = this.mouseMove.bind(this);
+    this.mouseUp = this.mouseUp.bind(this);
+    this.mouseUpOnPin = this.mouseUpOnPin.bind(this);
+
+    this.touchUp = this.touchUp.bind(this);
+    this.touchDown = this.touchDown.bind(this);
+    this.touchMove = this.touchMove.bind(this);
+    this.touchUpOnPin = this.touchUpOnPin.bind(this);
+
     this.onContextMenu = this.onContextMenu.bind(this);
     
-    this.container.addEventListener('touchenter', this.pointerOver);
-    this.container.addEventListener('touchleave', this.pointerOut);
-    this.container.addEventListener('mouseover', this.pointerOver);
-    this.container.addEventListener('mouseout', this.pointerOut);
+    this.container.addEventListener('mouseover', this.mouseOver);
+    this.container.addEventListener('mouseout', this.mouseOut);
+    this.container.addEventListener('mousedown', this.mouseDown);
+    this.container.addEventListener('mouseup', this.mouseUpOnPin);
 
-    this.container.addEventListener('touchstart', this.pointerDown);
-    this.container.addEventListener('touchend', this.targetPointerUp);
+    this.container.addEventListener('touchstart', this.touchDown);
+    this.container.addEventListener('touchend', this.touchUpOnPin);
     
-    this.container.addEventListener('mousedown', this.pointerDown);
-    this.container.addEventListener('mouseup', this.targetPointerUp);
     this.container.addEventListener('contextmenu', this.onContextMenu);
   }
 
-  pointerDown(e) {
-    ConnectHelper.snapTarget = null;
-    // only left mouse
-    if(e.which == 1 || e.which == 0) {
+  canConnect(pin) {
+    return pin != null && (pin.type == this.type) && (pin.flow != this.flow);
+  }
+
+  mouseDown(e) {
+    if(e.which == 1) {
       ConnectHelper.startExecutionPin(this, e);
       
-      document.addEventListener('mousemove', this.pointerMove);
-      document.addEventListener('touchmove', this.pointerMove);
-      document.addEventListener('touchend', this.pointerUp);
-      document.addEventListener('mouseup', this.pointerUp);
+      document.addEventListener('mousemove', this.mouseMove);
+      document.addEventListener('mouseup', this.mouseUp);
     }
   }
 
-  updateSnapTarget(e) {
-    if(e.changedTouches) {
-      let touch = e.changedTouches[0];
-      let target = document.elementFromPoint(touch.clientX, touch.clientY);
-      if(target.pin) {
-        ConnectHelper.snapTarget = target.pin;
-      }
-      else {
-        ConnectHelper.snapTarget = null;
-      }
+  touchDown(e) {
+    ConnectHelper.startExecutionPin(this, e);
+    
+    document.addEventListener('touchmove', this.touchMove);
+    document.addEventListener('touchend', this.touchUp);
+  }
+
+  mouseMove(e) {
+    ConnectHelper.drawLine(e.clientX, e.clientY, this.position.x, this.position.y);
+  }
+
+  touchMove(e) {
+    // TODO: double check the difference between e.changedTouches vs e.touches
+    let touch = e.changedTouches[0];
+    if(touch) {
+      ConnectHelper.touchMove(touch);
+      ConnectHelper.drawLine(touch.clientX, touch.clientY , this.position.x, this.position.y);
     }
   }
 
-  pointerMove(e) {
-    this.updateSnapTarget(e);
-
-    // TODO: Handle touches
-    let sx = e.clientX ? e.clientX : e.touches[0].clientX 
-    let sy = e.clientY ? e.clientY : e.touches[0].clientY 
-    // create a temp link, between initial execution pin position to current mouse position
-    ConnectHelper.drawLine(sx, sy, this.position.x, this.position.y);
+  touchUp(e) {
+    document.removeEventListener('touchmove', this.touchMove);
+    document.removeEventListener('touchend', this.touchUp);
+    
+    ConnectHelper.touchStop(e)
   }
 
-  pointerUp(e) {
+  mouseUp(e) {
     // only left mouse
-    if(e.which == 1 || e.which == 0) {
-      
-      document.removeEventListener('mousemove', this.pointerMove)
-      document.removeEventListener('touchmove', this.pointerMove);
-      document.removeEventListener('touchend', this.pointerUp);
-      document.removeEventListener('mouseup', this.pointerUp);
+    if(e.which == 1) {
+      document.removeEventListener('mousemove', this.mouseMove)
+      document.removeEventListener('mouseup', this.mouseUp);
 
-      if(e.which == 1) {
-        ConnectHelper.stop(e)
-      }
-      else {
-        ConnectHelper.touchStop(e)
-      }
+      ConnectHelper.stop(e)
     }
   }
 
-  pointerOver(e) {
-    ConnectHelper.snapTarget = this;
+  mouseOver(e) {
+    ConnectHelper.mouseOver(this);
   }
 
-  pointerOut(e) {
-    ConnectHelper.snapTarget = null;
+  mouseOut(e) {
+    ConnectHelper.mouseOut(this);
   }
 
-  targetPointerUp(e) {
+  mouseUpOnPin(e) {
     // only left mouse
     if(e.which == 1) {
       ConnectHelper.connectExecutionPin(this)
     }
-    else if(e.which == 0){
-      let touch = e.changedTouches[0];
-      let target = document.elementFromPoint(touch.clientX, touch.clientY);
+  }
+
+  touchUpOnPin(e) {
+    if(e.changedTouches) {
+      let target = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
       if(target.pin) ConnectHelper.connectExecutionPin(target.pin)
     }
   }

@@ -2,16 +2,14 @@ export default
 {
   process(pin, createdNode) {
     let inNode = pin.node;
-    let isExecutionPin = pin.type=='in' || pin.type=='out';
-    let connectParent = pin.type=='in' || pin.type=='input';
     
     // If dragging from execution pin and target node has execution pin
     // connect execution pin
-    if(isExecutionPin && createdNode.execution) {
+    if(pin.type == 'execution' && createdNode.execution) {
       let executionName = pin.name;
       let sourceNode = pin.node;
       let targetNode = createdNode;
-      if(connectParent) {
+      if(pin.flow == 'in') {
         executionName = createdNode.execution.contains('default') ? 'default' : createdNode.execution.keys[0];
         sourceNode = createdNode;
         targetNode = pin.node;
@@ -23,9 +21,9 @@ export default
       History.push(Commander.create('CreateExecution', sourceNode.id, executionName, targetNode.id).processAndSave());
     }
     // If dragging from data pin, connect data pin only
-    else if(!isExecutionPin){
+    else if(pin.type == 'data'){
       // connect to first ouput if any
-      if(connectParent) {
+      if(pin.flow == 'in') {
         let firstOutput = createdNode.outputs.get(createdNode.outputs.names[0]);
         if(firstOutput) {
           console.log(pin.node, pin.name, createdNode, firstOutput.name)

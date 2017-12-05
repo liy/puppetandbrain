@@ -31,13 +31,13 @@ export default class ExecutionInPin extends ExecutionPin
     }
   }
 
-  pointerMove(e) {
-    this.updateSnapTarget(e);
+  mouseMove(e) {
+    ConnectHelper.drawLine(this.position.x, this.position.y, e.clientX, e.clientY);
+  }
 
-    let sx = e.clientX ? e.clientX : e.touches[0].clientX 
-    let sy = e.clientY ? e.clientY : e.touches[0].clientY 
-    // create a temp link, between initial execution pin position to current mouse position
-    ConnectHelper.drawLine(this.position.x, this.position.y, sx, sy);
+  touchMove(e) {
+    ConnectHelper.touchMove(e.changedTouches[0]);
+    ConnectHelper.drawLine(this.position.x, this.position.y, e.touches[0].clientX, e.touches[0].clientY);
   }
 
   onContextMenu(e) {
