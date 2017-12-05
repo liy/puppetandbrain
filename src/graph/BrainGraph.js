@@ -71,6 +71,9 @@ class BrainGraph
   }
 
   onPan(e) {
+    // stop mobile drag to refresh action
+    e.preventDefault();
+
     if(e.touches) {
       this.translateX += e.touches[0].clientX - this.lastTouchX
       this.translateY += e.touches[0].clientY - this.lastTouchY

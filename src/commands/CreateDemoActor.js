@@ -10,6 +10,7 @@ import {Equal} from '../nodes/Operator';
 import FlipLeft from '../nodes/FlipLeft';
 import FlipRight from '../nodes/FlipRight';
 import TweenRight from '../nodes/TweenRight';
+import utils from '../utils/utils';
 
 
 
@@ -56,8 +57,6 @@ export default class CreateDemoActor extends Command
       }
     })
 
-    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
     let playSound = new PlaySound();
     playSound.init({
       owner: actor,
@@ -66,7 +65,7 @@ export default class CreateDemoActor extends Command
       variables: {
         'sound url': 'Jambalaya Loop.ogg',
         // On mobile play sound require a user interaciton so enable loop by default
-        'loop': isMobile
+        'loop': utils.isMobile
       }
     })
 
@@ -155,7 +154,7 @@ export default class CreateDemoActor extends Command
     gameStart.connectNext(animation)
     animation.connectNext(playSound);
     // on desktop use recursion 
-    if(!isMobile) {
+    if(!utils.isMobile) {
       // keep play the sound!
       playSound.connectNext(playSound, 'completed');
     }

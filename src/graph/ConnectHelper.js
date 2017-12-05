@@ -10,6 +10,7 @@ class ConnectHelper
     this._snapPin = null;
 
     this.linkSound = new Audio(require('../assets/sounds/link.mp3'))
+    this.snapSound = new Audio(require('../assets/sounds/snap.mp3'))
   }
 
   get snapPin() {
@@ -21,7 +22,7 @@ class ConnectHelper
     // first time
     if(this.startPin && this.startPin.canConnect(target.pin)) {
       // first time, play snap sound
-      if(this._snapPin != target.pin) this.linkSound.play();
+      if(this._snapPin != target.pin) this.snapSound.play();
       this._snapPin = target.pin;
     }
     else {
@@ -31,7 +32,7 @@ class ConnectHelper
 
   mouseOver(pin) {
     if(this.startPin && this.startPin.canConnect(pin)) {
-      this.linkSound.play();
+      this.snapSound.play();
     }
     this._snapPin = pin;
   }

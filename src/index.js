@@ -144,8 +144,6 @@ function render() {
 }
 PIXI.ticker.shared.add(render);
 
-
-
 async function load(activityID) {
   // TODO: get data from firestore
   let snapshot = await firebase.firestore().collection('activities').doc(activityID).get();
