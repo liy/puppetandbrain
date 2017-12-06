@@ -37,6 +37,7 @@ export TweenUp from './TweenUp';
 export TweenDown from './TweenDown';
 export TweenRight from './TweenRight';
 export TweenLeft from './TweenLeft';
+export SetRotation from './SetRotation';
 
 // listeners
 export GameStart from './listeners/GameStart'

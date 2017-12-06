@@ -70,7 +70,8 @@ module.exports = {
       }
     }),
     new webpack.DefinePlugin({
-      APP_VERSION: JSON.stringify(require("./package.json").version)
+      APP_VERSION: JSON.stringify(require("./package.json").version),
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ],
   

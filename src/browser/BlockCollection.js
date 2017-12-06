@@ -499,4 +499,29 @@ export default [
     outputs: ['event name'],
     minWidth: 100,
   },
+  {
+    name: 'Animation Event',
+    category: 'Event',
+    pod: {
+      className: 'AnimationEvent',
+    },
+    in: false,
+    out: ['default'],
+    outputs: ['event name'],
+    minWidth: 100,
+  },
+  {
+    name: 'Set Rotation',
+    category: 'Property',
+    pod: {
+      className: 'SetRotation',
+      variables: {
+        rotation: 0
+      }
+    },
+    in: true,
+    out: ['default'],
+    outputs: [],
+    minWidth: 120,
+  },
 ]

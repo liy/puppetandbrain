@@ -55,8 +55,9 @@ module.exports = {
       template: './src/index.html'
     }),
     new webpack.DefinePlugin({
-      APP_VERSION: JSON.stringify(require("./package.json").version)
-    })
+      APP_VERSION: JSON.stringify(require("./package.json").version),
+      'process.env.NODE_ENV': JSON.stringify('dev')
+    }),
   ],
   
   // Export full source map for debugging, maps to original source
