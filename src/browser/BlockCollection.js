@@ -524,4 +524,28 @@ export default [
     outputs: [],
     minWidth: 120,
   },
+  {
+    name: 'Rotate Right',
+    category: 'Animation',
+    pod: {
+      className: 'RotateRight'
+    },
+    in: true,
+    out: ['default', 'completed'],
+    inputs: [],
+    outputs: [],
+    minWidth: 120,
+  },
+  {
+    name: 'Rotate Left',
+    category: 'Animation',
+    pod: {
+      className: 'RotateLeft'
+    },
+    in: true,
+    out: ['default', 'completed'],
+    inputs: [],
+    outputs: [],
+    minWidth: 120,
+  },
 ]
