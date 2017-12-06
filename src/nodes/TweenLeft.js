@@ -15,9 +15,6 @@ export default class TweenLeft extends Task
 
   init(pod) {
     super.init(pod);
-
-    this.variables.duration = this.variables.duration || 5
-    this.variables.steps = this.variables.steps || 5
   }
 
   destroy() {
