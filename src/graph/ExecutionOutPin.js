@@ -17,6 +17,13 @@ export default class ExecutionOutPin extends ExecutionPin
     this.path.addEventListener('mousedown', e => {
       console.log('test line interaction')
     })
+
+    this.node.on('task.start', task => {
+      this.path.setAttribute('stroke', '#ffee00');
+      setTimeout(() => {
+        this.path.setAttribute('stroke', '#d0e400');
+      }, 500);
+    })
   }
 
   getConnectedPin() {
