@@ -15,9 +15,6 @@ export default class TweenUp extends Task
 
   init(pod) {
     super.init(pod);
-
-    this.variables.duration = this.variables.duration || 5
-    this.variables.steps = this.variables.steps || 5
   }
 
   destroy() {
@@ -36,11 +33,10 @@ export default class TweenUp extends Task
 
   run() {
     super.run()
-    let steps = this.inputs.value('steps');
 
     let pos = {
       x: this.owner.position.x ,
-      y: this.owner.position.y - window.innerHeight/10
+      y: this.owner.position.y + window.innerHeight/10
     }
 
     this.tween = TweenLite.to(this.owner, 1, {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
