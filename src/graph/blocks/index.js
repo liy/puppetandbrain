@@ -36,6 +36,7 @@ export TweenDownBlock from './TweenDownBlock';
 export SetRotationBlock from './SetRotationBlock';
 export RotateRightBlock from './RotateRightBlock';
 export RotateLeftBlock from './RotateLeftBlock';
+export SetPositionBlock from './SetPositionBlock';
 
 // listener blocks
 export GameStartBlock from './GameStartBlock';

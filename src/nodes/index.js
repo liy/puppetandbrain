@@ -40,6 +40,7 @@ export TweenLeft from './TweenLeft';
 export SetRotation from './SetRotation';
 export RotateRight from './RotateRight';
 export RotateLeft from './RotateLeft';
+export SetPosition from './SetPosition';
 
 // listeners
 export GameStart from './listeners/GameStart'

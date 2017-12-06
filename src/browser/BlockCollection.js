@@ -548,4 +548,20 @@ export default [
     outputs: [],
     minWidth: 120,
   },
+  {
+    name: 'Set Position',
+    category: 'Property',
+    pod: {
+      className: 'SetPosition',
+      variables: {
+        x: null,
+        y: null,
+      }
+    },
+    in: true,
+    out: ['default'],
+    inputs: [],
+    outputs: [],
+    minWidth: 120,
+  },
 ]
