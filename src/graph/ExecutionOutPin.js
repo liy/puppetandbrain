@@ -19,7 +19,7 @@ export default class ExecutionOutPin extends ExecutionPin
     })
 
     this.node.on('task.start', task => {
-      this.path.setAttribute('stroke', '#ffee00');
+      this.path.setAttribute('stroke', '#ffbb00');
       setTimeout(() => {
         this.path.setAttribute('stroke', '#d0e400');
       }, 500);
