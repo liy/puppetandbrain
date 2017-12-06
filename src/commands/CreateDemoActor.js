@@ -65,7 +65,7 @@ export default class CreateDemoActor extends Command
       x: 500,
       y: 50,
       variables: {
-        'sound url': 'Jambalaya Loop.ogg',
+        'sound url': 'Jambalaya Loop.mp3',
         // On mobile play sound require a user interaciton so enable loop by default
         'loop': utils.isMobile
       }
