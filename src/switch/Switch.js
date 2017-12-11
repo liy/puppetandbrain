@@ -26,8 +26,8 @@ export default class Switch extends EventEmitter
     // is scrolling web page, which will cause problems for switch users.
     // If an application temporarily needs space character input, programmer should enable
     // it in his program, e.g., a textfield is in focus, etc.
-    this.enableSpace = false;
-    this.enableTab = false;
+    this.enableSpace = true;
+    this.enableTab = true;
     this.preventDefaults = this.preventDefaults.bind(this);
     document.addEventListener('keydown', this.preventDefaults);
 
