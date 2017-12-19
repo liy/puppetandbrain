@@ -2,13 +2,13 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-
+const CleanWebpackPlugin = require('clean-webpack-plugin')
  
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
-    filename: 'index.js',
+    filename: 'bundle.js',
     // Where to put the final 'compiled' file
     path: path.join(__dirname, 'dist'),
   },
@@ -51,6 +51,7 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'game',
       filename: 'index.html',
