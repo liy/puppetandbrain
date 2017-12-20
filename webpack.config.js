@@ -24,7 +24,7 @@ module.exports = {
       // copy the required assets to dist folder
       // use require() to get the actuall url
       {
-        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt|svg)$/,
+        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt)$/,
         use: [
           {
             loader: 'file-loader',
@@ -42,6 +42,12 @@ module.exports = {
           'style-loader',
           'css-loader',
           'sass-loader',
+        ]
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          'raw-loader'
         ]
       },
     ]

@@ -249,3 +249,10 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
+
+import ABlock from './graph/blocks/ABlock';
+
+for(let i=0; i<10; ++i) {
+  const block = new ABlock({});
+  document.body.appendChild(block.element);
+}
