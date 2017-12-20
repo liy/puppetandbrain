@@ -17,18 +17,30 @@ export default class BlockBody
     this.icon = new BlockIcon(require('../../assets/icons/clock.svg'));
     this.element.appendChild(this.icon.element);
     
+    this.addRow();
+    this.addRow();
 
-    let row = document.createElement('div');
-    row.className = 'a-row';
-    this.body.appendChild(row);
-
-    
-    let exec = new ExecutionSVG();
-    this.body.appendChild(exec.element);
   }
 
   addRow() {
+    let row = document.createElement('div');
+    row.className = 'a-row';
+    this.body.appendChild(row);
+    this.rows.push(row);
 
+    let item = document.createElement('div');
+    item.className = 'item';
+    row.appendChild(item);
+    let exec = new ExecutionSVG();
+    item.appendChild(exec.element);
+
+    item = document.createElement('div');
+    item.className = 'item';
+    row.appendChild(item);
+    exec = new ExecutionSVG();
+    item.appendChild(exec.element);
+
+    return row;
   }
 
   getRow(i) {

@@ -1,0 +1,52 @@
+.a-row:first-child {
+  margin-top: 10px;
+}
+
+.a-row {
+  margin-top: 5px;
+  background-color: rgba(0, 255, 255, 0.342);
+  height: 30px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+
+  .item {
+    background-color: #ca7ec4;
+    display: flex;
+  }
+
+  .item-left {
+    flex-grow: 2;
+    flex-direction: row;
+
+    .execution-pin {
+      position: relative;
+      left: -32px;
+    }
+
+    .data-pin {
+      position: relative;
+      left: -32px;
+    }
+  }
+
+  .item-right {
+    flex-grow: 1;
+    flex-direction: row-reverse;
+
+    // TODO: remove for testing
+    margin-left: 5px;
+
+    .execution-pin {
+      position: relative;
+      left: 32px;
+    }
+
+    .data-pin {
+      position: relative;
+      left: 32px;
+    }
+  }
+}

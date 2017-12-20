@@ -1,8 +1,8 @@
-export default class ExecutionSVG
+export default class DataPinSVG
 {
   constructor() {
     this.element = new DOMParser().parseFromString(require('../../assets/execution.svg'), "image/svg+xml").rootElement;
-    this.element.setAttribute('class', 'execution-pin');
+    this.element.setAttribute('class', 'data-pin');
     this.element.setAttribute('width', 29);
     this.element.setAttribute('height', 22);
 

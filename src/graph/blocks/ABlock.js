@@ -19,8 +19,8 @@ export default class ABlock
     this.group.appendChild(this.body.element);
 
     
-    // let body = new BlockBody();
-    // this.group.appendChild(body.element);
+    let body = new BlockBody();
+    this.group.appendChild(body.element);
 
     
     this.dragstart = this.dragstart.bind(this);
