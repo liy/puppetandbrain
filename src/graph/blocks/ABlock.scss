@@ -1,6 +1,10 @@
 .a-block {
   position: absolute;
 
+  // make sure all the contents z-index(if any of them are absolute)
+  // are lower than this number
+  z-index: 2;
+
   .group {
     padding: 16px;
     border-radius: 26px;
@@ -8,5 +12,8 @@
     background-color: rgba(173, 173, 173, 0.3);
     left: -16px;
     top: -16px;
+
+    
+    min-width: fill-available;
   }
 }

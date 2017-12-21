@@ -2,6 +2,7 @@
   margin-top: 10px;
 }
 
+
 .a-row {
   margin-top: 5px;
   background-color: rgba(0, 255, 255, 0.342);
@@ -9,24 +10,30 @@
 
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
   justify-content: space-between;
 
   .item {
-    background-color: #ca7ec4;
+    background-color: #ca7ec4ab;
     display: flex;
+
+    // do not wrap!!!
+    // Otherwise when dragging block to the edge of the window
+    // the content tends to wrap and change the whole block width!
+    white-space: nowrap;
+    overflow-x: hidden;
   }
 
   .item-left {
-    flex-grow: 2;
+    flex-grow: 3;
     flex-direction: row;
+    order: 1;
 
-    .execution-pin {
+    .execution-pin-svg {
       position: relative;
       left: -32px;
     }
 
-    .data-pin {
+    .data-pin-svg {
       position: relative;
       left: -32px;
     }
@@ -35,18 +42,23 @@
   .item-right {
     flex-grow: 1;
     flex-direction: row-reverse;
+    order: 2;
 
     // TODO: remove for testing
-    margin-left: 5px;
+    margin-left: 1px;
 
-    .execution-pin {
+    .execution-pin-svg {
       position: relative;
       left: 32px;
     }
 
-    .data-pin {
+    .data-pin-svg {
       position: relative;
       left: 32px;
     }
   }
+}
+
+.a-row:last-child {
+  margin-bottom: 10px;
 }

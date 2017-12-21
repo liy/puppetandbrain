@@ -4,4 +4,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  // Make sure it is below other things...e.g., rows
+  z-index: 0;
 }

@@ -9,6 +9,7 @@
   .body {
     min-width: 160px;
     min-height: 140px;
+    max-width: 400px;
 
     background-color: #393d5e;
     border-radius: 10px;
@@ -16,57 +17,11 @@
     // avoid margin collapse
     display: inline-block;
 
-
-
-
-
-    // TODO: to be moved into BlockRow.scss
-    .a-row:first-child {
-      margin-top: 10px;
+    .row-container {
+      // Make sure all rows sits on top of the icon.
+      position: relative;
+      z-index: 1;
     }
-    
-    .a-row {
-      margin-top: 5px;
-      background-color: rgba(0, 255, 255, 0.342);
-      height: 30px;
-
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-
-      .item {
-        flex-grow: 2;
-        background-color: #ca7ec4;
-
-        display: flex;
-        flex-direction: row;
-
-        .execution-pin {
-          position: relative;
-          left: -32px;
-        }
-      }
-
-      .item:nth-child(2) {
-        flex-grow: 1;
-        // TODO: remove for testing
-        margin-left: 5px;
-
-        flex-direction: row-reverse;
-
-        .execution-pin {
-          position: relative;
-          left: 32px;
-        }
-      }
-    }
-
-
-
-
-
-
   }
 }
 

@@ -15,24 +15,32 @@ export default class ABlock
     this.group.className = 'group'
     this.element.appendChild(this.group);
 
-    this.body = new BlockBody();
-    this.group.appendChild(this.body.element);
-
-    
-    let body = new BlockBody();
-    this.group.appendChild(body.element);
-
+    this.bodies = [];
+    // always have main body
+    this.createBody();
     
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
-    this.element.addEventListener('mousedown', this.dragstart);
-    this.element.addEventListener('touchstart', this.dragstart);
+    this.group.addEventListener('mousedown', this.dragstart);
+    this.group.addEventListener('touchstart', this.dragstart);
     document.addEventListener('mouseup', this.dragstop);
     document.addEventListener('touchend', this.dragstop);
 
     this.x = Math.random()*window.innerWidth;
     this.y = Math.random()*window.innerHeight;
+  }
+
+  createBody() {
+    let body = new BlockBody();
+    this.group.appendChild(body.element);
+    this.bodies.push(body);
+
+    return body;
+  }
+
+  get mainBody() {
+    return this.bodies[0];
   }
 
   dragstart(e) {
@@ -44,6 +52,9 @@ export default class ABlock
     }
     document.addEventListener('mousemove', this.dragmove)
     document.addEventListener('touchmove', this.dragmove)
+
+    // bring to front 
+    this.element.parentElement.appendChild(this.element);
   }
 
   dragstop(e) {

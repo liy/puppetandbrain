@@ -1,6 +1,7 @@
 import './BlockBody.scss';
-import ExecutionSVG from '../gadgets/ExecutionSVG';
+import ExecutionPinSVG from '../gadgets/ExecutionPinSVG';
 import BlockIcon from './BlockIcon';
+import BlockRow from './BlockRow';
 
 export default class BlockBody
 {
@@ -14,41 +15,55 @@ export default class BlockBody
     this.body.setAttribute('class', 'body');
     this.element.appendChild(this.body);
 
+    this.rowContainer = document.createElement('div');
+    this.rowContainer.className = 'row-container';
+    this.body.appendChild(this.rowContainer);
+
     this.icon = new BlockIcon(require('../../assets/icons/clock.svg'));
-    this.element.appendChild(this.icon.element);
-    
-    this.addRow();
-    this.addRow();
-
+    this.body.appendChild(this.icon.element);
   }
 
-  addRow() {
-    let row = document.createElement('div');
-    row.className = 'a-row';
-    this.body.appendChild(row);
+  init({hasIn, executionNames, inputNames, outputNames}) {
+    if(hasIn) {
+      this.availableLeft.createLeft();
+    }
+
+    for(let name of executionNames) {
+      this.availableRight.createRight(name);
+    }
+
+    for(let name of inputNames) {
+      this.availableLeft.createLeft(name);
+    }
+
+    for(let name of outputNames) {
+      this.availableRight.createRight(name);
+    }
+  }
+
+  get availableLeft() {
+    for(let row of this.rows) {
+      if(!row.hasLeft) {
+        return row;
+      }
+    }
+    return this.createRow();
+  }
+
+  get availableRight() {
+    for(let row of this.rows) {
+      if(!row.hasRight) {
+        return row;
+      }
+    }
+    return this.createRow();
+  }
+
+  createRow() {
+    let row = new BlockRow();
+    this.rowContainer.appendChild(row.element);
     this.rows.push(row);
-
-    let item = document.createElement('div');
-    item.className = 'item';
-    row.appendChild(item);
-    let exec = new ExecutionSVG();
-    item.appendChild(exec.element);
-
-    item = document.createElement('div');
-    item.className = 'item';
-    row.appendChild(item);
-    exec = new ExecutionSVG();
-    item.appendChild(exec.element);
-
     return row;
-  }
-
-  getRow(i) {
-
-  }
-
-  removeRow(i) {
-
   }
   
   set width(v) {

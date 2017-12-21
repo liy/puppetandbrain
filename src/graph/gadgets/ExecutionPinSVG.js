@@ -1,4 +1,4 @@
-export default class ExecutionSVG
+export default class ExecutionPinSVG
 {
   constructor() {
     this.element = new DOMParser().parseFromString(require('../../assets/execution.svg'), "image/svg+xml").rootElement;
@@ -8,6 +8,11 @@ export default class ExecutionSVG
 
     this.colorPath = this.element.querySelector('#color');
     this.basePath = this.element.querySelector('#color');
+
+    this.element.addEventListener('mousedown', e => {
+      e.stopPropagation();
+      console.log(e)
+    })
   }
 
   set color(v) {
