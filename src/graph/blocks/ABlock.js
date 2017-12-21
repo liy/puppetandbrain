@@ -11,9 +11,9 @@ export default class ABlock
     this.element = document.createElement('div');
     this.element.setAttribute('class', 'a-block');
 
-    this.group = document.createElement('div');
-    this.group.className = 'group'
-    this.element.appendChild(this.group);
+    this.outline = document.createElement('div');
+    this.outline.className = 'outline normal'
+    this.element.appendChild(this.outline);
 
     this.bodies = [];
     // always have main body
@@ -72,8 +72,8 @@ export default class ABlock
     let sx = e.clientX ? e.clientX : e.touches[0].clientX;
     let sy = e.clientY ? e.clientY : e.touches[0].clientY;
     // Make sure all of the values are in client coordincate system. Then apply a scale
-    this.x = (sx + this._dragOffset.x) ;
-    this.y = (sy + this._dragOffset.y) ;
+    this.x = (sx - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale;
+    this.y = (sy - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale;
   }
 
   set x(x) {

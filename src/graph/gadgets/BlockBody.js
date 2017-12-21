@@ -1,5 +1,4 @@
 import './BlockBody.scss';
-import ExecutionPinSVG from '../gadgets/ExecutionPinSVG';
 import BlockIcon from './BlockIcon';
 import BlockRow from './BlockRow';
 import ADataPin from './ADataPin';
@@ -27,19 +26,19 @@ export default class BlockBody
 
   init({hasIn, executionNames, inputNames, outputNames}) {
     if(hasIn) {
-      this.availableLeft.addLeft(new AExecutionPin(name));
+      this.availableLeft.addLeft(new AExecutionPin(name, 'in'));
     }
 
     for(let name of executionNames) {
-      this.availableRight.addRight(new AExecutionPin(name));
+      this.availableRight.addRight(new AExecutionPin(name, 'out'));
     }
 
     for(let name of inputNames) {
-      this.availableLeft.addLeft(new ADataPin(name));
+      this.availableLeft.addLeft(new ADataPin(name, 'in'));
     }
 
     for(let name of outputNames) {
-      this.availableRight.addRight(new ADataPin(name));
+      this.availableRight.addRight(new ADataPin(name, 'out'));
     }
   }
 

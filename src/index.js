@@ -250,15 +250,3 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-import ABlock from './graph/blocks/ABlock';
-
-for(let i=0; i<10; ++i) {
-  const block = new ABlock({});
-  document.body.appendChild(block.element);
-  block.mainBody.init({
-    hasIn: true,
-    executionNames: [''],
-    inputNames: ['input 1', 'input 2'],
-    outputNames: ['output 1']
-  })
-}

@@ -32,12 +32,12 @@
     user-select: none;
   }
 
-  .execution-pin-svg {
+  .execution-svg {
     position: absolute;
     margin-top: 5px;
   }
 
-  .data-pin-svg {
+  .data-svg {
     position: absolute;
     margin-top: 4px;
   }
@@ -51,11 +51,11 @@
       margin-left: 8px;
     }
 
-    .execution-pin-svg {
+    .execution-svg {
       left: -32px;
     }
 
-    .data-pin-svg {
+    .data-svg {
       left: -31px;
     }
   }
@@ -69,11 +69,11 @@
       margin-right: 8px;
     }
 
-    .execution-pin-svg {
+    .execution-svg {
       right: -33px;
     }
 
-    .data-pin-svg {
+    .data-svg {
       right: -31px;
     }
   }

@@ -5,6 +5,7 @@ import ArrayMap from '../utils/ArrayMap';
 import BlockMenu from '../browser/BlockMenu';
 import BlockBrowser from '../browser/BlockBrowser';
 import VariablePanel from './gadgets/VariablePanel';
+import ABlock from './blocks/ABlock';
 
 class BrainGraph
 {
@@ -132,6 +133,18 @@ class BrainGraph
     this.tween = TweenLite.to(this.container.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
       this.container.style.opacity = 1.0;
     }});
+
+
+    for(let i=0; i<10; ++i) {
+      const block = new ABlock({});
+      this.blockContainer.appendChild(block.element);
+      block.mainBody.init({
+        hasIn: true,
+        executionNames: [''],
+        inputNames: ['input 1', 'input 2'],
+        outputNames: ['output 1']
+      })
+    }
   }
 
   close() {
