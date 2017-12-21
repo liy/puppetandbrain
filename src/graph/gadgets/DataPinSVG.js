@@ -1,17 +1,17 @@
 export default class DataPinSVG
 {
   constructor() {
-    this.element = new DOMParser().parseFromString(require('../../assets/execution.svg'), "image/svg+xml").rootElement;
-    this.element.setAttribute('class', 'data-pin');
+    this.element = new DOMParser().parseFromString(require('../../assets/data-pin.svg'), "image/svg+xml").rootElement;
+    this.element.setAttribute('class', 'data-pin-svg');
     this.element.setAttribute('width', 29);
     this.element.setAttribute('height', 22);
 
-    this.colorPath = this.element.querySelector('#color');
-    this.basePath = this.element.querySelector('#color');
+    // this.colorPath = this.element.querySelector('#color');
+    // this.basePath = this.element.querySelector('#color');
   }
 
   set color(v) {
-    this.colorPath.setAttribute('fill', v);
-    this.colorPath.setAttribute('stroke', v);
+    // this.colorPath.setAttribute('fill', v);
+    // this.colorPath.setAttribute('stroke', v);
   }
 }

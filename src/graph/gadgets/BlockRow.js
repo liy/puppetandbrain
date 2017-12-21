@@ -1,4 +1,5 @@
 import './BlockRow.scss'
+import AExecutionPin from './AExecutionPin';
 
 export default class BlockRow
 {
@@ -10,26 +11,16 @@ export default class BlockRow
     this.sealed = false;
   }
 
-  createLeft(name) {
-    this.itemLeft = document.createElement('div');
-    this.itemLeft.className = 'item item-left';
-    this.element.appendChild(this.itemLeft);
-    
-    // TODO: testing
-    let label = document.createElement('span');
-    label.textContent = name;
-    this.itemLeft.appendChild(label)
+  addLeft(pin) {
+    this.itemLeft = pin;
+    pin.element.className = 'item item-left';
+    this.element.appendChild(pin.element);
   }
 
-  createRight(name) {
-    this.itemRight = document.createElement('div');
-    this.itemRight.className = 'item item-right';
-    this.element.appendChild(this.itemRight);
-
-    // TODO: testing
-    let label = document.createElement('span');
-    label.textContent = name;
-    this.itemRight.appendChild(label)
+  addRight(pin) {
+    this.itemRight = pin;
+    pin.element.className = 'item item-right';
+    this.element.appendChild(pin.element);
   }
 
   get isFull() {

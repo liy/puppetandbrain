@@ -257,8 +257,8 @@ for(let i=0; i<10; ++i) {
   document.body.appendChild(block.element);
   block.mainBody.init({
     hasIn: true,
-    executionNames: ['out1', 'out2'],
+    executionNames: [''],
     inputNames: ['input 1', 'input 2'],
-    outputNames: ['output 1', 'output 2', 'output 2']
+    outputNames: ['output 1']
   })
 }

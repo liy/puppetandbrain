@@ -1,5 +1,4 @@
 .base {
-  margin-top: 10px;
   background-color: #282b42;
   border-radius: 10px;
   padding-bottom: 8px;
@@ -7,14 +6,16 @@
   position: relative;
   
   .body {
+    // Setting min and max size
     min-width: 160px;
-    min-height: 140px;
+    min-height: 100px;
     max-width: 400px;
 
     background-color: #393d5e;
     border-radius: 10px;
 
-    // avoid margin collapse
+    // FIXME: find a better way to avoid first margin collapse?
+    // avoid margin collapse on first row
     display: inline-block;
 
     .row-container {
@@ -23,8 +24,4 @@
       z-index: 1;
     }
   }
-}
-
-.base:first-child {
-  margin-top: 0;
 }

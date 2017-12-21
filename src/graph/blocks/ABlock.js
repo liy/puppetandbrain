@@ -22,8 +22,8 @@ export default class ABlock
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
-    this.group.addEventListener('mousedown', this.dragstart);
-    this.group.addEventListener('touchstart', this.dragstart);
+    this.element.addEventListener('mousedown', this.dragstart);
+    this.element.addEventListener('touchstart', this.dragstart);
     document.addEventListener('mouseup', this.dragstop);
     document.addEventListener('touchend', this.dragstop);
 
@@ -33,7 +33,7 @@ export default class ABlock
 
   createBody() {
     let body = new BlockBody();
-    this.group.appendChild(body.element);
+    this.element.appendChild(body.element);
     this.bodies.push(body);
 
     return body;
