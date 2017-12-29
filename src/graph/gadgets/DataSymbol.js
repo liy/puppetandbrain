@@ -6,10 +6,15 @@ export default class DataSymbol
 
     this.lineSVG = document.getElementById('svg');
 
-    this.element = new DOMParser().parseFromString(require('../../assets/data-pin.svg'), "image/svg+xml").rootElement;
+    this.element = new DOMParser().parseFromString(require('../../assets/data-symbol.svg'), "image/svg+xml").rootElement;
     this.element.setAttribute('class', 'data-svg');
-    this.element.setAttribute('width', 29);
-    this.element.setAttribute('height', 22);
+    this.element.setAttribute('width', 15);
+    this.element.setAttribute('height', 15);
+
+    if(flow == 'out') {
+      this.element.setAttribute('width', 12);
+      this.element.setAttribute('height', 12);
+    }
   }
 
   canConnect(symbol) {

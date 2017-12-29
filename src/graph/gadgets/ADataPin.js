@@ -1,16 +1,17 @@
-import DataSymbol from "./DataSymbol";
+import DataHead from './DataHead';
 
 export default class
 {
   constructor(name, flow) {
     this.element = document.createElement('div');
 
+    // contains symbol or input gadget
+    this.head = new DataHead(flow);
+    this.element.appendChild(this.head.element);
+
     this.label = document.createElement('span');
     this.label.textContent = name;
     this.element.appendChild(this.label);
-
-    this.symbol = new DataSymbol(flow);
-    this.element.appendChild(this.symbol.element);
   }
 
   canConnect(pin) {

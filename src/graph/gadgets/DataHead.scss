@@ -1,0 +1,42 @@
+.data-head {
+  position: absolute;
+
+  display: flex;
+
+  background-color: #393d5e;
+  height: 38px;
+  width: 34px;
+
+  .data-svg {    
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.item-left {
+  .data-head {
+    right: 100%;
+    flex-direction: row-reverse;
+
+    border-radius: 19px 0 0 19px;
+
+    .data-svg {
+      right: 6px;
+    }
+  }
+}
+
+.item-right {
+  .data-head {
+    left: 100%;
+    flex-direction: row;
+    
+    border-radius: 0 19px 19px 0;
+
+    
+    .data-svg {
+      left: 6px;
+    }
+  }
+}

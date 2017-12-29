@@ -11,13 +11,8 @@ export default class ABlock
     this.element = document.createElement('div');
     this.element.setAttribute('class', 'a-block');
 
-    this.outline = document.createElement('div');
-    this.outline.className = 'outline normal'
-    this.element.appendChild(this.outline);
-
-    this.bodies = [];
-    // always have main body
-    this.createBody();
+    this.body = new BlockBody();
+    this.element.appendChild(this.body.element);
     
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
@@ -29,18 +24,6 @@ export default class ABlock
 
     this.x = Math.random()*window.innerWidth;
     this.y = Math.random()*window.innerHeight;
-  }
-
-  createBody() {
-    let body = new BlockBody();
-    this.element.appendChild(body.element);
-    this.bodies.push(body);
-
-    return body;
-  }
-
-  get mainBody() {
-    return this.bodies[0];
   }
 
   dragstart(e) {

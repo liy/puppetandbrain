@@ -5,7 +5,7 @@
 .a-row {
   margin-top: 10px;
   // background-color: rgba(0, 255, 255, 0.342);
-  height: 30px;
+  height: 38px;
 
   display: flex;
   flex-direction: row;
@@ -15,7 +15,7 @@
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     color: #9e9e9e;
-    line-height: 30px;
+    line-height: 38px;
 
     // background-color: #ca7ec4ab;
     display: flex;
@@ -25,22 +25,59 @@
     // the content tends to wrap and change the whole block width!
     white-space: nowrap;
     // be careful, as anything has no position absolute will gets hidden if overflow.
-    overflow-x: hidden;
+    // overflow-x: hidden;
   }
 
   span {
     user-select: none;
   }
 
-  .execution-svg {
-    position: absolute;
-    margin-top: 5px;
-  }
+  // .execution-svg {
+  //   position: absolute;
+  //   margin-top: 5px;
+  // }
 
-  .data-svg {
-    position: absolute;
-    margin-top: 4px;
-  }
+  // .data-svg {
+  //   position: absolute;
+  //   margin-top: 4px;
+  // }
+
+  // .item-left {
+  //   flex-grow: 3;
+  //   flex-direction: row;
+  //   order: 1;
+
+  //   span {
+  //     margin-left: 8px;
+  //   }
+
+  //   .execution-svg {
+  //     left: -32px;
+  //   }
+
+  //   .data-svg {
+  //     left: -31px;
+  //   }
+  // }
+
+  // .item-right {
+  //   flex-grow: 1;
+  //   flex-direction: row-reverse;
+  //   order: 2;
+
+  //   span {
+  //     margin-right: 8px;
+  //   }
+
+  //   .execution-svg {
+  //     right: -33px;
+  //   }
+
+  //   .data-svg {
+  //     right: -31px;
+  //   }
+  // }
+
 
   .item-left {
     flex-grow: 3;
@@ -49,14 +86,6 @@
 
     span {
       margin-left: 8px;
-    }
-
-    .execution-svg {
-      left: -32px;
-    }
-
-    .data-svg {
-      left: -31px;
     }
   }
 
@@ -69,13 +98,6 @@
       margin-right: 8px;
     }
 
-    .execution-svg {
-      right: -33px;
-    }
-
-    .data-svg {
-      right: -31px;
-    }
   }
 }
 

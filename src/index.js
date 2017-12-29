@@ -123,6 +123,7 @@ import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
+import ABlock from './graph/blocks/ABlock';
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
@@ -250,3 +251,13 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
+for(let i=0; i<10; ++i) {
+  const block = new ABlock({});
+  document.body.appendChild(block.element);
+  block.body.init({
+    hasIn: true,
+    executionNames: [''],
+    inputNames: ['input 1', 'input 2'],
+    outputNames: ['output 1']
+  })
+}
