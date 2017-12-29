@@ -32,10 +32,10 @@
     user-select: none;
   }
 
-  // .execution-svg {
-  //   position: absolute;
-  //   margin-top: 5px;
-  // }
+  .execution-svg {
+    position: absolute;
+    margin-top: 5px;
+  }
 
   // .data-svg {
   //   position: absolute;
@@ -69,9 +69,7 @@
   //     margin-right: 8px;
   //   }
 
-  //   .execution-svg {
-  //     right: -33px;
-  //   }
+
 
   //   .data-svg {
   //     right: -31px;
@@ -84,6 +82,11 @@
     flex-direction: row;
     order: 1;
 
+    .execution-svg {
+      left: -25px;
+    }
+    
+
     span {
       margin-left: 8px;
     }
@@ -93,6 +96,10 @@
     flex-grow: 1;
     flex-direction: row-reverse;
     order: 2;
+
+    .execution-svg {
+      right: -28px;
+    }
 
     span {
       margin-right: 8px;
