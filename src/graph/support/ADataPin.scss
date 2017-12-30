@@ -20,6 +20,10 @@
     // flex-direction: row-reverse;
 
     border-radius: 19px 0 0 19px;
+    
+    box-shadow: -5px 0 8px -5px rgba(51, 51, 51, 0.6), 
+    0 -5px 8px -5px rgba(51, 51, 51, 0.6), 
+    0 5px 8px -5px rgba(51, 51, 51, 0.6);
 
     .data-svg {
       right: 6px;
@@ -33,6 +37,10 @@
     // flex-direction: row;
     
     border-radius: 0 19px 19px 0;
+
+    box-shadow: 5px 0 8px -5px rgba(51, 51, 51, 0.6), 
+    0 -5px 8px -5px rgba(51, 51, 51, 0.6), 
+    0 5px 8px -5px rgba(51, 51, 51, 0.6);
 
     .data-svg {
       left: 7px;

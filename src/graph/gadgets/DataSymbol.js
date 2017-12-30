@@ -8,15 +8,35 @@ export default class DataSymbol
 
     this.element = new DOMParser().parseFromString(require('../../assets/data-symbol.svg'), "image/svg+xml").rootElement;
     this.element.setAttribute('class', 'data-svg');
-    this.element.setAttribute('width', 17.5);
-    this.element.setAttribute('height', 17.5);
+    this.element.setAttribute('width', 16);
+    this.element.setAttribute('height', 16);
+
+    this.circlePath = this.element.querySelector('#circle-path');
 
     if(flow == 'out') {
-      this.element.setAttribute('width', 16);
-      this.element.setAttribute('height', 16);
-      let path = this.element.querySelector('#circle-path');
-      path.setAttribute('fill', '#98C6DE');
-      path.setAttribute('stroke', 'none');
+      this.circlePath.setAttribute('fill', '#98C6DE');
+      this.circlePath.setAttribute('stroke', 'none');
+    }
+    
+    this.element.addEventListener('mousedown', e => {
+      e.stopPropagation();
+      console.log(e)
+    })
+
+    this.visible = true;
+  }
+
+  get visible() {
+    return this._visible;
+  }
+
+  set visible(v) {
+    this._visible = v;
+    if(v) {
+      this.element.style.visibility = 'visible';
+    }
+    else {
+      this.element.style.visibility = 'hidden';
     }
   }
 
@@ -26,7 +46,7 @@ export default class DataSymbol
   
   get position() {
     let offset = this.lineSVG.getBoundingClientRect();
-    let rect = this.element.getBoundingClientRect();
+    let rect = this.circlePath.getBoundingClientRect();
     return {
       x: (rect.left + rect.right)/2 - offset.left,
       y: (rect.top + rect.bottom)/2 - offset.top

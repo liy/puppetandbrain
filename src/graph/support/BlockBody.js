@@ -1,8 +1,6 @@
 import './BlockBody.scss';
-import BlockIcon from './BlockIcon';
+import BlockIcon from '../gadgets/BlockIcon';
 import BlockRow from './BlockRow';
-import ADataPin from './ADataPin';
-import AExecutionPin from './AExecutionPin';
 
 export default class BlockBody
 {
@@ -24,22 +22,12 @@ export default class BlockBody
     this.body.appendChild(this.icon.element);
   }
 
-  init({hasIn, executionNames, inputNames, outputNames}) {
-    if(hasIn) {
-      this.availableLeft.addLeft(new AExecutionPin(name, 'in'));
-    }
+  addLeft(pin) {
+    this.availableLeft.addLeft(pin)
+  }
 
-    for(let name of executionNames) {
-      this.availableRight.addRight(new AExecutionPin(name, 'out'));
-    }
-
-    for(let name of inputNames) {
-      this.availableLeft.addLeft(new ADataPin(name, 'in'));
-    }
-
-    for(let name of outputNames) {
-      this.availableRight.addRight(new ADataPin(name, 'out'));
-    }
+  addRight(pin) {
+    this.availableRight.addRight(pin);
   }
 
   get availableLeft() {

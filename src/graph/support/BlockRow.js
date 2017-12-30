@@ -1,5 +1,4 @@
 import './BlockRow.scss'
-import AExecutionPin from './AExecutionPin';
 
 export default class BlockRow
 {

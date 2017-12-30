@@ -3,6 +3,8 @@ export default class ExecutionSymbol
   constructor(flow) {
     this.type = 'execution';
     this.flow = flow;
+    
+    this.lineSVG = document.getElementById('svg');
 
     this.element = new DOMParser().parseFromString(require('../../assets/execution.svg'), "image/svg+xml").rootElement;
     this.element.setAttribute('class', 'execution-svg');
@@ -11,14 +13,17 @@ export default class ExecutionSymbol
 
     this.inCircle = this.element.querySelector('#in-circle');
     this.outCircle = this.element.querySelector('#out-circle');
+    this.targetPath = null;
 
     if(flow == 'in') {
       this.inCircle.setAttribute('visibility', 'visible');
       this.outCircle.setAttribute('visibility', 'hidden');
+      this.targetPath = this.inCircle;
     }
     else {
       this.inCircle.setAttribute('visibility', 'hidden');
       this.outCircle.setAttribute('visibility', 'visible');
+      this.targetPath = this.outCircle;
     }
 
     this.element.addEventListener('mousedown', e => {
@@ -44,8 +49,8 @@ export default class ExecutionSymbol
   }
 
   get position() {
-    let offset = this.svg.getBoundingClientRect();
-    let rect = this.icon.getBoundingClientRect();
+    let offset = this.lineSVG.getBoundingClientRect();
+    let rect = this.targetPath.getBoundingClientRect();
     return {
       x: (rect.left + rect.right)/2 - offset.left,
       y: (rect.top + rect.bottom)/2

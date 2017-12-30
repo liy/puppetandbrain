@@ -124,6 +124,7 @@ import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
 import ABlock from './graph/blocks/ABlock';
+import Bar from './graph/gadgets/Bar';
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
@@ -251,13 +252,23 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
+let blocks = new Array();
 for(let i=0; i<10; ++i) {
   const block = new ABlock({});
   document.body.appendChild(block.element);
-  block.body.init({
+  block.init({
     hasIn: true,
     executionNames: [''],
     inputNames: ['input 1', 'input 2'],
     outputNames: ['output 1']
   })
+  blocks.push(block);
 }
+
+let bar = new Bar();
+blocks[0].inputPins.get('input 1').setGadget(bar);
+blocks[0].inputPins.get('input 1').gadgetVisible = true;
+setInterval(() => {
+  bar.ratio += 0.05;
+}, 500);
+console.log(bar)

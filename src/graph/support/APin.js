@@ -1,6 +1,4 @@
-import ExecutionSymbol from "./ExecutionSymbol";
-
-export default class AExecutionPin
+export default class APin
 {
   constructor(name, flow) {
     this.element = document.createElement('div');
@@ -8,8 +6,9 @@ export default class AExecutionPin
     this.label = document.createElement('span');
     this.label.textContent = name;
     this.element.appendChild(this.label);
+  }
 
-    this.symbol = new ExecutionSymbol(flow);
-    this.element.appendChild(this.symbol.element)
+  canConnect(pin) {
+    return pin != null && (pin.type == this.type) && (pin.flow != this.flow);
   }
 }

@@ -1,13 +1,12 @@
 import './ABlock.scss'
-import BlockBody from '../gadgets/BlockBody';
+import BlockBody from '../support/BlockBody';
+import AExecutionPin from '../support/AExecutionPin';
+import ADataPin from '../support/ADataPin';
+import ArrayMap from '../../utils/ArrayMap';
 
 export default class ABlock
 {
-  constructor({inputs, outputs, variables}) {
-    this.inputs = inputs;
-    this.outputs = outputs;
-    this.variables = variables;
-
+  constructor() {
     this.element = document.createElement('div');
     this.element.setAttribute('class', 'a-block');
 
@@ -24,6 +23,37 @@ export default class ABlock
 
     this.x = Math.random()*window.innerWidth;
     this.y = Math.random()*window.innerHeight;
+  }
+
+  init({hasIn, executionNames, inputNames, outputNames}) {
+    this.inPin = null;
+    this.outPins = new ArrayMap();
+    this.inputPins = new ArrayMap();
+    this.outputPins = new ArrayMap();
+
+    let pin = null;
+    if(hasIn) {
+      this.inPin = new AExecutionPin('', 'in');
+      this.body.addLeft(this.inPin);
+    }
+
+    for(let name of executionNames) {
+      pin = new AExecutionPin(name, 'out');
+      this.body.addRight(pin);
+      this.outPins.set(name, pin)
+    }
+
+    for(let name of inputNames) {
+      pin = new ADataPin(name, 'in');
+      this.body.addLeft(pin);
+      this.inputPins.set(name, pin);
+    }
+
+    for(let name of outputNames) {
+      pin = new ADataPin(name, 'out');
+      this.body.addRight(pin);
+      this.outputPins.set(name, pin);
+    }
   }
 
   dragstart(e) {
