@@ -3,6 +3,8 @@ import BlockBody from '../support/BlockBody';
 import AExecutionPin from '../support/AExecutionPin';
 import ADataPin from '../support/ADataPin';
 import ArrayMap from '../../utils/ArrayMap';
+import AOutputPin from '../support/AOutputPin';
+import AInputPin from '../support/AInputPin';
 
 export default class ABlock
 {
@@ -44,13 +46,13 @@ export default class ABlock
     }
 
     for(let name of inputNames) {
-      pin = new ADataPin(name, 'in');
+      pin = new AInputPin(name);
       this.body.addLeft(pin);
       this.inputPins.set(name, pin);
     }
 
     for(let name of outputNames) {
-      pin = new ADataPin(name, 'out');
+      pin = new AOutputPin(name);
       this.body.addRight(pin);
       this.outputPins.set(name, pin);
     }

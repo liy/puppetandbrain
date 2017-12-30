@@ -1,18 +1,23 @@
-export default class ExecutionSymbol
+import Gadget from './Gadget';
+
+export default class ExecutionSymbol extends Gadget
 {
   constructor(flow) {
+    super();
+
     this.type = 'execution';
     this.flow = flow;
     
     this.lineSVG = document.getElementById('svg');
 
-    this.element = new DOMParser().parseFromString(require('../../assets/execution.svg'), "image/svg+xml").rootElement;
-    this.element.setAttribute('class', 'execution-svg');
-    this.element.setAttribute('width', 42);
-    this.element.setAttribute('height', 22);
+    this.symbol = new DOMParser().parseFromString(require('../../assets/execution.svg'), "image/svg+xml").rootElement;
+    this.symbol.setAttribute('class', 'execution-svg');
+    this.symbol.setAttribute('width', 42);
+    this.symbol.setAttribute('height', 22);
+    this.element.appendChild(this.symbol)
 
-    this.inCircle = this.element.querySelector('#in-circle');
-    this.outCircle = this.element.querySelector('#out-circle');
+    this.inCircle = this.symbol.querySelector('#in-circle');
+    this.outCircle = this.symbol.querySelector('#out-circle');
     this.targetPath = null;
 
     if(flow == 'in') {

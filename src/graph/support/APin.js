@@ -7,8 +7,4 @@ export default class APin
     this.label.textContent = name;
     this.element.appendChild(this.label);
   }
-
-  canConnect(pin) {
-    return pin != null && (pin.type == this.type) && (pin.flow != this.flow);
-  }
 }

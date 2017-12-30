@@ -15,14 +15,4 @@ export default class ADataPin extends APin
     this.symbol = new DataSymbol(flow);
     this.head.appendChild(this.symbol.element);
   }
-
-  setGadget(gadget) {
-    this.gadget = gadget;
-    this.head.appendChild(this.gadget.element);
-  }
-
-  set gadgetVisible(flag) {
-    this.symbol.visible = !flag;
-    this.gadget.visible = flag;
-  }
 }

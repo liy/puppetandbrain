@@ -1,17 +1,22 @@
-export default class DataSymbol
+import Gadget from './Gadget';
+
+export default class DataSymbol extends Gadget
 {
   constructor(flow) {
+    super();
+
     this.type = 'data';
     this.flow = flow;
 
     this.lineSVG = document.getElementById('svg');
 
-    this.element = new DOMParser().parseFromString(require('../../assets/data-symbol.svg'), "image/svg+xml").rootElement;
-    this.element.setAttribute('class', 'data-svg');
-    this.element.setAttribute('width', 16);
-    this.element.setAttribute('height', 16);
+    this.symbol = new DOMParser().parseFromString(require('../../assets/data-symbol.svg'), "image/svg+xml").rootElement;
+    this.symbol.setAttribute('class', 'data-svg');
+    this.symbol.setAttribute('width', 16);
+    this.symbol.setAttribute('height', 16);
+    this.element.appendChild(this.symbol);
 
-    this.circlePath = this.element.querySelector('#circle-path');
+    this.circlePath = this.symbol.querySelector('#circle-path');
 
     if(flow == 'out') {
       this.circlePath.setAttribute('fill', '#98C6DE');
@@ -24,20 +29,6 @@ export default class DataSymbol
     })
 
     this.visible = true;
-  }
-
-  get visible() {
-    return this._visible;
-  }
-
-  set visible(v) {
-    this._visible = v;
-    if(v) {
-      this.element.style.visibility = 'visible';
-    }
-    else {
-      this.element.style.visibility = 'hidden';
-    }
   }
 
   canConnect(symbol) {
