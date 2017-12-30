@@ -1,3 +1,4 @@
+import './AInputPin.scss';
 import ADataPin from "./ADataPin";
 import InputField from '../gadgets/InputField'
 
@@ -9,11 +10,9 @@ export default class AInputPin extends ADataPin
     this.setGadget(new InputField());
     this.gadgetVisible = false;
 
-    this.element.addEventListener('mouseover', e => {
-      this.gadgetVisible = true;
-    })
-    this.element.addEventListener('mouseout', e => {
-      this.gadgetVisible = false;
+    this.element.className = 'input-pin';
+    this.label.addEventListener('mousedown', e => {
+      this.gadgetVisible = !this.gadgetVisible
     })
   }
 
@@ -28,7 +27,10 @@ export default class AInputPin extends ADataPin
   }
 
   set gadgetVisible(flag) {
-    this.symbol.visible = !flag;
     this.gadget.visible = flag;
+  }
+
+  get gadgetVisible() {
+    return this.gadget.visible;
   }
 }

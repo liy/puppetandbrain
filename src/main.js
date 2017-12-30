@@ -255,7 +255,7 @@ firebase.auth().onAuthStateChanged(user => {
 })
 
 let blocks = new Array();
-for(let i=0; i<10; ++i) {
+for(let i=0; i<2; ++i) {
   const block = new ABlock({});
   document.body.appendChild(block.element);
   block.init({
@@ -269,12 +269,7 @@ for(let i=0; i<10; ++i) {
 
 let bar = new Bar();
 blocks[0].inputPins.get('input 1').setGadget(bar);
-blocks[0].inputPins.get('input 1').gadgetVisible = true;
-setInterval(() => {
-  bar.ratio += 0.05;
-}, 500);
 
 
 let toggle = new Toggle();
-blocks[0].inputPins.get('input 2').setGadget(new InputField());
-blocks[0].inputPins.get('input 2').gadgetVisible = true;
+blocks[0].inputPins.get('input 2').setGadget(new Toggle());

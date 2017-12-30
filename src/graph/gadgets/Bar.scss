@@ -1,19 +1,20 @@
 .bar-container {
+  width: 80px;
+
   input {
-    position: absolute;
+    position: relative;
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12px;
     color: rgb(255, 255, 255);
     text-align: center;
-    border-radius: 22px;
 
-    position: absolute;
-    width: 100%;
     border: none;
     outline: none;
     background-color: transparent;
-    left: 0;
-    top: 12px;
+
+    width: 80px;
+    left: -80px;
+    top: -6px;
   }
 
   .bar-svg {

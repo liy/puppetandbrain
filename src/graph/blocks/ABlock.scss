@@ -4,4 +4,12 @@
   // make sure all the contents z-index(if any of them are absolute)
   // are lower than this number
   z-index: 2;
+
+  .a-title {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    margin-bottom: 8px;
+  }
 }

@@ -7,10 +7,8 @@
   height: 38px;
   min-width: 34px;
 
-  .data-svg {    
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  .data-svg {
+    margin-top: 11px;
   }
 }
 
@@ -26,7 +24,7 @@
     0 5px 8px -5px rgba(51, 51, 51, 0.6);
 
     .data-svg {
-      right: 6px;
+      margin-left: 10px;
     }
   }
 }
@@ -43,7 +41,7 @@
     0 5px 8px -5px rgba(51, 51, 51, 0.6);
 
     .data-svg {
-      left: 7px;
+      margin-left: 8px;
     }
   }
 }

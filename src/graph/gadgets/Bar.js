@@ -6,10 +6,11 @@ export default class Bar extends Gadget
   constructor() {
     super();
     this.element.className = 'bar-container';
+    this.element.style.display = 'none';
 
     this.barSvg = new DOMParser().parseFromString(require('../../assets/bar.svg'), "image/svg+xml").rootElement;
     this.barSvg.setAttribute('class', 'bar-svg');
-    this.barSvg.setAttribute('width', 90);
+    this.barSvg.setAttribute('width', 70);
     this.barSvg.setAttribute('height', 20);
     this.element.appendChild(this.barSvg);
 
@@ -23,7 +24,7 @@ export default class Bar extends Gadget
 
     this.decimalPlaces = 2;
 
-    this.ratio = 0;
+    this.ratio = 1;
 
     this.element.addEventListener('mousedown', e => {
       e.stopPropagation();
@@ -36,7 +37,7 @@ export default class Bar extends Gadget
 
   set ratio(v) {
     this._ratio = Math.min(v, 1);
-    this.line.setAttribute('d', `M10 10h${70*this._ratio}`);
+    this.line.setAttribute('d', `M10 10h${50*this._ratio}`);
     this.input.value = this.number.toFixed(this.decimalPlaces);
   }
 

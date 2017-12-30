@@ -10,7 +10,12 @@ export default class ABlock
 {
   constructor() {
     this.element = document.createElement('div');
-    this.element.setAttribute('class', 'a-block');
+    this.element.className = 'a-block';
+
+    this.title = document.createElement('div');
+    this.title.className = 'a-title';
+    this.element.appendChild(this.title);
+    this.title.textContent = 'test'
 
     this.body = new BlockBody();
     this.element.appendChild(this.body.element);

@@ -12,13 +12,13 @@ export default class BlockRow
 
   addLeft(pin) {
     this.itemLeft = pin;
-    pin.element.className = 'item item-left';
+    pin.element.classList.add('item', 'item-left')
     this.element.appendChild(pin.element);
   }
 
   addRight(pin) {
     this.itemRight = pin;
-    pin.element.className = 'item item-right';
+    pin.element.classList.add('item', 'item-right')
     this.element.appendChild(pin.element);
   }
 
