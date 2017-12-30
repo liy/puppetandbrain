@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20">
+  <path fill="none" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-miterlimit="10" d="M4 10h22"/>
+  <g id="knob">
+    <circle cx="10" cy="10" r="10" fill="#282b42"/>
+    <circle id="color" cx="10" cy="10" r="6" fill="#a4b500"/>
+  </g>
+</svg>

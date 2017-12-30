@@ -125,6 +125,7 @@ import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
 import ABlock from './graph/blocks/ABlock';
 import Bar from './graph/gadgets/Bar';
+import Toggle from './graph/gadgets/Toggle';
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
@@ -271,4 +272,8 @@ blocks[0].inputPins.get('input 1').gadgetVisible = true;
 setInterval(() => {
   bar.ratio += 0.05;
 }, 500);
-console.log(bar)
+
+
+let toggle = new Toggle();
+blocks[1].inputPins.get('input 1').setGadget(toggle);
+blocks[1].inputPins.get('input 1').gadgetVisible = true;
