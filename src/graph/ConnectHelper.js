@@ -9,7 +9,6 @@ class ConnectHelper
     
     this._snapSymbol = null;
 
-    this.linkSound = new Audio(require('../assets/sounds/link.mp3'))
     this.snapSound = new Audio(require('../assets/sounds/snap.mp3'))
   }
 
@@ -38,25 +37,25 @@ class ConnectHelper
   }
 
   mouseOut() {
-    console.warn('out')
     this._snapSymbol = null;
   }
 
-  async stop(e) {
+  stop(e) {
     this._snapSymbol = null;
+    this.startSymbol = null;
 
+    if(this.svg.contains(this.path)) {
+      this.svg.removeChild(this.path);
+    }
+  }
+
+  async openBrowser(e) {
     if(e.target == BrainGraph.container) {
       var browser = new BlockBrowser();
       let createdNode = await browser.open(e.clientX, e.clientY);
 
       if(createdNode) AutoConnect.process(this.startSymbol, createdNode);
     }
-
-    if(this.svg.contains(this.path)) {
-      this.svg.removeChild(this.path);
-    }
-
-    this.startSymbol = null;
   }
 
   async touchStop(e) {
@@ -80,8 +79,8 @@ class ConnectHelper
     this.startSymbol = null;
   }
 
-  startExecutionPin(pin, e) {
-    this.startSymbol = pin;
+  startExecutionSymbol(symbol) {
+    this.startSymbol = symbol;
     this.path.setAttribute('stroke', '#c6d4f7');
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
@@ -89,29 +88,13 @@ class ConnectHelper
     this.svg.appendChild(this.path);
   }
 
-  startDataSymbol(symbol, e) {
+  startDataSymbol(symbol) {
     this.startSymbol = symbol;
     this.path.setAttribute('stroke', '#a9c4d2');
     this.path.setAttribute('stroke-width', 2);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
     this.svg.appendChild(this.path);
-  }
-
-  connectExecutionPin(pin) {
-    // might happens
-    if(this.startSymbol && this.startSymbol.canConnect(pin)) {
-      let outPin = pin;
-      let inPin = this.startSymbol;
-      if(outPin.flow == 'in') {
-        outPin = this.startSymbol;
-        inPin = pin;
-      }
-  
-      this.linkSound.play()
-  
-      History.push(Commander.create('CreateExecution', outPin.node.id, outPin.name, inPin.node.id).processAndSave());
-    }
   }
 }
 

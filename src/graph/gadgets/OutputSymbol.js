@@ -27,7 +27,9 @@ export default class OutputSymbol extends DataSymbol
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
       this.linkSound.play()
-      History.push(Commander.create('CreateDataLink', ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name, this.node.id, this.name).processAndSave());
+      History.push(Commander.create('CreateDataLink', ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name, 
+        this.node.id, this.name).processAndSave());
     }
+    ConnectHelper.stop(e);
   }
 }

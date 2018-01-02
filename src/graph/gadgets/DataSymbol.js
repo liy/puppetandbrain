@@ -62,16 +62,19 @@ export default class DataSymbol extends Gadget
     // only left mouse
     if(e.button < 2) {
       const move = e => {
-        this.drawLine(e.clientX, e.clientY);
+        this.drawLineSnap(e.clientX, e.clientY);
       }
 
-      const up = e => {
+      const up = async e => {
         document.removeEventListener('mousemove', move);
         document.removeEventListener('mouseup', up);
+
+        await ConnectHelper.openBrowser(e);
+        ConnectHelper.stop(e);
       }
 
       ConnectHelper.startDataSymbol(this);
-      this.drawLine(e.clientX, e.clientY);
+      this.drawLineSnap(e.clientX, e.clientY);
       document.addEventListener('mousemove', move);
       document.addEventListener('mouseup', up);
     }
@@ -82,17 +85,20 @@ export default class DataSymbol extends Gadget
 
     const move = e => {
       const touch = e.touches[0];
-      this.drawLine(touch.clientX, touch.clientY);
+      this.drawLineSnap(touch.clientX, touch.clientY);
       ConnectHelper.touchMove(touch);
     }
 
-    const up = e => {
+    const up = async e => {
       document.removeEventListener('touchmove', move);
       document.removeEventListener('touchend', up);
+
+      await ConnectHelper.openBrowser(e);
+      ConnectHelper.stop(e);
     }
 
     ConnectHelper.startDataSymbol(this);
-    this.drawLine(e.touches[0].clientX, e.touches[0].clientY);
+    this.drawLineSnap(e.touches[0].clientX, e.touches[0].clientY);
     document.addEventListener('touchmove', move);
     document.addEventListener('touchend', up);
   }
@@ -118,13 +124,17 @@ export default class DataSymbol extends Gadget
     e.stopPropagation();
   }
 
-  drawLine(x, y) {
+  
+  drawLineSnap(x, y) {
     // snap
     if(this.canConnect(ConnectHelper.snapSymbol)) {
       x = ConnectHelper.snapSymbol.position.x;
       y = ConnectHelper.snapSymbol.position.y;
     }
+    this.drawLine(x, y, ConnectHelper.path);
+  } 
 
+  drawLine(x, y, path) {
     let source = this.position;
 
     let sx = source.x - this.offsetX;
@@ -140,20 +150,20 @@ export default class DataSymbol extends Gadget
     let degree = Math.atan2(dy, dx)*180/Math.PI;
 
     if(Math.abs(degree) < 45 && adx < 50) {
-      ConnectHelper.path.setAttribute('d', `M${source.x},${source.y} L${sx},${sy} ${tx},${ty} ${x},${y}`);
+      path.setAttribute('d', `M${source.x},${source.y} L${sx},${sy} ${tx},${ty} ${x},${y}`);
     }
     else {
       // horizontal
       if(adx > ady) {
         // dy with sign of dx
         let dysdx = ady*Math.sign(dx)
-        ConnectHelper.path.setAttribute('d', `M${source.x},${source.y} L${sx},${sy} l${dysdx/2},${dy/2} H${tx-dysdx/2} L${tx},${ty} ${x},${y}`);
+        path.setAttribute('d', `M${source.x},${source.y} L${sx},${sy} l${dysdx/2},${dy/2} H${tx-dysdx/2} L${tx},${ty} ${x},${y}`);
       }
       // vertical
       else {
         // dx with sign of dy
         let dxsdy = adx*Math.sign(dy)
-        ConnectHelper.path.setAttribute('d', `M${source.x},${source.y} L${sx},${sy} l${dx/2},${dxsdy/2} V${ty-dxsdy/2} L${tx},${ty} ${x},${y}`);
+        path.setAttribute('d', `M${source.x},${source.y} L${sx},${sy} l${dx/2},${dxsdy/2} V${ty-dxsdy/2} L${tx},${ty} ${x},${y}`);
       }
     }
   }

@@ -1,10 +1,10 @@
 import './ABlock.scss'
 import BlockBody from '../support/BlockBody';
-import AExecutionPin from '../support/AExecutionPin';
-import ADataPin from '../support/ADataPin';
 import ArrayMap from '../../utils/ArrayMap';
 import AOutputPin from '../support/AOutputPin';
 import AInputPin from '../support/AInputPin';
+import AExecutionInPin from '../support/AExecutionInPin';
+import AExecutionOutPin from '../support/AExecutionOutPin';
 
 export default class ABlock
 {
@@ -42,12 +42,12 @@ export default class ABlock
 
     let pin = null;
     if(hasIn) {
-      this.inPin = new AExecutionPin(node, '', 'in');
+      this.inPin = new AExecutionInPin(node, '');
       this.body.addLeft(this.inPin);
     }
 
     for(let name of executionNames) {
-      pin = new AExecutionPin(node, name, 'out');
+      pin = new AExecutionOutPin(node, name);
       this.body.addRight(pin);
       this.outPins.set(name, pin)
     }
