@@ -6,10 +6,6 @@
   background-color: #393d5e;
   height: 38px;
   min-width: 34px;
-
-  .data-svg {
-    margin-top: 11px;
-  }
 }
 
 .item-left {
@@ -19,13 +15,12 @@
 
     border-radius: 19px 0 0 19px;
     
-    box-shadow: -5px 0 8px -5px rgba(51, 51, 51, 0.6), 
-    0 -5px 8px -5px rgba(51, 51, 51, 0.6), 
-    0 5px 8px -5px rgba(51, 51, 51, 0.6);
+    box-shadow: -5px 0 8px -5px rgba(51, 51, 51, 0.4), 
+    0 -5px 8px -5px rgba(51, 51, 51, 0.4), 
+    0 5px 8px -5px rgba(51, 51, 51, 0.4);
 
-    .data-svg {
-      margin-left: 10px;
-    }
+    // box-shadow:0 -5px 8px -5px rgba(51, 51, 51, 0.4), 
+    // 0 5px 8px -5px rgba(51, 51, 51, 0.4);
   }
 }
 
@@ -36,12 +31,8 @@
     
     border-radius: 0 19px 19px 0;
 
-    box-shadow: 5px 0 8px -5px rgba(51, 51, 51, 0.6), 
-    0 -5px 8px -5px rgba(51, 51, 51, 0.6), 
-    0 5px 8px -5px rgba(51, 51, 51, 0.6);
-
-    .data-svg {
-      margin-left: 8px;
-    }
+    box-shadow: 5px 0 8px -5px rgba(51, 51, 51, 0.4), 
+    0 -5px 8px -5px rgba(51, 51, 51, 0.4), 
+    0 5px 8px -5px rgba(51, 51, 51, 0.4);
   }
 }

@@ -31,12 +31,20 @@ export default class ExecutionSymbol extends Gadget
       this.targetPath = this.outCircle;
     }
 
-    this.element.addEventListener('mousedown', e => {
-      e.stopPropagation();
-      console.log(e)
-    })
-
     this.connected = false;
+
+    this.mouseDown = this.mouseDown.bind(this);
+    this.mouseUp = this.mouseUp.bind(this);
+    this.element.addEventListener('mousedown', this.mouseDown);
+    this.element.addEventListener('mouseup', this.mouseUp);
+  }
+
+  mouseDown(e) {
+    e.stopPropagation();
+  }
+
+  mouseUp(e) {
+
   }
 
   canConnect(symbol) {

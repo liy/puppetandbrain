@@ -15,7 +15,6 @@ export default class ABlock
     this.title = document.createElement('div');
     this.title.className = 'a-title';
     this.element.appendChild(this.title);
-    this.title.textContent = 'test'
 
     this.body = new BlockBody();
     this.element.appendChild(this.body.element);
@@ -32,32 +31,35 @@ export default class ABlock
     this.y = Math.random()*window.innerHeight;
   }
 
-  init({hasIn, executionNames, inputNames, outputNames}) {
+  init({name, hasIn, executionNames, inputNames, outputNames, node}) {
+    this.node = node;
     this.inPin = null;
     this.outPins = new ArrayMap();
     this.inputPins = new ArrayMap();
     this.outputPins = new ArrayMap();
 
+    this.title.textContent = name || 'test';
+
     let pin = null;
     if(hasIn) {
-      this.inPin = new AExecutionPin('', 'in');
+      this.inPin = new AExecutionPin(node, '', 'in');
       this.body.addLeft(this.inPin);
     }
 
     for(let name of executionNames) {
-      pin = new AExecutionPin(name, 'out');
+      pin = new AExecutionPin(node, name, 'out');
       this.body.addRight(pin);
       this.outPins.set(name, pin)
     }
 
     for(let name of inputNames) {
-      pin = new AInputPin(name);
+      pin = new AInputPin(node, name);
       this.body.addLeft(pin);
       this.inputPins.set(name, pin);
     }
 
     for(let name of outputNames) {
-      pin = new AOutputPin(name);
+      pin = new AOutputPin(node, name);
       this.body.addRight(pin);
       this.outputPins.set(name, pin);
     }
