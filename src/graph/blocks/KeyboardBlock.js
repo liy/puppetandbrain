@@ -1,20 +1,24 @@
-import ListenerBlock from "./ListenerBlock";
+import Block from "./Block";
 
-export default class KeyboardBlock extends ListenerBlock
+export default class KeyboardBlock extends Block
 {
-  constructor(node) {
-    super(node);
+  constructor() {
+    super();
+  }
 
-    this.inputPin = this.inputPins.get('code');
-    let inputElement = this.inputPin.inputElement;
-    inputElement.addEventListener('keydown', e => {
-      e.preventDefault();
-      e.stopPropagation();
+  init(node) {
+    super.init(node);
 
-      e.target.value = e.code;
-      node.variables['code'] = e.code
-    })
+    // TODO: add  keycode gadget
     
-    this.minWidth = 125;
+    // this.inputPin = this.inputPins.get('code');
+    // let inputElement = this.inputPin.inputElement;
+    // inputElement.addEventListener('keydown', e => {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+
+    //   e.target.value = e.code;
+    //   node.variables['code'] = e.code
+    // })
   }
 }

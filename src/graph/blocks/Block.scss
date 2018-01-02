@@ -1,91 +1,17 @@
-.block
-{
-  cursor: default;
-  user-select:none;
-  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+.a-block {
   position: absolute;
 
-  .title {
-    color: rgb(255, 255, 255);
-    padding:5px 10px;
+  // make sure all the contents z-index(if any of them are absolute)
+  // are lower than this number
+  z-index: 2;
+
+  .a-title {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
-
-    input {
-      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      color: rgb(255, 255, 255);
-      text-align: center;
-      border-radius: 22px;
-
-      position: absolute;
-      width: 100%;
-      border: none;
-      outline: none;
-      background-color: transparent;
-      left: 0;
-      top: -15px;
-    }
-
-    ::placeholder {
-      color:rgb(143, 143, 143);
-    }
-
-    .input-error-hint {
-      font-size: 12px;
-      position: absolute;
-      right: -105px;
-      top: -17px;
-      text-align: left;
-      color: #dc0000;
-      width: 100px;
-      visibility: hidden;
-    }
+    font-size: 18px;
+    color: white;
+    margin-bottom: 8px;
     
-    // input:hover {
-    //   background-color: #797979;
-    // }
-  }
-
-  .content {
-    // min-width: 120px;
-    // min-height: 30px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-
-    background:rgba(57, 61, 94, 0.8);
-    color: rgb(245, 245, 245);
-    border-radius: 12px;    
-    border: 2px solid rgba(99, 99, 99, 0.0);
-    box-shadow: 0 0 5px rgba(51, 51, 51, 0.521);
-    
-
-    .row { 
-      // background-color: rgba($color: #a53583, $alpha: 0.3);
-      line-height: 22px;
-      height:22px;
-      width: 100%;
-      margin-top:1px;
-      margin-bottom:1px;
-    }
-  }
-
-  .drag-area {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(255, 0, 0, 0.0);
-    z-index: 0;
-  }
-
-  .block-selected {
-    // box-shadow: inset 0px 0px 0px 2px #FFF;
-    border: 2px solid rgba(255, 255, 255, 1.0);
-  }
-
-  .run {
-    border: 2px solid #ffbb00;
+    user-select: none;
   }
 }
-

@@ -12,4 +12,8 @@ export default class ADataPin extends APin
     this.head.className = 'data-head';
     this.element.appendChild(this.head);
   }
+
+  init(node) {
+    this.node = node;
+  }
 }

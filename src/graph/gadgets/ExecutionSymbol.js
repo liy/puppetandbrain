@@ -3,10 +3,9 @@ import ConnectHelper from '../ConnectHelper';
 
 export default class ExecutionSymbol extends Gadget
 {
-  constructor(node, name, flow) {
+  constructor(name, flow) {
     super();
 
-    this.node = node;
     this.name = name;
     this.flow = flow;
     this.type = 'execution';
@@ -24,9 +23,11 @@ export default class ExecutionSymbol extends Gadget
     this.outCircle = this.svg.querySelector('#out-circle');
     this.outCircle.style.pointerEvents = 'none';
     this.targetPath = null;
+  }
 
-    this.connected = false;
-    
+  init(node) {
+    this.node = node;
+
     this.mouseOver = this.mouseOver.bind(this)
     this.mouseOut = this.mouseOut.bind(this)
     this.mouseDown = this.mouseDown.bind(this);
@@ -57,6 +58,10 @@ export default class ExecutionSymbol extends Gadget
     else {
       this.inCircle.setAttribute('fill', 'none');
     }
+  }
+
+  get connected() {
+    return this._connected;
   }
 
   mouseDown(e) {

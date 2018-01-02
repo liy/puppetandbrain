@@ -1,19 +1,18 @@
-import TaskBlock from "./TaskBlock";
+import Block from "./Block";
 import BlockSelection from '../BlockSelection';
-require('./PerformBlock.scss')
 
-export default class PerformBlock extends TaskBlock
+export default class PerformBlock extends Block
 {
-  constructor(node, graph) {
-    super(node, graph);
+  constructor() {
+    super();
 
     this.clicks = 0;
     this.dbclick = this.dbclick.bind(this)
-    this.dragArea.addEventListener('mousedown', this.dbclick)
+    this.element.addEventListener('mousedown', this.dbclick)
   }
 
   dbclick(e) {
-    if(e.target != this.dragArea) return;
+    if(e.target != this.element) return;
 
     setTimeout(() => {
       this.clicks = 0;

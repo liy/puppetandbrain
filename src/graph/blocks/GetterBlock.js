@@ -1,12 +1,13 @@
-import DataBlock from "./DataBlock";
-import OutputPin from "../OutputPin";
+import Block from "./Block";
 
-export default class GetterBlock extends DataBlock
+export default class GetterBlock extends Block
 {
-  constructor(node) {
-    super(node);
+  constructor() {
+    super();
+  }
 
-    this.content.classList.add('getter-block');
+  init(node) {
+    super.init(node);
 
     // GetterNode actually use variable id as the name by default
     this.outputPin = this.outputPins.get(node.variable.id);

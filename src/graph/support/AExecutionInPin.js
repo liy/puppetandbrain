@@ -3,10 +3,13 @@ import APin from "./APin";
 
 export default class AExecutionInPin extends APin
 {
-  constructor(node) {
-    super(node, 'in');
-
-    this.symbol = new ExecutionInSymbol(node);
+  constructor() {
+    super('', 'in');
+    this.symbol = new ExecutionInSymbol();
     this.element.appendChild(this.symbol.element)
+  }
+
+  init(node) {
+    this.symbol.init(node);
   }
 }

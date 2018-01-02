@@ -5,7 +5,6 @@ import ArrayMap from '../utils/ArrayMap';
 import BlockMenu from '../browser/BlockMenu';
 import BlockBrowser from '../browser/BlockBrowser';
 import VariablePanel from './gadgets/VariablePanel';
-import ABlock from './blocks/ABlock';
 
 class BrainGraph
 {
@@ -211,25 +210,25 @@ class BrainGraph
     for(let block of this.blocks.getValues()) {
       // draw exeuctions
       // refresh in pin, only update the in pin icon status
-      if(block.inPin) block.inPin.refresh();
+      if(block.inPin) block.inPin.symbol.refresh();
       if(block.outPins) {
         block.outPins.getValues().forEach(pin => {
-          pin.refresh();
+          pin.symbol.refresh();
         })
       }
       // draw variable connection
       block.inputPins.getValues().forEach(pin => {
-        pin.refresh();
+        pin.symbol.refresh();
       })
       block.outputPins.getValues().forEach(pin => {
-        pin.refresh();
+        pin.symbol.refresh();
       })
     }
   }
 
   addBlock(block) {
     this.blocks.set(block.id, block);
-    this.blockContainer.appendChild(block.container);
+    this.blockContainer.appendChild(block.element);
   }
 
   getBlock(id) {
@@ -239,7 +238,7 @@ class BrainGraph
   // remove it visually
   removeBlock(block) {
     this.blocks.remove(block.id);
-    this.blockContainer.removeChild(block.container);
+    this.blockContainer.removeChild(block.element);
   }
 
   // destroy node and block all together and its connections, also remove it visually

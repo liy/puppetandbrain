@@ -10,8 +10,13 @@ export default class AInputPin extends ADataPin
 
     this.element.className = 'input-pin';
 
-    this.symbol = new InputSymbol();
+    this.symbol = new InputSymbol(name);
     this.head.appendChild(this.symbol.element);
+  }
+
+  init(node) {
+    super.init(node);
+    this.symbol.init(node);
 
     this.setGadget(new InputField());
     this.gadgetVisible = false;

@@ -123,10 +123,6 @@ import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
-import ABlock from './graph/blocks/ABlock';
-import Bar from './graph/gadgets/Bar';
-import Toggle from './graph/gadgets/Toggle';
-import InputField from './graph/gadgets/InputField'
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
@@ -254,22 +250,14 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-let blocks = new Array();
-for(let i=0; i<2; ++i) {
-  const block = new ABlock({});
-  document.body.appendChild(block.element);
-  block.init({
-    hasIn: true,
-    executionNames: [''],
-    inputNames: ['input 1', 'input 2'],
-    outputNames: ['output 1']
-  })
-  blocks.push(block);
-}
-
-let bar = new Bar();
-blocks[0].inputPins.get('input 1').setGadget(bar);
-
-
-let toggle = new Toggle();
-blocks[0].inputPins.get('input 2').setGadget(new Toggle());
+// let blocks = new Array();
+// for(let i=0; i<2; ++i) {
+//   const block = BlockFactory.create({
+//     // hasIn: true,
+//     // executionNames: [''],
+//     inputNames: ['input 1', 'input 2'],
+//     outputNames: ['output 1']
+//   }, null)
+//   document.body.appendChild(block.element);
+//   blocks.push(block);
+// }

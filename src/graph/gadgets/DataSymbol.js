@@ -3,13 +3,11 @@ import ConnectHelper from '../ConnectHelper';
 
 export default class DataSymbol extends Gadget
 {
-  constructor(node, name, flow) {
+  constructor(name, flow) {
     super();
 
-    // FIXME: hack for touches, get the symbol from dom element
-    this.element.symbol = this;
+    this._connected = false;
 
-    this.node = node;
     this.name = name;
     this.flow = flow;
     this.type = 'data';
@@ -31,6 +29,17 @@ export default class DataSymbol extends Gadget
     this.extendPath.setAttribute('stroke-opacity', 1);
     this.extendPath.setAttribute('fill', 'none');
 
+
+    // override this in input and output symbol
+    this.offsetX = 0;
+  }
+
+  init(node) {
+    this.node = node;
+
+    // FIXME: hack for touches, get the symbol from dom element
+    this.element.symbol = this;
+
     this.mouseOver = this.mouseOver.bind(this)
     this.mouseOut = this.mouseOut.bind(this)
     this.mouseDown = this.mouseDown.bind(this);
@@ -47,13 +56,28 @@ export default class DataSymbol extends Gadget
 
     this.onContextMenu = this.onContextMenu.bind(this);
     this.element.addEventListener('contextmenu', this.onContextMenu);
+  }
 
-    // override this in input and output symbol
-    this.offsetX = 0;
+  set connected(v) {
+    this._connected = v;
+    if(v) {
+      this.circlePath.setAttribute('fill', '#98c6de');
+    }
+    else {
+      this.circlePath.setAttribute('fill', 'none');
+    }
+  }
+
+  get connected() {
+    return this._connected;
   }
 
   canConnect(symbol) {
     return symbol != null && (symbol.type == this.type) && (symbol.flow != this.flow);
+  }
+
+  refresh() {
+
   }
 
   mouseDown(e) {

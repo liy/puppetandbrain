@@ -1,93 +1,94 @@
-import ExecutionInPin from "../ExecutionInPin";
-import ExecutionOutPin from "../ExecutionOutPin";
-import InputPin from "../InputPin";
-import OutputPin from "../OutputPin";
-import ArrayMap from "../../utils/ArrayMap";
-import BlockSelection from '../BlockSelection';
-
-import styles from './Block.scss';
+import './Block.scss'
+import BlockBody from '../support/BlockBody';
+import ArrayMap from '../../utils/ArrayMap';
+import AOutputPin from '../support/AOutputPin';
+import AInputPin from '../support/AInputPin';
+import AExecutionInPin from '../support/AExecutionInPin';
+import AExecutionOutPin from '../support/AExecutionOutPin';
 
 export default class Block
 {
-  constructor(node) {
-    this.node = node;
-    this.brain = this.node.brain;
-    this.id = this.node.id;
-
-    this.inputPins = new ArrayMap();
-    this.outputPins = new ArrayMap();
-
-    this.container = document.createElement('div');
-    this.container.className = `block`;
+  constructor() {
+    this.element = document.createElement('div');
+    this.element.className = 'a-block';
 
     this.title = document.createElement('div');
-    this.title.className = 'title'
-    this.container.appendChild(this.title);
-    this.title.textContent = this.node.nodeName;
+    this.title.className = 'a-title';
+    this.element.appendChild(this.title);
 
-    this.dragArea = document.createElement('div');
-    this.dragArea.className = 'drag-area';
-    this.container.appendChild(this.dragArea)
-
-    this.content = document.createElement('div');
-    this.content.className = `content ${this.node.className.toLowerCase()}-block`;
-    this.container.appendChild(this.content);
-
+    this.body = new BlockBody();
+    this.element.appendChild(this.body.element);
     
-    this.rows = [];
-
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
-    this.mouseover = this.mouseover.bind(this);
-    this.mouseout = this.mouseout.bind(this);
-
+    this.element.addEventListener('mousedown', this.dragstart);
+    this.element.addEventListener('touchstart', this.dragstart);
     document.addEventListener('mouseup', this.dragstop);
     document.addEventListener('touchend', this.dragstop);
-    this.dragArea.addEventListener('mousedown', this.dragstart);
-    this.dragArea.addEventListener('touchstart', this.dragstart);
-    // stop right click on block
-    this.dragArea.addEventListener('contextmenu', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      // TODO: show menu for the block
-    })
-    this.container.addEventListener('mouseover', this.mouseover)
-    this.container.addEventListener('mouseout', this.mouseout)
+  }
 
-    // append block to stage
+  init(node) {
+    this.node = node;
+    this.id = this.node.id;
+    this.inPin = null;
+    this.outPins = new ArrayMap();
+    this.inputPins = new ArrayMap();
+    this.outputPins = new ArrayMap();
+
+    this.title.textContent = node.nodeName;
+
+    let pin = null;
+    if(node.execution) {
+      if(node.hasIn) {
+        this.inPin = new AExecutionInPin();
+        this.inPin.init(node);
+        this.body.addLeft(this.inPin);
+      }
+
+      for(let name of node.execution.names) {
+        pin = new AExecutionOutPin(name);
+        pin.init(node);
+        this.body.addRight(pin);
+        this.outPins.set(name, pin)
+      }
+    }
+
+    for(let name of node.inputs.names) {
+      pin = new AInputPin(name);
+      pin.init(node);
+      this.body.addLeft(pin);
+      this.inputPins.set(name, pin);
+    }
+
+    for(let name of node.outputs.names) {
+      pin = new AOutputPin(name);
+      pin.init(node);
+      this.body.addRight(pin);
+      this.outputPins.set(name, pin);
+    }
+
+    this.x = this.node.x;
+    this.y = this.node.y;
     BrainGraph.addBlock(this);
-    this.container.style.left = this.node.x +'px'
-    this.container.style.top = this.node.y +'px'
-
-    this.isHover = false;
   }
 
   destroy() {
-    this.container.removeEventListener('mouseover', this.mouseover)
-    this.container.removeEventListener('mouseout', this.mouseout)
-    this.dragArea.removeEventListener('mousedown', this.dragstart);
-    this.dragArea.removeEventListener('touchstart', this.dragstart);
-    document.removeEventListener('mouseup', this.dragstop);
-    document.removeEventListener('touchend', this.dragstop);
-    document.removeEventListener('mousemove', this.dragmove);
-    document.removeEventListener('touchmove', this.dragmove);
-    BrainGraph.removeBlock(this);
+    
   }
 
   dragstart(e) {
-    BlockSelection.select(this);
-
     let sx = e.clientX ? e.clientX : e.touches[0].clientX;
     let sy = e.clientY ? e.clientY : e.touches[0].clientY;
     this._dragOffset = {
-      x: (this.container.getBoundingClientRect().left - sx),
-      y: (this.container.getBoundingClientRect().top - sy)
+      x: (this.element.getBoundingClientRect().left - sx),
+      y: (this.element.getBoundingClientRect().top - sy)
     }
     document.addEventListener('mousemove', this.dragmove)
     document.addEventListener('touchmove', this.dragmove)
 
-    this.moveCommand = Commander.create('MoveBlock', this);
+    // bring to front 
+    this.element.parentElement.appendChild(this.element);
   }
 
   dragstop(e) {
@@ -101,72 +102,62 @@ export default class Block
     }
   }
 
-  mouseover() {
-    this.isHover = true;
-    for(let inputPin of this.inputPins.getValues()) {
-      inputPin.blockover();
-    }
-  }
-
-  mouseout() {
-    this.isHover = false;
-    for(let inputPin of this.inputPins.getValues()) {
-      inputPin.blockout();
-    }
-  }
-
-  getRow(i) {
-    if(!this.rows[i]) {
-      this.rows[i] = document.createElement('div');
-      this.rows[i].className = 'row';
-      this.content.appendChild(this.rows[i]);
-    }
-    return this.rows[i]
-  }
-
   dragmove(e) {
     let sx = e.clientX ? e.clientX : e.touches[0].clientX;
     let sy = e.clientY ? e.clientY : e.touches[0].clientY;
     // Make sure all of the values are in client coordincate system. Then apply a scale
-    this.x = (sx - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale ;
-    this.y = (sy - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale ;
+    this.x = (sx - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale;
+    this.y = (sy - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale;
+
+    this.drawConnection();
+  }
+
+  drawConnection() {
+    // executuion pins
+    for(let pin of this.outPins.getValues()) {
+      pin.symbol.drawConnection();
+    }
+    if(this.inPin) this.inPin.symbol.drawConnection();
+
+    // output input pins
+    for(let pin of this.inputPins.getValues()) {
+      pin.symbol.drawConnection();
+    }
+    for(let pin of this.outputPins.getValues()){
+      pin.symbol.drawConnection();
+    }
   }
 
   set x(x) {
-    this.container.style.left = x +'px'
-    this.node.x = x;
+    this.element.style.left = x +'px'
   }
 
   set y(y) {
-    this.container.style.top = y +'px'
-    this.node.y = y;
+    this.element.style.top = y +'px'
   }
 
-  get x() {
-    return this.node.x;
-  }
+  template({name, hasIn, executionNames=[], inputNames=[], outputNames=[]}) {
+    this.title.textContent = name || 'test';
 
-  get y() {
-    return this.node.y;
-  }
+    let pin = null;
+    if(hasIn) {
+      pin = new AExecutionInPin('');
+      this.body.addLeft(this.inPin);
+    }
 
-  get width() {
-    return this.container.getClientRects().width
-  }
+    for(let name of executionNames) {
+      pin = new AExecutionOutPin(name);
+      this.body.addRight(pin);
+    }
 
-  get height() {
-    return this.container.getClientRects().height;
-  }
-  
-  set minWidth(v) {
-    this.content.style.minWidth = `${v}px`
-  }
+    for(let name of inputNames) {
+      pin = new AInputPin(name);
+      this.body.addLeft(pin);
+    }
 
-  set minHeight(v) {
-    this.content.style.minHeight = `${v}px`
-  }
-
-  get className() {
-    return this.__proto__.constructor.name;
+    for(let name of outputNames) {
+      pin = new AOutputPin(name);
+      this.body.addRight(pin);
+    }
   }
 }

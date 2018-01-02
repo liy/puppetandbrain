@@ -1,18 +1,12 @@
-import TaskBlock from "./TaskBlock";
+import Block from "./Block";
+import Toggle from '../gadgets/Toggle'
 
-export default class BranchBlock extends TaskBlock
+export default class BranchBlock extends Block
 {
-  constructor(node) {
-    super(node);
+  constructor() {
+    super();
 
     let pin = this.inputPins.get('condition');
-    let checkbox = pin.inputElement;
-    checkbox.value = node.inputs.value('condition');
-    checkbox.classList.add('input-boolean')
-    checkbox.readOnly = true;
-
-    checkbox.addEventListener('click', e => {
-      checkbox.value = this.node.variables['condition'] = !this.node.variables['condition'];
-    })
+    pin.setGadget(new Toggle());
   }
 }

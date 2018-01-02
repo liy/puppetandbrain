@@ -1,11 +1,13 @@
-import TaskBlock from "./TaskBlock";
+import Block from "./Block";
 
-export default class SetterBlock extends TaskBlock
+export default class SetterBlock extends Block
 {
-  constructor(node) {
-    super(node);
+  constructor() {
+    super();
+  }
 
-    this.minWidth = 120;
+  init(node) {
+    super.init(node);
 
     // actually use variable id as the name by default
     this.inputPin = this.inputPins.get(node.variable.id);
