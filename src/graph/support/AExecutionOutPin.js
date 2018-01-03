@@ -4,7 +4,7 @@ import APin from "./APin";
 export default class AExecutionOutPin extends APin
 {
   constructor(name) {
-    super(name);
+    super(name, 'out');
 
     this.symbol = new ExecutionOutSymbol(name);
     this.element.appendChild(this.symbol.element)
@@ -12,5 +12,13 @@ export default class AExecutionOutPin extends APin
 
   init(node) {
     this.symbol.init(node);
+  }
+
+  refreshSymbol() {
+    this.symbol.refresh();
+  }
+
+  drawConnection() {
+    this.symbol.drawConnection();
   }
 }

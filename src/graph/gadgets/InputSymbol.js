@@ -43,8 +43,8 @@ export default class InputSymbol extends DataSymbol
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
       this.linkSound.play()
-      // History.push(Commander.create('CreateDataLink', this.node.id, this.name, 
-      //   ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name).processAndSave())
+      History.push(Commander.create('CreateDataLink', this.node.id, this.name, 
+        ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name).processAndSave())
     }
     ConnectHelper.stop(e);
   }
@@ -54,15 +54,15 @@ export default class InputSymbol extends DataSymbol
     return BrainGraph.getBlock(this.pointer.output.node.id).outputPins.get(this.pointer.output.name);
   }
 
+  onContextMenu(e) {
+    super.onContextMenu(e);
+    History.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).processAndSave());
+  }
+  
   drawConnection() {
     const pin = this.getOutputPin();
     if(!pin) return;
 
     this.drawLine(pin.symbol.position.x, pin.symbol.position.y, this.connectionPath);
-  }
-
-  onContextMenu(e) {
-    super.onContextMenu(e);
-    History.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).processAndSave());
   }
 }

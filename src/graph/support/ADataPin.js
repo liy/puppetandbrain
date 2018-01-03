@@ -1,5 +1,6 @@
 import './ADataPin.scss'
-import DataSymbol from "../gadgets/DataSymbol";
+import InputSymbol from "../gadgets/InputSymbol";
+import OutputSymbol from "../gadgets/OutputSymbol";
 import APin from './APin';
 
 export default class ADataPin extends APin
@@ -11,9 +12,26 @@ export default class ADataPin extends APin
     this.head = document.createElement('div');
     this.head.className = 'data-head';
     this.element.appendChild(this.head);
+
+    if(flow == 'in') {
+      this.symbol = new InputSymbol(name);
+    }
+    else {
+      this.symbol = new OutputSymbol(name);
+    }
+    this.head.appendChild(this.symbol.element);
   }
 
   init(node) {
     this.node = node;
+    this.symbol.init(node);
+  }
+
+  refreshSymbol() {
+    this.symbol.refresh();
+  }
+
+  drawConnection() {
+    this.symbol.drawConnection();
   }
 }

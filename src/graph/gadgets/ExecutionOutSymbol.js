@@ -19,24 +19,24 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
     this.offsetX = -20;
   }
 
-  // init(node) {
-  //   super.init(node);
+  init(node) {
+    super.init(node);
 
-  //   // this.node.on('task.start', task => {
-  //   //   this.connectionPath.setAttribute('stroke', '#ffbb00');
-  //   //   setTimeout(() => {
-  //   //     this.connectionPath.setAttribute('stroke', '#d0e400');
-  //   //   }, 500);
-  //   // })
-  // }
-
-  set connected(v) {
-    super.connected = v;
-    this.refresh();
+    // this.node.on('task.start', task => {
+    //   this.connectionPath.setAttribute('stroke', '#ffbb00');
+    //   setTimeout(() => {
+    //     this.connectionPath.setAttribute('stroke', '#d0e400');
+    //   }, 500);
+    // })
+  }
+  
+  get isConnected() {
+    return this.node.execution.get(this.name) != null;
   }
 
   refresh() {
-    if(this.canConnect) {
+    // debugger;
+    if(this.isConnected) {
       this.drawConnection();
       BrainGraph.svg.appendChild(this.connectionPath);
     }
@@ -47,18 +47,18 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
 
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
-      this.linkSound.play()      
-      History.push(Commander.create('CreateExecution', this.node.id, this.node.name, ConnectHelper.startDataSymbol.node.id).processAndSave());
+      this.linkSound.play();      
+      History.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.startSymbol.node.id).processAndSave());
     }
     ConnectHelper.stop(e);
   }
 
-  getConnectedSymbol() {
+  getConnectedPin() {
     const targetTask = this.node.execution.get(this.name);
     if(!targetTask) return null;
 
     const block = BrainGraph.getBlock(targetTask.id);
-    return block.inPin.symbol;
+    return block.inPin;
   }
 
   onContextMenu(e) {
@@ -67,9 +67,9 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
   }
 
   drawConnection() {
-    const symbol = this.getConnectedSymbol();
-    if(!symbol) return;
+    const pin = this.getConnectedPin();
+    if(!pin) return;
 
-    this.drawLine(symbol.position.x, symbol.position.y, this.connectionPath);
+    this.drawLine(pin.symbol.position.x, pin.symbol.position.y, this.connectionPath);
   }
 }

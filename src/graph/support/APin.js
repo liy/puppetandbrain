@@ -1,6 +1,9 @@
 export default class APin
 {
   constructor(name, flow) {
+    this.name = name;
+    this.flow = flow;
+    
     this.element = document.createElement('div');
 
     this.label = document.createElement('span');

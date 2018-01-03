@@ -74,7 +74,11 @@ export default class Block
   }
 
   destroy() {
-    
+    this.element.removeEventListener('mousedown', this.dragstart);
+    this.element.removeEventListener('touchstart', this.dragstart);
+    document.removeEventListener('mouseup', this.dragstop);
+    document.removeEventListener('touchend', this.dragstop);
+    BrainGraph.removeBlock(this);
   }
 
   dragstart(e) {
@@ -115,16 +119,16 @@ export default class Block
   drawConnection() {
     // executuion pins
     for(let pin of this.outPins.getValues()) {
-      pin.symbol.drawConnection();
+      pin.drawConnection();
     }
-    if(this.inPin) this.inPin.symbol.drawConnection();
+    if(this.inPin) this.inPin.drawConnection();
 
     // output input pins
     for(let pin of this.inputPins.getValues()) {
-      pin.symbol.drawConnection();
+      pin.drawConnection();
     }
     for(let pin of this.outputPins.getValues()){
-      pin.symbol.drawConnection();
+      pin.drawConnection();
     }
   }
 

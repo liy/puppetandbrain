@@ -13,8 +13,28 @@ export default class ExecutionInSymbol extends ExecutionSymbol
     this.offsetX = 20;
   }
 
+  init(node) {
+    super.init(node);
+
+    if(this.isConnected) {
+      this.inCircle.setAttribute('fill', '#D0E400');
+    }
+    else {
+      this.inCircle.setAttribute('fill', 'none');
+    }
+  }
+
+  get isConnected() {
+    return this.node.callers.length != 0;
+  }
+
   refresh() {
-    // TODO:
+    if(this.isConnected) {
+      this.inCircle.setAttribute('fill', '#D0E400');
+    }
+    else {
+      this.inCircle.setAttribute('fill', 'none');
+    }
   }
 
   onContextMenu(e) {
@@ -28,7 +48,8 @@ export default class ExecutionInSymbol extends ExecutionSymbol
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
       this.linkSound.play()      
-      History.push(Commander.create('CreateExecution', ConnectHelper.startDataSymbol.node.id, ConnectHelper.startDataSymbol.name, this.node.id).processAndSave());
+      History.push(Commander.create('CreateExecution', ConnectHelper.startSymbol.node.id, 
+        ConnectHelper.startSymbol.name, this.node.id).processAndSave());
     }
     ConnectHelper.stop(e);
   }
@@ -41,9 +62,9 @@ export default class ExecutionInSymbol extends ExecutionSymbol
   }
   
   drawConnection() {
-    let connectedPins = this.getConnectedPins();
-    for(let pin of connectedPins) {
-      pin.symbol.drawConnection();
+    let pins = this.getConnectedPins();
+    for(let pin of pins) {
+      pin.drawConnection();
     }
   }
 }

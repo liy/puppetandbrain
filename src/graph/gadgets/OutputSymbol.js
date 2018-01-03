@@ -1,4 +1,5 @@
 import DataSymbol from "./DataSymbol";
+import ConnectHelper from '../ConnectHelper';
 
 export default class OutputSymbol extends DataSymbol
 {
@@ -40,7 +41,7 @@ export default class OutputSymbol extends DataSymbol
     let pointers = this.output.getPointers();
     for(let pointer of pointers) {
       let inputBlock = BrainGraph.getBlock(pointer.inputNode.id);
-      inputBlock.inputPins.get(pointer.inputName).symbol.drawConnection();
+      inputBlock.inputPins.get(pointer.inputName).drawConnection();
     }
   }
 }

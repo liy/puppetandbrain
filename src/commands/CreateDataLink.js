@@ -31,14 +31,14 @@ export default class CreateDataLink extends Command
     // Refresh the removed old output pin.
     if(oldOutput) {
       let block = BrainGraph.getBlock(oldOutput.node.id);
-      block.outputPins.get(oldOutput.name).refresh();
+      block.outputPins.get(oldOutput.name).refreshSymbol();
     }
 
-    // refresh the new input and output pins
+    // refreshSymbol the new input and output pins
     let inputPin = BrainGraph.getBlock(this.inputNodeID).inputPins.get(this.inputName);
     let outputPin = BrainGraph.getBlock(this.outputNodeID).outputPins.get(this.outputName);    
-    inputPin.refresh();
-    outputPin.refresh();
+    inputPin.refreshSymbol();
+    outputPin.refreshSymbol();
 
     return this;
   }

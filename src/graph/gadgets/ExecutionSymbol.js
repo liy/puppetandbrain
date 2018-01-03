@@ -50,20 +50,6 @@ export default class ExecutionSymbol extends Gadget
     return symbol != null && (symbol.type == this.type) && (symbol.flow != this.flow);
   }
 
-  set connected(v) {
-    this._connected = v;
-    if(v) {
-      this.inCircle.setAttribute('fill', '#D0E400');
-    }
-    else {
-      this.inCircle.setAttribute('fill', 'none');
-    }
-  }
-
-  get connected() {
-    return this._connected;
-  }
-
   mouseDown(e) {
     e.stopPropagation();
 
@@ -116,11 +102,10 @@ export default class ExecutionSymbol extends Gadget
 
   touchUp(e) {
     // override this to make connection
-    ConnectHelper.connectExecutionSymbol(this)
   }
 
   mouseUp(e) {
-    ConnectHelper.connectExecutionSymbol(this)
+    // override this to make connection
   }
 
   mouseOver(e) {

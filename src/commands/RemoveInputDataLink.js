@@ -32,8 +32,8 @@ export default class RemoveInputDataLink extends Command
 
     pointer.disconnect();
 
-    inputPin.refresh();
-    outputPin.refresh();
+    inputPin.refreshSymbol();
+    outputPin.refreshSymbol();
 
     return this;
   }

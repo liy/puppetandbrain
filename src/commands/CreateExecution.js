@@ -20,9 +20,9 @@ export default class CreateExecution extends Command
     
     // Only need to refresh 4 nodes' execution pins. You could go further only
     // refresh specific out pin.
-    BrainGraph.getBlock(this.sourceNodeID).outPins.get(this.executionName).refresh();
-    BrainGraph.getBlock(this.targetNodeID).inPin.refresh();
-    if(this.oldTargetID) BrainGraph.getBlock(this.oldTargetID).inPin.refresh();
+    BrainGraph.getBlock(this.sourceNodeID).outPins.get(this.executionName).refreshSymbol();
+    BrainGraph.getBlock(this.targetNodeID).inPin.refreshSymbol();
+    if(this.oldTargetID) BrainGraph.getBlock(this.oldTargetID).inPin.refreshSymbol();
 
     return this;
   }

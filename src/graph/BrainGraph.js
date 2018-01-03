@@ -210,18 +210,18 @@ class BrainGraph
     for(let block of this.blocks.getValues()) {
       // draw exeuctions
       // refresh in pin, only update the in pin icon status
-      if(block.inPin) block.inPin.symbol.refresh();
+      if(block.inPin) block.inPin.refreshSymbol();
       if(block.outPins) {
         block.outPins.getValues().forEach(pin => {
-          pin.symbol.refresh();
+          pin.refreshSymbol();
         })
       }
       // draw variable connection
       block.inputPins.getValues().forEach(pin => {
-        pin.symbol.refresh();
+        pin.refreshSymbol();
       })
       block.outputPins.getValues().forEach(pin => {
-        pin.symbol.refresh();
+        pin.refreshSymbol();
       })
     }
   }

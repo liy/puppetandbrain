@@ -21,12 +21,12 @@ export default class RemoveParentExecution extends Command
 
       // refresh the caller's output pins
       let callerBlock = BrainGraph.getBlock(caller.id);
-      callerBlock.outPins.get(caller.executionName).refresh();
+      callerBlock.outPins.get(caller.executionName).refreshSymbol();
     }
     
     // refresh this input pin
     let inPin = BrainGraph.getBlock(this.sourceNodeID).inPin;
-    inPin.refresh();
+    inPin.refreshSymbol();
 
     return this;
   }

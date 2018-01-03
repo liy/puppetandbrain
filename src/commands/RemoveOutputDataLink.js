@@ -20,9 +20,9 @@ export default class RemoveOutputDataLink extends Command
       let pointer = LookUp.get(pod.inputNode).inputs.get(pod.inputName);
       pointer.disconnect();
 
-      BrainGraph.getBlock(pointer.inputNode.id).inputPins.get(pointer.inputName).refresh();
+      BrainGraph.getBlock(pointer.inputNode.id).inputPins.get(pointer.inputName).refreshSymbol();
     }
-    BrainGraph.getBlock(this.outputNodeID).outputPins.get(this.outputName).refresh();
+    BrainGraph.getBlock(this.outputNodeID).outputPins.get(this.outputName).refreshSymbol();
 
     return this;
   }
