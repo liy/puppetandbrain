@@ -1,10 +1,10 @@
 .base {
-  background-color: rgba(40, 43, 66, 0.95);
+  background-color: rgba(40, 43, 66, 0.9);
   border-radius: 10px;
   padding-bottom: 8px;
   
   position: relative;
-  box-shadow: 0 0 8px 0px rgba(51, 51, 51, 0.6);
+  // box-shadow: 0 0 8px 0px rgba(51, 51, 51, 0.6);
   
   .body {
     // Setting min and max size
@@ -12,7 +12,7 @@
     min-height: 130px;
     max-width: 400px;
 
-    background-color: rgba(57, 61, 94, 0.5);
+    background-color: rgba(57, 61, 94, 0.6);
     border-radius: 10px;
 
     // FIXME: find a better way to avoid first margin collapse?

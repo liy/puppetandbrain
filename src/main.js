@@ -250,14 +250,6 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-// let blocks = new Array();
-// for(let i=0; i<2; ++i) {
-//   const block = BlockFactory.create({
-//     // hasIn: true,
-//     // executionNames: [''],
-//     inputNames: ['input 1', 'input 2'],
-//     outputNames: ['output 1']
-//   }, null)
-//   document.body.appendChild(block.element);
-//   blocks.push(block);
-// }
+window.colorCalculator = function(v1, v2, a1, a2) {
+  return v1 + (v2 - v1) * a2;
+}
