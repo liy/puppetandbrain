@@ -58,20 +58,6 @@ export default class DataSymbol extends Gadget
     this.element.addEventListener('contextmenu', this.onContextMenu);
   }
 
-  set connected(v) {
-    this._connected = v;
-    if(v) {
-      this.circlePath.setAttribute('fill', '#98c6de');
-    }
-    else {
-      this.circlePath.setAttribute('fill', 'none');
-    }
-  }
-
-  get connected() {
-    return this._connected;
-  }
-
   canConnect(symbol) {
     return symbol != null && (symbol.type == this.type) && (symbol.flow != this.flow);
   }

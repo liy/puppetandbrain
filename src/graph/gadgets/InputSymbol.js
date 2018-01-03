@@ -23,20 +23,28 @@ export default class InputSymbol extends DataSymbol
   init(node) {
     super.init(node);
     this.pointer = this.node.inputs.get(this.name);
+
+    if(this.isConnected) {
+      this.circlePath.setAttribute('fill', '#98c6de');
+    }
+    else {
+      this.circlePath.setAttribute('fill', 'none');
+    }
   }
 
-  set connected(v) {
-    super.connected = v;
-    this.refresh();
+  get isConnected() {
+    return this.pointer.isConnected;
   }
 
   refresh() {
-    if(this.canConnect) {
+    if(this.isConnected) {
       this.drawConnection();
       BrainGraph.svg.appendChild(this.connectionPath);
+      this.circlePath.setAttribute('fill', '#98c6de');
     }
     else {
       if(BrainGraph.svg.contains(this.connectionPath)) BrainGraph.svg.removeChild(this.connectionPath);
+      this.circlePath.setAttribute('fill', 'none');
     }
   }
 

@@ -23,6 +23,12 @@ export default class OutputSymbol extends DataSymbol
     this.output = this.node.outputs.get(this.name);
   }
 
+  get isConnected() {
+    // The output will have multiple connections, as there might be
+    // other inputs referencing this output.
+    return this.output.isConnected;
+  }
+
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
       this.linkSound.play()
