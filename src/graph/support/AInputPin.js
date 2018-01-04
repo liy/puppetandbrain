@@ -15,7 +15,6 @@ export default class AInputPin extends ADataPin
     super.init(node);
 
     this.setGadget(new InputField());
-    this.gadgetVisible = false;
 
     this.label.addEventListener('mousedown', e => {
       this.gadgetVisible = !this.gadgetVisible
@@ -29,6 +28,7 @@ export default class AInputPin extends ADataPin
     }
 
     this.gadget = gadget;
+    this.gadget.visible = false;
     this.head.appendChild(this.gadget.element);
   }
 

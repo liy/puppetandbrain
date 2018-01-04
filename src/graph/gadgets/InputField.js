@@ -6,7 +6,6 @@ export default class extends Gadget
   constructor() {
     super()
     this.element.className = 'input-container';
-    this.element.style.display = 'none';
 
     this.input = document.createElement('input');
     this.input.setAttribute('placeholder', '...')
