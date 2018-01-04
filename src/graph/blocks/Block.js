@@ -150,7 +150,7 @@ export default class Block
     let pin = null;
     if(hasIn) {
       pin = new AExecutionInPin('');
-      this.body.addLeft(this.inPin);
+      this.body.addLeft(pin);
     }
 
     for(let name of executionNames) {

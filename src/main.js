@@ -128,6 +128,20 @@ import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
 
+import Block from './graph/blocks/Block';
+
+// let block = new Block();
+// block.template({
+//   name: 'test',
+//   hasIn: true,
+//   executionNames: ['out 1', 'out 2'],
+//   inputNames: ['pre-acceptance pre-acceptance pre-acceptance pre-acceptance'],
+//   outputNames: ['output 1'],
+// });
+// block.element.style.left = 100+'px';
+// block.element.style.top = 100+'px';
+// document.body.appendChild(block.element)
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",

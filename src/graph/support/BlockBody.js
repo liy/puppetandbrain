@@ -1,5 +1,4 @@
 import './BlockBody.scss';
-import BlockRow from './BlockRow';
 import BlockIcon from '../gadgets/BlockIcon';
 import {svgElement} from '../../utils/utils';
 
@@ -22,44 +21,28 @@ export default class BlockBody
     this.body.setAttribute('class', 'body');
     this.base.appendChild(this.body);
 
-    this.rowContainer = document.createElement('div');
-    this.rowContainer.className = 'row-container';
-    this.body.appendChild(this.rowContainer);
+    this.content = document.createElement('div');
+    this.content.className = 'content';
+    this.body.appendChild(this.content);
+
+    this.left = document.createElement('div');
+    this.left.className = 'left'
+    this.content.appendChild(this.left);
+    this.right = document.createElement('div');
+    this.right.className = 'right';
+    this.content.appendChild(this.right);
 
     this.body.appendChild(new BlockIcon(svgElement(ClockIcon)).element);
   }
 
   addLeft(pin) {
-    this.availableLeft.addLeft(pin)
+    pin.element.classList.add('item', 'item-left')
+    this.left.appendChild(pin.element)
   }
 
   addRight(pin) {
-    this.availableRight.addRight(pin);
-  }
-
-  get availableLeft() {
-    for(let row of this.rows) {
-      if(!row.hasLeft) {
-        return row;
-      }
-    }
-    return this.createRow();
-  }
-
-  get availableRight() {
-    for(let row of this.rows) {
-      if(!row.hasRight) {
-        return row;
-      }
-    }
-    return this.createRow();
-  }
-
-  createRow() {
-    let row = new BlockRow();
-    this.rowContainer.appendChild(row.element);
-    this.rows.push(row);
-    return row;
+    pin.element.classList.add('item', 'item-right')
+    this.right.appendChild(pin.element)
   }
   
   set width(v) {
