@@ -1,6 +1,10 @@
 import './BlockBody.scss';
-import BlockIcon from '../gadgets/BlockIcon';
 import BlockRow from './BlockRow';
+import BlockIcon from '../gadgets/BlockIcon';
+import {svgElement} from '../../utils/utils';
+
+// TODO: remove this
+import ClockIcon from '../../assets/icons/clock.svg';
 
 export default class BlockBody
 {
@@ -22,8 +26,7 @@ export default class BlockBody
     this.rowContainer.className = 'row-container';
     this.body.appendChild(this.rowContainer);
 
-    // this.icon = new BlockIcon(require('../../assets/icons/clock.svg'));
-    // this.body.appendChild(this.icon.element);
+    this.body.appendChild(new BlockIcon(svgElement(ClockIcon)).element);
   }
 
   addLeft(pin) {
