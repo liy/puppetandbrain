@@ -32,7 +32,6 @@ export default class BlockBody
     this.right.className = 'right';
     this.content.appendChild(this.right);
 
-    this.body.appendChild(new BlockIcon(svgElement(ClockIcon)).element);
   }
 
   addLeft(pin) {

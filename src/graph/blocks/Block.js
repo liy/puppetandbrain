@@ -7,6 +7,13 @@ import AExecutionInPin from '../support/AExecutionInPin';
 import AExecutionOutPin from '../support/AExecutionOutPin';
 import BlockSelection from '../BlockSelection';
 
+import BlockIcon from '../gadgets/BlockIcon';
+import {svgElement} from '../../utils/utils';
+
+// TODO: remove this
+import ClockIcon from '../../assets/icons/clock.svg';
+
+
 export default class Block
 {
   constructor() {
@@ -27,6 +34,8 @@ export default class Block
     this.element.addEventListener('touchstart', this.dragstart);
     this.element.addEventListener('mouseup', this.dragstop);
     this.element.addEventListener('touchend', this.dragstop);
+
+    this.element.appendChild(new BlockIcon(svgElement(ClockIcon)).element);
   }
 
   init(node) {

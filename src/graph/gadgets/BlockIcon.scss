@@ -1,28 +1,12 @@
 .icon-container {
   position: absolute;
   width: 40%;
-  top: 50%;
+  top: 58%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  // Make sure it is below other things...e.g., rows
+  // Make sure it is below other things...e.g., item
   z-index: 0;
 
   user-select: none;
 }
-
-// .icon-container {
-//   position: absolute;
-//   top: 0;
-
-//   // display: flex;
-//   // justify-content: center;
-//   // align-items: center;
-  
-//   svg {
-//     width: 40%;
-//     margin-top: 50%;
-//     margin-left: 50%;
-//     transform: translate(-50%, -70%);
-//   }
-// }
