@@ -8,7 +8,8 @@ export default class AInputPin extends ADataPin
   constructor(name) {
     super(name, 'in')
 
-    this.element.className = 'input-pin';
+    this.connectionChanged = this.connectionChanged.bind(this);
+    this.mouseDown = this.mouseDown.bind(this);
   }
 
   init(node) {
@@ -16,9 +17,32 @@ export default class AInputPin extends ADataPin
 
     this.setGadget(new InputField());
 
-    this.label.addEventListener('mousedown', e => {
-      this.gadgetVisible = !this.gadgetVisible
-    })
+    this.element.addEventListener('mousedown', this.mouseDown)
+    
+    this.pointer = this.node.inputs.get(this.name);
+    if(!this.pointer.isConnected) {
+      this.element.classList.add('clickable');
+    }
+    this.pointer.on('input.connected', this.connectionChanged);
+    this.pointer.on('input.disconnected', this.connectionChanged);
+  }
+
+  connectionChanged(data) {
+    if(this.pointer.isConnected) {
+      this.gadget.visible = false;
+      this.element.classList.remove('clickable');
+    }
+    else {
+      this.element.classList.add('clickable');
+    }
+  }
+
+  mouseDown() {
+    // only be able toggle the gadget if input is NOT connected
+    if(this.pointer.isConnected) return;
+
+    this.gadgetVisible = !this.gadgetVisible;
+    this.symbol.drawConnection();
   }
 
   setGadget(gadget) {
