@@ -1,14 +1,15 @@
 import ConnectHelper from "../ConnectHelper";
 import ExecutionSymbol from "./ExecutionSymbol";
+import {svgElement} from '../../utils/utils';
+import ExecutionOutIcon from '../../assets/execution-out.svg';
 
 export default class ExecutionOutSymbol extends ExecutionSymbol
 {
   constructor(name) {
     super(name, 'out');
     
-    this.inCircle.setAttribute('visibility', 'hidden');
-    this.outCircle.setAttribute('visibility', 'visible');
-    this.targetPath = this.outCircle;
+    this.svg = svgElement(ExecutionOutIcon, {className: 'execution-svg', width:43, height:22})
+    this.element.appendChild(this.svg)
 
     this.connectionPath = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.connectionPath.setAttribute('stroke', '#d0e400');
@@ -16,7 +17,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
     this.connectionPath.setAttribute('stroke-opacity', 1);
     this.connectionPath.setAttribute('fill', 'none');
 
-    this.offsetX = -20;
+    this._offsetX = -20;
   }
 
   init(node) {
@@ -71,5 +72,14 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
     if(!pin) return;
 
     this.drawLine(pin.symbol.position.x, pin.symbol.position.y, this.connectionPath);
+  }
+
+  get position() {
+    let offset = BrainGraph.svg.getBoundingClientRect();
+    let rect = this.svg.getBoundingClientRect();
+    return {
+      x: (rect.left + rect.right)/2 - offset.left + 6.7*BrainGraph.scale,
+      y: (rect.top + rect.bottom)/2
+    }
   }
 }

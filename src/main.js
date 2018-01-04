@@ -1,3 +1,7 @@
+document.addEventListener("touchmove", e => {
+  e.preventDefault(); 
+}, { passive: false });
+
 // FIXME: for testing 
 // Needs to be removed quite soon!!
 require('pixi-spine');
@@ -104,7 +108,7 @@ require("./assets/favicon-192.png")
 require('./manifest.json')
 
 // imports
-require('./index.scss')
+require('./main.scss')
 
 // LookUp is a global window variable, save typing!
 require('./LookUp');
@@ -123,6 +127,7 @@ import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",

@@ -1,26 +1,27 @@
 import ConnectHelper from "../ConnectHelper";
 import ExecutionSymbol from "./ExecutionSymbol";
+import {svgElement} from '../../utils/utils';
+import ExecutionInIcon from '../../assets/execution-in.svg';
 
 export default class ExecutionInSymbol extends ExecutionSymbol
 {
   constructor() {
     super('', 'in');
     
-    this.inCircle.setAttribute('visibility', 'visible');
-    this.outCircle.setAttribute('visibility', 'hidden');
-    this.targetPath = this.inCircle;
+    this.svg = svgElement(ExecutionInIcon, {className: 'execution-svg', width:43, height:22})
+    this.element.appendChild(this.svg)
 
-    this.offsetX = 20;
+    this._offsetX = 20;
   }
 
   init(node) {
     super.init(node);
 
     if(this.isConnected) {
-      this.inCircle.setAttribute('fill', '#D0E400');
+      this.svg.style.setProperty('--fill', '#D0E400');
     }
     else {
-      this.inCircle.setAttribute('fill', 'none');
+      this.svg.style.setProperty('--fill', 'none');
     }
   }
 
@@ -30,10 +31,10 @@ export default class ExecutionInSymbol extends ExecutionSymbol
 
   refresh() {
     if(this.isConnected) {
-      this.inCircle.setAttribute('fill', '#D0E400');
+      this.svg.style.setProperty('--fill', '#D0E400');
     }
     else {
-      this.inCircle.setAttribute('fill', 'none');
+      this.svg.style.setProperty('--fill', 'none');
     }
   }
 
@@ -65,6 +66,15 @@ export default class ExecutionInSymbol extends ExecutionSymbol
     let pins = this.getConnectedPins();
     for(let pin of pins) {
       pin.drawConnection();
+    }
+  }
+  
+  get position() {
+    let offset = BrainGraph.svg.getBoundingClientRect();
+    let rect = this.svg.getBoundingClientRect();
+    return {
+      x: (rect.left + rect.right)/2 - offset.left - 11.3*BrainGraph.scale,
+      y: (rect.top + rect.bottom)/2
     }
   }
 }

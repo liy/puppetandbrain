@@ -8,18 +8,22 @@ export default class BlockBody
     this.rows = new Array();
 
     this.element = document.createElement('div');
-    this.element.setAttribute('class', 'base');
+    this.element.setAttribute('class', 'container');
+    
+    this.base = document.createElement('div');
+    this.base.setAttribute('class', 'base');
+    this.element.appendChild(this.base);
 
     this.body = document.createElement('div');
     this.body.setAttribute('class', 'body');
-    this.element.appendChild(this.body);
+    this.base.appendChild(this.body);
 
     this.rowContainer = document.createElement('div');
     this.rowContainer.className = 'row-container';
     this.body.appendChild(this.rowContainer);
 
-    this.icon = new BlockIcon(require('../../assets/icons/clock.svg'));
-    this.body.appendChild(this.icon.element);
+    // this.icon = new BlockIcon(require('../../assets/icons/clock.svg'));
+    // this.body.appendChild(this.icon.element);
   }
 
   addLeft(pin) {

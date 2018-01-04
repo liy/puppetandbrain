@@ -14,14 +14,13 @@ export default class DataSymbol extends Gadget
 
     this.linkSound = new Audio(require('../../assets/sounds/link.mp3'))
 
-    this.svg = new DOMParser().parseFromString(require('../../assets/data-symbol.svg'), "image/svg+xml").rootElement;
-    this.svg.setAttribute('class', 'data-svg');
-    this.svg.setAttribute('width', 34);
-    this.svg.setAttribute('height', 38);
-    this.svg.style.pointerEvents = 'none';
-    this.element.appendChild(this.svg);
+    // this.svg = new DOMParser().parseFromString(require('../../assets/data-symbol.svg'), "image/svg+xml").rootElement;
+    // this.svg.setAttribute('class', 'data-svg');
+    // this.svg.setAttribute('width', 34);
+    // this.svg.setAttribute('height', 38);
+    // this.svg.style.pointerEvents = 'none';
+    // this.element.appendChild(this.svg);
 
-    this.circlePath = this.svg.querySelector('#circle-path');
 
     this.extendPath = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.extendPath.setAttribute('stroke', '#98c6de');
@@ -31,7 +30,7 @@ export default class DataSymbol extends Gadget
 
 
     // override this in input and output symbol
-    this.offsetX = 0;
+    this._offsetX = 0;
   }
 
   init(node) {
@@ -159,7 +158,7 @@ export default class DataSymbol extends Gadget
     let ady = Math.abs(dy);
     let degree = Math.atan2(dy, dx)*180/Math.PI;
 
-    if(Math.abs(degree) < 45 && adx < 50) {
+    if(Math.abs(degree) < 45 && adx < 50*BrainGraph.scale) {
       path.setAttribute('d', `M${source.x},${source.y} L${sx},${sy} ${tx},${ty} ${x},${y}`);
     }
     else {
@@ -177,13 +176,13 @@ export default class DataSymbol extends Gadget
       }
     }
   }
+
+  get offsetX() {
+    return this._offsetX * BrainGraph.scale
+  }
   
   get position() {
-    let offset = BrainGraph.svg.getBoundingClientRect();
-    let rect = this.circlePath.getBoundingClientRect();
-    return {
-      x: (rect.left + rect.right)/2 - offset.left,
-      y: (rect.top + rect.bottom)/2 - offset.top
-    }
+    // override
+    return null;
   }
 }

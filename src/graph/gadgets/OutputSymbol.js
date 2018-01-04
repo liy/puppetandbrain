@@ -1,19 +1,20 @@
 import DataSymbol from "./DataSymbol";
 import ConnectHelper from '../ConnectHelper';
+import OutputIcon from '../../assets/output.svg';
+import {svgElement} from '../../utils/utils';
 
 export default class OutputSymbol extends DataSymbol
 {
   constructor(name) {
     super(name, 'out');
 
-    // offset the circle a little bit
-    this.circlePath.setAttribute('cx', 15);
-    this.circlePath.setAttribute('fill', '#98C6DE');
-    this.circlePath.setAttribute('stroke', 'none');
+    this.svg = svgElement(OutputIcon, {width:34, height:38, className:'data-svg'});
+    this.svg.style.pointerEvents = 'none';
+    this.element.appendChild(this.svg);
 
     this.extendPath.setAttribute('d', `M15,19 h19`);
 
-    this.offsetX = -32;
+    this._offsetX = -23;
     
     this.connected = true;
   }
@@ -48,6 +49,15 @@ export default class OutputSymbol extends DataSymbol
     for(let pointer of pointers) {
       let inputBlock = BrainGraph.getBlock(pointer.inputNode.id);
       inputBlock.inputPins.get(pointer.inputName).drawConnection();
+    }
+  }
+
+  get position() {
+    let offset = BrainGraph.svg.getBoundingClientRect();
+    let rect = this.svg.getBoundingClientRect();
+    return {
+      x: (rect.left + rect.right)/2 - offset.left,
+      y: (rect.top + rect.bottom)/2 - offset.top
     }
   }
 }

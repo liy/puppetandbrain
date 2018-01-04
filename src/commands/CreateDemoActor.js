@@ -12,7 +12,7 @@ import FlipRight from '../nodes/FlipRight';
 import TweenRight from '../nodes/TweenRight';
 import TweenLeft from '../nodes/TweenLeft';
 import Keyboard from '../nodes/listeners/Keyboard';
-import utils from '../utils/utils';
+import {isMobile} from '../utils/utils';
 
 
 
@@ -67,7 +67,7 @@ export default class CreateDemoActor extends Command
       variables: {
         'sound url': 'Jambalaya Loop.mp3',
         // On mobile play sound require a user interaciton so enable loop by default
-        'loop': utils.isMobile
+        'loop': isMobile
       }
     })
 
@@ -168,7 +168,7 @@ export default class CreateDemoActor extends Command
     gameStart.connectNext(animation)
     animation.connectNext(playSound);
     // on desktop use recursion 
-    if(!utils.isMobile) {
+    if(!isMobile) {
       // keep play the sound!
       playSound.connectNext(playSound, 'completed');
     }

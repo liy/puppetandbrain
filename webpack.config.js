@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'main.js'),
@@ -47,7 +49,8 @@ module.exports = {
       {
         test: /\.svg$/,
         use: [
-          'raw-loader'
+          'svg-sprite-loader',
+          // 'svgo-loader',
         ]
       },
     ]
@@ -64,6 +67,7 @@ module.exports = {
       APP_VERSION: JSON.stringify(require("./package.json").version),
       'process.env.NODE_ENV': JSON.stringify('dev')
     }),
+    new SpriteLoaderPlugin(),
   ],
   
   // Export full source map for debugging, maps to original source

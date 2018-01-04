@@ -10,19 +10,9 @@ export default class ExecutionSymbol extends Gadget
     this.flow = flow;
     this.type = 'execution';
 
-    this.linkSound = new Audio(require('../../assets/sounds/link.mp3'))
+    this.linkSound = new Audio(require('../../assets/sounds/link.mp3'));
 
-    this.svg = new DOMParser().parseFromString(require('../../assets/execution.svg'), "image/svg+xml").rootElement;
-    this.svg.setAttribute('class', 'execution-svg');
-    this.svg.setAttribute('width', 42);
-    this.svg.setAttribute('height', 22);
-    this.element.appendChild(this.svg)
-
-    this.inCircle = this.svg.querySelector('#in-circle');
-    this.inCircle.style.pointerEvents = 'none';
-    this.outCircle = this.svg.querySelector('#out-circle');
-    this.outCircle.style.pointerEvents = 'none';
-    this.targetPath = null;
+    this._offsetX = 0;
   }
 
   init(node) {
@@ -130,6 +120,10 @@ export default class ExecutionSymbol extends Gadget
     this.drawLine(x, y, ConnectHelper.path);
   } 
 
+  get offsetX() {
+    return this._offsetX * BrainGraph.scale
+  }
+
   drawLine(x, y, path) {
     let source = this.position;
 
@@ -145,7 +139,7 @@ export default class ExecutionSymbol extends Gadget
     let ady = Math.abs(dy);
     let degree = Math.atan2(dy, dx)*180/Math.PI;
 
-    if(Math.abs(degree) < 45 && adx < 50) {
+    if(Math.abs(degree) < 45 && adx < 50*BrainGraph.scale) {
       path.setAttribute('d', `M${source.x},${source.y} L${sx},${sy} ${tx},${ty} ${x},${y}`);
     }
     else {
@@ -161,15 +155,6 @@ export default class ExecutionSymbol extends Gadget
         let dxsdy = adx*Math.sign(dy)
         path.setAttribute('d', `M${source.x},${source.y} L${sx},${sy} l${dx/2},${dxsdy/2} V${ty-dxsdy/2} L${tx},${ty} ${x},${y}`);
       }
-    }
-  }
-
-  get position() {
-    let offset = BrainGraph.svg.getBoundingClientRect();
-    let rect = this.targetPath.getBoundingClientRect();
-    return {
-      x: (rect.left + rect.right)/2 - offset.left,
-      y: (rect.top + rect.bottom)/2
     }
   }
 }

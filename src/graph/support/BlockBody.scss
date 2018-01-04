@@ -1,28 +1,41 @@
-.base {
-  background-color: rgba(22, 25, 49, 0.85);
-  border-radius: 10px;
-  padding-bottom: 8px;
-  
-  position: relative;
-  // box-shadow: 0 0 8px 0px rgba(51, 51, 51, 0.6);
-  
-  .body {
-    // Setting min and max size
-    min-width: 100px;
-    min-height: 90px;
-    max-width: 400px;
+.container {
+  // border is 3 pixels, so the raduis will be added 3 extra pixels
+  border-radius: 13px;
+  // retain the position when selected
+  border: 3px solid rgba(0, 0, 0, 0);
 
-    background-color: rgba(57, 61, 94, 0.6);
+  .base {
+    position: relative;
+    background-color: rgba(22, 25, 49, 0.85);
     border-radius: 10px;
-
-    // FIXME: find a better way to avoid first margin collapse?
-    // avoid margin collapse on first row
-    display: inline-block;
-
-    .row-container {
-      // Make sure all rows sits on top of the icon.
-      position: relative;
-      z-index: 1;
+    padding-bottom: 8px;
+    
+    // box-shadow: 0 0 8px 0px rgba(51, 51, 51, 0.6);
+    
+    .body {
+      // Setting min and max size
+      min-width: 110px;
+      min-height: 100px;
+      max-width: 400px;
+  
+      background-color: rgba(57, 61, 94, 0.6);
+      border-radius: 10px;
+  
+      // FIXME: find a better way to avoid first margin collapse?
+      // avoid margin collapse on first row
+      display: inline-block;
+  
+      .row-container {
+        // Make sure all rows sits on top of the icon.
+        position: relative;
+        z-index: 1;
+      }
     }
   }
+}
+
+
+.block-selected {
+  border-radius: 13px;
+  border: 3px solid #fcee21;
 }

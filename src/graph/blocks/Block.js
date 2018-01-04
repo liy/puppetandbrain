@@ -5,6 +5,7 @@ import AOutputPin from '../support/AOutputPin';
 import AInputPin from '../support/AInputPin';
 import AExecutionInPin from '../support/AExecutionInPin';
 import AExecutionOutPin from '../support/AExecutionOutPin';
+import BlockSelection from '../BlockSelection';
 
 export default class Block
 {
@@ -24,8 +25,8 @@ export default class Block
     this.dragmove = this.dragmove.bind(this);
     this.element.addEventListener('mousedown', this.dragstart);
     this.element.addEventListener('touchstart', this.dragstart);
-    document.addEventListener('mouseup', this.dragstop);
-    document.addEventListener('touchend', this.dragstop);
+    this.element.addEventListener('mouseup', this.dragstop);
+    this.element.addEventListener('touchend', this.dragstop);
   }
 
   init(node) {
@@ -76,8 +77,8 @@ export default class Block
   destroy() {
     this.element.removeEventListener('mousedown', this.dragstart);
     this.element.removeEventListener('touchstart', this.dragstart);
-    document.removeEventListener('mouseup', this.dragstop);
-    document.removeEventListener('touchend', this.dragstop);
+    this.element.removeEventListener('mouseup', this.dragstop);
+    this.element.removeEventListener('touchend', this.dragstop);
     BrainGraph.removeBlock(this);
   }
 
@@ -91,19 +92,20 @@ export default class Block
     document.addEventListener('mousemove', this.dragmove)
     document.addEventListener('touchmove', this.dragmove)
 
+    BlockSelection.select(this);
+
     // bring to front 
     this.element.parentElement.appendChild(this.element);
+
+    this.moveCommand = Commander.create('MoveBlock', this);
   }
 
   dragstop(e) {
     document.removeEventListener('mousemove', this.dragmove);
     document.removeEventListener('touchmove', this.dragmove);
 
-    // Since dragstop is listening on document, have to make sure only the dragging block push the movecommand
-    if(e.target == this.dragArea) {
-      // process and push to history
-      if(this.moveCommand) History.push(this.moveCommand.processAndSave());
-    }
+    // process and push to history
+    if(this.moveCommand) History.push(this.moveCommand.processAndSave());
   }
 
   dragmove(e) {
@@ -134,10 +136,12 @@ export default class Block
 
   set x(x) {
     this.element.style.left = x +'px'
+    this.node.x = x;
   }
 
   set y(y) {
     this.element.style.top = y +'px'
+    this.node.y = y;
   }
 
   template({name, hasIn, executionNames=[], inputNames=[], outputNames=[]}) {

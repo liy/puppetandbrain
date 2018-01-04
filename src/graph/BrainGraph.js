@@ -66,7 +66,7 @@ class BrainGraph
 
     if(e.target == this.container) {
       this.container.addEventListener('mousemove', this.onPan);
-      this.container.addEventListener('touchmove', this.onPan);
+      this.container.addEventListener('touchmove', this.onPan, { passive: false });
     }
   }
 

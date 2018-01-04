@@ -1,4 +1,6 @@
 require('./AddActorButton.scss');
+import AddActorIcon from '../assets/add-actor.svg';
+import {svgElement} from '../utils/utils';
 
 const ACTORS = [
   // require('../assets/chicken/chicken.info.json'),
@@ -18,7 +20,8 @@ export default class AddActorButton
 {
   constructor() {
     this.element = document.getElementById('add-actor-button');
-    this.element.style.visibility = 'visible'
+    this.element.style.visibility = 'visible';
+    this.element.appendChild(svgElement(AddActorIcon));
 
     this.element.addEventListener('mousedown', e => {
       e.preventDefault();
