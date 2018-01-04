@@ -22,15 +22,15 @@
   
       // FIXME: find a better way to avoid first margin collapse?
       // avoid margin collapse on first row
-      display: inline-block;
+      // display: inline-block;
   
       .content {
         // Make sure all rows sits on top of the icon.
         position: relative;
         z-index: 1;
 
-        margin-top: 10px;
-        margin-bottom: 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
 
         display: flex;
         flex-direction: row;
