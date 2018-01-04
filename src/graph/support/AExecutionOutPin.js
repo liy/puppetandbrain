@@ -11,6 +11,7 @@ export default class AExecutionOutPin extends APin
   }
 
   init(node) {
+    super.init(node);
     this.symbol.init(node);
   }
 

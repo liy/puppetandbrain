@@ -23,7 +23,7 @@ export default class ADataPin extends APin
   }
 
   init(node) {
-    this.node = node;
+    super.init(node);
     this.symbol.init(node);
   }
 

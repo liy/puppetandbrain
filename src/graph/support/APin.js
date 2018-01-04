@@ -10,4 +10,8 @@ export default class APin
     this.label.textContent =  (name == 'default') ? '' : name;
     this.element.appendChild(this.label);
   }
+
+  init(node) {
+    this.node = node;
+  }
 }
