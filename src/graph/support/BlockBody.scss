@@ -38,7 +38,6 @@
 
         .left {
           flex-grow: 3;
-          order: 1;
           max-width: 200px;
 
           display: flex;
@@ -47,8 +46,7 @@
 
         .right {
           flex-grow: 1;
-          order: 2;
-          margin-left: 5px;
+          margin-left: 6px;
           max-width: 100px;
 
           display: flex;
