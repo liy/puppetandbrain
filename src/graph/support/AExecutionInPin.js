@@ -1,4 +1,4 @@
-import ExecutionInSymbol from "../gadgets/ExecutionInSymbol";
+import ExecutionInSymbol from "./ExecutionInSymbol";
 import APin from "./APin";
 
 export default class AExecutionInPin extends APin

@@ -1,6 +1,6 @@
 import './ADataPin.scss'
-import InputSymbol from "../gadgets/InputSymbol";
-import OutputSymbol from "../gadgets/OutputSymbol";
+import InputSymbol from "./InputSymbol";
+import OutputSymbol from "./OutputSymbol";
 import APin from './APin';
 
 export default class ADataPin extends APin

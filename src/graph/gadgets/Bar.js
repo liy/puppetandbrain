@@ -8,7 +8,7 @@ export default class Bar extends Gadget
     this.element.className = 'bar-container';
     this.element.style.display = 'none';
 
-    this.barSvg = new DOMParser().parseFromString(require('../../assets/bar.svg'), "image/svg+xml").rootElement;
+    this.barSvg = new DOMParser().parseFromString(require('!raw-loader!../../assets/bar.svg'), "image/svg+xml").rootElement;
     this.barSvg.setAttribute('class', 'bar-svg');
     this.barSvg.setAttribute('width', 70);
     this.barSvg.setAttribute('height', 20);
@@ -24,15 +24,36 @@ export default class Bar extends Gadget
 
     this.decimalPlaces = 2;
 
-    this.ratio = 1;
+    this.onDrag = this.onDrag.bind(this);
+  }
+
+  init(node, name) {
+    super.init(node, name)
+    
+    this.input.addEventListener('mousedown', e => {
+      e.preventDefault();
+    })
 
     this.element.addEventListener('mousedown', e => {
       e.stopPropagation();
+      document.addEventListener('mousemove', this.onDrag);
+    })
+
+    this.element.addEventListener('mouseup', e => {
+      document.removeEventListener('mousemove', this.onDrag);
     })
   }
 
+  onDrag(e) {
+    console.log(e)
+  }
+
+  onStop() {
+    
+  }
+
   get ratio() {
-    return this._ratio;
+    (this.max-this.min)
   }
 
   set ratio(v) {
@@ -41,7 +62,7 @@ export default class Bar extends Gadget
     this.input.value = this.number.toFixed(this.decimalPlaces);
   }
 
-  get number() {
-    return this.min + (this.max - this.min)*this._ratio;
+  get value() {
+    return this.node.variables[this.name];
   }
 }

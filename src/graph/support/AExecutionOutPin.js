@@ -1,4 +1,4 @@
-import ExecutionOutSymbol from "../gadgets/ExecutionOutSymbol";
+import ExecutionOutSymbol from "./ExecutionOutSymbol";
 import APin from "./APin";
 
 export default class AExecutionOutPin extends APin

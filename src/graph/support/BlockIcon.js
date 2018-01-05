@@ -1,10 +1,9 @@
 import './BlockIcon.scss'
-import Gadget from './Gadget';
 
-export default class BlockIcon extends Gadget
+export default class BlockIcon
 {
   constructor(svg) {
-    super();
+    this.element = document.createElement('div')
     this.element.className = 'icon-container';
     this.element.appendChild(svg);
   }

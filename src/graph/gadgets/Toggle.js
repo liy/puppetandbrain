@@ -16,17 +16,27 @@ export default class Toggle extends Gadget
     this.knob = this.element.querySelector('#knob');
     this.color = this.element.querySelector('#color');
 
-    this.element.addEventListener('mousedown', e => {
-      e.stopPropagation();
-      this.on = !this.on;
-    })
+    this.mouseDown = this.mouseDown.bind(this);
+    this.element.addEventListener('mousedown', this.mouseDown);
 
-    this.on = false
+  }
+
+  init(node, name) {
+    super.init(node, name);
+    this.on = this.node.variables[name];
+  }
+
+  destroyed() {
+    this.element.removeEventListener('mousedown', this.mouseDown);
+  }
+
+  mouseDown(e) {
+    e.stopPropagation();
+    this.on = !this.on;
   }
 
   set on(v) {
-    this._on = v;
-    if(this._on) {
+    if(v) {
       this.knob.setAttribute('transform', `translate(${10})`)
       this.color.setAttribute('fill', '#a4b500')
     }
@@ -34,9 +44,11 @@ export default class Toggle extends Gadget
       this.knob.setAttribute('transform', `translate(${0})`)
       this.color.setAttribute('fill', '#999999')
     }
+
+    this.node.variables[this.name] = v;
   }
 
   get on() {
-    return this._on
+    return this.node.variables[this.name];
   }
 }

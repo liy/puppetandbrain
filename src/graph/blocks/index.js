@@ -9,3 +9,4 @@ export LoopBlock from './LoopBlock';
 export PerformBlock from './PerformBlock';
 export PlaySoundBlock from './PlaySoundBlock';
 export SetterBlock from './SetterBlock';
+export SwitchAccessBlock from './SwitchAccessBlock';

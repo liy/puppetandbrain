@@ -1,7 +1,18 @@
+import EventEmitter from '../../utils/EventEmitter'
+
 export default class Gadget
 {
   constructor() {
     this.element = document.createElement('div')
+  }
+
+  init(node, name) {
+    this.node = node;
+    this.name = name;
+  }
+
+  destroy() {
+
   }
   
   get visible() {

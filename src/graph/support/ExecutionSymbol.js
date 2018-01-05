@@ -1,10 +1,9 @@
-import Gadget from './Gadget';
 import ConnectHelper from '../ConnectHelper';
 
-export default class ExecutionSymbol extends Gadget
+export default class ExecutionSymbol
 {
   constructor(name, flow) {
-    super();
+    this.element = document.createElement('div')
 
     this.name = name;
     this.flow = flow;

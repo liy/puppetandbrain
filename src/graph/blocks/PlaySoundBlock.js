@@ -9,7 +9,7 @@ export default class PlaySoundBlock extends Block
 
   init(node) {
     super.init(node);
-    
+
     this.inputPins.get('loop').setGadget(new Toggle());
   }
 }

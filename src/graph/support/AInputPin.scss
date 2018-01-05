@@ -1,8 +1,8 @@
 .clickable {
-  span {
+  .label {
     cursor: pointer;
   }
-  span:hover {
+  .label:hover {
     color: white;
   }
 }

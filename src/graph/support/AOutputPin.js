@@ -1,5 +1,5 @@
 import ADataPin from "./ADataPin";
-import OutputSymbol from "../gadgets/OutputSymbol";
+import OutputSymbol from "./OutputSymbol";
 
 export default class AOutputPin extends ADataPin
 {

@@ -1,5 +1,5 @@
 import './BlockBody.scss';
-import BlockIcon from '../gadgets/BlockIcon';
+import BlockIcon from './BlockIcon';
 import {svgElement} from '../../utils/utils';
 
 // TODO: remove this

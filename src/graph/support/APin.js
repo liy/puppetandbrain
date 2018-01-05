@@ -7,6 +7,7 @@ export default class APin
     this.element = document.createElement('div');
 
     this.label = document.createElement('span');
+    this.label.className = 'label';
     this.label.textContent =  (name == 'default') ? '' : name;
     this.element.appendChild(this.label);
   }

@@ -1,10 +1,9 @@
-import Gadget from './Gadget';
 import ConnectHelper from '../ConnectHelper';
 
-export default class DataSymbol extends Gadget
+export default class DataSymbol
 {
   constructor(name, flow) {
-    super();
+    this.element = document.createElement('div')
 
     this._connected = false;
 

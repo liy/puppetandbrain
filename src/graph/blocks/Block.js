@@ -5,9 +5,9 @@ import AOutputPin from '../support/AOutputPin';
 import AInputPin from '../support/AInputPin';
 import AExecutionInPin from '../support/AExecutionInPin';
 import AExecutionOutPin from '../support/AExecutionOutPin';
+import BlockIcon from '../support/BlockIcon';
 import BlockSelection from '../BlockSelection';
 
-import BlockIcon from '../gadgets/BlockIcon';
 import {svgElement} from '../../utils/utils';
 
 // TODO: remove this

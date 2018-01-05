@@ -62,14 +62,15 @@
           font-size: 12px;
           color: #9e9e9e;
           height: 38px;
-          line-height: 38px;
 
           margin-top: 5px;
         
           // background-color: #ca7ec4ab;
           display: flex;
 
-          span {
+          .label {
+            line-height: 38px;
+            
             user-select: none;
             overflow-x: hidden;
             // do not wrap!!!
@@ -91,7 +92,7 @@
             left: -32px;
           }
         
-          span {
+          .label {
             margin-left: 10px;
           }
         }
@@ -103,7 +104,7 @@
             right: -35px;
           }
         
-          span {
+          .label {
             margin-right: 13px;
           }
         }

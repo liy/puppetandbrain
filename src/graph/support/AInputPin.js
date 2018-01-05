@@ -1,7 +1,7 @@
 import './AInputPin.scss';
 import ADataPin from "./ADataPin";
 import InputField from '../gadgets/InputField'
-import InputSymbol from '../gadgets/InputSymbol';
+import InputSymbol from './InputSymbol';
 
 export default class AInputPin extends ADataPin
 {
@@ -15,7 +15,7 @@ export default class AInputPin extends ADataPin
   init(node) {
     super.init(node);
 
-    this.setGadget(new InputField());
+    this.setGadget(new InputField(node, this.name));
 
     this.element.addEventListener('mousedown', this.mouseDown)
     
@@ -25,6 +25,26 @@ export default class AInputPin extends ADataPin
     }
     this.pointer.on('input.connected', this.connectionChanged);
     this.pointer.on('input.disconnected', this.connectionChanged);
+  }
+
+  destroyed() {
+    this.gadget.destroy();
+    this.element.removeEventListener('mousedown', this.mouseDown)
+    this.pointer.off('input.connected', this.connectionChanged);
+    this.pointer.off('input.disconnected', this.connectionChanged);
+  }
+
+  setGadget(gadget) {
+    // remove old gadget
+    if(this.gadget) {
+      this.gadget.destroy();
+      this.head.removeChild(this.gadget.element);
+    }
+
+    this.gadget = gadget;
+    this.gadget.init(this.node, this.name);
+    this.gadget.visible = false;
+    this.head.appendChild(this.gadget.element);
   }
 
   connectionChanged(data) {
@@ -43,17 +63,6 @@ export default class AInputPin extends ADataPin
 
     this.gadgetVisible = !this.gadgetVisible;
     this.symbol.drawConnection();
-  }
-
-  setGadget(gadget) {
-    // remove old gadget
-    if(this.gadget) {
-      this.head.removeChild(this.gadget.element);
-    }
-
-    this.gadget = gadget;
-    this.gadget.visible = false;
-    this.head.appendChild(this.gadget.element);
   }
 
   set gadgetVisible(flag) {
