@@ -1,8 +1,15 @@
 .container {
+  // min and max size
+  min-width: 110px;
+  min-height: 110px;
+
   // border is 3 pixels, so the raduis will be added 3 extra pixels
   border-radius: 13px;
   // retain the position when selected
   border: 3px solid rgba(0, 0, 0, 0);
+
+  // auto fill available height
+  display: flex;
 
   .base {
     background-color: rgba(22, 25, 49, 0.85);
@@ -11,18 +18,20 @@
     
     // TODO: may be remove shaow?
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+
+    // auto fill available height
+    flex-grow: 1;
+    display: flex;
     
     .body {
-      // Setting min and max size
-      min-width: 110px;
-      min-height: 100px;
-  
       background-color: rgba(57, 61, 94, 0.6);
       border-radius: 10px;
-  
-      // FIXME: find a better way to avoid first margin collapse?
-      // avoid margin collapse on first row
-      // display: inline-block;
+
+      // fill available space
+      flex-grow: 1;
+      // make container to use flex so child can use flex-grow to fill the 
+      // available space
+      display: flex;
   
       .content {
         // Make sure all rows sits on top of the icon.
@@ -32,13 +41,17 @@
         padding-top: 10px;
         padding-bottom: 10px;
 
+        // This make content(item) exapand to fill the available height
+        // It is useful when manual set block body height
+        flex-grow: 1;
+
         display: flex;
+        // left and right item
         flex-direction: row;
-        
 
         .left {
           flex-grow: 3;
-          max-width: 200px;
+          width: 70%;
 
           display: flex;
           flex-direction: column;
@@ -46,74 +59,16 @@
 
         .right {
           flex-grow: 1;
+          // width: 30%;
           margin-left: 6px;
-          max-width: 100px;
 
           display: flex;
           flex-direction: column;
-        }
-
-        .item:first-child {
-          margin-top: 0;
-        }
-
-        .item {
-          font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-          font-size: 12px;
-          color: #9e9e9e;
-          height: 38px;
-
-          margin-top: 5px;
-        
-          // background-color: #ca7ec4ab;
-          display: flex;
-
-          .label {
-            line-height: 38px;
-            
-            user-select: none;
-            overflow-x: hidden;
-            // do not wrap!!!
-            // Otherwise when dragging block to the edge of the window
-            // the content tends to wrap and change the whole block width!
-            white-space: nowrap;
-          }
-        }
-        
-        .execution-svg {
-          position: absolute;
-          margin-top: 8px;
-        }
-        
-        .item-left {
-          flex-direction: row;
-        
-          .execution-svg {
-            left: -32px;
-          }
-        
-          .label {
-            margin-left: 10px;
-          }
-        }
-        
-        .item-right {
-          flex-direction: row-reverse;
-        
-          .execution-svg {
-            right: -35px;
-          }
-        
-          .label {
-            margin-right: 13px;
-          }
         }
       }
     }
   }
 }
-
-
 
 .block-selected {
   border-radius: 13px;

@@ -28,27 +28,35 @@ export default class BlockBody
     this.left = document.createElement('div');
     this.left.className = 'left'
     this.content.appendChild(this.left);
+
     this.right = document.createElement('div');
     this.right.className = 'right';
     this.content.appendChild(this.right);
-
   }
 
   addLeft(pin) {
-    pin.element.classList.add('item', 'item-left')
+    // pin.element.classList.add('pin-left')
     this.left.appendChild(pin.element)
   }
 
   addRight(pin) {
-    pin.element.classList.add('item', 'item-right')
+    // pin.element.classList.add('pin-right')
     this.right.appendChild(pin.element)
+  }
+
+  set minHeight(v) {
+    this.element.style.minHeight = `${v}px`;
+  }
+
+  set minWidth(v) {
+    this.element.style.minWidth = `${v}px`;
   }
   
   set width(v) {
-    this.element.style.width = `${v}px`
+    this.content.style.width = `${v}px`
   }
 
   set height(v) {
-    this.element.style.height = `${v}px`
+    this.content.style.height = `${v}px`
   }
 }

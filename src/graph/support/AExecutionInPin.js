@@ -1,7 +1,7 @@
 import ExecutionInSymbol from "./ExecutionInSymbol";
-import APin from "./APin";
+import AExecutionPin from "./AExecutionPin";
 
-export default class AExecutionInPin extends APin
+export default class AExecutionInPin extends AExecutionPin
 {
   constructor() {
     super('', 'in');

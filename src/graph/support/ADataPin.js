@@ -8,6 +8,8 @@ export default class ADataPin extends APin
   constructor(name, flow) {
     super(name, flow)
 
+    this.element.className = 'data-pin'
+
     // contains symbol or input gadget
     this.head = document.createElement('div');
     this.head.className = 'data-head';
