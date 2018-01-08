@@ -9,6 +9,13 @@ export default class extends VariableBase
 
     this.icon.appendChild(svgElement(ListIcon,{width:17, height:14}));
 
-    this.name.textContent = 'list name'
+    this.name.placeholder = 'list name...'
+
+    this.expand = this.expand.bind(this);
+    this.element.addEventListener('mousedown', this.expand);
+  }
+
+  expand(e) {
+    console.log('down');
   }
 }

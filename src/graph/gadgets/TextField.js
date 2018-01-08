@@ -1,4 +1,4 @@
-import './InputField.scss'
+import './TextField.scss'
 import Gadget from "./Gadget";
 
 // FIXME: use span with contentditable=true, it will allow auto expand
@@ -7,18 +7,22 @@ export default class extends Gadget
 {
   constructor(value, placeholderText='...') {
     super()
-    this.element.className = 'input-field';
+    this.element.className = 'text-field';
 
     this.input = document.createElement('span');
-    this.input.className = 'data-input'
+    this.input.className = 'data-text'
     this.input.contentEditable = true;
-    this.input.setAttribute('placeholder', placeholderText);
+    this.placeholder = placeholderText;
     this.element.appendChild(this.input);
 
     this.onChange = this.onChange.bind(this);
     this.input.addEventListener('mousedown', e => {
       e.stopPropagation();
     });
+  }
+
+  set placeholder(p) {
+    this.input.setAttribute('placeholder', p);
   }
   
   onChange(e) {

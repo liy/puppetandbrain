@@ -1,4 +1,5 @@
 import './VariableBase.scss'
+import VariableName from './VariableName';
 
 export default class 
 {
@@ -15,8 +16,7 @@ export default class
     this.container.appendChild(this.icon);
     this.icon.className = 'variable-icon';
 
-    this.name = document.createElement('div');
-    this.container.appendChild(this.name);
-    this.name.className = 'variable-name';
+    this.name = new VariableName();
+    this.container.appendChild(this.name.element);
   }
 }

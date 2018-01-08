@@ -1,5 +1,5 @@
 import VariableBase from './VariableBase';
-import VariableInputField from './VariableInputField';
+import VariableValue from './VariableValue';
 
 import DotIcon from '../../assets/dot.svg';
 import { svgElement } from '../../utils/utils';
@@ -11,9 +11,9 @@ export default class extends VariableBase
 
     this.icon.appendChild(svgElement(DotIcon,{width:10, height:10}));
 
-    this.name.textContent = 'variable name'
+    this.name.placeholder = 'name...'
 
-    this.input = new VariableInputField('test');
+    this.input = new VariableValue('test');
     this.container.appendChild(this.input.element);
   }
 }

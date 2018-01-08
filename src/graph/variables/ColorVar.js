@@ -9,10 +9,10 @@ export default class extends VariableBase
   constructor() {
     super();
 
+    this.name.placeholder = 'position...'
+
     let svg = svgElement(PipetteIcon,{width:16, height:16});
     this.icon.appendChild(svg);
-
-    this.name.textContent = 'color'
 
     this.colorButton = new ColorButton();
     this.container.appendChild(this.colorButton.element);

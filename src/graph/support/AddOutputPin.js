@@ -1,5 +1,5 @@
 import './AddOutputPin.scss';
-import InputField from '../gadgets/InputField';
+import TextField from '../gadgets/TextField';
 import PlusIcon from '../../assets/plus.svg';
 import {svgElement} from '../../utils/utils'
 
@@ -13,8 +13,8 @@ export default class
     this.pin.className = 'add-output-pin';
     this.element.appendChild(this.pin)
 
-    this.inputField = new InputField();
-    this.pin.appendChild(this.inputField.element);
+    this.textField = new TextField();
+    this.pin.appendChild(this.textField.element);
 
     this.head = document.createElement('div');
     this.head.className = 'add-output-head';
@@ -26,10 +26,10 @@ export default class
     this.head.addEventListener('mousedown', e => {
       e.preventDefault();
       
-      let outputName = String.trim(this.inputField.value);
+      let outputName = String.trim(this.textField.value);
       if(outputName) {
         node.outputs.addOutput(outputName);
-        this.inputField.value = '';
+        this.textField.value = '';
       }
     })
   }

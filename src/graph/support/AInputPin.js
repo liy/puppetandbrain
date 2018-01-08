@@ -1,6 +1,6 @@
 import './AInputPin.scss';
 import ADataPin from "./ADataPin";
-import InputField from '../gadgets/InputField'
+import TextField from '../gadgets/TextField'
 import InputSymbol from './InputSymbol';
 
 export default class AInputPin extends ADataPin
@@ -15,7 +15,7 @@ export default class AInputPin extends ADataPin
   init(node) {
     super.init(node);
 
-    this.setGadget(new InputField(node, this.name));
+    this.setGadget(new TextField(node, this.name));
 
     this.element.addEventListener('mousedown', this.mouseDown)
     

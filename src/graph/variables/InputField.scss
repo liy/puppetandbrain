@@ -1,0 +1,30 @@
+.input-field {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  color: rgb(0, 0, 0);
+
+  width: 100%;
+  overflow-x: hidden;
+  text-align: center;
+  
+  height: 24px;
+  line-height: 24px;
+
+  input {
+    padding: 0;
+
+    width: 100%;
+
+    height: 24px;
+    line-height: 24px;
+
+    border: none;
+    background: none;
+    outline: none;
+  }
+
+  ::placeholder {
+    color: rgb(124, 124, 124);
+    font-weight: 100;
+  }
+}

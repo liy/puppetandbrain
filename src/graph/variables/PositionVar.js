@@ -10,6 +10,6 @@ export default class extends VariableBase
     let svg = svgElement(PositionIcon,{width:10, height:16});
     this.icon.appendChild(svg);
 
-    this.name.textContent = 'position'
+    this.name.placeholder = 'position...'
   }
 }

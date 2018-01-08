@@ -1,0 +1,18 @@
+.variable-name {
+  flex-grow: 1;
+
+  height: 24px;
+  border-radius: 0;
+  background: none;
+
+  margin-top: 4px;
+  margin-left: 8px;
+
+  padding-right: 10px;
+
+  input {
+    text-align: left;
+    color: white;
+    font-size: 18px;
+  }
+}
