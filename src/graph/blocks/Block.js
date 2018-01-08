@@ -30,10 +30,10 @@ export default class Block
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
-    this.element.addEventListener('mousedown', this.dragstart);
-    this.element.addEventListener('touchstart', this.dragstart);
-    this.element.addEventListener('mouseup', this.dragstop);
-    this.element.addEventListener('touchend', this.dragstop);
+    this.body.element.addEventListener('mousedown', this.dragstart);
+    this.body.element.addEventListener('touchstart', this.dragstart);
+    this.body.element.addEventListener('mouseup', this.dragstop);
+    this.body.element.addEventListener('touchend', this.dragstop);
 
     this.element.appendChild(new BlockIcon(svgElement(ClockIcon)).element);
   }
@@ -84,10 +84,10 @@ export default class Block
   }
 
   destroy() {
-    this.element.removeEventListener('mousedown', this.dragstart);
-    this.element.removeEventListener('touchstart', this.dragstart);
-    this.element.removeEventListener('mouseup', this.dragstop);
-    this.element.removeEventListener('touchend', this.dragstop);
+    this.body.element.removeEventListener('mousedown', this.dragstart);
+    this.body.element.removeEventListener('touchstart', this.dragstart);
+    this.body.element.removeEventListener('mouseup', this.dragstop);
+    this.body.element.removeEventListener('touchend', this.dragstop);
     BrainGraph.removeBlock(this);
   }
 

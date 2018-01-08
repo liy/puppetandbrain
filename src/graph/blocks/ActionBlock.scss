@@ -1,0 +1,11 @@
+.a-title {
+  outline: none;
+}
+
+// place hodler
+.a-title:empty:before{
+  content: attr(placeholder);
+  display: block; /* For Firefox */
+  color: #CCC;
+  cursor: text;
+}

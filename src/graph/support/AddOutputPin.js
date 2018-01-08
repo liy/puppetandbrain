@@ -1,8 +1,9 @@
 import './AddOutputPin.scss';
+import InputField from '../gadgets/InputField';
 
 export default class
 {
-  constructor() {
+  constructor(node) {
     this.element = document.createElement('div');
     this.element.className = 'add-output-pin-container'
 
@@ -10,10 +11,8 @@ export default class
     this.pin.className = 'add-output-pin';
     this.element.appendChild(this.pin)
 
-    this.label = document.createElement('span');
-    this.label.className = 'label';
-    this.label.textContent =  'test'
-    this.pin.appendChild(this.label);
+    this.textField = new InputField();
+    this.pin.appendChild(this.textField.element);
 
     this.head = document.createElement('div');
     this.head.className = 'add-output-head';

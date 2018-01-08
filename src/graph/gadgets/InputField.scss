@@ -1,5 +1,5 @@
-.input-container {
-  max-width: 200px;
+.input-field {
+  max-width: 120px;
   overflow-x: hidden;
   text-align: center;
 
@@ -22,5 +22,13 @@
     line-height: 20px;
 
     outline: none;
+  }
+
+  // place holder
+  .data-input:empty:before{
+    content: attr(placeholder);
+    display: block; /* For Firefox */
+    color: #CCC;
+    cursor: text;
   }
 }

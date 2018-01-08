@@ -5,18 +5,17 @@ import Gadget from "./Gadget";
 // https://stackoverflow.com/questions/7168727/make-html-text-input-field-grow-as-i-type
 export default class extends Gadget
 {
-  constructor() {
+  constructor(value, placeholderText='...') {
     super()
-    this.element.className = 'input-container';
+    this.element.className = 'input-field';
 
     this.input = document.createElement('span');
     this.input.className = 'data-input'
     this.input.contentEditable = true;
-    this.input.setAttribute('placeholder', '...')
+    this.input.setAttribute('placeholder', placeholderText);
     this.element.appendChild(this.input);
 
     this.onChange = this.onChange.bind(this);
-
     this.input.addEventListener('mousedown', e => {
       e.stopPropagation();
     });

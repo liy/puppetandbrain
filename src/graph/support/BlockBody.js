@@ -51,6 +51,15 @@ export default class BlockBody
   set minWidth(v) {
     this.element.style.minWidth = `${v}px`;
   }
+
+  set maxWidth(v) {
+    this.content.style.maxWidth = `${v}px`;
+  }
+
+  set maxHeight(v) {
+    this.content.style.maxHeight = `${v}px`;
+  }
+
   
   set width(v) {
     this.content.style.width = `${v}px`
