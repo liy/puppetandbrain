@@ -14,12 +14,12 @@ export default class Perform extends Task
   }
 
   destroy() {
+    super.destroy();
     // Just incase the action has already been detroyed
     if(this.action)  {
       this.action.outputs.off('output.added', this.onOutputAdded);
-      this.action.removePerform();
+      this.action.removePerform(this);
     }
-    super.destroy();
   }
 
   init(pod) {

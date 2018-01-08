@@ -18,7 +18,15 @@ export default class PerformBlock extends Block
     super.init(node);
     
     // TODO: probably not needed
-    this.node.action.outputs.on('output.added', this.onOutputAdded);
+    if(this.node.action) {
+      this.node.action.outputs.on('output.added', this.onOutputAdded);
+    }
+  }
+
+  destroy() {
+    this.element.removeEventListener('mousedown', this.dbclick)
+    this.node.action.outputs.off('output.added', this.onOutputAdded);
+    super.destroy()
   }
 
   dbclick(e) {
