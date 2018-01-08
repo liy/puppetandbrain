@@ -31,4 +31,12 @@ export default class extends Gadget
     this.input.addEventListener('change', this.onChange);
     this.input.textContent = this.node.variables[name];
   }
+
+  get value() {
+    return this.input.textContent;
+  }
+
+  set value(v) {
+    this.input.textContent = v;
+  }
 }

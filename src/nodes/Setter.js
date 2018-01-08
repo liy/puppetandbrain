@@ -52,6 +52,10 @@ export default class Setter extends Task
     return `Set Variable`;
   }
   
+  get elementClassName() {
+    return ['property'];
+  }
+
   pod(detail) {
     let pod = super.pod(detail);
     pod.targetBrain = this.targetBrain.id;

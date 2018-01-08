@@ -13,6 +13,10 @@ export class Operator extends DataNode
       }
     });
   }
+
+  get elementClassName() {
+    return ['operator'];
+  }
 }
 
 export class Addition extends Operator

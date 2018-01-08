@@ -72,6 +72,10 @@ export default class Action extends Task
     return 'Action ' + this.actionName;
   }
 
+  get elementClassName() {
+    return ['action'];
+  }
+
   get hasIn() {
     return false;
   }

@@ -32,6 +32,8 @@ export default class BlockBody
     this.right = document.createElement('div');
     this.right.className = 'right';
     this.content.appendChild(this.right);
+
+    this.element.appendChild(new BlockIcon(svgElement(ClockIcon, {width:64, height:64})).element);
   }
 
   addLeft(pin) {
@@ -59,7 +61,6 @@ export default class BlockBody
   set maxHeight(v) {
     this.content.style.maxHeight = `${v}px`;
   }
-
   
   set width(v) {
     this.content.style.width = `${v}px`
@@ -67,5 +68,13 @@ export default class BlockBody
 
   set height(v) {
     this.content.style.height = `${v}px`
+  }
+
+  set baseColor(c) {
+    this.base.style.backgroundColor = c;
+  }
+
+  set color(c) {
+    this.body.style.backgroundColor = c;
   }
 }

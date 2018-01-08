@@ -1,0 +1,203 @@
+.action {
+  $baseR: 179;
+  $baseG: 145;
+  $baseB: 0;
+  $baseA: 0.85;
+  $r: 204;
+  $g: 166;
+  $b: 0;
+  $a: 0.6;
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin {
+    color: #D9D9D9
+  }
+  .execution-pin {
+    color: #D9D9D9
+  }
+}
+
+
+
+.property {
+  $baseR: 61;
+  $baseG: 85;
+  $baseB: 102;
+  $baseA: 0.85;
+  $r: 80;
+  $g: 112;
+  $b: 134;
+  $a: 0.6;
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin {
+    color: #BFBFBF
+  }
+  .execution-pin {
+    color: #BFBFBF
+  }
+}
+
+.getter {
+  .container {
+    min-height: 80px;
+  }
+  .left {
+    justify-content: center;
+  }
+
+  .right {
+    justify-content: center;
+  }
+}
+
+.operator {
+  .container {
+    min-height: 80px;
+  }
+
+  $baseR: 42;
+  $baseG: 100;
+  $baseB: 128;
+  $baseA: 0.85;
+  $r: 40;
+  $g: 124;
+  $b: 166;
+  $a: 0.6;
+
+  .left {
+    justify-content: center;
+  }
+
+  .right {
+    justify-content: center;
+  }
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin {
+    color: #BFBFBF
+  }
+  .execution-pin {
+    color: #BFBFBF
+  }
+}
+
+
+
+.listener {
+  $baseR: 114;
+  $baseG: 140;
+  $baseB: 39;
+  $baseA: 0.85;
+  $r: 136;
+  $g: 168;
+  $b: 47;
+  $a: 0.6;
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin {
+    color: #D9D9D9
+  }
+  .execution-pin {
+    color: #D9D9D9
+  }
+}
+
+.perform {
+  $baseR: 71;
+  $baseG: 47;
+  $baseB: 115;
+  $baseA: 0.85;
+  $r: 99;
+  $g: 69;
+  $b: 153;
+  $a: 0.6;
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin {
+    color: #D9D9D9
+  }
+  .execution-pin {
+    color: #D9D9D9
+  }
+}

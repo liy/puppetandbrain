@@ -22,4 +22,8 @@ export default class SetRotation extends Task
   get nodeName() {
     return 'Set Rotation';
   }
+
+  get elementClassName() {
+    return ['property'];
+  }
 }

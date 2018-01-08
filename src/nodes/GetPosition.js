@@ -24,4 +24,8 @@ export default class GetPosition extends DataNode
   get nodeName() {
     return 'Get Position';
   }
+
+  get elementClassName() {
+    return ['property', 'getter'];
+  }
 }

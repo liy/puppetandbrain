@@ -34,4 +34,8 @@ export default class GetProperty extends DataNode
       name: this.name,
     }
   }
+
+  get elementClassName() {
+    return ['property', 'getter'];
+  }
 }

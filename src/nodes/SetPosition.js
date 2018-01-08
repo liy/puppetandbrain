@@ -26,4 +26,8 @@ export default class SetPosition extends Task
   get nodeName() {
     return 'Set Position';
   }
+
+  get elementClassName() {
+    return ['property'];
+  }
 }

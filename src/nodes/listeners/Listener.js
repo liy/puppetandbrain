@@ -9,4 +9,8 @@ export default class EventListener extends Task
   get hasIn() {
     return false;
   }
+
+  get elementClassName() {
+    return ['listener'];
+  }
 }

@@ -40,6 +40,10 @@ export default class Getter extends DataNode
     return `Get Variable`;
   }
 
+  get elementClassName() {
+    return ['property', 'getter'];
+  }
+
   pod(detail) {
     let pod = super.pod(detail);
     pod.targetBrain = this.targetBrain.id;

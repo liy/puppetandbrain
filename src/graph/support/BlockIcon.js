@@ -6,5 +6,7 @@ export default class BlockIcon
     this.element = document.createElement('div')
     this.element.className = 'icon-container';
     this.element.appendChild(svg);
+    svg.setAttribute('width', 48)
+    svg.setAttribute('height', 48)
   }
 }

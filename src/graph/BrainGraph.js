@@ -1,4 +1,5 @@
-require('./BrainGraph.scss')
+import './blocks/color-theme.scss';
+import './BrainGraph.scss';
 
 import BlockSelection from './BlockSelection';
 import ArrayMap from '../utils/ArrayMap';

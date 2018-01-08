@@ -25,4 +25,8 @@ export default class GetRotation extends DataNode
   get nodeName() {
     return 'Get Rotation';
   }
+
+  get elementClassName() {
+    return ['property', 'getter'];
+  }
 }

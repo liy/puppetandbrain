@@ -5,13 +5,13 @@ import AOutputPin from '../support/AOutputPin';
 import AInputPin from '../support/AInputPin';
 import AExecutionInPin from '../support/AExecutionInPin';
 import AExecutionOutPin from '../support/AExecutionOutPin';
-import BlockIcon from '../support/BlockIcon';
 import BlockSelection from '../BlockSelection';
 
 import {svgElement} from '../../utils/utils';
 
 // TODO: remove this
 import ClockIcon from '../../assets/icons/clock.svg';
+import BlockIcon from '../support/BlockIcon';
 
 
 export default class Block
@@ -34,12 +34,17 @@ export default class Block
     this.body.element.addEventListener('touchstart', this.dragstart);
     this.body.element.addEventListener('mouseup', this.dragstop);
     this.body.element.addEventListener('touchend', this.dragstop);
-
-    this.element.appendChild(new BlockIcon(svgElement(ClockIcon)).element);
   }
 
   init(node) {
     this.node = node;
+    
+    if(node.elementClassName) {
+      for(let className of node.elementClassName) {
+        this.element.classList.add(className);
+      }
+    }
+
     this.id = this.node.id;
     this.inPin = null;
     this.outPins = new ArrayMap();

@@ -47,6 +47,10 @@ export default class Perform extends Task
     return this.action ? this.action.actionName : null;
   }
 
+  get elementClassName() {
+    return ['perform']
+  }
+
   run() {
     super.run()
 
