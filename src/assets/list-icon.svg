@@ -1,0 +1,10 @@
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 14">
+  <style>
+    .st1{fill:#ff913d}
+  </style>
+  <path fill="none" stroke="#ff913d" stroke-width="2" stroke-miterlimit="10" d="M3 11l3-8 5 8 3-8"/>
+  <circle class="st1" cx="3" cy="11" r="3"/>
+  <circle class="st1" cx="6" cy="3" r="3"/>
+  <circle class="st1" cx="11" cy="11" r="3"/>
+  <circle class="st1" cx="14" cy="3" r="3"/>
+</svg>

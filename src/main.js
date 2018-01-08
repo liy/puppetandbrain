@@ -272,3 +272,7 @@ firebase.auth().onAuthStateChanged(user => {
 window.colorCalculator = function(v1, v2, a1, a2) {
   return v1 + (v2 - v1) * a2;
 }
+
+import AVariablePanel from './graph/variables/AVariablePanel';
+const vp = new AVariablePanel();
+document.body.appendChild(vp.element);

@@ -5,7 +5,7 @@ import BlockSelection from './BlockSelection';
 import ArrayMap from '../utils/ArrayMap';
 import BlockMenu from '../browser/BlockMenu';
 import BlockBrowser from '../browser/BlockBrowser';
-import VariablePanel from './gadgets/VariablePanel';
+import VariablePanel from './variables/VariablePanel';
 
 class BrainGraph
 {
