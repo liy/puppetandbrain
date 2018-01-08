@@ -3,6 +3,7 @@ import GenericVar from './GenericVar';
 import ListVar from './ListVar';
 import MapVar from './MapVar';
 import PositionVar from './PositionVar';
+import ColorVar from './ColorVar';
 
 export default class
 {
@@ -32,6 +33,7 @@ export default class
     this.add(new ListVar());
     this.add(new MapVar());
     this.add(new PositionVar());
+    this.add(new ColorVar());
   }
 
   add(variable) {

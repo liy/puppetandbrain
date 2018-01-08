@@ -1,0 +1,32 @@
+.color-button {
+  width: 80px;
+  text-align: center;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+  margin-top: 4px;
+  margin-right: 8px;
+
+  user-select: none;  
+  
+  .color-hex {
+    position: relative;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    width: 80px;
+    // FIXME: no idea why I have to use -40 to vertical centre the span!!
+    top: -40px;
+
+    pointer-events: none;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+}

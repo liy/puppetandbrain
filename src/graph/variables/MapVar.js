@@ -9,6 +9,6 @@ export default class extends VariableBase
 
     this.icon.appendChild(svgElement(MapIcon,{width:16, height:16}));
 
-    this.name.textContent = 'list name'
+    this.name.textContent = 'map name'
   }
 }
