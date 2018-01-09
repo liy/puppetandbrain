@@ -47,7 +47,7 @@ export default class
     let mapButton = new CreateVariableButton(svgElement(MapIcon,{width:15, height:15}));
     let positionButton = new CreateVariableButton(svgElement(PositionIcon,{width:10, height:16}));
     let pipetteButton = new CreateVariableButton(svgElement(PipetteIcon,{width:16, height:16}));
-    let actorButton = new CreateVariableButton(null, '🐱');
+    let actorButton = new CreateVariableButton(null, '🐶');
     let binButton = new CreateVariableButton(svgElement(BinIcon,{width:18, height:18}));
 
     this.control.appendChild(genericButton.element);

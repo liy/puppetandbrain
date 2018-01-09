@@ -70,14 +70,9 @@ export default class extends VariableElement
     this.entries.splice(entry.index, 1);
     this.listElement.removeChild(entry.element);
 
-    if(this.data.length == 0) {
-      this.shrink();
-    }
-    else {
-      // refresh the element index text
-      for(let i=0; i<this.entries.length; ++i) {
-        this.entries[i].index = i
-      }
+    // refresh the element index text
+    for(let i=0; i<this.entries.length; ++i) {
+      this.entries[i].index = i
     }
   }
 

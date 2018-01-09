@@ -13,6 +13,6 @@ export default class extends VariableElement
 
     // let svg = svgElement(ActorIcon,{width:16, height:16});
     // this.icon.appendChild(svg);
-    this.icon.textContent = '🐱';
+    this.icon.textContent = '🐶';
   }
 }

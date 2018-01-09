@@ -65,10 +65,6 @@ export default class extends VariableElement
     this.data.remove(entry.key);
     this.entries.remove(entry.key);
     this.listElement.removeChild(entry.element);
-
-    if(this.data.length == 0) {
-      this.shrink();
-    }
   }
 
   get(key) {
