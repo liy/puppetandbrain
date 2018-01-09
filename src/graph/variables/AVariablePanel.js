@@ -64,6 +64,7 @@ export default class
     this.addPosition = this.addPosition.bind(this);
     this.addColor = this.addColor.bind(this);
     this.addActor = this.addActor.bind(this);
+    this.removeVariable = this.removeVariable.bind(this);
 
     genericButton.element.addEventListener('mousedown', this.addGeneric);
     listButton.element.addEventListener('mousedown', this.addList);
@@ -71,30 +72,31 @@ export default class
     positionButton.element.addEventListener('mousedown', this.addPosition);
     pipetteButton.element.addEventListener('mousedown', this.addColor);
     actorButton.element.addEventListener('mousedown', this.addActor);
+    binButton.element.addEventListener('mousedown', this.removeVariable);
   }
 
   addGeneric() {
-    VariblePanelManager.add(new GenericElement());    
+    this.add(new GenericElement());    
   }
 
   addList() {
-    VariblePanelManager.add(new ListElement());    
+    this.add(new ListElement());    
   }
 
   addMap() {
-    VariblePanelManager.add(new MapElement());    
+    this.add(new MapElement());    
   }
 
   addPosition() {
-    VariblePanelManager.add(new PositionElement());    
+    this.add(new PositionElement());    
   }
 
   addColor() {
-    VariblePanelManager.add(new ColorElement());    
+    this.add(new ColorElement());    
   }
 
   addActor() {
-    VariblePanelManager.add(new ActorElement());    
+    this.add(new ActorElement());    
   }
 
   add(variable) {
@@ -103,5 +105,11 @@ export default class
 
   remove(variable) {
     this.content.removeChild(variable.element);
+  }
+
+  removeVariable() {
+    if(VariblePanelManager.selected) {
+      this.content.removeChild(VariblePanelManager.selected.element);
+    }
   }
 }

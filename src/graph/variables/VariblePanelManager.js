@@ -31,12 +31,12 @@ class VariableManager
 
   async select(variable) {
     if(this.selected && this.selected != variable) {
-      await this.selected.shrink();
+      await this.selected.deselect();
     }
     
     this._selected = variable;
     if(!this.selected.expanded) {
-      this.selected.expand();
+      this.selected.select();
     }
   }
 

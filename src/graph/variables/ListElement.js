@@ -21,7 +21,7 @@ export default class extends VariableElement
     // only show up when selected
     this.addButton = document.createElement('div');
     this.addButton.appendChild(svgElement(AddIcon, {width:12, height:12}))
-    this.container.appendChild(this.addButton);
+    this.content.appendChild(this.addButton);
     this.addButton.className = 'add-entry-icon';
     this.addButton.style.visibility = 'hidden';
 
@@ -85,16 +85,16 @@ export default class extends VariableElement
     return this.entries[index];
   }
 
-  expand() {
+  select() {
     // if(this.data.length > 0) {
-      super.expand();
+      super.select();
       this.listElement.style.display = 'block';
       this.addButton.style.visibility = 'visible';
     // }
   }
 
-  shrink() {
-    super.shrink();
+  deselect() {
+    super.deselect();
     this.listElement.style.display = 'none';
     this.addButton.style.visibility = 'hidden';
   }

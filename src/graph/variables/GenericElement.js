@@ -17,6 +17,6 @@ export default class extends VariableElement
     this.name.placeholder = 'name...'
 
     this.input = new ValueField('test');
-    this.container.appendChild(this.input.element);
+    this.content.appendChild(this.input.element);
   }
 }

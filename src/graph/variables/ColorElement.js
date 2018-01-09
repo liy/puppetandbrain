@@ -17,6 +17,6 @@ export default class extends VariableElement
     this.icon.appendChild(svg);
 
     this.colorButton = new ColorButton();
-    this.container.appendChild(this.colorButton.element);
+    this.content.appendChild(this.colorButton.element);
   }
 }

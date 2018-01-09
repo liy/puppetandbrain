@@ -1,12 +1,14 @@
 .variable-element {
   background-color: #393D5E;
   margin-top: 10px;
-  border-radius: 16px;
+  border-radius: 19px;
 
   margin-left: 10px;
   margin-right: 10px;
 
-  .variable-element-container {
+  border: 3px solid rgba(0, 0, 0, 0);
+
+  .variable-element-content {
     height: 32px;
     line-height: 32px;
 
@@ -33,3 +35,6 @@
   }
 }
 
+.variable-element-selected {
+  border: 3px solid #fcee21;
+}

@@ -9,49 +9,50 @@ export default class
     
     this.element = document.createElement('div');
     this.element.className = 'variable-element';
-
-    // contains the swap background
-    this.container = document.createElement('div');
-    this.element.appendChild(this.container);
-    this.container.className = 'variable-element-container';
+    
+    this.content = document.createElement('div');
+    this.element.appendChild(this.content);
+    this.content.className = 'variable-element-content';
 
     this.icon = document.createElement('div');
-    this.container.appendChild(this.icon);
+    this.content.appendChild(this.icon);
     this.icon.className = 'variable-icon';
 
     this.name = new NameField();
-    this.container.appendChild(this.name.element);
+    this.content.appendChild(this.name.element);
 
     this.onSelect = this.onSelect.bind(this);
     this.element.addEventListener('mousedown', this.onSelect);
 
-    this._expanded = false;
+    this._selected = false;
   }
 
   onSelect(e) {
     VariblePanelManager.select(this);
   }
 
-  expand() {
-    this._expanded = true;
-    console.log('expand', this.name.value);
+  select() {
+    this._selected = true;
+    this.element.classList.add('variable-element-selected') 
+    console.log('select', this.name.value);
   }
 
-  shrink() {
-    this._expanded = false;
-    console.log('shrink', this.name.value);
+  deselect() {
+    this._selected = false;
+    this.element.classList.remove('variable-element-selected') 
+    console.log('deselect', this.name.value);
   }
 
   toggle() {
-    if(this._expanded) {
-      this.shrink();
+    if(this._selected) {
+      this.deselect();
     }
     else {
-      this.expand();
+      this.select();
     }
   }
 
-  get expanded() {
-    return this._expanded;
+  get selected() {
+    return this._selected;
   }
 }

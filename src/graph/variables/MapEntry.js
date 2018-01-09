@@ -26,7 +26,7 @@ export default class extends EventEmitter
     this.element.appendChild(this.keyField.element);
 
     this.valueField = new InputField();
-    this.valueField.element.classList.add('value-field');
+    this.valueField.element.classList.add('entry-value-field');
     this.valueField.placeholder = 'value';
     this.valueField.value = value;
     this.element.appendChild(this.valueField.element);
