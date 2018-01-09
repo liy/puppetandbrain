@@ -18,6 +18,7 @@ export default class Variable extends EventEmitter
     // if the type is an actor, the data will be an id
     this.data = pod.data;
     this.initialData = pod.data;
+    this.type = pod.type;
   }
 
   get inUse() {

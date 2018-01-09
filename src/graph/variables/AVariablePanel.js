@@ -4,6 +4,9 @@ import ListVar from './ListVar';
 import MapVar from './MapVar';
 import PositionVar from './PositionVar';
 import ColorVar from './ColorVar';
+import ActorVar from './ActorVar';
+
+import VariblePanelManager from './VariblePanelManager';
 
 export default class
 {
@@ -34,6 +37,7 @@ export default class
     this.add(new MapVar());
     this.add(new PositionVar());
     this.add(new ColorVar());
+    this.add(new ActorVar());
   }
 
   add(variable) {

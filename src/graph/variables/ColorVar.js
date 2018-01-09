@@ -9,7 +9,7 @@ export default class extends VariableBase
   constructor() {
     super();
 
-    this.name.placeholder = 'position...'
+    this.name.placeholder = 'color...'
 
     let svg = svgElement(PipetteIcon,{width:16, height:16});
     this.icon.appendChild(svg);

@@ -1,32 +1,35 @@
-.variable-container {
+.variable {
   background-color: #393D5E;
-  height: 32px;
-  line-height: 32px;
   margin-top: 10px;
   border-radius: 16px;
 
   margin-left: 10px;
   margin-right: 10px;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  .variable-container {
+    height: 32px;
+    line-height: 32px;
 
-  .variable-icon {
-    flex-grow: 0;
-
-    min-width: 18px;
-    width: 18px;
-    height: 18px;
-
-    margin-left: 10px;
-    margin-top: 7px;
-
-    // background-color: aqua;
-
-    // centre the svg
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+  
+    .variable-icon {
+      flex-grow: 0;
+  
+      min-width: 32px;
+      width: 32px;
+      height: 32px;
+  
+      margin-left: 3px;
+  
+      // background-color: aqua;
+  
+      // centre the svg
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
+

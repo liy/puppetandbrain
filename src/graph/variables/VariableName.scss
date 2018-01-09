@@ -8,11 +8,14 @@
   margin-top: 4px;
   margin-left: 8px;
 
-  padding-right: 10px;
-
   input {
     text-align: left;
     color: white;
     font-size: 18px;
   }
+}
+
+// padding if the variable name input will be touching the right edge of the variable item
+.variable-name:last-child {
+  padding-right: 10px;
 }

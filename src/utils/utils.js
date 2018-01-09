@@ -20,3 +20,9 @@ export function svgElement(iconData, options={}) {
 
   return new DOMParser().parseFromString(html, "image/svg+xml").rootElement;
 }
+
+export function nextFrame() {
+  return new Promise(resolve => {
+    setTimeout(resolve, 0);
+  });
+}

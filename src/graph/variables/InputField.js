@@ -13,4 +13,16 @@ export default class InputField
   set placeholder(p) {
     this.input.setAttribute('placeholder', p);
   }
+
+  set value(v) {
+    this.input.value = v;
+  }
+
+  get value() {
+    return this.input.value;
+  }
+
+  focus() {
+    this.input.focus();
+  }
 }
