@@ -35,11 +35,21 @@ class VariableManager
     }
     
     this._selected = variable;
-    this.selected.toggle();
+    if(!this.selected.expanded) {
+      this.selected.expand();
+    }
   }
 
   get selected() {
     return this._selected;
+  }
+
+  add(variable) {
+    
+  }
+
+  remove() {
+    this.panel
   }
 }
 

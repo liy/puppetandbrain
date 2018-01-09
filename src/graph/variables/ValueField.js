@@ -1,4 +1,4 @@
-import './VariableValue.scss'
+import './ValueField.scss'
 import InputField from './InputField';
 import {svgElement} from '../../utils/utils';
 import CrossIcon from '../../assets/cross.svg';
@@ -10,7 +10,7 @@ export default class extends InputField
 
     this.placeholder = 'value...'
 
-    this.element.classList.add('variable-value');
+    this.element.classList.add('value-field');
 
     this.icon = svgElement(CrossIcon, {width:10, height:10});
     this.element.appendChild(this.icon);

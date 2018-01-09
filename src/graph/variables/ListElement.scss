@@ -5,10 +5,12 @@
     padding-top: 5px;
     padding-bottom: 10px;
     padding-left: 12px;
+    padding-right: 12px;
+    
     // background-color: rgba(255, 228, 196, 0.288);
   }
 
-  .add-variable-icon {
+  .add-entry-icon {
     flex-grow: 0;
     
     min-width: 32px;
@@ -30,5 +32,12 @@
   // do not show list if it is empty, as its padding will mess up layout
   ol:empty {
     display: none;
+  }
+  ol:empty:before {
+    font-weight: 300;
+    content: attr(placeholder);
+    display: block; /* For Firefox */
+    color: rgb(139, 139, 139);
+    text-align: center;
   }
 }

@@ -1,12 +1,22 @@
 import './AVariablePanel.scss';
-import GenericVar from './GenericVar';
-import ListVar from './ListVar';
-import MapVar from './MapVar';
-import PositionVar from './PositionVar';
-import ColorVar from './ColorVar';
-import ActorVar from './ActorVar';
+
+import DotIcon from '../../assets/dot.svg';
+import ListIcon from '../../assets/list-icon.svg';
+import MapIcon from '../../assets/dictionary-icon.svg';
+import PositionIcon from '../../assets/position-icon.svg';
+import PipetteIcon from '../../assets/pipette.svg';
+import BinIcon from '../../assets/bin.svg';
+import CreateVariableButton from './CreateVariableButton';
+
+import GenericElement from './GenericElement';
+import ListElement from './ListElement';
+import MapElement from './MapElement';
+import PositionElement from './PositionElement';
+import ColorElement from './ColorElement';
+import ActorElement from './ActorElement';
 
 import VariblePanelManager from './VariblePanelManager';
+import { svgElement } from '../../utils/utils';
 
 export default class
 {
@@ -31,16 +41,67 @@ export default class
     this.pullBtn.id = 'pull-button';
     this.element.appendChild(this.pullBtn);
 
-    this.add(new GenericVar());
-    this.add(new GenericVar());
-    this.add(new ListVar());
-    this.add(new MapVar());
-    this.add(new PositionVar());
-    this.add(new ColorVar());
-    this.add(new ActorVar());
+    // variable buttons
+    let genericButton = new CreateVariableButton(svgElement(DotIcon,{width:10, height:10}));
+    let listButton = new CreateVariableButton(svgElement(ListIcon,{width:17, height:14}));
+    let mapButton = new CreateVariableButton(svgElement(MapIcon,{width:15, height:15}));
+    let positionButton = new CreateVariableButton(svgElement(PositionIcon,{width:10, height:16}));
+    let pipetteButton = new CreateVariableButton(svgElement(PipetteIcon,{width:16, height:16}));
+    let actorButton = new CreateVariableButton(null, '🐱');
+    let binButton = new CreateVariableButton(svgElement(BinIcon,{width:18, height:18}));
+
+    this.control.appendChild(genericButton.element);
+    this.control.appendChild(listButton.element);
+    this.control.appendChild(mapButton.element);
+    this.control.appendChild(positionButton.element);
+    this.control.appendChild(pipetteButton.element);
+    this.control.appendChild(actorButton.element);
+    this.control.appendChild(binButton.element);
+
+    this.addGeneric = this.addGeneric.bind(this);
+    this.addList = this.addList.bind(this);
+    this.addMap = this.addMap.bind(this);
+    this.addPosition = this.addPosition.bind(this);
+    this.addColor = this.addColor.bind(this);
+    this.addActor = this.addActor.bind(this);
+
+    genericButton.element.addEventListener('mousedown', this.addGeneric);
+    listButton.element.addEventListener('mousedown', this.addList);
+    mapButton.element.addEventListener('mousedown', this.addMap);
+    positionButton.element.addEventListener('mousedown', this.addPosition);
+    pipetteButton.element.addEventListener('mousedown', this.addColor);
+    actorButton.element.addEventListener('mousedown', this.addActor);
+  }
+
+  addGeneric() {
+    VariblePanelManager.add(new GenericElement());    
+  }
+
+  addList() {
+    VariblePanelManager.add(new ListElement());    
+  }
+
+  addMap() {
+    VariblePanelManager.add(new MapElement());    
+  }
+
+  addPosition() {
+    VariblePanelManager.add(new PositionElement());    
+  }
+
+  addColor() {
+    VariblePanelManager.add(new ColorElement());    
+  }
+
+  addActor() {
+    VariblePanelManager.add(new ActorElement());    
   }
 
   add(variable) {
     this.content.appendChild(variable.element);
+  }
+
+  remove(variable) {
+    this.content.removeChild(variable.element);
   }
 }

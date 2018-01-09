@@ -1,4 +1,4 @@
-.variable-name {
+.name-field {
   flex-grow: 1;
 
   height: 24px;
@@ -6,7 +6,7 @@
   background: none;
 
   margin-top: 4px;
-  margin-left: 8px;
+  margin-left: 3px;
 
   input {
     text-align: left;
@@ -16,6 +16,6 @@
 }
 
 // padding if the variable name input will be touching the right edge of the variable item
-.variable-name:last-child {
+.name-field:last-child {
   padding-right: 10px;
 }

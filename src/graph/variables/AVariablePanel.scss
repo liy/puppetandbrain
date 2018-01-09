@@ -16,6 +16,11 @@
   align-items: flex-start;
 }
 
+#variable-panel-content {
+  margin-top: 30px;
+  overflow-y: scroll;
+}
+
 #pull-button {
   position: absolute;
   background-color: #242747;
@@ -28,10 +33,11 @@
 }
 
 #variable-panel-title {
+  position: absolute;
   color: rgb(255, 255, 255);
   width: 100%;
   line-height: 30px;
-  margin-top: 5px;
+  top: 5px;
   text-align: center;
 }
 

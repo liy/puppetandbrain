@@ -1,0 +1,22 @@
+.variable {
+  .key-field  {
+    text-align: left;
+    width: 100px;
+    margin-right: 5px;
+    input {
+      color: #d3d3d3;
+      font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+
+      // background-color: aquamarine;
+      height: 24px;
+
+      overflow-x: hidden;
+    }
+
+    ::placeholder {
+      color: rgb(139, 139, 139);
+      font-weight: 300;
+    }
+  }
+}

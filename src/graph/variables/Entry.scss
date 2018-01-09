@@ -1,0 +1,64 @@
+.variable {
+  li:first-child {
+    margin-top: 0;
+  }
+
+  li {
+    height: 24px;
+    line-height: 24px;
+    margin-top: 5px;
+
+    display: flex;
+    flex-direction: row;
+    color: #999999;
+
+    .index-span {
+      font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+
+      // background-color: aquamarine;
+      width: 24px;
+      height: 24px;
+
+      user-select: none;
+      pointer-events: none;
+
+      overflow-x: hidden;
+      margin-right: 5px;
+    }
+
+    .value-field {
+      // background-color: bisque;
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #d3d3d3;
+      }
+
+      ::placeholder {
+        color: rgb(139, 139, 139);
+        font-weight: 300;
+      }
+    }
+
+    .remove-entry-icon {
+      flex-grow: 0;
+  
+      min-width: 24px;
+      width: 24px;
+      height: 24px;
+  
+      margin-right: -3px;
+      margin-left: 10px;
+  
+      // background-color: aqua;
+  
+      // centre the svg
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+    }
+  }
+}

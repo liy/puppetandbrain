@@ -1,23 +1,25 @@
-import './VariableBase.scss'
-import VariableName from './VariableName';
+import './VariableElement.scss'
+import NameField from './NameField';
 import VariblePanelManager from './VariblePanelManager';
 
 export default class 
 {
-  constructor() {
+  constructor(data) {
+    this.data = data;
+    
     this.element = document.createElement('div');
-    this.element.className = 'variable';
+    this.element.className = 'variable-element';
 
     // contains the swap background
     this.container = document.createElement('div');
     this.element.appendChild(this.container);
-    this.container.className = 'variable-container';
+    this.container.className = 'variable-element-container';
 
     this.icon = document.createElement('div');
     this.container.appendChild(this.icon);
     this.icon.className = 'variable-icon';
 
-    this.name = new VariableName();
+    this.name = new NameField();
     this.container.appendChild(this.name.element);
 
     this.onSelect = this.onSelect.bind(this);
@@ -47,5 +49,9 @@ export default class
     else {
       this.expand();
     }
+  }
+
+  get expanded() {
+    return this._expanded;
   }
 }
