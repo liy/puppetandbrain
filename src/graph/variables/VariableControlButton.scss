@@ -1,4 +1,4 @@
-.create-variable-button {
+.variable-control-button {
   width: 32px;
   height: 32px;
 
@@ -17,7 +17,7 @@
   cursor: pointer;
 }
 
-.create-variable-button-container:last-child {
+.variable-control-button-container:last-child {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;

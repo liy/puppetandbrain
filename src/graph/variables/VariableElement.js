@@ -1,11 +1,12 @@
 import './VariableElement.scss'
 import NameField from './NameField';
-import VariblePanelManager from './VariblePanelManager';
+import PanelController from './PanelController';
 
 export default class 
 {
   constructor(data) {
     this.data = data;
+    PanelController.elements.set(this.data.id, this);
     
     this.element = document.createElement('div');
     this.element.className = 'variable-element';
@@ -28,7 +29,7 @@ export default class
   }
 
   onSelect(e) {
-    VariblePanelManager.select(this);
+    PanelController.select(this);
   }
 
   select() {

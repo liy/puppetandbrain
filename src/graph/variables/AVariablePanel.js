@@ -1,22 +1,14 @@
 import './AVariablePanel.scss';
 
-import DotIcon from '../../assets/dot.svg';
-import ListIcon from '../../assets/list-icon.svg';
-import MapIcon from '../../assets/dictionary-icon.svg';
-import PositionIcon from '../../assets/position-icon.svg';
-import PipetteIcon from '../../assets/pipette.svg';
-import BinIcon from '../../assets/bin.svg';
-import CreateVariableButton from './CreateVariableButton';
+import PanelController from './PanelController';
 
-import GenericElement from './GenericElement';
-import ListElement from './ListElement';
-import MapElement from './MapElement';
-import PositionElement from './PositionElement';
-import ColorElement from './ColorElement';
-import ActorElement from './ActorElement';
-
-import VariblePanelManager from './VariblePanelManager';
-import { svgElement } from '../../utils/utils';
+import CreateGenericButton from './CreateGenericButton';
+import CreateListButton from './CreateListButton';
+import CreateMapButton from './CreateMapButton';
+import CreatePositionButton from './CreatePositionButton';
+import CreateColorButton from './CreateColorButton';
+import CreateActorButton from './CreateActorButton';
+import RemoveVariableButton from './RemoveVariableButton';
 
 export default class
 {
@@ -42,13 +34,13 @@ export default class
     this.element.appendChild(this.pullBtn);
 
     // variable buttons
-    let genericButton = new CreateVariableButton(svgElement(DotIcon,{width:10, height:10}));
-    let listButton = new CreateVariableButton(svgElement(ListIcon,{width:17, height:14}));
-    let mapButton = new CreateVariableButton(svgElement(MapIcon,{width:15, height:15}));
-    let positionButton = new CreateVariableButton(svgElement(PositionIcon,{width:10, height:16}));
-    let pipetteButton = new CreateVariableButton(svgElement(PipetteIcon,{width:16, height:16}));
-    let actorButton = new CreateVariableButton(null, '🐶');
-    let binButton = new CreateVariableButton(svgElement(BinIcon,{width:18, height:18}));
+    let genericButton = new CreateGenericButton();
+    let listButton = new CreateListButton();
+    let mapButton = new CreateMapButton();
+    let positionButton = new CreatePositionButton();
+    let pipetteButton = new CreateColorButton();
+    let actorButton = new CreateActorButton();
+    let binButton = new RemoveVariableButton();
 
     this.control.appendChild(genericButton.element);
     this.control.appendChild(listButton.element);
@@ -57,59 +49,13 @@ export default class
     this.control.appendChild(pipetteButton.element);
     this.control.appendChild(actorButton.element);
     this.control.appendChild(binButton.element);
-
-    this.addGeneric = this.addGeneric.bind(this);
-    this.addList = this.addList.bind(this);
-    this.addMap = this.addMap.bind(this);
-    this.addPosition = this.addPosition.bind(this);
-    this.addColor = this.addColor.bind(this);
-    this.addActor = this.addActor.bind(this);
-    this.removeVariable = this.removeVariable.bind(this);
-
-    genericButton.element.addEventListener('mousedown', this.addGeneric);
-    listButton.element.addEventListener('mousedown', this.addList);
-    mapButton.element.addEventListener('mousedown', this.addMap);
-    positionButton.element.addEventListener('mousedown', this.addPosition);
-    pipetteButton.element.addEventListener('mousedown', this.addColor);
-    actorButton.element.addEventListener('mousedown', this.addActor);
-    binButton.element.addEventListener('mousedown', this.removeVariable);
   }
 
-  addGeneric() {
-    this.add(new GenericElement());    
+  append(element) {
+    this.content.appendChild(element);
   }
 
-  addList() {
-    this.add(new ListElement());    
-  }
-
-  addMap() {
-    this.add(new MapElement());    
-  }
-
-  addPosition() {
-    this.add(new PositionElement());    
-  }
-
-  addColor() {
-    this.add(new ColorElement());    
-  }
-
-  addActor() {
-    this.add(new ActorElement());    
-  }
-
-  add(variable) {
-    this.content.appendChild(variable.element);
-  }
-
-  remove(variable) {
-    this.content.removeChild(variable.element);
-  }
-
-  removeVariable() {
-    if(VariblePanelManager.selected) {
-      this.content.removeChild(VariblePanelManager.selected.element);
-    }
+  remove(element) {
+    this.content.removeChild(element);
   }
 }
