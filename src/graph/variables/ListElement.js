@@ -8,14 +8,13 @@ import DataType from '../../data/DataType';
 
 export default class extends VariableElement
 {
-  constructor(data=[]) {
-    super(data);
+  constructor(variable) {
+    super(variable);
     this.type = DataType.ARRAY;
 
     // store the list entry element
     this.entries = [];
 
-    this.name.placeholder = 'list name...'
     this.icon.appendChild(svgElement(ListIcon, {width:17, height:14}));
 
     // only show up when selected
@@ -38,8 +37,12 @@ export default class extends VariableElement
     });
 
     // initialize the list
-    for(let value of this.data) {
-      this.add(value);
+    for(let i=0; i<this.variable.data.length; ++i) {
+      let value = this.variable.data[i];
+      let entry = new ListEntry(this.variable.data, i, value);
+      this.listElement.appendChild(entry.element);
+      this.entries.push(entry);
+      entry.on('entry.remove', this.remove)
     }
   }
 
@@ -50,11 +53,11 @@ export default class extends VariableElement
     }
   }
 
-  add(value='') {
-    let entry = new ListEntry(this.data, this.data.length, value);
+  add(value=null) {
+    let entry = new ListEntry(this.variable.data, this.variable.data.length, value);
     this.listElement.appendChild(entry.element);
 
-    this.data.push(value)
+    this.variable.data.push(value)
     this.entries.push(entry);
 
     // wait until next frame to focus
@@ -66,7 +69,7 @@ export default class extends VariableElement
   }
 
   remove(entry) {
-    this.data.splice(entry.index, 1);
+    this.variable.data.splice(entry.index, 1);
     this.entries.splice(entry.index, 1);
     this.listElement.removeChild(entry.element);
 
@@ -81,11 +84,9 @@ export default class extends VariableElement
   }
 
   select() {
-    // if(this.data.length > 0) {
-      super.select();
-      this.listElement.style.display = 'block';
-      this.addButton.style.visibility = 'visible';
-    // }
+    super.select();
+    this.listElement.style.display = 'block';
+    this.addButton.style.visibility = 'visible';
   }
 
   deselect() {

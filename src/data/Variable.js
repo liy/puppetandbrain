@@ -26,16 +26,18 @@ export default class Variable extends EventEmitter
   }
 
   /**
-   * Set the data and initial data
+   * Set the data and initial data. Should be only used in
+   * Variable creation and loading
    * @param {*} data 
    */
   set(data) {
+    // authoring time data
     this.data = data;
-    this.initialData = data;
+    this.runtime = JSON.parse(JSON.stringify(this.data));
   }
 
   reset() {
-    this.data = this.initialData;
+    this.runtime = JSON.parse(JSON.stringify(this.data));
   }
 
   get data() {
@@ -73,7 +75,7 @@ export default class Variable extends EventEmitter
       name: this.name,
       type: this.type,
       // Only record the initial data, not the runtime data...
-      data: this.initialData,
+      data: this.data,
       brain: this.brain.id,
     }
   }

@@ -2,8 +2,8 @@ import VariableControlButton from './VariableControlButton';
 import MapIcon from '../../assets/dictionary-icon.svg';
 import { svgElement } from '../../utils/utils';
 import DataType from '../../data/DataType';
-import DataMap from '../../data/DataMap';
 import Variable from '../../data/Variable';
+import ArrayMap from '../../utils/ArrayMap';
 
 export default class extends VariableControlButton
 {
@@ -17,7 +17,7 @@ export default class extends VariableControlButton
       brain: BrainGraph.brain.id,
       type: DataType.MAP,
       name: null,
-      data: new DataMap()
+      data: new ArrayMap()
     })
     BrainGraph.brain.variables.add(v);
   }

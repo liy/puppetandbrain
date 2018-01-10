@@ -24,7 +24,7 @@ export default class Setter extends Task
     // it will be updated on next load. It will not broke the program, but looks strange
     this.outputs.assignProperty(this.variableID, {
       get: () => {
-        return this.variable.data;
+        return this.variable.runtime;
       }
     });
   }
@@ -43,7 +43,7 @@ export default class Setter extends Task
   run() {
     super.run();
 
-    this.variable.data = this.inputs.value(this.variableID);
+    this.variable.runtime = this.inputs.value(this.variableID);
 
     this.execution.run();
   }
