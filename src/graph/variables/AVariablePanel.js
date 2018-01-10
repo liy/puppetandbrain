@@ -51,6 +51,12 @@ export default class
     this.control.appendChild(binButton.element);
   }
 
+  clear() {
+    while(this.content.lastChild) {
+      this.remove(this.content.lastChild);
+    }
+  }
+
   append(element) {
     this.content.appendChild(element);
   }

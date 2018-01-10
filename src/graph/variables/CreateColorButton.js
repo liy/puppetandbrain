@@ -15,6 +15,7 @@ export default class extends VariableControlButton
     v.init({
       brain: BrainGraph.brain.id,
       type: DataType.COLOR,
+      name: null,
       data: 0x000000
     })
     BrainGraph.brain.variables.add(v);

@@ -7,16 +7,19 @@ import DataType from '../../data/DataType';
 
 export default class extends VariableElement
 {
-  constructor() {
-    super();
-
-    this.type = DataType.GENERIC;
-
+  constructor(variable) {
+    super(variable);
     this.icon.appendChild(svgElement(DotIcon,{width:10, height:10}));
 
-    this.name.placeholder = 'name...'
+    this.valueField = new ValueField(variable.data);
+    this.content.appendChild(this.valueField.element);
 
-    this.input = new ValueField('test');
-    this.content.appendChild(this.input.element);
+    this.onValueChange = this.onValueChange.bind(this);
+    this.valueField.input.addEventListener('change', this.onValueChange);
+  }
+
+  onValueChange(e) {
+    // set both actual data and initial data
+    this.variable.set(e.target.value);
   }
 }

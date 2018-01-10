@@ -120,15 +120,10 @@ require('./commands/Commander');
 require('./graph/BrainGraph')
 require('./Stage')
 
-import SpineActor from './objects/SpineActor';
-import SpriteActor from './objects/SpriteActor';
-
 import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
-
-import Block from './graph/blocks/Block';
 
 // let block = new Block();
 // block.template({
@@ -268,11 +263,3 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
-
-window.colorCalculator = function(v1, v2, a1, a2) {
-  return v1 + (v2 - v1) * a2;
-}
-
-import AVariablePanel from './graph/variables/AVariablePanel';
-const vp = new AVariablePanel();
-document.body.appendChild(vp.element);

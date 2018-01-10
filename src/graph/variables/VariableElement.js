@@ -4,9 +4,10 @@ import PanelController from './PanelController';
 
 export default class 
 {
-  constructor(data) {
-    this.data = data;
-    PanelController.elements.set(this.data.id, this);
+  constructor(variable) {
+    this.variable = variable;
+    this.type = this.variable.type;
+    // PanelController.elements.set(this.variable.id, this);
     
     this.element = document.createElement('div');
     this.element.className = 'variable-element';
@@ -19,13 +20,20 @@ export default class
     this.content.appendChild(this.icon);
     this.icon.className = 'variable-icon';
 
-    this.name = new NameField();
-    this.content.appendChild(this.name.element);
+    this.nameField = new NameField(this.variable.name);
+    this.content.appendChild(this.nameField.element);
 
     this.onSelect = this.onSelect.bind(this);
     this.element.addEventListener('mousedown', this.onSelect);
 
     this._selected = false;
+    
+    this.onNameChange = this.onNameChange.bind(this);
+    this.nameField.input.addEventListener('change', this.onNameChange);
+  }
+
+  onNameChange(e) {
+    this.variable.name = e.target.value;
   }
 
   onSelect(e) {
@@ -35,13 +43,11 @@ export default class
   select() {
     this._selected = true;
     this.element.classList.add('variable-element-selected') 
-    console.log('select', this.name.value);
   }
 
   deselect() {
     this._selected = false;
-    this.element.classList.remove('variable-element-selected') 
-    console.log('deselect', this.name.value);
+    this.element.classList.remove('variable-element-selected')
   }
 
   toggle() {

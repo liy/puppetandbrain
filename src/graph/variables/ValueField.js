@@ -5,10 +5,8 @@ import CrossIcon from '../../assets/cross.svg';
 
 export default class extends InputField
 {
-  constructor(v, p) {
+  constructor(v, p='value...') {
     super(v, p);
-
-    this.placeholder = 'value...'
 
     this.element.classList.add('value-field');
 

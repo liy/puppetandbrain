@@ -46,7 +46,12 @@ export default class Variable extends EventEmitter
    * Update the data only. NOT the initial data
    */
   set data(v) {
+    let old = this._data;
     this._data = v;
+    this.emit('variable.data.changed', {
+      old,
+      data: v
+    })
   }
   
   get name() {

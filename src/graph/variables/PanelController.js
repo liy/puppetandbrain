@@ -1,19 +1,41 @@
 import DataType from "../../data/DataType";
 import ArrayMap from "../../utils/ArrayMap";
+import AVariablePanel from './AVariablePanel';
+
+import GenericElement from './GenericElement';
+import ListElement from './ListElement';
+import MapElement from './MapElement';
+import PositionElement from './PositionElement';
+import ColorElement from './ColorElement';
+import ActorElement from './ActorElement';
 
 class PanelController
 {
   constructor() {
-
+    this.add = this.add.bind(this);
   }
 
-  init(panel) {
-    this.panel = panel;
-    
+  init() {
+    this.panel = new AVariablePanel();
+  }
+  
+  open(brain) {
     this._selected = null;
 
+    this.brain = brain;
+
     // populated by element constructor
-    this.elements = new ArrayMap();
+    // this.elements = new ArrayMap();
+
+    for(let variable of this.brain.variables) {
+      this.add(variable);
+    }
+    
+    this.brain.variables.on('variable.added', this.add)
+  }
+
+  close() {
+    this.brain.variables.off('variable.added', this.add)
   }
 
   async select(variable) {
@@ -31,29 +53,29 @@ class PanelController
     return this._selected;
   }
 
-  remove(variable) {
-    this.panel.remove(this.elements.get(variable.id));
+  clear() {
+    this.panel.clear();
   }
 
   add(variable) {
     switch(variable.type) {
       case DataType.ACTOR:
-        this.panel.append(new ActorElement(variable)); 
+        this.panel.append(new ActorElement(variable).element); 
         break;
       case DataType.ARRAY:
-        this.panel.append(new ListElement(variable)); 
+        this.panel.append(new ListElement(variable).element); 
         break;
       case DataType.COLOR:
-        this.panel.append(new ColorElement(variable)); 
+        this.panel.append(new ColorElement(variable).element); 
         break;
       case DataType.MAP:
-        this.panel.append(new MapElement(variable)); 
+        this.panel.append(new MapElement(variable).element); 
         break;
       case DataType.VEC2:
-        this.panel.append(new PositionElement(variable)); 
+        this.panel.append(new PositionElement(variable).element); 
         break;
       default:
-        this.panel.append(new GenericElement(variable)); 
+        this.panel.append(new GenericElement(variable).element); 
         break;
     }
   }

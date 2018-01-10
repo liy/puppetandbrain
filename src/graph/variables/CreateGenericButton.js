@@ -14,7 +14,9 @@ export default class extends VariableControlButton
     let v = new Variable();
     v.init({
       brain: BrainGraph.brain.id,
-      type: DataType.GENERIC
+      type: DataType.GENERIC,
+      name: null,
+      data: null,
     })
     BrainGraph.brain.variables.add(v);
   }

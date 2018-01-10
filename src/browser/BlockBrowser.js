@@ -50,8 +50,7 @@ export default class BlockBrowser extends Browser
 
        // Populate all the variable getter and setter for this actor
        let brain = BrainGraph.brain;
-       for(let name of brain.variables.names) {
-        let variable = brain.variables.get(name);
+       for(let variable of brain.variables) {
         collection.push({
           name: `Get ${brain.owner.name} ${name}`,
           category: 'Property',

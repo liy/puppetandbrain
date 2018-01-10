@@ -2,12 +2,15 @@ import './InputField.scss';
 
 export default class InputField
 {
-  constructor() {
+  constructor(v, p='...') {
     this.element = document.createElement('div');
     this.element.className = 'input-field';
 
     this.input = document.createElement('input');
     this.element.appendChild(this.input);
+
+    this.value = v;
+    this.placeholder = p;
   }
 
   set placeholder(p) {
