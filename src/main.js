@@ -264,6 +264,3 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
-
-var map = new ArrayMap();
-console.log(JSON.stringify(map));

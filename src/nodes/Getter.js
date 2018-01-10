@@ -20,7 +20,6 @@ export default class Getter extends DataNode
     // Note the output key is the variable id!!!
     this.outputs.addOutput(this.variableID).assignProperty(this.variableID, {
       get: () => {
-        console.dir(this.variable.runtime);
         return this.variable.runtime;
       }
     });

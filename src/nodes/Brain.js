@@ -13,7 +13,7 @@ export default class Brain
 
     this.variables = new VariableList(this);
 
-    Stage.on('game.stop', this.stop, this);
+    Stage.on('game.prestart', this.prestart, this);
   }
 
   destroy() {
@@ -22,13 +22,11 @@ export default class Brain
     for(let node of nodes) {
       node.destroy();
     }
-    Stage.off('game.stop', this.stop, this);
+    Stage.off('game.prestart', this.prestart, this);
   }
 
-
-  stop() {
-    // reset back to initial data
-    this.variables.reset()
+  prestart() {
+    this.variables.updateRuntime();
   }
 
   createVariable(name, value) {

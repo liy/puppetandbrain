@@ -26,17 +26,16 @@ export default class Variable extends EventEmitter
   }
 
   /**
-   * Set the data and initial data. Should be only used in
-   * Variable creation and loading
+   * Set the authoring time data. Should be only used in
+   * Variable creation, panel editing and activity loading
    * @param {*} data 
    */
   set(data) {
     // authoring time data
     this.data = data;
-    this.runtime = JSON.parse(JSON.stringify(this.data));
   }
 
-  reset() {
+  updateRuntime() {
     this.runtime = JSON.parse(JSON.stringify(this.data));
   }
 

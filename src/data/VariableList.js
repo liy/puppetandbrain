@@ -24,10 +24,10 @@ export default class VariableList extends EventEmitter
     return removed;
   }
 
-  // reset all variable back to initial state
-  reset() {
-    for(let id of this.map.keys) {
-      this.values[id].reset();
+  
+  updateRuntime() {
+    for(let variable of this.map) {
+      variable.updateRuntime();
     }
   }
 
