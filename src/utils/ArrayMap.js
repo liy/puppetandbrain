@@ -6,6 +6,23 @@ export default class ArrayMap
     this.keys = [];
   }
 
+  [Symbol.iterator]() {
+    let index = 0;
+
+    return {
+      next: () => {
+        if(index < this.keys.length) {
+          return {
+            value: this.values[this.keys[index++]],
+            done: false
+          }
+        }
+
+        return {done: true}
+      }
+    }
+  }
+
   set(key, value) {
     if(this.keys.indexOf(key) == -1) {
       this.keys.push(key);
@@ -14,9 +31,11 @@ export default class ArrayMap
   }
 
   remove(key) {
+    let removed = this.values[key];
     delete this.values[key];
     let index = this.keys.indexOf(key);
     if(index != -1) this.keys.splice(index, 1);
+    return removed;
   }
 
   get(key) {

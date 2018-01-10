@@ -4,6 +4,7 @@ import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import DataNode from './nodes/DataNode';
 import Variable from './data/Variable';
+import DataType from './data/DataType';
 
 const scope = {
   ...nodes,
@@ -59,7 +60,7 @@ export default class ActivityLoader
     // create all the variables first
     for(let id of pod.variables) {
       let variablePod = pod.store[id];
-      let variable = new Variable(id)
+      let variable = (variablePod.type == DataType.ACTOR) ? new ActorVariable(id) : new Variable(id);
       variable.init(variablePod);
       // put the variable into its brain
       let brain = LookUp.get(variablePod.brain);

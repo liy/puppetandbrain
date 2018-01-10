@@ -12,57 +12,41 @@ export default class VariableList extends EventEmitter
     this.map = new ArrayMap();
   }
 
+  add(variable) {
+    this.map.set(variable.id, variable);
+    this.emit('variable.added', variable)
+    return variable;
+  }
+
+  remove(id) {
+    let removed = this.map.remove(id);
+    this.emit('variable.removed', removed)
+    return removed;
+  }
+
+  // reset all variable back to initial state
+  reset() {
+    for(let id of this.map.keys) {
+      this.values[id].reset();
+    }
+  }
+
   get values() {
     return this.map.values;
   }
 
   get names() {
-    return this.map.keys;
-  }
-
-  update(pod) {
-    // FIXME: Use pod to reset the variable list
-  }
-
-  // reset all variable back to initial state
-  reset() {
-    for(let name of this.names) {
-      this.values[name].reset();
-    }
-  }
-
-  add(variable) {
-    this.map.set(variable.name, variable);
-    return variable;
-  }
-
-  rename(name, newName) {
-    if(newName === '') return false;
-    if(this.contains(newName)) return false;
-
-    let variable = this.get(name);
-    this.remove(name);
-    variable.name = newName;
-    this.set(newName, variable);
-    return true;
-  }
-
-  create() {
-    do {
-      var name = 'variable-' + (this.length+1);
-    }
-    while(this.contains(name))
-    let variable = new Variable();
-    variable.init({
-      name: name,
-      brain: this.brain,
-      data: null,
+    return this.map.keys.map(id => {
+      return this.map.get(id).name;
     })
-    return this.add(variable);
+  }
+
+  [Symbol.iterator]() {
+    return this.map[Symbol.iterator]();
   }
 
   pod() {
-    return this.keys.map(name => {
+    return this.map.keys.map(name => {
       return {
         name,
         // TODO: not going to inlcude the actual variable data in the list
