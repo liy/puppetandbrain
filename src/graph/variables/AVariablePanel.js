@@ -1,7 +1,5 @@
 import './AVariablePanel.scss';
 
-import PanelController from './PanelController';
-
 import CreateGenericButton from './CreateGenericButton';
 import CreateListButton from './CreateListButton';
 import CreateMapButton from './CreateMapButton';

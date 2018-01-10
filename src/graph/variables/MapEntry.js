@@ -53,20 +53,24 @@ export default class extends EventEmitter
   }
 
   onValueChange(e) {
-    this.map.set(this.key, e.target.value);
+    this.map[this.key] = e.target.value;
     this.value = e.target.value;
   }
 
   onKeyChange(e) {
     let newKey = e.target.value;
-    if(!this.map.contains(newKey)) {
-      let value = this.map.get(this.key);
-      this.map.remove(this.key);
-      this.map.set(newKey, value);
+    // ensure key does not exist in the map
+    if(!(newKey in this.map)) {
+      let value = this.map[this.key];
+      delete this.map[this.key];
+      this.map[newKey] = value;
       this.key = newKey;
+
+      this.keyField.element.classList.remove('invalid-key-field');
     }
     else {
       // TODO: show error
+      this.keyField.element.classList.add('invalid-key-field');
     }
   }
 }

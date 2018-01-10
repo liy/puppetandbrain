@@ -11,15 +11,13 @@ let tokenGenerator = new TimeToken(4, 1, [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e
 
 export default class extends VariableElement
 {
-  constructor(map=new ArrayMap()) {
-    super(map);
+  constructor(variable) {
+    super(variable);
 
     // store the list entry element
     this.entries = new ArrayMap()
 
     this.icon.appendChild(svgElement(MapIcon,{width:16, height:16}));
-
-    this.name.placeholder = 'dictionary name...'
 
     // only show up when selected
     this.addButton = document.createElement('div');
@@ -40,17 +38,27 @@ export default class extends VariableElement
       this.add();
     });
 
-    // initialize the list
-    for(let key of this.data.keys) {
-      this.add(key, this.data.get(key));
+    // // initialize the list
+    // for(let key of this.data.keys) {
+    //   this.add(key, this.data.get(key));
+    // }
+
+    // initialize the map
+    let keys = Object.keys(this.variable.data);
+    for(let key of keys) {
+      let value = this.variable.data[key];
+      let entry = new MapEntry(this.variable.data, key, value);
+      this.listElement.appendChild(entry.element);
+      this.entries.set(key, entry);
+      entry.on('entry.remove', this.remove)
     }
   }
 
-  add(key=`${tokenGenerator.gen()}`, value='') {
-    let entry = new MapEntry(this.data, key, value);
+  add(key=`${tokenGenerator.gen()}`, value=null) {
+    let entry = new MapEntry(this.variable.data, key, value);
     this.listElement.appendChild(entry.element);
 
-    this.data.set(key, value)
+    this.variable.data[key] = value;
     this.entries.set(key, entry);
 
     // wait until next frame to focus
@@ -62,7 +70,7 @@ export default class extends VariableElement
   }
 
   remove(entry) {
-    this.data.remove(entry.key);
+    delete this.variable.data[entry.key];
     this.entries.remove(entry.key);
     this.listElement.removeChild(entry.element);
   }

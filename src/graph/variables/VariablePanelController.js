@@ -9,7 +9,7 @@ import PositionElement from './PositionElement';
 import ColorElement from './ColorElement';
 import ActorElement from './ActorElement';
 
-class PanelController
+class VariablePanelController
 {
   constructor() {
     this.add = this.add.bind(this);
@@ -36,6 +36,7 @@ class PanelController
 
   close() {
     this.brain.variables.off('variable.added', this.add)
+    this.panel.clear();
   }
 
   async select(variable) {
@@ -51,10 +52,6 @@ class PanelController
 
   get selected() {
     return this._selected;
-  }
-
-  clear() {
-    this.panel.clear();
   }
 
   add(variable) {
@@ -81,4 +78,4 @@ class PanelController
   }
 }
 
-export default new PanelController();
+export default new VariablePanelController();

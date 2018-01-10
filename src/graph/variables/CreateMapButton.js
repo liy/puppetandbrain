@@ -3,7 +3,6 @@ import MapIcon from '../../assets/dictionary-icon.svg';
 import { svgElement } from '../../utils/utils';
 import DataType from '../../data/DataType';
 import Variable from '../../data/Variable';
-import ArrayMap from '../../utils/ArrayMap';
 
 export default class extends VariableControlButton
 {
@@ -17,7 +16,7 @@ export default class extends VariableControlButton
       brain: BrainGraph.brain.id,
       type: DataType.MAP,
       name: null,
-      data: new ArrayMap()
+      data: {}
     })
     BrainGraph.brain.variables.add(v);
   }

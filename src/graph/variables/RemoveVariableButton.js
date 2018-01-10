@@ -1,7 +1,7 @@
 import VariableControlButton from './VariableControlButton';
 import BinIcon from '../../assets/bin.svg';
 import { svgElement } from '../../utils/utils';
-import PanelController from './PanelController'
+import VariablePanelController from './VariablePanelController'
 
 export default class extends VariableControlButton
 {
@@ -10,6 +10,6 @@ export default class extends VariableControlButton
   }
 
   pointerDown(e) {
-    BrainGraph.brain.variables.remove(PanelController.selected.data);
+    BrainGraph.brain.variables.remove(VariablePanelController.selected.data);
   }
 }

@@ -6,7 +6,7 @@ import ArrayMap from '../utils/ArrayMap';
 import BlockMenu from '../browser/BlockMenu';
 import BlockBrowser from '../browser/BlockBrowser';
 import AVariablePanel from './variables/AVariablePanel';
-import PanelController from './variables/PanelController';
+import VariablePanelController from './variables/VariablePanelController';
 
 class BrainGraph
 {
@@ -15,8 +15,8 @@ class BrainGraph
     this.blockContainer = document.getElementById('block-container');
     this.svg = document.getElementById('svg');
 
-    PanelController.init();
-    this.container.appendChild(PanelController.panel.element);
+    VariablePanelController.init();
+    this.container.appendChild(VariablePanelController.panel.element);
 
     this.dbClicks = 0;
 
@@ -106,7 +106,7 @@ class BrainGraph
     this.blocks = new ArrayMap();
 
     // extract all variables of the brain
-    PanelController.open(brain);
+    VariablePanelController.open(brain);
 
     document.getElementById('control').classList.add('blur')
 
@@ -157,7 +157,7 @@ class BrainGraph
         block.destroy();
       }
   
-      this.variablePanel.clear();
+      VariablePanelController.close();
       
       this.container.style = "visibility:hidden"
   

@@ -124,6 +124,7 @@ import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
+import ArrayMap from './utils/ArrayMap';
 
 // let block = new Block();
 // block.template({
@@ -263,3 +264,6 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
+
+var map = new ArrayMap();
+console.log(JSON.stringify(map));

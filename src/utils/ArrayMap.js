@@ -1,9 +1,9 @@
 export default class ArrayMap
 {
-  constructor() {
+  constructor(keys=[], values={}) {
     // this.values = Object.create(null);
-    this.values = {};
-    this.keys = [];
+    this.keys = keys;
+    this.values = values;
   }
 
   [Symbol.iterator]() {
