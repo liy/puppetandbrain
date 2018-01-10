@@ -1,12 +1,23 @@
+import EventEmitter from "../utils/EventEmitter";
 import ArrayMap from "../utils/ArrayMap";
 import Variable from './Variable';
 
-export default class VariableList extends ArrayMap
+export default class VariableList extends EventEmitter
 {
   constructor(brain) {
     super()
+
     this.brain = brain;
-    this.names = this.keys;
+    
+    this.map = new ArrayMap();
+  }
+
+  get values() {
+    return this.map.values;
+  }
+
+  get names() {
+    return this.map.keys;
   }
 
   update(pod) {
@@ -21,7 +32,7 @@ export default class VariableList extends ArrayMap
   }
 
   add(variable) {
-    this.set(variable.name, variable);
+    this.map.set(variable.name, variable);
     return variable;
   }
 
