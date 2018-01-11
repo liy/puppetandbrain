@@ -1,13 +1,16 @@
-import Task from "../Task";
+import {Task, Template as TaskTemplate} from '../Task'
 
-export default class EventListener extends Task
+export const Template = {
+  ...TaskTemplate,
+  // no execution in
+  in: [],
+  elementClass: ['listener']
+}
+
+export class Listener extends Task
 {
   constructor(id) {
     super(id);
-  }
-  
-  get hasIn() {
-    return false;
   }
 
   get elementClassName() {

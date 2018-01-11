@@ -1,5 +1,21 @@
-import Listener from "./Listener";
+import {Listener, Template as ListenerTemplate} from "./Listener";
 import Switch from '../../switch/Switch';
+
+NodeTemplate.SwitchAccess = {
+  ...ListenerTemplate,
+  name: 'Switch Access',
+  input: [{
+    name: 'debounce',
+    type: 'number',
+  }, {
+    name: 'pre-acceptance',
+    type: 'number',
+  }],
+  output: [{
+    name: 'which',
+    type: 'string'
+  }]
+}
 
 export default class SwitchAccess extends Listener
 {
@@ -9,14 +25,14 @@ export default class SwitchAccess extends Listener
     this.switchdown = this.switchdown.bind(this);
     this.switchup = this.switchup.bind(this);
 
-    this.inputs.addInput('debounce');
-    this.inputs.addInput('pre-acceptance');
+    // this.inputs.addInput('debounce');
+    // this.inputs.addInput('pre-acceptance');
 
-    this.execution.remove('default')
-    this.execution.set('switch down');
-    this.execution.set('switch up');
+    // this.execution.remove('default')
+    // this.execution.set('switch down');
+    // this.execution.set('switch up');
 
-    this.outputs.addOutput('which');
+    // this.outputs.addOutput('which');
 
     Stage.on('game.prestart', this.prestart, this)
     Stage.on('game.stop', this.stop, this)

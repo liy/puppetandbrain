@@ -1,15 +1,19 @@
-import Task from "./Task";
+import {Task, Template as TaskTemplate} from './Task'
+
+NodeTemplate.Branch = {
+  ...TaskTemplate,
+  name: 'Branch',
+  out: ['true', 'false'],
+  input: [{
+    name: 'condition',
+    type: 'boolean',
+  }]
+}
 
 export default class Branch extends Task
 {
   constructor(id) {
     super(id);
-
-    this.execution.remove('default');
-    this.execution.set('true')
-    this.execution.set('false')
-
-    this.inputs.addInput('condition');
   }
 
   run() {

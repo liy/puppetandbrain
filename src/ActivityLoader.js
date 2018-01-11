@@ -2,7 +2,6 @@ import JsonPromise from './utils/JsonPromise';
 import * as nodes from './nodes'
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
-import DataNode from './nodes/DataNode';
 import Variable from './data/Variable';
 import DataType from './data/DataType';
 
@@ -89,7 +88,8 @@ export default class ActivityLoader
     // connect the tasks
     for(let id of pod.nodes) {
       let node = LookUp.get(id);
-      if (node instanceof DataNode) continue;
+      // does not have execution, a data node
+      if (!node.execution) continue;
       let data = pod.store[id];
       for(let execData of data.execution) {
         if(execData.id) node.connectNext(LookUp.get(execData.id), execData.executionName)

@@ -1,4 +1,10 @@
-import Task from './Task'
+import {Task, Template as TaskTemplate} from './Task'
+
+NodeTemplate.Action = {
+  ...TaskTemplate,
+  name: 'Action',
+  in: [],
+}
 
 /**
  * User defined action

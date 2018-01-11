@@ -1,15 +1,19 @@
-import Task from './Task'
+import {Task, Template as TaskTemplate} from './Task'
+
+export const Template = NodeTemplate.Animation = {
+  ...TaskTemplate,
+  name: 'Animation',
+  input: [{
+    name: 'name',
+    type: 'string'
+  }],
+  output: [],
+}
 
 export default class Animation extends Task
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addInput('name');
-  }
-
-  init(pod) {
-    super.init(pod)
   }
 
   run() {

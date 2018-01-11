@@ -1,4 +1,9 @@
-import Listener from "./Listener";
+import {Listener, Template as ListenerTemplate} from "./Listener";
+
+NodeTemplate.GameStart = {
+  ...ListenerTemplate,
+  name: 'Game Start'
+}
 
 export default class GameStart extends Listener
 {

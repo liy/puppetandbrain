@@ -1,16 +1,19 @@
 import Listener from "./Listener";
 
+Template.Keyboard = {
+  ...Template.Listener,
+  name: 'Keyboard',
+  out: ['down', 'up'],
+  input: [{
+    name: 'code',
+    type: 'string'
+  }]
+}
+
 export default class Keyboard extends Listener
 {
   constructor(id) {
     super(id);
-
-    this.execution.remove('default')
-    this.execution.set('key down');
-    this.execution.set('key up');
-
-    // it actually holds the keycode
-    this.inputs.addInput('code');
 
     this.keydown = this.keydown.bind(this)
     this.keyup = this.keyup.bind(this)
@@ -40,14 +43,14 @@ export default class Keyboard extends Listener
   keydown(e) {
     if(e.code == this.inputs.value('code')) {
       super.run();
-      this.execution.run('key down');
+      this.execution.run('down');
     }
   }
 
   keyup(e) {
     if(e.code == this.inputs.value('code')) {
       super.run();
-      this.execution.run('key up');
+      this.execution.run('up');
     }
   }
 }

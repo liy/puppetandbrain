@@ -1,4 +1,11 @@
-import Listener from "./Listener";
+import {Listener, Template as ListenerTemplate} from "./Listener";
+
+NodeTemplate.Ticker = {
+  ...ListenerTemplate,
+  name: 'Game Tick',
+  out: ['tick']
+}
+
 
 export default class Ticker extends Listener
 {
@@ -29,6 +36,6 @@ export default class Ticker extends Listener
   }
 
   tick(e) {
-    this.execution.run()
+    this.execution.run('tick')
   }
 }

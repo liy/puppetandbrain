@@ -2,10 +2,19 @@ import Execution from './Execution'
 import Node from './Node';
 import ArrayMap from '../utils/ArrayMap';
 
-export default class Task extends Node
+export const Template = {
+  in: ['default'],
+  out: ['default'],
+  input: [],
+  output: [],
+}
+
+export class Task extends Node
 {
   constructor(id) {
     super(id);
+
+    this.in = [];
     this.execution = new Execution(this);
     this.callers = new ArrayMap();
   }
@@ -16,8 +25,21 @@ export default class Task extends Node
     this.setInitialState();
   }
 
+  mold() {
+    super.mold();
+
+    if(Template[this.className]) {
+      // in
+      this.in = Template[this.className].in.concat();
+      // out
+      for(let name of Template[this.className].out) {
+        this.execution.set(name)
+      }
+    }
+  }
+
   get hasIn() {
-    return true;
+    return this.in.length != 0;
   }
 
   setInitialState() {

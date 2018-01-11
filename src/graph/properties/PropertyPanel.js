@@ -20,7 +20,7 @@ export default class
 
     this.title = document.createElement('span');
     this.title.id = 'variable-panel-title';
-    this.title.textContent = 'Variables';
+    this.title.textContent = 'Property';
     this.element.appendChild(this.title)
 
     this.content = document.createElement('div');

@@ -1,6 +1,6 @@
-import DataNode from "./DataNode";
+import Node from "./Node";
 
-export default class GetPosition extends DataNode
+export default class GetPosition extends Node
 {
   constructor(id) {
     super(id)

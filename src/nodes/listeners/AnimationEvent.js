@@ -1,5 +1,6 @@
 import Listener from "./Listener";
 
+
 export default class AnimationEvent extends Listener
 {
   constructor(id) {

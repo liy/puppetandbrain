@@ -1,7 +1,6 @@
 import Command from './Command';
 import SpineActor from '../objects/SpineActor';
 import Action from '../nodes/Action';
-import DataNode from '../nodes/DataNode';
 
 export default class DeleteActor extends Command
 {

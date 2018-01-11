@@ -1,7 +1,7 @@
 import Output from "../data/Output";
-import DataNode from "./DataNode";
+import Node from "./Node";
 
-export default class Break extends DataNode
+export default class Break extends Node
 {
   constructor(id) {
     super(id)

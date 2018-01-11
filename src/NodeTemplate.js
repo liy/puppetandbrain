@@ -1,0 +1,1 @@
+window.NodeTemplate = Object.create(null);
