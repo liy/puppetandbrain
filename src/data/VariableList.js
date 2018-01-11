@@ -29,7 +29,7 @@ export default class VariableList extends EventEmitter
 
   remove(id) {
     let removed = this.map.remove(id);
-    this.emit('variable.removed', removed)
+    this.emit('variable.removed', removed);
     return removed;
   }
   

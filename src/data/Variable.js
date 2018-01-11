@@ -13,6 +13,12 @@ export default class Variable extends EventEmitter
     this.setters = [];
   }
 
+  destroy() {
+    LookUp.removeVariable(this.id);
+    // clear listener
+    this.clear();
+  }
+
   init(pod) {
     this.brain = LookUp.auto(pod.brain);
 

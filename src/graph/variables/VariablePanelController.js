@@ -85,6 +85,13 @@ class VariablePanelController
   remove(variable) {
     this.panel.remove(this.elements.get(variable.id).element);
   }
+
+  refresh() {
+    this.panel.clear();
+    for(let variable of this.brain.variables) {
+      this.add(variable);
+    }
+  }
 }
 
 export default new VariablePanelController();

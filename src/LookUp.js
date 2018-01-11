@@ -51,15 +51,17 @@ window.LookUp = {
     document.getElementById('activity-id').textContent = activityID;
   },
 
-  save: async function() {
+  save: async function(delay=true) {
     if(!this.user.uid) {
       console.error('User id cannot be null', this.user.uid); 
       return;
     }
 
-    // Wait for 3 second then start saving
-    delaySave.cancel();
-    await delaySave.wait(6000);
+    if(delay) {
+      // Wait for 3 second then start saving
+      delaySave.cancel();
+      await delaySave.wait(6000);
+    }
 
     let pod = this.pod();
     // Set the new activity's owner to be the user

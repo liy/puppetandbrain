@@ -1,5 +1,8 @@
 import Command from './Command';
 import Variable from '../data/Variable';
+import ActorVariable from '../data/ActorVariable';
+import DataType from '../data/DataType';
+import VariablePanelController from '../graph/variables/VariablePanelController';
 
 export default class DeleteVariable extends Command
 {
@@ -7,6 +10,7 @@ export default class DeleteVariable extends Command
     super();
     this.variableID = variableID;
     this.brainID = brainID;
+    this.variablePod = this.variable.pod();
   }
 
   get variable() {
@@ -17,10 +21,10 @@ export default class DeleteVariable extends Command
     this.getterPods = [];
     this.setterPods = [];
 
+
     // remove the variable
     let brain = LookUp.get(this.brainID);
-    this.variablePod = this.variable.pod();
-    brain.variables.remove(this.variable.id);
+    let removedVariable = brain.variables.remove(this.variablePod.id);
 
     // Get all and delete the getters and setters related to this variable
     // Note that I put the actual deletion in separate loop.
@@ -39,12 +43,17 @@ export default class DeleteVariable extends Command
       BrainGraph.deleteBlock(BrainGraph.getBlock(setter.id))
     }
 
+    VariablePanelController.refresh();
+
+    // destroy the variable, remove it from the look up
+    removedVariable.destroy();
+
     return this;
   }
 
   undo() {
     // put back the variable first
-    let variable = (this.variablePod.type == DataType.ACTOR) ? new ActorVariable(this.id) : new Variable(this.id);
+    let variable = (this.variablePod.type == DataType.ACTOR) ? new ActorVariable(this.variablePod.id) : new Variable(this.variablePod.id);
     variable.init(this.variablePod);
     LookUp.get(this.brainID).variables.add(variable);
 
@@ -129,6 +138,7 @@ export default class DeleteVariable extends Command
 
   redo() {
     this.process();
+    VariablePanelController.refresh();
     BrainGraph.refresh();
   }
 }
