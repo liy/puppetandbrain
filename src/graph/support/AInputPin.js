@@ -17,11 +17,11 @@ export default class AInputPin extends ADataPin
 
     this.setGadget(new TextField(node, this.name));
 
-    this.element.addEventListener('mousedown', this.mouseDown)
+    this.label.addEventListener('mousedown', this.mouseDown)
     
     this.pointer = this.node.inputs.get(this.name);
     if(!this.pointer.isConnected) {
-      this.element.classList.add('clickable');
+      this.label.classList.add('clickable');
     }
     this.pointer.on('input.connected', this.connectionChanged);
     this.pointer.on('input.disconnected', this.connectionChanged);
@@ -29,7 +29,7 @@ export default class AInputPin extends ADataPin
 
   destroyed() {
     this.gadget.destroy();
-    this.element.removeEventListener('mousedown', this.mouseDown)
+    this.label.removeEventListener('mousedown', this.mouseDown)
     this.pointer.off('input.connected', this.connectionChanged);
     this.pointer.off('input.disconnected', this.connectionChanged);
   }
