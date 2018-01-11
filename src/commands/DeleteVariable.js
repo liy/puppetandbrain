@@ -2,7 +2,7 @@ import Command from './Command';
 import Variable from '../data/Variable';
 import ActorVariable from '../data/ActorVariable';
 import DataType from '../data/DataType';
-import VariablePanelController from '../graph/variables/VariablePanelController';
+import PropertyController from '../graph/properties/PropertyController';
 
 export default class DeleteVariable extends Command
 {
@@ -55,7 +55,6 @@ export default class DeleteVariable extends Command
     // put back the variable first
     let variable = (this.variablePod.type == DataType.ACTOR) ? new ActorVariable(this.variablePod.id) : new Variable(this.variablePod.id);
     variable.init(this.variablePod);
-    console.log(this.variableIndex)
     LookUp.get(this.brainID).variables.insert(variable, this.variableIndex);
 
     // re-create the nodes and blocks first. Getting ready for execution 
@@ -137,7 +136,7 @@ export default class DeleteVariable extends Command
     BrainGraph.refresh();
 
     // as variable list has order, easiest way is refresh the whole panel.
-    VariablePanelController.refresh();
+    PropertyController.refresh();
   }
 
   redo() {

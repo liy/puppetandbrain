@@ -1,6 +1,6 @@
 import './VariableElement.scss'
 import NameField from './NameField';
-import VariablePanelController from './VariablePanelController';
+import PropertyController from './PropertyController';
 
 export default class 
 {
@@ -36,7 +36,7 @@ export default class
   }
 
   onSelect(e) {
-    VariablePanelController.select(this);
+    PropertyController.select(this);
   }
 
   select() {

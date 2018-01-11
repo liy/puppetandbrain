@@ -33,8 +33,8 @@ function create(entry, id) {
 document.addEventListener('keydown', e => {
   if(e.keyCode == 83 && e.ctrlKey) {
     e.preventDefault();
-
-    LookUp.save();
+    // save now!
+    LookUp.save(false);
   }
 })
 

@@ -1,7 +1,7 @@
 import VariableControlButton from './VariableControlButton';
 import BinIcon from '../../assets/bin.svg';
 import { svgElement } from '../../utils/utils';
-import VariablePanelController from './VariablePanelController'
+import PropertyController from './PropertyController'
 
 export default class extends VariableControlButton
 {
@@ -10,6 +10,6 @@ export default class extends VariableControlButton
   }
 
   pointerDown(e) {
-    History.push(Commander.create('DeleteVariable', VariablePanelController.selected.variable.id, BrainGraph.brain.id).processAndSave())
+    History.push(Commander.create('DeleteVariable', PropertyController.selected.variable.id, BrainGraph.brain.id).processAndSave())
   }
 }

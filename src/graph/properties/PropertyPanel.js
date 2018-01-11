@@ -1,4 +1,4 @@
-import './AVariablePanel.scss';
+import './PropertyPanel.scss';
 
 import CreateGenericButton from './CreateGenericButton';
 import CreateListButton from './CreateListButton';
@@ -39,8 +39,7 @@ export default class
     // toggle panel
     this.visible = false;
     this.pullBtn.addEventListener('mousedown', e => {
-      this.element.style.right = this.visible ? '-280px' : 0;
-      this.visible = !this.visible;
+      this.toggle();
     })
 
     // variable buttons
@@ -59,6 +58,11 @@ export default class
     this.control.appendChild(pipetteButton.element);
     this.control.appendChild(actorButton.element);
     this.control.appendChild(binButton.element);
+  }
+
+  toggle() {
+    this.element.style.right = this.visible ? '-280px' : 0;
+    this.visible = !this.visible;
   }
 
   clear() {

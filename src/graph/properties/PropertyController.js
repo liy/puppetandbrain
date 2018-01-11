@@ -1,6 +1,6 @@
 import DataType from "../../data/DataType";
 import ArrayMap from "../../utils/ArrayMap";
-import AVariablePanel from './AVariablePanel';
+import PropertyPanel from './PropertyPanel';
 
 import GenericElement from './GenericElement';
 import ListElement from './ListElement';
@@ -9,7 +9,7 @@ import PositionElement from './PositionElement';
 import ColorElement from './ColorElement';
 import ActorElement from './ActorElement';
 
-class VariablePanelController
+class PropertyController
 {
   constructor() {
     this.add = this.add.bind(this);
@@ -17,7 +17,7 @@ class VariablePanelController
   }
 
   init() {
-    this.panel = new AVariablePanel();
+    this.panel = new PropertyPanel();
   }
   
   open(brain) {
@@ -94,4 +94,4 @@ class VariablePanelController
   }
 }
 
-export default new VariablePanelController();
+export default new PropertyController();
