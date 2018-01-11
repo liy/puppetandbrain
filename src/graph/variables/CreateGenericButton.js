@@ -2,7 +2,6 @@ import VariableControlButton from './VariableControlButton';
 import DotIcon from '../../assets/dot.svg';
 import { svgElement } from '../../utils/utils';
 import DataType from '../../data/DataType';
-import Variable from '../../data/Variable';
 
 export default class extends VariableControlButton
 {
@@ -11,13 +10,11 @@ export default class extends VariableControlButton
   }
 
   pointerDown(e) {
-    let v = new Variable();
-    v.init({
+    History.push(Commander.create('CreateVariable', {
       brain: BrainGraph.brain.id,
       type: DataType.GENERIC,
       name: null,
       data: null,
-    })
-    BrainGraph.brain.variables.add(v);
+    }).processAndSave());
   }
 }

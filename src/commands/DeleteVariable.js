@@ -3,7 +3,7 @@ import Variable from '../data/Variable';
 
 export default class DeleteVariable extends Command
 {
-  constructor(brainID, variableID) {
+  constructor(variableID, brainID) {
     super();
     this.variableID = variableID;
     this.brainID = brainID;
@@ -20,9 +20,7 @@ export default class DeleteVariable extends Command
     // remove the variable
     let brain = LookUp.get(this.brainID);
     this.variablePod = this.variable.pod();
-    brain.variables.remove(this.variable.name);
-    // Variable panel needs to be updated to have the result
-    BrainGraph.variablePanel.refresh();
+    brain.variables.remove(this.variable.id);
 
     // Get all and delete the getters and setters related to this variable
     // Note that I put the actual deletion in separate loop.
@@ -46,11 +44,9 @@ export default class DeleteVariable extends Command
 
   undo() {
     // put back the variable first
-    let variable = new Variable(this.variablePod.id);
+    let variable = (this.variablePod.type == DataType.ACTOR) ? new ActorVariable(this.id) : new Variable(this.id);
     variable.init(this.variablePod);
     LookUp.get(this.brainID).variables.add(variable);
-    // Variable panel needs to be updated to have the undo result
-    BrainGraph.variablePanel.refresh();
 
     // re-create the nodes and blocks first. Getting ready for execution 
     // and variable linking!

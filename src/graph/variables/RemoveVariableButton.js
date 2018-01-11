@@ -10,6 +10,6 @@ export default class extends VariableControlButton
   }
 
   pointerDown(e) {
-    BrainGraph.brain.variables.remove(VariablePanelController.selected.data);
+    BrainGraph.brain.variables.remove(VariablePanelController.selected.variable.id);
   }
 }

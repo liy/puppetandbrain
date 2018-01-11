@@ -1,6 +1,8 @@
 import EventEmitter from "../utils/EventEmitter";
 import ArrayMap from "../utils/ArrayMap";
 import Variable from './Variable';
+import ActorVariable from './ActorVariable';
+import DataType from "./DataType";
 
 export default class VariableList extends EventEmitter
 {
@@ -10,6 +12,13 @@ export default class VariableList extends EventEmitter
     this.brain = brain;
     
     this.map = new ArrayMap();
+  }
+
+  create(variablePod) {
+    let variable = (variablePod.type == DataType.ACTOR) ? new ActorVariable(variablePod.id) : new Variable(variablePod.id);
+    variable.init(variablePod);
+    this.add(variable);
+    return variable;
   }
 
   add(variable) {
@@ -23,7 +32,6 @@ export default class VariableList extends EventEmitter
     this.emit('variable.removed', removed)
     return removed;
   }
-
   
   updateRuntime() {
     for(let variable of this.map) {

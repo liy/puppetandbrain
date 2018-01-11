@@ -13,6 +13,7 @@ class VariablePanelController
 {
   constructor() {
     this.add = this.add.bind(this);
+    this.remove = this.remove.bind(this);
   }
 
   init() {
@@ -24,18 +25,19 @@ class VariablePanelController
 
     this.brain = brain;
 
-    // populated by element constructor
-    // this.elements = new ArrayMap();
+    this.elements = new ArrayMap();
 
     for(let variable of this.brain.variables) {
       this.add(variable);
     }
     
     this.brain.variables.on('variable.added', this.add)
+    this.brain.variables.on('variable.removed', this.remove)
   }
 
   close() {
     this.brain.variables.off('variable.added', this.add)
+    this.brain.variables.off('variable.removed', this.remove)
     this.panel.clear();
   }
 
@@ -55,26 +57,33 @@ class VariablePanelController
   }
 
   add(variable) {
+    let variableElement = null;
     switch(variable.type) {
       case DataType.ACTOR:
-        this.panel.append(new ActorElement(variable).element); 
+        new ActorElement(variable); 
         break;
       case DataType.ARRAY:
-        this.panel.append(new ListElement(variable).element); 
+        variableElement = new ListElement(variable); 
         break;
       case DataType.COLOR:
-        this.panel.append(new ColorElement(variable).element); 
+        variableElement = new ColorElement(variable); 
         break;
       case DataType.MAP:
-        this.panel.append(new MapElement(variable).element); 
+        variableElement = new MapElement(variable); 
         break;
       case DataType.VEC2:
-        this.panel.append(new PositionElement(variable).element); 
+        variableElement = new PositionElement(variable); 
         break;
       default:
-        this.panel.append(new GenericElement(variable).element); 
+        variableElement = new GenericElement(variable); 
         break;
     }
+    this.panel.append(variableElement.element);
+    this.elements.set(variable.id, variableElement);
+  }
+
+  remove(variable) {
+    this.panel.remove(this.elements.get(variable.id).element);
   }
 }
 

@@ -1,7 +1,6 @@
 import VariableControlButton from './VariableControlButton';
 import PositionIcon from '../../assets/position-icon.svg';
 import { svgElement } from '../../utils/utils';
-import Variable from '../../data/Variable';
 import DataType from '../../data/DataType';
 
 export default class extends VariableControlButton
@@ -11,8 +10,7 @@ export default class extends VariableControlButton
   }
 
   pointerDown(e) {
-    let v = new Variable();
-    v.init({
+    History.push(Commander.create('CreateVariable', {
       brain: BrainGraph.brain.id,
       type: DataType.VEC2,
       name: null,
@@ -20,7 +18,6 @@ export default class extends VariableControlButton
         x: 0,
         y: 0.
       }
-    })
-    BrainGraph.brain.variables.add(v);
+    }).processAndSave());
   }
 }

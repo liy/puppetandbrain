@@ -24,17 +24,24 @@ export default class extends Gadget
   }
 
   onDown(e) {
+    this.color = Math.ceil(Math.random() * 0xFFFFFF);
+    this.emit('color.change', this.color);
   }
 
-  set color(hex) {
-    if(hex == 0xFFFFFF) {
-      this.hexField.style.color = '#000';
-    }
-    else {
+  set color(c) {
+    if(c == 0) {
       this.hexField.style.color = '#FFF';
     }
-    hex = `#${hex.toString(16)}`.toUpperCase();
+    else {
+      this.hexField.style.color = '#000';
+    }
+    let hex = `#${c.toString(16)}`.toUpperCase();
     this.hexField.textContent = hex;
     this.line.setAttribute('stroke', hex);
+    this._color = c;
+  }
+
+  get color() {
+    return this._color;
   }
 }

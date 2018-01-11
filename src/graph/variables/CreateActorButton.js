@@ -1,6 +1,4 @@
 import VariableControlButton from './VariableControlButton';
-
-import ActorVariable from '../../data/ActorVariable';
 import DataType from '../../data/DataType';
 
 export default class extends VariableControlButton
@@ -10,13 +8,11 @@ export default class extends VariableControlButton
   }
 
   pointerDown(e) {
-    let v = new ActorVariable();
-    v.init({
+    History.push(Commander.create('CreateVariable', {
       brain: BrainGraph.brain.id,
       type: DataType.ACTOR,
       name: null,
-      data: null,
-    })
-    BrainGraph.brain.variables.add(v);
+      data: 0,
+    }).processAndSave());
   }
 }

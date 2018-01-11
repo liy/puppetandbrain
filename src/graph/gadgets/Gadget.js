@@ -1,8 +1,9 @@
 import EventEmitter from '../../utils/EventEmitter'
 
-export default class Gadget
+export default class Gadget extends EventEmitter
 {
   constructor() {
+    super();
     this.element = document.createElement('div')
   }
 
@@ -12,7 +13,7 @@ export default class Gadget
   }
 
   destroy() {
-
+    this.clear();
   }
   
   get visible() {

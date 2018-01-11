@@ -5,11 +5,9 @@ import DataType from '../../data/DataType';
 
 export default class extends VariableElement
 {
-  constructor() {
-    super();
+  constructor(variable) {
+    super(variable);
     this.type = DataType.ACTOR;
-
-    this.name.placeholder = 'actor name...'
 
     // let svg = svgElement(ActorIcon,{width:16, height:16});
     // this.icon.appendChild(svg);

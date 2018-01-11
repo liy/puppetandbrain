@@ -2,27 +2,24 @@ import Command from './Command';
 
 export default class CreateVariable extends Command
 {
-  constructor(brainID) {
+  constructor(variablePod) {
     super();
-    this.brainID = brainID;
-    this.variableID = null;
+    this.variablePod = variablePod;
   }
 
   get variables() {
-    return LookUp.get(this.brainID).variables;
+    return LookUp.get(this.variablePod.brain).variables;
   }
 
   process() {
-    let variable = this.variables.create(this.variableID);
-    this.variableID = variable.id;
-    BrainGraph.variablePanel.appendVariableEntry(variable)
+    // if the pod has id, it will use the id, otherwise new id will be created
+    // so it is safe to call this in redo.
+    this.variablePod.id = this.variables.create(this.variablePod).id;
     return this;
   }
 
   undo() {
-    Commander.create('DeleteVariable', this.brainID, this.variableID).process();
-    // indicate it is removed... just in case
-    this.variable = null;
+    Commander.create('DeleteVariable', this.variablePod.id, this.variablePod.brain).process();
   }
 
   redo() {

@@ -7,16 +7,18 @@ import DataType from '../../data/DataType';
 
 export default class extends VariableElement
 {
-  constructor() {
-    super();
+  constructor(variable) {
+    super(variable);
     this.type = DataType.COLOR;
-
-    this.name.placeholder = 'color name...'
 
     let svg = svgElement(PipetteIcon,{width:16, height:16});
     this.icon.appendChild(svg);
 
     this.colorButton = new ColorButton();
     this.content.appendChild(this.colorButton.element);
+    this.colorButton.on('color.change', color => {
+      this.variable.data = color;
+      console.log(this.variable.data);
+    })
   }
 }
