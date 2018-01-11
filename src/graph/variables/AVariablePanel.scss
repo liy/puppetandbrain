@@ -3,7 +3,7 @@
 
   position: absolute;
   top: 0;
-  right: 0;
+  right: -280px;
   z-index: 2;
 
   width: 280px;
@@ -30,6 +30,15 @@
   height: 36px;
   left: -40px;
   top: 32px;
+
+  // centre the child svg
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  svg {
+    margin-left: 4px;
+  }
 }
 
 #variable-panel-title {

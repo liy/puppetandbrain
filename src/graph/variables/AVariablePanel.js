@@ -7,10 +7,14 @@ import CreatePositionButton from './CreatePositionButton';
 import CreateColorButton from './CreateColorButton';
 import CreateActorButton from './CreateActorButton';
 import RemoveVariableButton from './RemoveVariableButton';
+import { svgElement } from '../../utils/utils';
+
+import DetailIcon from '../../assets/detail.svg';
 
 export default class
 {
   constructor() {
+
     this.element = document.createElement('div');
     this.element.id = 'variable-panel';
 
@@ -30,6 +34,14 @@ export default class
     this.pullBtn = document.createElement('div');
     this.pullBtn.id = 'pull-button';
     this.element.appendChild(this.pullBtn);
+    // detail icon
+    this.pullBtn.appendChild(svgElement(DetailIcon, {width:16, height:16}));
+    // toggle panel
+    this.visible = false;
+    this.pullBtn.addEventListener('mousedown', e => {
+      this.element.style.right = this.visible ? '-280px' : 0;
+      this.visible = !this.visible;
+    })
 
     // variable buttons
     let genericButton = new CreateGenericButton();
