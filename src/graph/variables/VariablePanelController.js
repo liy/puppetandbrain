@@ -60,7 +60,7 @@ class VariablePanelController
     let variableElement = null;
     switch(variable.type) {
       case DataType.ACTOR:
-        new ActorElement(variable); 
+        variableElement = new ActorElement(variable); 
         break;
       case DataType.ARRAY:
         variableElement = new ListElement(variable); 
@@ -82,7 +82,7 @@ class VariablePanelController
     this.elements.set(variable.id, variableElement);
   }
 
-  remove(variable) {
+  remove({variable, index}) {
     this.panel.remove(this.elements.get(variable.id).element);
   }
 

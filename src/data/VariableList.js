@@ -27,8 +27,18 @@ export default class VariableList extends EventEmitter
     return variable;
   }
 
+  insert(variable, index) {
+    this.map.insert(variable.id, variable, index);
+    this.emit('variable.added', variable)
+    return variable;
+  }
+
   remove(id) {
-    let removed = this.map.remove(id);
+    const {
+      value: variable,
+      index,
+    } = this.map.remove(id);
+    const removed = {variable, index}
     this.emit('variable.removed', removed);
     return removed;
   }

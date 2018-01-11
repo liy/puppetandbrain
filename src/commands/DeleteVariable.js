@@ -11,6 +11,7 @@ export default class DeleteVariable extends Command
     this.variableID = variableID;
     this.brainID = brainID;
     this.variablePod = this.variable.pod();
+    this.variableIndex = 0;
   }
 
   get variable() {
@@ -24,7 +25,8 @@ export default class DeleteVariable extends Command
 
     // remove the variable
     let brain = LookUp.get(this.brainID);
-    let removedVariable = brain.variables.remove(this.variablePod.id);
+    let {variable, index} = brain.variables.remove(this.variablePod.id);
+    this.variableIndex = index;
 
     // Get all and delete the getters and setters related to this variable
     // Note that I put the actual deletion in separate loop.
@@ -43,10 +45,8 @@ export default class DeleteVariable extends Command
       BrainGraph.deleteBlock(BrainGraph.getBlock(setter.id))
     }
 
-    VariablePanelController.refresh();
-
     // destroy the variable, remove it from the look up
-    removedVariable.destroy();
+    variable.destroy();
 
     return this;
   }
@@ -55,7 +55,8 @@ export default class DeleteVariable extends Command
     // put back the variable first
     let variable = (this.variablePod.type == DataType.ACTOR) ? new ActorVariable(this.variablePod.id) : new Variable(this.variablePod.id);
     variable.init(this.variablePod);
-    LookUp.get(this.brainID).variables.add(variable);
+    console.log(this.variableIndex)
+    LookUp.get(this.brainID).variables.insert(variable, this.variableIndex);
 
     // re-create the nodes and blocks first. Getting ready for execution 
     // and variable linking!
@@ -134,11 +135,13 @@ export default class DeleteVariable extends Command
     }
     
     BrainGraph.refresh();
+
+    // as variable list has order, easiest way is refresh the whole panel.
+    VariablePanelController.refresh();
   }
 
   redo() {
     this.process();
-    VariablePanelController.refresh();
     BrainGraph.refresh();
   }
 }

@@ -30,12 +30,22 @@ export default class ArrayMap
     this.values[key] = value;
   }
 
+  insert(key, value, index) {
+    if(this.keys.indexOf(key) == -1) {
+      this.keys.splice(index, 0, key);
+    }
+    this.values[key] = value;
+  }
+
   remove(key) {
-    let removed = this.values[key];
+    let value = this.values[key];
     delete this.values[key];
     let index = this.keys.indexOf(key);
     if(index != -1) this.keys.splice(index, 1);
-    return removed;
+    return {
+      value,
+      index,
+    };
   }
 
   get(key) {
