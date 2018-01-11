@@ -105,6 +105,9 @@ export default class CreateDemoActor extends Command
       owner: actor,
       x: 383,
       y: 532,
+      variables: {
+        condition: true,
+      }
     })
 
     let flipLeft = new FlipLeft();
