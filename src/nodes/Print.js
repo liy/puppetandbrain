@@ -3,7 +3,6 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Print = {
   ...TaskTemplate,
-  name: 'Print',
   input: [{
     name: 'text',
     type: DataType.GENERIC,

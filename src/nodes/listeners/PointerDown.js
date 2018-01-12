@@ -1,4 +1,10 @@
-import {Listener} from "./Listener";
+import {Listener, Template as ParentTemplate} from "./Listener";
+
+NodeTemplate.PointerDown = {
+  ...ParentTemplate,
+  // I know it is not release and up, but click make sense to non-programmer
+  name: 'Click'
+}
 
 export default class PointerDown extends Listener
 {
@@ -13,12 +19,12 @@ export default class PointerDown extends Listener
     Stage.on('game.stop', this.stop)
   }
 
-  get nodeName() {
-    return 'Touch Start'
-  }
-
   destroy() {
     super.destroy();
+    
+    Stage.off('game.prestart', this.prestart)
+    Stage.off('game.stop', this.stop)
+
     this.owner.off('pointerdown', this.down)
   }
 

@@ -43,10 +43,6 @@ export default class Tween extends Task
     if(this.tween) this.tween.kill()
   }
 
-  get nodeName() {
-    return "Move";
-  }
-
   run() {
     super.run()
     let pos = this.inputs.value('position');

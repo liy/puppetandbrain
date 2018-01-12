@@ -2,10 +2,9 @@ import {Listener, Template as ListenerTemplate} from "./Listener";
 
 NodeTemplate.Ticker = {
   ...ListenerTemplate,
-  name: 'Game Tick',
+  name: 'Game Loop',
   out: ['tick']
 }
-
 
 export default class Ticker extends Listener
 {
@@ -21,10 +20,6 @@ export default class Ticker extends Listener
 
     Stage.off('game.start', this.start, this)
     Stage.off('game.stop', this.stop, this)
-  }
-
-  get nodeName() {
-    return 'Game Tick'
   }
 
   start() {

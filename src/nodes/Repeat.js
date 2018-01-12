@@ -3,7 +3,6 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Repeat = {
   ...TaskTemplate,
-  name: 'Repeat',
   out: ['completed', 'body'],
   input: [{
     name: 'count',

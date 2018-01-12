@@ -12,7 +12,8 @@ const OperatorTemplate = {
   output: [{
     name: 'value',
     type: DataType.GENERIC
-  }]
+  }],
+  elementClass: ['operator']
 }
 // FIXME: find a better way to handle type parsing!!
 export class Operator extends Node
@@ -29,10 +30,6 @@ export class Operator extends Node
         return this.value;
       }
     });
-  }
-
-  get elementClassName() {
-    return ['operator'];
   }
 }
 

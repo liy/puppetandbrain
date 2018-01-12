@@ -42,10 +42,10 @@ export default class Getter extends Node
   }
 
   get nodeName() {
-    return `Get Variable`;
+    return `Get ${this.owner.name} ${this.variableName}`;
   }
 
-  get elementClassName() {
+  get elementClass() {
     return ['property', 'getter'];
   }
 

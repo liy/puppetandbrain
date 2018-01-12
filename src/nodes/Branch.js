@@ -1,12 +1,12 @@
-import {Task, Template as TaskTemplate} from './Task'
+import {Task, Template as ParentTemplate} from './Task'
+import DataType from '../data/DataType';
 
 NodeTemplate.Branch = {
-  ...TaskTemplate,
-  name: 'Branch',
+  ...ParentTemplate,
   out: ['true', 'false'],
   input: [{
     name: 'condition',
-    type: 'boolean',
+    type: DataType.GENERIC,
   }]
 }
 

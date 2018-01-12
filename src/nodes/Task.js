@@ -3,10 +3,15 @@ import Node from './Node';
 import ArrayMap from '../utils/ArrayMap';
 
 export const Template = {
-  in: ['default'],
-  out: ['default'],
-  input: [],
-  output: [],
+  ins: [{
+    name: 'default'
+  }],
+  execution: [{
+    executionName: 'default'
+  }],
+  inputs: [],
+  outputs: [],
+  elementClass: [],
 }
 
 export class Task extends Node
@@ -14,7 +19,7 @@ export class Task extends Node
   constructor(id) {
     super(id);
 
-    this.in = [];
+    this.ins = [];
     this.execution = new Execution(this);
     this.callers = new ArrayMap();
   }
@@ -30,21 +35,21 @@ export class Task extends Node
 
     if(NodeTemplate[this.className]) {
       // in
-      if(NodeTemplate[this.className].in) {
-        this.in = NodeTemplate[this.className].in.concat();
+      if(NodeTemplate[this.className].ins) {
+        this.ins = NodeTemplate[this.className].in.concat();
       }
 
       // out
-      if(NodeTemplate[this.className].out) {
-        for(let name of NodeTemplate[this.className].out) {
-          this.execution.set(name)
+      if(NodeTemplate[this.className].execution) {
+        for(let execution of NodeTemplate[this.className].execution) {
+          this.execution.set(execution.executionName)
         }
       }
     }
   }
 
   get hasIn() {
-    return this.in.length != 0;
+    return this.ins.length != 0;
   }
 
   setInitialState() {

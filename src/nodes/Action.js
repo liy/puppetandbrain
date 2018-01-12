@@ -2,8 +2,8 @@ import {Task, Template as TaskTemplate} from './Task'
 
 NodeTemplate.Action = {
   ...TaskTemplate,
-  name: 'Action',
   in: [],
+  elementClass: ['action']
 }
 
 /**
@@ -76,14 +76,6 @@ export default class Action extends Task
 
   get nodeName() {
     return 'Action ' + this.actionName;
-  }
-
-  get elementClassName() {
-    return ['action'];
-  }
-
-  get hasIn() {
-    return false;
   }
 
   run() {

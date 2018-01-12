@@ -1,13 +1,13 @@
 import utils from '../utils/utils';
 import {Task, Template as TaskTemplate} from './Task';
 
-NodeTemplate.RotateAntiClockwise = {
+NodeTemplate.RotateClockwise = {
   ...TaskTemplate,
-  name: 'Rotate Anticlockwise',
+  name: 'Rotate Clockwise',
   out: ['default', 'completed']
 }
 
-export default class RotateAntiClockwise extends Task
+export default class RotateClockwise extends Task
 {
   constructor(id) {
     super(id);
@@ -30,16 +30,12 @@ export default class RotateAntiClockwise extends Task
     if(this.tween) this.tween.kill()
   }
 
-  get nodeName() {
-    return "Rotate Anticlockwise";
-  }
-
   run() {
     super.run()
 
     let r = 10 * utils.toRadian;
 
-    this.tween = TweenLite.to(this.owner, 0.2, {rotation: this.owner.rotation-r, ease:Linear.easeNone, onComplete: () => {
+    this.tween = TweenLite.to(this.owner, 0.2, {rotation: this.owner.rotation+r, ease:Linear.easeNone, onComplete: () => {
       this.execution.run('completed');
     }});
     this.execution.run();

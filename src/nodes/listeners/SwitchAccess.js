@@ -1,20 +1,21 @@
-import {Listener, Template as ListenerTemplate} from "./Listener";
 import Switch from '../../switch/Switch';
+import {Listener, Template as ListenerTemplate} from "./Listener";
+import DataType from "../../data/DataType";
 
 NodeTemplate.SwitchAccess = {
   ...ListenerTemplate,
-  out: ['down', 'up'],
   name: 'Switch',
+  out: ['down', 'up'],
   input: [{
     name: 'debounce',
-    type: 'number',
+    type: DataType.GENERIC,
   }, {
     name: 'pre-acceptance',
-    type: 'number',
+    type: DataType.GENERIC,
   }],
   output: [{
-    name: 'which',
-    type: 'string'
+    name: 'switch id',
+    type: DataType.GENERIC
   }]
 }
 
@@ -26,19 +27,21 @@ export default class SwitchAccess extends Listener
     this.switchdown = this.switchdown.bind(this);
     this.switchup = this.switchup.bind(this);
 
-    // this.inputs.addInput('debounce');
-    // this.inputs.addInput('pre-acceptance');
-
-    // this.execution.remove('default')
-    // this.execution.set('switch down');
-    // this.execution.set('switch up');
-
-    // this.outputs.addOutput('which');
-
     Stage.on('game.prestart', this.prestart, this)
     Stage.on('game.stop', this.stop, this)
 
     this.switch = new Switch(this);
+  }
+
+  destroy() {
+    super.destroy();
+
+    Stage.off('game.prestart', this.prestart, this)
+    Stage.off('game.stop', this.stop, this)
+
+    this.switch.destroy();
+    this.switch.off('switch.down', this.switchdown)
+    this.switch.off('switch.up', this.switchup)
   }
 
   prestart() {
@@ -54,21 +57,17 @@ export default class SwitchAccess extends Listener
     this.switch.off('switch.up', this.switchup)
   }
 
-  get nodeName() {
-    return 'Switch Access'
-  }
-
   switchdown(data) {
     super.run();
     
-    this.outputs.assignValue('which', data.which);
+    this.outputs.assignValue('switch id', data.switchID);
     this.execution.run('switch down');
   }
 
   switchup(data) {
     super.run();
     
-    this.outputs.assignValue('which', data.which);
+    this.outputs.assignValue('switch id', data.switchID);
     this.execution.run('switch up');
   }
 

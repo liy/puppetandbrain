@@ -11,7 +11,8 @@ NodeTemplate.GetRotation = {
   output: [{
     name: 'rotation',
     type: DataType.GENERIC
-  }]
+  }],
+  elementClass: ['property', 'getter']
 }
 
 export default class GetRotation extends Node
@@ -35,13 +36,5 @@ export default class GetRotation extends Node
         return LookUp.get(this.inputs.value('actor'))['rotation'] * utils.toDegree
       }
     });
-  }
-
-  get nodeName() {
-    return 'Get Rotation';
-  }
-
-  get elementClassName() {
-    return ['property', 'getter'];
   }
 }

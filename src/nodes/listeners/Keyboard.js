@@ -1,12 +1,12 @@
 import {Listener, Template as ListenerTemplate} from "./Listener";
+import DataType from "../../data/DataType";
 
 NodeTemplate.Keyboard = {
   ...ListenerTemplate,
-  name: 'Keyboard',
   out: ['down', 'up'],
   input: [{
     name: 'key name',
-    type: 'string'
+    type: DataType.GENERIC
   }]
 }
 
@@ -26,6 +26,10 @@ export default class Keyboard extends Listener
 
   destroy() {
     super.destroy();
+    
+    Stage.off('game.prestart', this.prestart, this)
+    Stage.off('game.stop', this.stop, this)
+
     document.removeEventListener('keydown', this.keydown)
     document.removeEventListener('keyup', this.keyup)
   }

@@ -86,7 +86,11 @@ export default class Node extends EventEmitter
 
   get nodeName() {
     // default node name to be the class name
-    return this.className;
+    return NodeTemplate[this.className].name || this.className;
+  }
+
+  get elementClass() {
+    return NodeTemplate[this.className].elementClass
   }
 
   get brain() {

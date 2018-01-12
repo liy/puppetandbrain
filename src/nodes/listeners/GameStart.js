@@ -18,11 +18,7 @@ export default class GameStart extends Listener
     super.destroy();
     Stage.off('game.start', this.start)
   }
-
-  get nodeName() {
-    return 'Game Start';
-  }
-
+  
   start(e) {
     super.run();
     this.execution.run();

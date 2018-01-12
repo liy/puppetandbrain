@@ -1,15 +1,16 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
 
-NodeTemplate.PointerDown = {
+NodteTemplate.CursorMove = {
   ...ParentTemplate,
-  name: 'Release'
+  name: 'Cursor Move'
 }
 
-export default class PointerUp extends Listener
+export default class CursorMove extends Listener
 {
   constructor(id) {
     super(id);
-    this.up = this.up.bind(this);
+
+    this.move = this.move.bind(this);
     this.prestart = this.prestart.bind(this);
     this.stop = this.stop.bind(this);
 
@@ -19,22 +20,25 @@ export default class PointerUp extends Listener
 
   destroy() {
     super.destroy();
-
+    
     Stage.off('game.prestart', this.prestart)
     Stage.off('game.stop', this.stop)
 
-    this.owner.off('pointerup', this.up)
+    document.removeEventListener('mousemove', this.move);
+    document.removeEventListener('touchmove', this.move);
   }
 
   prestart() {
-    this.owner.on('pointerup', this.up)
+    document.addEventListener('mousemove', this.move);
+    document.addEventListener('touchmove', this.move);
   }
 
   stop() {
-    this.owner.off('pointerup', this.up)
+    document.removeEventListener('mousemove', this.move);
+    document.removeEventListener('touchmove', this.move);
   }
 
-  up(e) {
+  move(e) {
     super.run();
     this.execution.run();
   }

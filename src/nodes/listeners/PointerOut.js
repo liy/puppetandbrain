@@ -1,4 +1,9 @@
-import {Listener} from "./Listener";
+import {Listener, Template as ParentTemplate} from "./Listener";
+
+NodeTemplate.PointerDown = {
+  ...ParentTemplate,
+  name: 'Unhover'
+}
 
 export default class PointerOut extends Listener
 {
@@ -9,12 +14,12 @@ export default class PointerOut extends Listener
     Stage.on('game.stop', this.stop, this)
   }
 
-  get nodeName() {
-    return 'Touch Unhover'
-  }
-
   destroy() {
     super.destroy();
+    
+    Stage.off('game.prestart', this.prestart, this)
+    Stage.off('game.stop', this.stop, this)
+    
     this.owner.off('pointerout', this.out, this)
   }
 

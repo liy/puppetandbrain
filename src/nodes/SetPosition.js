@@ -10,7 +10,8 @@ NodeTemplate.SetPosition = {
   }, {
     name: 'y',
     type: DataType.GENERIC,
-  }]
+  }],
+  elementClass: ['property']
 }
 
 export default class SetPosition extends Task
@@ -31,13 +32,5 @@ export default class SetPosition extends Task
 
     this.owner.x = Number(this.inputs.value('x'));
     this.owner.y = Number(this.inputs.value('y'));
-  }
-
-  get nodeName() {
-    return 'Set Position';
-  }
-
-  get elementClassName() {
-    return ['property'];
   }
 }

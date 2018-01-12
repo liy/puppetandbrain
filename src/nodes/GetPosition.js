@@ -10,7 +10,8 @@ NodeTemplate.GetPosition = {
   output: [{
     name: 'position',
     type: DataType.MAP
-  }]
+  }],
+  elementClass: ['property', 'getter']
 }
 
 export default class GetPosition extends Node
@@ -33,13 +34,5 @@ export default class GetPosition extends Node
         return LookUp.get(this.inputs.value('actor'))['position']
       }
     });
-  }
-
-  get nodeName() {
-    return 'Get Position';
-  }
-
-  get elementClassName() {
-    return ['property', 'getter'];
   }
 }

@@ -1,8 +1,8 @@
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
 NodeTemplate.Wait = {
-  ...TaskTemplate,
+  ...ParentTemplate,
   name: 'Wait',
   input: [{
     name: 'seconds',

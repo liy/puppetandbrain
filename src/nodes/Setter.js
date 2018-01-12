@@ -51,7 +51,7 @@ export default class Setter extends Task
   }
 
   get nodeName() {
-    return `Set Variable`;
+    return `Set ${this.owner.name} ${this.variableName}`;
   }
   
   get elementClassName() {

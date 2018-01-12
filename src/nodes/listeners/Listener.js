@@ -12,8 +12,4 @@ export class Listener extends Task
   constructor(id) {
     super(id);
   }
-
-  get elementClassName() {
-    return ['listener'];
-  }
 }

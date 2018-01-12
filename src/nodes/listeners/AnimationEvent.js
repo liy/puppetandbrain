@@ -19,16 +19,6 @@ export default class AnimationEvent extends Listener
   init(pod) {
     super.init(pod);
 
-    console.log(this.outputs)
-  }
-
-  get nodeName() {
-    return 'Animation Event'
-  }
-
-  init(pod) {
-    super.init(pod);
-
     let spineComponent = this.owner.getComponent('SpineComponent');
     if(spineComponent) {
       spineComponent.state.addListener({

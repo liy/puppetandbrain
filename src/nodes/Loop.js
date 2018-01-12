@@ -3,7 +3,6 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Loop = {
   ...TaskTemplate,
-  name: 'Loop',
   out: ['completed', 'body'],
   input: [{
     name: 'condition',

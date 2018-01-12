@@ -1,12 +1,12 @@
 import {Task, Template as TaskTemplate} from './Task';
 
-NodeTemplate.TweenUp = {
+NodeTemplate.StepUp = {
   ...TaskTemplate,
-  name: 'Move Up',
+  name: 'Step Up',
   out: ['default', 'completed']
 }
 
-export default class TweenUp extends Task
+export default class StepUp extends Task
 {
   constructor(id) {
     super(id);
@@ -23,10 +23,6 @@ export default class TweenUp extends Task
 
   stop() {
     if(this.tween) this.tween.kill()
-  }
-
-  get nodeName() {
-    return "Move Up";
   }
 
   run() {

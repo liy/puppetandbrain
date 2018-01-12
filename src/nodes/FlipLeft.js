@@ -2,7 +2,8 @@ import {Task, Template as TaskTemplate} from './Task';
 
 NodeTemplate.FlipLeft = {
   ...TaskTemplate,
-  name: 'Flip Left'
+  name: 'Flip Left',
+  out: ['default', 'completed']
 }
 
 export default class FlipLeft extends Task
@@ -18,6 +19,9 @@ export default class FlipLeft extends Task
 
   destroy() {
     super.destroy();
+    
+    if(this.tween) this.tween.kill()
+
     Stage.off('game.stop', this.stop);
     Stage.off('game.prestart', this.prestart);
   }
@@ -30,14 +34,12 @@ export default class FlipLeft extends Task
     if(this.tween) this.tween.kill()
   }
 
-  get nodeName() {
-    return 'Flip Left'
-  }
-
   run() {
     super.run();
     
-    this.tween = TweenLite.to(this.owner.scale, 0.15, {x:-this.scaleX, ease:Quad.easeIn})
+    this.tween = TweenLite.to(this.owner.scale, 0.15, {x:-this.scaleX, ease:Quad.easeIn, onComplete: () => {
+      this.execution.run('completed');
+    }})
     this.execution.run();
   }
 }

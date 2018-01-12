@@ -8,7 +8,8 @@ NodeTemplate.SetRotation = {
   input: [{
     name: 'rotation',
     type: DataType.GENERIC,
-  }]
+  }],
+  elementClass: ['property']
 }
 
 export default class SetRotation extends Task
@@ -17,21 +18,9 @@ export default class SetRotation extends Task
     super(id)
   }
 
-  init(pod) {
-    super.init(pod);
-  }
-
   run() {
     super.run();
 
     this.owner.rotation = Number(this.inputs.value('rotation')) * utils.toRadian;
-  }
-
-  get nodeName() {
-    return 'Set Rotation';
-  }
-
-  get elementClassName() {
-    return ['property'];
   }
 }

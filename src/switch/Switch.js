@@ -11,11 +11,11 @@ export default class Switch extends EventEmitter
 
     // physical device id mapping
     this.keyMap = {
-      9:  'left',
-      32: 'left',
-      49: 'left',
-      13: 'right',
-      51: 'right'
+      9:  1,
+      32: 1,
+      49: 1,
+      13: 2,
+      51: 2
     }
 
     this.debounce = new Debounce(access);
@@ -82,7 +82,7 @@ export default class Switch extends EventEmitter
     this.switchDownMap[keyCode] = true;
     this.emit('switch.down', {
       keyCode: keyCode,
-      which: this.keyMap[keyCode]
+      switchID: this.keyMap[keyCode]
     });
   }
 
@@ -94,7 +94,7 @@ export default class Switch extends EventEmitter
     this.switchDownMap[keyCode] = false;
     this.emit('switch.up', {
       keyCode: keyCode,
-      which: this.keyMap[keyCode]
+      switchID: this.keyMap[keyCode]
     });
   }
 
