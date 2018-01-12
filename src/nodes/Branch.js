@@ -9,7 +9,7 @@ NodeTemplate.Branch = {
     name: 'false'
   }],
   inputs: [{
-    inputName: 'condition',
+    name: 'condition',
     type: DataType.GENERIC,
   }]
 }

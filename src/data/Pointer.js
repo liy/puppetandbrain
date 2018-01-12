@@ -3,16 +3,16 @@ import EventEmitter from '../utils/EventEmitter';
 // input
 export default class Pointer extends EventEmitter
 {
-  constructor(inputNode, inputName) {
+  constructor(inputNode, name) {
     super();
 
     this.inputNode = inputNode;
-    this.inputName = inputName;
+    this.name = name;
     // by default it is a local variable pointer
     this.output = null;
     this.id = null;
     this.target = this.inputNode.variables;
-    this.targetName = this.inputName;
+    this.targetName = this.name;
   }
 
   set(pod) {
@@ -35,8 +35,6 @@ export default class Pointer extends EventEmitter
   connect(output, id) {
     // remove old output related connection
     let oldOutput = this.disconnect();
-
-    console.log(output)
 
     // Only output pointer will have id
     this.id = LookUp.addPointer(this, id);
@@ -61,7 +59,7 @@ export default class Pointer extends EventEmitter
       this.output = null;
 
       this.target = this.inputNode.variables;
-      this.targetName = this.inputName;
+      this.targetName = this.name;
 
       this.emit('input.disconnected', this);
     }
@@ -80,7 +78,7 @@ export default class Pointer extends EventEmitter
     return {
       className: this.__proto__.constructor.name,
       inputNode: this.inputNode.id,
-      inputName: this.inputName,
+      name: this.name,
       // only record the information below if pointer points to another node
       // undefined field will be removed when serailized
       id: this.id,

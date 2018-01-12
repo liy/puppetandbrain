@@ -39,7 +39,7 @@ export default class DeleteBlock extends Command
     // connect inputs directly using pointer pod
     for(let pointerPod of this.pod.inputs) {
       let inputNode = LookUp.get(pointerPod.inputNode);
-      let pointer = inputNode.inputs.get(pointerPod.inputName);
+      let pointer = inputNode.inputs.get(pointerPod.name);
       pointer.set(pointerPod)
     }
 

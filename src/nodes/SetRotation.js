@@ -6,7 +6,7 @@ NodeTemplate.SetRotation = {
   ...ParentTemplate,
   name: 'Set Rotation',
   inputs: [{
-    inputName: 'rotation',
+    name: 'rotation',
     type: DataType.GENERIC,
   }],
   elementClass: ['property']

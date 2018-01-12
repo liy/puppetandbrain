@@ -4,7 +4,7 @@ import DataType from '../data/DataType';
 NodeTemplate.GetPosition = {
   name: 'Get Position',
   inputs: [{
-    inputName: 'actor',
+    name: 'actor',
     type: DataType.ACTOR, 
   }],
   outputs: [{
@@ -24,11 +24,7 @@ export default class GetPosition extends Node
     super.init(pod);
 
     this.variables.actor = this.owner.id;
-  }
 
-  mold() {
-    super.mold();
-    
     this.outputs.assignProperty('position', {
       get: () => {
         return LookUp.get(this.inputs.value('actor'))['position']

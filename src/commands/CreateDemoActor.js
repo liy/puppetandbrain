@@ -154,7 +154,7 @@ export default class CreateDemoActor extends Command
       ...NodeTemplate.Equal,
       owner: actor,
       variables: {
-        B: 'left'
+        B: 1
       },
       x: 240,
       y: 600,

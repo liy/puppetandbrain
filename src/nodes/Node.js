@@ -47,7 +47,7 @@ export default class Node extends EventEmitter
     // connection is setup(pointer is added)
     if(pod.inputs) {
       for(let pointerPod of pod.inputs) {
-        this.inputs.addInput(pointerPod.inputName)
+        this.inputs.addInput(pointerPod.name)
       }
     }
 

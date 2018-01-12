@@ -10,7 +10,7 @@ NodeTemplate.Keyboard = {
     }
   ],
   inputs: [{
-    inputName: 'key name',
+    name: 'key name',
     type: DataType.GENERIC
   }]
 }

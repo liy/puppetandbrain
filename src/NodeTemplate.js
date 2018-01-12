@@ -20,7 +20,6 @@ const TestNode = {
 
   // TODO: rename to outs
   execution: [{
-    // TODO: rename to name
     name: 'default',
 
     // FUTURE
@@ -36,7 +35,7 @@ const TestNode = {
     id: 334,
 
     // TODO: rename to name
-    inputName: 'A',
+    name: 'A',
     type: DataType.GENERIC,
 
     // TODO: add value property, which contains input default value.

@@ -4,7 +4,7 @@ import DataType from '../data/DataType';
 NodeTemplate.Wait = {
   ...ParentTemplate,
   inputs: [{
-    inputName: 'seconds',
+    name: 'seconds',
     type: DataType.GENERIC,
   }]
 }

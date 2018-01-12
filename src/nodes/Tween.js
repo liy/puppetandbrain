@@ -10,10 +10,10 @@ NodeTemplate.Tween = {
     name: 'completed'
   }],
   inputs: [{
-    inputName: 'position',
+    name: 'position',
     type: DataType.VEC2,
   }, {
-    inputName: 'duration',
+    name: 'duration',
     type: DataType.GENERIC,
   }]
 }

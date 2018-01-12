@@ -5,7 +5,7 @@ import DataType from '../data/DataType';
 NodeTemplate.GetRotation = {
   name: 'Get Rotation',
   inputs: [{
-    inputName: 'actor',
+    name: 'actor',
     type: DataType.ACTOR, 
   }],
   outputs: [{
@@ -26,11 +26,7 @@ export default class GetRotation extends Node
     super.init(pod)
 
     this.variables.actor = this.owner.id;
-  }
-
-  mold() {
-    super.mold();
-
+    
     this.outputs.assignProperty('rotation', {
       get: () => {
         return LookUp.get(this.inputs.value('actor'))['rotation'] * utils.toDegree

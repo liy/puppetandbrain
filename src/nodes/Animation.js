@@ -4,7 +4,7 @@ import DataType from '../data/DataType';
 NodeTemplate.Animation = {
   ...ParentTemplate,
   inputs: [{
-    inputName: 'name',
+    name: 'name',
     type: DataType.GENERIC
   }],
   outputs: [],

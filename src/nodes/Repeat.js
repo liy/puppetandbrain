@@ -9,7 +9,7 @@ NodeTemplate.Repeat = {
     name: 'body'
   }],
   inputs: [{
-    inputName: 'count',
+    name: 'count',
     type: DataType.GENERIC,
   }],
   output: [{

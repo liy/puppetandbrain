@@ -87,7 +87,7 @@ export default class DeleteVariable extends Command
     for(let pod of this.setterPods) {
       for(let pointerPod of pod.inputs) {
         let inputNode = LookUp.get(pointerPod.inputNode);
-        let pointer = inputNode.inputs.get(pointerPod.inputName);
+        let pointer = inputNode.inputs.get(pointerPod.name);
         pointer.set(pointerPod)
       }
     }

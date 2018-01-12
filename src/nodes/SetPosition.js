@@ -5,10 +5,10 @@ NodeTemplate.SetPosition = {
   ...ParentTemplate,
   name: 'Set Position',
   inputs: [{
-    inputName: 'x',
+    name: 'x',
     type: DataType.GENERIC,
   }, {
-    inputName: 'y',
+    name: 'y',
     type: DataType.GENERIC,
   }],
   elementClass: ['property']

@@ -10,10 +10,10 @@ NodeTemplate.PlaySound = {
     name: 'completed'
   }],
   inputs: [{
-    inputName: 'sound url',
+    name: 'sound url',
     type: DataType.GENERIC,
   },{
-    inputName: 'loop',
+    name: 'loop',
     type: DataType.GENERIC,
   }],
   outputs: [{

@@ -4,10 +4,10 @@ import DataType from "../data/DataType";
 NodeTemplate.MakePosition = {
   name: 'Make Position',
   inputs: [{
-    inputName: 'x',
+    name: 'x',
     type: DataType.GENERIC,
   }, {
-    inputName: 'y',
+    name: 'y',
     type: DataType.GENERIC,
   }],
   outputs: [{
@@ -23,8 +23,8 @@ export default class MakePosition extends Node
     super(id)
   }
 
-  mold() {
-    super.mold();
+  init(pod) {
+    super.init(pod);
 
     this.outputs.assignProperty('position', {
       get: () => {

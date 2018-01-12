@@ -25,7 +25,7 @@ export default class OutputPin extends DataPin
     let pointers = this.output.getPointers();
     return pointers.map(pointer => {
       let inputBlock = BrainGraph.getBlock(pointer.inputNode.id);
-      return inputBlock.inputPins.get(pointer.inputName)
+      return inputBlock.inputPins.get(pointer.name)
     });
   }
 
@@ -34,7 +34,7 @@ export default class OutputPin extends DataPin
     for(let pointer of pointers) {
       // inputPin.drawConnection();
       let inputBlock = BrainGraph.getBlock(pointer.inputNode.id);
-      inputBlock.inputPins.get(pointer.inputName).drawConnection();
+      inputBlock.inputPins.get(pointer.name).drawConnection();
     }
   }
 

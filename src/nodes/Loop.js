@@ -9,7 +9,7 @@ NodeTemplate.Loop = {
     name: 'body'
   }],
   input: [{
-    inputName: 'condition',
+    name: 'condition',
     type: DataType.GENERIC,
   }],
   output: [{

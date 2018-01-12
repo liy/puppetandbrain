@@ -5,7 +5,7 @@ NodeTemplate.Break = {
   ins: [],
   execution: [],
   inputs: [{
-    inputName: 'in',
+    name: 'in',
     type: DataType.GENERIC,
   }]
 }

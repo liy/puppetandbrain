@@ -3,10 +3,10 @@ import DataType from "../data/DataType";
 
 const OperatorTemplate = {
   inputs: [{
-    inputName: 'A',
+    name: 'A',
     type: DataType.GENERIC,
   }, {
-    inputName: 'B',
+    name: 'B',
     type: DataType.GENERIC,
   }],
   outputs: [{
@@ -22,8 +22,8 @@ export class Operator extends Node
     super(id);
   }
 
-  mold() {
-    super.mold();
+  init(pod) {
+    super.init(pod);
 
     this.outputs.assignProperty('value', {
       get: () => {
@@ -95,6 +95,7 @@ export class Equal extends Operator
   }
 
   get value() {
+    console.log(this.inputs.value('A'), this.inputs.value('B'))
     // I use == so it auto convert string to number if it is possible.
     // e.g., 1 == "1" will return true.
     return this.inputs.value('A') == this.inputs.value('B');
@@ -168,10 +169,10 @@ export class RandomNumber extends Operator
 NodeTemplate.RandomInteger = {
   ...OperatorTemplate,
   inputs: [{
-    inputName: 'min',
+    name: 'min',
     type: DataType.GENERIC,
   }, {
-    inputName: 'max',
+    name: 'max',
     type: DataType.GENERIC,
   }],
   name: 'Random Integer'

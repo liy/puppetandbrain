@@ -11,10 +11,10 @@ NodeTemplate.SwitchAccess = {
     name: 'up'
   }],
   inputs: [{
-    inputName: 'debounce',
+    name: 'debounce',
     type: DataType.GENERIC,
   }, {
-    inputName: 'pre-acceptance',
+    name: 'pre-acceptance',
     type: DataType.GENERIC,
   }],
   outputs: [{
@@ -63,16 +63,16 @@ export default class SwitchAccess extends Listener
 
   switchdown(data) {
     super.run();
-    
+
     this.outputs.assignValue('switch id', data.switchID);
-    this.execution.run('switch down');
+    this.execution.run('down');
   }
 
   switchup(data) {
     super.run();
     
     this.outputs.assignValue('switch id', data.switchID);
-    this.execution.run('switch up');
+    this.execution.run('up');
   }
 
 
