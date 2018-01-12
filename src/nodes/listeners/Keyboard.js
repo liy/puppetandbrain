@@ -5,7 +5,7 @@ NodeTemplate.Keyboard = {
   name: 'Keyboard',
   out: ['down', 'up'],
   input: [{
-    name: 'code',
+    name: 'key name',
     type: 'string'
   }]
 }

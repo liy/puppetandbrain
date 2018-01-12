@@ -2,7 +2,7 @@ import Execution from './Execution'
 import Node from './Node';
 import ArrayMap from '../utils/ArrayMap';
 
-export const NodeTemplate = {
+export const Template = {
   in: ['default'],
   out: ['default'],
   input: [],

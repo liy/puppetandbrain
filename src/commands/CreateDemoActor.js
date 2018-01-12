@@ -177,13 +177,13 @@ export default class CreateDemoActor extends Command
     }
     animationEvent.connectNext(playEventSound);
 
-    switchAccess.connectNext(branch, 'switch down')
+    switchAccess.connectNext(branch, 'down')
     branch.connectNext(flipLeft, 'true')
     branch.connectNext(flipRight, 'false')
     flipLeft.connectNext(moveLeft);
     flipRight.connectNext(moveRight);
-    rightKey.connectNext(flipRight, 'key down')
-    leftKey.connectNext(flipLeft, 'key down')
+    rightKey.connectNext(flipRight, 'down')
+    leftKey.connectNext(flipLeft, 'down')
 
 
     // play event sound

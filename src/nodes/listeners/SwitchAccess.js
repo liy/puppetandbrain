@@ -3,7 +3,8 @@ import Switch from '../../switch/Switch';
 
 NodeTemplate.SwitchAccess = {
   ...ListenerTemplate,
-  name: 'Switch Access',
+  out: ['down', 'up'],
+  name: 'Switch',
   input: [{
     name: 'debounce',
     type: 'number',
