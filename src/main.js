@@ -265,15 +265,3 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
-
-
-
-
-
-
-
-
-// import './NodeTemplate';
-// import * as ns from './nodes'
-// // console.log(ns)
-// console.log(NodeTemplate)

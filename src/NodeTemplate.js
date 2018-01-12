@@ -4,7 +4,7 @@ window.NodeTemplate = Object.create(null);
 
 const TestNode = {
 
-  ins: [{
+  enters: [{
     name: 'default',
 
     // FUTURE: multiple execution in. Merge the callers field
@@ -18,7 +18,6 @@ const TestNode = {
   }],
 
 
-  // TODO: rename to outs
   execution: [{
     name: 'default',
 
@@ -34,7 +33,6 @@ const TestNode = {
     // id of the input(pointer)
     id: 334,
 
-    // TODO: rename to name
     name: 'A',
     type: DataType.GENERIC,
 
