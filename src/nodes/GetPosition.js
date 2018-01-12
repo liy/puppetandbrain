@@ -1,22 +1,36 @@
 import Node from "./Node";
+import DataType from '../data/DataType';
+
+NodeTemplate.GetPosition = {
+  name: 'Get Position',
+  input: [{
+    name: 'actor',
+    type: DataType.ACTOR, 
+  }],
+  output: [{
+    name: 'position',
+    type: DataType.MAP
+  }]
+}
 
 export default class GetPosition extends Node
 {
   constructor(id) {
     super(id)
-
-    this.inputs.addInput('target')
   }
 
   init(pod) {
     super.init(pod);
 
-    this.variables.target = this.owner.id;
+    this.variables.actor = this.owner.id;
+  }
 
-    let output = this.outputs.addOutput('position');
-    output.assignProperty('position', {
+  mold() {
+    super.mold();
+    
+    this.outputs.assignProperty('position', {
       get: () => {
-        return LookUp.get(this.variables.target)['position']
+        return LookUp.get(this.inputs.value('actor'))['position']
       }
     });
   }

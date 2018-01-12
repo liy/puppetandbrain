@@ -2,7 +2,7 @@ import Execution from './Execution'
 import Node from './Node';
 import ArrayMap from '../utils/ArrayMap';
 
-export const Template = {
+export const NodeTemplate = {
   in: ['default'],
   out: ['default'],
   input: [],
@@ -28,12 +28,17 @@ export class Task extends Node
   mold() {
     super.mold();
 
-    if(Template[this.className]) {
+    if(NodeTemplate[this.className]) {
       // in
-      this.in = Template[this.className].in.concat();
+      if(NodeTemplate[this.className].in) {
+        this.in = NodeTemplate[this.className].in.concat();
+      }
+
       // out
-      for(let name of Template[this.className].out) {
-        this.execution.set(name)
+      if(NodeTemplate[this.className].out) {
+        for(let name of NodeTemplate[this.className].out) {
+          this.execution.set(name)
+        }
       }
     }
   }

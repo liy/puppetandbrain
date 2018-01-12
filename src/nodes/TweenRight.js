@@ -1,20 +1,18 @@
-import Task from './Task';
+import {Task, Template as TaskTemplate} from './Task';
+
+NodeTemplate.TweenRight = {
+  ...TaskTemplate,
+  name: 'Move Right',
+  out: ['default', 'completed']
+}
 
 export default class TweenRight extends Task
 {
   constructor(id) {
     super(id);
 
-    // ensure the order
-    this.execution.set('default');
-    this.execution.set('completed');
-
     this.stop = this.stop.bind(this);
     Stage.on('game.stop', this.stop)
-  }
-
-  init(pod) {
-    super.init(pod);
   }
 
   destroy() {

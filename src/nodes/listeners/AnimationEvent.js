@@ -1,16 +1,25 @@
-import Listener from "./Listener";
+import {Listener, Template as ListenerTemplate} from "./Listener";
+import DataType from "../../data/DataType";
 
+NodeTemplate.AnimationEvent = {
+  ...ListenerTemplate,
+  name: 'Animation Event',
+  output: [{
+    name: 'event name',
+    type: DataType.GENERIC
+  }]
+}
 
 export default class AnimationEvent extends Listener
 {
   constructor(id) {
     super(id);
-
-    this.outputs.addOutput('event name');
   }
 
-  destroy() {
-    super.destroy();
+  init(pod) {
+    super.init(pod);
+
+    console.log(this.outputs)
   }
 
   get nodeName() {

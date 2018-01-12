@@ -1,6 +1,11 @@
-import DataNode from "./DataNode";
+import Node from "./Node";
 
-export default class Getter extends DataNode
+// Variable getters are dynamic has no template
+
+/**
+ * Variable(brain property) getter
+ */
+export default class Getter extends Node
 {
   constructor(id) {
     super(id);

@@ -1,12 +1,19 @@
-import Output from "../data/Output";
 import Node from "./Node";
+
+NodeTemplate.Break = {
+  name: 'Break',
+  in: ['default'],
+  out: ['default'],
+  input: [{
+    name: 'in',
+    type: 'object',
+  }]
+}
 
 export default class Break extends Node
 {
   constructor(id) {
     super(id)
-    
-    this.inputs.addInput('in');
   }
 
   init(pod) {

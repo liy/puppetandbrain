@@ -1,13 +1,20 @@
-import Task from './Task';
+import {Task, Template as TaskTemplate} from './Task';
+import DataType from '../data/DataType';
 
+NodeTemplate.Wait = {
+  ...TaskTemplate,
+  name: 'Wait',
+  input: [{
+    name: 'seconds',
+    type: DataType.GENERIC,
+  }]
+}
 export default class Wait extends Task
 {
   constructor(id) {
     super(id);
 
     Stage.on('game.stop', this.stop, this)
-
-    this.inputs.addInput('seconds')
   }
 
   destroy() {

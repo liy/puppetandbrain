@@ -1,5 +1,7 @@
-import Task from './Task';
+import {Task, Template as TaskTemplate} from './Task';
 
+
+// TODO: to be removed
 export default class Flip extends Task
 {
   constructor(id) {

@@ -36,6 +36,8 @@ export default class Pointer extends EventEmitter
     // remove old output related connection
     let oldOutput = this.disconnect();
 
+    console.log(output)
+
     // Only output pointer will have id
     this.id = LookUp.addPointer(this, id);
     this.output = output;

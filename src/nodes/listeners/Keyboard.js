@@ -1,7 +1,7 @@
-import Listener from "./Listener";
+import {Listener, Template as ListenerTemplate} from "./Listener";
 
-Template.Keyboard = {
-  ...Template.Listener,
+NodeTemplate.Keyboard = {
+  ...ListenerTemplate,
   name: 'Keyboard',
   out: ['down', 'up'],
   input: [{

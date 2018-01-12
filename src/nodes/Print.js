@@ -1,6 +1,16 @@
-import Task from './Task'
+import {Task, Template as TaskTemplate} from './Task';
+import DataType from '../data/DataType';
 
-export default class Trace extends Task
+NodeTemplate.Print = {
+  ...TaskTemplate,
+  name: 'Print',
+  input: [{
+    name: 'text',
+    type: DataType.GENERIC,
+  }]
+}
+
+export default class extends Task
 {
   constructor(id) {
     super(id);

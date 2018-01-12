@@ -1,16 +1,26 @@
-import Task from "./Task";
+import {Task, Template as TaskTemplate} from './Task'
+import DataType from "../data/DataType";
 
+NodeTemplate.PlaySound = {
+  ...TaskTemplate,
+  name: 'Play Sound',
+  out: ['default', 'completed'],
+  input: [{
+    name: 'sound url',
+    type: DataType.GENERIC,
+  },{
+    name: 'loop',
+    type: DataType.GENERIC,
+  }],
+  output: [{
+    name: 'audio',
+    type: DataType.GENERIC
+  }]
+}
 export default class PlaySound extends Task
 {
   constructor(id) {
     super(id);
-
-    this.inputs.addInput('sound url');
-    this.inputs.addInput('loop');
-
-    this.outputs.addOutput('audio');
-    // sound complete execution
-    this.execution.set('completed');
 
     this.stop = this.stop.bind(this);
     this.complete = this.complete.bind(this);

@@ -1,4 +1,9 @@
-import Task from './Task'
+import {Task, Template as TaskTemplate} from './Task'
+
+NodeTemplate.Perform = {
+  ...TaskTemplate,
+  name: 'Perform',
+}
 
 export default class Perform extends Task
 {

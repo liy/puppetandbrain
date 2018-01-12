@@ -1,25 +1,40 @@
-import DataNode from "./DataNode";
+import Node from "./Node";
 import utils from '../utils/utils'
+import DataType from '../data/DataType';
 
-export default class GetRotation extends DataNode
+NodeTemplate.GetRotation = {
+  name: 'Get Rotation',
+  input: [{
+    name: 'actor',
+    type: DataType.ACTOR, 
+  }],
+  output: [{
+    name: 'rotation',
+    type: DataType.GENERIC
+  }]
+}
+
+export default class GetRotation extends Node
 {
   constructor(id) {
     super(id)
-
-    this.inputs.addInput('target')
-
-    this.outputs.addOutput('rotation');
-    this.outputs.assignProperty('rotation', {
-      get: () => {
-        return LookUp.get(this.variables.target)['rotation'] * utils.toDegree
-      }
-    });
+    
   }
 
   init(pod) {
     super.init(pod)
 
-    this.variables.target = this.owner.id;
+    this.variables.actor = this.owner.id;
+  }
+
+  mold() {
+    super.mold();
+
+    this.outputs.assignProperty('rotation', {
+      get: () => {
+        return LookUp.get(this.inputs.value('actor'))['rotation'] * utils.toDegree
+      }
+    });
   }
 
   get nodeName() {

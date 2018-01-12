@@ -1,4 +1,6 @@
-import Task from "./Task";
+import {Task} from "./Task";
+
+// Variable setter are dynamic has no template
 
 export default class Setter extends Task
 {

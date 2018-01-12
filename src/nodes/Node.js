@@ -65,12 +65,17 @@ export default class Node extends EventEmitter
   }
 
   mold() {
-    if(Template[this.className]) {
-      for(let input of Template[this.className].input) {
-        this.inputs.addInput(input.name)
+    if(NodeTemplate[this.className]) {
+      if(NodeTemplate[this.className].input) {
+        for(let input of NodeTemplate[this.className].input) {
+          this.inputs.addInput(input.name)
+        }
       }
-      for(let output of Template[this.className].output) {
-        this.outputs.addOutput(output.name)
+
+      if(NodeTemplate[this.className].output) {
+        for(let output of NodeTemplate[this.className].output) {
+          this.outputs.addOutput(output.name)
+        }
       }
     }
   }

@@ -1,4 +1,9 @@
-import Task from './Task';
+import {Task, Template as TaskTemplate} from './Task';
+
+NodeTemplate.FlipRight = {
+  ...TaskTemplate,
+  name: 'Flip Right'
+}
 
 export default class FlipRight extends Task
 {

@@ -1,4 +1,19 @@
-import Task from './Task'
+import {Task, Template as TaskTemplate} from './Task';
+import DataType from '../data/DataType';
+
+NodeTemplate.Loop = {
+  ...TaskTemplate,
+  name: 'Loop',
+  out: ['completed', 'body'],
+  input: [{
+    name: 'condition',
+    type: DataType.GENERIC,
+  }],
+  output: [{
+    name: 'count',
+    type: DataType.GENERIC,
+  }]
+}
 
 export default class Loop extends Task
 {
@@ -7,15 +22,7 @@ export default class Loop extends Task
 
     Stage.on('game.prestart', this.prestart, this);
 
-    // no default
-    this.execution.remove('default');
-    this.execution.set('completed');
-    this.execution.set('body');
-
     this.variables.condition = true;
-    this.inputs.addInput('condition');
-
-    this.outputs.addOutput('times');
   }
 
   destroy() {
@@ -24,13 +31,13 @@ export default class Loop extends Task
   }
 
   prestart() {
-    this.times = 0;
+    this.count = 0;
   }
 
   run() {
     super.run()
 
-    this.outputs.assignValue('times', ++this.times);
+    this.outputs.assignValue('count', ++this.count);
     if(this.inputs.value('condition')) {
       this.execution.run('body')
     }

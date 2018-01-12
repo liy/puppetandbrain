@@ -1,22 +1,29 @@
-import Task from './Task'
+import {Task, Template as TaskTemplate} from './Task';
+import DataType from '../data/DataType';
+
+NodeTemplate.Repeat = {
+  ...TaskTemplate,
+  name: 'Repeat',
+  out: ['completed', 'body'],
+  input: [{
+    name: 'count',
+    type: DataType.GENERIC,
+  }],
+  output: [{
+    name: 'index',
+    type: DataType.GENERIC,
+  }]
+}
 
 export default class Repeat extends Task
 {
   constructor(id) {
     super(id);
-
-    // no default
-    this.execution.remove('default');
-    this.execution.set('completed');
-    this.execution.set('body');
-
-    this.inputs.addInput('times');
-    this.outputs.addOutput('index');
   }
 
   run() {
     super.run()
-    for(let i=0; i<this.inputs.value('times'); ++i) {
+    for(let i=0; i<this.inputs.value('count'); ++i) {
       this.outputs.assignValue('index', this.index);
       this.execution.run('body')
     }

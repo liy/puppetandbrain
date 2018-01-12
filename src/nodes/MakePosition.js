@@ -1,15 +1,30 @@
-import Output from "../data/Output";
-import DataNode from "./DataNode";
+import Node from "./Node";
+import DataType from "../data/DataType";
 
-export default class MakePosition extends DataNode
+NodeTemplate.MakePosition = {
+  name: 'Make Position',
+  input: [{
+    name: 'x',
+    type: DataType.GENERIC,
+  }, {
+    name: 'y',
+    type: DataType.GENERIC,
+  }],
+  output: [{
+    name: 'position',
+    type: DataType.VEC2,
+  }]
+}
+
+export default class MakePosition extends Node
 {
   constructor(id) {
     super(id)
-    
-    this.inputs.addInput('x');
-    this.inputs.addInput('y');
+  }
 
-    this.outputs.addOutput('position')
+  mold() {
+    super.mold();
+
     this.outputs.assignProperty('position', {
       get: () => {
         return {

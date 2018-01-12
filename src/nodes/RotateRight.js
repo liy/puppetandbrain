@@ -1,14 +1,16 @@
-import Task from './Task';
 import utils from '../utils/utils';
+import {Task, Template as TaskTemplate} from './Task';
 
-export default class RotateRight extends Task
+NodeTemplate.RotateClockwise = {
+  ...TaskTemplate,
+  name: 'Rotate Clockwise',
+  out: ['default', 'completed']
+}
+
+export default class RotateClockwise extends Task
 {
   constructor(id) {
     super(id);
-
-    // ensure the order
-    this.execution.set('default');
-    this.execution.set('completed');
 
     this.stop = this.stop.bind(this);
     Stage.on('game.stop', this.stop)
@@ -29,7 +31,7 @@ export default class RotateRight extends Task
   }
 
   get nodeName() {
-    return "Rotate Right";
+    return "Rotate Clockwise";
   }
 
   run() {

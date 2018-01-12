@@ -23,7 +23,7 @@ export Wait from './Wait';
 export Action from './Action';
 export Perform from './Perform'
 export Tween from './Tween';
-export Trace from './Trace';
+export Print from './Print';
 export Animation from './Animation';
 export Branch from './Branch';
 export Loop from './Loop';

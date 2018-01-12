@@ -1,16 +1,23 @@
-import Task from './Task';
+import {Task, Template as TaskTemplate} from './Task';
+import DataType from '../data/DataType';
+
+NodeTemplate.Tween = {
+  ...TaskTemplate,
+  name: 'Move',
+  out: ['default', 'completed'],
+  input: [{
+    name: 'position',
+    type: DataType.VEC2,
+  }, {
+    name: 'duration',
+    type: DataType.GENERIC,
+  }]
+}
 
 export default class Tween extends Task
 {
   constructor(id) {
     super(id);
-
-    // ensure the order
-    this.execution.set('default');
-    this.execution.set('completed');
-
-    this.inputs.addInput('position');
-    this.inputs.addInput('duration');
 
     this.stop = this.stop.bind(this);
     Stage.on('game.stop', this.stop)

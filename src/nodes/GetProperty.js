@@ -1,37 +1,51 @@
-import DataNode from "./DataNode";
+import Node from "./Node";
+import DataType from '../data/DataType';
 
+// NodeTemplate.GetProperty = {
+//   name: 'Get Property',
+//   input: [{
+//     name: 'actor',
+//     type: DataType.ACTOR, 
+//   }],
+//   output: [{
+//     name: 'property',
+//     type: DataType.GENERIC
+//   }],
+//   elementClass: ['property', 'getter']
+// }
+
+
+// TODO: to be removed
 // Dynamic property getter. Maybe not useful?
-export default class GetProperty extends DataNode
+export default class GetProperty extends Node
 {
   constructor(id) {
     super(id)
-
-    this.inputs.addInput('target');
   }
 
   init(pod) {
     super.init(pod);
     // name is authoring time settings.
-    this.name = pod.name;
-    this.variables.target = this.variables.target || this.owner.id;
+    this.property = pod.property;
+    this.variables.actor = this.variables.actor || this.owner.id;
 
     // dynamic output
-    this.outputs.addOutput(this.name);
-    this.outputs.assignProperty(this.name, {
+    this.outputs.addOutput(this.property);
+    this.outputs.assignProperty(this.property, {
       get: () => {
-        return LookUp.get(this.variables.target)[this.name]
+        return LookUp.get(this.variables.actor)[this.property]
       }
     });
   }
 
   get nodeName() {
-    return 'Get ' + this.name.charAt(0).toUpperCase() + this.name.slice(1);
+    return 'Get ' + this.property.charAt(0).toUpperCase() + this.property.slice(1);
   }
 
   pod(detail=false) {
     return {
       ...super.pod(detail),
-      name: this.name,
+      property: this.property,
     }
   }
 

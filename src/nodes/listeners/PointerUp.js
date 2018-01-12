@@ -1,4 +1,4 @@
-import Listener from "./Listener";
+import {Listener} from "./Listener";
 
 export default class PointerUp extends Listener
 {

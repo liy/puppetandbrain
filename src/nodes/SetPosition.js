@@ -1,12 +1,22 @@
-import Task from "./Task";
+import {Task, Template as TaskTemplate} from './Task';
+import DataType from '../data/DataType';
+
+NodeTemplate.SetPosition = {
+  ...TaskTemplate,
+  name: 'Set Position',
+  input: [{
+    name: 'x',
+    type: DataType.GENERIC,
+  }, {
+    name: 'y',
+    type: DataType.GENERIC,
+  }]
+}
 
 export default class SetPosition extends Task
 {
   constructor(id) {
     super(id)
-
-    this.inputs.addInput('x')
-    this.inputs.addInput('y')
   }
 
   init(pod) {
