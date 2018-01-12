@@ -92,7 +92,7 @@ export default class ActivityLoader
       if (!node.execution) continue;
       let data = pod.store[id];
       for(let execData of data.execution) {
-        if(execData.id) node.connectNext(LookUp.get(execData.id), execData.executionName)
+        if(execData.id) node.connectNext(LookUp.get(execData.id), execData.name)
       }
     }
 

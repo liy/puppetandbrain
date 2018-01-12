@@ -165,7 +165,7 @@ export default class CreateDemoActor extends Command
       ...NodeTemplate.Keyboard,
       owner: actor,
       variables: {
-        code: 'ArrowLeft'
+        'key name': 'ArrowLeft'
       },
       x: 50,
       y: 406,
@@ -176,7 +176,7 @@ export default class CreateDemoActor extends Command
       ...NodeTemplate.Keyboard,
       owner: actor,
       variables: {
-        code: 'ArrowRight'
+        'key name': 'ArrowRight'
       },
       x: 50,
       y: 717,

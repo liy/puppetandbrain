@@ -5,9 +5,9 @@ NodeTemplate.PlaySound = {
   ...ParentTemplate,
   name: 'Play Sound',
   execution: [{
-    executionName: 'default'
+    name: 'default'
   }, {
-    executionName: 'completed'
+    name: 'completed'
   }],
   inputs: [{
     inputName: 'sound url',

@@ -7,7 +7,7 @@ export const Template = {
     name: 'default'
   }],
   execution: [{
-    executionName: 'default'
+    name: 'default'
   }],
   inputs: [],
   outputs: [],
@@ -35,7 +35,7 @@ export class Task extends Node
     // out
     if(pod.execution) {
       for(let execution of NodeTemplate[this.className].execution) {
-        this.execution.set(execution.executionName)
+        this.execution.set(execution.name)
       }
     }
 

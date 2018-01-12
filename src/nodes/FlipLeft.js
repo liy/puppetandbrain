@@ -4,9 +4,9 @@ NodeTemplate.FlipLeft = {
   ...ParentTemplate,
   name: 'Flip Left',
   execution: [{
-    executionName: 'default'
+    name: 'default'
   }, {
-    executionName: 'completed'
+    name: 'completed'
   }]
 }
 

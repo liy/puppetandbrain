@@ -4,9 +4,9 @@ import DataType from '../data/DataType';
 NodeTemplate.Branch = {
   ...ParentTemplate,
   execution: [{
-    executionName: 'true'
+    name: 'true'
   }, {
-    executionName: 'false'
+    name: 'false'
   }],
   inputs: [{
     inputName: 'condition',

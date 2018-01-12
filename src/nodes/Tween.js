@@ -5,9 +5,9 @@ NodeTemplate.Tween = {
   ...ParentTemplate,
   name: 'Move',
   execution: [{
-    executionName: 'default'
+    name: 'default'
   }, {
-    executionName: 'completed'
+    name: 'completed'
   }],
   inputs: [{
     inputName: 'position',

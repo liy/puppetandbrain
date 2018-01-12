@@ -4,9 +4,9 @@ import DataType from '../data/DataType';
 NodeTemplate.Loop = {
   ...ParentTemplate,
   executions: [{
-    executionName: 'completed'
+    name: 'completed'
   }, {
-    executionName: 'body'
+    name: 'body'
   }],
   input: [{
     inputName: 'condition',

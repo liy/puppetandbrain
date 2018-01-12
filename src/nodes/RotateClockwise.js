@@ -5,9 +5,9 @@ NodeTemplate.RotateClockwise = {
   ...ParentTemplate,
   name: 'Rotate Clockwise',
   execution: [{
-    executionName: 'default'
+    name: 'default'
   }, {
-    executionName: 'completed'
+    name: 'completed'
   }]
 }
 

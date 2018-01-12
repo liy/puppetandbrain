@@ -2,14 +2,14 @@ import Command from "./Command";
 
 export default class RemoveExecution extends Command
 {
-  constructor(sourceNode, executionName) {
+  constructor(sourceNode, name) {
     super();
 
-    let targetNode = sourceNode.execution.get(executionName);
+    let targetNode = sourceNode.execution.get(name);
     this.targetID = targetNode ? targetNode.id : null;
     
     this.sourceID = sourceNode.id;
-    this.executionName = executionName;
+    this.name = name;
   }
 
   process() {
@@ -17,16 +17,16 @@ export default class RemoveExecution extends Command
     if(!this.targetID) return null;
 
     let sourceNode = LookUp.get(this.sourceID);
-    sourceNode.disconnectNext(LookUp.get(this.targetID), this.executionName);
+    sourceNode.disconnectNext(LookUp.get(this.targetID), this.name);
     BrainGraph.getBlock(this.targetID).inPin.refreshSymbol();
 
     let sourceBlock = BrainGraph.getBlock(this.sourceID);
-    sourceBlock.outPins.get(this.executionName).refreshSymbol();
+    sourceBlock.outPins.get(this.name).refreshSymbol();
     return this;
   }
 
   undo() {
-    LookUp.get(this.sourceID).connectNext(LookUp.get(this.targetID), this.executionName);
+    LookUp.get(this.sourceID).connectNext(LookUp.get(this.targetID), this.name);
     BrainGraph.refresh();
   }
 

@@ -21,7 +21,7 @@ const TestNode = {
   // TODO: rename to outs
   execution: [{
     // TODO: rename to name
-    executionName: 'default',
+    name: 'default',
 
     // FUTURE
     link: {

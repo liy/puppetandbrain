@@ -4,9 +4,9 @@ import DataType from '../data/DataType';
 NodeTemplate.Repeat = {
   ...ParentTemplate,
   execution: [{
-    executionName: 'completed'
+    name: 'completed'
   }, {
-    executionName: 'body'
+    name: 'body'
   }],
   inputs: [{
     inputName: 'count',

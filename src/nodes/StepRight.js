@@ -4,9 +4,9 @@ NodeTemplate.StepRight = {
   ...ParentTemplate,
   name: 'Step Right',
   execution: [{
-    executionName: 'default'
+    name: 'default'
   }, {
-    executionName: 'completed'
+    name: 'completed'
   }]
 }
 

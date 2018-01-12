@@ -6,9 +6,9 @@ NodeTemplate.SwitchAccess = {
   ...ParentTemplate,
   name: 'Switch',
   execution: [{
-    executionName: 'down'
+    name: 'down'
   }, {
-    executionName: 'up'
+    name: 'up'
   }],
   inputs: [{
     inputName: 'debounce',

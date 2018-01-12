@@ -4,13 +4,13 @@ import DataType from "../../data/DataType";
 NodeTemplate.Keyboard = {
   ...ParentTemplate,
   execution: [{
-      executionName: 'down'
+      name: 'down'
     }, {
-      executionName: 'up'
+      name: 'up'
     }
   ],
   inputs: [{
-    name: 'key name',
+    inputName: 'key name',
     type: DataType.GENERIC
   }]
 }
@@ -50,14 +50,14 @@ export default class Keyboard extends Listener
   }
 
   keydown(e) {
-    if(e.code == this.inputs.value('code')) {
+    if(e.code == this.inputs.value('key name')) {
       super.run();
       this.execution.run('down');
     }
   }
 
   keyup(e) {
-    if(e.code == this.inputs.value('code')) {
+    if(e.code == this.inputs.value('key name')) {
       super.run();
       this.execution.run('up');
     }

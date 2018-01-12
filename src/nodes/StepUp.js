@@ -4,9 +4,9 @@ NodeTemplate.StepUp = {
   ...ParentTemplate,
   name: 'Step Up',
   execution: [{
-    executionName: 'default'
+    name: 'default'
   }, {
-    executionName: 'completed'
+    name: 'completed'
   }]
 }
 

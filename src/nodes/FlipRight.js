@@ -4,9 +4,9 @@ NodeTemplate.FlipRight = {
   ...ParentTemplate,
   name: 'Flip Right',
   execution: [{
-    executionName: 'default'
+    name: 'default'
   }, {
-    executionName: 'completed'
+    name: 'completed'
   }]
 }
 
@@ -41,7 +41,7 @@ export default class FlipRight extends Task
   run() {
     super.run();
     
-    this.tween = TweenLite.to(this.owner.scale, 0.15, {x:-this.scaleX, ease:Quad.easeIn, onComplete: () => {
+    this.tween = TweenLite.to(this.owner.scale, 0.15, {x:this.scaleX, ease:Quad.easeIn, onComplete: () => {
       this.execution.run('completed');
     }})
     this.execution.run();
