@@ -1,9 +1,9 @@
-import {Listener, Template as ListenerTemplate} from "./Listener";
+import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.Ticker = {
-  ...ListenerTemplate,
+  ...ParentTemplate,
   name: 'Game Loop',
-  out: ['tick']
+  outs: ['tick']
 }
 
 export default class Ticker extends Listener

@@ -9,8 +9,8 @@ import Branch from '../nodes/Branch';
 import {Equal} from '../nodes/Operator';
 import FlipLeft from '../nodes/FlipLeft';
 import FlipRight from '../nodes/FlipRight';
-import TweenRight from '../nodes/TweenRight';
-import TweenLeft from '../nodes/TweenLeft';
+import StepRight from '../nodes/StepRight';
+import StepLeft from '../nodes/StepLeft';
 import Keyboard from '../nodes/listeners/Keyboard';
 import {isMobile} from '../utils/utils';
 
@@ -51,6 +51,7 @@ export default class CreateDemoActor extends Command
 
     let animation = new Animation();
     animation.init({
+      ...NodeTemplate.Animation,
       owner: actor,
       x: 250,
       y: 50,
@@ -61,6 +62,7 @@ export default class CreateDemoActor extends Command
 
     let playSound = new PlaySound();
     playSound.init({
+      ...NodeTemplate.PlaySound,
       owner: actor,
       x: 500,
       y: 50,
@@ -73,13 +75,16 @@ export default class CreateDemoActor extends Command
 
     let animationEvent = new AnimationEvent();
     animationEvent.init({
+      ...NodeTemplate.AnimationEvent,
       owner: actor,
       x: 50,
       y: 250
     })
+    console.log(animationEvent.pod())
     
     let playEventSound = new PlaySound();
     playEventSound.init({
+      ...NodeTemplate.PlaySound,
       owner: actor,
       x: 250,
       y: 250,
@@ -91,6 +96,7 @@ export default class CreateDemoActor extends Command
 
     let switchAccess = new SwitchAccess();
     switchAccess.init({
+      ...NodeTemplate.SwitchAccess,
       owner: actor,
       x: 50,
       y: 532,
@@ -102,6 +108,7 @@ export default class CreateDemoActor extends Command
 
     let branch = new Branch();
     branch.init({
+      ...NodeTemplate.Branch,
       owner: actor,
       x: 383,
       y: 532,
@@ -112,6 +119,7 @@ export default class CreateDemoActor extends Command
 
     let flipLeft = new FlipLeft();
     flipLeft.init({
+      ...NodeTemplate.FlipLeft,
       owner: actor,
       x: 590,
       y: 488,
@@ -119,20 +127,23 @@ export default class CreateDemoActor extends Command
 
     let flipRight = new FlipRight();
     flipRight.init({
+      ...NodeTemplate.FlipRight,
       owner: actor,
       x: 590,
       y: 611,
     })
 
-    let moveLeft = new TweenLeft();
+    let moveLeft = new StepLeft();
     moveLeft.init({
+      ...NodeTemplate.StepLeft,
       owner: actor,
       x: 820,
       y: 437,
     })
 
-    let moveRight = new TweenRight();
+    let moveRight = new StepRight();
     moveRight.init({
+      ...NodeTemplate.StepRight,
       owner: actor,
       x: 820,
       y: 661,
@@ -140,6 +151,7 @@ export default class CreateDemoActor extends Command
 
     let equal = new Equal();
     equal.init({
+      ...NodeTemplate.Equal,
       owner: actor,
       variables: {
         B: 'left'
@@ -150,6 +162,7 @@ export default class CreateDemoActor extends Command
 
     let leftKey = new Keyboard();
     leftKey.init({
+      ...NodeTemplate.Keyboard,
       owner: actor,
       variables: {
         code: 'ArrowLeft'
@@ -160,6 +173,7 @@ export default class CreateDemoActor extends Command
 
     let rightKey = new Keyboard();
     rightKey.init({
+      ...NodeTemplate.Keyboard,
       owner: actor,
       variables: {
         code: 'ArrowRight'
@@ -188,7 +202,7 @@ export default class CreateDemoActor extends Command
 
     // play event sound
     playEventSound.inputs.get('sound url').connect(animationEvent.outputs.get('event name'));
-    equal.inputs.get('A').connect(switchAccess.outputs.get('which'));
+    equal.inputs.get('A').connect(switchAccess.outputs.get('switch id'));
     branch.inputs.get('condition').connect(equal.outputs.get('value'));
 
     this.actorID = actor.id;

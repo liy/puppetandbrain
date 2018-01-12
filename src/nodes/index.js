@@ -31,13 +31,13 @@ export Setter from './Setter';
 export PlaySound from './PlaySound';
 export FlipLeft from './FlipLeft';
 export FlipRight from './FlipRight';
-export TweenUp from './TweenUp';
-export TweenDown from './TweenDown';
-export TweenRight from './TweenRight';
-export TweenLeft from './TweenLeft';
+export StepUp from './StepUp';
+export StepDown from './StepDown';
+export StepRight from './StepRight';
+export StepLeft from './StepLeft';
 export SetRotation from './SetRotation';
-export RotateRight from './RotateRight';
-export RotateLeft from './RotateLeft';
+export RotateAntiClockwise from './RotateAntiClockwise';
+export RotateClockwise from './RotateClockwise';
 export SetPosition from './SetPosition';
 
 // listeners
@@ -45,7 +45,7 @@ export GameStart from './listeners/GameStart'
 export Ticker from './listeners/Ticker'
 export Keyboard from './listeners/Keyboard'
 export PointerDown from './listeners/PointerDown'
-export PointerMove from './listeners/PointerMove'
+export CursorMove from './listeners/CursorMove'
 export PointerOver from './listeners/PointerOver'
 export PointerOut from './listeners/PointerOut'
 export PointerUp from './listeners/PointerUp'

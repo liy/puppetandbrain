@@ -1,6 +1,6 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
 
-NodteTemplate.CursorMove = {
+NodeTemplate.CursorMove = {
   ...ParentTemplate,
   name: 'Cursor Move'
 }

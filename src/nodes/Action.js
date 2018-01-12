@@ -1,8 +1,8 @@
-import {Task, Template as TaskTemplate} from './Task'
+import {Task, Template as ParentTemplate} from './Task'
 
 NodeTemplate.Action = {
-  ...TaskTemplate,
-  in: [],
+  ...ParentTemplate,
+  ins: [],
   elementClass: ['action']
 }
 

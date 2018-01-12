@@ -1,10 +1,10 @@
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
 NodeTemplate.Print = {
-  ...TaskTemplate,
-  input: [{
-    name: 'text',
+  ...ParentTemplate,
+  inputs: [{
+    input: 'text',
     type: DataType.GENERIC,
   }]
 }
@@ -15,12 +15,6 @@ export default class extends Task
     super(id);
 
     this.debugTrace = document.getElementById('debug-trace');
-
-    this.inputs.addInput('text');
-  }
-
-  get nodeName() {
-    return 'Print';
   }
 
   run() {

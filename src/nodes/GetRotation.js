@@ -4,11 +4,11 @@ import DataType from '../data/DataType';
 
 NodeTemplate.GetRotation = {
   name: 'Get Rotation',
-  input: [{
-    name: 'actor',
+  inputs: [{
+    inputName: 'actor',
     type: DataType.ACTOR, 
   }],
-  output: [{
+  outputs: [{
     name: 'rotation',
     type: DataType.GENERIC
   }],

@@ -1,15 +1,19 @@
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
 NodeTemplate.Tween = {
-  ...TaskTemplate,
+  ...ParentTemplate,
   name: 'Move',
-  out: ['default', 'completed'],
-  input: [{
-    name: 'position',
+  execution: [{
+    executionName: 'default'
+  }, {
+    executionName: 'completed'
+  }],
+  inputs: [{
+    inputName: 'position',
     type: DataType.VEC2,
   }, {
-    name: 'duration',
+    inputName: 'duration',
     type: DataType.GENERIC,
   }]
 }

@@ -1,6 +1,8 @@
+import DataType from "./data/DataType";
+
 window.NodeTemplate = Object.create(null);
 
-const test = {
+const TestNode = {
 
   ins: [{
     name: 'default',
@@ -30,7 +32,8 @@ const test = {
 
 
   inputs: [{
-    // id: id of the input(pointer)
+    // id of the input(pointer)
+    id: 334,
 
     // TODO: rename to name
     inputName: 'A',

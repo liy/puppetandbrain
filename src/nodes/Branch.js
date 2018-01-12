@@ -3,9 +3,13 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Branch = {
   ...ParentTemplate,
-  out: ['true', 'false'],
-  input: [{
-    name: 'condition',
+  execution: [{
+    executionName: 'true'
+  }, {
+    executionName: 'false'
+  }],
+  inputs: [{
+    inputName: 'condition',
     type: DataType.GENERIC,
   }]
 }

@@ -27,25 +27,19 @@ export class Task extends Node
   init(pod) {
     super.init(pod);
 
-    this.setInitialState();
-  }
+    // in
+    if(pod.ins) {
+      this.ins = NodeTemplate[this.className].ins.concat();
+    }
 
-  mold() {
-    super.mold();
-
-    if(NodeTemplate[this.className]) {
-      // in
-      if(NodeTemplate[this.className].ins) {
-        this.ins = NodeTemplate[this.className].in.concat();
-      }
-
-      // out
-      if(NodeTemplate[this.className].execution) {
-        for(let execution of NodeTemplate[this.className].execution) {
-          this.execution.set(execution.executionName)
-        }
+    // out
+    if(pod.execution) {
+      for(let execution of NodeTemplate[this.className].execution) {
+        this.execution.set(execution.executionName)
       }
     }
+
+    this.setInitialState();
   }
 
   get hasIn() {

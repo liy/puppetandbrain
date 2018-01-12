@@ -2,14 +2,14 @@ import Node from "./Node";
 import DataType from "../data/DataType";
 
 const OperatorTemplate = {
-  input: [{
-    name: 'A',
+  inputs: [{
+    inputName: 'A',
     type: DataType.GENERIC,
   }, {
-    name: 'B',
+    inputName: 'B',
     type: DataType.GENERIC,
   }],
-  output: [{
+  outputs: [{
     name: 'value',
     type: DataType.GENERIC
   }],
@@ -147,7 +147,7 @@ export class LessEqual extends Operator
 
 NodeTemplate.RandomNumber = {
   ...OperatorTemplate,
-  input: [],
+  inputs: [],
   name: 'Random Number'
 }
 export class RandomNumber extends Operator
@@ -167,11 +167,11 @@ export class RandomNumber extends Operator
 
 NodeTemplate.RandomInteger = {
   ...OperatorTemplate,
-  input: [{
-    name: 'min',
+  inputs: [{
+    inputName: 'min',
     type: DataType.GENERIC,
   }, {
-    name: 'max',
+    inputName: 'max',
     type: DataType.GENERIC,
   }],
   name: 'Random Integer'

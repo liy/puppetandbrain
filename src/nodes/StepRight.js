@@ -1,9 +1,13 @@
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 
 NodeTemplate.StepRight = {
-  ...TaskTemplate,
+  ...ParentTemplate,
   name: 'Step Right',
-  out: ['default', 'completed']
+  execution: [{
+    executionName: 'default'
+  }, {
+    executionName: 'completed'
+  }]
 }
 
 export default class StepRight extends Task

@@ -1,14 +1,14 @@
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
 NodeTemplate.SetPosition = {
-  ...TaskTemplate,
+  ...ParentTemplate,
   name: 'Set Position',
-  input: [{
-    name: 'x',
+  inputs: [{
+    inputName: 'x',
     type: DataType.GENERIC,
   }, {
-    name: 'y',
+    inputName: 'y',
     type: DataType.GENERIC,
   }],
   elementClass: ['property']

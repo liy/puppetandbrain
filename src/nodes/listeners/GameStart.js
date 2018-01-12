@@ -1,7 +1,7 @@
-import {Listener, Template as ListenerTemplate} from "./Listener";
+import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.GameStart = {
-  ...ListenerTemplate,
+  ...ParentTemplate,
   name: 'Game Start'
 }
 

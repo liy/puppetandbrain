@@ -3,7 +3,7 @@ import {Task, Template as TaskTemplate} from '../Task'
 export const Template = {
   ...TaskTemplate,
   // no execution in
-  in: [],
+  ins: [],
   elementClass: ['listener']
 }
 

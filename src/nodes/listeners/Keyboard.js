@@ -1,10 +1,15 @@
-import {Listener, Template as ListenerTemplate} from "./Listener";
+import {Listener, Template as ParentTemplate} from "./Listener";
 import DataType from "../../data/DataType";
 
 NodeTemplate.Keyboard = {
-  ...ListenerTemplate,
-  out: ['down', 'up'],
-  input: [{
+  ...ParentTemplate,
+  execution: [{
+      executionName: 'down'
+    }, {
+      executionName: 'up'
+    }
+  ],
+  inputs: [{
     name: 'key name',
     type: DataType.GENERIC
   }]

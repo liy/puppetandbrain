@@ -1,9 +1,13 @@
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 
 NodeTemplate.FlipRight = {
-  ...TaskTemplate,
+  ...ParentTemplate,
   name: 'Flip Right',
-  out: ['default', 'completed']
+  execution: [{
+    executionName: 'default'
+  }, {
+    executionName: 'completed'
+  }]
 }
 
 export default class FlipRight extends Task

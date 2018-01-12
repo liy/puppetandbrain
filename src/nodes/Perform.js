@@ -1,8 +1,6 @@
-import {Task, Template as TaskTemplate} from './Task'
+import {Task} from './Task';
 
-NodeTemplate.Perform = {
-  ...TaskTemplate
-}
+// Perform is dynamic, no template
 
 export default class Perform extends Task
 {

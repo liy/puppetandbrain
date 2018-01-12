@@ -3,14 +3,14 @@ import DataType from "../data/DataType";
 
 NodeTemplate.MakePosition = {
   name: 'Make Position',
-  input: [{
-    name: 'x',
+  inputs: [{
+    inputName: 'x',
     type: DataType.GENERIC,
   }, {
-    name: 'y',
+    inputName: 'y',
     type: DataType.GENERIC,
   }],
-  output: [{
+  outputs: [{
     name: 'position',
     type: DataType.VEC2,
   }],

@@ -1,10 +1,14 @@
 import utils from '../utils/utils';
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 
 NodeTemplate.RotateAntiClockwise = {
-  ...TaskTemplate,
+  ...ParentTemplate,
   name: 'Rotate Anticlockwise',
-  out: ['default', 'completed']
+  execution: [{
+    executionName: 'default'
+  }, {
+    executionName: 'completed'
+  }]
 }
 
 export default class RotateAntiClockwise extends Task

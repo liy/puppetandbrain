@@ -33,9 +33,6 @@ export default class Node extends EventEmitter
     this.owner = LookUp.auto(pod.owner);
     this.owner.brain.addNode(this);
 
-    // read and setup in, out, inputs and outputs from template
-    this.mold();
-
     // Set the variables! I can just do normal ref assignment
     // But do a property assignment, just be safe...
     if(pod.variables) Object.assign(this.variables, pod.variables);
@@ -62,22 +59,6 @@ export default class Node extends EventEmitter
 
     this.x = pod.x;
     this.y = pod.y;
-  }
-
-  mold() {
-    if(NodeTemplate[this.className]) {
-      if(NodeTemplate[this.className].input) {
-        for(let input of NodeTemplate[this.className].input) {
-          this.inputs.addInput(input.name)
-        }
-      }
-
-      if(NodeTemplate[this.className].output) {
-        for(let output of NodeTemplate[this.className].output) {
-          this.outputs.addOutput(output.name)
-        }
-      }
-    }
   }
 
   get className() {

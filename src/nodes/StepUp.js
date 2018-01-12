@@ -1,9 +1,13 @@
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 
 NodeTemplate.StepUp = {
-  ...TaskTemplate,
+  ...ParentTemplate,
   name: 'Step Up',
-  out: ['default', 'completed']
+  execution: [{
+    executionName: 'default'
+  }, {
+    executionName: 'completed'
+  }]
 }
 
 export default class StepUp extends Task

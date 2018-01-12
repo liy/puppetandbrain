@@ -1,11 +1,15 @@
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
 NodeTemplate.Loop = {
-  ...TaskTemplate,
-  out: ['completed', 'body'],
+  ...ParentTemplate,
+  executions: [{
+    executionName: 'completed'
+  }, {
+    executionName: 'body'
+  }],
   input: [{
-    name: 'condition',
+    inputName: 'condition',
     type: DataType.GENERIC,
   }],
   output: [{

@@ -1,21 +1,19 @@
-import {Task, Template as TaskTemplate} from './Task'
+import {Task, Template as ParentTemplate} from './Task'
 import DataType from '../data/DataType';
 
-export const Template = NodeTemplate.Animation = {
-  ...TaskTemplate,
-  input: [{
-    name: 'name',
+NodeTemplate.Animation = {
+  ...ParentTemplate,
+  inputs: [{
+    inputName: 'name',
     type: DataType.GENERIC
   }],
-  output: [],
+  outputs: [],
 }
 
 export default class Animation extends Task
 {
   constructor(id) {
     super(id);
-
-    console.log(this.nodeName)
   }
 
   run() {

@@ -1,19 +1,23 @@
 import Switch from '../../switch/Switch';
-import {Listener, Template as ListenerTemplate} from "./Listener";
+import {Listener, Template as ParentTemplate} from "./Listener";
 import DataType from "../../data/DataType";
 
 NodeTemplate.SwitchAccess = {
-  ...ListenerTemplate,
+  ...ParentTemplate,
   name: 'Switch',
-  out: ['down', 'up'],
-  input: [{
-    name: 'debounce',
+  execution: [{
+    executionName: 'down'
+  }, {
+    executionName: 'up'
+  }],
+  inputs: [{
+    inputName: 'debounce',
     type: DataType.GENERIC,
   }, {
-    name: 'pre-acceptance',
+    inputName: 'pre-acceptance',
     type: DataType.GENERIC,
   }],
-  output: [{
+  outputs: [{
     name: 'switch id',
     type: DataType.GENERIC
   }]

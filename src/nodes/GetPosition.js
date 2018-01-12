@@ -3,11 +3,11 @@ import DataType from '../data/DataType';
 
 NodeTemplate.GetPosition = {
   name: 'Get Position',
-  input: [{
-    name: 'actor',
+  inputs: [{
+    inputName: 'actor',
     type: DataType.ACTOR, 
   }],
-  output: [{
+  outputs: [{
     name: 'position',
     type: DataType.MAP
   }],

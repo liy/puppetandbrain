@@ -1,11 +1,15 @@
-import {Task, Template as TaskTemplate} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
 NodeTemplate.Repeat = {
-  ...TaskTemplate,
-  out: ['completed', 'body'],
-  input: [{
-    name: 'count',
+  ...ParentTemplate,
+  execution: [{
+    executionName: 'completed'
+  }, {
+    executionName: 'body'
+  }],
+  inputs: [{
+    inputName: 'count',
     type: DataType.GENERIC,
   }],
   output: [{

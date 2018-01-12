@@ -1,18 +1,22 @@
-import {Task, Template as TaskTemplate} from './Task'
+import {Task, Template as ParentTemplate} from './Task'
 import DataType from "../data/DataType";
 
 NodeTemplate.PlaySound = {
-  ...TaskTemplate,
+  ...ParentTemplate,
   name: 'Play Sound',
-  out: ['default', 'completed'],
-  input: [{
-    name: 'sound url',
+  execution: [{
+    executionName: 'default'
+  }, {
+    executionName: 'completed'
+  }],
+  inputs: [{
+    inputName: 'sound url',
     type: DataType.GENERIC,
   },{
-    name: 'loop',
+    inputName: 'loop',
     type: DataType.GENERIC,
   }],
-  output: [{
+  outputs: [{
     name: 'audio',
     type: DataType.GENERIC
   }]

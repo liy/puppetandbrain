@@ -2,11 +2,10 @@ import Node from "./Node";
 import DataType from "../data/DataType";
 
 NodeTemplate.Break = {
-  name: 'Break',
-  in: ['default'],
-  out: ['default'],
-  input: [{
-    name: 'in',
+  ins: [],
+  execution: [],
+  inputs: [{
+    inputName: 'in',
     type: DataType.GENERIC,
   }]
 }

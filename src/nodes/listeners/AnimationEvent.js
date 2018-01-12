@@ -1,10 +1,10 @@
-import {Listener, Template as ListenerTemplate} from "./Listener";
+import {Listener, Template as ParentTemplate} from "./Listener";
 import DataType from "../../data/DataType";
 
 NodeTemplate.AnimationEvent = {
-  ...ListenerTemplate,
+  ...ParentTemplate,
   name: 'Animation Event',
-  output: [{
+  outputs: [{
     name: 'event name',
     type: DataType.GENERIC
   }]
