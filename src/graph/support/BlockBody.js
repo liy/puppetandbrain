@@ -33,7 +33,9 @@ export default class BlockBody
     this.right.className = 'right';
     this.content.appendChild(this.right);
 
-    this.element.appendChild(new BlockIcon(svgElement(ClockIcon, {width:64, height:64})).element);
+    this.body.style.backgroundImage = `url("${require('!file-loader!../../assets/icons/clock.svg')}")`
+    this.body.style.backgroundRepeat = 'no-repeat';
+    this.body.style.backgroundPosition = 'center';
   }
 
   addLeft(pin) {
