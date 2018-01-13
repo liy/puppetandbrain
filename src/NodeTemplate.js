@@ -4,28 +4,25 @@ window.NodeTemplate = Object.create(null);
 
 const TestNode = {
 
-  enters: [{
+  enter: {
     name: 'default',
+    enabled: true,
 
-    // FUTURE: multiple execution in. Merge the callers field
-    links: [{
-      node: 123,
-      name: 'name'
+    // multiple execution in. Merge the callers field
+    callers: [{
+      nodeID: 123,
+      executionName: 'name'
     },{
-      node: 124,
-      name: 'name'
+      nodeID: 124,
+      executionName: 'name'
     }]
-  }],
+  },
 
 
   execution: [{
-    name: 'default',
-
-    // FUTURE
-    link: {
-      node: 123,
-      name: 'name'
-    }
+    name: 'out execution name',
+    // execution connect to this node id
+    nodeID: 123,
   }],
 
 
@@ -38,9 +35,9 @@ const TestNode = {
 
     // TODO: add value property, which contains input default value.
 
-    // TODO: rename output to link
-    link: {
-      node: 123,
+    output: {
+      // rename node to nodeID
+      nodeID: 123,
       name: 'output name'
     }
   }],
@@ -50,12 +47,13 @@ const TestNode = {
     name: 'value',
     type: DataType.GENERIC,
 
-    // FUTURE: connection to a node
-    links: [{
-      node: 123,
+
+    // TODO: double check the naming
+    connections: [{
+      nodeID: 123,
       name: 'input name'
     }, {
-      node: 124,
+      nodeID: 124,
       name: 'input name'
     }]
   }],

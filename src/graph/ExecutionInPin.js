@@ -10,8 +10,8 @@ export default class ExecutionInPin extends ExecutionPin
   }
 
   getConnectedPins() {
-    return this.node.callers.getValues().map(caller => {
-      let block = BrainGraph.getBlock(caller.task.id);
+    return this.node.getCallers().map(caller => {
+      let block = BrainGraph.getBlock(caller.nodeID);
       return block.outPins.get(caller.executionName);
     })
   }

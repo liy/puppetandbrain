@@ -1,11 +1,13 @@
-import Execution from './Execution'
+import Execution from '../edge/Execution'
+import Enter from '../edge/Enter'
 import Node from './Node';
 import ArrayMap from '../utils/ArrayMap';
 
 export const Template = {
-  ins: [{
-    name: 'default'
-  }],
+  enter: {
+    name: 'default',
+    enabled: true,
+  },
   execution: [{
     name: 'default'
   }],
@@ -19,18 +21,16 @@ export class Task extends Node
   constructor(id) {
     super(id);
 
-    this.ins = [];
-    this.execution = new Execution(this);
-    this.callers = new ArrayMap();
+    this.enter = new Enter();
+    this.execution = new Execution();
   }
 
   init(pod) {
     super.init(pod);
 
     // in
-    if(pod.ins) {
-      this.ins = NodeTemplate[this.className].ins.concat();
-    }
+    this.enter.name = pod.enter.name;
+    this.enter.enabled = pod.enter.enabled;
 
     // out
     if(pod.execution) {
@@ -40,10 +40,6 @@ export class Task extends Node
     }
 
     this.setInitialState();
-  }
-
-  get hasIn() {
-    return this.ins.length != 0;
   }
 
   setInitialState() {
@@ -57,26 +53,19 @@ export class Task extends Node
     this.variables = this.initialState.variables;
   }
 
+  getCallers() {
+    return this.enter.getCallers();
+  }
+
   connectNext(target, executionName='default') {
     // Remove old target connection information
-    let oldTarget = this.execution.get(executionName);
-    if(oldTarget) this.disconnectNext(oldTarget, executionName);
+    let oldTask = this.execution.get(executionName);
+    if(oldTask) this.disconnectNext(oldTask, executionName);
 
-    // setup new connection to target
-    this.execution.set(executionName, target)
-
-    // Make the target knows that it is connected by this task
-    // 
-    // Note that caller's key is combination of
-    // the caller's id and its execution name.
-    // this because same caller can have multiple
-    // executions connected to this task. Caller's
-    // id cannot identify the actual execution information.
-    // Combine both id and exeuction name can solve the issue
-    target.callers.set(this.id+'.'+executionName, {
-      executionName: executionName,
-      task: this
-    });
+    // link execution name with the target
+    this.execution.connect(executionName, target)
+    // link target enter with this node
+    target.enter.connect(this, executionName)
 
     return target;
   }
@@ -87,10 +76,10 @@ export class Task extends Node
   }
 
   disconnectNext(target, executionName='default') {
-    // Note the combination of id and exeuciton name is used
-    // for removing the caller information.
-    target.callers.remove(this.id+'.'+executionName)
-    this.execution.set(executionName, null);
+    // disconnect target enter with this node execution name
+    target.enter.disconnect(this, executionName);
+    // disconnect this execution name
+    this.execution.disconnect(executionName);
   }
 
   disconnectParent(parent, parentExecutionName) {
@@ -108,12 +97,7 @@ export class Task extends Node
       id: this.id,
       execution: this.execution.pod(),
       // This is used when redo block deletion to connect parent nodes 
-      callers: this.callers.getValues().map(caller => {
-        return {
-          executionName: caller.executionName,
-          id: caller.task.id
-        }
-      })
+      enter: this.enter.pod()
     }
   }
 }

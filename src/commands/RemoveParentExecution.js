@@ -7,21 +7,16 @@ export default class RemoveParentExecution extends Command
 
     this.sourceNodeID = sourceNodeID;
     let sourceNode = LookUp.get(this.sourceNodeID );
-    this.callers = sourceNode.callers.getValues().map(caller => {
-      return {
-        id: caller.task.id,
-        executionName: caller.executionName,
-      }
-    })
+    this.callerPods = sourceNode.getCallers();
   }
 
   process() {
-    for(let caller of this.callers) {
-      LookUp.get(this.sourceNodeID).disconnectParent(LookUp.get(caller.id), caller.executionName);
+    for(let pod of this.callerPods) {
+      LookUp.get(this.sourceNodeID).disconnectParent(LookUp.get(pod.nodeID), pod.executionName);
 
-      // refresh the caller's output pins
-      let callerBlock = BrainGraph.getBlock(caller.id);
-      callerBlock.outPins.get(caller.executionName).refreshSymbol();
+      // refresh the pod's output pins
+      let callerBlock = BrainGraph.getBlock(pod.nodeID);
+      callerBlock.outPins.get(pod.executionName).refreshSymbol();
     }
     
     // refresh this input pin
@@ -32,8 +27,8 @@ export default class RemoveParentExecution extends Command
   }
 
   undo() {
-    for(let caller of this.callers) {
-      LookUp.get(this.sourceNodeID).connectParent(LookUp.get(caller.id), caller.executionName);
+    for(let pod of this.callerPods) {
+      LookUp.get(this.sourceNodeID).connectParent(LookUp.get(pod.nodeID), pod.executionName);
     }
     BrainGraph.refresh();
   }

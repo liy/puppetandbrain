@@ -44,6 +44,7 @@ export default class CreateDemoActor extends Command
     // Add default game start action
     let gameStart = new GameStart();
     gameStart.init({
+      ...NodeTemplate.GameStart,
       owner: actor,
       x: 50,
       y: 50

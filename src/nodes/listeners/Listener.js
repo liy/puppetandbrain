@@ -1,9 +1,11 @@
-import {Task, Template as TaskTemplate} from '../Task'
+import {Task, Template as ParentTemplate} from '../Task'
 
 export const Template = {
-  ...TaskTemplate,
+  ...ParentTemplate,
   // no execution in
-  ins: [],
+  enter: {
+    enabled: false
+  },
   elementClass: ['listener']
 }
 

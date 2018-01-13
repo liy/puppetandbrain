@@ -23,6 +23,12 @@ export default class ArrayMap
     }
   }
 
+  map(callback) {
+    return this.keys.map(key => {
+      return callback(key, this.values[key]);
+    })
+  }
+
   set(key, value) {
     if(this.keys.indexOf(key) == -1) {
       this.keys.push(key);

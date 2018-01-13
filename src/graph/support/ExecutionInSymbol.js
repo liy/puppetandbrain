@@ -26,7 +26,7 @@ export default class ExecutionInSymbol extends ExecutionSymbol
   }
 
   get isConnected() {
-    return this.node.callers.length != 0;
+    return this.node.enter.isConnected;
   }
 
   refresh() {
@@ -56,8 +56,8 @@ export default class ExecutionInSymbol extends ExecutionSymbol
   }
   
   getConnectedPins() {
-    return this.node.callers.getValues().map(caller => {
-      let block = BrainGraph.getBlock(caller.task.id);
+    return this.node.getCallers().map(caller => {
+      let block = BrainGraph.getBlock(caller.nodeID);
       return block.outPins.get(caller.executionName);
     })
   }
