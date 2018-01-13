@@ -11,8 +11,6 @@ export default class DataSymbol
     this.flow = flow;
     this.type = 'data';
 
-    this.linkSound = new Audio(require('../../assets/sounds/link.mp3'))
-
     // this.svg = new DOMParser().parseFromString(require('../../assets/data-symbol.svg'), "image/svg+xml").rootElement;
     // this.svg.setAttribute('class', 'data-svg');
     // this.svg.setAttribute('width', 34);

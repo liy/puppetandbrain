@@ -8,13 +8,6 @@ import AExecutionOutPin from '../support/AExecutionOutPin';
 import BlockSelection from '../BlockSelection';
 import EventEmitter from '../../utils/EventEmitter';
 
-import {svgElement} from '../../utils/utils';
-
-// TODO: remove this
-import ClockIcon from '../../assets/icons/clock.svg';
-import BlockIcon from '../support/BlockIcon';
-
-
 export default class Block extends EventEmitter
 {
   constructor() {

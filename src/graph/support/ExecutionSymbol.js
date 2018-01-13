@@ -9,8 +9,6 @@ export default class ExecutionSymbol
     this.flow = flow;
     this.type = 'execution';
 
-    this.linkSound = new Audio(require('../../assets/sounds/link.mp3'));
-
     this._offsetX = 0;
   }
 

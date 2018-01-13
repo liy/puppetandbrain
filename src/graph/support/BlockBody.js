@@ -1,6 +1,4 @@
 import './BlockBody.scss';
-import BlockIcon from './BlockIcon';
-import {svgElement} from '../../utils/utils';
 
 // TODO: remove this
 import ClockIcon from '../../assets/icons/clock.svg';

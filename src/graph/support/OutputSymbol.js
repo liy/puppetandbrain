@@ -3,6 +3,8 @@ import ConnectHelper from '../ConnectHelper';
 import OutputIcon from '../../assets/output.svg';
 import {svgElement} from '../../utils/utils';
 
+const linkSound = new Audio(require('../../assets/sounds/link.mp3'));
+
 export default class OutputSymbol extends DataSymbol
 {
   constructor(name) {
@@ -32,7 +34,7 @@ export default class OutputSymbol extends DataSymbol
 
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
-      this.linkSound.play()
+      linkSound.play()
       History.push(Commander.create('CreateDataLink', ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name, 
         this.node.id, this.name).processAndSave());
     }

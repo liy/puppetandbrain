@@ -3,6 +3,8 @@ import ExecutionSymbol from "./ExecutionSymbol";
 import {svgElement} from '../../utils/utils';
 import ExecutionInIcon from '../../assets/execution-in.svg';
 
+const linkSound = new Audio(require('../../assets/sounds/link.mp3'))
+
 export default class ExecutionInSymbol extends ExecutionSymbol
 {
   constructor() {
@@ -48,7 +50,7 @@ export default class ExecutionInSymbol extends ExecutionSymbol
 
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
-      this.linkSound.play()      
+      linkSound.play()      
       History.push(Commander.create('CreateExecution', ConnectHelper.startSymbol.node.id, 
         ConnectHelper.startSymbol.name, this.node.id).processAndSave());
     }
