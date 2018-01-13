@@ -1,5 +1,4 @@
 require('./ContentSection.scss')
-import DummyBlock from "./DummyBlock";
 import GroupSection from './GroupSection';
 
 export default class ContentSection

@@ -36,8 +36,8 @@ export default class Block extends EventEmitter
     this.body.element.addEventListener('mouseup', this.dragstop);
     this.body.element.addEventListener('touchend', this.dragstop);
     
-    if(node.elementClassName) {
-      for(let className of node.elementClassName) {
+    if(node.elementClass) {
+      for(let className of node.elementClass) {
         this.element.classList.add(className);
       }
     }
@@ -192,5 +192,13 @@ export default class Block extends EventEmitter
     }
 
     this.element.style.position = 'relative'
+
+    this.body.element.addEventListener('mousedown', e => {
+      console.log(e)
+      this.emit('block.chosen', pod);
+    }, {capture:true});
+    // this.body.element.addEventListener('touchstart', e => {
+    //   this.emit('block.chosen', pod);
+    // }, {capture:true});
   }
 }

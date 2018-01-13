@@ -1,4 +1,3 @@
-import DummyBlock from "./DummyBlock";
 require('./GroupSection.scss');
 
 export default class GroupSection

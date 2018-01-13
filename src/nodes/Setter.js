@@ -1,6 +1,11 @@
 import {Task} from "./Task";
 
 NodeTemplate.Setter = {
+  enter: {
+    name: 'default',
+    enabled: true,
+  },
+  execution: ['default'],
   elementClass: ['property', 'setter'],
   category: 'Property'
 }

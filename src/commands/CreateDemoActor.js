@@ -101,6 +101,7 @@ export default class CreateDemoActor extends Command
       y: 532
     })
 
+    console.log(NodeTemplate.Branch)
     let branch = new Branch();
     branch.init({
       ...NodeTemplate.Branch,

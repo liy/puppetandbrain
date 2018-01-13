@@ -4,17 +4,18 @@ import DataType from '../data/DataType';
 NodeTemplate.Print = {
   ...ParentTemplate,
   inputs: [{
-    input: 'text',
+    name: 'text',
     type: DataType.GENERIC,
   }],
   memory: {
     text: 'default text'
   },
-  category: 'Debug',
-  keyword: ['trace']
+  category: 'Utilities',
+  elementClass: ['utility'],
+  keywords: ['trace']
 }
 
-export default class extends Task
+export default class Print extends Task
 {
   constructor(id) {
     super(id);

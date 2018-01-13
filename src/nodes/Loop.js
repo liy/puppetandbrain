@@ -19,6 +19,7 @@ NodeTemplate.Loop = {
   memory: {
     condition: true,
   },
+  elementClass: ['flow-control'],
   category: 'Flow Control',
 }
 

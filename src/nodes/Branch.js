@@ -15,6 +15,7 @@ NodeTemplate.Branch = {
   memory: {
     condition: true
   },
+  elementClass: ['flow-control'],
   category: 'Flow Control',
   keywords: ['if else']
 }

@@ -17,10 +17,15 @@
   height: 29px;
   display: flex;
 
-  .input-field {
+  .text-field {
     margin-right: 13px;
     line-height: 29px;
     margin-top: 5px;
+
+    // place holder
+    .data-text:empty:before {
+      color: rgb(185, 185, 185);
+    }
   }
 }
 

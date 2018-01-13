@@ -60,23 +60,32 @@ export default class BlockBrowser extends Browser
       for(let variable of BrainGraph.brain.variables) {
         templates.push({
           ...NodeTemplate.Getter,
-          name: `Get ${BrainGraph.brain.owner.name} ${name}`,
-          // Note that, owner is the node's owner
-          owner: BrainGraph.BrainGraph.brain.owner,
-          targetBrain: BrainGraph.brain,
-          variableID: variable.id,
-          outputs: [{name}],
-        })
-        templates.push({
-          name: `Set ${brain.owner.name} ${name}`,
+          name: `Get ${BrainGraph.brain.owner.name} ${variable.name}`,
           // Note that, owner is the node's owner
           owner: BrainGraph.brain.owner,
-          targetBrain: brain,
+          targetBrain: BrainGraph.brain,
           variableID: variable.id,
-          inputs: [{name}],
-          outputs: [{name}],
+          inputs: [],
+          outputs: [{
+            name: variable.name,
+          }],
+        })
+        templates.push({
+          ...NodeTemplate.Setter,
+          name: `Set ${BrainGraph.brain.owner.name} ${variable.name}`,
+          // Note that, owner is the node's owner
+          owner: BrainGraph.brain.owner,
+          targetBrain: BrainGraph.brain,
+          variableID: variable.id,
+          inputs: [{
+            name: variable.name
+          }],
+          outputs: [{
+            name: variable.name
+          }],
         })
       }
+      console.log(templates)
 
       // break position
       templates.push({

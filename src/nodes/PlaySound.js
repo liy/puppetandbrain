@@ -24,7 +24,8 @@ NodeTemplate.PlaySound = {
     loop: true,
     'sound url': '',
   },
-  category: 'Audio'
+  category: 'Audio',
+  elementClass: ['audio']
 }
 export default class PlaySound extends Task
 {

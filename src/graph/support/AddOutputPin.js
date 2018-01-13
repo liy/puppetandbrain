@@ -13,7 +13,7 @@ export default class
     this.pin.className = 'add-output-pin';
     this.element.appendChild(this.pin)
 
-    this.textField = new TextField();
+    this.textField = new TextField(null, '...');
     this.pin.appendChild(this.textField.element);
 
     this.head = document.createElement('div');

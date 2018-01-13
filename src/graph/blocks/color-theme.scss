@@ -74,6 +74,7 @@
   .container {
     min-height: 80px;
   }
+
   .left {
     justify-content: center;
   }
@@ -235,5 +236,87 @@
   }
   .execution-pin {
     color: #D9D9D9
+  }
+}
+
+.flow-control {
+  $baseR: 57;
+  $baseG: 87;
+  $baseB: 142;
+  $baseA: 0.85;
+  $r: 72;
+  $g: 110;
+  $b: 179;
+  $a: 0.6;
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin {
+    color: #bfbfbf
+  }
+  .execution-pin {
+    color: #bfbfbf
+  }
+}
+
+.audio {
+  $baseR: 177;
+  $baseG: 114;
+  $baseB: 37;
+  $baseA: 0.85;
+  $r: 212;
+  $g: 140;
+  $b: 52;
+  $a: 0.6;
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin {
+    color: #d8d8d8
+  }
+  .execution-pin {
+    color: #d8d8d8
+  }
+}
+
+.center-input {
+  .left {
+    justify-content: center;
+  }
+}
+
+.center-output {
+  .right {
+    justify-content: center;
   }
 }

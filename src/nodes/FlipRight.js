@@ -8,7 +8,7 @@ NodeTemplate.FlipRight = {
   }, {
     name: 'completed'
   }],
-  category: 'Property',
+  category: 'Animation',
 }
 
 export default class FlipRight extends Task

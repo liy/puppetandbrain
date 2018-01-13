@@ -11,7 +11,7 @@ NodeTemplate.StepDown = {
   category: 'Animation'
 }
 
-export default class extends Task
+export default class StepDown extends Task
 {
   constructor(id) {
     super(id);
