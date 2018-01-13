@@ -81,7 +81,6 @@ export default class CreateDemoActor extends Command
       x: 50,
       y: 250
     })
-    console.log(animationEvent.pod())
     
     let playEventSound = new PlaySound();
     playEventSound.init({

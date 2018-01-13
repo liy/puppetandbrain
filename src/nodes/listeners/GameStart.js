@@ -5,8 +5,6 @@ NodeTemplate.GameStart = {
   name: 'Game Start'
 }
 
-console.log(NodeTemplate.GameStart)
-
 export default class GameStart extends Listener
 {
   constructor(id) {

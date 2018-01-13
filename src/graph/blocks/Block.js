@@ -55,7 +55,7 @@ export default class Block
 
     let pin = null;
     if(node.execution) {
-      if(node.hasIn) {
+      if(node.enter.enabled) {
         this.inPin = new AExecutionInPin();
         this.inPin.init(node);
         this.body.addLeft(this.inPin);

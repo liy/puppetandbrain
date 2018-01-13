@@ -15,7 +15,7 @@ export default
         targetNode = pin.node;
       }
       // target node has no execution in, do not connect
-      else if(!targetNode.hasIn){
+      else if(!targetNode.enter.enabled){
         return;
       }
       History.push(Commander.create('CreateExecution', sourceNode.id, executionName, targetNode.id).processAndSave());

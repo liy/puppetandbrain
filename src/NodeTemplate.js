@@ -48,7 +48,6 @@ const TestNode = {
     type: DataType.GENERIC,
 
 
-    // TODO: double check the naming
     connections: [{
       nodeID: 123,
       name: 'input name'

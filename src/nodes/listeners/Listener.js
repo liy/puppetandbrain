@@ -4,6 +4,7 @@ export const Template = {
   ...ParentTemplate,
   // no execution in
   enter: {
+    name: 'default',
     enabled: false
   },
   elementClass: ['listener']

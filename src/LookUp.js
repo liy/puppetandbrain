@@ -198,11 +198,11 @@ window.LookUp = {
     })
   },
 
-  pod: function() {
+  pod: function(detail=false) {
     let result = {};
     result.store = {};
     for(let id in this.store) {
-      result.store[id] = this.store[id].pod(false);
+      result.store[id] = this.store[id].pod(detail);
     }
     result.actors = ACTORS;
     result.nodes = NODES;

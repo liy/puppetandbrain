@@ -68,7 +68,7 @@ export default class Output extends EventEmitter
         return {
           id: pointer.id,
           inputNode: pointer.inputNode.id,
-          inputName: pointer.inputName,
+          inputName: pointer.name,
         }
       })
     }
