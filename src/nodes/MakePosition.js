@@ -14,7 +14,11 @@ NodeTemplate.MakePosition = {
     name: 'position',
     type: DataType.VEC2,
   }],
-  elementClass: ['getter']
+  elementClass: ['getter'],
+  memory: {
+    x: 0,
+    y: 0,
+  }
 }
 
 export default class MakePosition extends Node

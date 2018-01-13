@@ -15,7 +15,10 @@ NodeTemplate.Repeat = {
   output: [{
     name: 'index',
     type: DataType.GENERIC,
-  }]
+  }],
+  memory: {
+    count: 3
+  }
 }
 
 export default class Repeat extends Task

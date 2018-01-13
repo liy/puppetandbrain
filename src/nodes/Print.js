@@ -6,7 +6,10 @@ NodeTemplate.Print = {
   inputs: [{
     input: 'text',
     type: DataType.GENERIC,
-  }]
+  }],
+  memory: {
+    text: 'default text'
+  }
 }
 
 export default class extends Task

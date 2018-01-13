@@ -2,7 +2,9 @@ import Node from "./Node";
 import DataType from "../data/DataType";
 
 NodeTemplate.Break = {
-  ins: [],
+  enter: {
+    enabled: false
+  },
   execution: [],
   inputs: [{
     name: 'in',

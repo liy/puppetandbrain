@@ -8,6 +8,9 @@ NodeTemplate.Animation = {
     type: DataType.GENERIC
   }],
   outputs: [],
+  memory: {
+    name: 'idle'
+  }
 }
 
 export default class Animation extends Task

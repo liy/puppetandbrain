@@ -20,7 +20,11 @@ NodeTemplate.SwitchAccess = {
   outputs: [{
     name: 'switch id',
     type: DataType.GENERIC
-  }]
+  }],
+  memory: {
+    debounce: 1,
+    'pre-acceptance': 0
+  }
 }
 
 export default class SwitchAccess extends Listener

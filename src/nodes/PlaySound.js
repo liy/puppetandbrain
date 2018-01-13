@@ -19,7 +19,11 @@ NodeTemplate.PlaySound = {
   outputs: [{
     name: 'audio',
     type: DataType.GENERIC
-  }]
+  }],
+  memory: {
+    loop: true,
+    'sound url': '',
+  }
 }
 export default class PlaySound extends Task
 {

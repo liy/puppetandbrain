@@ -49,9 +49,6 @@ export default class Node extends EventEmitter
     if(pod.inputs) {
       for(let pointerPod of pod.inputs) {
         this.inputs.addInput(pointerPod.name)
-
-        // You can provide a data property in pod, to set the input memory data
-        if(pointerPod.data) this.memory[pointerPod.name] = pointerPod.data;
       }
     }
 

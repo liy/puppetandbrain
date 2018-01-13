@@ -15,7 +15,11 @@ NodeTemplate.Tween = {
   }, {
     name: 'duration',
     type: DataType.GENERIC,
-  }]
+  }],
+  memory: {
+    position: {x:0,y:0},
+    duration: 1
+  }
 }
 
 export default class Tween extends Task
@@ -25,16 +29,6 @@ export default class Tween extends Task
 
     this.stop = this.stop.bind(this);
     Stage.on('game.stop', this.stop)
-  }
-
-  init(pod) {
-    super.init(pod);
-
-    this.memory.duration = this.memory.duration || 1
-    this.memory.position = this.memory.position || {
-      x: this.owner.x+100,
-      y: this.owner.y
-    }
   }
 
   destroy() {

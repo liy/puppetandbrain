@@ -15,7 +15,10 @@ NodeTemplate.Loop = {
   output: [{
     name: 'count',
     type: DataType.GENERIC,
-  }]
+  }],
+  memory: {
+    condition: true,
+  }
 }
 
 export default class Loop extends Task

@@ -13,7 +13,11 @@ const OperatorTemplate = {
     name: 'value',
     type: DataType.GENERIC
   }],
-  elementClass: ['operator']
+  memory: {
+    A: 0,
+    B: 0,
+  },
+  elementClass: ['operator'],
 }
 // FIXME: find a better way to handle type parsing!!
 export class Operator extends Node
@@ -168,6 +172,7 @@ export class RandomNumber extends Operator
 
 NodeTemplate.RandomInteger = {
   ...OperatorTemplate,
+  name: 'Random Integer',
   inputs: [{
     name: 'min',
     type: DataType.GENERIC,
@@ -175,7 +180,10 @@ NodeTemplate.RandomInteger = {
     name: 'max',
     type: DataType.GENERIC,
   }],
-  name: 'Random Integer'
+  memory: {
+    min: 0,
+    max: 1
+  }
 }
 export class RandomInteger extends Operator
 {

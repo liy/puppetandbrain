@@ -9,6 +9,9 @@ NodeTemplate.SetRotation = {
     name: 'rotation',
     type: DataType.GENERIC,
   }],
+  memory: {
+    rotation: 0
+  },
   elementClass: ['property']
 }
 

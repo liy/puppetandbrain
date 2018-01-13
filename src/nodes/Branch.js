@@ -11,7 +11,10 @@ NodeTemplate.Branch = {
   inputs: [{
     name: 'condition',
     type: DataType.GENERIC,
-  }]
+  }],
+  memory: {
+    condition: true
+  }
 }
 
 export default class Branch extends Task

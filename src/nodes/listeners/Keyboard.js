@@ -11,8 +11,11 @@ NodeTemplate.Keyboard = {
   ],
   inputs: [{
     name: 'key name',
-    type: DataType.GENERIC
-  }]
+    type: DataType.GENERIC,
+  }],
+  memory: {
+    'key name': 'Space'
+  }
 }
 
 export default class Keyboard extends Listener

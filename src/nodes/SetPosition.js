@@ -11,20 +11,17 @@ NodeTemplate.SetPosition = {
     name: 'y',
     type: DataType.GENERIC,
   }],
-  elementClass: ['property']
+  memory: {
+    x: 0,
+    y: 0,
+  },
+  elementClass: ['property'],
 }
 
 export default class SetPosition extends Task
 {
   constructor(id) {
     super(id)
-  }
-
-  init(pod) {
-    super.init(pod);
-
-    this.memory.x = pod.memory.x || this.owner.x
-    this.memory.y = pod.memory.y || this.owner.y
   }
 
   run() {

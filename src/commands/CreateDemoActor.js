@@ -56,7 +56,7 @@ export default class CreateDemoActor extends Command
       owner: actor,
       x: 250,
       y: 50,
-      variables: {
+      memory: {
         name: 'run'
       }
     })
@@ -67,7 +67,7 @@ export default class CreateDemoActor extends Command
       owner: actor,
       x: 500,
       y: 50,
-      variables: {
+      memory: {
         'sound url': 'Jambalaya Loop.mp3',
         // On mobile play sound require a user interaciton so enable loop by default
         'loop': isMobile
@@ -88,8 +88,7 @@ export default class CreateDemoActor extends Command
       owner: actor,
       x: 250,
       y: 250,
-      variables: {
-        'sound url': '',
+      memory: {
         'loop': false
       }
     })
@@ -99,11 +98,7 @@ export default class CreateDemoActor extends Command
       ...NodeTemplate.SwitchAccess,
       owner: actor,
       x: 50,
-      y: 532,
-      variables: {
-        debounce: 0,
-        'pre-acceptance': 0
-      }
+      y: 532
     })
 
     let branch = new Branch();
@@ -111,10 +106,7 @@ export default class CreateDemoActor extends Command
       ...NodeTemplate.Branch,
       owner: actor,
       x: 383,
-      y: 532,
-      variables: {
-        condition: true,
-      }
+      y: 532
     })
 
     let flipLeft = new FlipLeft();
@@ -153,7 +145,8 @@ export default class CreateDemoActor extends Command
     equal.init({
       ...NodeTemplate.Equal,
       owner: actor,
-      variables: {
+      memory: {
+        // left switch id is 1
         B: 1
       },
       x: 240,
@@ -164,7 +157,7 @@ export default class CreateDemoActor extends Command
     leftKey.init({
       ...NodeTemplate.Keyboard,
       owner: actor,
-      variables: {
+      memory: {
         'key name': 'ArrowLeft'
       },
       x: 50,
@@ -175,7 +168,7 @@ export default class CreateDemoActor extends Command
     rightKey.init({
       ...NodeTemplate.Keyboard,
       owner: actor,
-      variables: {
+      memory: {
         'key name': 'ArrowRight'
       },
       x: 50,
