@@ -2,7 +2,8 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.PointerDown = {
   ...ParentTemplate,
-  name: 'Release'
+  name: 'Release',
+  keywords: [...ParentTemplate.keywords, , 'mouse up']
 }
 
 export default class PointerUp extends Listener

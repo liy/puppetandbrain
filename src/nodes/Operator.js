@@ -18,6 +18,8 @@ const OperatorTemplate = {
     B: 0,
   },
   elementClass: ['operator'],
+  category: 'Math',
+  keywords: ['operator']
 }
 // FIXME: find a better way to handle type parsing!!
 export class Operator extends Node
@@ -40,7 +42,8 @@ export class Operator extends Node
 
 NodeTemplate.Addition = {
   ...OperatorTemplate,
-  name: 'Add'
+  name: 'Add',
+  keywords: [...OperatorTemplate.keywords, '+', 'addition']
 }
 export class Addition extends Operator
 {
@@ -55,7 +58,8 @@ export class Addition extends Operator
 
 NodeTemplate.Multiply = {
   ...OperatorTemplate,
-  name: 'Multiply'
+  name: 'Multiply',
+  keywords: [...OperatorTemplate.keywords, '*', 'multiply']
 }
 export class Multiply extends Operator
 {
@@ -70,7 +74,8 @@ export class Multiply extends Operator
 
 NodeTemplate.Divide = {
   ...OperatorTemplate,
-  name: 'Divide'
+  name: 'Divide',
+  keywords: [...OperatorTemplate.keywords, '/', 'division']
 }
 export class Divide extends Operator
 {
@@ -86,7 +91,8 @@ export class Divide extends Operator
 
 NodeTemplate.Equal = {
   ...OperatorTemplate,
-  name: '='
+  name: '=',
+  keywords: [...OperatorTemplate.keywords, '=', 'equal']
 }
 export class Equal extends Operator
 {
@@ -109,7 +115,8 @@ export class Equal extends Operator
 
 NodeTemplate.LessThan = {
   ...OperatorTemplate,
-  name: '<'
+  name: '<',
+  keywords: [...OperatorTemplate.keywords, '<', 'less than', 'less']
 }
 export class LessThan extends Operator
 {
@@ -132,7 +139,8 @@ export class LessThan extends Operator
 
 NodeTemplate.LessEqual = {
   ...OperatorTemplate,
-  name: '<='
+  name: '<=',
+  keywords: [...OperatorTemplate.keywords, '<=', 'less equal']
 }
 export class LessEqual extends Operator
 {
@@ -153,7 +161,8 @@ export class LessEqual extends Operator
 NodeTemplate.RandomNumber = {
   ...OperatorTemplate,
   inputs: [],
-  name: 'Random Number'
+  name: 'Random Number',
+  keywords: [...OperatorTemplate.keywords, 'random']
 }
 export class RandomNumber extends Operator
 {
@@ -183,7 +192,8 @@ NodeTemplate.RandomInteger = {
   memory: {
     min: 0,
     max: 1
-  }
+  },
+  keywords: [...OperatorTemplate.keywords, 'random']
 }
 export class RandomInteger extends Operator
 {

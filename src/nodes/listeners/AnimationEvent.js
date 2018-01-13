@@ -7,7 +7,8 @@ NodeTemplate.AnimationEvent = {
   outputs: [{
     name: 'event name',
     type: DataType.GENERIC
-  }]
+  }],
+  keyboards: [ParentTemplate.keywords, 'animation'],
 }
 
 export default class AnimationEvent extends Listener

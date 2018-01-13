@@ -3,7 +3,8 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 NodeTemplate.Ticker = {
   ...ParentTemplate,
   name: 'Game Loop',
-  outs: ['tick']
+  outs: ['tick'],
+  keywords: [...ParentTemplate.keywords, 'ticker', 'accessibility']
 }
 
 export default class Ticker extends Listener

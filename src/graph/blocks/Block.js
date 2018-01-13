@@ -6,6 +6,7 @@ import AInputPin from '../support/AInputPin';
 import AExecutionInPin from '../support/AExecutionInPin';
 import AExecutionOutPin from '../support/AExecutionOutPin';
 import BlockSelection from '../BlockSelection';
+import EventEmitter from '../../utils/EventEmitter';
 
 import {svgElement} from '../../utils/utils';
 
@@ -14,9 +15,11 @@ import ClockIcon from '../../assets/icons/clock.svg';
 import BlockIcon from '../support/BlockIcon';
 
 
-export default class Block
+export default class Block extends EventEmitter
 {
   constructor() {
+    super();
+
     this.element = document.createElement('div');
     this.element.className = 'a-block';
 
@@ -158,28 +161,42 @@ export default class Block
     this.node.y = y;
   }
 
-  template({name, hasIn, executionNames=[], inputNames=[], outputNames=[]}) {
-    this.title.textContent = name || 'test';
+  template(pod) {
+    if(pod.elementClass) {
+      for(let className of pod.elementClass) {
+        this.element.classList.add(className);
+      }
+    }
+
+    this.title.textContent = pod.name;
 
     let pin = null;
-    if(hasIn) {
-      pin = new AExecutionInPin('');
+    if(pod.execution) {
+      if(pod.enter.enabled) {
+        this.inPin = new AExecutionInPin();
+        // this.inPin.init(null);
+        this.body.addLeft(this.inPin);
+      }
+
+      for(let execPod of pod.execution) {
+        pin = new AExecutionOutPin(execPod.name);
+        // pin.init(null);
+        this.body.addRight(pin);
+      }
+    }
+
+    for(let inputPod of pod.inputs) {
+      pin = new AInputPin(inputPod.name);
+      // pin.init(null);
       this.body.addLeft(pin);
     }
 
-    for(let name of executionNames) {
-      pin = new AExecutionOutPin(name);
+    for(let outputPod of pod.outputs) {
+      pin = new AOutputPin(outputPod.name);
+      // pin.init(null);
       this.body.addRight(pin);
     }
 
-    for(let name of inputNames) {
-      pin = new AInputPin(name);
-      this.body.addLeft(pin);
-    }
-
-    for(let name of outputNames) {
-      pin = new AOutputPin(name);
-      this.body.addRight(pin);
-    }
+    this.element.style.position = 'relative'
   }
 }

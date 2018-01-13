@@ -18,7 +18,8 @@ NodeTemplate.Loop = {
   }],
   memory: {
     condition: true,
-  }
+  },
+  category: 'Flow Control',
 }
 
 export default class Loop extends Task

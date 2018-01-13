@@ -26,6 +26,12 @@ export default class OutputList extends EventEmitter
     Stage.off('game.stop', this.clearValues);
   }
 
+  map(callback) {
+    return this.names.map(name => {
+      return callback(name, this.list.values[name]);
+    })
+  }
+
   get(name) {
     return this.list.get(name);
   }

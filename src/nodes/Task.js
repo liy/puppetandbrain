@@ -14,6 +14,8 @@ export const Template = {
   inputs: [],
   outputs: [],
   elementClass: [],
+  category: null,
+  keywords: []
 }
 
 export class Task extends Node

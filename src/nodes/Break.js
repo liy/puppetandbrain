@@ -9,7 +9,10 @@ NodeTemplate.Break = {
   inputs: [{
     name: 'in',
     type: DataType.GENERIC,
-  }]
+  }],
+  outputs: [],
+  elementClass: ['operator'],
+  category: 'Utilities'
 }
 
 /**

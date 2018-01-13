@@ -10,7 +10,9 @@ NodeTemplate.Animation = {
   outputs: [],
   memory: {
     name: 'idle'
-  }
+  },
+  category: 'Animation',
+  keywords: [...ParentTemplate.keywords, 'animate']
 }
 
 export default class Animation extends Task

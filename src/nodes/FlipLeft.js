@@ -7,7 +7,8 @@ NodeTemplate.FlipLeft = {
     name: 'default'
   }, {
     name: 'completed'
-  }]
+  }],
+  category: 'Animation',
 }
 
 export default class FlipLeft extends Task

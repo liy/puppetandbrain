@@ -11,7 +11,8 @@ NodeTemplate.GetPosition = {
     name: 'position',
     type: DataType.MAP
   }],
-  elementClass: ['property', 'getter']
+  elementClass: ['property', 'getter'],
+  category: 'Transformation'
 }
 
 export default class GetPosition extends Node

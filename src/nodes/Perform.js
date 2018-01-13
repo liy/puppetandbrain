@@ -1,6 +1,9 @@
 import {Task} from './Task';
 
-// Perform is dynamic, no template
+NodeTemplate.Perform = {
+  elementClass: ['perform'],
+  category: 'Action'
+}
 
 export default class Perform extends Task
 {
@@ -58,11 +61,7 @@ export default class Perform extends Task
   get actionName() {
     return this.action ? this.action.actionName : null;
   }
-
-  get elementClassName() {
-    return ['perform']
-  }
-
+  
   run() {
     super.run()
 

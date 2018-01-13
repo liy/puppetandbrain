@@ -24,7 +24,8 @@ NodeTemplate.SwitchAccess = {
   memory: {
     debounce: 1,
     'pre-acceptance': 0
-  }
+  },
+  keywords: [...ParentTemplate.keywords, 'switch access', 'accessibility']
 }
 
 export default class SwitchAccess extends Listener

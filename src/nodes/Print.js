@@ -9,7 +9,9 @@ NodeTemplate.Print = {
   }],
   memory: {
     text: 'default text'
-  }
+  },
+  category: 'Debug',
+  keyword: ['trace']
 }
 
 export default class extends Task

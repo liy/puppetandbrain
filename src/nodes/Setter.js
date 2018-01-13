@@ -1,6 +1,9 @@
 import {Task} from "./Task";
 
-// Variable setter are dynamic has no template
+NodeTemplate.Setter = {
+  elementClass: ['property', 'setter'],
+  category: 'Property'
+}
 
 export default class Setter extends Task
 {

@@ -19,7 +19,8 @@ NodeTemplate.Tween = {
   memory: {
     position: {x:0,y:0},
     duration: 1
-  }
+  },
+  category: 'Animation',
 }
 
 export default class Tween extends Task

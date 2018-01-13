@@ -7,7 +7,9 @@ export const Template = {
     name: 'default',
     enabled: false
   },
-  elementClass: ['listener']
+  elementClass: ['listener'],
+  category: 'Event',
+  keywords: ['event', 'listener']
 }
 
 export class Listener extends Task

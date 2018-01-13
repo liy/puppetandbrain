@@ -23,7 +23,8 @@ NodeTemplate.PlaySound = {
   memory: {
     loop: true,
     'sound url': '',
-  }
+  },
+  category: 'Audio'
 }
 export default class PlaySound extends Task
 {

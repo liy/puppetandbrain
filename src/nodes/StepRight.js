@@ -7,7 +7,8 @@ NodeTemplate.StepRight = {
     name: 'default'
   }, {
     name: 'completed'
-  }]
+  }],
+  category: 'Animation'
 }
 
 export default class StepRight extends Task

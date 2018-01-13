@@ -15,7 +15,7 @@ NodeTemplate.Keyboard = {
   }],
   memory: {
     'key name': 'Space'
-  }
+  },
 }
 
 export default class Keyboard extends Listener

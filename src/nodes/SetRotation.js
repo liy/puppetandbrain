@@ -12,7 +12,8 @@ NodeTemplate.SetRotation = {
   memory: {
     rotation: 0
   },
-  elementClass: ['property']
+  elementClass: ['property'],
+  category: 'Transformation'
 }
 
 export default class SetRotation extends Task

@@ -2,7 +2,7 @@ import Browser from "./Browser";
 import BlockCollection from './BlockCollection';
 import ArrayMap from "../utils/ArrayMap";
 import GroupSection from "./GroupSection";
-import DummyBlock from "./DummyBlock";
+import Block from '../graph/blocks/Block';
 
 export default class BlockBrowser extends Browser
 {
@@ -10,6 +10,18 @@ export default class BlockBrowser extends Browser
     super();
 
     this.groups = new ArrayMap();
+  }
+
+  getTemplates() {
+    // these are dynmaic templates
+    let classNames = Object.keys(NodeTemplate).filter(className => {
+      return className != 'Getter' && className != 'Setter' && className != 'Perform'
+    })
+  
+    return classNames.map(className => {
+      NodeTemplate[className].className = className;
+      return NodeTemplate[className];
+    })
   }
 
   open(x, y) {
@@ -21,73 +33,56 @@ export default class BlockBrowser extends Browser
         resolve();
       })
 
-      let collection = BlockCollection.concat();
+      let templates = this.getTemplates();
 
       // Populate the performs
-      for(let actor of LookUp.getActors()) {
+      for(const actor of LookUp.getActors()) {
         // if(actor == BrainGraph.brain.owner) continue;
         
         for(let actionName of Object.keys(actor.actions)) {
           let action = actor.actions[actionName];
-          collection.push({
+          templates.push({
+            ...NodeTemplate.Perform,
             name: `Perform ${actionName}`,
-            category: 'Action',
-            pod: {
-              className: 'Perform',
-              owner: BrainGraph.brain.owner,
-              target: actor,
-              actionID: actor.actions[actionName].id
-            },
-            in: false,
-            out: ['default'],
-            outputs: [],
-            inputs: action.outputs.names,
-            minWidth: 120,
+            // the node going to be created is owned by the current opening brain
+            owner: BrainGraph.brain.owner,
+            target: actor,
+            actionID: actor.actions[actionName].id,
+            inputs: action.outputs.names.map(name => {
+              return {name}
+            }),
           })
-          
         }
       }
 
-       // Populate all the variable getter and setter for this actor
-       let brain = BrainGraph.brain;
-       for(let variable of brain.variables) {
-        collection.push({
-          name: `Get ${brain.owner.name} ${name}`,
-          category: 'Property',
-          pod: {
-            className: 'Getter',
-            // Note that, owner is the node's owner
-            owner: BrainGraph.brain.owner,
-            targetBrain: brain,
-            variableID: variable.id
-          },
-          in: false,
-          out: [],
-          outputs: [name],
-          minWidth: 100,
+      // Populate all the variable getter and setter for this actor
+      for(let variable of BrainGraph.brain.variables) {
+        templates.push({
+          ...NodeTemplate.Getter,
+          name: `Get ${BrainGraph.brain.owner.name} ${name}`,
+          // Note that, owner is the node's owner
+          owner: BrainGraph.BrainGraph.brain.owner,
+          targetBrain: BrainGraph.brain,
+          variableID: variable.id,
+          outputs: [{name}],
         })
-        collection.push({
+        templates.push({
           name: `Set ${brain.owner.name} ${name}`,
-          category: 'Property',
-          pod: {
-            className: 'Setter',
-            // Note that, owner is the node's owner
-            owner: BrainGraph.brain.owner,
-            targetBrain: brain,
-            variableID: variable.id
-          },
-          in: true,
-          out: ['default'],
-          inputs: [name],
-          outputs: [name],
-          minWidth: 100,
+          // Note that, owner is the node's owner
+          owner: BrainGraph.brain.owner,
+          targetBrain: brain,
+          variableID: variable.id,
+          inputs: [{name}],
+          outputs: [{name}],
         })
-       }
+      }
 
-      for(let info of collection) {
-        let group = this.getGroup(info.category);
-        let block = new DummyBlock(info);
+      for(let template of templates) {
+        let group = this.getGroup(template.category);
+        let block = new Block();
         group.addBlock(block);
+        block.template(template);
+
 
         block.once('block.chosen', data => {
           this.close();

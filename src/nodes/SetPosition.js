@@ -16,6 +16,7 @@ NodeTemplate.SetPosition = {
     y: 0,
   },
   elementClass: ['property'],
+  category: 'Transformation'
 }
 
 export default class SetPosition extends Task

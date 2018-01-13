@@ -17,6 +17,10 @@ export default class GroupSection
   }
 
   addBlock(block) {
-    this.grid.appendChild(block.gridBox);
+    const gridBox = document.createElement('div');
+    gridBox.className = 'grid-box';
+    gridBox.appendChild(block.element);
+    
+    this.grid.appendChild(gridBox)
   }
 }

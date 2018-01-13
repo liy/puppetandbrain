@@ -7,7 +7,8 @@ NodeTemplate.StepDown = {
     name: 'default'
   }, {
     name: 'completed'
-  }]
+  }],
+  category: 'Animation'
 }
 
 export default class extends Task

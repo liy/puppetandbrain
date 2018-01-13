@@ -18,7 +18,9 @@ NodeTemplate.Repeat = {
   }],
   memory: {
     count: 3
-  }
+  },
+  category: 'Flow control',
+  keywords: ['loop']
 }
 
 export default class Repeat extends Task

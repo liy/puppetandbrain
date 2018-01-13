@@ -1,6 +1,9 @@
 import Node from "./Node";
 
-// Variable getters are dynamic has no template
+NodeTemplate.Getter = {
+  elementClass: ['property', 'getter'],
+  category: 'Property'
+}
 
 /**
  * Variable(brain property) getter

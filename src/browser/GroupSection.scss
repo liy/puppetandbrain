@@ -21,3 +21,11 @@
   color: rgb(196, 196, 196);
   line-height: 50px;
 }
+
+// box contains the actual dummy block
+.grid-box {
+  // centre the svg
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

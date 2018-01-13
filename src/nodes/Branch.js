@@ -14,7 +14,9 @@ NodeTemplate.Branch = {
   }],
   memory: {
     condition: true
-  }
+  },
+  category: 'Flow control',
+  keywords: ['if else']
 }
 
 export default class Branch extends Task

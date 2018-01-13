@@ -2,7 +2,8 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.PointerDown = {
   ...ParentTemplate,
-  name: 'Unhover'
+  name: 'Unhover',
+  keywords: [...ParentTemplate.keywords, 'roll out', 'mouse out']
 }
 
 export default class PointerOut extends Listener

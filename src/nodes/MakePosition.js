@@ -18,7 +18,9 @@ NodeTemplate.MakePosition = {
   memory: {
     x: 0,
     y: 0,
-  }
+  },
+  category: 'Utilities',
+  keywords: ['position', 'transformation']
 }
 
 export default class MakePosition extends Node

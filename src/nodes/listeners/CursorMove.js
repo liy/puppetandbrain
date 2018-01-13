@@ -2,7 +2,8 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.CursorMove = {
   ...ParentTemplate,
-  name: 'Cursor Move'
+  name: 'Cursor Move',
+  keywords: [...ParentTemplate.keywords, 'mouse', 'cursor']
 }
 
 export default class CursorMove extends Listener

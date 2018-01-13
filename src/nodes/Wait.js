@@ -6,7 +6,8 @@ NodeTemplate.Wait = {
   inputs: [{
     name: 'seconds',
     type: DataType.GENERIC,
-  }]
+  }],
+  category: 'Flow Control'
 }
 export default class Wait extends Task
 {

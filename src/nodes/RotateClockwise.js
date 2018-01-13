@@ -8,7 +8,9 @@ NodeTemplate.RotateClockwise = {
     name: 'default'
   }, {
     name: 'completed'
-  }]
+  }],
+  category: 'Animation',
+  keywords: ['rotate', 'rotation', 'clockwise']
 }
 
 export default class RotateClockwise extends Task

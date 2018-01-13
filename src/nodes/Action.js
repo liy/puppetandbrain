@@ -5,7 +5,8 @@ NodeTemplate.Action = {
   enter: {
     enabled: false
   },
-  elementClass: ['action']
+  elementClass: ['action'],
+  category: 'Action',
 }
 
 /**
