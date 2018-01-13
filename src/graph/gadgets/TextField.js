@@ -26,14 +26,14 @@ export default class extends Gadget
   }
   
   onChange(e) {
-    this.node.variables[name] = e.target.value;
+    this.node.memory[name] = e.target.value;
   }
 
   init(node, name) {
     super.init(node, name);
 
     this.input.addEventListener('change', this.onChange);
-    this.input.textContent = this.node.variables[name];
+    this.input.textContent = this.node.memory[name];
   }
 
   get value() {

@@ -11,7 +11,7 @@ export default class Pointer extends EventEmitter
     // by default it is a local variable pointer
     this.output = null;
     this.id = null;
-    this.target = this.inputNode.variables;
+    this.target = this.inputNode.memory;
     this.targetName = this.name;
   }
 
@@ -58,7 +58,7 @@ export default class Pointer extends EventEmitter
       this.id = null;
       this.output = null;
 
-      this.target = this.inputNode.variables;
+      this.target = this.inputNode.memory;
       this.targetName = this.name;
 
       this.emit('input.disconnected', this);
@@ -82,7 +82,10 @@ export default class Pointer extends EventEmitter
       // only record the information below if pointer points to another node
       // undefined field will be removed when serailized
       id: this.id,
-      output: this.output ? this.output.pod() : null
+      output: this.output ? this.output.pod() : null,
+
+      // default data
+      data: this.data
     }
   }
 }

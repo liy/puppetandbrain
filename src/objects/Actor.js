@@ -100,7 +100,9 @@ export default class Actor extends PIXI.Container
       }
     }
     this.rotation = this.initialState.rotation;
-    this.variables = this.initialState.variables;
+
+    // not used at all?
+    // this.variables = this.initialState.variables;
   }
 
   get position() {

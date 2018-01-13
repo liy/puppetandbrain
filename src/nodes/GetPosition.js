@@ -23,7 +23,7 @@ export default class GetPosition extends Node
   init(pod) {
     super.init(pod);
 
-    this.variables.actor = this.owner.id;
+    this.memory.actor = this.owner.id;
 
     this.outputs.assignProperty('position', {
       get: () => {

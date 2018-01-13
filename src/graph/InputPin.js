@@ -25,9 +25,9 @@ export default class InputPin extends DataPin
     }
     this.container.appendChild(this.inputElement);
     this.inputElement.addEventListener('change', e => {
-      this.node.variables[this.name] = e.target.value;
+      this.node.memory[this.name] = e.target.value;
       if(this.node.initialState) {
-        this.node.initialState.variables[this.name] = e.target.value;
+        this.node.initialState.memory[this.name] = e.target.value;
       }
       this.updateInputElement();
     })

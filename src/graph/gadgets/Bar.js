@@ -71,12 +71,12 @@ export default class Bar extends Gadget
   set number(n) {
     n = Math.min(this.max, n);
     n = Math.max(this.min, n);
-    this.node.variables[this.name] = n;
+    this.node.memory[this.name] = n;
     this.update();
   }
 
   get number() {
-    return this.node.variables[this.name];
+    return this.node.memory[this.name];
   }
 
   onStop() {

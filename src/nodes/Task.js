@@ -44,13 +44,13 @@ export class Task extends Node
 
   setInitialState() {
     this.initialState = {
-      variables: JSON.parse(JSON.stringify(this.variables))
+      memory: JSON.parse(JSON.stringify(this.memory))
     }
   }
 
   terminate() {
     super.terminate();
-    this.variables = this.initialState.variables;
+    this.memory = this.initialState.memory;
   }
 
   getCallers() {

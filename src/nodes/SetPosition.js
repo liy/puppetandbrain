@@ -23,8 +23,8 @@ export default class SetPosition extends Task
   init(pod) {
     super.init(pod);
 
-    this.variables.x = pod.variables.x || this.owner.x
-    this.variables.y = pod.variables.y || this.owner.y
+    this.memory.x = pod.memory.x || this.owner.x
+    this.memory.y = pod.memory.y || this.owner.y
   }
 
   run() {

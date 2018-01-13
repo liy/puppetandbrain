@@ -9,8 +9,9 @@ export default class Node extends EventEmitter
     super();
     this.id = LookUp.addNode(this, id);
 
-    // this.variables = Object.create(null);
-    this.variables = {};
+    // stores data used by inputs, or potential input data, e.g., node enabled, I think I can
+    // either leave it as a authoring time property or make it exposed through input
+    this.memory = {};
 
     this.inputs = new InputList(this);
     this.outputs = new OutputList(this);
@@ -33,9 +34,9 @@ export default class Node extends EventEmitter
     this.owner = LookUp.auto(pod.owner);
     this.owner.brain.addNode(this);
 
-    // Set the variables! I can just do normal ref assignment
+    // Set the memory! I can just do normal ref assignment
     // But do a property assignment, just be safe...
-    if(pod.variables) Object.assign(this.variables, pod.variables);
+    if(pod.memory) Object.assign(this.memory, pod.memory);
 
     // Since there are "Action" node which has dynamic ouputs
     // I cannot make input and ouput connections in initialization process
@@ -48,6 +49,9 @@ export default class Node extends EventEmitter
     if(pod.inputs) {
       for(let pointerPod of pod.inputs) {
         this.inputs.addInput(pointerPod.name)
+
+        // You can provide a data property in pod, to set the input memory data
+        if(pointerPod.data) this.memory[pointerPod.name] = pointerPod.data;
       }
     }
 
@@ -91,7 +95,7 @@ export default class Node extends EventEmitter
     return {
       className: this.className,
       id: this.id,
-      variables: this.variables,
+      memory: this.memory,
       owner: this.owner.id,
       inputs: this.inputs.pod(),
       outputs: this.outputs.pod(detail),

@@ -25,7 +25,7 @@ export default class GetRotation extends Node
   init(pod) {
     super.init(pod)
 
-    this.variables.actor = this.owner.id;
+    this.memory.actor = this.owner.id;
     
     this.outputs.assignProperty('rotation', {
       get: () => {

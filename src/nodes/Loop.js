@@ -24,8 +24,6 @@ export default class Loop extends Task
     super(id);
 
     Stage.on('game.prestart', this.prestart, this);
-
-    this.variables.condition = true;
   }
 
   destroy() {

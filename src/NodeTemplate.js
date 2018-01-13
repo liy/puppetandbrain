@@ -33,7 +33,8 @@ const TestNode = {
     name: 'A',
     type: DataType.GENERIC,
 
-    // TODO: add value property, which contains input default value.
+    // TODO: add data property, which contains input default data.
+    data: null,
 
     output: {
       // rename node to nodeID
@@ -58,9 +59,8 @@ const TestNode = {
   }],
 
 
-  // TODO: rename to property, property of the node.
-  // An authoring time variable for the node only.
-  variables: {
+  // stores data used by input or potentially used by input
+  memory: {
     A: 123
   },
 

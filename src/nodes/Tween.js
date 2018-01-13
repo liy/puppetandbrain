@@ -30,8 +30,8 @@ export default class Tween extends Task
   init(pod) {
     super.init(pod);
 
-    this.variables.duration = this.variables.duration || 1
-    this.variables.position = this.variables.position || {
+    this.memory.duration = this.memory.duration || 1
+    this.memory.position = this.memory.position || {
       x: this.owner.x+100,
       y: this.owner.y
     }

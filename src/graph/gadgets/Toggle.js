@@ -23,7 +23,7 @@ export default class Toggle extends Gadget
 
   init(node, name) {
     super.init(node, name);
-    this.on = this.node.variables[name];
+    this.on = this.node.memory[name];
   }
 
   destroyed() {
@@ -45,10 +45,10 @@ export default class Toggle extends Gadget
       this.color.setAttribute('fill', '#999999')
     }
 
-    this.node.variables[this.name] = v;
+    this.node.memory[this.name] = v;
   }
 
   get on() {
-    return this.node.variables[this.name];
+    return this.node.memory[this.name];
   }
 }
