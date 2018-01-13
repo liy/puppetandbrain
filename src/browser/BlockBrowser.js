@@ -15,11 +15,12 @@ export default class BlockBrowser extends Browser
   getTemplates() {
     // these are dynmaic templates
     let classNames = Object.keys(NodeTemplate).filter(className => {
-      return className != 'Getter' && className != 'Setter' && className != 'Perform'
+      return className != 'Getter' && className != 'Setter' && className != 'Perform' && className != 'Break'
     })
   
     return classNames.map(className => {
       NodeTemplate[className].className = className;
+      NodeTemplate[className].name = NodeTemplate[className].name || className;
       return NodeTemplate[className];
     })
   }
@@ -76,6 +77,15 @@ export default class BlockBrowser extends Browser
           outputs: [{name}],
         })
       }
+
+      // break position
+      templates.push({
+        ...NodeTemplate.Break,
+        name: `Break Position`,
+        // the node going to be created is owned by the current opening brain
+        owner: BrainGraph.brain.owner,
+        outputs: [{name:'x'},{name:'y'}]
+      })
 
       for(let template of templates) {
         let group = this.getGroup(template.category);

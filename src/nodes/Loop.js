@@ -3,16 +3,16 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Loop = {
   ...ParentTemplate,
-  executions: [{
+  execution: [{
     name: 'completed'
   }, {
     name: 'body'
   }],
-  input: [{
+  inputs: [{
     name: 'condition',
     type: DataType.GENERIC,
   }],
-  output: [{
+  outputs: [{
     name: 'count',
     type: DataType.GENERIC,
   }],

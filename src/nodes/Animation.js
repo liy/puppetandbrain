@@ -3,6 +3,7 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Animation = {
   ...ParentTemplate,
+  name: 'Animation',
   inputs: [{
     name: 'name',
     type: DataType.GENERIC

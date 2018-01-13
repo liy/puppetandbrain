@@ -33,14 +33,15 @@ export default class Block extends EventEmitter
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
-    this.body.element.addEventListener('mousedown', this.dragstart);
-    this.body.element.addEventListener('touchstart', this.dragstart);
-    this.body.element.addEventListener('mouseup', this.dragstop);
-    this.body.element.addEventListener('touchend', this.dragstop);
   }
 
   init(node) {
     this.node = node;
+
+    this.body.element.addEventListener('mousedown', this.dragstart);
+    this.body.element.addEventListener('touchstart', this.dragstart);
+    this.body.element.addEventListener('mouseup', this.dragstop);
+    this.body.element.addEventListener('touchend', this.dragstop);
     
     if(node.elementClassName) {
       for(let className of node.elementClassName) {

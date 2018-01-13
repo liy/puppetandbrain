@@ -11,7 +11,7 @@ NodeTemplate.Break = {
     type: DataType.GENERIC,
   }],
   outputs: [],
-  elementClass: ['operator'],
+  elementClass: ['utility'],
   category: 'Utilities'
 }
 

@@ -19,7 +19,7 @@ NodeTemplate.Repeat = {
   memory: {
     count: 3
   },
-  category: 'Flow control',
+  category: 'Flow Control',
   keywords: ['loop']
 }
 

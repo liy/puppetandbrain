@@ -19,6 +19,7 @@ NodeTemplate.MakePosition = {
     x: 0,
     y: 0,
   },
+  elementClass: ['utility'],
   category: 'Utilities',
   keywords: ['position', 'transformation']
 }

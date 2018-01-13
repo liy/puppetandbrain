@@ -3,7 +3,7 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 NodeTemplate.Ticker = {
   ...ParentTemplate,
   name: 'Game Loop',
-  outs: ['tick'],
+  execution: [{name: 'tick'}],
   keywords: [...ParentTemplate.keywords, 'ticker', 'accessibility']
 }
 

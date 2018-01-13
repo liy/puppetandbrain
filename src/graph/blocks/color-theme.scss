@@ -201,3 +201,39 @@
     color: #D9D9D9
   }
 }
+
+
+.utility {
+  $baseR: 76;
+  $baseG: 26;
+  $baseB: 26;
+  $baseA: 0.85;
+  $r: 125;
+  $g: 43;
+  $b: 43;
+  $a: 0.6;
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin {
+    color: #D9D9D9
+  }
+  .execution-pin {
+    color: #D9D9D9
+  }
+}
