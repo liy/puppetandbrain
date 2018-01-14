@@ -155,6 +155,15 @@ export default class Block extends EventEmitter
     this.node.y = y;
   }
 
+  get x() {
+    return this.node.x;
+  }
+
+  get y() {
+    return this.node.y;
+  }
+
+
   template(pod) {
     if(pod.elementClass) {
       for(let className of pod.elementClass) {

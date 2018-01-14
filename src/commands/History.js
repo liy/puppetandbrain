@@ -6,7 +6,9 @@ class History
     document.addEventListener('keydown', this.keydown.bind(this));
     
     this.undoBtn = document.getElementById('undo-button');
+    this.undoBtn.style.backgroundImage = `url("${require('!file-loader!../assets/undo-arrow.svg')}")`
     this.redoBtn = document.getElementById('redo-button');
+    this.redoBtn.style.backgroundImage = `url("${require('!file-loader!../assets/redo-arrow.svg')}")`
     this.undo = this.undo.bind(this);
     this.redo = this.redo.bind(this);
     this.undoBtn.addEventListener('click', this.undo)
