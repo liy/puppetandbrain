@@ -83,9 +83,6 @@ export default class Pointer extends EventEmitter
       // undefined field will be removed when serailized
       id: this.id,
       output: this.output ? this.output.pod() : null,
-
-      // default data
-      data: this.data
     }
   }
 }
