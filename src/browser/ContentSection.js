@@ -25,4 +25,8 @@ export default class ContentSection
       this.content.removeChild(this.content.lastChild);
     }
   }
+
+  resetScroll() {
+    this.scroll.scrollTop = 0;
+  }
 }

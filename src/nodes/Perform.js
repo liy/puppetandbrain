@@ -1,8 +1,11 @@
-import {Task} from './Task';
+import {Task, Template as ParentTemplate} from './Task';
 
 NodeTemplate.Perform = {
+  ...ParentTemplate,
+  className: 'Perform',
   elementClass: ['perform'],
-  category: 'Action'
+  category: 'Action',
+  keywords: ['call', 'message', 'function', 'method']
 }
 
 export default class Perform extends Task

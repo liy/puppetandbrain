@@ -1,11 +1,14 @@
 import Node from "./Node";
 
 NodeTemplate.Getter = {
+  className: 'Getter',
   enter: {
     name: 'default',
     enabled: false,
   },
   execution: [],
+  inputs: [],
+  outputs: [],
   elementClass: ['property', 'getter'],
   category: 'Property'
 }

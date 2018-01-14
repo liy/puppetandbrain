@@ -194,11 +194,7 @@ export default class Block extends EventEmitter
     this.element.style.position = 'relative'
 
     this.body.element.addEventListener('mousedown', e => {
-      console.log(e)
       this.emit('block.chosen', pod);
-    }, {capture:true});
-    // this.body.element.addEventListener('touchstart', e => {
-    //   this.emit('block.chosen', pod);
-    // }, {capture:true});
+    });
   }
 }

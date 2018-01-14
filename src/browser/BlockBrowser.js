@@ -6,7 +6,7 @@ import ArrayMap from "../utils/ArrayMap";
 import GroupSection from "./GroupSection";
 import Block from '../graph/blocks/Block';
 
-
+// FIXME: clean up needed!!
 export default class BlockBrowser extends Browser
 {
   constructor() {
@@ -18,7 +18,15 @@ export default class BlockBrowser extends Browser
 
     this.searchOptions = {
       // id: 'className',
-      keys: ['_name', 'keywords', '_category'] 
+      shouldSort: true,
+      threshold: 0.2,
+      keys: [{
+        name: 'category', weight: 0.05
+      }, {
+        name: 'keywords', weight: 0.05
+      }, {
+        name: 'name', weight: 0.9  
+      }] 
     }
 
     this.fuse = null;
@@ -26,14 +34,14 @@ export default class BlockBrowser extends Browser
 
   onSearch(e) {
     let templates = null;
-    let terms = (e.target.value).trim();
-    if(terms === '') {
+    if((e.target.value).trim() === '') {
       templates = this.templates;
     }
     else {
       templates = this.fuse.search(e.target.value);
     }
     this.refresh(templates);
+    this.contentSection.resetScroll();
   }
 
   getTemplates() {
@@ -46,28 +54,25 @@ export default class BlockBrowser extends Browser
       NodeTemplate[className].className = className;
       NodeTemplate[className].name = NodeTemplate[className].name || className;
 
-      // FIXME: use _ prefix name and category.
-      // not sure why fuse.js does not like name and category fields.
-      // probably a bug in their library
-      NodeTemplate[className]._name = NodeTemplate[className].name;
-      NodeTemplate[className]._category = NodeTemplate[className].category;
-
       return NodeTemplate[className];
     })
 
+    // Make sure template does not have circular reference. I've changed all references into id.
+    // Because fuse.js:
+    //  this._log('\n\nOutput:\n\n', JSON.stringify(results));
+    // will cause circular issue.
+    // It is stupid to have a log statement to break the whole search library
 
     // Populate the performs
     for(const actor of LookUp.getActors()) {
-      // if(actor == BrainGraph.brain.owner) continue;
-      
       for(let actionName of Object.keys(actor.actions)) {
         let action = actor.actions[actionName];
         templates.push({
           ...NodeTemplate.Perform,
           name: `Perform ${actionName}`,
           // the node going to be created is owned by the current opening brain
-          owner: BrainGraph.brain.owner,
-          target: actor,
+          owner: BrainGraph.brain.owner.id,
+          target: actor.id,
           actionID: actor.actions[actionName].id,
           inputs: action.outputs.names.map(name => {
             return {name}
@@ -81,37 +86,25 @@ export default class BlockBrowser extends Browser
       templates.push({
         ...NodeTemplate.Getter,
         name: `Get ${BrainGraph.brain.owner.name} ${variable.name}`,
-        // Note that, owner is the node's owner
-        owner: BrainGraph.brain.owner,
-        targetBrain: BrainGraph.brain,
+        owner: BrainGraph.brain.owner.id,
+        targetBrain: BrainGraph.brain.id,
         variableID: variable.id,
-        inputs: [],
-        outputs: [{
-          name: variable.name,
-        }],
       })
       templates.push({
         ...NodeTemplate.Setter,
         name: `Set ${BrainGraph.brain.owner.name} ${variable.name}`,
-        // Note that, owner is the node's owner
-        owner: BrainGraph.brain.owner,
-        targetBrain: BrainGraph.brain,
+        owner: BrainGraph.brain.owner.id,
+        targetBrain: BrainGraph.brain.id,
         variableID: variable.id,
-        inputs: [{
-          name: variable.name
-        }],
-        outputs: [{
-          name: variable.name
-        }],
       })
     }
 
-    // break position
+    // break position block
     templates.push({
       ...NodeTemplate.Break,
       name: `Break Position`,
       // the node going to be created is owned by the current opening brain
-      owner: BrainGraph.brain.owner,
+      owner: BrainGraph.brain.owner.id,
       outputs: [{name:'x'},{name:'y'}]
     })
   
@@ -135,7 +128,7 @@ export default class BlockBrowser extends Browser
 
       this.contentSection.element.addEventListener('mousedown', e => {
         this.close();
-        resolve();
+        this.resolve();
       })
     })
   }
@@ -145,7 +138,7 @@ export default class BlockBrowser extends Browser
 
     for(let template of templates) {
       let group = this.getGroup(template.category);
-      let block = new Block();
+      let block = BlockFactory.createTemplateBlock(template)
       group.addBlock(block);
       block.template(template);
 
@@ -156,8 +149,6 @@ export default class BlockBrowser extends Browser
   }
 
   onSelect(data) {
-    this.close();
-    
     let command = Commander.create('CreateBlock', data, BrainGraph.brain.owner.id, this.targetX, this.targetY).processAndSave();
     History.push(command);
     // Make sure there is a block created.

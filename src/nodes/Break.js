@@ -15,6 +15,8 @@ NodeTemplate.Break = {
   category: 'Utilities'
 }
 
+// FIXME: rename to extract????
+// FIXME: add outputs when input is collected? auto outputs?
 /**
  * Break's output is dynamic
  * 

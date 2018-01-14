@@ -1,11 +1,14 @@
 import {Task} from "./Task";
 
 NodeTemplate.Setter = {
+  className: 'Setter',
   enter: {
     name: 'default',
     enabled: true,
   },
   execution: ['default'],
+  inputs: [],
+  outputs: [],
   elementClass: ['property', 'setter'],
   category: 'Property'
 }
@@ -30,8 +33,8 @@ export default class Setter extends Task
     this.inputs.addInput(this.variableID);
 
     this.outputs.addOutput(this.variableID)
-    // FIXME: update the input and output variable name when variable name is changed?
-    // it will be updated on next load. It will not broke the program, but looks strange
+    
+    // Note the output key is the variable id!!!
     this.outputs.assignProperty(this.variableID, {
       get: () => {
         return this.variable.runtime;
