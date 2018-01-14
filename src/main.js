@@ -1,7 +1,3 @@
-document.addEventListener("touchmove", e => {
-  e.preventDefault(); 
-}, { passive: false });
-
 // FIXME: for testing 
 // Needs to be removed quite soon!!
 require('pixi-spine');
