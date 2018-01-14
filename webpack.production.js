@@ -72,7 +72,16 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       APP_VERSION: JSON.stringify(require("./package.json").version),
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      // production
+      FIREBASE_CONFIG: JSON.stringify({
+        apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
+        authDomain: "puppet-brain.firebaseapp.com",
+        databaseURL: "https://puppet-brain.firebaseio.com",
+        projectId: "puppet-brain",
+        storageBucket: "puppet-brain.appspot.com",
+        messagingSenderId: "392290034997"
+      })
     })
   ],
   

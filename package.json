@@ -7,7 +7,8 @@
     "prestart": "./node_modules/.bin/webpack -p",
     "start": "./node_modules/.bin/webpack-dev-server --open http://localhost:8081 --host 0.0.0.0 --port 8081",
     "build": "./node_modules/.bin/webpack --config webpack.production.js",
-    "deploy": "npm run build && firebase deploy"
+    "deploy": "npm run build && firebase deploy -P production",
+    "staging": "./node_modules/.bin/webpack --config webpack.staging.js && firebase deploy -P staging"
   },
   "author": "Zhengyi Li <liy8272@gmail.com>",
   "repository": {

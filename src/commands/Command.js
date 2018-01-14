@@ -11,7 +11,7 @@ export default class Command
 
   processAndSave() {
     let command = this.process();
-    if(process.env.NODE_ENV === 'production') {
+    if(process.env.NODE_ENV !== 'dev') {
       if(command) LookUp.save();
     }
     return command;

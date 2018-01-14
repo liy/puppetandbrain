@@ -1,8 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+ 
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'main.js'),
@@ -26,7 +27,7 @@ module.exports = {
       // copy the required assets to dist folder
       // use require() to get the actuall url
       {
-        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt)$/,
+        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt|svg)$/,
         use: [
           {
             loader: 'file-loader',
@@ -46,26 +47,32 @@ module.exports = {
           'sass-loader',
         ]
       },
-      {
-        test: /\.svg$/,
-        use: [
-          'svg-sprite-loader',
-          // 'svgo-loader',
-        ]
-      },
     ]
   },
 
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'game',
       filename: 'index.html',
       inject: 'body',
       template: './src/index.html'
     }),
+    new UglifyJSPlugin({ 
+      uglifyOptions: {
+        sourceMap: false,
+        mangle: {
+          keep_fnames: true,
+        },
+        // remove console
+        compress: {
+          drop_console: true
+        }
+      }
+    }),
     new webpack.DefinePlugin({
       APP_VERSION: JSON.stringify(require("./package.json").version),
-      'process.env.NODE_ENV': JSON.stringify('dev'),
+      'process.env.NODE_ENV': JSON.stringify('staging'),
       // staging
       FIREBASE_CONFIG: JSON.stringify({
         apiKey: "AIzaSyC760Njk0wan_MlFKoiHYawfSYy0CaeLUA",
@@ -75,8 +82,7 @@ module.exports = {
         storageBucket: "puppet-brain-staging.appspot.com",
         messagingSenderId: "868975802956"
       })
-    }),
-    new SpriteLoaderPlugin(),
+    })
   ],
   
   // Export full source map for debugging, maps to original source

@@ -136,16 +136,11 @@ import ArrayMap from './utils/ArrayMap';
 // document.body.appendChild(block.element)
 
 
-firebase.initializeApp({
-  apiKey: "AIzaSyA1MlcE35XJjV9qWmuojlL71y1AlKsNwPQ",
-  authDomain: "puppet-brain.firebaseapp.com",
-  databaseURL: "https://puppet-brain.firebaseio.com",
-  projectId: "puppet-brain",
-  storageBucket: "puppet-brain.appspot.com",
-  messagingSenderId: "392290034997"
-});
+firebase.initializeApp(FIREBASE_CONFIG);
 
 document.getElementById('app-version').textContent = APP_VERSION;
+
+console.log(FIREBASE_CONFIG)
 
 var canvas = document.getElementById('canvas');
 
