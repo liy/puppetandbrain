@@ -123,24 +123,10 @@ import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
 import ArrayMap from './utils/ArrayMap';
 
-// let block = new Block();
-// block.template({
-//   name: 'test',
-//   hasIn: true,
-//   executionNames: ['out 1', 'out 2'],
-//   inputNames: ['pre-acceptance pre-acceptance pre-acceptance pre-acceptance'],
-//   outputNames: ['output 1'],
-// });
-// block.element.style.left = 100+'px';
-// block.element.style.top = 100+'px';
-// document.body.appendChild(block.element)
-
 
 firebase.initializeApp(FIREBASE_CONFIG);
 
 document.getElementById('app-version').textContent = APP_VERSION;
-
-console.log(FIREBASE_CONFIG)
 
 var canvas = document.getElementById('canvas');
 
