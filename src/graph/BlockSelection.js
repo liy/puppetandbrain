@@ -51,7 +51,10 @@ class BlockSelection
   }
 
   delete() {
-    History.push(Commander.create('DeleteBlock', this.selected.id).processAndSave());
+    if(this.selected) {
+      History.push(Commander.create('DeleteBlock', this.selected.id).processAndSave());
+      this.selected = null;
+    }
   }
 }
 

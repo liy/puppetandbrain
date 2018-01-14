@@ -1,4 +1,5 @@
 import Command from './Command';
+import BlockSelection from '../graph/BlockSelection';
 
 export default class DeleteBlock extends Command
 {
@@ -30,8 +31,7 @@ export default class DeleteBlock extends Command
         if(exec.nodeID) node.connectNext(LookUp.get(exec.nodeID), exec.name)
       }
     }
-    console.log(this.pod)
-    if(this.pod.enter.callers) {
+    if(this.pod.enter) {
       for(let callerPod of this.pod.enter.callers) {
         if(callerPod.nodeID) node.connectParent(LookUp.get(callerPod.nodeID), callerPod.executionName);
       }
@@ -58,6 +58,8 @@ export default class DeleteBlock extends Command
 
     BlockFactory.create(node);
     BrainGraph.refresh();
+
+    BlockSelection.select(this.block);
   }
 
   redo() {
