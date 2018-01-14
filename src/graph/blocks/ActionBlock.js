@@ -2,6 +2,7 @@ import './ActionBlock.scss'
 import Block from "./Block";
 import AddOutputPin from '../support/AddOutputPin'
 import AOutputPin from "../support/AOutputPin";
+import { nextFrame } from '../../utils/utils';
 
 export default class ActionBlock extends Block
 {
@@ -22,7 +23,6 @@ export default class ActionBlock extends Block
     super.init(node);
 
     this.title.textContent = this.node.actionName;
-    this.title.focus();
 
     this.addOutputPin = new AddOutputPin(node);
     this.body.addRight(this.addOutputPin);
@@ -30,6 +30,13 @@ export default class ActionBlock extends Block
     this.title.addEventListener('input', this.onTitleInput);
 
     this.node.outputs.on('output.added', this.onOutputAdded);
+  }
+
+  focus() {
+    // wait until next frame, when the element is added onto the screen to focus title
+    nextFrame().then(() => {
+      this.title.focus();
+    }) 
   }
 
   onTitleInput(e) {
@@ -48,5 +55,7 @@ export default class ActionBlock extends Block
     this.body.addRight(pin);
     // make sure the add pin is the last
     this.body.addRight(this.addOutputPin);
+
+    this.outputPins.set(name, pin);
   }
 }

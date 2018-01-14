@@ -36,6 +36,7 @@ class BlockSelection
     }
     this.selected = block;
     this.selected.body.element.classList.add('block-selected');
+    this.selected.focus();
     
   }
   

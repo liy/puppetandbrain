@@ -93,6 +93,11 @@ export default class Block extends EventEmitter
     BrainGraph.removeBlock(this);
   }
 
+  focus() {
+    // override me if you want to have anything auto focused when node is created, or selected
+    // Invoked from BlockSelection.select();
+  }
+
   dragstart(e) {
     let sx = e.clientX ? e.clientX : e.touches[0].clientX;
     let sy = e.clientY ? e.clientY : e.touches[0].clientY;

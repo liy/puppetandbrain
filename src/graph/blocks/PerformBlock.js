@@ -47,5 +47,7 @@ export default class PerformBlock extends Block
     let pin = new AInputPin(name);
     pin.init(this.node);
     this.body.addLeft(pin);
+
+    this.inputPins.set(name, pin);
   }
 }
