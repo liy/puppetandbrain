@@ -76,6 +76,11 @@ export default class ArrayMap
     })
   }
 
+  clear() {
+    this.values = {};
+    this.keys = [];
+  }
+
   contains(key) {
     return key in this.values;
   }

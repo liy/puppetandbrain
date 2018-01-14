@@ -15,8 +15,16 @@ export default class Browser
     this.searchSection = new SearchSection();
     this.filterSection = new FilterSection();
 
+    this.searchField = this.searchSection.searchInput;
+    this.onSearch = this.onSearch.bind(this);
+    this.searchField.addEventListener('input', this.onSearch);
+
     this.keydown = this.keydown.bind(this);
     this.element.addEventListener('keydown', this.keydown);
+  }
+
+  onSearch(e) {
+    // override me....
   }
 
   keydown(e) {

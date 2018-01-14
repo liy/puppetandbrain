@@ -19,4 +19,10 @@ export default class ContentSection
   addGroup(group) {
     this.content.appendChild(group.element);
   }
+
+  clear() {
+    while(this.content.lastChild) {
+      this.content.removeChild(this.content.lastChild);
+    }
+  }
 }

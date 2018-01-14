@@ -21,7 +21,7 @@ NodeTemplate.Repeat = {
   },
   elementClass: ['flow-control'],
   category: 'Flow Control',
-  keywords: ['loop']
+  keywords: ['loop', 'repeat']
 }
 
 export default class Repeat extends Task
