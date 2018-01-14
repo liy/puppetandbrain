@@ -6,7 +6,7 @@ export default class GroupSection
     this.element = document.createElement('div');
     this.element.className = 'group-section';
 
-    this.title = document.createElement('div');
+    this.title = document.createElement('span');
     this.title.className = 'group-name';
     this.title.textContent = name;
     this.element.appendChild(this.title);
