@@ -11,14 +11,27 @@ export default class InputField
 
     this.value = v;
     this.placeholder = p;
+
+    this.onInput = this.onInput.bind(this);
+    this.input.addEventListener('input', this.onInput);
   }
 
+  destroy() {
+    super.destroy();
+    
+    this.input.removeEventListener('input', this.onInput);
+  }
+  
   set placeholder(p) {
     this.input.setAttribute('placeholder', p);
   }
 
+  onInput(e) {
+    this.emit('gadget.state.change', e.target.value)
+  }
+
   set value(v) {
-    this.input.value = v;
+    this._value = v;
   }
 
   get value() {

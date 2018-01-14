@@ -34,10 +34,10 @@ class BlockSelection
     if(this.selected) {
       this.selected.body.element.classList.remove('block-selected')
     }
+
     this.selected = block;
     this.selected.body.element.classList.add('block-selected');
     this.selected.focus();
-    
   }
   
   downOnEmptySpace(e) {

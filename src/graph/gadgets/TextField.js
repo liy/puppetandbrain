@@ -1,7 +1,7 @@
 import './TextField.scss'
 import Gadget from "./Gadget";
 
-// FIXME: use span with contentditable=true, it will allow auto expand
+// use span with contentditable=true, it allows auto expand
 // https://stackoverflow.com/questions/7168727/make-html-text-input-field-grow-as-i-type
 export default class extends Gadget
 {
@@ -12,13 +12,21 @@ export default class extends Gadget
     this.input = document.createElement('span');
     this.input.className = 'data-text'
     this.input.contentEditable = true;
+    this.value = value;
     this.placeholder = placeholderText;
     this.element.appendChild(this.input);
 
     this.onChange = this.onChange.bind(this);
+    this.input.addEventListener('change', this.onChange);
+
     this.input.addEventListener('mousedown', e => {
       e.stopPropagation();
     });
+  }
+
+  destroy() {
+    super.destroy();
+    this.input.removeEventListener('change', this.onChange);
   }
 
   set placeholder(p) {
@@ -26,21 +34,18 @@ export default class extends Gadget
   }
   
   onChange(e) {
-    this.node.memory[name] = e.target.value;
+    this.emit('gadget.state.change', e.target.value)
   }
 
-  init(node, name) {
-    super.init(node, name);
-
-    this.input.addEventListener('change', this.onChange);
-    this.input.textContent = this.node.memory[name];
+  set value(v) {
+    this.input.textContent = v;
   }
 
   get value() {
     return this.input.textContent;
   }
 
-  set value(v) {
-    this.input.textContent = v;
+  focus() {
+    this.input.focus();
   }
 }

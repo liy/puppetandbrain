@@ -33,4 +33,8 @@ export default class
       }
     })
   }
+
+  focus() {
+    this.textField.focus();
+  }
 }

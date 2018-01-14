@@ -1,15 +1,15 @@
 import './Bar.scss';
 import Gadget from './Gadget';
 
-export default class Bar extends Gadget
+// TODO: rename to range
+export default class extends Gadget
 {
-  constructor() {
+  constructor({value=0, min=0, max=1, decimalPlaces=2}) {
     super();
-    this.element.className = 'bar-container';
-    this.element.style.display = 'none';
+    this.element.className = 'range-container';
 
     this.barSvg = new DOMParser().parseFromString(require('!raw-loader!../../assets/bar.svg'), "image/svg+xml").rootElement;
-    this.barSvg.setAttribute('class', 'bar-svg');
+    this.barSvg.setAttribute('class', 'range-svg');
     this.element.appendChild(this.barSvg);
 
     this.line = this.element.querySelector('#line');
@@ -18,31 +18,26 @@ export default class Bar extends Gadget
     this.rangeSpan.className = 'range-span';
     this.element.appendChild(this.rangeSpan);
 
-    this.min = 0;
-    this.max = 1;
+    this.min = min;
+    this.max = max;
 
-    this.decimalPlaces = 2;
+    this.decimalPlaces = decimalPlaces;
 
     this.lastX = 0;
 
     this.onDown = this.onDown.bind(this);
     this.onDrag = this.onDrag.bind(this);
     this.onStop = this.onStop.bind(this);
-  }
-
-  init(node, name) {
-    super.init(node, name)
-
+    
     this.element.addEventListener('mousedown', this.onDown)
     this.element.addEventListener('touchstart', this.onDown)
 
-    document.addEventListener('mouseup', this.onStop)
-    document.addEventListener('touchend', this.onStop)
-
-    this.update();
+    document.addEventListener('mouseup', this.onStop);
+    document.addEventListener('touchend', this.onStop);
   }
 
   destroy() {
+    super.destroy();
     this.element.removeEventListener('mousedown', this.onDown)
     this.element.removeEventListener('touchstart', this.onDown)
     document.removeEventListener('mousemove', this.onDrag);
@@ -55,7 +50,7 @@ export default class Bar extends Gadget
     document.addEventListener('touchmove', this.onDrag);
 
     let offsetX = e.offsetX ? e.offsetX : e.changedTouches[0].clientX-this.element.getBoundingClientRect().left
-    this.number = offsetX/80 * (this.min + (this.max-this.min));
+    this.value = offsetX/80 * (this.min + (this.max-this.min));
 
     this.lastX = e.clientX ? e.clientX : e.changedTouches[0].clientX;
   }
@@ -64,19 +59,23 @@ export default class Bar extends Gadget
     let x = e.clientX ? e.clientX : e.changedTouches[0].clientX;
     let inc = (this.max-this.min)/100;
     let sign = Math.sign(x - this.lastX);
-    this.number += inc*sign;
+    this.value += inc*sign;
     this.lastX = x;
+
+    this.emit('gadget.state.change', this.value);
   }
 
-  set number(n) {
+  set value(n) {
     n = Math.min(this.max, n);
     n = Math.max(this.min, n);
-    this.node.memory[this.name] = n;
+
+    this._value = n;
+
     this.update();
   }
 
-  get number() {
-    return this.node.memory[this.name];
+  get value() {
+    return this._value;
   }
 
   onStop() {
@@ -85,13 +84,13 @@ export default class Bar extends Gadget
   }
 
   update() {
-    let ratio = Math.min(1, (this.number-this.min)/(this.max-this.min));
+    let ratio = Math.min(1, (this.value-this.min)/(this.max-this.min));
     if(ratio == 0) {
       this.line.setAttribute('d', '');
     }
     else {
       this.line.setAttribute('d', `M10 10h${50*ratio}`);
     }
-    this.rangeSpan.textContent = this.number.toFixed(this.decimalPlaces);
+    this.rangeSpan.textContent = this.value.toFixed(this.decimalPlaces);
   }
 }

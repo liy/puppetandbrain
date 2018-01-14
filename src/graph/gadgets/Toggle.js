@@ -3,7 +3,7 @@ import Gadget from './Gadget';
 
 export default class Toggle extends Gadget
 {
-  constructor() {
+  constructor(value=false) {
     super();
     this.element.className = 'toggle-container';
 
@@ -19,23 +19,22 @@ export default class Toggle extends Gadget
     this.mouseDown = this.mouseDown.bind(this);
     this.element.addEventListener('mousedown', this.mouseDown);
 
+    this.value = value;
   }
 
-  init(node, name) {
-    super.init(node, name);
-    this.on = this.node.memory[name];
-  }
-
-  destroyed() {
+  destroy() {
+    super.destroy();
     this.element.removeEventListener('mousedown', this.mouseDown);
   }
 
   mouseDown(e) {
     e.stopPropagation();
-    this.on = !this.on;
+
+    this.value = !this.value;
+    this.emit('gadget.state.change', this.value);
   }
 
-  set on(v) {
+  set value(v) {
     if(v) {
       this.knob.setAttribute('transform', `translate(${10})`)
       this.color.setAttribute('fill', '#a4b500')
@@ -44,11 +43,10 @@ export default class Toggle extends Gadget
       this.knob.setAttribute('transform', `translate(${0})`)
       this.color.setAttribute('fill', '#999999')
     }
-
-    this.node.memory[this.name] = v;
+    this._value = v;
   }
 
-  get on() {
-    return this.node.memory[this.name];
+  get value() {
+    return this._value;
   }
 }

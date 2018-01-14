@@ -26,6 +26,7 @@ export default class Block extends EventEmitter
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
+    this.releaseOutside = this.releaseOutside.bind(this)
   }
 
   init(node) {
@@ -90,6 +91,8 @@ export default class Block extends EventEmitter
     this.body.element.removeEventListener('touchstart', this.dragstart);
     this.body.element.removeEventListener('mouseup', this.dragstop);
     this.body.element.removeEventListener('touchend', this.dragstop);
+    document.removeEventListener('mouseup', this.dragstop);
+
     BrainGraph.removeBlock(this);
   }
 
@@ -107,6 +110,8 @@ export default class Block extends EventEmitter
     }
     document.addEventListener('mousemove', this.dragmove)
     document.addEventListener('touchmove', this.dragmove)
+    // when release on graph container, it is released outside of the block
+    BrainGraph.container.addEventListener('mouseup', this.releaseOutside);
 
     BlockSelection.select(this);
 
@@ -117,11 +122,24 @@ export default class Block extends EventEmitter
   }
 
   dragstop(e) {
+    BrainGraph.container.removeEventListener('mouseup', this.releaseOutside);
+    
     document.removeEventListener('mousemove', this.dragmove);
     document.removeEventListener('touchmove', this.dragmove);
 
     // process and push to history
     if(this.moveCommand) History.push(this.moveCommand.processAndSave());
+  }
+
+  releaseOutside(e) {
+    BrainGraph.container.removeEventListener('mouseup', this.releaseOutside);
+    if(e.target == BrainGraph.container) {
+      document.removeEventListener('mousemove', this.dragmove);
+      document.removeEventListener('touchmove', this.dragmove);
+
+      // process and push to history
+      if(this.moveCommand) History.push(this.moveCommand.processAndSave());
+    }
   }
 
   dragmove(e) {

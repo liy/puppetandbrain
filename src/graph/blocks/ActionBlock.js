@@ -35,7 +35,12 @@ export default class ActionBlock extends Block
   focus() {
     // wait until next frame, when the element is added onto the screen to focus title
     nextFrame().then(() => {
-      this.title.focus();
+      if(this.title.textContent.trim() == '') {
+        this.title.focus();
+      }
+      else {
+        this.addOutputPin.focus();
+      }
     }) 
   }
 

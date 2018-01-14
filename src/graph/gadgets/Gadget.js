@@ -4,12 +4,7 @@ export default class Gadget extends EventEmitter
 {
   constructor() {
     super();
-    this.element = document.createElement('div')
-  }
-
-  init(node, name) {
-    this.node = node;
-    this.name = name;
+    this.element = document.createElement('div');
   }
 
   destroy() {

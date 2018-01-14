@@ -20,15 +20,20 @@ export default class extends Gadget
     this.onDown = this.onDown.bind(this);
     this.element.addEventListener('mousedown', this.onDown);
 
-    this.color = 0xFF9900;
+    this.value = 0xFF9900;
+  }
+
+  destroy() {
+    super.destroy();
+    this.element.removeEventListener('mousedown', this.onDown);
   }
 
   onDown(e) {
     this.color = Math.ceil(Math.random() * 0xFFFFFF);
-    this.emit('color.change', this.color);
+    this.emit('gadget.state.change', this.color);
   }
 
-  set color(c) {
+  set value(c) {
     if(c == 0) {
       this.hexField.style.color = '#FFF';
     }
@@ -41,7 +46,7 @@ export default class extends Gadget
     this._color = c;
   }
 
-  get color() {
+  get value() {
     return this._color;
   }
 }
