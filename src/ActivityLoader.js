@@ -91,8 +91,8 @@ export default class ActivityLoader
       // does not have execution, a data node
       if (!node.execution) continue;
       let data = pod.store[id];
-      for(let execData of data.execution) {
-        if(execData.id) node.connectNext(LookUp.get(execData.id), execData.name)
+      for(let execPod of data.execution) {
+        if(execPod.nodeID) node.connectNext(LookUp.get(execPod.nodeID), execPod.name)
       }
     }
 

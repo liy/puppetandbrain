@@ -6,7 +6,9 @@ NodeTemplate.Setter = {
     name: 'default',
     enabled: true,
   },
-  execution: ['default'],
+  execution: [{
+    name: 'default'
+  }],
   inputs: [],
   outputs: [],
   elementClass: ['property', 'setter'],
