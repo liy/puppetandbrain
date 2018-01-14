@@ -4,15 +4,15 @@ import DataType from '../data/DataType';
 NodeTemplate.Repeat = {
   ...ParentTemplate,
   execution: [{
-    name: 'completed'
+    name: 'repeat'
   }, {
-    name: 'body'
+    name: 'exit'
   }],
   inputs: [{
     name: 'count',
     type: DataType.GENERIC,
   }],
-  output: [{
+  outputs: [{
     name: 'index',
     type: DataType.GENERIC,
   }],
