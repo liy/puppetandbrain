@@ -45,16 +45,18 @@ export default class BlockBrowser extends Browser
   }
 
   getTemplates() {
-    // these are dynmaic templates
-    let classNames = Object.keys(NodeTemplate).filter(className => {
-      return className != 'Getter' && className != 'Setter' && className != 'Perform' && className != 'Break'
-    })
-
-    let templates = classNames.map(className => {
+    // TODO: to be removed
+    // just in case I fogot add className and name...
+    let templates = Object.keys(NodeTemplate).map(className => {
       NodeTemplate[className].className = className;
       NodeTemplate[className].name = NodeTemplate[className].name || className;
 
       return NodeTemplate[className];
+    })
+
+    // these are dynmaic templates
+    templates = templates.filter(template => {
+      return template.className != 'Getter' && template.className != 'Setter' && template.className != 'Perform' && template.className != 'Break'
     })
 
     // Make sure template does not have circular reference. I've changed all references into id.
