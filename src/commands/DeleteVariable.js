@@ -78,7 +78,7 @@ export default class DeleteVariable extends Command
       for(let exec of pod.execution) {
         if(exec.id) node.connectNext(LookUp.get(exec.id), exec.name)
       }
-      for(let callerPod of pod.callers) {
+      for(let callerPod of pod.enter.callers) {
         if(callerPod.nodeID) node.connectParent(LookUp.get(callerPod.nodeID), callerPod.executionName);
       }
     }

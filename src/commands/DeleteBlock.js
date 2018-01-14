@@ -27,12 +27,13 @@ export default class DeleteBlock extends Command
     // connect executions
     if(this.pod.execution) {
       for(let exec of this.pod.execution) {
-        if(exec.id) node.connectNext(LookUp.get(exec.id), exec.name)
+        if(exec.nodeID) node.connectNext(LookUp.get(exec.nodeID), exec.name)
       }
     }
-    if(this.pod.callers) {
-      for(let callerPod of this.pod.callers) {
-        if(callerPod.id) node.connectParent(LookUp.get(callerPod.nodeID), callerPod.executionName);
+    console.log(this.pod)
+    if(this.pod.enter.callers) {
+      for(let callerPod of this.pod.enter.callers) {
+        if(callerPod.nodeID) node.connectParent(LookUp.get(callerPod.nodeID), callerPod.executionName);
       }
     }
 
