@@ -2,6 +2,6 @@
   "projects": {
     "default": "puppet-brain-staging",
     "production": "puppet-brain",
-    "staging": "puppet-brain-staging",
+    "staging": "puppet-brain-staging"
   }
 }

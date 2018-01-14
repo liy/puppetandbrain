@@ -2,7 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
  
 
 module.exports = {
@@ -27,7 +28,7 @@ module.exports = {
       // copy the required assets to dist folder
       // use require() to get the actuall url
       {
-        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt|svg)$/,
+        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt)$/,
         use: [
           {
             loader: 'file-loader',
@@ -45,6 +46,13 @@ module.exports = {
           'style-loader',
           'css-loader',
           'sass-loader',
+        ]
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          'svg-sprite-loader',
+          // 'svgo-loader',
         ]
       },
     ]
@@ -82,7 +90,8 @@ module.exports = {
         storageBucket: "puppet-brain.appspot.com",
         messagingSenderId: "392290034997"
       })
-    })
+    }),
+    new SpriteLoaderPlugin(),
   ],
   
   // Export full source map for debugging, maps to original source
