@@ -37,11 +37,11 @@ export default class Toggle extends Gadget
   set value(v) {
     if(v) {
       this.knob.setAttribute('transform', `translate(${10})`)
-      this.color.setAttribute('fill', '#a4b500')
+      this.color.setAttribute('fill', '#006AFF')
     }
     else {
       this.knob.setAttribute('transform', `translate(${0})`)
-      this.color.setAttribute('fill', '#999999')
+      this.color.setAttribute('fill', '#808080')
     }
     this._value = v;
   }

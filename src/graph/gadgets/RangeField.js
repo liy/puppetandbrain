@@ -27,9 +27,6 @@ export default class extends Gadget
     this.element.addEventListener('mousedown', this.onDown)
     this.element.addEventListener('touchstart', this.onDown)
 
-    document.addEventListener('mouseup', this.onStop);
-    document.addEventListener('touchend', this.onStop);
-
     this.min = min;
     this.max = max;
     this.decimalPlaces = decimalPlaces;
@@ -49,6 +46,9 @@ export default class extends Gadget
     e.stopPropagation();
     document.addEventListener('mousemove', this.onDrag);
     document.addEventListener('touchmove', this.onDrag);
+    
+    document.addEventListener('mouseup', this.onStop);
+    document.addEventListener('touchend', this.onStop);
 
     let offsetX = e.offsetX ? e.offsetX : e.changedTouches[0].clientX-this.element.getBoundingClientRect().left
     this.value = offsetX/80 * (this.min + (this.max-this.min));
@@ -80,6 +80,9 @@ export default class extends Gadget
   }
 
   onStop() {
+    document.removeEventListener('mouseup', this.onStop);
+    document.removeEventListener('touchend', this.onStop);
+
     document.removeEventListener('mousemove', this.onDrag);
     document.removeEventListener('touchmove', this.onDrag);
   }
