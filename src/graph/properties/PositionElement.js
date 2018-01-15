@@ -2,7 +2,7 @@ import VariableElement from './VariableElement';
 import PositionIcon from '../../assets/position-icon.svg';
 import { svgElement } from '../../utils/utils';
 import DataType from '../../data/DataType';
-import PositionField from './PositionField';
+import PositionField from '../gadgets/PositionField';
 
 export default class extends VariableElement
 {

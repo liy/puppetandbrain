@@ -7,6 +7,11 @@ export default class Gadget extends EventEmitter
     this.element = document.createElement('div');
   }
 
+  /**
+   * Destroy gadget and remove all listeners
+   * 
+   * @memberof Gadget
+   */
   destroy() {
     this.clear();
   }

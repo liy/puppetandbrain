@@ -18,10 +18,9 @@ export default class InputField
 
   destroy() {
     super.destroy();
-    
     this.input.removeEventListener('input', this.onInput);
   }
-  
+
   set placeholder(p) {
     this.input.setAttribute('placeholder', p);
   }

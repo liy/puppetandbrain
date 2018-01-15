@@ -1,4 +1,4 @@
-.range-container {
+.range-field {
   width: 80px;
   text-align: center;
   user-select: none;  
@@ -6,7 +6,7 @@
 
 
 
-  .range-span {
+  .range-field-span {
     position: relative;
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12px;
@@ -23,7 +23,7 @@
     pointer-events: none;
   }
 
-  .range-svg {
+  .range-field-svg {
     width: 70px;
     height: 20px;
     margin-top: 9px;

@@ -16,8 +16,8 @@ export default class extends Gadget
     this.placeholder = placeholderText;
     this.element.appendChild(this.input);
 
-    this.onChange = this.onChange.bind(this);
-    this.input.addEventListener('change', this.onChange);
+    this.onInput = this.onInput.bind(this);
+    this.input.addEventListener('input', this.onInput);
 
     this.input.addEventListener('mousedown', e => {
       e.stopPropagation();
@@ -26,15 +26,17 @@ export default class extends Gadget
 
   destroy() {
     super.destroy();
-    this.input.removeEventListener('change', this.onChange);
+    this.input.removeEventListener('input', this.onInput);
   }
 
   set placeholder(p) {
     this.input.setAttribute('placeholder', p);
   }
   
-  onChange(e) {
-    this.emit('gadget.state.change', e.target.value)
+  onInput(e) {
+    // this removes any br, div...
+    this.input.textContent = this.input.textContent;
+    this.emit('gadget.state.change', this.input.textContent)
   }
 
   set value(v) {

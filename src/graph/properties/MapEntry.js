@@ -1,7 +1,7 @@
 import './MapEntry.scss'
 
 import EventEmitter from "../../utils/EventEmitter";
-import InputField from './InputField';
+import InputField from '../gadgets/InputField';
 
 import CrossIcon from '../../assets/cross.svg';
 import { svgElement } from '../../utils/utils';

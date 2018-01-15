@@ -1,4 +1,4 @@
-import './Bar.scss';
+import './RangeField.scss';
 import Gadget from './Gadget';
 
 // TODO: rename to range
@@ -6,16 +6,16 @@ export default class extends Gadget
 {
   constructor({value=0, min=0, max=1, decimalPlaces=2}) {
     super();
-    this.element.className = 'range-container';
+    this.element.className = 'range-field';
 
     this.barSvg = new DOMParser().parseFromString(require('!raw-loader!../../assets/bar.svg'), "image/svg+xml").rootElement;
-    this.barSvg.setAttribute('class', 'range-svg');
+    this.barSvg.setAttribute('class', 'range-field-svg');
     this.element.appendChild(this.barSvg);
 
     this.line = this.element.querySelector('#line');
 
     this.rangeSpan = document.createElement('span');
-    this.rangeSpan.className = 'range-span';
+    this.rangeSpan.className = 'range-field-span';
     this.element.appendChild(this.rangeSpan);
 
     this.min = min;

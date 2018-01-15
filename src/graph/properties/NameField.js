@@ -1,5 +1,5 @@
 import './NameField.scss'
-import InputField from './InputField';
+import InputField from '../gadgets/InputField';
 
 export default class extends InputField
 {

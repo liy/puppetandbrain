@@ -1,5 +1,5 @@
 import './ValueField.scss'
-import InputField from './InputField';
+import InputField from '../gadgets/InputField';
 import {svgElement} from '../../utils/utils';
 import CrossIcon from '../../assets/cross.svg';
 

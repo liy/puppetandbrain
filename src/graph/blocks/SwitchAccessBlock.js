@@ -1,5 +1,5 @@
 import Block from "./Block";
-import Bar from '../gadgets/Bar';
+import RangeField from '../gadgets/RangeField';
 
 export default class extends Block
 {
@@ -10,18 +10,20 @@ export default class extends Block
   init(node) {
     super.init(node);
     
-    let debounceBar = new Bar();
-    debounceBar.min = 0;
-    debounceBar.max = 10;
-    debounceBar.decimalPlaces = 1;
+    let debounceRange = new RangeField({
+      value:node.memory.debounce,
+      min:0,
+      max:10,
+      decimalPlaces:1
+    });
+    let preAcceptanceRange = new RangeField({
+      value:node.memory['pre-acceptance'],
+      min:0,
+      max:5,
+      decimalPlaces1:1
+    });
 
-    
-    let preAcceptanceBar = new Bar();
-    preAcceptanceBar.min = 0;
-    preAcceptanceBar.max = 5;
-    preAcceptanceBar.decimalPlaces = 1;
-
-    this.inputPins.get('debounce').setGadget(debounceBar);
-    this.inputPins.get('pre-acceptance').setGadget(preAcceptanceBar);
+    this.inputPins.get('debounce').setGadget(debounceRange);
+    this.inputPins.get('pre-acceptance').setGadget(preAcceptanceRange);
   }
 }

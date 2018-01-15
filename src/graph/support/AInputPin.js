@@ -15,7 +15,7 @@ export default class AInputPin extends ADataPin
   init(node) {
     super.init(node);
 
-    this.setGadget(new TextField(node, this.name));
+    this.setGadget(new TextField(node.memory[this.name], this.name));
 
     this.label.addEventListener('mousedown', this.mouseDown)
     
@@ -27,9 +27,10 @@ export default class AInputPin extends ADataPin
     this.pointer.on('input.disconnected', this.connectionChanged);
   }
 
-  destroyed() {
+  destroy() {
+    // this will remove all listeners as well
     this.gadget.destroy();
-    this.label.removeEventListener('mousedown', this.mouseDown)
+    this.label.removeEventListener('mousedown', this.mouseDown);
     this.pointer.off('input.connected', this.connectionChanged);
     this.pointer.off('input.disconnected', this.connectionChanged);
   }
@@ -37,14 +38,28 @@ export default class AInputPin extends ADataPin
   setGadget(gadget) {
     // remove old gadget
     if(this.gadget) {
+      // destroy will clear all the listeners
       this.gadget.destroy();
       this.head.removeChild(this.gadget.element);
     }
 
     this.gadget = gadget;
-    this.gadget.init(this.node, this.name);
     this.gadget.visible = false;
     this.head.appendChild(this.gadget.element);
+
+    // TODO: the gadget state change is quite generic,
+    // this simple node memory update should do the job
+    // If not, it is still possible to clear the gadget old listener
+    // setup a specific one in the specific block. 
+    this.gadget.on('gadget.state.change', value => {
+      console.log(value, 'gadget.state.change');
+      // Note that, by default, it is a simple pin name which is enougth to identify
+      // the pin and corresponding data.
+      // However, in setter block, this.name is actually a property id. Because user
+      // can change property name on the fly, it is better to use fixed id.
+      // It is hard to read, maybe an extra optional field "dataID" instead of "name"?
+      this.node.memory[this.name] = value;
+    });
   }
 
   connectionChanged(data) {
