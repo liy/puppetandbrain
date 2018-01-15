@@ -3,6 +3,9 @@
   margin-top: 10px;
   border-radius: 19px;
 
+  padding-left: 5px;
+  padding-right: 5px;
+
   margin-left: 10px;
   margin-right: 10px;
 
@@ -15,6 +18,8 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    // vertical centre fields in the content
+    align-items: center;
   
     .variable-icon {
       flex-grow: 0;
@@ -22,8 +27,6 @@
       min-width: 32px;
       width: 32px;
       height: 32px;
-  
-      margin-left: 3px;
   
       // background-color: aqua;
   
@@ -33,6 +36,14 @@
       align-items: center;
 
       user-select: none;
+    }
+
+    .gadget-container {
+      height: 32px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
