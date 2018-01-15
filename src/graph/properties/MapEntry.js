@@ -44,21 +44,21 @@ export default class extends EventEmitter
       this.emit('entry.remove', this);
     })
 
-    this.valueField.input.addEventListener('change', this.onValueChange)
-    this.keyField.input.addEventListener('change', this.onKeyChange)
+    this.valueField.on('gadget.state.change', this.onValueChange)
+    this.keyField.on('gadget.state.change', this.onKeyChange)
   }
 
   focus() {
     this.valueField.focus();
   }
 
-  onValueChange(e) {
-    this.map[this.key] = e.target.value;
-    this.value = e.target.value;
+  onValueChange(value) {
+    this.map[this.key] = value;
+    this.value = value;
   }
 
-  onKeyChange(e) {
-    let newKey = e.target.value;
+  onKeyChange(value) {
+    let newKey = value;
     // ensure key does not exist in the map
     if(!(newKey in this.map)) {
       let value = this.map[this.key];

@@ -34,13 +34,13 @@ export default class extends EventEmitter
     this.icon.addEventListener('mousedown', e => {
       this.emit('entry.remove', this);
     })
-    this.valueField.input.addEventListener('change', this.onChange)
+    this.valueField.on('gadget.state.change', this.onChange)
 
     this.index = index;
   }
 
-  onChange(e) {
-    this.arr[this.index] = e.target.value;
+  onChange(value) {
+    this.arr[this.index] = value;
   }
 
   focus() {
