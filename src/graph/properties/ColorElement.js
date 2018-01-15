@@ -1,5 +1,5 @@
 import VariableElement from './VariableElement';
-import PipetteIcon from '../../assets/pipette.svg';
+import BucketIcon from '../../assets/paint-bucket.svg';
 import { svgElement } from '../../utils/utils';
 
 import ColorButton from '../gadgets/ColorButton';
@@ -11,7 +11,7 @@ export default class extends VariableElement
     super(variable);
     this.type = DataType.COLOR;
 
-    let svg = svgElement(PipetteIcon,{width:16, height:16});
+    let svg = svgElement(BucketIcon, {width:18, height:18});
     this.icon.appendChild(svg);
 
     this.colorButton = new ColorButton();

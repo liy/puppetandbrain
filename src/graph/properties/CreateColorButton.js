@@ -1,12 +1,12 @@
 import VariableControlButton from './VariableControlButton';
-import PipetteIcon from '../../assets/pipette.svg';
+import BucketIcon from '../../assets/paint-bucket.svg';
 import { svgElement } from '../../utils/utils';
 import DataType from '../../data/DataType';
 
 export default class extends VariableControlButton
 {
   constructor() {
-    super(svgElement(PipetteIcon,{width:16, height:16}));
+    super(svgElement(BucketIcon,{width:18, height:18}));
   }
 
   pointerDown(e) {
