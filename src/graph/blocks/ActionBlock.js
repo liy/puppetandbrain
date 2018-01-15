@@ -17,6 +17,7 @@ export default class ActionBlock extends Block
 
     this.onTitleInput = this.onTitleInput.bind(this)
     this.onOutputAdded = this.onOutputAdded.bind(this)
+    this.addPinTrigger = this.addPinTrigger.bind(this)
   }
 
   init(node) {
@@ -24,8 +25,9 @@ export default class ActionBlock extends Block
 
     this.title.textContent = this.node.actionName;
 
-    this.addOutputPin = new AddOutputPin(node);
+    this.addOutputPin = new AddOutputPin();
     this.body.addRight(this.addOutputPin);
+    this.addOutputPin.on('addPin.trigger', this.addPinTrigger)
     
     this.title.addEventListener('input', this.onTitleInput);
 
@@ -52,6 +54,10 @@ export default class ActionBlock extends Block
     else {
       // TODO: hide error
     }
+  }
+
+  addPinTrigger(name) {
+    this.node.outputs.addOutput(name);
   }
 
   onOutputAdded(name) {

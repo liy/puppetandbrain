@@ -2,10 +2,13 @@ import './AddOutputPin.scss';
 import TextField from '../gadgets/TextField';
 import PlusIcon from '../../assets/plus.svg';
 import {svgElement} from '../../utils/utils'
+import EventEmitter from '../../utils/EventEmitter';
 
-export default class
+export default class extends EventEmitter
 {
-  constructor(node) {
+  constructor() {
+    super();
+
     this.element = document.createElement('div');
     this.element.className = 'add-output-pin-container'
 
@@ -23,15 +26,18 @@ export default class
     let svg = svgElement(PlusIcon, {className: 'plus-svg', width:13, height:13})
     this.head.appendChild(svg);
 
+    // FIXME: move this into corresponding block...
     this.head.addEventListener('mousedown', e => {
       e.preventDefault();
       
       let outputName = String.trim(this.textField.value);
       if(outputName) {
-        node.outputs.addOutput(outputName);
+        this.emit('addPin.trigger', outputName);
         this.textField.value = '';
       }
     })
+
+    this.head.addEventListener
   }
 
   focus() {

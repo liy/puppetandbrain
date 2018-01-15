@@ -118,6 +118,7 @@ export default class BlockBrowser extends Browser
         position: {x:0,y:0}
       }
     })
+
   
     return templates;
   }

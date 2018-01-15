@@ -35,6 +35,9 @@ export default class AInputPin extends ADataPin
       case DataType.GENERIC:
         this.setGadget(new TextField(data));
         break;
+      default:
+        this.setGadget(new TextField(data));
+        break;
     }
 
     this.label.addEventListener('mousedown', this.mouseDown)

@@ -11,3 +11,4 @@ export PlaySoundBlock from './PlaySoundBlock';
 export SetterBlock from './SetterBlock';
 export SwitchAccessBlock from './SwitchAccessBlock';
 export SetPositionBlock from './SetPositionBlock';
+export ExtractorBlock from './ExtractorBlock';

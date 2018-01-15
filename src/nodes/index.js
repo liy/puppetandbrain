@@ -39,6 +39,7 @@ export SetRotation from './SetRotation';
 export RotateAntiClockwise from './RotateAntiClockwise';
 export RotateClockwise from './RotateClockwise';
 export SetPosition from './SetPosition';
+export Extractor from './Extractor';
 
 // listeners
 export GameStart from './listeners/GameStart'
