@@ -8,6 +8,7 @@ import MapElement from './MapElement';
 import PositionElement from './PositionElement';
 import ColorElement from './ColorElement';
 import ActorElement from './ActorElement';
+import { nextFrame } from "../../utils/utils";
 
 class PropertyController
 {
@@ -80,6 +81,10 @@ class PropertyController
     }
     this.panel.append(variableElement.element);
     this.elements.set(variable.id, variableElement);
+
+    nextFrame().then(() => {
+      variableElement.focus();
+    });
   }
 
   remove({variable, index}) {

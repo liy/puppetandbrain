@@ -58,6 +58,10 @@ export default class
     }
   }
 
+  focus() {
+    this.nameField.focus();
+  }
+
   get selected() {
     return this._selected;
   }
