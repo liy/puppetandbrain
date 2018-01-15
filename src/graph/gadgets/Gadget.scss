@@ -1,0 +1,16 @@
+.gadget {
+  .gadget-icon {
+    flex-grow: 0;
+
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+
+    // centre the svg
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+  }
+}

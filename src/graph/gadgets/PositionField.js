@@ -2,12 +2,14 @@ import './PositionField.scss';
 import InputField from "./InputField";
 import Gadget from './Gadget';
 
+import PipetteIcon from '../../assets/pipette.svg'; 
+import {svgElement} from '../../utils/utils';
+
 export default class extends Gadget
 {
   constructor(x, y) {
     super();
-    this.element = document.createElement('div');
-    this.element.className = 'position-field'
+    this.element.classList.add('position-field');
 
     this.xSpan = document.createElement('span');
     this.xSpan.className = 'x-span';
@@ -26,8 +28,41 @@ export default class extends Gadget
     this.yInputField = new InputField(y);
     this.yInputField.input.type = 'number'
     this.element.appendChild(this.yInputField.element);
-
     this._position = {x,y} 
+
+    // picker
+    this.picker = document.createElement('div');
+    this.picker.className = 'gadget-icon';
+    this.picker.appendChild(svgElement(PipetteIcon,{width:16, height:16}));
+    this.element.appendChild(this.picker);
+
+    // those are self contained, and does not require remvoing event 
+    this.picker.addEventListener('mousedown', e => {
+      e.stopPropagation();
+
+      document.body.style.cursor = 'crosshair';
+      let picking = e => {
+        this.value = {
+          x: e.clientX,
+          y: e.clientY
+        }
+        this.emit('gadget.state.change', this.value);
+
+        document.body.style.cursor = 'auto';
+        document.removeEventListener('mousedown', picking);
+        document.removeEventListener('mousemove', pickMoving);
+      }
+
+      let pickMoving = e => {
+        this.value = {
+          x: e.clientX,
+          y: e.clientY
+        }
+      }
+      
+      document.addEventListener('mousedown', picking);
+      document.addEventListener('mousemove', pickMoving);
+    })
 
     this.xInputField.on('gadget.state.change', x => {
       this._position.x = Number(x);

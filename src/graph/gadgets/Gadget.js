@@ -1,3 +1,4 @@
+import './Gadget.scss'
 import EventEmitter from '../../utils/EventEmitter'
 
 export default class Gadget extends EventEmitter
@@ -5,6 +6,7 @@ export default class Gadget extends EventEmitter
   constructor() {
     super();
     this.element = document.createElement('div');
+    this.element.className = 'gadget';
   }
 
   /**

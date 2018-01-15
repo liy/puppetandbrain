@@ -5,9 +5,9 @@ export default class extends Gadget
 {
   constructor(list=[]) {
     super()
+    this.element.classList.add('drop-down');
 
     this.select = document.createElement('select');
-    this.element.className = 'drop-down'
     this.element.appendChild(this.select);
 
     this.select.addEventListener('mousedown', e => {

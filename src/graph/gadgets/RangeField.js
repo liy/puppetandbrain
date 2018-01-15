@@ -6,7 +6,7 @@ export default class extends Gadget
 {
   constructor({value=0, min=0, max=1, decimalPlaces=2}) {
     super();
-    this.element.className = 'range-field';
+    this.element.classList.add('range-field');
 
     this.barSvg = new DOMParser().parseFromString(require('!raw-loader!../../assets/bar.svg'), "image/svg+xml").rootElement;
     this.element.appendChild(this.barSvg);

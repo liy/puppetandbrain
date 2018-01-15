@@ -5,9 +5,7 @@ export default class extends Gadget
 {
   constructor(value, placeholder='...') {
     super();
-
-    this.element = document.createElement('div');
-    this.element.className = 'input-field';
+    this.element.classList.add('input-field');
 
     this.input = document.createElement('input');
     this.element.appendChild(this.input);

@@ -7,7 +7,7 @@ export default class extends Gadget
 {
   constructor(value, placeholder='...') {
     super()
-    this.element.className = 'text-field';
+    this.element.classList.add('text-field');
 
     this.input = document.createElement('span');
     this.input.className = 'data-text'

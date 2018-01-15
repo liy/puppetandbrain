@@ -5,7 +5,7 @@ export default class Toggle extends Gadget
 {
   constructor(value=false) {
     super();
-    this.element.className = 'toggle-container';
+    this.element.classList.add('toggle-button');
 
     this.toggle = new DOMParser().parseFromString(require('!raw-loader!../../assets/toggle.svg'), "image/svg+xml").rootElement;
     this.toggle.setAttribute('class', 'toggle-svg');

@@ -5,7 +5,7 @@ export default class extends Gadget
 {
   constructor() {
     super();
-    this.element.className = 'color-button';
+    this.element.classList.add('color-button');
 
     let svg = new DOMParser().parseFromString(require('!raw-loader!../../assets/bar.svg'), "image/svg+xml").rootElement;
     svg.setAttribute('height', 24)
