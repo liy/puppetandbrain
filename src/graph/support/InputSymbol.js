@@ -98,4 +98,9 @@ export default class InputSymbol extends DataSymbol
   get color() {
     return DataColor[this.pointer.type] || DataColor[DataType.GENERIC];
   }
+
+  template(dataType) {
+    let color = DataColor[dataType] || DataColor[DataType.GENERIC];
+    this.svg.style.setProperty('--stroke', `#${color.toString(16)}`);
+  }
 }

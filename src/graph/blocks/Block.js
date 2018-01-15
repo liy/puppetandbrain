@@ -200,26 +200,24 @@ export default class Block extends EventEmitter
     if(pod.execution) {
       if(pod.enter.enabled) {
         this.inPin = new AExecutionInPin();
-        // this.inPin.init(null);
         this.body.addLeft(this.inPin);
       }
 
       for(let execPod of pod.execution) {
         pin = new AExecutionOutPin(execPod.name);
-        // pin.init(null);
         this.body.addRight(pin);
       }
     }
 
     for(let inputPod of pod.inputs) {
       pin = new AInputPin(inputPod.name);
-      // pin.init(null);
+      pin.symbol.template(inputPod.type)
       this.body.addLeft(pin);
     }
 
     for(let outputPod of pod.outputs) {
       pin = new AOutputPin(outputPod.name);
-      // pin.init(null);
+      pin.symbol.template(outputPod.type)
       this.body.addRight(pin);
     }
 

@@ -5,6 +5,7 @@ import BlockCollection from './BlockCollection';
 import ArrayMap from "../utils/ArrayMap";
 import GroupSection from "./GroupSection";
 import Block from '../graph/blocks/Block';
+import DataType from '../data/DataType';
 
 // FIXME: clean up needed!!
 export default class BlockBrowser extends Browser
@@ -107,7 +108,14 @@ export default class BlockBrowser extends Browser
       name: `Break Position`,
       // the node going to be created is owned by the current opening brain
       owner: BrainGraph.brain.owner.id,
-      outputs: [{name:'x'},{name:'y'}]
+      inputs: [{
+        name: 'position',
+        type: DataType.VEC2,
+      }],
+      outputs: [{name:'x'},{name:'y'}],
+      memory: {
+        position: {x:0,y:0}
+      }
     })
   
     return templates;

@@ -37,8 +37,6 @@ export default class AInputPin extends ADataPin
         break;
     }
 
-
-
     this.label.addEventListener('mousedown', this.mouseDown)
     
     this.pointer = this.node.inputs.get(this.name);
@@ -110,5 +108,9 @@ export default class AInputPin extends ADataPin
 
   get gadgetVisible() {
     return this.gadget.visible;
+  }
+
+  template(pod) {
+    
   }
 }

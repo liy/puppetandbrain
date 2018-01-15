@@ -7,10 +7,7 @@ NodeTemplate.Break = {
     enabled: false
   },
   execution: [],
-  inputs: [{
-    name: 'in',
-    type: DataType.GENERIC,
-  }],
+  inputs: [],
   outputs: [],
   elementClass: ['utility', 'center-input'],
   category: 'Utilities'
