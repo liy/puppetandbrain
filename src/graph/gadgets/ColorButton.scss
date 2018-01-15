@@ -1,15 +1,13 @@
 .color-button {
+  position: relative;
   min-width: 80px;
+  height: 24px;
   text-align: center;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-
-  margin-top: 4px;
-  margin-right: 8px;
 
   user-select: none;  
   
   .color-hex {
-    position: relative;
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12px;
     color: rgb(255, 255, 255);
@@ -20,8 +18,12 @@
     background-color: transparent;
 
     width: 80px;
-    // FIXME: no idea why I have to use -40 to vertical centre the span!!
-    top: -40px;
+
+    // combine with parent postion:relative. vertical centre the text
+    position: absolute;
+    line-height: 24px;
+    height: 24px;
+    top: 0;
 
     pointer-events: none;
   }

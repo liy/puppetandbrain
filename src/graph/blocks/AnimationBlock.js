@@ -1,5 +1,6 @@
 import Block from "./Block";
 import DropDown from '../gadgets/DropDown';
+import ColorButton from '../gadgets/ColorButton';
 
 export default class AnimationBlock extends Block
 {
@@ -11,13 +12,15 @@ export default class AnimationBlock extends Block
   init(node) {
     super.init(node);
 
-    let dropdown = new DropDown();
-    this.inputPins.get('name').setGadget(dropdown);
-    // this.element.appendChild(dropdown.element)
+    // let dropdown = new DropDown();
+    // this.inputPins.get('name').setGadget(dropdown);
 
-    node.owner.getAnimations().then(animations => {
-      let names = animations.map(animation => animation.name)
-      dropdown.setList(names, node.memory.name);
-    })
+    // node.owner.getAnimations().then(animations => {
+    //   let names = animations.map(animation => animation.name)
+    //   dropdown.setList(names, node.memory.name);
+    // })
+
+
+    this.inputPins.get('name').setGadget(new ColorButton());
   }
 }

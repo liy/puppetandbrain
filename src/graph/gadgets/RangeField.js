@@ -9,13 +9,12 @@ export default class extends Gadget
     this.element.className = 'range-field';
 
     this.barSvg = new DOMParser().parseFromString(require('!raw-loader!../../assets/bar.svg'), "image/svg+xml").rootElement;
-    this.barSvg.setAttribute('class', 'range-field-svg');
     this.element.appendChild(this.barSvg);
 
     this.line = this.element.querySelector('#line');
 
-    this.rangeSpan = document.createElement('span');
-    this.rangeSpan.className = 'range-field-span';
+    this.rangeSpan = document.createElement('div');
+    this.rangeSpan.className = 'range-text';
     this.element.appendChild(this.rangeSpan);
 
     this.lastX = 0;

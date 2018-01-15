@@ -13,7 +13,7 @@ export default class extends Gadget
 
     this.line = this.element.querySelector('#line');
 
-    this.hexField = document.createElement('span');
+    this.hexField = document.createElement('div');
     this.hexField.className = 'color-hex';
     this.element.appendChild(this.hexField);
 
