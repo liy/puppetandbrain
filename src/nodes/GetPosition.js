@@ -4,12 +4,12 @@ import DataType from '../data/DataType';
 NodeTemplate.GetPosition = {
   name: 'Get Position',
   inputs: [{
-    name: 'actor',
+    name: 'puppet',
     type: DataType.ACTOR, 
   }],
   outputs: [{
     name: 'position',
-    type: DataType.MAP
+    type: DataType.VEC2
   }],
   elementClass: ['property', 'getter'],
   category: 'Transformation'

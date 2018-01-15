@@ -2,6 +2,8 @@ import DataSymbol from "./DataSymbol";
 import ConnectHelper from "../ConnectHelper";
 import InputIcon from '../../assets/input.svg';
 import {svgElement} from '../../utils/utils';
+import DataColor from "../../data/DataColor";
+import DataType from "../../data/DataType";
 
 const linkSound = new Audio(require('../../assets/sounds/link.mp3'));
 
@@ -15,12 +17,9 @@ export default class InputSymbol extends DataSymbol
     this.element.appendChild(this.svg);
 
     this.connectionPath = document.createElementNS('http://www.w3.org/2000/svg','path');
-    this.connectionPath.setAttribute('stroke', '#98c6de');
     this.connectionPath.setAttribute('stroke-width', 2);
     this.connectionPath.setAttribute('stroke-opacity', 1);
     this.connectionPath.setAttribute('fill', 'none');
-
-    this.extendPath.setAttribute('d', `M13,19 h-21`);
 
     this._offsetX = 23;
   }
@@ -29,13 +28,17 @@ export default class InputSymbol extends DataSymbol
     super.init(node);
     this.pointer = this.node.inputs.get(this.name);
 
+    this.connectionPath.setAttribute('stroke', this.hexColor);
+
     if(this.isConnected) {
-      this.svg.style.setProperty('--fill', '#98C6DE');
+      // this.svg.style.setProperty('--fill', '#98C6DE');
+      this.svg.style.setProperty('--fill', this.hexColor);
       this.svg.style.setProperty('--stroke', 'none');
     }
     else {
       this.svg.style.setProperty('--fill', 'none');
-      this.svg.style.setProperty('--stroke', '#98C6DE');
+      // this.svg.style.setProperty('--stroke', '#98C6DE');
+      this.svg.style.setProperty('--stroke', this.hexColor);
     }
   }
 
@@ -47,13 +50,13 @@ export default class InputSymbol extends DataSymbol
     if(this.isConnected) {
       this.drawConnection();
       BrainGraph.svg.appendChild(this.connectionPath);
-      this.svg.style.setProperty('--fill', '#98C6DE');
+      this.svg.style.setProperty('--fill', this.hexColor);
       this.svg.style.setProperty('--stroke', 'none');
     }
     else {
       if(BrainGraph.svg.contains(this.connectionPath)) BrainGraph.svg.removeChild(this.connectionPath);
       this.svg.style.setProperty('--fill', 'none');
-      this.svg.style.setProperty('--stroke', '#98C6DE');
+      this.svg.style.setProperty('--stroke', this.hexColor);
     }
   }
 
@@ -90,5 +93,10 @@ export default class InputSymbol extends DataSymbol
       x: (rect.left + rect.right)/2 - offset.left,
       y: (rect.top + rect.bottom)/2 - offset.top
     }
+  }
+
+  get color() {
+    console.log(this.pointer.type)
+    return DataColor[this.pointer.type] || DataColor[DataType.GENERIC];
   }
 }

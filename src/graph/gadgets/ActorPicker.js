@@ -14,7 +14,7 @@ export default class extends Gadget
 
     this.element.classList.add('actor-picker');
 
-    this.nameField = new TextField('','pick an actor...')
+    this.nameField = new TextField('','pick a puppet...')
     this.element.appendChild(this.nameField.element);
 
     this.picker = document.createElement('div');

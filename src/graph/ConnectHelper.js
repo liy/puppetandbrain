@@ -90,7 +90,7 @@ class ConnectHelper
 
   startDataSymbol(symbol) {
     this.startSymbol = symbol;
-    this.path.setAttribute('stroke', '#a9c4d2');
+    this.path.setAttribute('stroke', symbol.hexColor);
     this.path.setAttribute('stroke-width', 2);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');

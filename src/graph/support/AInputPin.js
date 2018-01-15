@@ -51,7 +51,7 @@ export default class AInputPin extends ADataPin
 
   destroy() {
     // this will remove all listeners as well
-    this.gadget.destroy();
+    if(this.gadget) this.gadget.destroy();
     this.label.removeEventListener('mousedown', this.mouseDown);
     this.pointer.off('input.connected', this.connectionChanged);
     this.pointer.off('input.disconnected', this.connectionChanged);
@@ -85,7 +85,7 @@ export default class AInputPin extends ADataPin
 
   connectionChanged(data) {
     if(this.pointer.isConnected) {
-      this.gadget.visible = false;
+      if(this.gadget) this.gadget.visible = false;
       this.element.classList.remove('clickable');
     }
     else {

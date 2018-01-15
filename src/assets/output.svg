@@ -1,3 +1,3 @@
 <svg version="1.1" id="output" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 38" >
-	<circle fill="#98C6DE" cx="15" cy="19" r="6"/>
+	<circle style="fill:var(--fill, #98C6DE)" cx="15" cy="19" r="6"/>
 </svg>

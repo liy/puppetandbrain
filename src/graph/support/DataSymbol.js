@@ -13,21 +13,6 @@ export default class DataSymbol
     this.flow = flow;
     this.type = 'data';
 
-    // this.svg = new DOMParser().parseFromString(require('../../assets/data-symbol.svg'), "image/svg+xml").rootElement;
-    // this.svg.setAttribute('class', 'data-svg');
-    // this.svg.setAttribute('width', 34);
-    // this.svg.setAttribute('height', 38);
-    // this.svg.style.pointerEvents = 'none';
-    // this.element.appendChild(this.svg);
-
-
-    this.extendPath = document.createElementNS('http://www.w3.org/2000/svg','path');
-    this.extendPath.setAttribute('stroke', '#98c6de');
-    this.extendPath.setAttribute('stroke-width', 2);
-    this.extendPath.setAttribute('stroke-opacity', 1);
-    this.extendPath.setAttribute('fill', 'none');
-
-
     // override this in input and output symbol
     this._offsetX = 0;
   }
@@ -183,5 +168,13 @@ export default class DataSymbol
   get position() {
     // override
     return null;
+  }
+
+  get color() {
+    return 0;
+  }
+
+  get hexColor() {
+    return `#${this.color.toString(16)}`
   }
 }

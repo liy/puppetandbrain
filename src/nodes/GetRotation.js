@@ -5,7 +5,7 @@ import DataType from '../data/DataType';
 NodeTemplate.GetRotation = {
   name: 'Get Rotation',
   inputs: [{
-    name: 'actor',
+    name: 'puppet',
     type: DataType.ACTOR, 
   }],
   outputs: [{

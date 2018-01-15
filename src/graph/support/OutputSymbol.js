@@ -2,6 +2,8 @@ import DataSymbol from "./DataSymbol";
 import ConnectHelper from '../ConnectHelper';
 import OutputIcon from '../../assets/output.svg';
 import {svgElement} from '../../utils/utils';
+import DataColor from "../../data/DataColor";
+import DataType from "../../data/DataType";
 
 const linkSound = new Audio(require('../../assets/sounds/link.mp3'));
 
@@ -14,8 +16,6 @@ export default class OutputSymbol extends DataSymbol
     this.svg.style.pointerEvents = 'none';
     this.element.appendChild(this.svg);
 
-    this.extendPath.setAttribute('d', `M15,19 h19`);
-
     this._offsetX = -23;
     
     this.connected = true;
@@ -24,6 +24,8 @@ export default class OutputSymbol extends DataSymbol
   init(node) {
     super.init(node);
     this.output = this.node.outputs.get(this.name);
+
+    this.svg.style.setProperty('--fill', this.hexColor);
   }
 
   get isConnected() {
@@ -61,5 +63,9 @@ export default class OutputSymbol extends DataSymbol
       x: (rect.left + rect.right)/2 - offset.left,
       y: (rect.top + rect.bottom)/2 - offset.top
     }
+  }
+
+  get color() {
+    return DataColor[this.output.type] || DataColor[DataType.GENERIC];
   }
 }
