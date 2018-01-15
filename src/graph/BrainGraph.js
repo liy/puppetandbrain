@@ -165,6 +165,18 @@ class BrainGraph
     }})
   }
 
+  hide() {
+    Stage.blurEnabled = false;
+    this.container.style = "visibility:hidden"
+    document.getElementById('control').classList.remove('blur')
+  }
+
+  show() {
+    Stage.blurEnabled = true;
+    this.container.style = "visibility:visible"
+    document.getElementById('control').classList.add('blur')
+  }
+
   switchTo(brain) {
     while(this.svg.hasChildNodes()) {
       this.svg.removeChild(this.svg.lastChild)

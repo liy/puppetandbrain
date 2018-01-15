@@ -41,7 +41,7 @@ export default class extends Gadget
       e.stopPropagation();
 
       document.body.style.cursor = 'crosshair';
-      let picking = e => {
+      let picked = e => {
         this.value = {
           x: e.clientX,
           y: e.clientY
@@ -49,19 +49,19 @@ export default class extends Gadget
         this.emit('gadget.state.change', this.value);
 
         document.body.style.cursor = 'auto';
-        document.removeEventListener('mousedown', picking);
-        document.removeEventListener('mousemove', pickMoving);
+        document.removeEventListener('mousedown', picked);
+        document.removeEventListener('mousemove', picking);
       }
 
-      let pickMoving = e => {
+      let picking = e => {
         this.value = {
           x: e.clientX,
           y: e.clientY
         }
       }
       
-      document.addEventListener('mousedown', picking);
-      document.addEventListener('mousemove', pickMoving);
+      document.addEventListener('mousedown', picked);
+      document.addEventListener('mousemove', picking);
     })
 
     this.xInputField.on('gadget.state.change', x => {

@@ -1,0 +1,14 @@
+.actor-picker {
+  height: 24px;
+  border-radius: 12px;
+  background-color: rgba(133, 133, 133, 0.3);
+
+  padding-left: 10px;
+  padding-right: 5px;
+
+  .text-field {
+    background: none;
+    user-select: none;
+    pointer-events: none;
+  }
+}

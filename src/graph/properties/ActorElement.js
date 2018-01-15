@@ -2,15 +2,20 @@ import VariableElement from './VariableElement';
 import ActorIcon from '../../assets/actor.svg';
 import { svgElement } from '../../utils/utils';
 import DataType from '../../data/DataType';
+import ActorPicker from '../gadgets/ActorPicker';
 
 export default class extends VariableElement
 {
   constructor(variable) {
     super(variable);
     this.type = DataType.ACTOR;
-
-    // let svg = svgElement(ActorIcon,{width:16, height:16});
-    // this.icon.appendChild(svg);
     this.icon.textContent = '🐶';
+    
+    this.actorPicker = new ActorPicker();
+    this.content.appendChild(this.actorPicker.element);
+
+    this.actorPicker.on('gadget.state.change', actorID => {
+      this.variable.data = actorID;
+    })
   }
 }

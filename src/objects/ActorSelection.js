@@ -43,6 +43,7 @@ class ActorSelection extends EventEmitter
     this.deselectAll();
     this.selected = [target];
     this.emit('actor.selection.change', this.selected);
+    this.emit('actor.selection.selected', this.selected);
   }
 
   deselectAll() {
