@@ -22,7 +22,7 @@ NodeTemplate.SwitchAccess = {
     type: DataType.GENERIC
   }],
   memory: {
-    debounce: 1,
+    debounce: 0,
     'pre-acceptance': 0
   },
   keywords: [...ParentTemplate.keywords, 'switch access', 'accessibility']

@@ -18,11 +18,6 @@ export default class extends Gadget
     this.rangeSpan.className = 'range-field-span';
     this.element.appendChild(this.rangeSpan);
 
-    this.min = min;
-    this.max = max;
-
-    this.decimalPlaces = decimalPlaces;
-
     this.lastX = 0;
 
     this.onDown = this.onDown.bind(this);
@@ -34,6 +29,12 @@ export default class extends Gadget
 
     document.addEventListener('mouseup', this.onStop);
     document.addEventListener('touchend', this.onStop);
+
+    this.min = min;
+    this.max = max;
+    this.decimalPlaces = decimalPlaces;
+
+    this.value = value;
   }
 
   destroy() {

@@ -1,16 +1,19 @@
 import './InputField.scss';
+import Gadget from './Gadget';
 
-export default class InputField
+export default class extends Gadget
 {
-  constructor(v, p='...') {
+  constructor(value, placeholder='...') {
+    super();
+
     this.element = document.createElement('div');
     this.element.className = 'input-field';
 
     this.input = document.createElement('input');
     this.element.appendChild(this.input);
 
-    this.value = v;
-    this.placeholder = p;
+    this.value = value;
+    this.placeholder = placeholder;
 
     this.onInput = this.onInput.bind(this);
     this.input.addEventListener('input', this.onInput);
@@ -30,7 +33,7 @@ export default class InputField
   }
 
   set value(v) {
-    this._value = v;
+    this.input.value = v;
   }
 
   get value() {

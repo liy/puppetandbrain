@@ -20,7 +20,7 @@ export default class extends Block
       value:node.memory['pre-acceptance'],
       min:0,
       max:5,
-      decimalPlaces1:1
+      decimalPlaces:1
     });
 
     this.inputPins.get('debounce').setGadget(debounceRange);

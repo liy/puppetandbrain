@@ -1,9 +1,11 @@
 import './PositionField.scss';
 import InputField from "./InputField";
+import Gadget from './Gadget';
 
-export default class
+export default class extends Gadget
 {
   constructor(x, y) {
+    super();
     this.element = document.createElement('div');
     this.element.className = 'position-field'
 
@@ -24,13 +26,38 @@ export default class
     this.yInputField = new InputField(y);
     this.yInputField.input.type = 'number'
     this.element.appendChild(this.yInputField.element);
+
+    this._position = {x,y} 
+
+    this.xInputField.on('gadget.state.change', x => {
+      this._position.x = x;
+      this.value = this._position;
+      this.emit('gadget.state.change', this._position)
+    })
+
+    this.yInputField.on('gadget.state.change', y => {
+      this._position.y = y;
+      this.value = this._position
+      this.emit('gadget.state.change', this._position)
+    })
   }
 
-  get xInput() {
-    return this.xInputField.input;
+  destroy() {
+    super.destroy();
+    this.xInputField.destroy();
+    this.yInputField.destroy();
   }
 
-  get yInput() {
-    return this.yInputField.input;
+  get value() {
+    return this.position
+  }
+
+  set value(position) {
+    this._position = {
+      x: position.x,
+      y: position.y
+    }
+    this.xInputField.value = position.x;
+    this.yInputField.value = position.y;
   }
 }

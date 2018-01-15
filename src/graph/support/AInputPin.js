@@ -52,7 +52,6 @@ export default class AInputPin extends ADataPin
     // If not, it is still possible to clear the gadget old listener
     // setup a specific one in the specific block. 
     this.gadget.on('gadget.state.change', value => {
-      console.log(value, 'gadget.state.change');
       // Note that, by default, it is a simple pin name which is enougth to identify
       // the pin and corresponding data.
       // However, in setter block, this.name is actually a property id. Because user
