@@ -27,6 +27,7 @@ export default class GetterBlock extends Block
 
   onNameChanged(data) {
     this.outputPin.label.textContent = data.name;
+    this.title.textContent = this.node.nodeName;
   }
 
   template(pod) {

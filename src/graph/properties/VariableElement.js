@@ -28,11 +28,11 @@ export default class
     this._selected = false;
     
     this.onNameChange = this.onNameChange.bind(this);
-    this.nameField.input.addEventListener('change', this.onNameChange);
+    this.nameField.on('gadget.state.change', this.onNameChange);
   }
 
-  onNameChange(e) {
-    this.variable.name = e.target.value;
+  onNameChange(name) {
+    this.variable.name = name;
   }
 
   onSelect(e) {

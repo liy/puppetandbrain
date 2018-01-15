@@ -96,7 +96,6 @@ export default class InputSymbol extends DataSymbol
   }
 
   get color() {
-    console.log(this.pointer.type)
     return DataColor[this.pointer.type] || DataColor[DataType.GENERIC];
   }
 }

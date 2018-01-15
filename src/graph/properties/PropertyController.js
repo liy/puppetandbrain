@@ -29,7 +29,7 @@ class PropertyController
     this.elements = new ArrayMap();
 
     for(let variable of this.brain.variables) {
-      this.add(variable);
+      this.add(variable, false);
     }
     
     this.brain.variables.on('variable.added', this.add)
@@ -42,12 +42,12 @@ class PropertyController
     this.panel.clear();
   }
 
-  async select(variable) {
-    if(this.selected && this.selected != variable) {
+  async select(variableElement) {
+    if(this.selected && this.selected != variableElement) {
       await this.selected.deselect();
     }
     
-    this._selected = variable;
+    this._selected = variableElement;
     if(!this.selected.expanded) {
       this.selected.select();
     }
@@ -57,7 +57,7 @@ class PropertyController
     return this._selected;
   }
 
-  add(variable) {
+  add(variable, autoSelect=true) {
     let variableElement = null;
     switch(variable.type) {
       case DataType.ACTOR:
@@ -82,13 +82,20 @@ class PropertyController
     this.panel.append(variableElement.element);
     this.elements.set(variable.id, variableElement);
 
-    nextFrame().then(() => {
-      variableElement.focus();
-    });
+    if(autoSelect) {
+      this.select(variableElement);
+      nextFrame().then(() => {
+        variableElement.focus();
+      });
+    }
   }
 
   remove({variable, index}) {
     this.panel.remove(this.elements.get(variable.id).element);
+    this.elements.remove(variable.id)
+    
+    let previous = this.elements.getAt(Math.max(index-1, 0));
+    if(previous) this.select(previous)
   }
 
   refresh() {

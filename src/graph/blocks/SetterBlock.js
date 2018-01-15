@@ -38,6 +38,7 @@ export default class SetterBlock extends Block
   onNameChanged(data) {
     this.inputPin.label.textContent = data.name;
     this.outputPin.label.textContent = data.name;
+    this.title.textContent = this.node.nodeName;
   }
 
   template(pod) {
