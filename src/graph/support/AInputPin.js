@@ -5,13 +5,8 @@ import InputSymbol from './InputSymbol';
 
 export default class AInputPin extends ADataPin
 {
-  constructor(name) {
-    super(name, 'in')
-
-    // for veritcally centre the gadget
-    this.gadgetContainer = document.createElement('div');
-    this.gadgetContainer.className = 'gadget-container';
-    this.head.appendChild(this.gadgetContainer)
+  constructor(name, label=name) {
+    super(name, 'in', label)
 
     this.connectionChanged = this.connectionChanged.bind(this);
     this.mouseDown = this.mouseDown.bind(this);
@@ -20,7 +15,7 @@ export default class AInputPin extends ADataPin
   init(node) {
     super.init(node);
 
-    this.setGadget(new TextField(node.memory[this.name], this.name));
+    this.setGadget(new TextField(node.memory[this.name]));
 
     this.label.addEventListener('mousedown', this.mouseDown)
     
@@ -45,12 +40,12 @@ export default class AInputPin extends ADataPin
     if(this.gadget) {
       // destroy will clear all the listeners
       this.gadget.destroy();
-      this.gadgetContainer.removeChild(this.gadget.element);
+      this.head.removeChild(this.gadget.element);
     }
 
     this.gadget = gadget;
     this.gadget.visible = false;
-    this.gadgetContainer.appendChild(this.gadget.element);
+    this.head.appendChild(this.gadget.element);
 
     // TODO: the gadget state change is quite generic,
     // this simple node memory update should do the job

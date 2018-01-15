@@ -1,9 +1,11 @@
+import './DataSymbol.scss';
 import ConnectHelper from '../ConnectHelper';
 
 export default class DataSymbol
 {
   constructor(name, flow) {
-    this.element = document.createElement('div')
+    this.element = document.createElement('div');
+    this.element.className = 'data-symbol';
 
     this._connected = false;
 

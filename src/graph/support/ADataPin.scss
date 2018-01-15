@@ -47,6 +47,8 @@
   position: absolute;
 
   display: flex;
+  // vertical centre fields in the content
+  align-items: center;
 
   // rgb = base + (overlay - base)*overlay.alpha
   // alpha = base.alpha + (1-base.alpha)*overlay.alpha

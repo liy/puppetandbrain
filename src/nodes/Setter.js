@@ -34,7 +34,10 @@ export default class Setter extends Task
 
     this.inputs.addInput(this.variableID);
 
-    this.outputs.addOutput(this.variableID)
+    this.outputs.addOutput(this.variableID);
+
+    // Set default memory value from the brain property's value
+    this.memory[this.variableID] = this.variable.data;
     
     // Note the output key is the variable id!!!
     this.outputs.assignProperty(this.variableID, {
