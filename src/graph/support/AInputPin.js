@@ -19,9 +19,7 @@ export default class AInputPin extends ADataPin
   init(node) {
     super.init(node);
 
-    // this.setGadget(new TextField(node.memory[this.name]));
-
-    // TODO: setup gadget
+    // setup gadget
     let input = node.inputs.get(this.name);
     let data = node.memory[this.name];
     switch(input.type) {

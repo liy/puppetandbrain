@@ -3,9 +3,10 @@ import EventEmitter from "../utils/EventEmitter";
 
 export default class Output extends EventEmitter
 {
-  constructor(node, data, name) {
+  constructor(node, data, name, type) {
     super();
 
+    this.type = type;
     this.node = node;
     this.data = data;
     this.name = name;
@@ -57,6 +58,7 @@ export default class Output extends EventEmitter
       node: this.node.id,
       name: this.name,
       isValue: this.isValue,
+      type: this.type,
     }
     // ActivityLoader does not require information who connects to this output.
     // Because it just loops through all pointers, connect them all.

@@ -32,9 +32,9 @@ export default class Setter extends Task
     this.variable = LookUp.get(this.variableID);
     this.variable.setters.push(this)
 
-    this.inputs.addInput(this.variableID);
+    this.inputs.addInput(this.variableID, this.variable.type);
 
-    this.outputs.addOutput(this.variableID);
+    this.outputs.addOutput(this.variableID, this.variable.type);
 
     // Set default memory value from the brain property's value
     this.memory[this.variableID] = this.variable.data;

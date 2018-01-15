@@ -57,10 +57,10 @@ export default class OutputList extends EventEmitter
     return this.list.length;
   }
 
-  addOutput(name) {
+  addOutput(name, type) {
     let output = this.list.get(name);
     if(!output) {
-      output = new Output(this.node, this.data, name)
+      output = new Output(this.node, this.data, name, type)
       this.list.set(name, output);
       this.emit('output.added', name)
     }

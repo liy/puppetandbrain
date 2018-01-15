@@ -28,22 +28,6 @@ export default class SetterBlock extends Block
     // also listening on name changes from the variable
     this.onNameChanged = this.onNameChanged.bind(this);
     node.variable.on('variable.name.changed', this.onNameChanged);
-    
-    // TODO: setup gadget
-    switch(node.variable.type) {
-      case DataType.VEC2:
-        this.inputPin.setGadget(new PositionField(0,0));
-        break;
-      case DataType.COLOR:
-        this.inputPin.setGadget(new ColorButton(0xFF9900));
-        break;
-      case DataType.ACTOR:
-        this.inputPin.setGadget(new ActorPicker());
-        break;
-      case DataType.GENERIC:
-        this.setGadget(new TextField());
-        break;
-    }
   }
 
   destroy() {

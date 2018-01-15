@@ -54,7 +54,7 @@ export default class Node extends EventEmitter
 
     if(pod.outputs) {
       for(let outputPod of pod.outputs) {
-        this.outputs.addOutput(outputPod.name);
+        this.outputs.addOutput(outputPod.name, outputPod.type);
       }
     }
 
