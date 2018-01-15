@@ -13,6 +13,7 @@ export default class ContentSection
 
     this.content = document.createElement('div');
     this.content.className = 'browser-content';
+    this.content.setAttribute('placeholder', 'Cannot find the block you are looking for...👻 Please try other keywords.');
     this.scroll.appendChild(this.content);
   }
 

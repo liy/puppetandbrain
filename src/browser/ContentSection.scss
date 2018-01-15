@@ -34,6 +34,15 @@
   // background-color: rgba(167, 61, 119, 0.603);
 }
 
+.browser-content:empty:before {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  content: attr(placeholder);
+  display: block; /* For Firefox */
+  color: rgb(201, 201, 201);
+  text-align: center;
+}
+
 
 // hide scroll bar
 ::-webkit-scrollbar {
