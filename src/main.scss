@@ -100,7 +100,13 @@ body {
   background-position: center; 
 }
 
-// disable span selection!!!
+// disable drag DOM element selection!!! 
 span {
+  user-select: none;
+}
+svg {
+  user-select: none;
+}
+div {
   user-select: none;
 }

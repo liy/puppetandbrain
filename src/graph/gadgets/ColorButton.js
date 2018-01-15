@@ -29,8 +29,8 @@ export default class extends Gadget
   }
 
   onDown(e) {
-    this.color = Math.ceil(Math.random() * 0xFFFFFF);
-    this.emit('gadget.state.change', this.color);
+    this.value = Math.ceil(Math.random() * 0xFFFFFF);
+    this.emit('gadget.state.change', this.value);
   }
 
   set value(c) {
