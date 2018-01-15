@@ -31,12 +31,20 @@ export default class Break extends Node
   init(pod) {
     super.init(pod);
     
+    this.inputName = pod.inputName;
+
     for(let outputPod of pod.outputs) {
       this.outputs.assignProperty(outputPod.name, {
         get: () => {
-          return this.inputs.value('in')[outputPod.name]
+          return this.inputs.value(this.inputName)[outputPod.name]
         }
       }, outputPod.type);
     }
+  }
+
+  pod(detail) {
+    let pod = super.pod(detail);
+    pod.inputName = this.inputName;
+    return pod;
   }
 }

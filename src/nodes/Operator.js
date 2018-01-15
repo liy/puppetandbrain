@@ -105,7 +105,6 @@ export class Equal extends Operator
   }
 
   get value() {
-    console.log(this.inputs.value('A'), this.inputs.value('B'))
     // I use == so it auto convert string to number if it is possible.
     // e.g., 1 == "1" will return true.
     return this.inputs.value('A') == this.inputs.value('B');

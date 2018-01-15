@@ -108,6 +108,7 @@ export default class BlockBrowser extends Browser
       name: `Break Position`,
       // the node going to be created is owned by the current opening brain
       owner: BrainGraph.brain.owner.id,
+      inputName: 'position',
       inputs: [{
         name: 'position',
         type: DataType.VEC2,
