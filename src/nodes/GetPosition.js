@@ -30,6 +30,6 @@ export default class GetPosition extends Node
       get: () => {
         return LookUp.get(this.inputs.value('actor'))['position']
       }
-    });
+    }, DataType.VEC2);
   }
 }

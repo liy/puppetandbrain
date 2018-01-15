@@ -34,11 +34,11 @@ export default class Getter extends Node
     this.variable.getters.push(this)
 
     // Note the output key is the variable id!!!
-    this.outputs.addOutput(this.variableID).assignProperty(this.variableID, {
+    this.outputs.assignProperty(this.variableID, {
       get: () => {
         return this.variable.runtime;
       }
-    });
+    }, this.variable.type);
   }
 
   destroy() {

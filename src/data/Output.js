@@ -3,7 +3,7 @@ import EventEmitter from "../utils/EventEmitter";
 
 export default class Output extends EventEmitter
 {
-  constructor(node, data, name, type) {
+  constructor(node, data, name, type=DataType.GENERIC) {
     super();
 
     this.type = type;

@@ -1,6 +1,7 @@
 import ArrayMap from "../utils/ArrayMap";
 import Output from "./Output";
 import EventEmitter from "../utils/EventEmitter";
+import DataType from "./DataType";
 
 export default class OutputList extends EventEmitter
 {
@@ -67,12 +68,12 @@ export default class OutputList extends EventEmitter
     return output;
   }
 
-  assignProperty(name, descriptor) {
-    this.addOutput(name).assignProperty(name, descriptor);
+  assignProperty(name, descriptor, type) {
+    this.addOutput(name, type).assignProperty(name, descriptor);
   }
 
-  assignValue(name, value) {
-    this.addOutput(name).assignValue(name, value);
+  assignValue(name, value, type) {
+    this.addOutput(name, type).assignValue(name, value);
   }
 
   clearValues() {

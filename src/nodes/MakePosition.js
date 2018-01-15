@@ -40,6 +40,6 @@ export default class MakePosition extends Node
           y: this.inputs.value('y')
         }
       }
-    });
+    }, DataType.VEC2);
   }
 }
