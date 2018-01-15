@@ -14,7 +14,7 @@ export default class extends VariableControlButton
       brain: BrainGraph.brain.id,
       type: DataType.COLOR,
       name: null,
-      data: 0x000000
+      data: 0xFFFFFF
     }).processAndSave());
   }
 }
