@@ -1,4 +1,5 @@
 import Block from "./Block";
+import KeyNameCatcher from '../gadgets/KeyNameCatcher';
 
 export default class KeyboardBlock extends Block
 {
@@ -9,16 +10,6 @@ export default class KeyboardBlock extends Block
   init(node) {
     super.init(node);
 
-    // TODO: add  keycode gadget
-    
-    // this.inputPin = this.inputPins.get('code');
-    // let inputElement = this.inputPin.inputElement;
-    // inputElement.addEventListener('keydown', e => {
-    //   e.preventDefault();
-    //   e.stopPropagation();
-
-    //   e.target.value = e.code;
-    //   node.variables['code'] = e.code
-    // })
+    this.inputPins.get('key name').setGadget(new KeyNameCatcher(node.memory['key name']));
   }
 }
