@@ -3,7 +3,7 @@ import Gadget from './Gadget';
 
 export default class extends Gadget
 {
-  constructor() {
+  constructor(color=0xFF9900) {
     super();
     this.element.classList.add('color-button');
 
@@ -21,7 +21,7 @@ export default class extends Gadget
     this.onDown = this.onDown.bind(this);
     this.element.addEventListener('mousedown', this.onDown);
 
-    this.value = 0xFF9900;
+    this.value = color;
   }
 
   destroy() {

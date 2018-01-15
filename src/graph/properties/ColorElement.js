@@ -14,12 +14,11 @@ export default class extends VariableElement
     let svg = svgElement(BucketIcon, {width:18, height:18});
     this.icon.appendChild(svg);
 
-    this.colorButton = new ColorButton();
+    this.colorButton = new ColorButton(this.variable.data);
     this.content.appendChild(this.colorButton.element);
     
-    this.colorButton.on('color.change', color => {
+    this.colorButton.on('gadget.state.change', color => {
       this.variable.data = color;
-      console.log(this.variable.data);
     })
   }
 }

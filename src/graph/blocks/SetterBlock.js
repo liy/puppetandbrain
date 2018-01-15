@@ -34,7 +34,7 @@ export default class SetterBlock extends Block
         this.inputPin.setGadget(new PositionField(0,0));
         break;
       case DataType.COLOR:
-        this.inputPin.setGadget(new ColorButton());
+        this.inputPin.setGadget(new ColorButton(0xFF9900));
         break;
     }
   }
