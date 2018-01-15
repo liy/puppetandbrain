@@ -1,4 +1,4 @@
-import utils from '../utils/utils';
+import {toRadian} from '../utils/utils';
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
@@ -25,6 +25,6 @@ export default class SetRotation extends Task
   run() {
     super.run();
 
-    this.owner.rotation = Number(this.inputs.value('rotation')) * utils.toRadian;
+    this.owner.rotation = Number(this.inputs.value('rotation')) * toRadian;
   }
 }

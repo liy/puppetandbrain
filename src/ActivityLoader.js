@@ -3,6 +3,7 @@ import * as nodes from './nodes'
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import Variable from './data/Variable';
+import ActorVariable from './data/ActorVariable';
 import DataType from './data/DataType';
 
 const scope = {

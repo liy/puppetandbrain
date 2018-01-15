@@ -11,7 +11,7 @@ export default class extends VariableElement
     this.type = DataType.ACTOR;
     this.icon.textContent = '🐶';
     
-    this.actorPicker = new ActorPicker();
+    this.actorPicker = new ActorPicker(this.variable.data);
     this.content.appendChild(this.actorPicker.element);
 
     this.actorPicker.on('gadget.state.change', actorID => {

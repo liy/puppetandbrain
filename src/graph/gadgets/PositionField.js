@@ -58,6 +58,7 @@ export default class extends Gadget
           x: e.clientX,
           y: e.clientY
         }
+        this.emit('gadget.state.change', this.value);
       }
       
       document.addEventListener('mousedown', picked);

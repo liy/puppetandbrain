@@ -1,4 +1,4 @@
-import utils from '../utils/utils';
+import {toRadian} from '../utils/utils';
 import {Task, Template as ParentTemplate} from './Task';
 
 NodeTemplate.RotateAntiClockwise = {
@@ -39,7 +39,7 @@ export default class RotateAntiClockwise extends Task
   run() {
     super.run()
 
-    let r = 10 * utils.toRadian;
+    let r = 10 * toRadian;
 
     this.tween = TweenLite.to(this.owner, 0.2, {rotation: this.owner.rotation-r, ease:Linear.easeNone, onComplete: () => {
       this.execution.run('completed');

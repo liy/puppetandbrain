@@ -24,11 +24,11 @@ export default class GetPosition extends Node
   init(pod) {
     super.init(pod);
 
-    this.memory.actor = this.owner.id;
+    this.memory.puppet = this.owner.id;
 
     this.outputs.assignProperty('position', {
       get: () => {
-        return LookUp.get(this.inputs.value('actor'))['position']
+        return LookUp.get(this.inputs.value('puppet'))['position']
       }
     }, DataType.VEC2);
   }
