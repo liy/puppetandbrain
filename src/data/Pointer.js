@@ -3,9 +3,10 @@ import EventEmitter from '../utils/EventEmitter';
 // input
 export default class Pointer extends EventEmitter
 {
-  constructor(inputNode, name) {
+  constructor(inputNode, name, type) {
     super();
 
+    this.type = type;
     this.inputNode = inputNode;
     this.name = name;
     // by default it is a local variable pointer
@@ -83,6 +84,7 @@ export default class Pointer extends EventEmitter
       // undefined field will be removed when serailized
       id: this.id,
       output: this.output ? this.output.pod() : null,
+      type: this.type,
     }
   }
 }

@@ -6,6 +6,7 @@ import AExecutionOutPin from "../support/AExecutionOutPin";
 import DataType from "../../data/DataType";
 import PositionField from "../gadgets/PositionField";
 import ColorButton from "../gadgets/ColorButton";
+import ActorPicker from "../gadgets/ActorPicker";
 
 export default class SetterBlock extends Block
 {
@@ -35,6 +36,12 @@ export default class SetterBlock extends Block
         break;
       case DataType.COLOR:
         this.inputPin.setGadget(new ColorButton(0xFF9900));
+        break;
+      case DataType.ACTOR:
+        this.inputPin.setGadget(new ActorPicker());
+        break;
+      case DataType.GENERIC:
+        this.setGadget(new TextField());
         break;
     }
   }
@@ -82,7 +89,6 @@ export default class SetterBlock extends Block
     this.element.style.position = 'relative'
 
     this.body.element.addEventListener('mousedown', e => {
-      console.log(e)
       this.emit('block.chosen', pod);
     }, {capture:true});
     // this.body.element.addEventListener('touchstart', e => {

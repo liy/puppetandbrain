@@ -19,10 +19,10 @@ export default class InputList extends ArrayMap
     }
   }
 
-  addInput(name) {
+  addInput(name, type) {
     let pointer = this.get(name);
     if(!pointer) {
-      pointer = new Pointer(this.node, name)
+      pointer = new Pointer(this.node, name, type)
       this.set(name, pointer);
     }
     return pointer;

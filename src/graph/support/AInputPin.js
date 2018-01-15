@@ -1,7 +1,11 @@
 import './AInputPin.scss';
 import ADataPin from "./ADataPin";
 import TextField from '../gadgets/TextField'
+import PositionField from '../gadgets/PositionField'
+import ActorPicker from '../gadgets/ActorPicker'
+import ColorButton from '../gadgets/ColorButton'
 import InputSymbol from './InputSymbol';
+import DataType from '../../data/DataType';
 
 export default class AInputPin extends ADataPin
 {
@@ -15,7 +19,27 @@ export default class AInputPin extends ADataPin
   init(node) {
     super.init(node);
 
-    this.setGadget(new TextField(node.memory[this.name]));
+    // this.setGadget(new TextField(node.memory[this.name]));
+
+    // TODO: setup gadget
+    let input = node.inputs.get(this.name);
+    let data = node.memory[this.name];
+    switch(input.type) {
+      case DataType.VEC2:
+        this.setGadget(new PositionField(data.x,data.y));
+        break;
+      case DataType.COLOR:
+        this.setGadget(new ColorButton(data));
+        break;
+      case DataType.ACTOR:
+        this.setGadget(new ActorPicker(data));
+        break;
+      case DataType.GENERIC:
+        this.setGadget(new TextField(data));
+        break;
+    }
+
+
 
     this.label.addEventListener('mousedown', this.mouseDown)
     
@@ -73,9 +97,12 @@ export default class AInputPin extends ADataPin
 
   mouseDown() {
     // only be able toggle the gadget if input is NOT connected
-    if(this.pointer.isConnected) return;
+    // or has no gadget
+    if(this.pointer.isConnected || !this.gadget) return;
 
     this.gadgetVisible = !this.gadgetVisible;
+
+    // update the link path
     this.symbol.drawConnection();
   }
 
