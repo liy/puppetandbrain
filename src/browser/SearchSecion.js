@@ -7,7 +7,7 @@ export default class SearchSection
     this.element.className = 'search-section';
 
     this.searchInput = document.createElement('input');
-    this.searchInput.className = 'search-input';
+    this.searchInput.placeholder = 'Search Block...'
     this.element.appendChild(this.searchInput);
   }
 
