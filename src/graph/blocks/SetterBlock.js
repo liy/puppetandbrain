@@ -3,6 +3,8 @@ import AInputPin from "../support/AInputPin";
 import AOutputPin from "../support/AOutputPin";
 import AExecutionInPin from "../support/AExecutionInPin";
 import AExecutionOutPin from "../support/AExecutionOutPin";
+import DataType from "../../data/DataType";
+import PositionField from "../gadgets/PositionField";
 
 export default class SetterBlock extends Block
 {
@@ -23,7 +25,14 @@ export default class SetterBlock extends Block
 
     // also listening on name changes from the variable
     this.onNameChanged = this.onNameChanged.bind(this);
-    node.variable.on('variable.name.changed', this.onNameChanged)
+    node.variable.on('variable.name.changed', this.onNameChanged);
+    
+    // TODO: setup gadget
+    switch(node.variable.type) {
+      case DataType.VEC2:
+        this.inputPin.setGadget(new PositionField(0,0));
+        break;
+    }
   }
 
   destroy() {
