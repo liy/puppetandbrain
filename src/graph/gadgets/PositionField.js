@@ -30,15 +30,22 @@ export default class extends Gadget
     this._position = {x,y} 
 
     this.xInputField.on('gadget.state.change', x => {
-      this._position.x = x;
+      this._position.x = Number(x);
       this.value = this._position;
       this.emit('gadget.state.change', this._position)
     })
 
     this.yInputField.on('gadget.state.change', y => {
-      this._position.y = y;
+      this._position.y = Number(y);
       this.value = this._position
       this.emit('gadget.state.change', this._position)
+    })
+
+    this.xInputField.input.addEventListener('click', e => {
+      e.target.select();
+    })
+    this.yInputField.input.addEventListener('click', e => {
+      e.target.select();
     })
   }
 
@@ -49,7 +56,7 @@ export default class extends Gadget
   }
 
   get value() {
-    return this.position
+    return this._position
   }
 
   set value(position) {
