@@ -16,7 +16,6 @@ export default class extends VariableElement
 
     this.colorButton = new ColorButton();
     this.content.appendChild(this.colorButton.element);
-    this.colorButton.element.style.marginRight = '5px'
     
     this.colorButton.on('color.change', color => {
       this.variable.data = color;

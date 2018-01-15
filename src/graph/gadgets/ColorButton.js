@@ -7,8 +7,9 @@ export default class extends Gadget
     super();
     this.element.classList.add('color-button');
 
+    // TODO: create a specific svg for the color button
     let svg = new DOMParser().parseFromString(require('!raw-loader!../../assets/bar.svg'), "image/svg+xml").rootElement;
-    svg.setAttribute('height', 24)
+    svg.setAttribute('height', 26)
     this.element.appendChild(svg);
 
     this.line = this.element.querySelector('#line');

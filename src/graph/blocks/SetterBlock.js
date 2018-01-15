@@ -5,6 +5,7 @@ import AExecutionInPin from "../support/AExecutionInPin";
 import AExecutionOutPin from "../support/AExecutionOutPin";
 import DataType from "../../data/DataType";
 import PositionField from "../gadgets/PositionField";
+import ColorButton from "../gadgets/ColorButton";
 
 export default class SetterBlock extends Block
 {
@@ -31,6 +32,9 @@ export default class SetterBlock extends Block
     switch(node.variable.type) {
       case DataType.VEC2:
         this.inputPin.setGadget(new PositionField(0,0));
+        break;
+      case DataType.COLOR:
+        this.inputPin.setGadget(new ColorButton());
         break;
     }
   }
