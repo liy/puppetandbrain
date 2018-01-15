@@ -10,3 +10,4 @@ export PerformBlock from './PerformBlock';
 export PlaySoundBlock from './PlaySoundBlock';
 export SetterBlock from './SetterBlock';
 export SwitchAccessBlock from './SwitchAccessBlock';
+export SetPositionBlock from './SetPositionBlock';

@@ -23,7 +23,7 @@ export default class Gadget extends EventEmitter
   set visible(v) {
     this._visible = v;
     if(v) {
-      this.element.style.display = 'block';
+      this.element.style.display = 'inherit';
     }
     else {
       this.element.style.display = 'none';

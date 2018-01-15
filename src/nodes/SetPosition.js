@@ -5,15 +5,11 @@ NodeTemplate.SetPosition = {
   ...ParentTemplate,
   name: 'Set Position',
   inputs: [{
-    name: 'x',
-    type: DataType.GENERIC,
-  }, {
-    name: 'y',
-    type: DataType.GENERIC,
+    name: 'position',
+    type: DataType.VEC2,
   }],
   memory: {
-    x: 0,
-    y: 0,
+    position: {x:0, y:0}
   },
   elementClass: ['property'],
   category: 'Transformation'
@@ -28,7 +24,8 @@ export default class SetPosition extends Task
   run() {
     super.run();
 
-    this.owner.x = Number(this.inputs.value('x'));
-    this.owner.y = Number(this.inputs.value('y'));
+    let p = this.inputs.value('position');
+    this.owner.x = Number(p.x);
+    this.owner.y = Number(p.y);
   }
 }
