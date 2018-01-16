@@ -32,6 +32,8 @@ export default class Block extends EventEmitter
   init(node) {
     this.node = node;
 
+    this.body.iconPath = node.iconPath; 
+
     this.body.element.addEventListener('mousedown', this.dragstart);
     this.body.element.addEventListener('touchstart', this.dragstart);
     this.body.element.addEventListener('mouseup', this.dragstop);
@@ -188,6 +190,8 @@ export default class Block extends EventEmitter
 
 
   template(pod) {
+    this.body.iconPath = pod.iconPath;
+    
     if(pod.elementClass) {
       for(let className of pod.elementClass) {
         this.element.classList.add(className);

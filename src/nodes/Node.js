@@ -34,6 +34,9 @@ export default class Node extends EventEmitter
     this.owner = LookUp.auto(pod.owner);
     this.owner.brain.addNode(this);
 
+    //icon
+    this.iconPath = pod.iconPath;
+
     // Set the memory! I can just do normal ref assignment
     // But do a property assignment, just be safe...
     if(pod.memory) Object.assign(this.memory, pod.memory);

@@ -31,9 +31,13 @@ export default class BlockBody
     this.right.className = 'right';
     this.content.appendChild(this.right);
 
-    this.body.style.backgroundImage = `url("${require('!file-loader!../../assets/icons/clock.svg')}")`
+    this.body.style.backgroundImage = `url("${require('!file-loader!../../assets/icons/dots.svg')}")`
     this.body.style.backgroundRepeat = 'no-repeat';
     this.body.style.backgroundPosition = 'center';
+  }
+
+  set iconPath(path) {
+    if(path) this.body.style.backgroundImage = `url("${path}")`
   }
 
   addLeft(pin) {

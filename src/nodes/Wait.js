@@ -8,7 +8,8 @@ NodeTemplate.Wait = {
     type: DataType.GENERIC,
   }],
   elementClass: ['flow-control'],
-  category: 'Flow Control'
+  category: 'Flow Control',
+  iconPath: require('!file-loader!../assets/icons/clock.svg')
 }
 export default class Wait extends Task
 {
