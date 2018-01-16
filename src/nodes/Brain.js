@@ -11,6 +11,9 @@ export default class Brain
     this.owner = owner;
     this.nodes = new ArrayMap();
 
+    // stores Action
+    this.actions = {};
+
     this.variables = new VariableList(this);
 
     Stage.on('game.prestart', this.prestart, this);

@@ -8,6 +8,7 @@ var ACTORS = [];
 var NODES = [];
 var POINTERS = [];
 var BRAINS = [];
+// brain variable and actor properties
 var VARIABLES = [];
 
 var activityID = null;

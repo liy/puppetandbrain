@@ -1,4 +1,3 @@
-import Actor from '../objects/Actor';
 import EventEmitter from '../utils/EventEmitter';
 import DataType from './DataType';
 

@@ -4,13 +4,13 @@ import Brain from '../nodes/Brain';
 import Action from '../nodes/Action';
 
 /**
- * Actor shows up on the stage!
+ * Actor shows up on the canvas!
  *
  * @export
  * @class Actor
  * @extends {PIXI.Container}
  */
-export default class Actor
+export default class CanvasActor extends PIXI.Container
 {
   constructor(id) {
     super();
@@ -21,6 +21,12 @@ export default class Actor
     this.name = 'Actor ' + this.id;
 
     this.initialState = {};
+
+    // TODO: make this feature next version?
+    this.childActors = [];
+
+    this._clickCounter = 0;
+    this.on('pointerup', this.dbClick, this)
 
     Stage.on('game.prestart', this.gamePrestart, this);
     Stage.on('game.stop', this.gameStop, this);
@@ -103,6 +109,16 @@ export default class Actor
     return {
       x: p.x,
       y: p.y
+    }
+  }
+
+  dbClick(e) {
+    // Open brain graph
+    setTimeout(() => {
+      this._clickCounter = 0;
+    }, 300)
+    if(++this._clickCounter%2 == 0) {
+      History.push(Commander.create('OpenGraph', this.brain.id).process());
     }
   }
 

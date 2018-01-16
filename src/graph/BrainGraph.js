@@ -222,7 +222,7 @@ class BrainGraph
 
   draw() {
     for(let block of this.blocks.getValues()) {
-      // draw exeuctions
+      // draw connection
       // refresh in pin, only update the in pin icon status
       if(block.inPin) block.inPin.refreshSymbol();
       if(block.outPins) {
@@ -230,7 +230,6 @@ class BrainGraph
           pin.refreshSymbol();
         })
       }
-      // draw variable connection
       block.inputPins.getValues().forEach(pin => {
         pin.refreshSymbol();
       })
@@ -266,7 +265,7 @@ class BrainGraph
         Commander.create('RemoveExecution', pin.node, pin.name).process();        
       }
     }
-    // disconnect all variable pins
+    // disconnect all pins
     for(let pin of block.inputPins.getValues()) {
       Commander.create('RemoveInputDataLink', pin.node.id, pin.name).process();
     }

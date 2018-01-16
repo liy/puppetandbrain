@@ -46,7 +46,6 @@ export default class Node extends EventEmitter
     // The data connection has to be made separately!
     //
     // we just need the name to be populated here.
-    // variable access will be auto created.
     // Of course some of them will be discarded once
     // connection is setup(pointer is added)
     if(pod.inputs) {
@@ -82,9 +81,7 @@ export default class Node extends EventEmitter
     return this.owner.brain;
   }
 
-  /**
-   * Does not copy the variable and execution connections
-   */
+  // TODO: double check whether this works 
   copy() {
     let node = NodeFactory.create(this.className);
     node.init(this.pod())

@@ -6,12 +6,15 @@ export default class Pointer extends EventEmitter
   constructor(inputNode, name, type) {
     super();
 
+    // assigned in the connect method
+    this.id = null;
+
     this.type = type;
     this.inputNode = inputNode;
     this.name = name;
-    // by default it is a local variable pointer
+    // connected to nothing by default
     this.output = null;
-    this.id = null;
+    // by default it is a local node memory pointer
     this.target = this.inputNode.memory;
     this.targetName = this.name;
   }

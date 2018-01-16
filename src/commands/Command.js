@@ -1,5 +1,5 @@
 /**
- * It is a good pratice to avoid using reference in undo and redo actions.
+ * It is a good pratice to avoid using reference in undo and redo.
  * As the reference might changes(during modification).
  * Use id to retrieve the actual object instead.
  */

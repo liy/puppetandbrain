@@ -1,4 +1,3 @@
-import Actor from './Actor';
 import SpineActor from './SpineActor';
 
 window.ActorFactory = {

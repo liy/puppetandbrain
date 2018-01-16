@@ -37,7 +37,7 @@ export default class Action extends Task
   }
 
   destroy() {
-    delete this.owner.actions[this.actionName];
+    delete this.owner.brain.actions[this.actionName];
     super.destroy();
   }
 
@@ -51,9 +51,9 @@ export default class Action extends Task
   }
 
   isValidActionName(name) {
-    if(String.trim(name) != '' && this.owner.actions[name] == this) return true;
+    if(String.trim(name) != '' && this.owner.brain.actions[name] == this) return true;
 
-    return !(String.trim(name) == '' || this.owner.actions[name] != null)
+    return !(String.trim(name) == '' || this.owner.brain.actions[name] != null)
   }
 
   updateActionName(name) {
@@ -61,7 +61,7 @@ export default class Action extends Task
     // validate there are no same function names
     if(!this.isValidActionName(name)) return false;
 
-    delete this.owner.actions[this.actionName];
+    delete this.owner.brain.actions[this.actionName];
     this.actionName = name;
 
     return true
@@ -69,9 +69,9 @@ export default class Action extends Task
 
   set actionName(v) {
     // remove old actions
-    if(this.owner.actions[this.actionName]) delete this.owner.actions[this.actionName];
+    if(this.owner.brain.actions[this.actionName]) delete this.owner.brain.actions[this.actionName];
     this._actionName = v;
-    this.owner.actions[this.actionName] = this;
+    this.owner.brain.actions[this.actionName] = this;
   }
 
   get actionName() {

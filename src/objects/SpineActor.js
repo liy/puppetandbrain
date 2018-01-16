@@ -1,11 +1,11 @@
 import JsonPromise from '../utils/JsonPromise';
-import Actor from './Actor';
+import CanvasActor from './CanvasActor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import SelectionComponent from '../components/SelectionComponent';
 import DragComponent from '../components/DragComponent';
 import SpineComponent from '../components/SpineComponent';
 
-export default class SpineActor extends Actor
+export default class SpineActor extends CanvasActor
 {
   constructor(id) {
     super(id);

@@ -82,15 +82,15 @@ export default class BlockBrowser extends Browser
 
     // Populate the performs
     for(const actor of LookUp.getActors()) {
-      for(let actionName of Object.keys(actor.actions)) {
-        let action = actor.actions[actionName];
+      for(let actionName of Object.keys(actor.brain.actions)) {
+        let action = actor.brain.actions[actionName];
         templates.push({
           ...NodeTemplate.Perform,
           name: `Perform ${actionName}`,
           // the node going to be created is owned by the current opening brain
           owner: BrainGraph.brain.owner.id,
           target: actor.id,
-          actionID: actor.actions[actionName].id,
+          actionID: actor.brain.actions[actionName].id,
           inputs: action.outputs.names.map(name => {
             return {name}
           }),
