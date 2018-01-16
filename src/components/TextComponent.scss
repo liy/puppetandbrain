@@ -1,6 +1,9 @@
 .text-component {
   color: rgba(0, 0, 0, 1);
   outline: none;
+  background-color: aquamarine;
+
+  cursor: pointer;
 }
 
 .text-component:empty:before {
@@ -8,5 +11,6 @@
   content: attr(placeholder);
   display: block; /* For Firefox */
   color: rgb(175, 175, 175);
-  cursor: text;
+  // cursor: text;
+  cursor: pointer;
 }

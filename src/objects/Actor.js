@@ -21,7 +21,7 @@ export default class Actor extends EventEmitter
 
     // transform for the components
     // also be able to manipulate in the node graph property.
-    this.position = {
+    this.translate = {
       x: 0,
       y: 0,
     }
@@ -41,8 +41,8 @@ export default class Actor extends EventEmitter
   }
 
   init(pod={}) {
-    this.position.x = pod.x || 0;
-    this.position.y = pod.y || 0;
+    this.translate.x = pod.x || 0;
+    this.translate.y = pod.y || 0;
     this.rotation = pod.rotation || 0;
     this.scale.x = pod.scaleX || 1;
     this.scale.y = pod.scaleY || 1;
@@ -65,12 +65,12 @@ export default class Actor extends EventEmitter
     document.removeEventListener('mousemove', this.dragMove);
   }
 
-  mouseDown(x, y, offset) {
+  mouseDown(translateX, translateY, offset) {
     this.select();
 
     this.offset = offset;
-    this.position.x = x;
-    this.position.y = y;
+    this.translate.x = translateX+this.offset.x;
+    this.translate.y = translateY+this.offset.y;
     document.addEventListener('mousemove', this.dragMove);
   }
 
@@ -99,8 +99,8 @@ export default class Actor extends EventEmitter
   }
 
   dragMove(e) {
-    this.position.x = e.clientX + this.offset.x;
-    this.position.y = e.clientY + this.offset.y;
+    this.translate.x = e.clientX + this.offset.x;
+    this.translate.y = e.clientY + this.offset.y;
   }
 
   select() {
@@ -125,12 +125,16 @@ export default class Actor extends EventEmitter
     return this.__proto__.constructor.name;
   }
 
+  get position() {
+    return this.translate;
+  }
+
   pod(detail=false) {
     let pod = {
       className: this.className,
       id: this.id,
-      x: this.position.x,
-      y: this.position.y,
+      x: this.translate.x,
+      y: this.translate.y,
       scaleX: this.scale.x,
       scaleY: this.scale.y,
       name: this.name,

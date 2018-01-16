@@ -141,6 +141,9 @@ window.renderer = PIXI.autoDetectRenderer({
 
 Stage.init(renderer.width, renderer.height);
 function render() {
+  for(let actorID of Stage.actors) {
+    LookUp.get(actorID).updateTransform();
+  }
   renderer.render(Stage);
 }
 PIXI.ticker.shared.add(render);
@@ -245,14 +248,41 @@ firebase.auth().onAuthStateChanged(user => {
 
 import Actor from './objects/Actor';
 import TextComponent from './components/TextComponent';
+import SpineComponent from './components/SpineComponent';
+import JsonPromise from './utils/JsonPromise';
+import { nextFrame } from './utils/utils';
 
 let actor = new Actor();
 actor.addComponent('text', new TextComponent());
+JsonPromise.load(require('./assets/cat/cat.info.json')).then(info => {
+  let loader = new PIXI.loaders.Loader();
+  loader.add(info.id)
+  return new Promise((resolve, reject) => {
+    loader.load((loader, resources) => {
+      let spineComponent = new SpineComponent(resources[info.id].spineData);
+      actor.addComponent('spine', spineComponent);
+      resolve();
+    })
+  })
+})
 actor.init()
+Stage.addActor(actor);
 
-function loop() {
-  actor.updateTransform();
-  requestAnimationFrame(loop);
-}
+document.addEventListener('mousedown', e => {
+  console.log(document.elementsFromPoint(e.clientX, e.clientY));
 
-loop();
+  let es = document.elementsFromPoint(e.clientX, e.clientY);
+  for(let ele of es) {
+    if(ele.className == 'text-component') {
+      console.log('focus', ele)
+      ele.focus();
+      nextFrame().then(() => {
+        ele.focus();
+      })
+    }
+  }
+
+  // nextFrame().then(() => {
+  //   actor.getComponent('text').focus();
+  // })
+})

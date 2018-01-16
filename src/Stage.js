@@ -21,22 +21,20 @@ class Stage extends PIXI.Container
 
 
     // For deselection
-    let catcher = new PIXI.Graphics();
-    catcher.interactive = true;
-    catcher.beginFill(0, 0);
-    catcher.drawRect(0, 0, width, height);
-    catcher.endFill();
-    this.addChild(catcher);
-    catcher.on('mousedown', ActorSelection.deselectAll.bind(ActorSelection));
+    // let catcher = new PIXI.Graphics();
+    // catcher.interactive = true;
+    // catcher.beginFill(0, 0);
+    // catcher.drawRect(0, 0, width, height);
+    // catcher.endFill();
+    // this.addChild(catcher);
+    // catcher.on('mousedown', ActorSelection.deselectAll.bind(ActorSelection));
   }
 
   addActor(actor) {
-    this.addChild(actor);
     this.actors.push(actor.id);
   }
 
   removeActor(actor) {
-    this.removeChild(actor)
     let index = this.actors.indexOf(actor.id);
     if(index != -1) this.actors.splice(index);
   }

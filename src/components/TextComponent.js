@@ -19,9 +19,6 @@ export default class TextComponent extends Component
     this.x = 0;
     this.y = 0;
 
-    // drag offset
-    this.offset = {x:0,y:0};
-
     this.placeholder = 'Enter your text here...';
     this.contentEditable = true;
   }
@@ -56,9 +53,12 @@ export default class TextComponent extends Component
   }
 
   mouseDown(e) {
-    this.offset.x = this.element.getBoundingClientRect().left - e.clientX;
-    this.offset.y = this.element.getBoundingClientRect().top - e.clientY;
-    this.entity.mouseDown(this.element.getBoundingClientRect().left, this.element.getBoundingClientRect().top, this.offset);
+    let rect = this.element.getBoundingClientRect();
+    let offset = {
+      x: rect.left - e.clientX,
+      y: rect.top - e.clientY
+    }
+    this.entity.mouseDown(e.clientX, e.clientY, offset);
   }
 
   mouseUp(e) {
@@ -74,6 +74,10 @@ export default class TextComponent extends Component
   }
 
   updateTransform() {
-    this.element.style.transform = `translate(${this.x+this.entity.position.x}px, ${this.y+this.entity.position.y}px)`
+    this.element.style.transform = `translate(${this.x+this.entity.translate.x}px, ${this.y+this.entity.translate.y}px)`
+  }
+
+  focus() {
+    this.element.focus();
   }
 }
