@@ -34,15 +34,30 @@ export default class BlockBrowser extends Browser
   }
 
   onSearch(e) {
-    let templates = null;
     if((e.target.value).trim() === '') {
-      templates = this.templates;
+      this.filteredTemplates = this.templates;
     }
     else {
-      templates = this.fuse.search(e.target.value);
+      this.filteredTemplates = this.fuse.search(e.target.value);
     }
-    this.refresh(templates);
+    this.refresh(this.filteredTemplates);
     this.contentSection.resetScroll();
+  }
+
+  quickSelect() {
+    let template = this.filteredTemplates[0];
+    if(!template) return;
+
+    let command = Commander.create('CreateBlock', template, BrainGraph.brain.owner.id, this.targetX, this.targetY).processAndSave();
+    History.push(command);
+    // Make sure there is a block created.
+    if(command) {
+      this.resolve(command.getCreatedNode());
+    }
+    else {
+      this.resolve();
+    }
+    this.close();
   }
 
   getTemplates() {
@@ -145,10 +160,10 @@ export default class BlockBrowser extends Browser
     })
   }
 
-  refresh(templates) {
+  refresh(tempaltes) {
     this.clear();
 
-    for(let template of templates) {
+    for(let template of tempaltes) {
       let group = this.getGroup(template.category);
       let block = BlockFactory.createTemplateBlock(template)
       group.addBlock(block);

@@ -31,6 +31,14 @@ export default class Browser
     if(e.keyCode == 27) {
       this.close();
     }
+    //enter
+    else if(e.keyCode == 13) {
+      this.quickSelect();
+    }
+  }
+
+  quickSelect() {
+
   }
 
   open(x, y) {
