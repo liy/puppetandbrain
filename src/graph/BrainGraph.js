@@ -3,7 +3,6 @@ import './BrainGraph.scss';
 
 import BlockSelection from './BlockSelection';
 import ArrayMap from '../utils/ArrayMap';
-import BlockMenu from '../browser/BlockMenu';
 import BlockBrowser from '../browser/BlockBrowser';
 import PropertyController from './properties/PropertyController';
 
@@ -112,11 +111,11 @@ class BrainGraph
     this.resize = this.resize.bind(this);
     this.keydown = this.keydown.bind(this)
     this.pointerdown = this.pointerdown.bind(this);
-    this.openBlockMenu = this.openBlockMenu.bind(this)
+    this.openBlockBrowser = this.openBlockBrowser.bind(this)
 
     this.container.style = "visibility:visible"
 
-    this.container.addEventListener('contextmenu', this.openBlockMenu);
+    this.container.addEventListener('contextmenu', this.openBlockBrowser);
     this.container.addEventListener('mousedown', this.pointerdown);
     document.addEventListener('keydown', this.keydown);
     window.addEventListener('resize', this.resize);
@@ -140,7 +139,7 @@ class BrainGraph
   close() {
 
     document.getElementById('control').classList.remove('blur')
-    this.container.removeEventListener('contextmenu', this.openBlockMenu);
+    this.container.removeEventListener('contextmenu', this.openBlockBrowser);
     this.container.removeEventListener('mousedown', this.pointerdown);
     document.removeEventListener('keydown', this.keydown);
     window.removeEventListener('resize', this.resize);
@@ -281,15 +280,11 @@ class BrainGraph
     block.node.destroy();
   }
 
-  openBlockMenu(e) {
+  openBlockBrowser(e) {
     if(e.target == this.container) {
       e.stopPropagation();
       e.preventDefault();
-
-      // let menu = new BlockMenu(this);
-      // menu.open()
-      // menu.x = e.clientX;
-      // menu.y = e.clientY;
+      
       let browser = new BlockBrowser();
       browser.open(e.clientX, e.clientY);
     }

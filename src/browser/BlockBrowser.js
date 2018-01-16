@@ -1,7 +1,6 @@
 import Fuse from 'fuse.js'
 
 import Browser from "./Browser";
-import BlockCollection from './BlockCollection';
 import ArrayMap from "../utils/ArrayMap";
 import GroupSection from "./GroupSection";
 import Block from '../graph/blocks/Block';
