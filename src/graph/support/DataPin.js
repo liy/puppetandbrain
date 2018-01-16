@@ -1,9 +1,9 @@
-import './ADataPin.scss'
+import './DataPin.scss'
 import InputSymbol from "./InputSymbol";
 import OutputSymbol from "./OutputSymbol";
-import APin from './APin';
+import Pin from './Pin';
 
-export default class ADataPin extends APin
+export default class extends Pin
 {
   constructor(name, flow) {
     super(name, flow)

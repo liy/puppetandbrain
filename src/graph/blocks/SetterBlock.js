@@ -1,8 +1,8 @@
 import Block from "./Block";
-import AInputPin from "../support/AInputPin";
-import AOutputPin from "../support/AOutputPin";
-import AExecutionInPin from "../support/AExecutionInPin";
-import AExecutionOutPin from "../support/AExecutionOutPin";
+import InputPin from "../support/InputPin";
+import OutputPin from "../support/OutputPin";
+import ExecutionInPin from "../support/ExecutionInPin";
+import ExecutionOutPin from "../support/ExecutionOutPin";
 import DataType from "../../data/DataType";
 import PositionField from "../gadgets/PositionField";
 import ColorButton from "../gadgets/ColorButton";
@@ -53,22 +53,22 @@ export default class SetterBlock extends Block
     let pin = null;
     if(pod.execution) {
       if(pod.enter.enabled) {
-        this.inPin = new AExecutionInPin();
+        this.inPin = new ExecutionInPin();
         // this.inPin.init(null);
         this.body.addLeft(this.inPin);
       }
 
       for(let execPod of pod.execution) {
-        pin = new AExecutionOutPin(execPod.name);
+        pin = new ExecutionOutPin(execPod.name);
         // pin.init(null);
         this.body.addRight(pin);
       }
     }
 
-    pin = new AInputPin(LookUp.get(pod.variableID).name);
+    pin = new InputPin(LookUp.get(pod.variableID).name);
     this.body.addLeft(pin);
 
-    pin = new AOutputPin(LookUp.get(pod.variableID).name);
+    pin = new OutputPin(LookUp.get(pod.variableID).name);
     this.body.addRight(pin);
 
     this.element.style.position = 'relative'

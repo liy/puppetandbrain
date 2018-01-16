@@ -1,4 +1,4 @@
-export default class APin
+export default class Pin
 {
   /**
    * 

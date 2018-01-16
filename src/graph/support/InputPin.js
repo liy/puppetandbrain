@@ -1,5 +1,5 @@
-import './AInputPin.scss';
-import ADataPin from "./ADataPin";
+import './InputPin.scss';
+import DataPin from "./DataPin";
 import TextField from '../gadgets/TextField'
 import PositionField from '../gadgets/PositionField'
 import ActorPicker from '../gadgets/ActorPicker'
@@ -7,7 +7,7 @@ import ColorButton from '../gadgets/ColorButton'
 import InputSymbol from './InputSymbol';
 import DataType from '../../data/DataType';
 
-export default class AInputPin extends ADataPin
+export default class extends DataPin
 {
   constructor(name, label=name) {
     super(name, 'in', label)

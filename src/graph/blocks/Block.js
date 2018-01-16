@@ -1,10 +1,10 @@
 import './Block.scss'
 import BlockBody from '../support/BlockBody';
 import ArrayMap from '../../utils/ArrayMap';
-import AOutputPin from '../support/AOutputPin';
-import AInputPin from '../support/AInputPin';
-import AExecutionInPin from '../support/AExecutionInPin';
-import AExecutionOutPin from '../support/AExecutionOutPin';
+import OutputPin from '../support/OutputPin';
+import InputPin from '../support/InputPin';
+import ExecutionInPin from '../support/ExecutionInPin';
+import ExecutionOutPin from '../support/ExecutionOutPin';
 import BlockSelection from '../BlockSelection';
 import EventEmitter from '../../utils/EventEmitter';
 
@@ -56,13 +56,13 @@ export default class Block extends EventEmitter
     let pin = null;
     if(node.execution) {
       if(node.enter.enabled) {
-        this.inPin = new AExecutionInPin();
+        this.inPin = new ExecutionInPin();
         this.inPin.init(node);
         this.body.addLeft(this.inPin);
       }
 
       for(let name of node.execution.names) {
-        pin = new AExecutionOutPin(name);
+        pin = new ExecutionOutPin(name);
         pin.init(node);
         this.body.addRight(pin);
         this.outPins.set(name, pin)
@@ -70,14 +70,14 @@ export default class Block extends EventEmitter
     }
 
     for(let name of node.inputs.names) {
-      pin = new AInputPin(name);
+      pin = new InputPin(name);
       pin.init(node);
       this.body.addLeft(pin);
       this.inputPins.set(name, pin);
     }
 
     for(let name of node.outputs.names) {
-      pin = new AOutputPin(name);
+      pin = new OutputPin(name);
       pin.init(node);
       this.body.addRight(pin);
       this.outputPins.set(name, pin);
@@ -203,24 +203,24 @@ export default class Block extends EventEmitter
     let pin = null;
     if(pod.execution) {
       if(pod.enter.enabled) {
-        this.inPin = new AExecutionInPin();
+        this.inPin = new ExecutionInPin();
         this.body.addLeft(this.inPin);
       }
 
       for(let execPod of pod.execution) {
-        pin = new AExecutionOutPin(execPod.name);
+        pin = new ExecutionOutPin(execPod.name);
         this.body.addRight(pin);
       }
     }
 
     for(let inputPod of pod.inputs) {
-      pin = new AInputPin(inputPod.name);
+      pin = new InputPin(inputPod.name);
       pin.symbol.template(inputPod.type)
       this.body.addLeft(pin);
     }
 
     for(let outputPod of pod.outputs) {
-      pin = new AOutputPin(outputPod.name);
+      pin = new OutputPin(outputPod.name);
       pin.symbol.template(outputPod.type)
       this.body.addRight(pin);
     }

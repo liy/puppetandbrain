@@ -1,5 +1,5 @@
 import Block from "./Block";
-import AOutputPin from "../support/AOutputPin";
+import OutputPin from "../support/OutputPin";
 
 export default class GetterBlock extends Block
 {
@@ -39,7 +39,7 @@ export default class GetterBlock extends Block
 
     this.title.textContent = pod.name;
 
-    let pin = new AOutputPin(LookUp.get(pod.variableID).name);
+    let pin = new OutputPin(LookUp.get(pod.variableID).name);
     this.body.addRight(pin);
 
     this.element.style.position = 'relative'

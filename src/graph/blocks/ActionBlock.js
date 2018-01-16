@@ -1,7 +1,7 @@
 import './ActionBlock.scss'
 import Block from "./Block";
 import AddOutputPin from '../support/AddOutputPin'
-import AOutputPin from "../support/AOutputPin";
+import OutputPin from "../support/OutputPin";
 import { nextFrame } from '../../utils/utils';
 
 export default class ActionBlock extends Block
@@ -61,7 +61,7 @@ export default class ActionBlock extends Block
   }
 
   onOutputAdded(name) {
-    let pin = new AOutputPin(name);
+    let pin = new OutputPin(name);
     pin.init(this.node);
     this.body.addRight(pin);
     // make sure the add pin is the last

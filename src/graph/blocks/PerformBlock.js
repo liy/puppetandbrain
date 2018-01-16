@@ -1,6 +1,6 @@
 import Block from "./Block";
 import BlockSelection from '../BlockSelection';
-import AInputPin from "../support/AInputPin";
+import InputPin from "../support/InputPin";
 
 export default class PerformBlock extends Block
 {
@@ -44,7 +44,7 @@ export default class PerformBlock extends Block
   }
 
   onOutputAdded(name) {
-    let pin = new AInputPin(name);
+    let pin = new InputPin(name);
     pin.init(this.node);
     this.body.addLeft(pin);
 

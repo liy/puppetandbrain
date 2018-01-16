@@ -1,7 +1,7 @@
 import ExecutionOutSymbol from "./ExecutionOutSymbol";
-import AExecutionPin from "./AExecutionPin";
+import ExecutionPin from "./ExecutionPin";
 
-export default class AExecutionOutPin extends AExecutionPin
+export default class extends ExecutionPin
 {
   constructor(name) {
     super(name, 'out');

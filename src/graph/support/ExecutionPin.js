@@ -1,7 +1,7 @@
-import './AExecutionPin.scss';
-import APin from "./APin";
+import './ExecutionPin.scss';
+import Pin from "./Pin";
 
-export default class extends APin
+export default class extends Pin
 {
   constructor(name, flow) {
     super(name, flow);
