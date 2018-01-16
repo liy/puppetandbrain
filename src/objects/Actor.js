@@ -1,126 +1,124 @@
 import Entity from './Entity';
 import mixin from '../utils/mixin';
+import EventEmitter from '../utils/EventEmitter';
+import TextComponent from '../components/TextComponent';
 import Brain from '../nodes/Brain';
-import Action from '../nodes/Action';
+import ActorSelection from './ActorSelection';
+import Variable from '../data/Variable';
 
-/**
- * Actor shows up on the stage!
- *
- * @export
- * @class Actor
- * @extends {PIXI.Container}
- */
-export default class Actor
+export default class Actor extends EventEmitter
 {
   constructor(id) {
     super();
+
+    this.selected = false;
+    this._clicks = 0;
 
     // create an entry in the reference look up
     this.id = LookUp.addActor(this, id);
 
     this.name = 'Actor ' + this.id;
 
-    this.initialState = {};
+    // transform for the components
+    // also be able to manipulate in the node graph property.
+    this.position = {
+      x: 0,
+      y: 0,
+    }
+    this.rotation = 0;
+    this.scale = {
+      x: 1,
+      y: 1
+    }
 
-    Stage.on('game.prestart', this.gamePrestart, this);
-    Stage.on('game.stop', this.gameStop, this);
+    this.relaseOutside = this.relaseOutside.bind(this)
+    this.dragMove = this.dragMove.bind(this);
+
+    // release outside
+    document.addEventListener('mouseup', this.relaseOutside);
 
     mixin(this, new Entity());
   }
 
-  init(pod) {
-    this.x = pod.x;
-    this.y = pod.y;
-    if(pod.scale) {
-      this.scale = {
-        x: pod.scale.x,
-        y: pod.scale.y
-      }
-    }
+  init(pod={}) {
+    this.position.x = pod.x || 0;
+    this.position.y = pod.y || 0;
     this.rotation = pod.rotation || 0;
-    this.name = pod.name || this.name;
+    this.scale.x = pod.scaleX || 1;
+    this.scale.y = pod.scaleY || 1;
 
     // Create empty brain but with exisitng ID if there is one.
     // in the future I might allow actors to sharing same brain.
     // therefore, I decide to use separated step to populate the 
     // content of the brain.
     this.brain = new Brain(this, pod.brainID);
-
-    this.initialState = {
-      x: this.x,
-      y: this.y,
-      scale: {
-        x: this.scale.x,
-        y: this.scale.y
-      },
-      rotation: this.rotation
-    }
   }
 
   destroy() {
-    // destroy all components
-    Object.keys(this.components).forEach(name => {
-      this.components[name].destroy();
-    })
+    for(let component of this.components) {
+      component.destroy();
+    }
+    this.components.clear();
 
     LookUp.removeActor(this.id);
-    this.off('pointerup', this.dbClick, this);
-    Stage.off('game.prestart', this.gamePrestart, this);
-    Stage.off('game.stop', this.gameStop, this);
-    this.brain.destroy();
+
+    document.removeEventListener('mousemove', this.dragMove);
   }
 
-  gamePrestart() {
-    // setup initial state
-    this.initialState = {
-      x: this.x,
-      y: this.y,
-      scale: {
-        x: this.scale.x,
-        y: this.scale.y
-      },
-      rotation: this.rotation
+  mouseDown(x, y, offset) {
+    this.select();
+
+    this.offset = offset;
+    this.position.x = x;
+    this.position.y = y;
+    document.addEventListener('mousemove', this.dragMove);
+  }
+
+  mouseUp(e) {
+    document.removeEventListener('mousemove', this.dragMove);
+
+    // double click to open brain
+    setTimeout(() => {
+      this._clicks = 0;
+    }, 300)
+    if(++this._clicks%2 == 0) {
+      History.push(Commander.create('OpenGraph', this.brain.id).process());
     }
   }
 
-  gameStop() {
-    this.x = this.initialState.x;
-    this.y = this.initialState.y;
-    if(this.initialState.scale) {
-      this.scale = {
-        x: this.initialState.scale.x,
-        y: this.initialState.scale.y
-      }
+  relaseOutside() {
+    document.removeEventListener('mousemove', this.dragMove);
+  }
+
+  mouseOver() {
+
+  }
+
+  mouseOut() {
+
+  }
+
+  dragMove(e) {
+    this.position.x = e.clientX + this.offset.x;
+    this.position.y = e.clientY + this.offset.y;
+  }
+
+  select() {
+    ActorSelection.set(this);
+    this.selected = true;
+
+    // TODO: override this to make selection box
+  }
+
+  deselect() {
+    ActorSelection.remove(this);
+    this.selected = false;
+  }
+
+  updateTransform() {
+    for(let component of this.components) {
+      component.updateTransform();
     }
-    this.rotation = this.initialState.rotation;
-
-    // not used at all?
-    // this.variables = this.initialState.variables;
-  }
-
-  get position() {
-    let p = super.position;
-    return {
-      x: p.x,
-      y: p.y
-    }
-  }
-
-  addActor(actor) {
-    this.addChild(actor);
-    this.childActors.push(actor.id);
-  }
-
-  removeActor(actor) {
-    this.removeChild(actor)
-    let index = this.childActors.indexOf(actor.id);
-    if(index != -1) this.childActors.splice(index);
-  }
-
-  copy() {
-    let actor = ActorFactory.create(this.className);
-    actor.init(this.pod())
-    return actor;
   }
 
   get className() {
@@ -131,20 +129,14 @@ export default class Actor
     let pod = {
       className: this.className,
       id: this.id,
-      x: this.x,
-      y: this.y,
-      scale: {
-        x: this.scale.x,
-        y: this.scale.y
-      },
+      x: this.position.x,
+      y: this.position.y,
+      scaleX: this.scale.x,
+      scaleY: this.scale.y,
       name: this.name,
       childActors: this.childActors.concat(),
       brainID: this.brain.id,
     }
-
-    // FIXME: find a better way to handle saving
-    // if game still running, override pod with initial state
-    if(Stage.running) Object.assign(pod, this.initialState);
 
     if(detail) {
       pod.brain = this.brain.pod(detail);

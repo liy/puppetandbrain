@@ -1,28 +1,32 @@
+import ArrayMap from "../utils/ArrayMap";
+
 export default class Entity
 {
   constructor() {
-    this.components = Object.create(null);
+    this.components = new ArrayMap();
   }
 
-  addComponent(component) {
+  addComponent(name, component) {
     component.entity = this;
-    this.components[component.constructor.name] = component;
+    this.components.set(name, component);
     component.added();
   }
 
-  removeComponent(componentClassName) {
-    delete this.components[componentClassName];
-    component.entity = null;
-    component.removed();
+  removeComponent(name) {
+    let {index, value: component} = this.components.remove(name);
+    if(component) {
+      component.entity = null;
+      component.removed();
+    }
   }
 
-  getComponent(componentClassName) {
-    return this.components[componentClassName];
+  getComponent(name) {
+    return this.components.get(name);
   }
 
   tick() {
-    for(let key in this.components) {
-      this.components[key].tick();
+    for(let component in this.components) {
+      component.tick();
     }
   }
 }

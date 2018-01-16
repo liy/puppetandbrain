@@ -132,8 +132,8 @@ var canvas = document.getElementById('canvas');
 
 window.renderer = PIXI.autoDetectRenderer({
   autoStart: true,
-  width: window.innerWidth-1,
-  height: window.innerHeight-1,
+  width: window.innerWidth,
+  height: window.innerHeight,
   view: canvas,
   transparent: true,
   antialias: true
@@ -168,20 +168,20 @@ async function load(activityID) {
 
 
 function simpleInit() {
-  Commander.create('CreateDemoActor').process();
+  // Commander.create('CreateDemoActor').process();
 
 
-  let promises = Stage.actors.map(actor => {
-    return actor.loaded;
-  })
-  // start the activity when cow and donkey are loaded
-  Promise.all(promises).then(() => {
-    new AddActorButton();
-    new DebugButton();
-    new BrainButton();
-    // serialize everything before game start
-    console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
-  })
+  // let promises = Stage.actors.map(actor => {
+  //   return actor.loaded;
+  // })
+  // // start the activity when cow and donkey are loaded
+  // Promise.all(promises).then(() => {
+  //   new AddActorButton();
+  //   new DebugButton();
+  //   new BrainButton();
+  //   // serialize everything before game start
+  //   console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
+  // })
 }
 
 
@@ -242,3 +242,17 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
+
+import Actor from './objects/Actor';
+import TextComponent from './components/TextComponent';
+
+let actor = new Actor();
+actor.addComponent('text', new TextComponent());
+actor.init()
+
+function loop() {
+  actor.updateTransform();
+  requestAnimationFrame(loop);
+}
+
+loop();

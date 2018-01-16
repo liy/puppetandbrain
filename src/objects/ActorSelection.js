@@ -48,7 +48,7 @@ class ActorSelection extends EventEmitter
 
   deselectAll() {
     this.selected.forEach(entity => {
-      entity.getComponent('SelectionComponent').deselect(entity)
+      entity.deselect(entity)
     })
   }
 

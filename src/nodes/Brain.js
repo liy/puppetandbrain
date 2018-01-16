@@ -32,10 +32,6 @@ export default class Brain
     this.variables.updateRuntime();
   }
 
-  createVariable(name, value) {
-    this.variables[name] = value;
-  }
-
   addNode(node) {
     this.nodes.set(node.id, node);
   }

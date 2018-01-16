@@ -1,12 +1,11 @@
 export default class Component
 {
   constructor() {
-    // super();
     this.entity = null;
   }
 
   destroy() {
-    PIXI.ticker.shared.remove(this.tick, this)
+
   }
 
   added() {
@@ -14,20 +13,10 @@ export default class Component
   }
 
   removed() {
-    PIXI.ticker.shared.remove(this.tick, this)
+
   }
 
-  set tickEnabled(v) {
-    if(v) {
-      // tick logic before rendering!
-      PIXI.ticker.shared.add(this.tick, this, PIXI.UPDATE_PRIORITY.HIGH)
-    }
-    else {
-      PIXI.ticker.shared.remove(this.tick, this)
-    }
-  }
-
-  tick() {
-
+  updateTransform() {
+    
   }
 }
