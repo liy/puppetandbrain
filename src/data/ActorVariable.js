@@ -9,10 +9,25 @@ export default class extends Variable
   }
 
   get data() {
-    return this._data;
+    return LookUp.auto(this._data);
+  }
+
+  updateRuntime() {
+    this.runtime = this.data;
   }
 
   set data(v) {
     super.data = v;
+  }
+
+  pod() {
+    return {
+      id: this.id,
+      name: this.name,
+      type: this.type,
+      // Only record the initial data, not the runtime data...
+      data: this.data ? this.data.id : null,
+      brain: this.brain.id,
+    }
   }
 }

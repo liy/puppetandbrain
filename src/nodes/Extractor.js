@@ -22,4 +22,20 @@ export default class Extractor extends Node
   constructor(id) {
     super(id)
   }
+
+  init(pod) {
+    super.init(pod);
+
+    let pointer = this.inputs.get('in');
+    // All the outputs in extract are property 
+    if(pod.outputs) {
+      for(let outputPod of pod.outputs) {
+        this.outputs.assignProperty(outputPod.name, {
+          get: () => {
+            return pointer.value[outputPod.name]
+          }
+        });
+      }
+    }
+  }
 }
