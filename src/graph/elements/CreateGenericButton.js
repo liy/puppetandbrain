@@ -1,9 +1,9 @@
-import VariableControlButton from './VariableControlButton';
+import ElementControlButton from './ElementControlButton';
 import DotIcon from '../../assets/dot.svg';
 import { svgElement } from '../../utils/utils';
 import DataType from '../../data/DataType';
 
-export default class extends VariableControlButton
+export default class extends ElementControlButton
 {
   constructor() {
     super(svgElement(DotIcon,{width:10, height:10}));

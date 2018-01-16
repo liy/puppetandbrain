@@ -4,7 +4,7 @@ import './BrainGraph.scss';
 import BlockSelection from './BlockSelection';
 import ArrayMap from '../utils/ArrayMap';
 import BlockBrowser from '../browser/BlockBrowser';
-import PropertyController from './properties/PropertyController';
+import PropertyController from './elements/PropertyController';
 
 class BrainGraph
 {

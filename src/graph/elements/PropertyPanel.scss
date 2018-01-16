@@ -1,4 +1,4 @@
-#variable-panel {
+#element-panel {
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   position: absolute;
@@ -16,7 +16,7 @@
   align-items: flex-start;
 }
 
-#variable-panel-content {
+#element-panel-content {
   margin-top: 30px;
   overflow-y: scroll;
 }
@@ -43,7 +43,7 @@
   }
 }
 
-#variable-panel-title {
+#element-panel-title {
   position: absolute;
   color: rgb(255, 255, 255);
   width: 100%;
@@ -52,11 +52,11 @@
   text-align: center;
 }
 
-#variable-panel-content {
+#element-panel-content {
   width: 100%;
 }
 
-#variable-panel-control {
+#element-panel-control {
   // background-color:chartreuse;
   margin-top: 10px;
   width: 100%;

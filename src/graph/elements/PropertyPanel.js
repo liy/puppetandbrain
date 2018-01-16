@@ -16,19 +16,19 @@ export default class
   constructor() {
 
     this.element = document.createElement('div');
-    this.element.id = 'variable-panel';
+    this.element.id = 'element-panel';
 
     this.title = document.createElement('span');
-    this.title.id = 'variable-panel-title';
+    this.title.id = 'element-panel-title';
     this.title.textContent = 'Property';
     this.element.appendChild(this.title)
 
     this.content = document.createElement('div');
-    this.content.id = 'variable-panel-content';
+    this.content.id = 'element-panel-content';
     this.element.appendChild(this.content)
     
     this.control = document.createElement('div');
-    this.control.id = 'variable-panel-control';
+    this.control.id = 'element-panel-control';
     this.element.appendChild(this.control)
 
     this.pullBtn = document.createElement('div');

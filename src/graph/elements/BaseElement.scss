@@ -1,4 +1,4 @@
-.variable-element {
+.base-element {
   background-color: #393D5E;
   margin-top: 10px;
   border-radius: 19px;
@@ -11,7 +11,7 @@
 
   border: 3px solid rgba(0, 0, 0, 0);
 
-  .variable-element-content {
+  .element-content {
     height: 32px;
     line-height: 32px;
 
@@ -21,7 +21,7 @@
     // vertical centre fields in the content
     align-items: center;
   
-    .variable-icon {
+    .element-icon {
       flex-grow: 0;
   
       min-width: 32px;
@@ -40,6 +40,6 @@
   }
 }
 
-.variable-element-selected {
+.element-selected {
   border: 3px solid #fcee21;
 }

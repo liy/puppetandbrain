@@ -2,7 +2,7 @@ import Command from './Command';
 import Variable from '../data/Variable';
 import ActorVariable from '../data/ActorVariable';
 import DataType from '../data/DataType';
-import PropertyController from '../graph/properties/PropertyController';
+import PropertyController from '../graph/elements/PropertyController';
 
 export default class DeleteVariable extends Command
 {

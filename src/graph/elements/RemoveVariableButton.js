@@ -1,9 +1,9 @@
-import VariableControlButton from './VariableControlButton';
+import ElementControlButton from './ElementControlButton';
 import BinIcon from '../../assets/bin.svg';
 import { svgElement } from '../../utils/utils';
 import PropertyController from './PropertyController'
 
-export default class extends VariableControlButton
+export default class extends ElementControlButton
 {
   constructor() {
     super(svgElement(BinIcon,{width:18, height:18}));

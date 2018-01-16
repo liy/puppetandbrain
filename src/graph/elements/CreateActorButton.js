@@ -1,7 +1,7 @@
-import VariableControlButton from './VariableControlButton';
+import ElementControlButton from './ElementControlButton';
 import DataType from '../../data/DataType';
 
-export default class extends VariableControlButton
+export default class extends ElementControlButton
 {
   constructor() {
     super(null, '🐶');

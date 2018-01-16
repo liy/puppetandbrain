@@ -1,13 +1,13 @@
-import './VariableControlButton.scss';
+import './ElementControlButton.scss';
 
 export default class
 {
   constructor(icon, emoji) {
     this.element = document.createElement('div');
-    this.element.className = 'variable-control-button-container';
+    this.element.className = 'element-control-button-container';
 
     this.button = document.createElement('div');
-    this.button.className = 'variable-control-button';
+    this.button.className = 'element-control-button';
     this.element.appendChild(this.button);
     
     if(icon) {
