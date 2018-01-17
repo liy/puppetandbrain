@@ -35,7 +35,7 @@ export default class Node extends EventEmitter
     this.owner.brain.addNode(this);
 
     //icon
-    this.iconPath = pod.iconPath;
+    this.iconPath = NodeTemplate[this.className].iconPath;
 
     // Set the memory! I can just do normal ref assignment
     // But do a property assignment, just be safe...

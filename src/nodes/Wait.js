@@ -7,6 +7,9 @@ NodeTemplate.Wait = {
     name: 'seconds',
     type: DataType.GENERIC,
   }],
+  memory: {
+    seconds: 1
+  },
   elementClass: ['flow-control'],
   category: 'Flow Control',
   iconPath: require('!file-loader!../assets/icons/clock.svg')
