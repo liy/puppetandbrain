@@ -25,14 +25,14 @@ require('./main.scss')
 // LookUp is a global window variable, save typing!
 import 'pixi-spine';
 import './NodeTemplate';
-require('./LookUp');
-require('./nodes/NodeFactory');
-require('./objects/ActorFactory');
-require('./graph/BlockFactory');
-require('./commands/History');
-require('./commands/Commander');
-require('./graph/BrainGraph')
-require('./Editor')
+import './LookUp'
+import './nodes/NodeFactory'
+import './objects/ActorFactory'
+import './graph/BlockFactory'
+import './commands/History'
+import './commands/Commander'
+import './graph/BrainGraph'
+import './Editor'
 
 import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';

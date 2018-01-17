@@ -113,7 +113,6 @@ export default class Actor extends EventEmitter
       this._clicks = 0;
     }, 300)
     if(++this._clicks%2 == 0) {
-      console.log('!!')
       History.push(Commander.create('OpenGraph', this.brain.id).process());
     }
   }

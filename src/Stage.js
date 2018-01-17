@@ -47,6 +47,13 @@ export default class Stage
   }
 
   set blurEnabled(v) {
-    this.filters = v ? [new PIXI.filters.BlurFilter(2, 1)] : [];
+    if(v) {
+      this.container.filters = [new PIXI.filters.BlurFilter(2, 1)];
+      document.getElementById('stage-overlayer').classList.add('blur');
+    }
+    else {
+      this.container.filters = [];
+      document.getElementById('stage-overlayer').classList.remove('blur');
+    }
   }
 }
