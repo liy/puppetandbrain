@@ -246,6 +246,14 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
+
+
+
+
+
+
+
+
 import Actor from './objects/Actor';
 import TextComponent from './components/TextComponent';
 import SpineComponent from './components/SpineComponent';
@@ -266,6 +274,9 @@ JsonPromise.load(require('./assets/cat/cat.info.json')).then(info => {
   })
 })
 actor.init()
+// actor.scale = {x:0.5, y:0.5};
+// actor.x = 100;
+// actor.rotation = Math.PI/6;
 Stage.addActor(actor);
 
 document.addEventListener('mousedown', e => {
@@ -281,8 +292,4 @@ document.addEventListener('mousedown', e => {
       })
     }
   }
-
-  // nextFrame().then(() => {
-  //   actor.getComponent('text').focus();
-  // })
 })

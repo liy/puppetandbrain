@@ -1,11 +1,8 @@
 export default class Component
 {
-  constructor() {
+  constructor(name=this.className) {
+    this.name = name;
     this.entity = null;
-  }
-
-  destroy() {
-
   }
 
   added() {
@@ -18,5 +15,15 @@ export default class Component
 
   updateTransform() {
     
+  }
+
+  get className() {
+    return this.__proto__.constructor.name;
+  }
+
+  pod() {
+    return {
+      name: this.name
+    }
   }
 }

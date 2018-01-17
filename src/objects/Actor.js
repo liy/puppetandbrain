@@ -5,6 +5,7 @@ import TextComponent from '../components/TextComponent';
 import Brain from '../nodes/Brain';
 import ActorSelection from './ActorSelection';
 import Variable from '../data/Variable';
+import Matrix from '../math/Matrix';
 
 export default class Actor extends EventEmitter
 {
@@ -21,15 +22,17 @@ export default class Actor extends EventEmitter
 
     // transform for the components
     // also be able to manipulate in the node graph property.
-    this.translate = {
+    this.position = {
       x: 0,
       y: 0,
     }
+    // in radian
     this.rotation = 0;
     this.scale = {
       x: 1,
       y: 1
     }
+    this.matrix = new Matrix();
 
     this.relaseOutside = this.relaseOutside.bind(this)
     this.dragMove = this.dragMove.bind(this);
@@ -41,8 +44,8 @@ export default class Actor extends EventEmitter
   }
 
   init(pod={}) {
-    this.translate.x = pod.x || 0;
-    this.translate.y = pod.y || 0;
+    this.position.x = pod.x || 0;
+    this.position.y = pod.y || 0;
     this.rotation = pod.rotation || 0;
     this.scale.x = pod.scaleX || 1;
     this.scale.y = pod.scaleY || 1;
@@ -69,8 +72,8 @@ export default class Actor extends EventEmitter
     this.select();
 
     this.offset = offset;
-    this.translate.x = translateX+this.offset.x;
-    this.translate.y = translateY+this.offset.y;
+    this.position.x = translateX+this.offset.x;
+    this.position.y = translateY+this.offset.y;
     document.addEventListener('mousemove', this.dragMove);
   }
 
@@ -99,8 +102,8 @@ export default class Actor extends EventEmitter
   }
 
   dragMove(e) {
-    this.translate.x = e.clientX + this.offset.x;
-    this.translate.y = e.clientY + this.offset.y;
+    this.position.x = e.clientX + this.offset.x;
+    this.position.y = e.clientY + this.offset.y;
   }
 
   select() {
@@ -116,6 +119,11 @@ export default class Actor extends EventEmitter
   }
 
   updateTransform() {
+    this.matrix.identity();
+    this.matrix.rotate(this.rotation)
+    this.matrix.scale(this.scale.x, this.scale.y);
+    this.matrix.translate(this.position.x, this.position.y);
+
     for(let component of this.components) {
       component.updateTransform();
     }
@@ -125,26 +133,41 @@ export default class Actor extends EventEmitter
     return this.__proto__.constructor.name;
   }
 
-  get position() {
-    return this.translate;
+  set x(x) {
+    this.position.x = x;
+  }
+
+  get x() {
+    return this.position.x;
+  }
+
+  set y(y) {
+    this.position.y = y;
+  }
+
+  get y() {
+    return this.position.y;
   }
 
   pod(detail=false) {
     let pod = {
       className: this.className,
       id: this.id,
-      x: this.translate.x,
-      y: this.translate.y,
+      x: this.position.x,
+      y: this.position.y,
       scaleX: this.scale.x,
       scaleY: this.scale.y,
       name: this.name,
       childActors: this.childActors.concat(),
       brainID: this.brain.id,
+      components: this.components.map((name, component) => {
+        return component.pod();
+      })
     }
 
     if(detail) {
       pod.brain = this.brain.pod(detail);
-    } 
+    }
 
     return pod;
   }

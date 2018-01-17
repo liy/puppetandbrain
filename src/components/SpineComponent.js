@@ -9,7 +9,6 @@ export default class SpineComponent extends Component
     this.aniBuffer = null;
 
     this.spine = new PIXI.spine.Spine(spineData);
-    this.spine.scale.x = this.spine.scale.y = 0.5;
     this.spine.interactive = true;
 
     if(this.aniBuffer){
@@ -56,7 +55,11 @@ export default class SpineComponent extends Component
   }
 
   updateTransform() {
-    this.spine.x = this.entity.translate.x;
-    this.spine.y = this.entity.translate.y;
+    // I have no idea how to update pixi's matrix... so manual transform here. But it is 
+    // probably has better perfomance, since we did not have matrix calculation twice...
+    this.spine.x = this.entity.position.x;
+    this.spine.y = this.entity.position.y;
+    this.spine.rotation = this.entity.rotation;
+    this.spine.scale = this.entity.scale;
   }
 }

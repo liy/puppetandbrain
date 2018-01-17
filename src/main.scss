@@ -10,10 +10,20 @@ body {
   user-select: none;
 }
 
-#dom-stage {
+#stage-grid {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -1;
+  user-select: none;
+  pointer-events: none;
+}
+
+#stage-overlayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
 }
 
 #activity-id {
