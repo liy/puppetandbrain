@@ -10,6 +10,7 @@ export default class Entity
     component.entity = this;
     this.components.set(name, component);
     component.added();
+    return component;
   }
 
   removeComponent(name) {
@@ -18,6 +19,7 @@ export default class Entity
       component.entity = null;
       component.removed();
     }
+    return component;
   }
 
   getComponent(name) {

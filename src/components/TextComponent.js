@@ -19,6 +19,16 @@ export default class TextComponent extends ElementComponent
 
     this.placeholder = 'Enter your text here...';
     this.contentEditable = true;
+
+    this.onInput = this.onInput.bind(this);
+    this.textElement.addEventListener('input', this.onInput);
+  }
+
+  onInput(e) {
+    if(this.textElement.textContent == '') {
+      // this removes any br, div...
+      this.textElement.textContent = this.textElement.textContent;
+    }
   }
 
   set contentEditable(v) {

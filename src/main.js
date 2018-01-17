@@ -259,25 +259,29 @@ import TextComponent from './components/TextComponent';
 import SpineComponent from './components/SpineComponent';
 import JsonPromise from './utils/JsonPromise';
 import { nextFrame } from './utils/utils';
+import ChoiceBox from './objects/ChoiceBox';
 
-let actor = new Actor();
-actor.addComponent('text', new TextComponent());
-JsonPromise.load(require('./assets/cat/cat.info.json')).then(info => {
-  let loader = new PIXI.loaders.Loader();
-  loader.add(info.id)
-  return new Promise((resolve, reject) => {
-    loader.load((loader, resources) => {
-      let spineComponent = new SpineComponent(resources[info.id].spineData);
-      actor.addComponent('spine', spineComponent);
-      resolve();
-    })
-  })
-})
-actor.init()
-// actor.scale = {x:0.5, y:0.5};
-// actor.x = 100;
-// actor.rotation = Math.PI/6;
-Stage.addActor(actor);
+// let actor = new Actor();
+// actor.addComponent('text', new TextComponent());
+// JsonPromise.load(require('./assets/cat/cat.info.json')).then(info => {
+//   let loader = new PIXI.loaders.Loader();
+//   loader.add(info.id)
+//   return new Promise((resolve, reject) => {
+//     loader.load((loader, resources) => {
+//       let spineComponent = new SpineComponent(resources[info.id].spineData);
+//       actor.addComponent('spine', spineComponent);
+//       resolve();
+//     })
+//   })
+// })
+// actor.init()
+// // actor.scale = {x:0.5, y:0.5};
+// // actor.x = 100;
+// // actor.rotation = Math.PI/6;
+// Stage.addActor(actor);
+let box = new ChoiceBox();
+box.init();
+Stage.addActor(box);
 
 document.addEventListener('mousedown', e => {
   console.log(document.elementsFromPoint(e.clientX, e.clientY));

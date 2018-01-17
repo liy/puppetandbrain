@@ -1,6 +1,6 @@
-import Component from './Component'
+import ContainerComponent from './ContainerComponent';
 
-export default class SpineComponent extends Component
+export default class SpineComponent extends ContainerComponent
 {
   constructor(spineData) {
     super()
@@ -10,25 +10,22 @@ export default class SpineComponent extends Component
 
     this.spine = new PIXI.spine.Spine(spineData);
     this.spine.interactive = true;
+    this.container.addChild(this.spine);
 
     if(this.aniBuffer){
       this.spine.state.setAnimation(this.aniBuffer.track, this.aniBuffer.name, this.aniBuffer.loop);
     }
 
-    this.spine.on('pointerdown', e => {
-      this.data = e.data;
-      let p = this.data.getLocalPosition(this.spine.parent)
-      let offset = {
-        x: (this.spine.x - p.x),
-        y: (this.spine.y - p.y)
-      }
+    // this.spine.on('pointerdown', e => {
+    //   this.data = e.data;
+    //   let p = this.data.getLocalPosition(this.spine.parent)
+    //   let offset = {
+    //     x: (this.spine.x - p.x),
+    //     y: (this.spine.y - p.y)
+    //   }
       
-      this.entity.mouseDown(p.x, p.y, offset);
-    })
-  }
-
-  added() {
-    Stage.addChild(this.spine);
+    //   this.entity.mouseDown(p.x, p.y, offset);
+    // })
   }
 
   setToSetupPose() {
@@ -52,14 +49,5 @@ export default class SpineComponent extends Component
 
   getAnimations() {
     return this.spine.state.data.skeletonData.animations
-  }
-
-  updateTransform() {
-    // I have no idea how to update pixi's matrix... so manual transform here. But it is 
-    // probably has better perfomance, since we did not have matrix calculation twice...
-    this.spine.x = this.entity.position.x;
-    this.spine.y = this.entity.position.y;
-    this.spine.rotation = this.entity.rotation;
-    this.spine.scale = this.entity.scale;
   }
 }
