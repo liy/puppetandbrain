@@ -32,8 +32,10 @@ export default class CreateDemoActor extends Command
         x: 0.5,
         y: 0.5
       },
-      x: Editor.stage.stageWidth/2,
-      y: Editor.stage.stageHeight/2,
+      position: {
+        x: Editor.stage.stageWidth/2,
+        y: Editor.stage.stageHeight/2,
+      }
     })
     Editor.stage.addActor(actor)
 

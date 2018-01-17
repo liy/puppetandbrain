@@ -4,17 +4,9 @@ import ActorSelection from './objects/ActorSelection';
 export default class Stage
 {
   constructor() {
-    this.running = false;
     this.actors = new ArrayMap();
 
     this.container = new PIXI.Container();
-
-    document.addEventListener('keydown', (e) => {
-      if(e.key == 'F6' || e.key == 'F4') {
-        e.preventDefault();
-        this.toggle();
-      }
-    })
   }
 
   init(width, height) {

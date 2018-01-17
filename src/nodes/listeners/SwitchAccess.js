@@ -35,6 +35,8 @@ export default class SwitchAccess extends Listener
 
     this.switchdown = this.switchdown.bind(this);
     this.switchup = this.switchup.bind(this);
+    this.prestart = this.prestart.bind(this);
+    this.stop = this.stop.bind(this);
 
     Editor.on('game.prestart', this.prestart, this)
     Editor.on('game.stop', this.stop, this)
@@ -54,7 +56,7 @@ export default class SwitchAccess extends Listener
   }
 
   prestart() {
-    // FIXME: if this block is deleted and redo, while game is running
+    // FIXME: if this block is deleted and redo, while game is playing
     // the event will not be registered.
     // perhaps use promise??
     this.switch.on('switch.down', this.switchdown)
@@ -79,6 +81,4 @@ export default class SwitchAccess extends Listener
     this.outputs.assignValue('switch id', data.switchID);
     this.execution.run('up');
   }
-
-
 }

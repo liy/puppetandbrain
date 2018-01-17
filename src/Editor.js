@@ -8,7 +8,17 @@ class Editor extends EventEmitter
 
     this.loop = this.loop.bind(this);
 
+    // whether game is playing or not
+    this.playing = false;
+
     this.stage = new Stage();
+    
+    document.addEventListener('keydown', (e) => {
+      if(e.key == 'F6' || e.key == 'F4') {
+        e.preventDefault();
+        this.toggle();
+      }
+    })
   }
 
   init() {
@@ -23,6 +33,7 @@ class Editor extends EventEmitter
     });
     
     this.stage.init(renderer.width, renderer.height);
+    PIXI.ticker.shared.add(this.loop);
   }
 
   loop() {
@@ -31,20 +42,18 @@ class Editor extends EventEmitter
   }
 
   start() {
-    PIXI.ticker.shared.add(this.loop);
-    this.running = true;
+    this.playing = true;
     this.emit('game.prestart')
     this.emit('game.start')
   }
 
   stop() {
-    PIXI.ticker.shared.remove(this.loop);
-    this.running = false;
+    this.playing = false;
     this.emit('game.stop')
   }
 
   toggle() {
-    if(this.running) {
+    if(this.playing) {
       this.stop();
     }
     else {

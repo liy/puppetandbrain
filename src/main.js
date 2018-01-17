@@ -131,7 +131,7 @@ firebase.initializeApp(FIREBASE_CONFIG);
 
 document.getElementById('app-version').textContent = APP_VERSION;
 
-Editor.start();
+// Editor.start();
 // setTimeout(() => {
 //   Editor.stop();
 // }, 5000)

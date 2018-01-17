@@ -50,11 +50,9 @@ export default class Actor extends EventEmitter
   }
 
   init(pod={}) {
-    this.position.x = pod.x || 0;
-    this.position.y = pod.y || 0;
+    this.position = pod.position || {x:0,y:0};
     this.rotation = pod.rotation || 0;
-    this.scale.x = pod.scaleX || 1;
-    this.scale.y = pod.scaleY || 1;
+    this.scale = pod.scale || {x:1,y:1}
 
     // Create empty brain but with exisitng ID if there is one.
     // in the future I might allow actors to sharing same brain.
@@ -96,10 +94,14 @@ export default class Actor extends EventEmitter
 
   mouseDown(translateX, translateY, offset) {
     this.select();
-    
+
     this.offset = offset;
     this.position.x = translateX+this.offset.x;
     this.position.y = translateY+this.offset.y;
+    
+    // crete move command, when move update it with new position
+    if(!Editor.playing) this.moveCommand = Commander.create('MoveActor', this);
+
     document.addEventListener('mousemove', this.dragMove);
   }
 
@@ -118,6 +120,8 @@ export default class Actor extends EventEmitter
 
   relaseOutside() {
     document.removeEventListener('mousemove', this.dragMove);
+    // update entity's new position
+    if(this.moveCommand) History.push(this.moveCommand.processAndSave());
   }
 
   mouseOver() {
@@ -191,8 +195,8 @@ export default class Actor extends EventEmitter
     }
 
     // FIXME: find a better way to handle saving
-    // if game still running, override pod with initial state
-    if(Editor.running) Object.assign(pod, this.initialState);
+    // if game still playing, override pod with initial state
+    if(Editor.playing) Object.assign(pod, this.initialState);
 
     if(detail) {
       pod.brain = this.brain.pod(detail);
