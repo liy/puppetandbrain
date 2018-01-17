@@ -16,13 +16,14 @@ export default class Wait extends Task
   constructor(id) {
     super(id);
 
-    Stage.on('game.stop', this.stop, this)
+    this.stop = this.stop.bind(this);
+    Editor.on('game.stop', this.stop)
   }
 
   destroy() {
     super.destroy();
     clearTimeout(this.timeoutID);
-    Stage.off('game.stop', this.stop)
+    Editor.off('game.stop', this.stop)
   }
 
   stop() {

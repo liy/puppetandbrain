@@ -104,6 +104,7 @@ body {
 #at {
   position: absolute;
   user-select: none;
+  pointer-events: none;
   // cursor: pointer;
   z-index: 1;
   top: 10px;

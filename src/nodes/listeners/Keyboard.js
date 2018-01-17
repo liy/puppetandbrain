@@ -28,15 +28,15 @@ export default class Keyboard extends Listener
     this.prestart = this.prestart.bind(this);
     this.stop = this.stop.bind(this);
 
-    Stage.on('game.prestart', this.prestart, this)
-    Stage.on('game.stop', this.stop, this)
+    Editor.on('game.prestart', this.prestart, this)
+    Editor.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
     
-    Stage.off('game.prestart', this.prestart, this)
-    Stage.off('game.stop', this.stop, this)
+    Editor.off('game.prestart', this.prestart, this)
+    Editor.off('game.stop', this.stop, this)
 
     document.removeEventListener('keydown', this.keydown)
     document.removeEventListener('keyup', this.keyup)

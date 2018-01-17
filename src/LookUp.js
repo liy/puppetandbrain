@@ -210,7 +210,9 @@ window.LookUp = {
     result.pointers = POINTERS;
     result.brains = BRAINS;
     result.variables = VARIABLES;
-    result.stage = Stage.actors;
+    result.stage = Editor.stage.actors.map(actor => {
+      return actor.id;
+    });
 
     return result;
   },

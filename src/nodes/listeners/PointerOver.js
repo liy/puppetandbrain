@@ -11,15 +11,15 @@ export default class PointerOver extends Listener
   constructor(id) {
     super(id);
 
-    Stage.on('game.prestart', this.prestart, this)
-    Stage.on('game.stop', this.stop, this)
+    Editor.on('game.prestart', this.prestart, this)
+    Editor.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
     
-    Stage.off('game.prestart', this.prestart, this)
-    Stage.off('game.stop', this.stop, this)
+    Editor.off('game.prestart', this.prestart, this)
+    Editor.off('game.stop', this.stop, this)
 
     this.owner.off('pointerover', this.over, this)
   }

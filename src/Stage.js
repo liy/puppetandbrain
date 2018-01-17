@@ -1,11 +1,13 @@
+import ArrayMap from './utils/ArrayMap'
 import ActorSelection from './objects/ActorSelection';
 
-class Stage extends PIXI.Container
+export default class Stage
 {
   constructor() {
-    super();
     this.running = false;
-    this.actors = [];
+    this.actors = new ArrayMap();
+
+    this.container = new PIXI.Container();
 
     document.addEventListener('keydown', (e) => {
       if(e.key == 'F6' || e.key == 'F4') {
@@ -30,45 +32,29 @@ class Stage extends PIXI.Container
     // catcher.on('mousedown', ActorSelection.deselectAll.bind(ActorSelection));
   }
 
+  updateTransform() {
+    for(let actor of this.actors) {
+      actor.updateTransform();
+    }
+  }
+
   addActor(actor) {
-    this.actors.push(actor.id);
+    this.actors.set(actor.id, actor);
   }
 
   removeActor(actor) {
-    let index = this.actors.indexOf(actor.id);
-    if(index != -1) this.actors.splice(index);
+    this.actors.remove(actor.id);
   }
 
-  removeActorAt(index) {
-    let id = super.removeChildAt(index);
-    if(id) {
-      this.actors.splice(index);
-    }
+  addChild(child) {
+    return this.container.addChild(child);
   }
 
-  toggle() {
-    if(this.running) {
-      this.stop();
-    }
-    else {
-      this.start();
-    }
-  }
-
-  start() {
-    this.running = true;
-    this.emit('game.prestart')
-    this.emit('game.start')
-  }
-
-  stop() {
-    this.running = false;
-    this.emit('game.stop')
+  removeChild(child) {
+    return this.container.removeChild(child);
   }
 
   set blurEnabled(v) {
     this.filters = v ? [new PIXI.filters.BlurFilter(2, 1)] : [];
   }
 }
-
-window.Stage = new Stage();

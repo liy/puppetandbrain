@@ -13,12 +13,12 @@ export default class ContainerComponent extends Component
   }
 
   added() {
-    Stage.addChild(this.container);
+    Editor.stage.addChild(this.container);
     this.container.on('pointerdown', this.pointerDown, this);
   }
 
   removed() {
-    Stage.removeChild(this.container);
+    Editor.stage.removeChild(this.container);
     this.container.off('pointerdown', this.pointerDown, this);
   }
 

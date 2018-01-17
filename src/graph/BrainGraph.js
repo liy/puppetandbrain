@@ -121,7 +121,7 @@ class BrainGraph
     window.addEventListener('resize', this.resize);
     this.resize();
 
-    Stage.blurEnabled = true;
+    Editor.stage.blurEnabled = true;
     BlockSelection.toggle();
 
     for(let node of this.brain.getNodes()) {
@@ -159,19 +159,19 @@ class BrainGraph
       
       this.container.style = "visibility:hidden"
   
-      Stage.blurEnabled = false;
+      Editor.stage.blurEnabled = false;
       BlockSelection.toggle();
     }})
   }
 
   hide() {
-    Stage.blurEnabled = false;
+    Editor.stage.blurEnabled = false;
     this.container.style = "visibility:hidden"
     document.getElementById('control').classList.remove('blur')
   }
 
   show() {
-    Stage.blurEnabled = true;
+    Editor.stage.blurEnabled = true;
     this.container.style = "visibility:visible"
     document.getElementById('control').classList.add('blur')
   }

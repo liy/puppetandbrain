@@ -6,6 +6,13 @@ export default class Entity
     this.components = new ArrayMap();
   }
 
+  removeComponents() {
+    let names = this.components.keys;
+    for(let name of names) {
+      this.removeComponent(name);
+    }
+  }
+
   addComponent(name, component) {
     component.entity = this;
     this.components.set(name, component);

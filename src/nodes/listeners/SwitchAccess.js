@@ -36,8 +36,8 @@ export default class SwitchAccess extends Listener
     this.switchdown = this.switchdown.bind(this);
     this.switchup = this.switchup.bind(this);
 
-    Stage.on('game.prestart', this.prestart, this)
-    Stage.on('game.stop', this.stop, this)
+    Editor.on('game.prestart', this.prestart, this)
+    Editor.on('game.stop', this.stop, this)
 
     this.switch = new Switch(this);
   }
@@ -45,8 +45,8 @@ export default class SwitchAccess extends Listener
   destroy() {
     super.destroy();
 
-    Stage.off('game.prestart', this.prestart, this)
-    Stage.off('game.stop', this.stop, this)
+    Editor.off('game.prestart', this.prestart, this)
+    Editor.off('game.stop', this.stop, this)
 
     this.switch.destroy();
     this.switch.off('switch.down', this.switchdown)

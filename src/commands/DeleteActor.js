@@ -16,7 +16,7 @@ export default class DeleteActor extends Command
     actor.getComponent('SelectionComponent').deselect(actor)
 
     actor.destroy();
-    Stage.removeActor(actor);
+    Editor.stage.removeActor(actor);
 
     return this;
   }
@@ -24,7 +24,7 @@ export default class DeleteActor extends Command
   undo() {
     let actor = new SpineActor(this.pod.id);
     actor.init(this.pod);
-    Stage.addActor(actor)
+    Editor.stage.addActor(actor)
 
     // create and init nodes
     for(let nodePod of this.pod.brain.nodes) {

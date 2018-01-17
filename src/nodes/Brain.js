@@ -16,7 +16,9 @@ export default class Brain
 
     this.variables = new VariableList(this);
 
-    Stage.on('game.prestart', this.prestart, this);
+    this.prestart = this.prestart.bind(this);
+    
+    Editor.on('game.prestart', this.prestart);
   }
 
   destroy() {
@@ -25,7 +27,7 @@ export default class Brain
     for(let node of nodes) {
       node.destroy();
     }
-    Stage.off('game.prestart', this.prestart, this);
+    Editor.off('game.prestart', this.prestart);
   }
 
   prestart() {

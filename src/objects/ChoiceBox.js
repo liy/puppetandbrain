@@ -12,7 +12,6 @@ export default class ChoiceBox extends Actor
   init(pod={}) {
     super.init(pod);
 
-
     this.width = pod.width || 200;
     this.height = pod.height || 200;
     this.padding = pod.padding || 10;

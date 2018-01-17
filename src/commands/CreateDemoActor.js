@@ -32,10 +32,10 @@ export default class CreateDemoActor extends Command
         x: 0.5,
         y: 0.5
       },
-      x: Stage.stageWidth/2,
-      y: Stage.stageHeight/2,
+      x: Editor.stage.stageWidth/2,
+      y: Editor.stage.stageHeight/2,
     })
-    Stage.addActor(actor)
+    Editor.stage.addActor(actor)
 
     // wait until it finishes loading
     // as we will fetching actor information
@@ -206,7 +206,7 @@ export default class CreateDemoActor extends Command
   undo() {
     let actor = LookUp.get(this.actorID);
     actor.destroy();
-    Stage.removeActor(actor);
+    Editor.stage.removeActor(actor);
   }
 
   redo() {

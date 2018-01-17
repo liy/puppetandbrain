@@ -11,7 +11,7 @@ export default class BoxComponent extends ElementComponent
     this.element.style.height = `${height}px`;
 
     this.textElement = document.createElement('div');
-    this.textElement.className = 'box-component-label';
+    this.textElement.className = 'label';
     this.textElement.textContent = text;
     this.element.appendChild(this.textElement);
 

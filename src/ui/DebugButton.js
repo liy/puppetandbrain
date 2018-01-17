@@ -16,22 +16,22 @@ export default class DebugButton
 
     this.element.appendChild(this.startIcon);
 
-    Stage.on('game.start', () => {
+    Editor.on('game.start', () => {
       this.element.removeChild(this.element.firstChild);
       this.element.appendChild(this.stopIcon);
       this.element.title = 'Press F6 to stop'
-    }, this)
+    })
 
-    Stage.on('game.stop', () => {
+    Editor.on('game.stop', () => {
       this.element.removeChild(this.element.firstChild);
       this.element.appendChild(this.startIcon);
       this.element.title = 'Press F6 to start'
-    }, this)
+    })
 
     this.element.addEventListener('mousedown', e => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      Stage.toggle();
+      Editor.toggle();
     })
   }
 }

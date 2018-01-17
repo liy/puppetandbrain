@@ -9,14 +9,16 @@
     margin-top: 10px;
   }
 
-  .box-component-label {
+  .label {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
     color: rgba(0, 0, 0, 1);
     outline: none;
     overflow: hidden;
-    // align-items: center;
+    text-align: center;
   }
   
-  .box-component-label:empty:before {
+  .label:empty:before {
     font-weight: 300;
     content: attr(placeholder);
     display: block; /* For Firefox */

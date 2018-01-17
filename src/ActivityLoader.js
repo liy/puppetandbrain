@@ -50,7 +50,7 @@ export default class ActivityLoader
 
     for(let id of pod.stage) {
       let actorPod = pod.store[id];
-      add(Stage, actorPod)
+      add(Editor.stage, actorPod)
     }
 
     return Promise.all(promises);

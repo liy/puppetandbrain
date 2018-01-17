@@ -12,11 +12,14 @@ export default class Actor extends EventEmitter
   constructor(id) {
     super();
 
-    this.selected = false;
-    this._clicks = 0;
-
     // create an entry in the reference look up
     this.id = LookUp.addActor(this, id);
+
+    this.relaseOutside = this.relaseOutside.bind(this)
+    this.dragMove = this.dragMove.bind(this);
+
+    this.selected = false;
+    this._clicks = 0;
 
     this.name = 'Actor ' + this.id;
 
@@ -34,13 +37,16 @@ export default class Actor extends EventEmitter
     }
     this.matrix = new Matrix();
 
-    this.relaseOutside = this.relaseOutside.bind(this)
-    this.dragMove = this.dragMove.bind(this);
-
     // release outside
     document.addEventListener('mouseup', this.relaseOutside);
 
     mixin(this, new Entity());
+    
+    this.gamePrestart = this.gamePrestart.bind(this);
+    this.gameStop = this.gameStop.bind(this);
+
+    Editor.on('game.prestart', this.gamePrestart);
+    Editor.on('game.stop', this.gameStop);
   }
 
   init(pod={}) {
@@ -58,14 +64,32 @@ export default class Actor extends EventEmitter
   }
 
   destroy() {
-    for(let component of this.components) {
-      component.destroy();
-    }
-    this.components.clear();
-
+    this.removeComponents();
     LookUp.removeActor(this.id);
-
     document.removeEventListener('mousemove', this.dragMove);
+
+    Editor.off('game.prestart', this.gamePrestart);
+    Editor.off('game.stop', this.gameStop);
+  }
+
+  gamePrestart() {
+    this.initialState = {
+      position: {
+        ...this.position
+      },
+      scale: {
+        ...this.scale
+      },
+      rotation: this.rotation
+    }
+  }
+
+  gameStop() {
+    if(this.initialState) {
+      this.position = {...this.initialState.position} 
+      this.scale = {...this.initialState.scale};
+      this.rotation = this.initialState.rotation;
+    }
   }
 
   mouseDown(translateX, translateY, offset) {

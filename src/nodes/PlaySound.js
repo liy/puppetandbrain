@@ -35,7 +35,7 @@ export default class PlaySound extends Task
     this.stop = this.stop.bind(this);
     this.complete = this.complete.bind(this);
 
-    Stage.on('game.stop', this.stop)
+    Editor.on('game.stop', this.stop)
   }
 
   destroy() {
@@ -44,7 +44,7 @@ export default class PlaySound extends Task
       this.audio.pause();
       this.audio.removeEventListener('ended', this.complete);
     }
-    Stage.off('game.stop', this.stop)
+    Editor.off('game.stop', this.stop)
   }
 
   run() {

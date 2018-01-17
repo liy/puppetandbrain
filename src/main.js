@@ -115,7 +115,7 @@ require('./graph/BlockFactory');
 require('./commands/History');
 require('./commands/Commander');
 require('./graph/BrainGraph')
-require('./Stage')
+require('./Editor')
 
 import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
@@ -124,29 +124,17 @@ import BrainButton from './ui/BrainButton';
 import ArrayMap from './utils/ArrayMap';
 
 
+// prevent default context menu for the whole site
+document.addEventListener('contextmenu', event => event.preventDefault());
+
 firebase.initializeApp(FIREBASE_CONFIG);
 
 document.getElementById('app-version').textContent = APP_VERSION;
 
-var canvas = document.getElementById('canvas');
-
-window.renderer = PIXI.autoDetectRenderer({
-  autoStart: true,
-  width: window.innerWidth,
-  height: window.innerHeight,
-  view: canvas,
-  transparent: true,
-  antialias: true
-});
-
-Stage.init(renderer.width, renderer.height);
-function render() {
-  for(let actorID of Stage.actors) {
-    LookUp.get(actorID).updateTransform();
-  }
-  renderer.render(Stage);
-}
-PIXI.ticker.shared.add(render);
+Editor.start();
+setTimeout(() => {
+  Editor.stop();
+}, 5000)
 
 async function load(activityID) {
   // TODO: get data from firestore
@@ -173,8 +161,7 @@ async function load(activityID) {
 function simpleInit() {
   // Commander.create('CreateDemoActor').process();
 
-
-  // let promises = Stage.actors.map(actor => {
+  // let promises = Editor.stage.actors.map(actor => {
   //   return actor.loaded;
   // })
   // // start the activity when cow and donkey are loaded
@@ -188,10 +175,7 @@ function simpleInit() {
 }
 
 
-// prevent default context menu for the whole site
-document.addEventListener('contextmenu', event => event.preventDefault());
-
-
+// TODO: to be replaced by share API
 let idDiv = document.getElementById('activity-id');
 idDiv.addEventListener('mousedown', e => {
   e.preventDefault();
@@ -211,7 +195,6 @@ idDiv.addEventListener('mousedown', e => {
   document.execCommand('copy');
 
   document.body.removeChild(temp)
-
 })
 
 // Persist the sign in token in local machine, probably in local storage or something in browser... whatever.
@@ -246,56 +229,8 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-
-
-
-
-
-
-
-
-import Actor from './objects/Actor';
-import TextComponent from './components/TextComponent';
-import SpineComponent from './components/SpineComponent';
-import JsonPromise from './utils/JsonPromise';
-import { nextFrame } from './utils/utils';
 import ChoiceBox from './objects/ChoiceBox';
 
-// let actor = new Actor();
-// actor.addComponent('text', new TextComponent());
-// JsonPromise.load(require('./assets/cat/cat.info.json')).then(info => {
-//   let loader = new PIXI.loaders.Loader();
-//   loader.add(info.id)
-//   return new Promise((resolve, reject) => {
-//     loader.load((loader, resources) => {
-//       let spineComponent = new SpineComponent(resources[info.id].spineData);
-//       actor.addComponent('spine', spineComponent);
-//       resolve();
-//     })
-//   })
-// })
-// actor.init()
-// // actor.scale = {x:0.5, y:0.5};
-// // actor.x = 100;
-// // actor.rotation = Math.PI/6;
-// Stage.addActor(actor);
-let box = new ChoiceBox();
-box.init();
-box.x = 400;
-box.y = 600;
-Stage.addActor(box);
-
-document.addEventListener('mousedown', e => {
-  console.log(document.elementsFromPoint(e.clientX, e.clientY));
-
-  let es = document.elementsFromPoint(e.clientX, e.clientY);
-  for(let ele of es) {
-    if(ele.className == 'text-component') {
-      console.log('focus', ele)
-      ele.focus();
-      nextFrame().then(() => {
-        ele.focus();
-      })
-    }
-  }
-})
+let cb = new ChoiceBox();
+cb.init();
+Editor.stage.addActor(cb)

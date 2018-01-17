@@ -16,15 +16,15 @@ export default class PointerDown extends Listener
     this.prestart = this.prestart.bind(this);
     this.stop = this.stop.bind(this);
 
-    Stage.on('game.prestart', this.prestart)
-    Stage.on('game.stop', this.stop)
+    Editor.on('game.prestart', this.prestart)
+    Editor.on('game.stop', this.stop)
   }
 
   destroy() {
     super.destroy();
     
-    Stage.off('game.prestart', this.prestart)
-    Stage.off('game.stop', this.stop)
+    Editor.off('game.prestart', this.prestart)
+    Editor.off('game.stop', this.stop)
 
     this.owner.off('pointerdown', this.down)
   }

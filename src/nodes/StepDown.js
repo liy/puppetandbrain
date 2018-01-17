@@ -17,12 +17,12 @@ export default class StepDown extends Task
     super(id);
 
     this.stop = this.stop.bind(this);
-    Stage.on('game.stop', this.stop)
+    Editor.on('game.stop', this.stop)
   }
 
   destroy() {
     super.destroy();
-    Stage.off('game.stop', this.stop)
+    Editor.off('game.stop', this.stop)
     if(this.tween) this.tween.kill()
   }
 

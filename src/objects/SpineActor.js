@@ -27,7 +27,7 @@ export default class SpineActor extends CanvasActor
       return new Promise((resolve, reject) => {
         loader.load((loader, resources) => {
           this.spineComponent = new SpineComponent(resources[info.id].spineData);
-          this.addComponent(this.spineComponent);
+          this.addComponent('animation', this.spineComponent);
           resolve();
         })
       })

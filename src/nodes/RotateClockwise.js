@@ -19,7 +19,7 @@ export default class RotateClockwise extends Task
     super(id);
 
     this.stop = this.stop.bind(this);
-    Stage.on('game.stop', this.stop)
+    Editor.on('game.stop', this.stop)
   }
 
   init(pod) {
@@ -28,7 +28,7 @@ export default class RotateClockwise extends Task
 
   destroy() {
     super.destroy();
-    Stage.off('game.stop', this.stop)
+    Editor.off('game.stop', this.stop)
     if(this.tween) this.tween.kill()
   }
 

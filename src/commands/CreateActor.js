@@ -19,10 +19,10 @@ export default class CreateActor extends Command
         x: 0.5,
         y: 0.5
       },
-      x: Math.random() * Stage.stageWidth,
-      y: Math.random() * Stage.stageHeight,
+      x: Math.random() * Editor.stage.stageWidth,
+      y: Math.random() * Editor.stage.stageHeight,
     })
-    Stage.addActor(actor)
+    Editor.stage.addActor(actor)
 
     // Add default game start action
     let gameStart = new GameStart();
@@ -53,7 +53,7 @@ export default class CreateActor extends Command
   undo() {
     let actor = LookUp.get(this.actorID);
     actor.destroy();
-    Stage.removeActor(actor);
+    Editor.stage.removeActor(actor);
   }
 
   redo() {
