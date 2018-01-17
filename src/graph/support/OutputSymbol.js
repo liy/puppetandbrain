@@ -69,7 +69,7 @@ export default class OutputSymbol extends DataSymbol
     return DataColor[this.output.type] || DataColor[DataType.GENERIC];
   }
 
-  template(dataType) {
+  colorize(dataType) {
     let color = DataColor[dataType] || DataColor[DataType.GENERIC];
     this.svg.style.setProperty('--fill', `#${color.toString(16)}`);
   }

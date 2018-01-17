@@ -31,6 +31,8 @@ export default class GetterBlock extends Block
   }
 
   template(pod) {
+    this.element.classList.add('template-block');
+
     if(pod.elementClass) {
       for(let className of pod.elementClass) {
         this.element.classList.add(className);
@@ -39,10 +41,10 @@ export default class GetterBlock extends Block
 
     this.title.textContent = pod.name;
 
-    let pin = new OutputPin(LookUp.get(pod.variableID).name);
+    let variable = LookUp.get(pod.variableID);
+    let pin = new OutputPin(variable.name);
+    pin.symbol.colorize(variable.type)
     this.body.addRight(pin);
-
-    this.element.style.position = 'relative'
 
     this.body.element.addEventListener('mousedown', e => {
       console.log(e)

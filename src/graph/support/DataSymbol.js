@@ -1,5 +1,7 @@
 import './DataSymbol.scss';
 import ConnectHelper from '../ConnectHelper';
+import DataColor from '../../data/DataColor';
+import DataType from '../../data/DataType';
 
 export default class DataSymbol
 {

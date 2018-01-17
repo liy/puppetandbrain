@@ -42,6 +42,8 @@ export default class SetterBlock extends Block
   }
 
   template(pod) {
+    this.element.classList.add('template-block');
+    
     if(pod.elementClass) {
       for(let className of pod.elementClass) {
         this.element.classList.add(className);
@@ -65,13 +67,15 @@ export default class SetterBlock extends Block
       }
     }
 
-    pin = new InputPin(LookUp.get(pod.variableID).name);
+    let variable = LookUp.get(pod.variableID);
+
+    pin = new InputPin(variable.name);
+    pin.symbol.colorize(variable.type)
     this.body.addLeft(pin);
 
-    pin = new OutputPin(LookUp.get(pod.variableID).name);
+    pin = new OutputPin(variable.name);
+    pin.symbol.colorize(variable.type)
     this.body.addRight(pin);
-
-    this.element.style.position = 'relative'
 
     this.body.element.addEventListener('mousedown', e => {
       this.emit('block.chosen', pod);

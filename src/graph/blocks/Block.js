@@ -14,10 +14,10 @@ export default class Block extends EventEmitter
     super();
 
     this.element = document.createElement('div');
-    this.element.className = 'a-block';
+    this.element.className = 'block';
 
     this.title = document.createElement('div');
-    this.title.className = 'a-title';
+    this.title.className = 'title';
     this.element.appendChild(this.title);
 
     this.body = new BlockBody();
@@ -190,6 +190,8 @@ export default class Block extends EventEmitter
 
 
   template(pod) {
+    this.element.classList.add('template-block');
+
     this.body.iconPath = pod.iconPath;
     
     if(pod.elementClass) {
@@ -215,17 +217,15 @@ export default class Block extends EventEmitter
 
     for(let inputPod of pod.inputs) {
       pin = new InputPin(inputPod.name);
-      pin.symbol.template(inputPod.type)
+      pin.symbol.colorize(inputPod.type)
       this.body.addLeft(pin);
     }
 
     for(let outputPod of pod.outputs) {
       pin = new OutputPin(outputPod.name);
-      pin.symbol.template(outputPod.type)
+      pin.symbol.colorize(outputPod.type)
       this.body.addRight(pin);
     }
-
-    this.element.style.position = 'relative'
 
     this.body.element.addEventListener('mousedown', e => {
       this.emit('block.chosen', pod);

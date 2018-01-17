@@ -3,7 +3,8 @@ import ConnectHelper from '../ConnectHelper';
 export default class ExecutionSymbol
 {
   constructor(name, flow) {
-    this.element = document.createElement('div')
+    this.element = document.createElement('div');
+    this.element.style.cursor = 'pointer';
 
     this.name = name;
     this.flow = flow;

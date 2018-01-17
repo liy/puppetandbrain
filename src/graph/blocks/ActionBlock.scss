@@ -1,12 +1,12 @@
 .action {
-  .a-title {
+  .title {
     outline: none;
     user-select: auto;
     pointer-events: auto;
   }
   
   // place hodler
-  .a-title:empty:before{
+  .title:empty:before{
     content: attr(placeholder);
     display: block; /* For Firefox */
     color: #CCC;

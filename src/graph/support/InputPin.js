@@ -112,8 +112,4 @@ export default class extends DataPin
   get gadgetVisible() {
     return this.gadget.visible;
   }
-
-  template(pod) {
-    
-  }
 }
