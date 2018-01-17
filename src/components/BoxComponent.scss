@@ -6,6 +6,7 @@
 
   .image {
     flex-grow: 2;
+
     margin-top: 10px;
   }
 
@@ -16,6 +17,8 @@
     outline: none;
     overflow: hidden;
     text-align: center;
+
+    margin: 10px;
   }
   
   .label:empty:before {

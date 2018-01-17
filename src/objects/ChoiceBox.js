@@ -14,7 +14,7 @@ export default class ChoiceBox extends Actor
 
     this.width = pod.width || 200;
     this.height = pod.height || 200;
-    this.padding = pod.padding || 10;
+    this.padding = pod.padding || 0;
 
     let boxWidth = this.width-this.padding*2;
     let boxHeight = this.height-this.padding*2;
@@ -25,6 +25,13 @@ export default class ChoiceBox extends Actor
 
     this.box = this.addComponent('box', new GraphicsComponent());
     this.color = 0xFFFFFF;
+  }
+
+  select() {
+    super.select();
+
+    // bring it to front
+    Editor.stage.addChild(this.box.container);
   }
 
   set color(c) {

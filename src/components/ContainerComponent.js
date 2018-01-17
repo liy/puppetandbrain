@@ -15,11 +15,13 @@ export default class ContainerComponent extends Component
   added() {
     Editor.stage.addChild(this.container);
     this.container.on('pointerdown', this.pointerDown, this);
+    this.container.on('pointerup', this.pointerUp, this);
   }
 
   removed() {
     Editor.stage.removeChild(this.container);
     this.container.off('pointerdown', this.pointerDown, this);
+    this.container.off('pointerup', this.pointerUp, this);
   }
 
   pointerDown(e) {
@@ -31,6 +33,10 @@ export default class ContainerComponent extends Component
     }
     
     this.entity.mouseDown(p.x, p.y, offset);
+  }
+
+  pointerUp(e) {
+    this.entity.mouseUp(e);
   }
 
   updateTransform() {

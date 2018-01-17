@@ -1,11 +1,9 @@
 import JsonPromise from '../utils/JsonPromise';
-import CanvasActor from './CanvasActor';
+import Actor from './Actor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
-import SelectionComponent from '../components/SelectionComponent';
-import DragComponent from '../components/DragComponent';
 import SpineComponent from '../components/SpineComponent';
 
-export default class SpineActor extends CanvasActor
+export default class SpineActor extends Actor
 {
   constructor(id) {
     super(id);
@@ -17,9 +15,7 @@ export default class SpineActor extends CanvasActor
 
     this.loaded = JsonPromise.load(this.url).then(info => {
       this.name = info.name;
-      this.addComponent(new PlaceHolderComponent(info.dimension));
-      this.addComponent(new SelectionComponent(info.dimension));
-      this.addComponent(new DragComponent(info.dimension));
+      this.addComponent('placeholder', new PlaceHolderComponent(info.dimension));
       return info;
     }).then(info => {
       let loader = new PIXI.loaders.Loader();
@@ -51,6 +47,14 @@ export default class SpineActor extends CanvasActor
   async getAnimations() {
     await this.loaded;
     return this.spineComponent.getAnimations();
+  }
+
+  
+  select() {
+    super.select();
+
+    // bring it to front
+    Editor.stage.addChild(this.spineComponent.container);
   }
 
   pod(detail) {

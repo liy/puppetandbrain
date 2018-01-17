@@ -70,6 +70,8 @@ export default class Actor extends EventEmitter
 
     Editor.off('game.prestart', this.gamePrestart);
     Editor.off('game.stop', this.gameStop);
+
+    this.brain.destroy();
   }
 
   gamePrestart() {
@@ -94,7 +96,7 @@ export default class Actor extends EventEmitter
 
   mouseDown(translateX, translateY, offset) {
     this.select();
-
+    
     this.offset = offset;
     this.position.x = translateX+this.offset.x;
     this.position.y = translateY+this.offset.y;
@@ -109,6 +111,7 @@ export default class Actor extends EventEmitter
       this._clicks = 0;
     }, 300)
     if(++this._clicks%2 == 0) {
+      console.log('!!')
       History.push(Commander.create('OpenGraph', this.brain.id).process());
     }
   }
@@ -177,17 +180,19 @@ export default class Actor extends EventEmitter
     let pod = {
       className: this.className,
       id: this.id,
-      x: this.position.x,
-      y: this.position.y,
-      scaleX: this.scale.x,
-      scaleY: this.scale.y,
+      position: {...this.position},
+      scale: {...this.scale},
+      rotation: this.rotation,
       name: this.name,
-      childActors: this.childActors.concat(),
       brainID: this.brain.id,
       components: this.components.map((name, component) => {
         return component.pod();
       })
     }
+
+    // FIXME: find a better way to handle saving
+    // if game still running, override pod with initial state
+    if(Editor.running) Object.assign(pod, this.initialState);
 
     if(detail) {
       pod.brain = this.brain.pod(detail);

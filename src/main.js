@@ -132,9 +132,9 @@ firebase.initializeApp(FIREBASE_CONFIG);
 document.getElementById('app-version').textContent = APP_VERSION;
 
 Editor.start();
-setTimeout(() => {
-  Editor.stop();
-}, 5000)
+// setTimeout(() => {
+//   Editor.stop();
+// }, 5000)
 
 async function load(activityID) {
   // TODO: get data from firestore
@@ -159,19 +159,19 @@ async function load(activityID) {
 
 
 function simpleInit() {
-  // Commander.create('CreateDemoActor').process();
+  Commander.create('CreateDemoActor').process();
 
-  // let promises = Editor.stage.actors.map(actor => {
-  //   return actor.loaded;
-  // })
-  // // start the activity when cow and donkey are loaded
-  // Promise.all(promises).then(() => {
-  //   new AddActorButton();
-  //   new DebugButton();
-  //   new BrainButton();
-  //   // serialize everything before game start
-  //   console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
-  // })
+  let promises = Editor.stage.actors.map(actor => {
+    return actor.loaded;
+  })
+  // start the activity when cow and donkey are loaded
+  Promise.all(promises).then(() => {
+    new AddActorButton();
+    new DebugButton();
+    new BrainButton();
+    // serialize everything before game start
+    console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
+  })
 }
 
 
