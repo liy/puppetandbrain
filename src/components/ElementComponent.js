@@ -32,13 +32,17 @@ export default class ElementComponent extends Component
   added() {
     document.getElementById('stage-overlayer').appendChild(this.element);
     this.element.addEventListener('mousedown', this.mouseDown)
-    this.element.addEventListener('mouseup', this.mouseUp)
+    this.element.addEventListener('mouseup', this.mouseUp);
+    this.element.addEventListener('mouseover', this.mouseOver)
+    this.element.addEventListener('mouseout', this.mouseOut)
   }
 
   removed() {
     document.getElementById('stage-overlayer').removeChild(this.element);
     this.element.removeEventListener('mousedown', this.mouseDown)
     this.element.removeEventListener('mouseup', this.mouseUp)
+    this.element.removeEventListener('mouseover', this.mouseOver)
+    this.element.removeEventListener('mouseout', this.mouseOut)
   }
 
   mouseDown(e) {

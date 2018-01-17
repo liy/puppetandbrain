@@ -16,6 +16,8 @@ export default class ContainerComponent extends Component
     Editor.stage.addChild(this.container);
     this.container.on('pointerdown', this.pointerDown, this);
     this.container.on('pointerup', this.pointerUp, this);
+    this.container.on('mouseover', this.mouseOver, this);
+    this.container.on('mouseout', this.mouseOut, this);
   }
 
   removed() {
@@ -38,6 +40,14 @@ export default class ContainerComponent extends Component
   pointerUp(e) {
     this.entity.mouseUp(e);
   }
+
+  mouseOver(e) {
+    this.entity.mouseOver(e);
+  }
+
+  mouseOut(e) {
+    this.entity.mouseOut(e);
+  } 
 
   updateTransform() {
     // I have no idea how to update pixi's matrix... so manual transform here. But it is 

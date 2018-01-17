@@ -124,11 +124,11 @@ export default class Actor extends EventEmitter
     if(this.moveCommand) History.push(this.moveCommand.processAndSave());
   }
 
-  mouseOver() {
-
+  mouseOver(e) {
+    
   }
 
-  mouseOut() {
+  mouseOut(e) {
 
   }
 

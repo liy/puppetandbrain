@@ -1,3 +1,4 @@
+const filters = require('pixi-filters');
 import JsonPromise from '../utils/JsonPromise';
 import Actor from './Actor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
@@ -7,6 +8,9 @@ export default class SpineActor extends Actor
 {
   constructor(id) {
     super(id);
+    
+    this.selectOutline = new filters.OutlineFilter(4, 0xc95ce8)
+    this.hoverOutline = new filters.OutlineFilter(3, 0xdbace8)
   }
 
   init(pod) {
@@ -48,13 +52,34 @@ export default class SpineActor extends Actor
     await this.loaded;
     return this.spineComponent.getAnimations();
   }
-
   
   select() {
     super.select();
 
+    this.spineComponent.container.filters = [this.selectOutline]
     // bring it to front
     Editor.stage.addChild(this.spineComponent.container);
+  }
+
+  deselect() {
+    super.deselect();
+    this.spineComponent.container.filters = [];
+  }
+
+  mouseOver() {
+    if(!this.selected && this.loaded) {
+      this.spineComponent.container.filters = [this.hoverOutline]
+    }
+  }
+
+  mouseOut() {
+    if(!this.selected) {
+      this.spineComponent.container.filters = []
+    }
+    else {
+      this.spineComponent.container.filters = [this.selectOutline]
+    }
+    
   }
 
   pod(detail) {

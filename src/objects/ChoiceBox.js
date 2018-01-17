@@ -1,3 +1,4 @@
+const filters = require('pixi-filters');
 import './ChoiceBox.scss';
 import Actor from "./Actor";
 import BoxComponent from "../components/BoxComponent";
@@ -7,6 +8,9 @@ export default class ChoiceBox extends Actor
 {
   constructor() {
     super();
+    
+    this.selectOutline = new filters.OutlineFilter(4, 0xc95ce8)
+    this.hoverOutline = new filters.OutlineFilter(3, 0xdbace8)
   }
 
   init(pod={}) {
@@ -30,8 +34,30 @@ export default class ChoiceBox extends Actor
   select() {
     super.select();
 
+    this.box.graphics.filters = [this.selectOutline]
     // bring it to front
     Editor.stage.addChild(this.box.container);
+  }
+
+  deselect() {
+    super.deselect();
+    this.box.graphics.filters = [];
+  }
+
+  mouseOver(e) {
+    if(!this.selected) {
+      this.box.graphics.filters = [this.hoverOutline]
+    }
+  }
+
+  mouseOut(e) {
+    if(!this.selected) {
+      this.box.graphics.filters = []
+    }
+    else {
+      this.box.graphics.filters = [this.selectOutline]
+    }
+    
   }
 
   set color(c) {

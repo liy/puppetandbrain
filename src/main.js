@@ -1,86 +1,6 @@
 // FIXME: for testing 
 // Needs to be removed quite soon!!
-require('pixi-spine');
-require('./assets/cow/cow.atlas')
-require('./assets/cow/cow.png')
-require('./assets/cow/cow2.png')
-require('./assets/cow/cow3.png')
-require('./assets/cow/cow.json')
-require('./assets/cow/walk-interact-cow-1.mp3')
-require('./assets/cow/cow-walk.mp3')
-require('./assets/cow/attention-cow-2.mp3')
-require('./assets/cow/attention-cow-1.mp3')
-require('./assets/cow/walk-interact-cow-2.mp3')
-
-require('./assets/donkey/donkey.atlas')
-require('./assets/donkey/donkey.png')
-require('./assets/donkey/donkey2.png')
-require('./assets/donkey/donkey.json')
-require('./assets/donkey/walk-interact-donkey-1.mp3')
-require('./assets/donkey/donkey-walk.mp3')
-require('./assets/donkey/attention-donkey-1.mp3')
-require('./assets/donkey/walk-interact-donkey-2.mp3')
-
-require('./assets/chicken/chicken.atlas')
-require('./assets/chicken/chicken.png')
-require('./assets/chicken/chicken2.png')
-require('./assets/chicken/chicken.json')
-require('./assets/chicken/attention-chicken-2.mp3')
-require('./assets/chicken/chicken-walk.mp3')
-require('./assets/chicken/walk-chicken-1.mp3')
-require('./assets/chicken/walk-chicken-2.mp3')
-require('./assets/chicken/walk-chicken-3.mp3')
-require('./assets/chicken/attention-chicken-1.mp3')
-
-require('./assets/horse/horse.atlas')
-require('./assets/horse/horse.png')
-require('./assets/horse/horse2.png')
-require('./assets/horse/horse.json')
-require('./assets/horse/horse-walk.mp3')
-require('./assets/horse/walk-horse-1.mp3')
-require('./assets/horse/walk-horse-2.mp3')
-require('./assets/horse/walk-interact-horse-1.mp3')
-require('./assets/horse/walk-interact-horse-2.mp3')
-require('./assets/horse/attention-horse.mp3')
-require('./assets/horse/attention-horse-1.mp3')
-
-require('./assets/pig/pig.atlas')
-require('./assets/pig/pig.png')
-require('./assets/pig/pig2.png')
-require('./assets/pig/pig.json')
-require('./assets/pig/attention-pig-1.mp3')
-require('./assets/pig/pig-walk.mp3')
-require('./assets/pig/walk-interact-pig-1.mp3')
-require('./assets/pig/walk-interact-pig-2.mp3')
-require('./assets/pig/attention-pig.mp3')
-
-require('./assets/sheep/sheep.atlas')
-require('./assets/sheep/sheep.png')
-require('./assets/sheep/sheep2.png')
-require('./assets/sheep/sheep.json')
-require('./assets/sheep/attention-sheep-2.mp3')
-require('./assets/sheep/sheep-walk.mp3')
-require('./assets/sheep/walk-interact-sheep-1.mp3')
-require('./assets/sheep/walk-interact-sheep-2.mp3')
-require('./assets/sheep/attention-sheep-1.mp3')
-
-require('./assets/duck/duck.atlas')
-require('./assets/duck/duck.json')
-require('./assets/duck/duck.png')
-require('./assets/duck/duck2.png')
-require('./assets/duck/duck-walk.mp3')
-require('./assets/duck/walk-interact-duck-1.mp3')
-require('./assets/duck/walk-interact-duck-2.mp3')
-require('./assets/duck/attention-duck-1.mp3')
-
-require('./assets/goat/goat.json')
-require('./assets/goat/goat.png')
-require('./assets/goat/goat2.png')
-require('./assets/goat/goat-walk.mp3')
-require('./assets/goat/walk-interact-goat-1.mp3')
-require('./assets/goat/walk-interact-goat-2.mp3')
-require('./assets/goat/attention-goat-1.mp3')
-require('./assets/goat/goat.atlas')
+// 
 
 require('./assets/cat/cat.json')
 require('./assets/cat/cat.png')
@@ -95,10 +15,6 @@ require('./assets/mice/mice.atlas')
 require('./assets/sounds/Jambalaya Loop.mp3')
 require('./assets/sounds/Jambalaya Loop.ogg')
 
-
-
-
-
 // favicons
 require("./assets/favicon-192.png")
 require('./manifest.json')
@@ -107,6 +23,7 @@ require('./manifest.json')
 require('./main.scss')
 
 // LookUp is a global window variable, save typing!
+import 'pixi-spine';
 import './NodeTemplate';
 require('./LookUp');
 require('./nodes/NodeFactory');

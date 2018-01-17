@@ -1,4 +1,3 @@
-const filters = require('pixi-filters');
 
 import Component from './Component';
 import ActorSelection from '../objects/ActorSelection';
