@@ -281,6 +281,8 @@ import ChoiceBox from './objects/ChoiceBox';
 // Stage.addActor(actor);
 let box = new ChoiceBox();
 box.init();
+box.x = 400;
+box.y = 600;
 Stage.addActor(box);
 
 document.addEventListener('mousedown', e => {

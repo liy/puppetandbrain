@@ -13,6 +13,7 @@ export default class ElementComponent extends Component
     this.mouseOut = this.mouseOut.bind(this);
 
     this.element = document.createElement('div');
+    this.element.className = 'element-component';
 
     // local transform
     this.position = {
@@ -44,8 +45,8 @@ export default class ElementComponent extends Component
     let rect = this.element.getBoundingClientRect();
     // FXIME: calculate the offset correctly
     let offset = {
-      x: rect.left - e.clientX,
-      y: rect.top - e.clientY
+      x: rect.left - e.clientX - this.position.x,
+      y: rect.top - e.clientY - this.position.y
     }
     this.entity.mouseDown(e.clientX, e.clientY, offset);
   }

@@ -1,0 +1,27 @@
+.box-component {
+  display: flex;
+  flex-direction: column;
+
+  // background-color: rgba(215, 223, 250, 0.664);
+
+  .image {
+    flex-grow: 2;
+    margin-top: 10px;
+  }
+
+  .box-component-label {
+    color: rgba(0, 0, 0, 1);
+    outline: none;
+    overflow: hidden;
+    // align-items: center;
+  }
+  
+  .box-component-label:empty:before {
+    font-weight: 300;
+    content: attr(placeholder);
+    display: block; /* For Firefox */
+    color: rgb(175, 175, 175);
+    cursor: text;
+  }
+}
+

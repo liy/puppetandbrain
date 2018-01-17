@@ -1,5 +1,6 @@
+import './ChoiceBox.scss';
 import Actor from "./Actor";
-import TextComponent from "../components/TextComponent";
+import BoxComponent from "../components/BoxComponent";
 import GraphicsComponent from "../components/GraphicsComponent";
 
 export default class ChoiceBox extends Actor
@@ -8,14 +9,33 @@ export default class ChoiceBox extends Actor
     super();
   }
 
-  init(pod) {
+  init(pod={}) {
     super.init(pod);
 
-    this.addComponent('label', new TextComponent());
-    this.graphics = this.addComponent('box', new GraphicsComponent()).graphics;
 
-    this.graphics.beginFill(0xFF9900, 1);
-    this.graphics.drawRect(0, 0, 100, 100);
-    this.graphics.endFill();
+    this.width = pod.width || 200;
+    this.height = pod.height || 200;
+    this.padding = pod.padding || 10;
+
+    let boxWidth = this.width-this.padding*2;
+    let boxHeight = this.height-this.padding*2;
+
+    this.content = this.addComponent('content', new BoxComponent(boxWidth, boxHeight));
+    this.content.position.x = -boxWidth/2;
+    this.content.position.y = -boxHeight/2;
+
+    this.box = this.addComponent('box', new GraphicsComponent());
+    this.color = 0xFFFFFF;
+  }
+
+  set color(c) {
+    this._color = c;
+    this.box.graphics.beginFill(this.color, 1);
+    this.box.graphics.drawRoundedRect (-this.width/2, -this.height/2, this.width, this.width, 10);
+    this.box.graphics.endFill();
+  }
+
+  get color() {
+    return this._color;
   }
 } 
