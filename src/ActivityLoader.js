@@ -1,16 +1,10 @@
 import JsonPromise from './utils/JsonPromise';
-import * as nodes from './nodes'
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import Variable from './data/Variable';
 import ActorVariable from './data/ActorVariable';
 import DataType from './data/DataType';
-
-const scope = {
-  ...nodes,
-  SpineActor,
-  SpriteActor,
-}
+import * as ObjecClasses from './objects';
 
 export default class ActivityLoader
 {
@@ -34,23 +28,14 @@ export default class ActivityLoader
 
   createActors(pod) {
     let promises = [];
-    // Handles nested actors.
-    var add = function(container, actorPod) {
-      let actor = new scope[actorPod.className](actorPod.id);
-      actor.init(actorPod);
-      container.addActor(actor);
-      promises.push(actor.loaded);
-
-      for(let i=0; i<actorPod.childActors.length; ++i) {
-        let childID = actorPod.childActors[i];
-        let childData = actorPod.store[childID];
-        add(actor, childData)
-      }
-    }
 
     for(let id of pod.stage) {
       let actorPod = pod.store[id];
-      add(Editor.stage, actorPod)
+
+      let actor = new ObjecClasses[actorPod.className](actorPod.id);
+      actor.init(actorPod);
+      Editor.stage.addActor(actor);
+      promises.push(actor.loaded);
     }
 
     return Promise.all(promises);

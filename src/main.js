@@ -159,11 +159,12 @@ async function load(activityID) {
 
 
 function simpleInit() {
-  Commander.create('CreateDemoActor').process();
 
   let promises = Editor.stage.actors.map(actor => {
     return actor.loaded;
   })
+  promises.push(Commander.create('CreateDemoActor').process())
+  
   // start the activity when cow and donkey are loaded
   Promise.all(promises).then(() => {
     new AddActorButton();
@@ -229,8 +230,8 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-import ChoiceBox from './objects/ChoiceBox';
+// import ChoiceBox from './objects/ChoiceBox';
 
-let cb = new ChoiceBox();
-cb.init();
-Editor.stage.addActor(cb)
+// let cb = new ChoiceBox();
+// cb.init();
+// Editor.stage.addActor(cb)

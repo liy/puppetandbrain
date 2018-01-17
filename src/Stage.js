@@ -15,13 +15,13 @@ export default class Stage
 
 
     // For deselection
-    // let catcher = new PIXI.Graphics();
-    // catcher.interactive = true;
-    // catcher.beginFill(0, 0);
-    // catcher.drawRect(0, 0, width, height);
-    // catcher.endFill();
-    // this.addChild(catcher);
-    // catcher.on('mousedown', ActorSelection.deselectAll.bind(ActorSelection));
+    let catcher = new PIXI.Graphics();
+    catcher.interactive = true;
+    catcher.beginFill(0, 0);
+    catcher.drawRect(0, 0, width, height);
+    catcher.endFill();
+    this.addChild(catcher);
+    catcher.on('mousedown', ActorSelection.deselectAll.bind(ActorSelection));
   }
 
   updateTransform() {
