@@ -46,13 +46,7 @@ export default class ElementComponent extends Component
   }
 
   mouseDown(e) {
-    let rect = this.element.getBoundingClientRect();
-    // FXIME: calculate the offset correctly
-    let offset = {
-      x: rect.left - e.clientX - this.position.x,
-      y: rect.top - e.clientY - this.position.y
-    }
-    this.entity.mouseDown(e.clientX, e.clientY, offset);
+    this.entity.mouseDown(e.clientX, e.clientY);
   }
 
   mouseUp(e) {
@@ -73,12 +67,14 @@ export default class ElementComponent extends Component
     this.matrix.rotate(this.rotation);
     this.matrix.scale(this.scale.x, this.scale.y);
     this.matrix.translate(this.position.x, this.position.y);
+    // centre the element
+    this.matrix.translate(-this.element.offsetWidth/2, -this.element.offsetHeight/2)
 
     this.matrix.prepend(this.entity.matrix);
 
     // No idea why css set transform origin to 0.5 by default
     this.element.style.transformOrigin = '0 0';
-    this.element.style.transform = this.matrix.toCss();
+    this.element.style.transform = `${this.matrix.toCss()}`;
   }
 
   focus() {

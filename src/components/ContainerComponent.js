@@ -27,14 +27,8 @@ export default class ContainerComponent extends Component
   }
 
   pointerDown(e) {
-    this.data = e.data;
-    let p = this.data.getLocalPosition(this.container.parent)
-    let offset = {
-      x: (this.container.x - p.x),
-      y: (this.container.y - p.y)
-    }
-    
-    this.entity.mouseDown(p.x, p.y, offset);
+    let p = e.data.getLocalPosition(this.container.parent)
+    this.entity.mouseDown(p.x, p.y);
   }
 
   pointerUp(e) {

@@ -92,13 +92,14 @@ export default class Actor extends EventEmitter
     }
   }
 
-  mouseDown(translateX, translateY, offset) {
+  mouseDown(mouseX, mouseY) {
     this.select();
 
-    this.offset = offset;
-    this.position.x = translateX+this.offset.x;
-    this.position.y = translateY+this.offset.y;
-    
+    this.offset = {
+      x: this.position.x - mouseX,
+      y: this.position.y - mouseY
+    }
+
     // crete move command, when move update it with new position
     if(!Editor.playing) this.moveCommand = Commander.create('MoveActor', this);
 

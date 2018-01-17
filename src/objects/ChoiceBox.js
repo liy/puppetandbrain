@@ -24,8 +24,6 @@ export default class ChoiceBox extends Actor
     let boxHeight = this.height-this.padding*2;
 
     this.content = this.addComponent('content', new BoxComponent(boxWidth, boxHeight));
-    this.content.position.x = -boxWidth/2;
-    this.content.position.y = -boxHeight/2;
 
     this.box = this.addComponent('box', new GraphicsComponent());
     this.color = 0xFFFFFF;
