@@ -6,8 +6,8 @@ import GraphicsComponent from "../components/GraphicsComponent";
 
 export default class ChoiceBox extends Actor
 {
-  constructor() {
-    super();
+  constructor(id) {
+    super(id);
     
     this.selectOutline = new filters.OutlineFilter(4, 0xc95ce8)
     this.hoverOutline = new filters.OutlineFilter(3, 0xdbace8)
