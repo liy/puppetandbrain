@@ -1,7 +1,7 @@
 import Command from './Command';
 import Variable from '../data/Variable';
 import DataType from '../data/DataType';
-import PropertyController from '../graph/elements/PropertyController';
+import ElementController from '../graph/elements/ElementController';
 
 export default class DeleteVariable extends Command
 {
@@ -136,7 +136,7 @@ export default class DeleteVariable extends Command
     BrainGraph.refresh();
 
     // as variable list has order, easiest way is refresh the whole panel.
-    PropertyController.refresh();
+    ElementController.refresh();
   }
 
   redo() {

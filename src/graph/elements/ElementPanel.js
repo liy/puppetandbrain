@@ -1,4 +1,4 @@
-import './PropertyPanel.scss';
+import './ElementPanel.scss';
 
 import CreateGenericButton from './CreateGenericButton';
 import CreateListButton from './CreateListButton';

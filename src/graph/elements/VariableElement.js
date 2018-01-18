@@ -1,6 +1,6 @@
 import BaseElement from './BaseElement';
 import NameField from './NameField';
-import PropertyController from './PropertyController';
+import ElementController from './ElementController';
 
 export default class extends BaseElement
 {

@@ -1,6 +1,6 @@
 import DataType from "../../data/DataType";
 import ArrayMap from "../../utils/ArrayMap";
-import PropertyPanel from './PropertyPanel';
+import ElementPanel from './ElementPanel';
 
 import GenericElement from './GenericElement';
 import ListElement from './ListElement';
@@ -10,7 +10,7 @@ import ColorElement from './ColorElement';
 import ActorElement from './ActorElement';
 import { nextFrame } from "../../utils/utils";
 
-class PropertyController
+class ElementController
 {
   constructor() {
     this.add = this.add.bind(this);
@@ -18,7 +18,7 @@ class PropertyController
   }
 
   init() {
-    this.panel = new PropertyPanel();
+    this.panel = new ElementPanel();
   }
   
   open(brain) {
@@ -106,4 +106,4 @@ class PropertyController
   }
 }
 
-export default new PropertyController();
+export default new ElementController();

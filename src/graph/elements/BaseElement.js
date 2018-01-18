@@ -1,6 +1,6 @@
 import './BaseElement.scss'
 import NameField from './NameField';
-import PropertyController from './PropertyController';
+import ElementController from './ElementController';
 
 export default class 
 {
@@ -23,7 +23,7 @@ export default class
   }
 
   onSelect(e) {
-    PropertyController.select(this);
+    ElementController.select(this);
   }
 
   select() {

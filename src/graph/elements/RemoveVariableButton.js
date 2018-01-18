@@ -1,7 +1,7 @@
 import ElementControlButton from './ElementControlButton';
 import BinIcon from '../../assets/bin.svg';
 import { svgElement } from '../../utils/utils';
-import PropertyController from './PropertyController'
+import ElementController from './ElementController'
 
 export default class extends ElementControlButton
 {
@@ -10,14 +10,14 @@ export default class extends ElementControlButton
   }
 
   pointerDown(e) {
-    if(PropertyController.selected.variable.inUse) {
+    if(ElementController.selected.variable.inUse) {
       let confirm = window.confirm('Variable is in use, do you really want to delete the varaible and its getters and setters?');
       if(confirm) {
-        History.push(Commander.create('DeleteVariable', PropertyController.selected.variable.id, BrainGraph.brain.id).processAndSave())
+        History.push(Commander.create('DeleteVariable', ElementController.selected.variable.id, BrainGraph.brain.id).processAndSave())
       }
     }
     else {
-      History.push(Commander.create('DeleteVariable', PropertyController.selected.variable.id, BrainGraph.brain.id).processAndSave())
+      History.push(Commander.create('DeleteVariable', ElementController.selected.variable.id, BrainGraph.brain.id).processAndSave())
     }
   }
 }
