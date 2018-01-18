@@ -1,11 +1,17 @@
-import './TextComponent.scss'
+import './ElementComponent.scss'
 import Component from "./Component";
 import Matrix from '../math/Matrix';
 
+const stageOverlayer = document.getElementById('stage-overlayer')
+
 export default class ElementComponent extends Component
 {
-  constructor() {
+  constructor(width, height) {
     super();
+
+
+    this.width = width;
+    this.height = height;
 
     this.mouseDown = this.mouseDown.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
@@ -27,18 +33,25 @@ export default class ElementComponent extends Component
     this.rotation = 0;
 
     this.matrix = new Matrix();
+
+    // FIXME: not sure why this works....
+    // hack to make sure it is not flickering
+    // I know it is strange to have the element here.
+    // but it removes flickering issue when created
+    this.element.style.opacity = 0;
+    stageOverlayer.appendChild(this.element);
   }
 
-  added() {
-    document.getElementById('stage-overlayer').appendChild(this.element);
+  onStage() {
+    this.element.style.opacity = 1;
     this.element.addEventListener('mousedown', this.mouseDown)
     this.element.addEventListener('mouseup', this.mouseUp);
     this.element.addEventListener('mouseover', this.mouseOver)
     this.element.addEventListener('mouseout', this.mouseOut)
   }
 
-  removed() {
-    document.getElementById('stage-overlayer').removeChild(this.element);
+  offStage() {
+    stageOverlayer.removeChild(this.element);
     this.element.removeEventListener('mousedown', this.mouseDown)
     this.element.removeEventListener('mouseup', this.mouseUp)
     this.element.removeEventListener('mouseover', this.mouseOver)
@@ -67,13 +80,12 @@ export default class ElementComponent extends Component
     this.matrix.rotate(this.rotation);
     this.matrix.scale(this.scale.x, this.scale.y);
     this.matrix.translate(this.position.x, this.position.y);
-    // centre the element
+    // centre the element to its origin
     this.matrix.translate(-this.element.offsetWidth/2, -this.element.offsetHeight/2)
 
     this.matrix.prepend(this.entity.matrix);
 
-    // No idea why css set transform origin to 0.5 by default
-    this.element.style.transformOrigin = '0 0';
+
     this.element.style.transform = `${this.matrix.toCss()}`;
   }
 

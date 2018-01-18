@@ -21,7 +21,7 @@ export default class Actor extends EventEmitter
     this.selected = false;
     this._clicks = 0;
 
-    this.name = 'Actor ' + this.id;
+    this.name = this.className;
 
     // transform for the components
     // also be able to manipulate in the node graph property.
@@ -36,6 +36,7 @@ export default class Actor extends EventEmitter
       y: 1
     }
     this.matrix = new Matrix();
+
 
     // release outside
     document.addEventListener('mouseup', this.relaseOutside);
@@ -53,6 +54,8 @@ export default class Actor extends EventEmitter
     this.position = pod.position || {x:0,y:0};
     this.rotation = pod.rotation || 0;
     this.scale = pod.scale || {x:1,y:1}
+
+    // this.rotation = Math.PI/6;
 
     // Create empty brain but with exisitng ID if there is one.
     // in the future I might allow actors to sharing same brain.
@@ -151,8 +154,8 @@ export default class Actor extends EventEmitter
 
   updateTransform() {
     this.matrix.identity();
-    this.matrix.rotate(this.rotation)
     this.matrix.scale(this.scale.x, this.scale.y);
+    this.matrix.rotate(this.rotation)
     this.matrix.translate(this.position.x, this.position.y);
 
     for(let component of this.components) {

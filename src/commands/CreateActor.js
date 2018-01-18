@@ -19,8 +19,10 @@ export default class CreateActor extends Command
         x: 0.5,
         y: 0.5
       },
-      x: Math.random() * Editor.stage.stageWidth,
-      y: Math.random() * Editor.stage.stageHeight,
+      position: {
+        x: Math.random() * Editor.stage.stageWidth,
+        y: Math.random() * Editor.stage.stageHeight,
+      }
     })
     Editor.stage.addActor(actor)
 

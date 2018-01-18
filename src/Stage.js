@@ -7,6 +7,8 @@ export default class Stage
     this.actors = new ArrayMap();
 
     this.container = new PIXI.Container();
+
+    this.backStage = [];
   }
 
   init(width, height) {
@@ -31,11 +33,18 @@ export default class Stage
   }
 
   addActor(actor) {
+    // call update transform immeditately
+    // so it is up to date with the transform even without waiting
+    // for the next updateTransform() call
+    actor.updateTransform();
     this.actors.set(actor.id, actor);
+    actor.onStage();
   }
 
   removeActor(actor) {
     this.actors.remove(actor.id);
+    actor.offStage();
+    actor.destroy();
   }
 
   addChild(child) {

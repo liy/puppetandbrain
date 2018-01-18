@@ -29,6 +29,18 @@ export default class Entity
     return component;
   }
 
+  onStage() {
+    for(let component of this.components) {
+      component.onStage();
+    }
+  }
+
+  offStage() {
+    for(let component of this.components) {
+      component.offStage();
+    }
+  }
+
   getComponent(name) {
     return this.components.get(name);
   }

@@ -4,7 +4,7 @@ import ElementComponent from "./ElementComponent";
 export default class BoxComponent extends ElementComponent
 {
   constructor(width, height, text='test') {
-    super();
+    super(width, height);
 
     this.element.classList.add('box-component');
     this.element.style.width = `${width}px`;
@@ -12,7 +12,7 @@ export default class BoxComponent extends ElementComponent
 
     this.image = document.createElement('div')
     this.image.className = 'image';
-    this.image.style.backgroundImage = `url(https://cataas.com/cat?width=80)`
+    this.image.style.backgroundImage = `url(${require('!file-loader!../assets/icons/dots.svg')})`
     this.image.style.backgroundRepeat = 'no-repeat';
     this.image.style.backgroundPosition = 'center';
     this.image.style.backgroundSize = 'contain';

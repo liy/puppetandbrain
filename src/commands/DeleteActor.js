@@ -13,7 +13,7 @@ export default class DeleteActor extends Command
     let actor = LookUp.get(this.actorID);
     this.pod = actor.pod(true);
 
-    actor.getComponent('SelectionComponent').deselect(actor)
+    actor.deselect()
 
     actor.destroy();
     Editor.stage.removeActor(actor);

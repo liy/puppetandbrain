@@ -76,7 +76,6 @@ async function load(activityID) {
 
 
 function simpleInit() {
-
   let promises = Editor.stage.actors.map(actor => {
     return actor.loaded;
   })
@@ -84,6 +83,14 @@ function simpleInit() {
   
   // start the activity when cow and donkey are loaded
   Promise.all(promises).then(() => {
+
+    
+let cb = new ChoiceBox();
+cb.init();
+cb.x = 600;
+cb.y = 300;
+Editor.stage.addActor(cb)
+
     new AddActorButton();
     new DebugButton();
     new BrainButton();
@@ -147,8 +154,5 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-// import ChoiceBox from './objects/ChoiceBox';
+import ChoiceBox from './objects/ChoiceBox';
 
-// let cb = new ChoiceBox();
-// cb.init();
-// Editor.stage.addActor(cb)

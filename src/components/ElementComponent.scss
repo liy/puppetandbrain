@@ -1,0 +1,10 @@
+.element-component {
+  position: absolute;
+
+  // pixi use 0,0 as anchor,
+  // css transform use 50% 50% by default...
+  // just need to make them all agree a number
+  transform-origin: 0 0;
+
+  // background-color: rgba(215, 223, 250, 0.664);
+}

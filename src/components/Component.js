@@ -13,6 +13,14 @@ export default class Component
 
   }
 
+  onStage() {
+
+  }
+
+  offStage() {
+    
+  }
+
   updateTransform() {
     
   }
