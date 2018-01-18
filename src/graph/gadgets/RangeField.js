@@ -9,6 +9,8 @@ export default class extends Gadget
     this.element.classList.add('range-field');
 
     this.barSvg = new DOMParser().parseFromString(require('!raw-loader!../../assets/bar.svg'), "image/svg+xml").rootElement;
+    this.barSvg.setAttribute('width', 91)
+    this.barSvg.setAttribute('height', 26)
     this.element.appendChild(this.barSvg);
 
     this.line = this.element.querySelector('#line');
@@ -16,6 +18,7 @@ export default class extends Gadget
     this.rangeSpan = document.createElement('div');
     this.rangeSpan.className = 'range-text';
     this.element.appendChild(this.rangeSpan);
+    this.rangeSpan.contentEditable = true;
 
     this.lastX = 0;
 
@@ -42,7 +45,7 @@ export default class extends Gadget
   }
 
   onDown(e) {
-    e.stopPropagation();
+    // e.stopPropagation();
     document.addEventListener('mousemove', this.onDrag);
     document.addEventListener('touchmove', this.onDrag);
     
@@ -56,6 +59,8 @@ export default class extends Gadget
   }
 
   onDrag(e) {
+    e.stopPropagation();
+    
     let x = e.clientX ? e.clientX : e.changedTouches[0].clientX;
     let inc = (this.max-this.min)/100;
     let sign = Math.sign(x - this.lastX);

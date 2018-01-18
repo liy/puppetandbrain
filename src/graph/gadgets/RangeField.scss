@@ -1,10 +1,12 @@
 .range-field {
   position: relative;
-  width: 80px;
-  height: 20px;
+  min-width: 91px;
+  height: 26px;
   text-align: center;
   user-select: none;  
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+  // background-color: aqua;
 
   .range-text {
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -16,23 +18,18 @@
     outline: none;
     background-color: transparent;
 
-    width: 80px;
+    width: 91px;
 
     // combine with parent postion:relative. vertical centre the text
     position: absolute;
-    line-height: 20px;
-    height: 20px;
+    line-height: 26px;
+    height: 26px;
     top: 0;
 
-    pointer-events: none;
+    // pointer-events: none;
   }
 
   svg {
-    width: 70px;
-    height: 20px;
-    margin-left: 3px;
-    margin-right: 7px;
-
     cursor: pointer;
   }
 }

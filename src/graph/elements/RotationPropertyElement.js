@@ -1,7 +1,7 @@
 import PropertyElement from './PropertyElement';
 import RotationIcon from '../../assets/rotation-icon.svg';
-import { svgElement } from '../../utils/utils';
-import ValueField from './ValueField';
+import { svgElement, toDegree, toRadian } from '../../utils/utils';
+import RangeField from '../gadgets/RangeField';
 
 export default class extends PropertyElement
 {
@@ -11,11 +11,11 @@ export default class extends PropertyElement
     let svg = svgElement(RotationIcon,{width:18, height:18});
     this.icon.appendChild(svg);
 
-    this.valueField = new ValueField(actor.rotation);
-    this.content.appendChild(this.valueField.element);
+    this.rangeField = new RangeField({value:actor.rotation*toDegree, min:-360, max:360, decimalPlaces:0});
+    this.content.appendChild(this.rangeField.element);
 
-    this.valueField.on('gadget.state.change', value => {
-      actor.rotation = Number(value);
+    this.rangeField.on('gadget.state.change', value => {
+      actor.rotation = Number(value)*toRadian;
     })
   }
 
