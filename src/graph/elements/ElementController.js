@@ -2,6 +2,10 @@ import DataType from "../../data/DataType";
 import ArrayMap from "../../utils/ArrayMap";
 import ElementPanel from './ElementPanel';
 
+import PositionPropertyElement from './PositionPropertyElement';
+import SizePropertyElement from './SizePropertyElement';
+import RotationPropertyElement from './RotationPropertyElement';
+
 import GenericElement from './GenericElement';
 import ListElement from './ListElement';
 import MapElement from './MapElement';
@@ -28,9 +32,12 @@ class ElementController
 
     this.elements = new ArrayMap();
 
+    this.addProperties();
+
     for(let variable of this.brain.variables) {
       this.add(variable, false);
     }
+
     
     this.brain.variables.on('variable.added', this.add)
     this.brain.variables.on('variable.removed', this.remove)
@@ -90,6 +97,22 @@ class ElementController
     }
   }
 
+  addProperties() {
+    let actor = this.brain.owner;
+
+    let positionElement = new PositionPropertyElement(this.brain.owner);
+    this.panel.append(positionElement.element);
+    this.elements.set('posiiton', positionElement);
+
+    let sizeElement = new SizePropertyElement(this.brain.owner);
+    this.panel.append(sizeElement.element);
+    this.elements.set('size', sizeElement);
+
+    let rotationElement = new RotationPropertyElement(this.brain.owner);
+    this.panel.append(rotationElement.element);
+    this.elements.set('rotation', rotationElement);
+  }
+
   remove({variable, index}) {
     this.panel.remove(this.elements.get(variable.id).element);
     this.elements.remove(variable.id)
@@ -100,6 +123,9 @@ class ElementController
 
   refresh() {
     this.panel.clear();
+
+    this.addProperties();
+
     for(let variable of this.brain.variables) {
       this.add(variable);
     }

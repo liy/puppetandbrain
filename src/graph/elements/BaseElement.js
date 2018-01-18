@@ -4,7 +4,7 @@ import ElementController from './ElementController';
 
 export default class 
 {
-  constructor(variable) {
+  constructor() {
     this.element = document.createElement('div');
     this.element.className = 'base-element';
     
