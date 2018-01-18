@@ -1,7 +1,6 @@
 import EventEmitter from "../utils/EventEmitter";
 import ArrayMap from "../utils/ArrayMap";
 import Variable from './Variable';
-import ActorVariable from './ActorVariable';
 import DataType from "./DataType";
 
 export default class VariableList extends EventEmitter
@@ -15,7 +14,7 @@ export default class VariableList extends EventEmitter
   }
 
   create(variablePod) {
-    let variable = (variablePod.type == DataType.ACTOR) ? new ActorVariable(variablePod.id) : new Variable(variablePod.id);
+    let variable = new Variable(variablePod.id);
     variable.init(variablePod);
     this.add(variable);
     return variable;

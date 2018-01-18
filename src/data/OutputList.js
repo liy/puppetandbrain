@@ -22,6 +22,8 @@ export default class OutputList extends EventEmitter
   }
 
   destroy() {
+    // clear all listeners
+    this.clear();
     // FIXME: how to destroy? what means of destroy a output list?
     // probably because you are destroy the whole node?
     Editor.off('game.stop', this.clearValues);

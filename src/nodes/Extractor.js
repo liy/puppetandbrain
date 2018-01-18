@@ -32,10 +32,23 @@ export default class Extractor extends Node
       for(let outputPod of pod.outputs) {
         this.outputs.assignProperty(outputPod.name, {
           get: () => {
-            return pointer.value[outputPod.name]
+            // note that extractor does not care whether input is a reference
+            // or an id... it is better to contains the complexity here without requring
+            // other nodes to return certain type...
+            return LookUp.auto(pointer.value)[outputPod.name]
           }
         });
       }
     }
+
+    // as we added the listener after parent init, only user newly added output
+    // will trigger the listener
+    this.outputs.on('output.added', name => {
+      this.outputs.assignProperty(name, {
+        get: () => {
+          return LookUp.auto(pointer.value)[name]
+        }
+      });
+    });
   }
 }

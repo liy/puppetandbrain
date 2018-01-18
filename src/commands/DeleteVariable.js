@@ -1,6 +1,5 @@
 import Command from './Command';
 import Variable from '../data/Variable';
-import ActorVariable from '../data/ActorVariable';
 import DataType from '../data/DataType';
 import PropertyController from '../graph/elements/PropertyController';
 
@@ -53,7 +52,7 @@ export default class DeleteVariable extends Command
 
   undo() {
     // put back the variable first
-    let variable = (this.variablePod.type == DataType.ACTOR) ? new ActorVariable(this.variablePod.id) : new Variable(this.variablePod.id);
+    let variable = new Variable(this.variablePod.id);
     variable.init(this.variablePod);
     LookUp.get(this.brainID).variables.insert(variable, this.variableIndex);
 

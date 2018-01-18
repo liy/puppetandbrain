@@ -2,7 +2,6 @@ import JsonPromise from './utils/JsonPromise';
 import SpineActor from './objects/SpineActor';
 import SpriteActor from './objects/SpriteActor';
 import Variable from './data/Variable';
-import ActorVariable from './data/ActorVariable';
 import DataType from './data/DataType';
 import * as ObjecClasses from './objects';
 
@@ -45,7 +44,7 @@ export default class ActivityLoader
     // create all the variables first
     for(let id of pod.variables) {
       let variablePod = pod.store[id];
-      let variable = (variablePod.type == DataType.ACTOR) ? new ActorVariable(id) : new Variable(id);
+      let variable = new Variable(id);
       variable.init(variablePod);
       // put the variable into its brain
       let brain = LookUp.get(variablePod.brain);

@@ -28,13 +28,8 @@ export default class ExtractorBlock extends Block
   }
 
   addPinTrigger(name) {
-    let pointer = this.node.inputs.get('in');
-    // override the added output
-    this.node.outputs.assignProperty(name, {
-      get: () => {
-        return pointer.value[name]
-      }
-    });
+    // let node to deal with the detail output assignment
+    this.node.outputs.addOutput(name);
   }
 
   onOutputAdded(name) {
@@ -45,5 +40,8 @@ export default class ExtractorBlock extends Block
     this.body.addRight(this.addOutputPin);
 
     this.outputPins.set(name, pin);
+
+    // draw connections as the pins might moved
+    this.drawConnection();
   }
 }
