@@ -3,6 +3,8 @@ import './ChoiceBox.scss';
 import Actor from "./Actor";
 import BoxComponent from "../components/BoxComponent";
 import GraphicsComponent from "../components/GraphicsComponent";
+import DataType from '../data/DataType';
+import IconStore from '../ui/IconStore';
 
 export default class ChoiceBox extends Actor
 {
@@ -24,9 +26,27 @@ export default class ChoiceBox extends Actor
     let boxHeight = this.height-this.padding*2;
 
     this.content = this.addComponent('content', new BoxComponent(boxWidth, boxHeight));
-
     this.box = this.addComponent('box', new GraphicsComponent());
-    this.color = 0xFFFFFF;
+    
+    // just make code a little bit easier to read by define a properties field
+    // if it does not exist
+    pod.properties = pod.properties || {};
+    // setup properties
+    this.properties.add({
+      property: 'boxColor',
+      name: 'box color',
+      gadgetClass: 'ColorButton',
+      value: pod.properties.boxColor || 0xFFFFFF,
+      iconID: IconStore.COLOR
+    })
+    this.properties.add({
+      property: 'textColor',
+      name: 'text color',
+      gadgetClass: 'ColorButton',
+      value: pod.properties.textColor || 0x000000,
+      iconID: IconStore.COLOR
+    });
+    this.properties.add({property: 'image', value: require('!file-loader!../assets/icons/dots.svg')});
   }
 
   select() {
@@ -58,14 +78,30 @@ export default class ChoiceBox extends Actor
     
   }
 
-  set color(c) {
-    this._color = c;
-    this.box.graphics.beginFill(this.color, 1);
+  set boxColor(c) {
+    this._boxColor = c;
+    this.box.graphics.beginFill(this.boxColor, 1);
     this.box.graphics.drawRoundedRect (-this.width/2, -this.height/2, this.width, this.width, 10);
     this.box.graphics.endFill();
   }
 
-  get color() {
-    return this._color;
+  get boxColor() {
+    return this._boxColor;
+  }
+
+  set textColor(c) {
+    this.content.textColor = c;
+  }
+
+  get textColor() {
+    return this.content.textColor;
+  }
+
+  set image(url) {
+    this.content.imageUrl = url
+  }
+
+  get image() {
+    return this.content.imageUrl
   }
 } 

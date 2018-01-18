@@ -6,11 +6,14 @@ import Brain from '../nodes/Brain';
 import ActorSelection from './ActorSelection';
 import Variable from '../data/Variable';
 import Matrix from '../math/Matrix';
+import PropertyList from '../data/PropertyList';
 
 export default class Actor extends EventEmitter
 {
   constructor(id) {
     super();
+
+    this.properties = new PropertyList(this);
 
     // create an entry in the reference look up
     this.id = LookUp.addActor(this, id);
@@ -154,8 +157,8 @@ export default class Actor extends EventEmitter
 
   updateTransform() {
     this.matrix.identity();
-    this.matrix.scale(this.scale.x, this.scale.y);
     this.matrix.rotate(this.rotation)
+    this.matrix.scale(this.scale.x, this.scale.y);
     this.matrix.translate(this.position.x, this.position.y);
 
     for(let component of this.components) {
@@ -194,7 +197,8 @@ export default class Actor extends EventEmitter
       brainID: this.brain.id,
       components: this.components.map((name, component) => {
         return component.pod();
-      })
+      }),
+      properties: this.properties.pod(),
     }
 
     // FIXME: find a better way to handle saving

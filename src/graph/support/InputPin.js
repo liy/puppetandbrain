@@ -24,7 +24,7 @@ export default class extends DataPin
     let data = node.memory[this.name];
     switch(input.type) {
       case DataType.VEC2:
-        this.setGadget(new PositionField(data.x,data.y));
+        this.setGadget(new PositionField(data));
         break;
       case DataType.COLOR:
         this.setGadget(new ColorButton(data));

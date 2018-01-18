@@ -14,7 +14,7 @@ export default class extends VariableElement
     let svg = svgElement(PositionIcon,{width:10, height:16});
     this.icon.appendChild(svg);
 
-    this.positionField = new PositionField(this.variable.data.x, this.variable.data.y);
+    this.positionField = new PositionField(this.variable.data);
     this.content.appendChild(this.positionField.element);
 
     this.positionField.on('gadget.state.change', position => {

@@ -12,7 +12,6 @@ export default class BoxComponent extends ElementComponent
 
     this.image = document.createElement('div')
     this.image.className = 'image';
-    this.image.style.backgroundImage = `url(${require('!file-loader!../assets/icons/dots.svg')})`
     this.image.style.backgroundRepeat = 'no-repeat';
     this.image.style.backgroundPosition = 'center';
     this.image.style.backgroundSize = 'contain';
@@ -28,6 +27,8 @@ export default class BoxComponent extends ElementComponent
 
     this.onInput = this.onInput.bind(this);
     this.textElement.addEventListener('input', this.onInput);
+
+    this.textColor = 0x000000;
   }
   
   onInput(e) {
@@ -51,5 +52,23 @@ export default class BoxComponent extends ElementComponent
 
   get placeholder() {
     return this.textElement.getAttribute('placeholder');
+  }
+
+  set textColor(c) {
+    this._textColor = c;
+    this.textElement.style.color = `#${c.toString(16)}`
+  }
+
+  get textColor() {
+    return this._textColor;
+  }
+
+  set imageUrl(url) {
+    this._imageUrl = url;
+    this.image.style.backgroundImage = `url(${url})`
+  }
+
+  get imageUrl() {
+    return this._imageUrl;
   }
 }

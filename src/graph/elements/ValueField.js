@@ -1,7 +1,7 @@
 import './ValueField.scss'
 import InputField from '../gadgets/InputField';
-import {svgElement} from '../../utils/utils';
-import CrossIcon from '../../assets/cross.svg';
+// import {svgElement} from '../../utils/utils';
+// import CrossIcon from '../../assets/cross.svg';
 
 export default class extends InputField
 {
@@ -10,7 +10,7 @@ export default class extends InputField
 
     this.element.classList.add('value-field');
 
-    this.icon = svgElement(CrossIcon, {width:10, height:10});
-    this.element.appendChild(this.icon);
+    // this.icon = svgElement(CrossIcon, {width:10, height:10});
+    // this.element.appendChild(this.icon);
   }
 }

@@ -10,6 +10,6 @@ export default class extends Block
   init(node) {
     super.init(node);
     
-    this.inputPins.get('position').setGadget(new PositionField(0, 0));
+    this.inputPins.get('position').setGadget(new PositionField());
   }
 }

@@ -3,10 +3,6 @@ import InputPin from "../support/InputPin";
 import OutputPin from "../support/OutputPin";
 import ExecutionInPin from "../support/ExecutionInPin";
 import ExecutionOutPin from "../support/ExecutionOutPin";
-import DataType from "../../data/DataType";
-import PositionField from "../gadgets/PositionField";
-import ColorButton from "../gadgets/ColorButton";
-import ActorPicker from "../gadgets/ActorPicker";
 
 export default class SetterBlock extends Block
 {

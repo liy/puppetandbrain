@@ -1,23 +1,28 @@
 import PropertyElement from './PropertyElement';
 import DotIcon from '../../assets/dot.svg';
 import { svgElement } from '../../utils/utils';
-import ValueField from '../gadgets/ValueField';
+import ValueField from './ValueField';
+import * as GadgetClasses from '../gadgets';
+import IconStore from '../../ui/IconStore';
 
 export default class extends PropertyElement
 {
-  constructor(actor, propertyName) {
-    super(actor, propertyName);
+  constructor(actor, descriptor) {
+    super(actor, descriptor);
 
-    let svg = svgElement(DotIcon,{width:12, height:12});
-    this.svg.style.setProperty('--fill', '#d1bdff');
-    this.icon.appendChild(svg);
+    this.icon.appendChild(IconStore.get(descriptor.iconID));
 
-    this.valueField = new ValueField(actor[propertyName]);
-    this.content.appendChild(this.valueField.element);
-    this.valueField.icon.style.display = 'none';
+    let gadget = null;
+    if(descriptor.gadgetClass) {
+      gadget = new GadgetClasses[descriptor.gadgetClass](descriptor.value)
+    }
+    else {
+      gadget = new ValueField(descriptor.value)
+    }
+    this.content.appendChild(gadget.element);
 
-    this.valueField.on('gadget.state.change', value => {
-      actor[propertyName] = value;
+    gadget.on('gadget.state.change', value => {
+      actor[descriptor.property] = value;
     })
   }
 

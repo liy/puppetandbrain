@@ -5,6 +5,8 @@ import ElementPanel from './ElementPanel';
 import PositionPropertyElement from './PositionPropertyElement';
 import SizePropertyElement from './SizePropertyElement';
 import RotationPropertyElement from './RotationPropertyElement';
+import GenericPropertyElement from './GenericPropertyElement'
+import PanelSeperator from './PanelSeperator';
 
 import GenericElement from './GenericElement';
 import ListElement from './ListElement';
@@ -12,7 +14,7 @@ import MapElement from './MapElement';
 import PositionElement from './PositionElement';
 import ColorElement from './ColorElement';
 import ActorElement from './ActorElement';
-import { nextFrame } from "../../utils/utils";
+import { nextFrame, svgElement } from "../../utils/utils";
 
 class ElementController
 {
@@ -100,17 +102,27 @@ class ElementController
   addProperties() {
     let actor = this.brain.owner;
 
-    let positionElement = new PositionPropertyElement(this.brain.owner);
+    let positionElement = new PositionPropertyElement(actor);
     this.panel.append(positionElement.element);
     this.elements.set('posiiton', positionElement);
 
-    let sizeElement = new SizePropertyElement(this.brain.owner);
+    let sizeElement = new SizePropertyElement(actor);
     this.panel.append(sizeElement.element);
     this.elements.set('size', sizeElement);
 
-    let rotationElement = new RotationPropertyElement(this.brain.owner);
+    let rotationElement = new RotationPropertyElement(actor);
     this.panel.append(rotationElement.element);
     this.elements.set('rotation', rotationElement);
+
+    // extra properties if any
+    for(let descriptor of actor.properties) {
+      let propertyElement = new GenericPropertyElement(actor, descriptor);
+      this.panel.append(propertyElement.element);
+      this.elements.set(descriptor.property, propertyElement);
+    }
+
+    // seperator
+    this.panel.append(new PanelSeperator().element)
   }
 
   remove({variable, index}) {

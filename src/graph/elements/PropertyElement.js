@@ -3,7 +3,7 @@ import BaseElement from './BaseElement'
 
 export default class extends BaseElement
 {
-  constructor(actor, propertyName='property') {
+  constructor(actor, descriptor) {
     super();
 
     this.actor = actor;
@@ -12,7 +12,7 @@ export default class extends BaseElement
 
     this.label = document.createElement('span');
     this.label.className = 'property-name';
-    this.label.textContent = propertyName;
+    this.label.textContent = descriptor.name || descriptor.property;
     this.content.appendChild(this.label);
   }
 }

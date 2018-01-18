@@ -13,7 +13,6 @@ export default class extends VariableElement
 
     this.valueField = new ValueField(variable.data);
     this.content.appendChild(this.valueField.element);
-    this.valueField.icon.style.display = 'none';
 
     this.onValueChange = this.onValueChange.bind(this);
     this.valueField.input.addEventListener('change', this.onValueChange);

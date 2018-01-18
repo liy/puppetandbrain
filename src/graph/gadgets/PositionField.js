@@ -7,7 +7,7 @@ import {svgElement} from '../../utils/utils';
 
 export default class extends Gadget
 {
-  constructor(x, y) {
+  constructor(position={x:0,y:0}) {
     super();
     this.element.classList.add('position-field');
 
@@ -16,7 +16,7 @@ export default class extends Gadget
     this.xSpan.textContent = 'x'
     this.element.appendChild(this.xSpan);
 
-    this.xInputField = new InputField(x)
+    this.xInputField = new InputField(position.x)
     this.xInputField.input.type = 'number'
     this.element.appendChild(this.xInputField.element);
 
@@ -25,10 +25,10 @@ export default class extends Gadget
     this.ySpan.textContent = 'y'
     this.element.appendChild(this.ySpan);
 
-    this.yInputField = new InputField(y);
+    this.yInputField = new InputField(position.y);
     this.yInputField.input.type = 'number'
     this.element.appendChild(this.yInputField.element);
-    this._position = {x,y} 
+    this._position = position; 
 
     // picker
     this.picker = document.createElement('div');
