@@ -26,7 +26,7 @@ export default class Block extends EventEmitter
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
-    this.releaseOutside = this.releaseOutside.bind(this)
+    this.releaseOutside = this.releaseOutside.bind(this);
   }
 
   init(node) {
@@ -117,9 +117,8 @@ export default class Block extends EventEmitter
 
     BlockSelection.select(this);
 
-    // bring to front 
-    this.element.parentElement.appendChild(this.element);
-
+    this.isFirstDragMove = true;
+   
     this.moveCommand = Commander.create('MoveBlock', this);
   }
 
@@ -145,6 +144,15 @@ export default class Block extends EventEmitter
   }
 
   dragmove(e) {
+    // bring to front
+    // doing the appendChild in the move allow sub elements to have "click" listener
+    // for example, input pin label can use click listener to expand gadget...
+    // better than using mouse down since it will triggers even when dragging.
+    if(!this.isFirstDragMove) {
+      this.isFirstDragMove = false;
+      this.element.parentElement.appendChild(this.element);
+    }
+    
     let sx = e.clientX ? e.clientX : e.touches[0].clientX;
     let sy = e.clientY ? e.clientY : e.touches[0].clientY;
     // Make sure all of the values are in client coordincate system. Then apply a scale
