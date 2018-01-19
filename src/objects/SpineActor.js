@@ -69,12 +69,14 @@ export default class SpineActor extends Actor
   }
 
   mouseOver() {
+    super.mouseOver();
     if(!this.selected && this.loaded) {
       this.spineComponent.container.filters = [this.hoverOutline]
     }
   }
 
   mouseOut() {
+    super.mouseOut();
     if(!this.selected) {
       this.spineComponent.container.filters = []
     }

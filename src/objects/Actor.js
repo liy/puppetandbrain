@@ -138,11 +138,11 @@ export default class Actor extends EventEmitter
   }
 
   mouseOver(e) {
-    
+    this.emit('pointerover', this);
   }
 
   mouseOut(e) {
-
+    this.emit('pointerout', this);
   }
 
   dragMove(e) {

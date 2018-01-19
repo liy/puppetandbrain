@@ -121,9 +121,6 @@ export class LessThan extends Operator
 {
   constructor(id) {
     super(id);
-    
-    this.inputs.addInput('A');
-    this.inputs.addInput('B');
   }
 
   get nodeName() {

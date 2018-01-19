@@ -31,8 +31,7 @@ export class Task extends Node
     super.init(pod);
 
     // in
-    this.enter.name = pod.enter.name;
-    this.enter.enabled = pod.enter.enabled;
+    this.enter.set(pod.enter.name, pod.enter.enabled);
 
     // out
     if(pod.execution) {

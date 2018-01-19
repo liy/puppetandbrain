@@ -10,6 +10,11 @@ export default class
     this.enabled = true;
   }
 
+  set(name='default', enabled=true) {
+    this.name = name;
+    this.enabled = enabled;
+  }
+
   connect(caller, executionName) {
     // Multiple executions can link to the same enter.
     // Combine caller id and execution name to indentify the link

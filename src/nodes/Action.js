@@ -90,7 +90,7 @@ export default class Action extends Task
 
   pod(detail=false) {
     let pod = super.pod(detail);
-    pod.actionName = this.actionName;
+    pod.actionName = this.actionName || null;
     return pod
   }
 }
