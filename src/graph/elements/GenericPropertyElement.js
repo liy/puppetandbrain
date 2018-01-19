@@ -9,7 +9,13 @@ export default class extends PropertyElement
   constructor(actor, descriptor) {
     super(actor, descriptor);
 
-    this.icon.appendChild(IconStore.get(descriptor.iconID));
+    let icon = IconStore.get(descriptor.iconID);
+    if(typeof icon == 'string') {
+      this.icon.textContent = icon;
+    }
+    else {
+      this.icon.appendChild(icon);
+    }
 
     let gadget = null;
     if(descriptor.gadgetClass) {

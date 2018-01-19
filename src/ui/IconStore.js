@@ -60,7 +60,7 @@ const STORE = {
 export default {
   ...NAMES,
   get(name=NAMES.GENERIC) {
-    if(typeof STORE[name] == 'string') return STORE[name];
+    if(!STORE[name]) return name;
     return svgElement(STORE[name].icon, {width: STORE[name].width, height: STORE[name].height});
   }
 }

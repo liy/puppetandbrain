@@ -55,6 +55,7 @@ export default class ChoiceBox extends Actor
       property: 'image', 
       value: require('!file-loader!../assets/icons/dots.svg'),
       gadgetClass: 'ImageField',
+      iconID: "🖼️"
     });
   }
 
