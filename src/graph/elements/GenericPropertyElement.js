@@ -1,7 +1,6 @@
 import PropertyElement from './PropertyElement';
 import DotIcon from '../../assets/dot.svg';
 import { svgElement } from '../../utils/utils';
-import ValueField from './ValueField';
 import * as GadgetClasses from '../gadgets';
 import IconStore from '../../ui/IconStore';
 
@@ -17,7 +16,7 @@ export default class extends PropertyElement
       gadget = new GadgetClasses[descriptor.gadgetClass](descriptor.value)
     }
     else {
-      gadget = new ValueField(descriptor.value)
+      gadget = new GadgetClasses.ValueField(descriptor.value)
     }
     this.content.appendChild(gadget.element);
 

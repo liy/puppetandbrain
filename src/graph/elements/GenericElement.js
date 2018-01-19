@@ -1,5 +1,5 @@
 import VariableElement from './VariableElement';
-import ValueField from './ValueField';
+import ValueField from '../gadgets/ValueField';
 
 import DotIcon from '../../assets/dot.svg';
 import { svgElement } from '../../utils/utils';

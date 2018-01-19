@@ -3,6 +3,7 @@ import InputField from '../gadgets/InputField';
 // import {svgElement} from '../../utils/utils';
 // import CrossIcon from '../../assets/cross.svg';
 
+// TODO: find a better name, maybe ElementField?
 export default class extends InputField
 {
   constructor(v, p='value...') {

@@ -1,0 +1,32 @@
+.image-field {
+  height: 28px;
+  border-radius: 14px;
+  background-color: rgba(0, 0, 0, 0.15);
+
+  img {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    max-width: 24px;
+    max-height: 24px;
+    margin-right: 2px;
+
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .input-field {
+    min-width: 100px;
+    background: none;
+    padding-left: 10px;
+    padding-right: 5px;
+
+    input {      
+      line-height: 24px;
+      color: white;
+    }
+  }
+}
+
+.image-field.drag-over {
+  background-color: rgb(192, 192, 192);
+}
