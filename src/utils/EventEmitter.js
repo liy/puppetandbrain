@@ -9,7 +9,7 @@ export default class EventEmitter
    * @param {[type]} type       [description]
    * @param {[type]} listener   [description]
    */
-  on(type, fn, context=this){
+  on(type, fn, context=fn){
     this.listeners[type] = this.listeners[type] || [];
     this.listeners[type].push({
       fn,
@@ -21,7 +21,7 @@ export default class EventEmitter
     return this.listeners[type];
   }
 
-  off(type, fn, context=this){
+  off(type, fn, context=fn){
     var typedListeners = this.listeners[type];
 
     if (typedListeners)
@@ -35,11 +35,11 @@ export default class EventEmitter
     }
   }
 
-  once(type, fn, context) {
+  once(type, fn, context=fn) {
     this.listeners[type] = this.listeners[type] || [];
 
-    let wrapper = (e) => {
-      fn.call(context, e);
+    let wrapper = (data, type) => {
+      fn.call(context, data, type);
       this.off(type, wrapper, context);
     }
     this.listeners[type].push({
