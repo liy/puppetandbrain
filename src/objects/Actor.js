@@ -88,6 +88,10 @@ export default class Actor extends EventEmitter
       },
       rotation: this.rotation
     }
+
+    for(let descriptor of this.properties) {
+      this.initialState[descriptor.property] = this[descriptor.property];
+    }
   }
 
   gameStop() {
@@ -95,6 +99,9 @@ export default class Actor extends EventEmitter
       this.position = {...this.initialState.position} 
       this.scale = {...this.initialState.scale};
       this.rotation = this.initialState.rotation;
+    }
+    for(let descriptor of this.properties) {
+      this[descriptor.property] = this.initialState[descriptor.property];
     }
   }
 

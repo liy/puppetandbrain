@@ -17,12 +17,13 @@ export default class extends PropertyElement
       this.icon.appendChild(icon);
     }
 
+    let value = this.actor[descriptor.property];
     let gadget = null;
     if(descriptor.gadgetClass) {
-      gadget = new GadgetClasses[descriptor.gadgetClass](descriptor.value)
+      gadget = new GadgetClasses[descriptor.gadgetClass](value)
     }
     else {
-      gadget = new GadgetClasses.ValueField(descriptor.value)
+      gadget = new GadgetClasses.ValueField(value)
     }
     this.content.appendChild(gadget.element);
 

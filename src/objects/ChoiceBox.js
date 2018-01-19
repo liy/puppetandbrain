@@ -28,18 +28,22 @@ export default class ChoiceBox extends Actor
     this.content = this.addComponent('content', new BoxComponent(boxWidth, boxHeight));
     this.box = this.addComponent('box', new GraphicsComponent());
 
-    console.log(pod)
-    
     // just make code a little bit easier to read by define a properties field
     // if it does not exist
     pod.properties = pod.properties || {};
     // setup properties
+    this.properties.add({
+      ...pod.properties.text,
+      property: 'text',
+      iconID: '🏷️'
+    })
     this.properties.add({
       value: 0xFFFFFF,
       ...pod.properties.boxColor,
       property: 'boxColor',
       name: 'box color',
       gadgetClass: 'ColorButton',
+      type: DataType.COLOR,
       iconID: IconStore.COLOR
     })
     this.properties.add({
@@ -48,9 +52,9 @@ export default class ChoiceBox extends Actor
       property: 'textColor',
       name: 'text color',
       gadgetClass: 'ColorButton',
+      type: DataType.COLOR,
       iconID: IconStore.COLOR
     });
-    console.log(this.properties)
     this.properties.add({
       property: 'image', 
       value: require('!file-loader!../assets/icons/dots.svg'),
@@ -85,7 +89,6 @@ export default class ChoiceBox extends Actor
     else {
       this.box.graphics.filters = [this.selectOutline]
     }
-    
   }
 
   set boxColor(c) {
@@ -113,5 +116,13 @@ export default class ChoiceBox extends Actor
 
   get image() {
     return this.content.imageUrl
+  }
+
+  set text(text) {
+    this.content.text = text
+  }
+
+  get text() {
+    return this.content.text;
   }
 } 

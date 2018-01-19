@@ -18,6 +18,10 @@ export default class extends ArrayMap
     }
   }
 
+  getType(property) {
+    return this.get(property).type;
+  }
+
   pod() {
     const properties = {};
     this.map((property, descriptor) => {

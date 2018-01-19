@@ -71,7 +71,9 @@ export default class BlockBrowser extends Browser
 
     // these are dynmaic templates
     templates = templates.filter(template => {
-      return template.className != 'Getter' && template.className != 'Setter' && template.className != 'Perform' && template.className != 'Break'
+      return template.className != 'Getter' && template.className != 'Setter' && 
+             template.className != 'PropertyGetter' && template.className != 'PropertySetter' && 
+             template.className != 'Perform' && template.className != 'Break';
     })
 
     // Make sure template does not have circular reference. I've changed all references into id.
@@ -132,6 +134,35 @@ export default class BlockBrowser extends Browser
         position: {x:0,y:0}
       }
     })
+
+    // actor properties
+    let actor = BrainGraph.brain.owner;
+    for(let descriptor of actor.properties) {
+      templates.push({
+        ...NodeTemplate.PropertyGetter,
+        name: `Get ${BrainGraph.brain.owner.name} ${descriptor.property}`,
+        owner: BrainGraph.brain.owner.id,
+        property: descriptor.property,
+        outputs: [{
+          name: descriptor.property,
+          type: descriptor.type || DataType.GENERIC
+        }]
+      })
+      templates.push({
+        ...NodeTemplate.PropertySetter,
+        name: `Set ${BrainGraph.brain.owner.name} ${descriptor.property}`,
+        owner: BrainGraph.brain.owner.id,
+        property: descriptor.property,
+        inputs: [{
+          name: descriptor.property,
+          type: descriptor.type || DataType.GENERIC
+        }],
+        outputs: [{
+          name: descriptor.property,
+          type: descriptor.type || DataType.GENERIC
+        }]
+      })
+    }
 
   
     return templates;

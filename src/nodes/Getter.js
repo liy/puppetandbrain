@@ -56,10 +56,6 @@ export default class Getter extends Node
     return `Get ${this.owner.name} ${this.variableName}`;
   }
 
-  get elementClass() {
-    return ['property', 'getter'];
-  }
-
   pod(detail) {
     let pod = super.pod(detail);
     pod.targetBrain = this.targetBrain.id;

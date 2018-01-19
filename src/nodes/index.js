@@ -17,6 +17,8 @@ export MakePosition from './MakePosition';
 export GetPosition from './GetPosition';
 export GetRotation from './GetRotation';
 export Getter from './Getter';
+export PropertyGetter from './PropertyGetter';
+export PropertySetter from './PropertySetter';
 
 export Wait from './Wait';
 export Action from './Action';

@@ -71,4 +71,12 @@ export default class BoxComponent extends ElementComponent
   get imageUrl() {
     return this._imageUrl;
   }
+
+  set text(text) {
+    this.textElement.textContent = text || '';
+  }
+
+  get text() {
+    return this.textElement.textContent;
+  }
 }
