@@ -83,8 +83,9 @@ export default class Block extends EventEmitter
       this.outputPins.set(name, pin);
     }
 
-    this.x = this.node.x;
-    this.y = this.node.y;
+    // this.x = this.node.x;
+    // this.y = this.node.y;
+    this.translate(this.node.x, this.node.y);
     BrainGraph.addBlock(this);
   }
 
@@ -156,8 +157,9 @@ export default class Block extends EventEmitter
     let sx = e.clientX ? e.clientX : e.touches[0].clientX;
     let sy = e.clientY ? e.clientY : e.touches[0].clientY;
     // Make sure all of the values are in client coordincate system. Then apply a scale
-    this.x = (sx - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale;
-    this.y = (sy - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale;
+    const x = (sx - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale;
+    const y = (sy - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale;
+    this.translate(x, y);
 
     this.drawConnection();
   }
@@ -179,13 +181,21 @@ export default class Block extends EventEmitter
   }
 
   set x(x) {
-    this.element.style.left = x +'px'
     this.node.x = x;
+    // this.element.style.left = x +'px'
+    this.element.style.transform = `translate(${x}px, ${this.y}px)`
   }
 
   set y(y) {
-    this.element.style.top = y +'px'
     this.node.y = y;
+    // this.element.style.top = y +'px'
+    this.element.style.transform = `translate(${this.x}px, ${y}px)`
+  }
+
+  translate(x, y) {
+    this.element.style.transform = `translate(${x}px, ${y}px)`
+    this.node.x = x;
+    this.node.y - y;
   }
 
   get x() {
