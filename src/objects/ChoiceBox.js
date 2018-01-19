@@ -56,8 +56,8 @@ export default class ChoiceBox extends Actor
       iconID: IconStore.COLOR
     });
     this.properties.add({
+      ...pod.properties.image,
       property: 'image', 
-      value: require('!file-loader!../assets/icons/dots.svg'),
       gadgetClass: 'ImageField',
       iconID: "🖼️"
     });
