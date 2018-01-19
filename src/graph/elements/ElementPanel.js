@@ -49,7 +49,8 @@ export default class
     let positionButton = new CreatePositionButton();
     let pipetteButton = new CreateColorButton();
     let actorButton = new CreateActorButton();
-    let binButton = new RemoveVariableButton();
+    this.binButton = new RemoveVariableButton();
+    this.binButton.hide();
 
     this.control.appendChild(genericButton.element);
     this.control.appendChild(listButton.element);
@@ -57,7 +58,7 @@ export default class
     this.control.appendChild(positionButton.element);
     this.control.appendChild(pipetteButton.element);
     this.control.appendChild(actorButton.element);
-    this.control.appendChild(binButton.element);
+    this.control.appendChild(this.binButton.element);
   }
 
   toggle() {
@@ -77,5 +78,13 @@ export default class
 
   remove(element) {
     this.content.removeChild(element);
+  }
+
+  showRemove() {
+
+  }
+
+  hideRemove() {
+
   }
 }

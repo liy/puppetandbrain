@@ -26,4 +26,12 @@ export default class
   pointerDown() {
     // override this to create variable
   }
+
+  show() {
+    this.element.style.display = 'inherit';
+  }
+
+  hide() {
+    this.element.style.display = 'none';
+  }
 }

@@ -2,6 +2,7 @@ import DataType from "../../data/DataType";
 import ArrayMap from "../../utils/ArrayMap";
 import ElementPanel from './ElementPanel';
 
+import PropertyElement from './PropertyElement'
 import PositionPropertyElement from './PositionPropertyElement';
 import SizePropertyElement from './SizePropertyElement';
 import RotationPropertyElement from './RotationPropertyElement';
@@ -59,6 +60,13 @@ class ElementController
     this._selected = variableElement;
     if(!this.selected.expanded) {
       this.selected.select();
+    }
+
+    if(this.selected instanceof PropertyElement) {
+      this.panel.binButton.hide();
+    }
+    else {
+      this.panel.binButton.show();
     }
   }
 

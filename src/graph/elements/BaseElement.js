@@ -28,12 +28,12 @@ export default class
 
   select() {
     this._selected = true;
-    this.element.classList.add('element-selected') 
+    this.element.classList.add('element-selected');
   }
 
   deselect() {
     this._selected = false;
-    this.element.classList.remove('element-selected')
+    this.element.classList.remove('element-selected');
   }
 
   toggle() {
