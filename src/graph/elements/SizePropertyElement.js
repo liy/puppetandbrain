@@ -1,7 +1,7 @@
 import PropertyElement from './PropertyElement';
 import SizeIcon from '../../assets/size-icon.svg';
 import { svgElement } from '../../utils/utils';
-import PositionField from '../gadgets/PositionField';
+import RangeField from '../gadgets/RangeField';
 
 export default class extends PropertyElement
 {
@@ -11,12 +11,12 @@ export default class extends PropertyElement
     let svg = svgElement(SizeIcon,{width:18, height:18});
     this.icon.appendChild(svg);
 
-    this.positionField = new PositionField(actor.scale);
-    this.content.appendChild(this.positionField.element);
-    this.positionField.picker.style.display = 'none'
+    this.rangeField = new RangeField({value: actor.scale.x, min:-2, max:2, decimalPlaces:2});
+    this.content.appendChild(this.rangeField.element);
 
-    this.positionField.on('gadget.state.change', value => {
-      actor.scale = value;
+    this.rangeField.on('gadget.state.change', value => {
+      actor.scale.x = value;
+      actor.scale.y = value;
     })
   }
 

@@ -80,6 +80,8 @@ export default class extends Gadget
 
     let ratio = offsetX/this.width;
     this.value = this.min + (this.max-this.min)*ratio;
+    
+    this.emit('gadget.state.change', this.value);
 
     this.lastX = e.clientX ? e.clientX : e.changedTouches[0].clientX;
 
