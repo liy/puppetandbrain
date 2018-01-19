@@ -67,7 +67,7 @@ export default class Setter extends Task
   }
 
   get nodeName() {
-    return `Set ${this.owner.name} ${this.variableName}`;
+    return `Set ${this.variableName}`;
   }
 
   pod(detail) {

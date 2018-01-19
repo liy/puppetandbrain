@@ -46,7 +46,7 @@ export default class PropertySetter extends Task
   }
 
   get nodeName() {
-    return `Set ${this.owner.name} ${this.property}`;
+    return `Set ${this.property}`;
   }
 
   pod(detail) {

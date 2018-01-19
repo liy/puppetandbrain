@@ -53,7 +53,7 @@ export default class Getter extends Node
   }
 
   get nodeName() {
-    return `Get ${this.owner.name} ${this.variableName}`;
+    return `Get ${this.variableName}`;
   }
 
   pod(detail) {

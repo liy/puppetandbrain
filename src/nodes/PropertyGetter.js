@@ -39,7 +39,7 @@ export default class PropertyGetter extends Node
   }
   
   get nodeName() {
-    return `Get ${this.owner.name} ${this.property}`;
+    return `Get ${this.property}`;
   }
   
   pod(detail=false) {
