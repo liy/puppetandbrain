@@ -21,4 +21,9 @@ export default class extends VariableElement
       this.variable.data = color;
     })
   }
+
+  destroy() {
+    this.colorButton.destroy();
+    super.destroy();
+  }
 }

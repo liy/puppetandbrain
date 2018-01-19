@@ -16,10 +16,8 @@ export default class FlipRight extends Task
   constructor(id) {
     super(id)
     
-    this.stop = this.stop.bind(this);
-    this.prestart = this.prestart.bind(this);
-    Editor.on('game.stop', this.stop);
-    Editor.on('game.prestart', this.prestart)
+    Editor.on('game.stop', this.stop, this);
+    Editor.on('game.prestart', this.prestart, this)
   }
 
   destroy() {
@@ -27,8 +25,8 @@ export default class FlipRight extends Task
 
     if(this.tween) this.tween.kill();
 
-    Editor.off('game.stop', this.stop);
-    Editor.off('game.prestart', this.prestart);
+    Editor.off('game.stop', this.stop, this);
+    Editor.off('game.prestart', this.prestart, this);
   }
 
   prestart() {

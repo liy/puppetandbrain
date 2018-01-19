@@ -12,6 +12,13 @@ export default class ExtractorBlock extends Block
     this.onOutputAdded = this.onOutputAdded.bind(this)
     this.addPinTrigger = this.addPinTrigger.bind(this)
   }
+  
+  destroy() {
+    this.addOutputPin.off('addPin.trigger', this.addPinTrigger, this)
+    this.node.outputs.off('output.added', this.onOutputAdded, this)
+    
+    super.destroy();
+  }
 
   init(node) {
     super.init(node);

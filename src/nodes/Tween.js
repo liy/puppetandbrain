@@ -28,13 +28,12 @@ export default class Tween extends Task
   constructor(id) {
     super(id);
 
-    this.stop = this.stop.bind(this);
-    Editor.on('game.stop', this.stop)
+    Editor.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
-    Editor.off('game.stop', this.stop)
+    Editor.off('game.stop', this.stop, this)
     if(this.tween) this.tween.kill()
   }
 

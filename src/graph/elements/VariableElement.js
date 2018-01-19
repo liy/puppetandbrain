@@ -13,8 +13,13 @@ export default class extends BaseElement
     this.nameField = new NameField(this.variable.name);
     this.content.appendChild(this.nameField.element);
     
-    this.onNameChange = this.onNameChange.bind(this);
-    this.nameField.on('gadget.state.change', this.onNameChange);
+    this.nameField.on('gadget.state.change', this.onNameChange, this);
+  }
+
+  destroy() {
+    this.nameField.off('gadget.state.change', this.onNameChange, this);
+    this.nameField.destroy();
+    super.destroy();
   }
 
   onNameChange(name) {

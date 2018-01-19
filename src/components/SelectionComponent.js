@@ -9,11 +9,6 @@ export default class SelectionComponent extends Component
     super();
 
     this.dimension = dimension;
-    
-    this.mousedown = this.mousedown.bind(this);
-    this.mouseover = this.mouseover.bind(this);
-    this.mouseout = this.mouseout.bind(this);
-    this.touchstart = this.touchstart.bind(this);
 
     this.selected = false;
 
@@ -23,18 +18,18 @@ export default class SelectionComponent extends Component
 
   destroy() {
     super.destroy();
-    this.entity.off('mousedown', this.mousedown);
-    this.entity.off('mouseover', this.mouseover);
-    this.entity.off('mouseout', this.mouseout);
-    this.entity.off('touchstart', this.touchstart);
+    this.entity.off('mousedown', this.mousedown, this);
+    this.entity.off('mouseover', this.mouseover, this);
+    this.entity.off('mouseout', this.mouseout, this);
+    this.entity.off('touchstart', this.touchstart, this);
   }
 
   added() {
     this.entity.interactive = true;
-    this.entity.on('mousedown', this.mousedown);
-    this.entity.on('mouseover', this.mouseover);
-    this.entity.on('mouseout', this.mouseout);
-    this.entity.on('touchstart', this.touchstart);
+    this.entity.on('mousedown', this.mousedown, this);
+    this.entity.on('mouseover', this.mouseover, this);
+    this.entity.on('mouseout', this.mouseout, this);
+    this.entity.on('touchstart', this.touchstart, this);
 
     this.tickEnabled = true;
   }

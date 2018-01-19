@@ -4,27 +4,23 @@ export default class DragComponent extends Component
 {
   constructor() {
     super();
-
-    this.dragstart = this.dragstart.bind(this);
-    this.dragmove = this.dragmove.bind(this);
-    this.dragend = this.dragend.bind(this);
   }
 
   destroy() {
     super.destroy();
-    this.entity.off('pointerdown', this.dragstart)
-    this.entity.off('pointermove', this.dragmove)
-    this.entity.off('pointerup', this.dragend)
-    this.entity.off('pointerupoutside', this.dragend)
+    this.entity.off('pointerdown', this.dragstart, this)
+    this.entity.off('pointermove', this.dragmove, this)
+    this.entity.off('pointerup', this.dragend, this)
+    this.entity.off('pointerupoutside', this.dragend, this)
   }
 
   added() {
     this.entity.interctive = true;
 
-    this.entity.on('pointerdown', this.dragstart)
-    this.entity.on('pointermove', this.dragmove)
-    this.entity.on('pointerup', this.dragend)
-    this.entity.on('pointerupoutside', this.dragend)
+    this.entity.on('pointerdown', this.dragstart, this)
+    this.entity.on('pointermove', this.dragmove, this)
+    this.entity.on('pointerup', this.dragend, this)
+    this.entity.on('pointerupoutside', this.dragend, this)
   }
 
   dragstart(e) {

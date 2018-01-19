@@ -18,4 +18,9 @@ export default class extends VariableElement
       this.variable.data = actorID;
     })
   }
+
+  destroy() {
+    this.actorPicker.destroy();
+    super.destroy();
+  }
 }

@@ -17,15 +17,13 @@ export default class Perform extends Task
    */
   constructor(id) {
     super(id);
-
-    this.onOutputAdded = this.onOutputAdded.bind(this);
   }
 
   destroy() {
     super.destroy();
     // Just incase the action has already been detroyed
     if(this.action)  {
-      this.action.outputs.off('output.added', this.onOutputAdded);
+      this.action.outputs.off('output.added', this.onOutputAdded, this);
       this.action.removePerform(this);
     }
   }
@@ -41,7 +39,7 @@ export default class Perform extends Task
     if(this.action) {
       this.action.addPerform(this);
       
-      this.action.outputs.on('output.added', this.onOutputAdded);
+      this.action.outputs.on('output.added', this.onOutputAdded, this);
       // Get all the outputs of the target action, and presented as Call inputs
       // When task runs, all the Call input value will be assigned to Function's output
       for(let name of this.action.outputs.names) {

@@ -86,9 +86,9 @@ export default class extends Gadget
   }
 
   destroy() {
-    super.destroy();
     this.xInputField.destroy();
     this.yInputField.destroy();
+    super.destroy();
   }
 
   get value() {

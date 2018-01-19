@@ -22,6 +22,10 @@ export default class
     this._selected = false;
   }
 
+  destroy() {
+    this.element.removeEventListener('mousedown', this.onSelect);
+  }
+
   onSelect(e) {
     ElementController.select(this);
   }

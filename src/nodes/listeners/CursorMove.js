@@ -12,18 +12,16 @@ export default class CursorMove extends Listener
     super(id);
 
     this.move = this.move.bind(this);
-    this.prestart = this.prestart.bind(this);
-    this.stop = this.stop.bind(this);
 
-    Editor.on('game.prestart', this.prestart)
-    Editor.on('game.stop', this.stop)
+    Editor.on('game.prestart', this.prestart, this)
+    Editor.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
     
-    Editor.off('game.prestart', this.prestart)
-    Editor.off('game.stop', this.stop)
+    Editor.off('game.prestart', this.prestart, this)
+    Editor.off('game.stop', this.stop, this)
 
     document.removeEventListener('mousemove', this.move);
     document.removeEventListener('touchmove', this.move);

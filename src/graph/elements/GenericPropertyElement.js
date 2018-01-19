@@ -18,18 +18,22 @@ export default class extends PropertyElement
     }
 
     let value = this.actor[descriptor.property];
-    let gadget = null;
+    this.gadget = null;
     if(descriptor.gadgetClass) {
-      gadget = new GadgetClasses[descriptor.gadgetClass](value)
+      this.gadget = new GadgetClasses[descriptor.gadgetClass](value)
     }
     else {
-      gadget = new GadgetClasses.ValueField(value)
+      this.gadget = new GadgetClasses.ValueField(value)
     }
-    this.content.appendChild(gadget.element);
+    this.content.appendChild(this.gadget.element);
 
-    gadget.on('gadget.state.change', value => {
+    this.gadget.on('gadget.state.change', value => {
       actor[descriptor.property] = value;
     })
   }
 
+  destroy() {
+    this.gadget.destroy();
+    super.destroy();
+  }
 }

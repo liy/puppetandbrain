@@ -45,12 +45,9 @@ export default class Actor extends EventEmitter
     document.addEventListener('mouseup', this.relaseOutside);
 
     mixin(this, new Entity());
-    
-    this.gamePrestart = this.gamePrestart.bind(this);
-    this.gameStop = this.gameStop.bind(this);
 
-    Editor.on('game.prestart', this.gamePrestart);
-    Editor.on('game.stop', this.gameStop);
+    Editor.on('game.prestart', this.gamePrestart, this);
+    Editor.on('game.stop', this.gameStop, this);
   }
 
   init(pod={}) {
@@ -72,8 +69,8 @@ export default class Actor extends EventEmitter
     LookUp.removeActor(this.id);
     document.removeEventListener('mousemove', this.dragMove);
 
-    Editor.off('game.prestart', this.gamePrestart);
-    Editor.off('game.stop', this.gameStop);
+    Editor.off('game.prestart', this.gamePrestart, this);
+    Editor.off('game.stop', this.gameStop, this);
 
     this.brain.destroy();
   }

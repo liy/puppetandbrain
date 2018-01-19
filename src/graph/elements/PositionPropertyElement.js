@@ -19,4 +19,9 @@ export default class extends PropertyElement
       this.actor.position.y = position.y;
     })
   }
+
+  destroy() {
+    this.positionField.destroy();
+    super.destroy();
+  }
 }

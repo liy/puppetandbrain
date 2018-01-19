@@ -19,14 +19,13 @@ export default class Wait extends Task
   constructor(id) {
     super(id);
 
-    this.stop = this.stop.bind(this);
-    Editor.on('game.stop', this.stop)
+    Editor.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
     clearTimeout(this.timeoutID);
-    Editor.off('game.stop', this.stop)
+    Editor.off('game.stop', this.stop, this)
   }
 
   stop() {

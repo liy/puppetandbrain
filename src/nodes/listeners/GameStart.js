@@ -10,13 +10,12 @@ export default class GameStart extends Listener
   constructor(id) {
     super(id);
 
-    this.start = this.start.bind(this)
-    Editor.on('game.start', this.start)
+    Editor.on('game.start', this.start, this)
   }
 
   destroy() {
     super.destroy();
-    Editor.off('game.start', this.start)
+    Editor.off('game.start', this.start, this)
   }
   
   start(e) {

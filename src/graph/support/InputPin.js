@@ -11,9 +11,6 @@ export default class extends DataPin
 {
   constructor(name, label=name) {
     super(name, 'in', label)
-
-    this.connectionChanged = this.connectionChanged.bind(this);
-    this.labelClicked = this.labelClicked.bind(this);
   }
 
   init(node) {
@@ -40,22 +37,23 @@ export default class extends DataPin
         break;
     }
 
+    this.labelClicked = this.labelClicked.bind(this);
     this.label.addEventListener('click', this.labelClicked)
     
     this.pointer = this.node.inputs.get(this.name);
     if(!this.pointer.isConnected) {
       this.label.classList.add('clickable');
     }
-    this.pointer.on('input.connected', this.connectionChanged);
-    this.pointer.on('input.disconnected', this.connectionChanged);
+    this.pointer.on('input.connected', this.connectionChanged, this);
+    this.pointer.on('input.disconnected', this.connectionChanged, this);
   }
 
   destroy() {
     // this will remove all listeners as well
     if(this.gadget) this.gadget.destroy();
     this.label.removeEventListener('click', this.labelClicked);
-    this.pointer.off('input.connected', this.connectionChanged);
-    this.pointer.off('input.disconnected', this.connectionChanged);
+    this.pointer.off('input.connected', this.connectionChanged, this);
+    this.pointer.off('input.disconnected', this.connectionChanged, this);
   }
 
   setGadget(gadget) {

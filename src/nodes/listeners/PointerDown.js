@@ -12,29 +12,25 @@ export default class PointerDown extends Listener
   constructor(id) {
     super(id);
 
-    this.down = this.down.bind(this);
-    this.prestart = this.prestart.bind(this);
-    this.stop = this.stop.bind(this);
-
-    Editor.on('game.prestart', this.prestart)
-    Editor.on('game.stop', this.stop)
+    Editor.on('game.prestart', this.prestart, this)
+    Editor.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
     
-    Editor.off('game.prestart', this.prestart)
-    Editor.off('game.stop', this.stop)
+    Editor.off('game.prestart', this.prestart, this)
+    Editor.off('game.stop', this.stop, this)
 
-    this.owner.off('pointerdown', this.down)
+    this.owner.off('pointerdown', this.down, this)
   }
 
   prestart() {
-    this.owner.on('pointerdown', this.down)
+    this.owner.on('pointerdown', this.down, this)
   }
 
   stop() {
-    this.owner.off('pointerdown', this.down)
+    this.owner.off('pointerdown', this.down, this)
   }
 
   down(e) {

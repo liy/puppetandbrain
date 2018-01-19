@@ -22,4 +22,8 @@ export default class extends VariableElement
     })
   }
 
+  destroy() {
+    this.positionField.destroy();
+    super.destroy();
+  }
 }

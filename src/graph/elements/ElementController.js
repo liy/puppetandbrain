@@ -19,10 +19,7 @@ import { nextFrame, svgElement } from "../../utils/utils";
 
 class ElementController
 {
-  constructor() {
-    this.add = this.add.bind(this);
-    this.remove = this.remove.bind(this);
-  }
+  constructor() {}
 
   init() {
     this.panel = new ElementPanel();
@@ -42,13 +39,13 @@ class ElementController
     }
 
     
-    this.brain.variables.on('variable.added', this.add)
-    this.brain.variables.on('variable.removed', this.remove)
+    this.brain.variables.on('variable.added', this.add, this)
+    this.brain.variables.on('variable.removed', this.remove, this)
   }
 
   close() {
-    this.brain.variables.off('variable.added', this.add)
-    this.brain.variables.off('variable.removed', this.remove)
+    this.brain.variables.off('variable.added', this.add, this)
+    this.brain.variables.off('variable.removed', this.remove, this)
     this.panel.clear();
   }
 

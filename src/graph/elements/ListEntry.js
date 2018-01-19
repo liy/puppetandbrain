@@ -29,14 +29,18 @@ export default class extends EventEmitter
     this.icon.className = 'remove-entry-icon';
     this.icon.appendChild(svgElement(CrossIcon, {width:10, height:10}));
 
-    this.onChange = this.onChange.bind(this);
-
     this.icon.addEventListener('mousedown', e => {
       this.emit('entry.remove', this);
     })
-    this.valueField.on('gadget.state.change', this.onChange)
+    this.valueField.on('gadget.state.change', this.onChange, this)
 
     this.index = index;
+  }
+
+  destroy() {
+    this.clear();
+    this.valueField.off('gadget.state.change', this.onChange, this)
+    this.valueField.destroy();
   }
 
   onChange(value) {

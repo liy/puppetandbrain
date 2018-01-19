@@ -12,17 +12,15 @@ export default class Ticker extends Listener
   constructor(id) {
     super(id);
   
-    this.start = this.start.bind(this);
-    this.stop = this.stop.bind(this);
-    Editor.on('game.start', this.start)
-    Editor.on('game.stop', this.stop)
+    Editor.on('game.start', this.start, this)
+    Editor.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
 
-    Editor.off('game.start', this.start)
-    Editor.off('game.stop', this.stop)
+    Editor.off('game.start', this.start, this)
+    Editor.off('game.stop', this.stop, this)
   }
 
   start() {

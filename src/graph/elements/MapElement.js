@@ -31,8 +31,6 @@ export default class extends VariableElement
     this.listElement.className = 'list'
     this.element.appendChild(this.listElement);
 
-    this.remove = this.remove.bind(this);
-
     this.addButton.addEventListener('mousedown', e => {
       e.preventDefault();
       this.add();
@@ -50,8 +48,15 @@ export default class extends VariableElement
       let entry = new MapEntry(this.variable.data, key, value);
       this.listElement.appendChild(entry.element);
       this.entries.set(key, entry);
-      entry.on('entry.remove', this.remove)
+      entry.on('entry.remove', this.remove, this)
     }
+  }
+
+  destroy() {
+    for(let entry of this.entries) {
+      entry.destroy();
+    }
+    super.destroy();
   }
 
   add(key=`${tokenGenerator.gen()}`, value=null) {
@@ -66,7 +71,7 @@ export default class extends VariableElement
       entry.focus();
     })
 
-    entry.on('entry.remove', this.remove)
+    entry.on('entry.remove', this.remove, this)
   }
 
   remove(entry) {

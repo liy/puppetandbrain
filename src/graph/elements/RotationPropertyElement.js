@@ -19,4 +19,8 @@ export default class extends PropertyElement
     })
   }
 
+  destroy() {
+    this.rangeField.destroy();
+    super.destroy();
+  }
 }

@@ -10,19 +10,17 @@ export default class PerformBlock extends Block
     this.clicks = 0;
     this.dbclick = this.dbclick.bind(this)
     this.element.addEventListener('mousedown', this.dbclick)
-
-    this.onOutputAdded = this.onOutputAdded.bind(this);
   }
 
   init(node) {
     super.init(node);
     
-    if(this.node.action) this.node.action.outputs.on('output.added', this.onOutputAdded);
+    if(this.node.action) this.node.action.outputs.on('output.added', this.onOutputAdded, this);
   }
 
   destroy() {
     this.element.removeEventListener('mousedown', this.dbclick)
-    if(this.node.action) this.node.action.outputs.off('output.added', this.onOutputAdded);
+    if(this.node.action) this.node.action.outputs.off('output.added', this.onOutputAdded, this);
     super.destroy()
   }
 

@@ -16,8 +16,13 @@ export default class ActionBlock extends Block
     this.body.minHeight = 120;
 
     this.onTitleInput = this.onTitleInput.bind(this)
-    this.onOutputAdded = this.onOutputAdded.bind(this)
-    this.addPinTrigger = this.addPinTrigger.bind(this)
+  }
+
+  destroy() {
+    this.addOutputPin.off('addPin.trigger', this.addPinTrigger, this)
+    this.node.outputs.off('output.added', this.onOutputAdded, this)
+    
+    super.destroy();
   }
 
   init(node) {
@@ -27,11 +32,10 @@ export default class ActionBlock extends Block
 
     this.addOutputPin = new AddOutputPin();
     this.body.addRight(this.addOutputPin);
-    this.addOutputPin.on('addPin.trigger', this.addPinTrigger)
+    this.addOutputPin.on('addPin.trigger', this.addPinTrigger, this)
+    this.node.outputs.on('output.added', this.onOutputAdded, this)
     
     this.title.addEventListener('input', this.onTitleInput);
-
-    this.node.outputs.on('output.added', this.onOutputAdded);
   }
 
   focus() {

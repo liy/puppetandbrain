@@ -16,13 +16,12 @@ export default class GetterBlock extends Block
     // change the output pin's name from id to actual name
     this.outputPin.label.textContent = node.variableName;
     // also listening on name changes from the variable
-    this.onNameChanged = this.onNameChanged.bind(this);
-    node.variable.on('variable.name.changed', this.onNameChanged)
+    node.variable.on('variable.name.changed', this.onNameChanged, this)
   }
 
   destroy() {
     super.destroy();
-    this.node.variable.off('variable.name.changed', this.onNameChanged)
+    this.node.variable.off('variable.name.changed', this.onNameChanged, this)
   }
 
   onNameChanged(data) {

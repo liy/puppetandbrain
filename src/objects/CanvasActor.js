@@ -28,10 +28,8 @@ export default class CanvasActor extends PIXI.Container
     this._clickCounter = 0;
     this.on('pointerup', this.dbClick, this)
 
-    this.gameStop = this.gameStop.bind(this);
-    this.gamePrestart = this.gamePrestart.bind(this);
-    Editor.on('game.prestart', this.gamePrestart);
-    Editor.on('game.stop', this.gameStop);
+    Editor.on('game.prestart', this.gamePrestart, this);
+    Editor.on('game.stop', this.gameStop, this);
 
     mixin(this, new Entity());
   }
@@ -72,9 +70,9 @@ export default class CanvasActor extends PIXI.Container
     })
 
     LookUp.removeActor(this.id);
-    this.off('pointerup', this.dbClick, this);
-    Editor.off('game.prestart', this.gamePrestart);
-    Editor.off('game.stop', this.gameStop);
+    this.off('pointerup', this.dbClick, this, this);
+    Editor.off('game.prestart', this.gamePrestart, this);
+    Editor.off('game.stop', this.gameStop, this);
     this.brain.destroy();
   }
 

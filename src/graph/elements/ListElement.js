@@ -29,8 +29,6 @@ export default class extends VariableElement
     this.listElement.className = 'list'
     this.element.appendChild(this.listElement);
 
-    this.remove = this.remove.bind(this);
-
     this.addButton.addEventListener('mousedown', e => {
       e.preventDefault();
       this.add();
@@ -42,13 +40,13 @@ export default class extends VariableElement
       let entry = new ListEntry(this.variable.data, i, value);
       this.listElement.appendChild(entry.element);
       this.entries.push(entry);
-      entry.on('entry.remove', this.remove)
+      entry.on('entry.remove', this.remove, this)
     }
   }
 
   destroy() {
     for(let entry of this.entries) {
-      entry.off('entry.remove', this.remove)
+      entry.off('entry.remove', this.remove, this)
       this.listElement.removeChild(entry.element);
     }
   }
@@ -65,7 +63,7 @@ export default class extends VariableElement
       entry.focus();
     })
 
-    entry.on('entry.remove', this.remove)
+    entry.on('entry.remove', this.remove, this)
   }
 
   remove(entry) {
