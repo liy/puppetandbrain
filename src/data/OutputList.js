@@ -17,8 +17,7 @@ export default class OutputList extends EventEmitter
     this.names = this.list.keys;
 
     // when game stops, make all values null
-    this.clearValues = this.clearValues.bind(this);
-    Editor.on('game.stop', this.clearValues);
+    Editor.on('game.stop', this.clearValues, this);
   }
 
   destroy() {
@@ -26,7 +25,7 @@ export default class OutputList extends EventEmitter
     this.clear();
     // FIXME: how to destroy? what means of destroy a output list?
     // probably because you are destroy the whole node?
-    Editor.off('game.stop', this.clearValues);
+    Editor.off('game.stop', this.clearValues, this);
   }
 
   map(callback) {

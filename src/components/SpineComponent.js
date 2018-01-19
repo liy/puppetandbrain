@@ -15,17 +15,6 @@ export default class SpineComponent extends ContainerComponent
     if(this.aniBuffer){
       this.spine.state.setAnimation(this.aniBuffer.track, this.aniBuffer.name, this.aniBuffer.loop);
     }
-
-    // this.spine.on('pointerdown', e => {
-    //   this.data = e.data;
-    //   let p = this.data.getLocalPosition(this.spine.parent)
-    //   let offset = {
-    //     x: (this.spine.x - p.x),
-    //     y: (this.spine.y - p.y)
-    //   }
-      
-    //   this.entity.mouseDown(p.x, p.y, offset);
-    // })
   }
 
   setToSetupPose() {

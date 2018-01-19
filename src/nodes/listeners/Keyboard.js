@@ -25,8 +25,6 @@ export default class Keyboard extends Listener
 
     this.keydown = this.keydown.bind(this)
     this.keyup = this.keyup.bind(this)
-    this.prestart = this.prestart.bind(this);
-    this.stop = this.stop.bind(this);
 
     Editor.on('game.prestart', this.prestart, this)
     Editor.on('game.stop', this.stop, this)

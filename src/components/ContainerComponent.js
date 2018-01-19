@@ -24,6 +24,8 @@ export default class ContainerComponent extends Component
     Editor.stage.removeChild(this.container);
     this.container.off('pointerdown', this.pointerDown, this);
     this.container.off('pointerup', this.pointerUp, this);
+    this.container.off('mouseover', this.mouseOver, this);
+    this.container.off('mouseout', this.mouseOut, this);
   }
 
   pointerDown(e) {
