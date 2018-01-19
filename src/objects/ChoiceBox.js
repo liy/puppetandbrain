@@ -27,25 +27,30 @@ export default class ChoiceBox extends Actor
 
     this.content = this.addComponent('content', new BoxComponent(boxWidth, boxHeight));
     this.box = this.addComponent('box', new GraphicsComponent());
+
+    console.log(pod)
     
     // just make code a little bit easier to read by define a properties field
     // if it does not exist
     pod.properties = pod.properties || {};
     // setup properties
     this.properties.add({
+      value: 0xFFFFFF,
+      ...pod.properties.boxColor,
       property: 'boxColor',
       name: 'box color',
       gadgetClass: 'ColorButton',
-      value: pod.properties.boxColor || 0xFFFFFF,
       iconID: IconStore.COLOR
     })
     this.properties.add({
+      value: 0x000000,
+      ...pod.properties.textColor,
       property: 'textColor',
       name: 'text color',
       gadgetClass: 'ColorButton',
-      value: pod.properties.textColor || 0x000000,
       iconID: IconStore.COLOR
     });
+    console.log(this.properties)
     this.properties.add({property: 'image', value: require('!file-loader!../assets/icons/dots.svg')});
   }
 

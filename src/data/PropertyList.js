@@ -19,8 +19,11 @@ export default class extends ArrayMap
   }
 
   pod() {
-    return {
-      ...this.values
-    };
+    const properties = {};
+    this.map((property, descriptor) => {
+      descriptor.value = this.actor[property];
+      properties[property] = descriptor;
+    })
+    return properties;
   }
 }
