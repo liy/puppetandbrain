@@ -1,6 +1,7 @@
 import './ColorButton.scss';
 import Gadget from './Gadget';
 
+// TODO: use custom color input... system's almost un-usable...
 export default class extends Gadget
 {
   constructor(color=0xFF9900) {
@@ -14,12 +15,12 @@ export default class extends Gadget
 
     this.line = this.element.querySelector('#line');
 
-    this.hexField = document.createElement('div');
-    this.hexField.className = 'color-hex';
-    this.element.appendChild(this.hexField);
 
-    this.onDown = this.onDown.bind(this);
-    this.element.addEventListener('mousedown', this.onDown);
+    this.colorInput = document.createElement('input');
+    this.colorInput.className = 'color-hex';
+    this.colorInput.type = 'color'
+    this.element.appendChild(this.colorInput);
+    this.colorInput.addEventListener('change', this.onChange.bind(this));
 
     this.value = color;
   }
@@ -29,22 +30,19 @@ export default class extends Gadget
     this.element.removeEventListener('mousedown', this.onDown);
   }
 
-  onDown(e) {
-    this.value = Math.ceil(Math.random() * 0xFFFFFF);
+  onChange(e) {
+    this._color = Number(e.target.value.replace('#', '0x'))
+    this.line.setAttribute('stroke', e.target.value);
     this.emit('gadget.state.change', this.value);
   }
 
   set value(c) {
-    if(c == 0) {
-      this.hexField.style.color = '#FFF';
-    }
-    else {
-      this.hexField.style.color = '#000';
-    }
-    let hex = `#${c.toString(16)}`.toUpperCase();
-    this.hexField.textContent = hex;
-    this.line.setAttribute('stroke', hex);
     this._color = c;
+
+    if(Number.isInteger(c)) {
+      c = `#${c.toString(16)}`;
+    }
+    this.line.setAttribute('stroke', c);
   }
 
   get value() {

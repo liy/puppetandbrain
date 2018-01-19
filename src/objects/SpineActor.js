@@ -26,6 +26,8 @@ export default class SpineActor extends Actor
       loader.add(info.id)
       return new Promise((resolve, reject) => {
         loader.load((loader, resources) => {
+          // FIXIME: spine component not avaialble when it is fully loaded...
+          // mouseover event will try to accesss it before it is available...
           this.spineComponent = new SpineComponent(resources[info.id].spineData);
           this.addComponent('animation', this.spineComponent);
           resolve();
