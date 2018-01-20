@@ -23,7 +23,7 @@ export default class Stage
     catcher.drawRect(0, 0, width, height);
     catcher.endFill();
     this.addChild(catcher);
-    catcher.on('mousedown', ActorSelection.deselectAll.bind(ActorSelection));
+    catcher.on('mousedown', ActorSelection.deselectAll, ActorSelection);
   }
 
   updateTransform() {
