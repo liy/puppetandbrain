@@ -199,6 +199,10 @@ window.LookUp = {
     })
   },
 
+  hasID: function(id) {
+    return id in STORE;
+  },
+
   pod: function(detail=false) {
     let result = {};
     result.store = {};

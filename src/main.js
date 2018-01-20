@@ -42,7 +42,11 @@ import ArrayMap from './utils/ArrayMap';
 
 
 // prevent default context menu for the whole site
-document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('contextmenu', e => {
+  e.preventDefault();
+
+  console.log(ActorSelection.selected[0]);
+});
 
 firebase.initializeApp(FIREBASE_CONFIG);
 
@@ -155,4 +159,5 @@ firebase.auth().onAuthStateChanged(user => {
 })
 
 import ChoiceBox from './objects/ChoiceBox';
+import ActorSelection from './objects/ActorSelection';
 

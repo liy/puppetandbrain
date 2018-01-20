@@ -1,47 +1,78 @@
-import JsonPromise from './utils/JsonPromise';
-import Variable from './data/Variable';
 import * as ObjecClasses from './objects';
 
-export default class ActivityLoader
+export default class Import
 {
   constructor() {
+    this.ids = {};
+  }
+
+  mapID(id) {
+    // generate new ids
+    while(true) {
+      let newID = Math.floor(Math.random() * 999)+1;
+      if(!this.ids[newID] && LookUp.hasID(newID)) break;
+    }
+    this.ids[id] = newID;
+    return newID;
+  }
+
+  start(pod) {
+    // map all ids
+    let ids = [
+      ...pod.actors=[],
+      ...pod.brains=[],
+      ...pod.nodes=[],
+      ...pod.pointers=[],
+      ...pod.variables=[],
+    ]
+    ids.forEach(this.mapID);
+
+    switch(pod.type) {
+      case 'actor':
+        this.importActor(pod);
+        break;
+      case 'brain':
+        this.importBrain(pod);
+        break;
+      case 'node':
+        this.importNode(pod);
+        break;
+      case 'variable':
+        this.importVariable(pod);
+        break;
+    }
+  }
+
+  importActor() {
+    
+  }
+
+  importBrain() {
 
   }
 
-  load(url) {
-    return JsonPromise.load(url).then(pod => {
-      this.createActors(pod)
-      // create nodes; link execution, input and outputs
-      this.fillBrains(pod)
-    })
+  importNode() {
+
   }
 
-  async parse(pod) {
-    await this.createActors(pod);
-    // create nodes; link execution, input and outputs
-    this.fillBrains(pod);
+  importVariable() {
+
   }
 
-  createActors(pod) {
-    let promises = [];
-
-    for(let id of pod.stage) {
+  createActors() {
+    for(let id of pod.actors) {
       let actorPod = pod.store[id];
-
-      let actor = new ObjecClasses[actorPod.className](actorPod.id);
+      let actor = new ObjecClasses[actorPod.className](this.ids(actorPod.id));
       actor.init(actorPod);
       Editor.stage.addActor(actor);
-      promises.push(actor.loaded);
     }
-
-    return Promise.all(promises);
   }
 
   fillBrains(pod) {
     // create all the variables first
     for(let id of pod.variables) {
       let variablePod = pod.store[id];
-      let variable = new Variable(id);
+      let variable = new Variable(this.ids[id]);
       variable.init(variablePod);
       // put the variable into its brain
       let brain = LookUp.get(variablePod.brain);
@@ -51,7 +82,7 @@ export default class ActivityLoader
     let performs = [];
     for(let id of pod.nodes) {
       let data = pod.store[id];
-      let node = NodeFactory.create(data.className, id)
+      let node = NodeFactory.create(data.className, this.ids[id])
       // delay perform node initialization,
       // since they depend on Action nodes to be initialized first
       if(data.className ==  'Perform') {
@@ -63,7 +94,7 @@ export default class ActivityLoader
 
     // initilaize perform node
     for(let data of performs) {
-      let node = LookUp.get(data.id);
+      let node = LookUp.get(this.ids[data.id]);
       node.init(data);
     }
 
