@@ -88,6 +88,21 @@ export default class Node extends EventEmitter
     return node;
   }
 
+  export(data={}) {
+    data.nodes = data.nodes || [];
+    data.nodes.push(this.id);
+
+    data.store = data.store || {};
+    data.store[this.id] = this.pod();
+
+    // pointers
+    for(let pointer of this.inputs) {
+      pointer.export(data);
+    }
+
+    return data;
+  }
+
   pod(detail) {
     return {
       className: this.className,

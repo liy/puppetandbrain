@@ -66,6 +66,26 @@ export default class Brain
     })
   }
 
+  export(data={}) {
+    data.brains = data.brains || [];
+    data.brains.push(this.id);
+
+    data.store = data.store || {};
+    data.store[this.id] = this.pod()
+
+    // nodes
+    for(let node of this.nodes) {
+      node.export(data);
+    }
+
+    // variables
+    for(let variable of this.variables) {
+      variable.export(data);
+    }
+    
+    return data;
+  }
+
   pod(detail=false) {
     let pod = {
       className: this.__proto__.constructor.name,

@@ -73,6 +73,16 @@ export default class Variable extends EventEmitter
     })
   }
 
+  export(data={}) {
+    data.variables = data.variables || []
+    data.variables.push(this.id);
+
+    data.store = data.store || {};
+    data.store[this.id] = this.pod();
+
+    return data;
+  }
+
   pod() {
     return {
       id: this.id,

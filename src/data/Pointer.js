@@ -78,6 +78,19 @@ export default class Pointer extends EventEmitter
     return this.target[this.targetName];
   }
 
+  export(data={}) {
+    // only need to export output pointer
+    if(this.id) {
+      data.pointers = data.pointers || [];
+      data.pointers.push(this.id);
+
+      data.store = data.store || {};
+      data.store[this.id] = this.pod()
+    }
+    
+    return data;
+  }
+
   pod() {
     return {
       className: this.__proto__.constructor.name,
