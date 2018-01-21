@@ -211,7 +211,7 @@ window.LookUp = {
     }
     result.actors = ACTORS;
     result.nodes = NODES;
-    result.dataLinks = POINTERS;
+    result.pointers = POINTERS;
     result.brains = BRAINS;
     result.variables = VARIABLES;
     result.stage = Editor.stage.actors.map((actorID, actor) => {

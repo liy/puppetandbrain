@@ -31,11 +31,7 @@ export default class InputList extends ArrayMap
   value(name) {
     return this.inputs[name].value;
   }
-
-  isConnected(name) {
-    return !this.inputs[name].isLocalPointer;
-  }
-
+  
   pod() {
     return this.names.map(name => {
       return this.inputs[name].pod()
