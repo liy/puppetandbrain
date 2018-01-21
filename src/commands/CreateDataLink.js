@@ -23,10 +23,10 @@ export default class CreateDataLink extends Command
   }
 
   process() {
-    let pointer = this.inputNode.inputs.get(this.inputName);
+    let input = this.inputNode.inputs.get(this.inputName);
     let output = this.outputNode.outputs.get(this.outputName);
 
-    let oldOutput = pointer.connect(output);
+    let oldOutput = input.connect(output);
 
     // Refresh the removed old output pin.
     if(oldOutput) {
@@ -44,11 +44,11 @@ export default class CreateDataLink extends Command
   }
 
   undo() {
-    let pointer = this.inputNode.inputs.get(this.inputName);
-    pointer.disconnect();
-    // note that this pointer could be local pointer
-    // when undo better to disconnect first before set the pointer to the old pointer pod.
-    if(this.oldPointerPod) pointer.set(this.oldPointerPod);
+    let input = this.inputNode.inputs.get(this.inputName);
+    input.disconnect();
+    // note that this input could be local input
+    // when undo better to disconnect first before set the input to the old input pod.
+    if(this.oldPointerPod) input.set(this.oldPointerPod);
     BrainGraph.refresh()
   }
 

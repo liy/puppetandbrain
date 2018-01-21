@@ -10,7 +10,7 @@ export default class DeleteBlock extends Command
   
   process() {
     // get detailed pod information of the node.
-    // which includes all the input and output pointer information nested in the pod
+    // which includes all the input and output information nested in the pod
     this.pod = this.block.node.pod(true);
     // TODO: may be instead of call functions, include command here??!?
     BrainGraph.deleteBlock(this.block);
@@ -37,22 +37,22 @@ export default class DeleteBlock extends Command
       }
     }
 
-    // connect inputs directly using pointer pod
-    for(let pointerPod of this.pod.inputs) {
-      let node = LookUp.get(pointerPod.nodeID);
-      let pointer = node.inputs.get(pointerPod.name);
-      pointer.set(pointerPod)
+    // connect inputs directly using input pod
+    for(let inputPod of this.pod.inputs) {
+      let node = LookUp.get(inputPod.nodeID);
+      let input = node.inputs.get(inputPod.name);
+      input.set(inputPod)
     }
 
-    // loop through all the outputs and connect all the inputs(pointer) connected to this
-    // output, manually WITHOUT using pointer pod.
+    // loop through all the outputs and connect all the inputs connected to this
+    // output, manually WITHOUT using input pod.
     for(let outputPod of this.pod.outputs) {
       let output = node.outputs.get(outputPod.name);
-      // note connection not a qulified pointer pod. Resursive issue...
+      // Note, connection is not a qulified input pod because of resursive issue...
       // Just loop through all the inputs connected to current output, and connect them!
       for(let connection of outputPod.connections) {
-        let pointer = LookUp.get(connection.nodeID).inputs.get(connection.name);
-        pointer.connect(output, connection.id)
+        let input = LookUp.get(connection.nodeID).inputs.get(connection.name);
+        input.connect(output, connection.id)
       }
     }
 

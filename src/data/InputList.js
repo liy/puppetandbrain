@@ -1,4 +1,4 @@
-import Pointer from './Pointer';
+import Input from './Input';
 import ArrayMap from '../utils/ArrayMap';
 
 export default class InputList extends ArrayMap
@@ -9,36 +9,36 @@ export default class InputList extends ArrayMap
 
     // Ready only, I could make them getter. I assume no one will touch them.
     // Just make code easier to read.
-    this.pointers = this.values;
+    this.inputs = this.values;
     this.names = this.keys;
   }
 
   destroy() {
     for(let name of this.keys) {
-      this.pointers[name].destroy();
+      this.inputs[name].destroy();
     }
   }
 
   addInput(name, type) {
-    let pointer = this.get(name);
-    if(!pointer) {
-      pointer = new Pointer(this.node, name, type)
-      this.set(name, pointer);
+    let input = this.get(name);
+    if(!input) {
+      input = new Input(this.node, name, type)
+      this.set(name, input);
     }
-    return pointer;
+    return input;
   }
 
   value(name) {
-    return this.pointers[name].value;
+    return this.inputs[name].value;
   }
 
   isConnected(name) {
-    return !this.pointers[name].isLocalPointer;
+    return !this.inputs[name].isLocalPointer;
   }
 
   pod() {
     return this.names.map(name => {
-      return this.pointers[name].pod()
+      return this.inputs[name].pod()
     })
   }
 }

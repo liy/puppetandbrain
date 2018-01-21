@@ -40,20 +40,20 @@ export default class extends DataPin
     this.labelClicked = this.labelClicked.bind(this);
     this.label.addEventListener('click', this.labelClicked)
     
-    this.pointer = this.node.inputs.get(this.name);
-    if(!this.pointer.isConnected) {
+    this.input = this.node.inputs.get(this.name);
+    if(!this.input.isConnected) {
       this.label.classList.add('clickable');
     }
-    this.pointer.on('input.connected', this.connectionChanged, this);
-    this.pointer.on('input.disconnected', this.connectionChanged, this);
+    this.input.on('input.connected', this.connectionChanged, this);
+    this.input.on('input.disconnected', this.connectionChanged, this);
   }
 
   destroy() {
     // this will remove all listeners as well
     if(this.gadget) this.gadget.destroy();
     this.label.removeEventListener('click', this.labelClicked);
-    this.pointer.off('input.connected', this.connectionChanged, this);
-    this.pointer.off('input.disconnected', this.connectionChanged, this);
+    this.input.off('input.connected', this.connectionChanged, this);
+    this.input.off('input.disconnected', this.connectionChanged, this);
   }
 
   setGadget(gadget) {
@@ -83,7 +83,7 @@ export default class extends DataPin
   }
 
   connectionChanged(data) {
-    if(this.pointer.isConnected) {
+    if(this.input.isConnected) {
       if(this.gadget) this.gadget.visible = false;
       this.label.classList.remove('clickable');
     }
@@ -95,7 +95,7 @@ export default class extends DataPin
   labelClicked() {
     // only be able toggle the gadget if input is NOT connected
     // or has no gadget
-    if(this.pointer.isConnected || !this.gadget) return;
+    if(this.input.isConnected || !this.gadget) return;
 
     this.gadgetVisible = !this.gadgetVisible;
 

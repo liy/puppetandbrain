@@ -22,7 +22,7 @@ export default class Import
       ...pod.actors=[],
       ...pod.brains=[],
       ...pod.nodes=[],
-      ...pod.pointers=[],
+      ...pod.inputs=[],
       ...pod.variables=[],
     ]
     ids.forEach(this.mapID);
@@ -110,12 +110,12 @@ export default class Import
     }
 
     // connect the inputs with outputs
-    for(let id of pod.pointers) {
-      let pointerPod = pod.store[id];
-      let node = LookUp.get(pointerPod.nodeID);
+    for(let id of pod.inputs) {
+      let inputPod = pod.store[id];
+      let node = LookUp.get(inputPod.nodeID);
 
-      let pointer = node.inputs.get(pointerPod.name);
-      pointer.set(pointerPod)
+      let input = node.inputs.get(inputPod.name);
+      input.set(inputPod)
     }
   }
 }

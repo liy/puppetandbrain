@@ -1,15 +1,15 @@
 import EventEmitter from '../utils/EventEmitter';
 
 // input
-export default class Pointer extends EventEmitter
+export default class Input extends EventEmitter
 {
   /**
-   * Creates an instance of Pointer, points to its owner node's
+   * Creates an instance of Input, points to its owner node's
    * memory, or another node's output. 
    * @param {any} node Owner of the input
    * @param {any} name name of the input
    * @param {any} type type of the input
-   * @memberof Pointer
+   * @memberof Input
    */
   constructor(node, name, type) {
     super();
@@ -22,13 +22,12 @@ export default class Pointer extends EventEmitter
     this.name = name;
     // connected to nothing by default
     this.output = null;
-    // by default it is a local node memory pointer
-    this.target = this.node.memory;
-    this.targetName = this.name;
+    // by default it uses local node memory
+    this.target = this.node.memory;    this.targetName = this.name;
   }
 
   set(pod) {
-    // output pointer, connect to the output
+    // if the input has an ID, it must be connected to an output, so connect to the output
     if(pod.id) {
       // find the output
       let output = LookUp.get(pod.output.node).outputs.get(pod.output.name);
@@ -48,12 +47,12 @@ export default class Pointer extends EventEmitter
     // remove old output related connection
     let oldOutput = this.disconnect();
 
-    // Only output pointer will have id
+    // Only connected input has id
     this.id = LookUp.addPointer(this, id);
     this.output = output;
     this.output.connect(this);
 
-    // Make pointer points to the output data and name
+    // Make input points to the output data and name
     this.target = this.output.data;
     this.targetName = this.output.name;
 
@@ -87,10 +86,10 @@ export default class Pointer extends EventEmitter
   }
 
   export(data={}) {
-    // only need to export output pointer
+    // only need to export connected input
     if(this.id) {
-      data.pointers = data.pointers || [];
-      data.pointers.push(this.id);
+      data.inputs = data.inputs || [];
+      data.inputs.push(this.id);
 
       data.store = data.store || {};
       data.store[this.id] = this.pod()
@@ -102,11 +101,10 @@ export default class Pointer extends EventEmitter
   pod() {
     return {
       className: this.__proto__.constructor.name,
-      // owner of the pointer
+      // owner of the input
       nodeID: this.node.id,
       name: this.name,
-      // only record the information below if pointer points to another node
-      // undefined field will be removed when serailized
+      // if id is null, it means this input uses node's memory
       id: this.id,
       output: this.output ? this.output.pod() : null,
       type: this.type,

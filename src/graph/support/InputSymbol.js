@@ -26,7 +26,7 @@ export default class InputSymbol extends DataSymbol
 
   init(node) {
     super.init(node);
-    this.pointer = this.node.inputs.get(this.name);
+    this.input = this.node.inputs.get(this.name);
 
     this.connectionPath.setAttribute('stroke', this.hexColor);
 
@@ -43,7 +43,7 @@ export default class InputSymbol extends DataSymbol
   }
 
   get isConnected() {
-    return this.pointer.isConnected;
+    return this.input.isConnected;
   }
 
   refresh() {
@@ -70,8 +70,8 @@ export default class InputSymbol extends DataSymbol
   }
 
   getOutputPin() {
-    if(!this.pointer.isOutputPointer) return null;
-    return BrainGraph.getBlock(this.pointer.output.node.id).outputPins.get(this.pointer.output.name);
+    if(!this.input.isOutputPointer) return null;
+    return BrainGraph.getBlock(this.input.output.node.id).outputPins.get(this.input.output.name);
   }
 
   onContextMenu(e) {
@@ -96,7 +96,7 @@ export default class InputSymbol extends DataSymbol
   }
 
   get color() {
-    return DataColor[this.pointer.type] || DataColor[DataType.GENERIC];
+    return DataColor[this.input.type] || DataColor[DataType.GENERIC];
   }
 
   colorize(dataType) {

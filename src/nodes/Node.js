@@ -47,7 +47,7 @@ export default class Node extends EventEmitter
     //
     // we just need the name to be populated here.
     // Of course some of them will be discarded once
-    // connection is setup(pointer is added)
+    // connection is setup(input is added)
     if(pod.inputs) {
       for(let pointerPod of pod.inputs) {
         this.inputs.addInput(pointerPod.name, pointerPod.type)
@@ -95,9 +95,9 @@ export default class Node extends EventEmitter
     data.store = data.store || {};
     data.store[this.id] = this.pod();
 
-    // pointers
-    for(let pointer of this.inputs) {
-      pointer.export(data);
+    // inputs
+    for(let input of this.inputs) {
+      input.export(data);
     }
 
     return data;

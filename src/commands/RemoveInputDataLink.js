@@ -2,15 +2,15 @@ import Command from './Command';
 
 export default class RemoveInputDataLink extends Command
 {
-  constructor(inputNodeID, inputNodeName) {
+  constructor(inputNodeID, inputName) {
     super();
 
     this.inputNodeID = inputNodeID;
-    this.inputNodeName = inputNodeName;
-    let pointer = this.inputNode.inputs.get(this.inputNodeName);
-    if(pointer.output) {
-      this.outputNodeID = pointer.output.node.id;
-      this.outputNodeName = pointer.output.name;
+    this.inputName = inputName;
+    let input = this.inputNode.inputs.get(this.inputName);
+    if(input.output) {
+      this.outputNodeID = input.output.node.id;
+      this.outputName = input.output.name;
     }
   }
 
@@ -18,19 +18,19 @@ export default class RemoveInputDataLink extends Command
     return LookUp.get(this.inputNodeID)
   }
 
-  get pointer() {
-    return this.inputNode.inputs.get(this.inputNodeName);
+  get input() {
+    return this.inputNode.inputs.get(this.inputName);
   }
 
   process() {
-    if(!this.pointer.output) return null;
+    if(!this.input.output) return null;
 
-    let pointer = this.inputNode.inputs.get(this.inputNodeName);
+    let input = this.inputNode.inputs.get(this.inputName);
     
-    let inputPin = BrainGraph.getBlock(this.inputNodeID).inputPins.get(this.inputNodeName);
-    let outputPin = BrainGraph.getBlock(pointer.output.node.id).outputPins.get(pointer.output.name);
+    let inputPin = BrainGraph.getBlock(this.inputNodeID).inputPins.get(this.inputName);
+    let outputPin = BrainGraph.getBlock(input.output.node.id).outputPins.get(input.output.name);
 
-    pointer.disconnect();
+    input.disconnect();
 
     inputPin.refreshSymbol();
     outputPin.refreshSymbol();
@@ -39,7 +39,7 @@ export default class RemoveInputDataLink extends Command
   }
 
   undo() {
-    Commander.create('CreateDataLink', this.inputNodeID, this.inputNodeName, this.outputNodeID, this.outputNodeName).processAndSave()
+    Commander.create('CreateDataLink', this.inputNodeID, this.inputName, this.outputNodeID, this.outputName).processAndSave()
   }
 
   redo() {
