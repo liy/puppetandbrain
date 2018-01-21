@@ -26,7 +26,7 @@ export default class PropertySetter extends Task
 
     this.property = pod.property;
 
-    this.memory[pod.property] = this.owner[this.property];
+    this.memory[pod.property] = this.memory[pod.property] || this.owner[this.property];
     
     this.outputs.assignProperty(this.property, {
       get: () => {

@@ -22,10 +22,11 @@ export default class PropertyGetter extends Node
   init(pod) {
     super.init(pod);
 
-    // default to self.
-    this.memory.puppet = this.owner.id;
+    // TODO: to be removed???
+    // default to owner.
+    this.memory.puppet = this.memory.puppet || this.owner.id;
 
-    // name is authoring time settings.
+    // property name is authoring time settings.
     this.property = pod.property;
 
     // dynamic output
