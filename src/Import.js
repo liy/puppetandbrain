@@ -75,7 +75,7 @@ export default class Import
       let variable = new Variable(this.ids[id]);
       variable.init(variablePod);
       // put the variable into its brain
-      let brain = LookUp.get(variablePod.brain);
+      let brain = LookUp.get(variablePod.brainID);
       brain.variables.add(variable);
     }
 
@@ -112,7 +112,7 @@ export default class Import
     // connect the inputs with outputs
     for(let id of pod.pointers) {
       let pointerPod = pod.store[id];
-      let inputNode = LookUp.get(pointerPod.inputNode);
+      let inputNode = LookUp.get(pointerPod.nodeID);
 
       let pointer = inputNode.inputs.get(pointerPod.name);
       pointer.set(pointerPod)

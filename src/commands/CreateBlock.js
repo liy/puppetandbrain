@@ -20,7 +20,7 @@ export default class CreateBlock extends Command
     let node = NodeFactory.create(this.pod.className, this.nodeID);
     node.init({
       ...this.pod,
-      owner: LookUp.get(this.ownerID),
+      ownerID: this.ownerID,
       x: this.x,
       y: this.y
     })

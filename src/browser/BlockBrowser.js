@@ -90,7 +90,7 @@ export default class BlockBrowser extends Browser
           ...NodeTemplate.Perform,
           name: `Perform ${actionName}`,
           // the node going to be created is owned by the current opening brain
-          owner: BrainGraph.brain.owner.id,
+          ownerID: BrainGraph.brain.owner.id,
           target: actor.id,
           actionID: actor.brain.actions[actionName].id,
           inputs: action.outputs.names.map(name => {
@@ -105,14 +105,14 @@ export default class BlockBrowser extends Browser
       templates.push({
         ...NodeTemplate.Getter,
         name: `Get ${variable.name}`,
-        owner: BrainGraph.brain.owner.id,
+        ownerID: BrainGraph.brain.owner.id,
         targetBrain: BrainGraph.brain.id,
         variableID: variable.id,
       })
       templates.push({
         ...NodeTemplate.Setter,
         name: `Set ${variable.name}`,
-        owner: BrainGraph.brain.owner.id,
+        ownerID: BrainGraph.brain.owner.id,
         targetBrain: BrainGraph.brain.id,
         variableID: variable.id,
       })
@@ -123,7 +123,7 @@ export default class BlockBrowser extends Browser
       ...NodeTemplate.Break,
       name: `Break Position`,
       // the node going to be created is owned by the current opening brain
-      owner: BrainGraph.brain.owner.id,
+      ownerID: BrainGraph.brain.owner.id,
       inputName: 'position',
       inputs: [{
         name: 'position',
@@ -141,7 +141,7 @@ export default class BlockBrowser extends Browser
       templates.push({
         ...NodeTemplate.PropertyGetter,
         name: `Get ${descriptor.property}`,
-        owner: BrainGraph.brain.owner.id,
+        ownerID: BrainGraph.brain.owner.id,
         property: descriptor.property,
         outputs: [{
           name: descriptor.property,
@@ -151,7 +151,7 @@ export default class BlockBrowser extends Browser
       templates.push({
         ...NodeTemplate.PropertySetter,
         name: `Set ${descriptor.property}`,
-        owner: BrainGraph.brain.owner.id,
+        ownerID: BrainGraph.brain.owner.id,
         property: descriptor.property,
         inputs: [{
           name: descriptor.property,

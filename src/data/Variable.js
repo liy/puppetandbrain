@@ -19,7 +19,7 @@ export default class Variable extends EventEmitter
   }
 
   init(pod) {
-    this.brain = LookUp.auto(pod.brain);
+    this.brain = LookUp.get(pod.brainID);
 
     this.type = pod.type;
     this._name = pod.name;
@@ -88,9 +88,9 @@ export default class Variable extends EventEmitter
       id: this.id,
       name: this.name,
       type: this.type,
+      brainID: this.brain.id,
       // Only record the initial data, not the runtime data...
       data: this.data,
-      brain: this.brain.id,
     }
   }
 }

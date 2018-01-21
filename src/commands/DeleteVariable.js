@@ -68,7 +68,7 @@ export default class DeleteVariable extends Command
     }
 
     // Check DeleteBlock command for a simpler version of recovering 
-    // execution connection and output input link...
+    // execution link and output input link...
     // Here is basically multiple undo of the DeleteBlock
 
     // connect setter's execution
@@ -86,7 +86,7 @@ export default class DeleteVariable extends Command
     // connect setter inputs directly using input
     for(let pod of this.setterPods) {
       for(let pointerPod of pod.inputs) {
-        let inputNode = LookUp.get(pointerPod.inputNode);
+        let inputNode = LookUp.get(pointerPod.nodeID);
         let pointer = inputNode.inputs.get(pointerPod.name);
         pointer.set(pointerPod)
       }
@@ -96,11 +96,11 @@ export default class DeleteVariable extends Command
       let node = LookUp.get(pod.id);
       for(let outputPod of pod.outputs) {
         let output = node.outputs.get(outputPod.name);
-        // Note, connection is not a qulified input pod. Resursive issue...
+        // Note, link is not a qulified input pod. Resursive issue...
         // Just loop through all the inputs connected to current output, and connect them!
-        for(let connection of outputPod.connections) {
-          let pointer = LookUp.get(connection.inputNode).inputs.get(connection.inputName);
-          pointer.connect(output, connection.id)
+        for(let link of outputPod.links) {
+          let pointer = LookUp.get(link.nodeID).inputs.get(link.name);
+          pointer.connect(output, link.id)
         }
       }
     }
@@ -110,11 +110,11 @@ export default class DeleteVariable extends Command
       let node = LookUp.get(pod.id);
       for(let outputPod of pod.outputs) {
         let output = node.outputs.get(outputPod.name);
-        // Note, connection is not a qulified input pod. Resursive issue...
+        // Note, link is not a qulified input pod. Resursive issue...
         // Just loop through all the inputs connected to current output, and connect them!
-        for(let connection of outputPod.connections) {
-          let pointer = LookUp.get(connection.inputNode).inputs.get(connection.inputName);
-          pointer.connect(output, connection.id)
+        for(let link of outputPod.links) {
+          let pointer = LookUp.get(link.nodeID).inputs.get(link.name);
+          pointer.connect(output, link.id)
         }
       }
     }

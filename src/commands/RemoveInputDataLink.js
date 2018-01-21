@@ -7,10 +7,10 @@ export default class RemoveInputDataLink extends Command
 
     this.inputNodeID = inputNodeID;
     this.inputName = inputName;
-    let input = this.inputNode.inputs.get(this.inputName);
-    if(input.output) {
-      this.outputNodeID = input.output.node.id;
-      this.outputName = input.output.name;
+    let pointer = this.inputNode.inputs.get(this.inputName);
+    if(pointer.output) {
+      this.outputNodeID = pointer.output.node.id;
+      this.outputName = pointer.output.name;
     }
   }
 
@@ -18,19 +18,14 @@ export default class RemoveInputDataLink extends Command
     return LookUp.get(this.inputNodeID)
   }
 
-  get input() {
-    return this.inputNode.inputs.get(this.inputName);
-  }
-
   process() {
-    if(!this.input.output) return null;
-
-    let input = this.inputNode.inputs.get(this.inputName);
+    let pointer = this.inputNode.inputs.get(this.inputName);
+    if(!pointer.output) return null;
     
     let inputPin = BrainGraph.getBlock(this.inputNodeID).inputPins.get(this.inputName);
-    let outputPin = BrainGraph.getBlock(input.output.node.id).outputPins.get(input.output.name);
+    let outputPin = BrainGraph.getBlock(pointer.output.node.id).outputPins.get(pointer.output.name);
 
-    input.disconnect();
+    pointer.disconnect();
 
     inputPin.refreshSymbol();
     outputPin.refreshSymbol();

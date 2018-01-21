@@ -3,19 +3,19 @@ import EventEmitter from '../utils/EventEmitter';
 // pointer
 export default class Pointer extends EventEmitter
 {
-  constructor(inputNode, name, type) {
+  constructor(node, name, type) {
     super();
 
     // assigned in the connect method
     this.id = null;
 
     this.type = type;
-    this.inputNode = inputNode;
+    this.node = node;
     this.name = name;
     // connected to nothing by default
     this.output = null;
     // by default it is a local node memory pointer
-    this.target = this.inputNode.memory;
+    this.target = this.node.memory;
     this.targetName = this.name;
   }
 
@@ -23,7 +23,7 @@ export default class Pointer extends EventEmitter
     // if the input has an ID, it must be connected to an output, so connect to the output
     if(pod.id) {
       // find the output
-      let output = LookUp.get(pod.output.node).outputs.get(pod.output.name);
+      let output = LookUp.get(pod.output.nodeID).outputs.get(pod.output.name);
       this.connect(output, pod.id);
     }
   }
@@ -58,7 +58,7 @@ export default class Pointer extends EventEmitter
       this.id = null;
       this.output = null;
 
-      this.target = this.inputNode.memory;
+      this.target = this.node.memory;
       this.targetName = this.name;
 
       this.emit('input.disconnected', this);
@@ -90,7 +90,7 @@ export default class Pointer extends EventEmitter
   pod() {
     return {
       className: this.__proto__.constructor.name,
-      inputNode: this.inputNode.id,
+      nodeID: this.node.id,
       name: this.name,
       // if id is null, it means this input uses node's memory
       id: this.id,

@@ -96,7 +96,7 @@ export class Task extends Node
     return {
       ...super.pod(detail),
       id: this.id,
-      execution: this.execution.pod(),
+      execution: this.execution.pod(detail),
       // This is used when redo block deletion to connect parent nodes 
       enter: this.enter.pod()
     }

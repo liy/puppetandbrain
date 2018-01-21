@@ -12,8 +12,8 @@ export default class Output extends EventEmitter
     this.data = data;
     this.name = name;
     this.isValue = true;
-    // this.connections = Object.create(null);
-    this.connections = {};
+
+    this.links = {};
   }
 
   assignProperty(name, descriptor) {
@@ -27,51 +27,54 @@ export default class Output extends EventEmitter
   }
 
   connect(input) {
-    this.connections[input.id] = input;
+    this.links[input.id] = input;
     this.emit('output.connected', this)
   }
 
   disconnect(input) {
-    delete this.connections[input.id];
+    delete this.links[input.id];
     this.emit('output.disconnected', this)
   }
 
   contains(id) {
-    return id in this.connections;
+    return id in this.links;
   }
 
   get isConnected() {
-    return Object.keys(this.connections).length != 0;
+    return Object.keys(this.links).length != 0;
   }
 
   getPointer(id) {
-    return this.connections[id];
+    return this.links[id];
   }
 
   getPointers() {
-    return Object.keys(this.connections).map(id => {
-      return this.connections[id];
+    return Object.keys(this.links).map(id => {
+      return this.links[id];
     })
   }
 
   pod(detail) {
     let pod = {
-      node: this.node.id,
+      nodeID: this.node.id,
       name: this.name,
       isValue: this.isValue,
       type: this.type,
     }
+
+    // TODO: make links into valid pointer pod?
+    //
     // ActivityLoader does not require information who connects to this output.
     // Because it just loops through all inputs, connect them all.
-    // On the other hand, DeleteBlock command require connections as it does not
-    // have access to a simple flat inputs array. It has to replies on the connections
+    // On the other hand,  command require links as it does not
+    // have access to a simple flat inputs array. It has to replies on the links
     // informatin to reconnect the other block's inputs with deleted outputs.
     if(detail) {
-      pod.connections = this.getPointers().map(pointer => {
+      pod.links = this.getPointers().map(pointer => {
         return {
           id: pointer.id,
-          inputNode: pointer.inputNode.id,
-          inputName: pointer.name,
+          nodeID: pointer.node.id,
+          name: pointer.name,
         }
       })
     }

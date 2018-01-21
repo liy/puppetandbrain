@@ -30,7 +30,7 @@ export default class CreateActor extends Command
     let gameStart = new GameStart();
     gameStart.init({
       ...NodeTemplate.GameStart,
-      owner: actor,
+      ownerID: actor.id,
       x: 50,
       y: 50
     })
@@ -38,7 +38,7 @@ export default class CreateActor extends Command
     let animation = new Animation();
     animation.init({
       ...NodeTemplate.Animation,
-      owner: actor,
+      ownerID: actor,
       x: 250,
       y: 50,
       memory: {

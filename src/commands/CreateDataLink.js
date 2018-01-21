@@ -11,7 +11,7 @@ export default class CreateDataLink extends Command
     this.outputName = outputName;
     
     let oldInput = this.inputNode.inputs.get(this.inputName);
-    if(oldInput) this.oldInputPod = oldInput.pod();
+    if(input) this.oldPointerPod = oldInput.pod();
   }
 
   get inputNode() {
@@ -48,7 +48,7 @@ export default class CreateDataLink extends Command
     input.disconnect();
     // note that this input could be local input
     // when undo better to disconnect first before set the input to the old input pod.
-    if(this.oldInputPod) input.set(this.oldInputPod);
+    if(this.oldPointerPod) input.set(this.oldPointerPod);
     BrainGraph.refresh()
   }
 

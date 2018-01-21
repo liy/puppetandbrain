@@ -11,7 +11,7 @@ export default class extends ElementControlButton
 
   pointerDown(e) {
     History.push(Commander.create('CreateVariable', {
-      brain: BrainGraph.brain.id,
+      brainID: BrainGraph.brain.id,
       type: DataType.VEC2,
       name: null,
       data: {

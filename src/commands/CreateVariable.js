@@ -8,7 +8,7 @@ export default class CreateVariable extends Command
   }
 
   get variables() {
-    return LookUp.get(this.variablePod.brain).variables;
+    return LookUp.get(this.variablePod.brainID).variables;
   }
 
   process() {
@@ -19,7 +19,7 @@ export default class CreateVariable extends Command
   }
 
   undo() {
-    Commander.create('DeleteVariable', this.variablePod.id, this.variablePod.brain).process();
+    Commander.create('DeleteVariable', this.variablePod.id, this.variablePod.brainID).process();
   }
 
   redo() {

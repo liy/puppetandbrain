@@ -30,7 +30,7 @@ export default class Execution extends ArrayMap
   }
 
   pod() {
-    return this.keys.map(name => {
+    return this.names.map(name => {
       return {
         name: name,
         nodeID: this.nodes[name] ? this.nodes[name].id : null

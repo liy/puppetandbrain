@@ -47,7 +47,7 @@ export default class CreateDemoActor extends Command
     let gameStart = new GameStart();
     gameStart.init({
       ...NodeTemplate.GameStart,
-      owner: actor,
+      ownerID: actor.id,
       x: 50,
       y: 50
     })
@@ -55,7 +55,7 @@ export default class CreateDemoActor extends Command
     let animation = new Animation();
     animation.init({
       ...NodeTemplate.Animation,
-      owner: actor,
+      ownerID: actor.id,
       x: 250,
       y: 50,
       memory: {
@@ -66,7 +66,7 @@ export default class CreateDemoActor extends Command
     let playSound = new PlaySound();
     playSound.init({
       ...NodeTemplate.PlaySound,
-      owner: actor,
+      ownerID: actor.id,
       x: 500,
       y: 50,
       memory: {
@@ -79,7 +79,7 @@ export default class CreateDemoActor extends Command
     let animationEvent = new AnimationEvent();
     animationEvent.init({
       ...NodeTemplate.AnimationEvent,
-      owner: actor,
+      ownerID: actor.id,
       x: 50,
       y: 250
     })
@@ -87,7 +87,7 @@ export default class CreateDemoActor extends Command
     let playEventSound = new PlaySound();
     playEventSound.init({
       ...NodeTemplate.PlaySound,
-      owner: actor,
+      ownerID: actor.id,
       x: 250,
       y: 250,
       memory: {
@@ -98,7 +98,7 @@ export default class CreateDemoActor extends Command
     let switchAccess = new SwitchAccess();
     switchAccess.init({
       ...NodeTemplate.SwitchAccess,
-      owner: actor,
+      ownerID: actor.id,
       x: 50,
       y: 532
     })
@@ -106,7 +106,7 @@ export default class CreateDemoActor extends Command
     let branch = new Branch();
     branch.init({
       ...NodeTemplate.Branch,
-      owner: actor,
+      ownerID: actor.id,
       x: 383,
       y: 532
     })
@@ -114,7 +114,7 @@ export default class CreateDemoActor extends Command
     let flipLeft = new FlipLeft();
     flipLeft.init({
       ...NodeTemplate.FlipLeft,
-      owner: actor,
+      ownerID: actor.id,
       x: 590,
       y: 488,
     })
@@ -122,7 +122,7 @@ export default class CreateDemoActor extends Command
     let flipRight = new FlipRight();
     flipRight.init({
       ...NodeTemplate.FlipRight,
-      owner: actor,
+      ownerID: actor.id,
       x: 590,
       y: 611,
     })
@@ -130,7 +130,7 @@ export default class CreateDemoActor extends Command
     let moveLeft = new StepLeft();
     moveLeft.init({
       ...NodeTemplate.StepLeft,
-      owner: actor,
+      ownerID: actor.id,
       x: 820,
       y: 437,
     })
@@ -138,7 +138,7 @@ export default class CreateDemoActor extends Command
     let moveRight = new StepRight();
     moveRight.init({
       ...NodeTemplate.StepRight,
-      owner: actor,
+      ownerID: actor.id,
       x: 820,
       y: 661,
     })
@@ -146,7 +146,7 @@ export default class CreateDemoActor extends Command
     let equal = new Equal();
     equal.init({
       ...NodeTemplate.Equal,
-      owner: actor,
+      ownerID: actor.id,
       memory: {
         // left switch id is 1
         B: 1
@@ -158,7 +158,7 @@ export default class CreateDemoActor extends Command
     let leftKey = new Keyboard();
     leftKey.init({
       ...NodeTemplate.Keyboard,
-      owner: actor,
+      ownerID: actor.id,
       memory: {
         'key name': 'ArrowLeft'
       },
@@ -169,7 +169,7 @@ export default class CreateDemoActor extends Command
     let rightKey = new Keyboard();
     rightKey.init({
       ...NodeTemplate.Keyboard,
-      owner: actor,
+      ownerID: actor.id,
       memory: {
         'key name': 'ArrowRight'
       },
