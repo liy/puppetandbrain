@@ -39,8 +39,8 @@ export default class DeleteBlock extends Command
 
     // connect inputs directly using pointer pod
     for(let pointerPod of this.pod.inputs) {
-      let inputNode = LookUp.get(pointerPod.inputNode);
-      let pointer = inputNode.inputs.get(pointerPod.name);
+      let node = LookUp.get(pointerPod.nodeID);
+      let pointer = node.inputs.get(pointerPod.name);
       pointer.set(pointerPod)
     }
 
@@ -51,7 +51,7 @@ export default class DeleteBlock extends Command
       // note connection not a qulified pointer pod. Resursive issue...
       // Just loop through all the inputs connected to current output, and connect them!
       for(let connection of outputPod.connections) {
-        let pointer = LookUp.get(connection.inputNode).inputs.get(connection.inputName);
+        let pointer = LookUp.get(connection.nodeID).inputs.get(connection.name);
         pointer.connect(output, connection.id)
       }
     }

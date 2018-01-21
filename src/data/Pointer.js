@@ -3,19 +3,27 @@ import EventEmitter from '../utils/EventEmitter';
 // input
 export default class Pointer extends EventEmitter
 {
-  constructor(inputNode, name, type) {
+  /**
+   * Creates an instance of Pointer, points to its owner node's
+   * memory, or another node's output. 
+   * @param {any} node Owner of the input
+   * @param {any} name name of the input
+   * @param {any} type type of the input
+   * @memberof Pointer
+   */
+  constructor(node, name, type) {
     super();
 
     // assigned in the connect method
     this.id = null;
 
     this.type = type;
-    this.inputNode = inputNode;
+    this.node = node;
     this.name = name;
     // connected to nothing by default
     this.output = null;
     // by default it is a local node memory pointer
-    this.target = this.inputNode.memory;
+    this.target = this.node.memory;
     this.targetName = this.name;
   }
 
@@ -62,7 +70,7 @@ export default class Pointer extends EventEmitter
       this.id = null;
       this.output = null;
 
-      this.target = this.inputNode.memory;
+      this.target = this.node.memory;
       this.targetName = this.name;
 
       this.emit('input.disconnected', this);
@@ -94,7 +102,8 @@ export default class Pointer extends EventEmitter
   pod() {
     return {
       className: this.__proto__.constructor.name,
-      inputNode: this.inputNode.id,
+      // owner of the pointer
+      nodeID: this.node.id,
       name: this.name,
       // only record the information below if pointer points to another node
       // undefined field will be removed when serailized

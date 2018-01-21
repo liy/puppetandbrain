@@ -81,9 +81,8 @@ export default class ActivityLoader
     // connect the inputs with outputs
     for(let id of pod.pointers) {
       let pointerPod = pod.store[id];
-      let inputNode = LookUp.get(pointerPod.inputNode);
-
-      let pointer = inputNode.inputs.get(pointerPod.name);
+      let node = LookUp.get(pointerPod.nodeID);
+      let pointer = node.inputs.get(pointerPod.name);
       pointer.set(pointerPod)
     }
   }

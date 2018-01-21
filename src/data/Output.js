@@ -70,8 +70,8 @@ export default class Output extends EventEmitter
       pod.connections = this.getPointers().map(pointer => {
         return {
           id: pointer.id,
-          inputNode: pointer.inputNode.id,
-          inputName: pointer.name,
+          nodeID: pointer.node.id,
+          name: pointer.name,
         }
       })
     }

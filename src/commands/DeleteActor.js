@@ -44,8 +44,8 @@ export default class DeleteActor extends Command
 
     // connect the inputs with outputs
     for(let pointerPod of this.pod.brain.pointers) {
-      let inputNode = LookUp.get(pointerPod.inputNode);
-      let pointer = inputNode.inputs.get(pointerPod.name);
+      let node = LookUp.get(pointerPod.nodeID);
+      let pointer = node.inputs.get(pointerPod.name);
       pointer.set(pointerPod)
     }
   }
