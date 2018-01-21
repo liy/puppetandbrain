@@ -21,10 +21,6 @@ export default class RotateAntiClockwise extends Task
     Editor.on('game.stop', this.stop, this)
   }
 
-  init(pod) {
-    super.init(pod);
-  }
-
   destroy() {
     super.destroy();
     Editor.off('game.stop', this.stop, this)
