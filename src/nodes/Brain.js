@@ -1,5 +1,4 @@
 import ArrayMap from '../utils/ArrayMap';
-import Pointer from '../data/Pointer';
 import Task from './Task';
 import VariableList from '../data/VariableList';
 import Variable from '../data/Variable';
@@ -48,16 +47,16 @@ export default class Brain
     return this.nodes.getValues();
   }
 
-  getPointers() {
+  getDataLinks() {
     let nodes = this.nodes.getValues();
-    let pointers = [];
+    let dataLinks = [];
     for(let node of nodes) {
       for(let name of node.inputs.names) {
-        let pointer = node.inputs.get(name);
-        if(pointer.isOutputPointer) pointers.push(pointer); 
+        let input = node.inputs.get(name);
+        if(input.isConnected) dataLinks.push(input); 
       }
     }
-    return pointers;
+    return dataLinks;
   }
 
   getTasks() {
@@ -102,8 +101,8 @@ export default class Brain
       pod.nodes = this.nodes.getValues().map(node => {
         return node.pod(detail)
       })
-      pod.pointers = this.getPointers().map(pointer => {
-        return pointer.pod();
+      pod.inputs = this.getInputs().map(input => {
+        return input.pod();
       })
     }
     else {

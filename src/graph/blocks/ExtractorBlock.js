@@ -36,7 +36,7 @@ export default class ExtractorBlock extends Block
 
   addPinTrigger(name) {
     // let node to deal with the detail output assignment
-    this.node.outputs.addOutput(name);
+    this.node.outputs.add(name);
   }
 
   onOutputAdded(name) {

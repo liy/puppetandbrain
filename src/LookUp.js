@@ -6,7 +6,7 @@ import Delay from './switch/Delay';
 var STORE = {};
 var ACTORS = [];
 var NODES = [];
-var POINTERS = [];
+var DATALINKS = [];
 var BRAINS = [];
 // brain variable and actor properties
 var VARIABLES = [];
@@ -118,15 +118,15 @@ window.LookUp = {
     delete STORE[id]
   },
 
-  addPointer: function(entry, id) {
+  addDataLink: function(entry, id) {
     id = create(entry, id)
-    POINTERS.push(id);
+    DATALINKS.push(id);
     return id;
   },
 
-  removePointer: function(id) {
-    let index = POINTERS.indexOf(id);
-    if(index != -1) POINTERS.splice(index, 1);
+  removeDataLink: function(id) {
+    let index = DATALINKS.indexOf(id);
+    if(index != -1) DATALINKS.splice(index, 1);
     delete STORE[id]
   },
 
@@ -187,8 +187,8 @@ window.LookUp = {
     })
   },
 
-  getPointers: function() {
-    return POINTERS.map(id => {
+  getDataLinks: function() {
+    return DATALINKS.map(id => {
       return STORE[id]
     })
   },
@@ -211,7 +211,7 @@ window.LookUp = {
     }
     result.actors = ACTORS;
     result.nodes = NODES;
-    result.pointers = POINTERS;
+    result.dataLinks = DATALINKS;
     result.brains = BRAINS;
     result.variables = VARIABLES;
     result.stage = Editor.stage.actors.map((actorID, actor) => {

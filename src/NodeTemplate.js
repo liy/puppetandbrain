@@ -27,7 +27,7 @@ const TestNode = {
 
 
   inputs: [{
-    // id of the input(pointer)
+    // id of the input
     id: 334,
 
     name: 'A',

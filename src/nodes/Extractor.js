@@ -26,7 +26,7 @@ export default class Extractor extends Node
   init(pod) {
     super.init(pod);
 
-    let pointer = this.inputs.get('in');
+    let input = this.inputs.get('in');
     // All the outputs in extract are property 
     if(pod.outputs) {
       for(let outputPod of pod.outputs) {
@@ -35,7 +35,7 @@ export default class Extractor extends Node
             // note that extractor does not care whether input is a reference
             // or an id... it is better to contains the complexity here without requring
             // other nodes to return certain type...
-            return LookUp.auto(pointer.value)[outputPod.name]
+            return LookUp.auto(input.value)[outputPod.name]
           }
         });
       }
@@ -46,7 +46,7 @@ export default class Extractor extends Node
     this.outputs.on('output.added', name => {
       this.outputs.assignProperty(name, {
         get: () => {
-          return LookUp.auto(pointer.value)[name]
+          return LookUp.auto(input.value)[name]
         }
       });
     });
