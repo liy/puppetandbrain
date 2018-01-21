@@ -25,7 +25,6 @@ export default class Getter extends Node
   init(pod) {
     super.init(pod);
 
-    this.targetBrain = LookUp.get(pod.targetBrainID);
     // use variable id instead of name, as name will be changed by user
     this.variableID = pod.variableID;
     this.variable = LookUp.get(this.variableID);
@@ -56,7 +55,6 @@ export default class Getter extends Node
 
   pod(detail) {
     let pod = super.pod(detail);
-    pod.targetBrainID = this.targetBrain.id;
     pod.variableID = this.variableID;
     // TODO: not sure this is useful or not.
     pod.variableName = this.variableName;

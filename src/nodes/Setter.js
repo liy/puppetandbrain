@@ -24,7 +24,6 @@ export default class Setter extends Task
   init(pod) {
     super.init(pod);
 
-    this.targetBrain = LookUp.auto(pod.targetBrainID);
     // use variable id instead of name, as name will be changed by user
     this.variableID = pod.variableID;
     this.variable = LookUp.get(this.variableID);
@@ -70,7 +69,6 @@ export default class Setter extends Task
 
   pod(detail) {
     let pod = super.pod(detail);
-    pod.targetBrainID = this.targetBrain.id;
     pod.variableID = this.variableID;
     return pod;
   }

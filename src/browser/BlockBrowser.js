@@ -105,14 +105,12 @@ export default class BlockBrowser extends Browser
         ...NodeTemplate.Getter,
         name: `Get ${variable.name}`,
         ownerID: BrainGraph.brain.owner.id,
-        targetBrainID: BrainGraph.brain.id,
         variableID: variable.id,
       })
       templates.push({
         ...NodeTemplate.Setter,
         name: `Set ${variable.name}`,
         ownerID: BrainGraph.brain.owner.id,
-        targetBrainID: BrainGraph.brain.id,
         variableID: variable.id,
       })
     }
