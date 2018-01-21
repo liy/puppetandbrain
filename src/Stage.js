@@ -44,7 +44,6 @@ export default class Stage
   removeActor(actor) {
     this.actors.remove(actor.id);
     actor.offStage();
-    actor.destroy();
   }
 
   addChild(child) {

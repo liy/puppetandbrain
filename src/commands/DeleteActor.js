@@ -1,5 +1,5 @@
 import Command from './Command';
-import SpineActor from '../objects/SpineActor';
+import * as ObjecClasses from '../objects';
 import Action from '../nodes/Action';
 import Variable from '../data/Variable';
 
@@ -14,18 +14,17 @@ export default class DeleteActor extends Command
     let actor = LookUp.get(this.actorID);
     this.pod = actor.pod(true);
 
-    console.log(this.pod)
-
     actor.deselect()
 
-    actor.destroy();
     Editor.stage.removeActor(actor);
+    actor.destroy();
 
     return this;
   }
 
   undo() {
-    let actor = new SpineActor(this.pod.id);
+    // let actor = new SpineActor(this.pod.id);
+    let actor = new ObjecClasses[this.pod.className](this.pod.id);
     actor.init(this.pod);
     Editor.stage.addActor(actor)
 

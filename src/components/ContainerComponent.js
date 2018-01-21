@@ -12,7 +12,7 @@ export default class ContainerComponent extends Component
     this.container.interactive = true;
   }
 
-  added() {
+  onStage() {
     Editor.stage.addChild(this.container);
     this.container.on('pointerdown', this.pointerDown, this);
     this.container.on('pointerup', this.pointerUp, this);
@@ -20,7 +20,7 @@ export default class ContainerComponent extends Component
     this.container.on('mouseout', this.mouseOut, this);
   }
 
-  removed() {
+  offStage() {
     Editor.stage.removeChild(this.container);
     this.container.off('pointerdown', this.pointerDown, this);
     this.container.off('pointerup', this.pointerUp, this);

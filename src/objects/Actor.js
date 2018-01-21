@@ -68,6 +68,7 @@ export default class Actor extends EventEmitter
     this.removeComponents();
     LookUp.removeActor(this.id);
     document.removeEventListener('mousemove', this.dragMove);
+    document.removeEventListener('mouseup', this.relaseOutside);
 
     Editor.off('game.prestart', this.gamePrestart, this);
     Editor.off('game.stop', this.gameStop, this);
