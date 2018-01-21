@@ -89,7 +89,7 @@ export default class Brain
     let pod = {
       className: this.__proto__.constructor.name,
       id: this.id,
-      variables: this.variables.pod(),
+      variables: this.variables.pod(detail),
       // Note that the owner is not here.
       // This is because in brain is created in Actor,
       // does not need owner information.

@@ -10,7 +10,7 @@ export default class VariableList extends EventEmitter
 
     this.brain = brain;
     
-    this.map = new ArrayMap();
+    this.variables = new ArrayMap();
   }
 
   create(variablePod) {
@@ -21,13 +21,13 @@ export default class VariableList extends EventEmitter
   }
 
   add(variable) {
-    this.map.set(variable.id, variable);
+    this.variables.set(variable.id, variable);
     this.emit('variable.added', variable)
     return variable;
   }
 
   insert(variable, index) {
-    this.map.insert(variable.id, variable, index);
+    this.variables.insert(variable.id, variable, index);
     this.emit('variable.added', variable)
     return variable;
   }
@@ -36,39 +36,39 @@ export default class VariableList extends EventEmitter
     const {
       value: variable,
       index,
-    } = this.map.remove(id);
+    } = this.variables.remove(id);
     const removed = {variable, index}
     this.emit('variable.removed', removed);
     return removed;
   }
   
   updateRuntime() {
-    for(let variable of this.map) {
+    for(let variable of this.variables) {
       variable.updateRuntime();
     }
   }
 
   get values() {
-    return this.map.values;
+    return this.variables.values;
   }
 
   get names() {
-    return this.map.keys.map(id => {
-      return this.map.get(id).name;
+    return this.variables.keys.map(id => {
+      return this.variables.get(id).name;
     })
   }
 
   [Symbol.iterator]() {
-    return this.map[Symbol.iterator]();
+    return this.variables[Symbol.iterator]();
   }
 
-  pod() {
-    return this.map.keys.map(name => {
-      return {
-        name,
-        // TODO: not going to inlcude the actual variable data in the list
-        // it is stored in the LookUp store
-        variable: this.values[name].id,
+  pod(detail) {
+    return this.variables.map((id, variable) => {
+      if(detail) {
+        return variable.pod();
+      }
+      else {
+        return id;
       }
     })
   }

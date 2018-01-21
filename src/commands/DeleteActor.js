@@ -1,6 +1,7 @@
 import Command from './Command';
 import SpineActor from '../objects/SpineActor';
 import Action from '../nodes/Action';
+import Variable from '../data/Variable';
 
 export default class DeleteActor extends Command
 {
@@ -12,6 +13,8 @@ export default class DeleteActor extends Command
   process() {
     let actor = LookUp.get(this.actorID);
     this.pod = actor.pod(true);
+
+    console.log(this.pod)
 
     actor.deselect()
 
@@ -25,6 +28,15 @@ export default class DeleteActor extends Command
     let actor = new SpineActor(this.pod.id);
     actor.init(this.pod);
     Editor.stage.addActor(actor)
+
+    // create variables
+    for(let variablePod of this.pod.brain.variables) {
+      let variable = new Variable(variablePod.id);
+      variable.init(variablePod);
+      // put the variable into its brain
+      let brain = LookUp.get(variablePod.brainID);
+      brain.variables.add(variable);
+    }
 
     // create and init nodes
     for(let nodePod of this.pod.brain.nodes) {
