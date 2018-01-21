@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20">
-  <path fill="none" stroke="#333333" stroke-width="4" stroke-linecap="round" stroke-miterlimit="10" d="M4 10h22"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 16">
+  <path fill="none" stroke="#33333388" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" d="M6 8h14"/>
   <g id="knob">
-    <circle cx="10" cy="10" r="10" fill="#1A1A1A"/>
-    <circle id="color" cx="10" cy="10" r="7" fill="#006AFF"/>
+    <circle cx="8" cy="8" r="8" fill="#1A1A1A"/>
+    <circle id="color" cx="8" cy="8" r="4" fill="#006AFF"/>
   </g>
 </svg>
