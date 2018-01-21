@@ -91,7 +91,6 @@ export default class BlockBrowser extends Browser
           name: `Perform ${actionName}`,
           // the node going to be created is owned by the current opening brain
           ownerID: BrainGraph.brain.owner.id,
-          target: actor.id,
           actionID: actor.brain.actions[actionName].id,
           inputs: action.outputs.names.map(name => {
             return {name}

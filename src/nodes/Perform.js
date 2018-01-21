@@ -31,8 +31,6 @@ export default class Perform extends Task
   init(pod) {
     super.init(pod);
 
-    // TODO: target is really not needed
-    this.target = LookUp.auto(pod.target);
     this.actionID = pod.actionID;
     
     // Check action is valid or not, since action might be deleted
@@ -82,12 +80,11 @@ export default class Perform extends Task
   }
 
   get nodeName() {
-    return this.target.name + ' Perform '  + this.actionName;
+    return this.action.owner.name + ' Perform '  + this.actionName;
   }
 
   pod(detail=false) {
     let pod = super.pod(detail);
-    pod.target = this.target.id;
     pod.actionID = this.action ? this.action.id : null;
     return pod;
   }
