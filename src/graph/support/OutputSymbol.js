@@ -49,10 +49,10 @@ export default class OutputSymbol extends DataSymbol
   }
 
   drawConnection() {
-    let inputs = this.output.getInputs();
-    for(let input of inputs) {
-      let inputBlock = BrainGraph.getBlock(input.node.id);
-      inputBlock.inputPins.get(input.name).drawConnection();
+    let pointers = this.output.getPointers();
+    for(let pointer of pointers) {
+      let inputBlock = BrainGraph.getBlock(pointer.inputNode.id);
+      inputBlock.inputPins.get(pointer.name).drawConnection();
     }
   }
 

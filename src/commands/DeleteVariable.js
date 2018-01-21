@@ -85,10 +85,10 @@ export default class DeleteVariable extends Command
     
     // connect setter inputs directly using input
     for(let pod of this.setterPods) {
-      for(let inputPod of pod.inputs) {
-        let node = LookUp.get(inputPod.nodeID);
-        let input = node.inputs.get(inputPod.name);
-        input.set(inputPod)
+      for(let pointerPod of pod.inputs) {
+        let inputNode = LookUp.get(pointerPod.inputNode);
+        let pointer = inputNode.inputs.get(pointerPod.name);
+        pointer.set(pointerPod)
       }
     }
     // connect setter outputs
@@ -99,8 +99,8 @@ export default class DeleteVariable extends Command
         // Note, connection is not a qulified input pod. Resursive issue...
         // Just loop through all the inputs connected to current output, and connect them!
         for(let connection of outputPod.connections) {
-          let input = LookUp.get(connection.nodeID).inputs.get(connection.name);
-          input.connect(output, connection.id)
+          let pointer = LookUp.get(connection.inputNode).inputs.get(connection.inputName);
+          pointer.connect(output, connection.id)
         }
       }
     }
@@ -113,8 +113,8 @@ export default class DeleteVariable extends Command
         // Note, connection is not a qulified input pod. Resursive issue...
         // Just loop through all the inputs connected to current output, and connect them!
         for(let connection of outputPod.connections) {
-          let input = LookUp.get(connection.nodeID).inputs.get(connection.name);
-          input.connect(output, connection.id)
+          let pointer = LookUp.get(connection.inputNode).inputs.get(connection.inputName);
+          pointer.connect(output, connection.id)
         }
       }
     }

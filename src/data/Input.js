@@ -3,27 +3,20 @@ import EventEmitter from '../utils/EventEmitter';
 // input
 export default class Input extends EventEmitter
 {
-  /**
-   * Creates an instance of Input, points to its owner node's
-   * memory, or another node's output. 
-   * @param {any} node Owner of the input
-   * @param {any} name name of the input
-   * @param {any} type type of the input
-   * @memberof Input
-   */
-  constructor(node, name, type) {
+  constructor(inputNode, name, type) {
     super();
 
     // assigned in the connect method
     this.id = null;
 
     this.type = type;
-    this.node = node;
+    this.inputNode = inputNode;
     this.name = name;
     // connected to nothing by default
     this.output = null;
-    // by default it uses local node memory
-    this.target = this.node.memory;    this.targetName = this.name;
+    // by default it is a local node memory pointer
+    this.target = this.inputNode.memory;
+    this.targetName = this.name;
   }
 
   set(pod) {
@@ -65,7 +58,7 @@ export default class Input extends EventEmitter
       this.id = null;
       this.output = null;
 
-      this.target = this.node.memory;
+      this.target = this.inputNode.memory;
       this.targetName = this.name;
 
       this.emit('input.disconnected', this);
@@ -97,8 +90,7 @@ export default class Input extends EventEmitter
   pod() {
     return {
       className: this.__proto__.constructor.name,
-      // owner of the input
-      nodeID: this.node.id,
+      inputNode: this.inputNode.id,
       name: this.name,
       // if id is null, it means this input uses node's memory
       id: this.id,

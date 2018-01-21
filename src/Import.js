@@ -110,12 +110,12 @@ export default class Import
     }
 
     // connect the inputs with outputs
-    for(let id of pod.inputs) {
-      let inputPod = pod.store[id];
-      let node = LookUp.get(inputPod.nodeID);
+    for(let id of pod.pointers) {
+      let pointerPod = pod.store[id];
+      let inputNode = LookUp.get(pointerPod.inputNode);
 
-      let input = node.inputs.get(inputPod.name);
-      input.set(inputPod)
+      let pointer = inputNode.inputs.get(pointerPod.name);
+      pointer.set(pointerPod)
     }
   }
 }

@@ -15,12 +15,12 @@ export default class RemoveOutputDataLink extends Command
   }
 
   process() {
-    for(let pod of this.inputPods) {
-      // Since input id can change... better to grab it from node
-      let input = LookUp.get(pod.nodeID).inputs.get(pod.name);
-      input.disconnect();
+    for(let pod of this.pointerPods) {
+      // Since pointer id can change... better to grab it from node
+      let pointer = LookUp.get(pod.inputNode).inputs.get(pod.name);
+      pointer.disconnect();
 
-      BrainGraph.getBlock(input.node.id).inputPins.get(input.name).refreshSymbol();
+      BrainGraph.getBlock(pointer.inputNode.id).inputPins.get(pointer.name).refreshSymbol();
     }
     BrainGraph.getBlock(this.outputNodeID).outputPins.get(this.outputName).refreshSymbol();
 
@@ -28,11 +28,11 @@ export default class RemoveOutputDataLink extends Command
   }
 
   undo() {
-    // Note once input is disconnected, it is removed from lookup table.... not sure whether it is a good thing or not
-    for(let pod of this.inputPods) {
-      // so we grab the input from the node, and restore it using the input pod
-      let input = LookUp.get(pod.nodeID).inputs.get(pod.name);
-      input.set(pod);
+    // Note once pointer is disconnected, it is removed from lookup table.... not sure whether it is a good thing or not
+    for(let pod of this.pointerPods) {
+      // so we grab the pointer from the node, and restore it using the pointer pod
+      let pointer = LookUp.get(pod.inputNode).inputs.get(pod.name);
+      pointer.set(pod);
     }
     BrainGraph.refresh();
   }
