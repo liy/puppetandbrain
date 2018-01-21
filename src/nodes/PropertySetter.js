@@ -19,8 +19,6 @@ export default class PropertySetter extends Task
 {
   constructor(id) {
     super(id);
-
-    this.targetBrain = null;
   }
 
   init(pod) {

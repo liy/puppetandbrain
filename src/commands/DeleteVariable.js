@@ -123,12 +123,12 @@ export default class DeleteVariable extends Command
     for(let pod of this.getterPods) {
       // make sure the node related block needs belong the variable owner brain
       // this is for future proof, if we allow variable access across different brains.
-      if(pod.targetBrain == this.brainID) {
+      if(pod.targetBrainID == this.brainID) {
         BlockFactory.create(LookUp.get(pod.id));
       }
     }
     for(let pod of this.setterPods) {
-      if(pod.targetBrain == this.brainID) {
+      if(pod.targetBrainID == this.brainID) {
         BlockFactory.create(LookUp.get(pod.id));
       }
     }
