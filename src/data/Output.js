@@ -44,11 +44,11 @@ export default class Output extends EventEmitter
     return Object.keys(this.connections).length != 0;
   }
 
-  getInput(id) {
+  getPointer(id) {
     return this.connections[id];
   }
 
-  getInputs() {
+  getPointers() {
     return Object.keys(this.connections).map(id => {
       return this.connections[id];
     })
@@ -67,7 +67,7 @@ export default class Output extends EventEmitter
     // have access to a simple flat inputs array. It has to replies on the connections
     // informatin to reconnect the other block's inputs with deleted outputs.
     if(detail) {
-      pod.connections = this.getInputs().map(input => {
+      pod.connections = this.getPointers().map(pointer => {
         return {
           id: pointer.id,
           inputNode: pointer.inputNode.id,

@@ -47,16 +47,16 @@ export default class Brain
     return this.nodes.getValues();
   }
 
-  getDataLinks() {
+  getPointers() {
     let nodes = this.nodes.getValues();
-    let dataLinks = [];
+    let pointers = [];
     for(let node of nodes) {
       for(let name of node.inputs.names) {
-        let input = node.inputs.get(name);
-        if(input.isConnected) dataLinks.push(input); 
+        let pointer = node.inputs.get(name);
+        if(pointer.isConnected) pointers.push(pointer); 
       }
     }
-    return dataLinks;
+    return pointers;
   }
 
   getTasks() {
@@ -101,8 +101,8 @@ export default class Brain
       pod.nodes = this.nodes.getValues().map(node => {
         return node.pod(detail)
       })
-      pod.inputs = this.getInputs().map(input => {
-        return input.pod();
+      pod.pointers = this.getPointers().map(pointer => {
+        return pointer.pod();
       })
     }
     else {

@@ -9,8 +9,8 @@ export default class RemoveOutputDataLink extends Command
     this.outputName = outputName;
 
     // Keep track of raw input data, so we can restore the input in undo
-    this.inputPods = LookUp.get(this.outputNodeID).outputs.get(this.outputName).getInputs().map(input => {
-      return input.pod()
+    this.pointerPods = LookUp.get(this.outputNodeID).outputs.get(this.outputName).getPointers().map(pointer => {
+      return pointer.pod()
     })
   }
 

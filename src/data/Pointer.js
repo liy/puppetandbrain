@@ -1,7 +1,7 @@
 import EventEmitter from '../utils/EventEmitter';
 
-// input
-export default class Input extends EventEmitter
+// pointer
+export default class Pointer extends EventEmitter
 {
   constructor(inputNode, name, type) {
     super();
@@ -37,7 +37,7 @@ export default class Input extends EventEmitter
     let oldOutput = this.disconnect();
 
     // Only connected input has id
-    this.id = LookUp.addDataLink(this, id);
+    this.id = LookUp.addPointer(this, id);
     this.output = output;
     this.output.connect(this);
 
@@ -54,7 +54,7 @@ export default class Input extends EventEmitter
     let oldOutput = this.output;
     if(this.output) {
       this.output.disconnect(this);
-      LookUp.removeDataLink(this.id);
+      LookUp.removePointer(this.id);
       this.id = null;
       this.output = null;
 

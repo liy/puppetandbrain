@@ -1,4 +1,4 @@
-import Input from './Input';
+import Pointer from './Pointer';
 import ArrayMap from '../utils/ArrayMap';
 
 export default class InputList extends ArrayMap
@@ -22,7 +22,7 @@ export default class InputList extends ArrayMap
   add(name, type) {
     let input = this.get(name);
     if(!input) {
-      input = new Input(this.node, name, type)
+      input = new Pointer(this.node, name, type)
       this.set(name, input);
     }
     return input;
