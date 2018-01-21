@@ -78,8 +78,8 @@ export default class ActivityLoader
       }
     }
 
-    // connect the inputs with outputs
-    for(let id of pod.inputs) {
+    // connect the input with outputs
+    for(let id of pod.dataLinks) {
       let inputPod = pod.store[id];
       let node = LookUp.get(inputPod.nodeID);
       let input = node.inputs.get(inputPod.name);

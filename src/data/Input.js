@@ -35,10 +35,6 @@ export default class Input extends EventEmitter
     }
   }
 
-  get isOutputPointer() {
-    return this.output != null;
-  }
-
   get isConnected() {
     return this.output != null;
   }
@@ -48,7 +44,7 @@ export default class Input extends EventEmitter
     let oldOutput = this.disconnect();
 
     // Only connected input has id
-    this.id = LookUp.addPointer(this, id);
+    this.id = LookUp.addDataLink(this, id);
     this.output = output;
     this.output.connect(this);
 
@@ -65,7 +61,7 @@ export default class Input extends EventEmitter
     let oldOutput = this.output;
     if(this.output) {
       this.output.disconnect(this);
-      LookUp.removePointer(this.id);
+      LookUp.removeDataLink(this.id);
       this.id = null;
       this.output = null;
 

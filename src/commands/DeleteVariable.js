@@ -85,10 +85,10 @@ export default class DeleteVariable extends Command
     
     // connect setter inputs directly using input
     for(let pod of this.setterPods) {
-      for(let pointerPod of pod.inputs) {
-        let node = LookUp.get(pointerPod.nodeID);
-        let input = node.inputs.get(pointerPod.name);
-        input.set(pointerPod)
+      for(let inputPod of pod.inputs) {
+        let node = LookUp.get(inputPod.nodeID);
+        let input = node.inputs.get(inputPod.name);
+        input.set(inputPod)
       }
     }
     // connect setter outputs

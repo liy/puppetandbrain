@@ -59,7 +59,7 @@ export default class OutputList extends EventEmitter
     return this.list.length;
   }
 
-  addOutput(name, type) {
+  add(name, type) {
     let output = this.list.get(name);
     if(!output) {
       output = new Output(this.node, this.data, name, type)
@@ -70,11 +70,11 @@ export default class OutputList extends EventEmitter
   }
 
   assignProperty(name, descriptor, type) {
-    this.addOutput(name, type).assignProperty(name, descriptor);
+    this.add(name, type).assignProperty(name, descriptor);
   }
 
   assignValue(name, value, type) {
-    this.addOutput(name, type).assignValue(name, value);
+    this.add(name, type).assignValue(name, value);
   }
 
   clearValues() {

@@ -19,7 +19,7 @@ export default class InputList extends ArrayMap
     }
   }
 
-  addInput(name, type) {
+  add(name, type) {
     let input = this.get(name);
     if(!input) {
       input = new Input(this.node, name, type)
@@ -30,10 +30,6 @@ export default class InputList extends ArrayMap
 
   value(name) {
     return this.inputs[name].value;
-  }
-
-  isConnected(name) {
-    return !this.inputs[name].isLocalPointer;
   }
 
   pod() {

@@ -61,7 +61,7 @@ export default class ActionBlock extends Block
   }
 
   addPinTrigger(name) {
-    this.node.outputs.addOutput(name);
+    this.node.outputs.add(name);
   }
 
   onOutputAdded(name) {

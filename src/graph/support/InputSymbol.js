@@ -70,7 +70,7 @@ export default class InputSymbol extends DataSymbol
   }
 
   getOutputPin() {
-    if(!this.input.isOutputPointer) return null;
+    if(!this.input.isConnected) return null;
     return BrainGraph.getBlock(this.input.output.node.id).outputPins.get(this.input.output.name);
   }
 

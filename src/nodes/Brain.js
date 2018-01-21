@@ -47,16 +47,16 @@ export default class Brain
     return this.nodes.getValues();
   }
 
-  getInputs() {
+  getDataLinks() {
     let nodes = this.nodes.getValues();
-    let inputs = [];
+    let dataLinks = [];
     for(let node of nodes) {
       for(let name of node.inputs.names) {
         let input = node.inputs.get(name);
-        if(input.isOutputPointer) inputs.push(input); 
+        if(input.isConnected) dataLinks.push(input); 
       }
     }
-    return inputs;
+    return dataLinks;
   }
 
   getTasks() {
