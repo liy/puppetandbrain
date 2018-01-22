@@ -77,8 +77,8 @@ export default class Pointer extends EventEmitter
   export(data={}) {
     // only need to export connected input
     if(this.id) {
-      data.inputs = data.inputs || [];
-      data.inputs.push(this.id);
+      data.pointers = data.pointers || [];
+      data.pointers.push(this.id);
 
       data.store = data.store || {};
       data.store[this.id] = this.pod()
