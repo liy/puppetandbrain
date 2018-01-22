@@ -22,4 +22,12 @@ export default class GroupSection
     
     this.grid.appendChild(gridBox)
   }
+
+  append(item) {
+    const gridBox = document.createElement('div');
+    gridBox.className = 'grid-box';
+    gridBox.appendChild(item.element);
+    
+    this.grid.appendChild(gridBox)
+  }
 }

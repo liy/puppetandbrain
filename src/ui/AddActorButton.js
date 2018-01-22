@@ -1,6 +1,7 @@
 require('./AddActorButton.scss');
 import AddActorIcon from '../assets/add-actor.svg';
 import {svgElement} from '../utils/utils';
+import PuppetBrowser from '../browser/PuppetBrowser';
 
 const ACTORS = [
   // require('../assets/chicken/chicken.info.json'),
@@ -26,7 +27,10 @@ export default class AddActorButton
     this.element.addEventListener('mousedown', e => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      History.push(Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).processAndSave());
+      // History.push(Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).processAndSave());
+
+      var browser = new PuppetBrowser();
+      browser.open()
     })
   }
 }
