@@ -13,7 +13,6 @@ export default class ImportActors
   }
 
   createActors(pod) {
-    console.log(pod);
     for(let id of pod.actors) {
       // note that I do not need to remove brainID from actorPod.
       // Because LookUp will generate a new ID if brainID exist.
@@ -39,6 +38,8 @@ export default class ImportActors
   }
 
   createNodes(pod) {
+    if(!pod.nodes) return;
+
     let performs= [];
     for(let id of pod.nodes) {
       let nodePod = pod.store[id];
@@ -89,7 +90,6 @@ export default class ImportActors
         for(let execPod of nodePod.execution) {
           // ignore the connection are NOT part of the imported node
           let targetNode = this.mapping[execPod.nodeID];
-          console.log(targetNode)
           if(targetNode) {
             node.connectNext(targetNode, execPod.name)
           }

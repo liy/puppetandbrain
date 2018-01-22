@@ -88,14 +88,14 @@ function simpleInit() {
   // start the activity when cow and donkey are loaded
   Promise.all(promises).then(() => {
     
-    // let cb = new ChoiceBox();
-    // cb.init();
-    // cb.x = 600;
-    // cb.y = 300;
-    // Editor.stage.addActor(cb)
+    let cb = new ChoiceBox();
+    cb.init();
+    cb.x = 600;
+    cb.y = 300;
+    Editor.stage.addActor(cb)
 
     let importActors = new ImportActors();
-    importActors.start(LookUp.getActors()[0].export());
+    importActors.start(LookUp.getActors()[1].export());
 
     new AddActorButton();
     new DebugButton();
