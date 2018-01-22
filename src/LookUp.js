@@ -204,6 +204,13 @@ window.LookUp = {
     return id in STORE;
   },
 
+  getPuppets: function() {
+    // collection.forEach(doc => {
+    //   console.log(doc.id, doc.data())
+    // })
+    return firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).get();
+  },
+
   pod: function(detail=false) {
     let result = {};
     result.store = {};

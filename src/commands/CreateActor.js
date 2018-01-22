@@ -38,7 +38,7 @@ export default class CreateActor extends Command
     let animation = new Animation();
     animation.init({
       ...NodeTemplate.Animation,
-      ownerID: actor,
+      ownerID: actor.id,
       x: 250,
       y: 50,
       memory: {

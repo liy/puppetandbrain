@@ -229,4 +229,8 @@ export default class Actor extends EventEmitter
 
     return pod;
   }
+
+  snapshot() {
+    
+  }
 }

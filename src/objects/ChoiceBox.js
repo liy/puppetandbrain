@@ -5,6 +5,7 @@ import BoxComponent from "../components/BoxComponent";
 import GraphicsComponent from "../components/GraphicsComponent";
 import DataType from '../data/DataType';
 import IconStore from '../ui/IconStore';
+import html2canvas from 'html2canvas';
 
 export default class ChoiceBox extends Actor
 {
@@ -38,7 +39,7 @@ export default class ChoiceBox extends Actor
       iconID: '🏷️'
     })
     this.properties.add({
-      value: 0xFFFFFF,
+      value: 0xFF9900,
       ...pod.properties.boxColor,
       property: 'boxColor',
       name: 'box color',
@@ -125,5 +126,21 @@ export default class ChoiceBox extends Actor
 
   get text() {
     return this.content.text;
+  }
+
+  snapshot() {
+    let texture = Editor.renderer.generateTexture(this.box.container);
+    let canvas = Editor.renderer.extract.canvas(texture);
+    // TODO: to be removed
+    canvas.id = 'snapshot-canvas';
+
+    // draw dom element to canvas
+    return html2canvas(this.content.element, {
+      backgroundColor: null,
+      // allowTaint: true,
+    }).then(domCanvas => {
+      canvas.getContext('2d').drawImage(domCanvas, 0, 0);
+      return canvas;
+    })
   }
 } 

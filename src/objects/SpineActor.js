@@ -95,4 +95,13 @@ export default class SpineActor extends Actor
     pod.url = this.url;
     return pod;
   }
+
+  snapshot() {
+    return new Promise(resolve => {
+      let texture = Editor.renderer.generateTexture(this.spineComponent.container);
+      let canvas = Editor.renderer.extract.canvas(texture);
+      canvas.id = 'snapshot-canvas';
+      resolve(canvas);
+    })
+  }
 }

@@ -19,11 +19,8 @@ class Editor extends EventEmitter
         this.toggle();
       }
     })
-  }
 
-  init() {
-    var canvas = document.getElementById('canvas');
-    window.renderer = PIXI.autoDetectRenderer({
+    this.renderer = PIXI.autoDetectRenderer({
       autoStart: true,
       width: window.innerWidth,
       height: window.innerHeight,
@@ -31,14 +28,18 @@ class Editor extends EventEmitter
       transparent: true,
       antialias: true
     });
+  }
+
+  init() {
+    var canvas = document.getElementById('canvas');
     
-    this.stage.init(renderer.width, renderer.height);
+    this.stage.init(this.renderer.width, this.renderer.height);
     PIXI.ticker.shared.add(this.loop);
   }
 
   loop() {
     this.stage.updateTransform();
-    renderer.render(this.stage.container);
+    this.renderer.render(this.stage.container);
   }
 
   start() {

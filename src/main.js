@@ -22,9 +22,10 @@ require('./manifest.json')
 // imports
 require('./main.scss')
 
-// LookUp is a global window variable, save typing!
+import html2canvas from 'html2canvas';
 import 'pixi-spine';
 import './NodeTemplate';
+// LookUp is a global window variable, save typing!
 import './LookUp'
 import './nodes/NodeFactory'
 import './objects/ActorFactory'
@@ -39,6 +40,11 @@ import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
 import ArrayMap from './utils/ArrayMap';
+
+
+import ImportActors from './ImportActors';
+import ExportActors from './ExportActors';
+import ChoiceBox from './objects/ChoiceBox'
 
 
 // prevent default context menu for the whole site
@@ -71,6 +77,12 @@ async function load(activityID) {
   })
 
   Promise.all(promises).then(() => {
+
+    
+
+    // let exportActors = new ExportActors();
+    // exportActors.start(LookUp.getActors()[0].export())
+
     new AddActorButton();
     new DebugButton();
     new BrainButton();
@@ -86,7 +98,7 @@ function simpleInit() {
   promises.push(Commander.create('CreateDemoActor').process())
   
   // start the activity when cow and donkey are loaded
-  Promise.all(promises).then(() => {
+  Promise.all(promises).then(async () => {
     
     let cb = new ChoiceBox();
     cb.init();
@@ -94,8 +106,7 @@ function simpleInit() {
     cb.y = 300;
     Editor.stage.addActor(cb)
 
-    let importActors = new ImportActors();
-    importActors.start(LookUp.getActors()[1].export());
+
 
     new AddActorButton();
     new DebugButton();
@@ -159,8 +170,3 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
-
-import ChoiceBox from './objects/ChoiceBox';
-import ActorSelection from './objects/ActorSelection';
-import ImportActors from './ImportActors';
-
