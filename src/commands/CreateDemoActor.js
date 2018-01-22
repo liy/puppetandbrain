@@ -204,13 +204,11 @@ export default class CreateDemoActor extends Command
 
     this.actorID = actor.id;
 
-    let variable = new Variable();
-    variable.init({
+    actor.brain.variables.create({
       type: DataType.GENERIC,
-      name: 'demo variable',
-      data: 'demo data'
-    })
-    actor.brain.variables.add(variable);
+      name: 'text',
+      data: 'this is a fat cat'
+    });
 
     return this;
   }

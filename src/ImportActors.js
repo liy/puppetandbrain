@@ -13,6 +13,7 @@ export default class ImportActors
   }
 
   createActors(pod) {
+    console.log(pod);
     for(let id of pod.actors) {
       // note that I do not need to remove brainID from actorPod.
       // Because LookUp will generate a new ID if brainID exist.
