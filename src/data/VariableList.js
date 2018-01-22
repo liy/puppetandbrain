@@ -15,12 +15,14 @@ export default class VariableList extends EventEmitter
 
   create(variablePod) {
     let variable = new Variable(variablePod.id);
+    variable.brain = this;
     variable.init(variablePod);
     this.add(variable);
     return variable;
   }
 
   add(variable) {
+    variable.brain = this;
     this.variables.set(variable.id, variable);
     this.emit('variable.added', variable)
     return variable;

@@ -87,13 +87,15 @@ function simpleInit() {
   
   // start the activity when cow and donkey are loaded
   Promise.all(promises).then(() => {
-
     
-let cb = new ChoiceBox();
-cb.init();
-cb.x = 600;
-cb.y = 300;
-Editor.stage.addActor(cb)
+    // let cb = new ChoiceBox();
+    // cb.init();
+    // cb.x = 600;
+    // cb.y = 300;
+    // Editor.stage.addActor(cb)
+
+    let importActors = new ImportActors();
+    importActors.start(LookUp.getActors()[0].export());
 
     new AddActorButton();
     new DebugButton();
@@ -160,4 +162,5 @@ firebase.auth().onAuthStateChanged(user => {
 
 import ChoiceBox from './objects/ChoiceBox';
 import ActorSelection from './objects/ActorSelection';
+import ImportActors from './ImportActors';
 

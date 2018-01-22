@@ -13,6 +13,8 @@ import StepRight from '../nodes/StepRight';
 import StepLeft from '../nodes/StepLeft';
 import Keyboard from '../nodes/listeners/Keyboard';
 import {isMobile} from '../utils/utils';
+import Variable from '../data/Variable';
+import DataType from '../data/DataType';
 
 
 
@@ -201,6 +203,14 @@ export default class CreateDemoActor extends Command
     branch.inputs.get('condition').connect(equal.outputs.get('value'));
 
     this.actorID = actor.id;
+
+    let variable = new Variable();
+    variable.init({
+      type: DataType.GENERIC,
+      name: 'demo variable',
+      data: 'demo data'
+    })
+    actor.brain.variables.add(variable);
 
     return this;
   }

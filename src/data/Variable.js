@@ -10,6 +10,9 @@ export default class Variable extends EventEmitter
     // Keep track of getter and setter nodes using this variable. For variable deletion use.
     this.getters = [];
     this.setters = [];
+
+    // set in variable list
+    this.brain = null;
   }
 
   destroy() {
@@ -19,8 +22,6 @@ export default class Variable extends EventEmitter
   }
 
   init(pod) {
-    this.brain = LookUp.get(pod.brainID);
-
     this.type = pod.type;
     this._name = pod.name;
     this.set(pod.data);

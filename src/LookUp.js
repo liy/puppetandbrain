@@ -18,7 +18,8 @@ var creating = false;
 var delaySave = new Delay();
 
 function create(entry, id) {
-  if(!id) {
+  // if no id, or id exist, create a new id for the item
+  if(!id || id in STORE) {
     // naive way, better to use hash(random + timestamp + machine name + etc).
     while(true) {
       id = Math.floor(Math.random() * 999)+1;
