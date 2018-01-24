@@ -3,17 +3,22 @@ class API {
 
   }
 
-  getPuppets() {
+  async getPuppets() {
     // collection.forEach(doc => {
     //   console.log(doc.id, doc.data())
     // })
-    return firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).get();
+    let collections = await firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).get();
+    let pods = [];
+    collections.forEach(doc => {
+      pods.push(doc.data());
+    });
+    return pods;
   }
 
   async createPuppet(actor) {
     // generate entry in firestore
     const id = firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).doc().id
-    let promise = firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).doc(id).update({
+    firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).doc(id).set({
       ...actor.export(),
       // FIXME: ask user to type a name
       name: `My ${actor.name}`,
@@ -32,11 +37,11 @@ class API {
     return id;
   }
 
-  newCreation() {
+  async newCreation() {
     let pod = LookUp.pod();
 
     const id = firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc().id;
-    await firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc(id).update({
+    await firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc(id).set({
       ...pod,
       id, 
       userID: LookUp.user.uid

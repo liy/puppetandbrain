@@ -5,6 +5,8 @@ import BrowserHeader from './BrowserHeader';
 import PuppetBox from './PuppetBox'
 import Browser from './Browser';
 
+import API from '../API';
+
 export default class extends Browser
 {
   constructor() {
@@ -22,13 +24,10 @@ export default class extends Browser
   open() {
     document.body.appendChild(this.element);
 
-    for(let i=0; i<10; ++i) {
-      this.contentSection.add(new PuppetBox('test'), 'My Puppets');
-    }
-
-    
-    for(let i=0; i<5; ++i) {
-      this.contentSection.add(new PuppetBox('test'), 'Puppets');
-    }
+    API.getPuppets().then(pods => {
+      for(let pod of pods) {
+        this.contentSection.add(new PuppetBox(pod), 'My Puppets')
+      }
+    })
   }
 }

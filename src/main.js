@@ -45,6 +45,11 @@ import ArrayMap from './utils/ArrayMap';
 import ImportActors from './ImportActors';
 import ExportActors from './ExportActors';
 import ChoiceBox from './objects/ChoiceBox'
+import PuppetBrowser from './browser/PuppetBrowser';
+import ActorSelection from './objects/ActorSelection';
+import API from './API';
+window.ActorSelection = ActorSelection;
+window.API = API;
 
 
 // prevent default context menu for the whole site
@@ -156,6 +161,7 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                     console.error(errorCode, errorMessage)
                 });
 
+
 firebase.auth().onAuthStateChanged(user => {
   // sign in
   if(user) {
@@ -175,7 +181,3 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
-
-import PuppetBrowser from './browser/PuppetBrowser';
-let browser = new PuppetBrowser();
-browser.open();

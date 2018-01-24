@@ -6,22 +6,25 @@ import Logo from '../assets/logo.svg';
 
 export default class extends GridBox
 {
-  constructor(name, snapshotUrl) {
+  constructor(pod) {
     super();
     this.element.classList.add('puppet-box');
 
     this.box = document.createElement('div');
     this.box.className = 'box';
-    this.box.style.backgroundImage = `url("${snapshotUrl}")`
     this.box.style.backgroundRepeat = 'no-repeat';
     this.box.style.backgroundPosition = 'center';
+    this.box.style.backgroundSize = 'contain';
     this.element.appendChild(this.box);
 
     this.title = document.createElement('span');
     this.title.className = 'title';
-    this.title.textContent = name
+    this.title.textContent = pod.name
     this.element.appendChild(this.title);
 
-    // this.box.appendChild(svgElement(Logo));
+    // load the file
+    firebase.storage().ref(`users/${pod.userID}/snapshots/${pod.id}-puppet-snapshot`).getDownloadURL().then(url => {
+      this.box.style.backgroundImage = `url("${url}")`
+    })
   }
 }
