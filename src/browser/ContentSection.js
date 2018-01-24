@@ -4,6 +4,8 @@ import GroupSection from './GroupSection';
 export default class ContentSection
 {
   constructor() {
+    this.colorPalette = null;
+    
     this.element = document.createElement('div');
     this.element.className = 'browser-content-scroll-wrapper';
 
@@ -19,10 +21,12 @@ export default class ContentSection
     this.groups = new Map();
   }
 
+
   add(gridBox, groupName) {
     let group = this.groups.get(groupName);
     if(!group) {
       group = new GroupSection(groupName);
+      if(this.colorPalette) group.color = this.colorPalette[groupName];
       this.groups.set(groupName, group);
       this.content.appendChild(group.element);
     }
@@ -33,6 +37,7 @@ export default class ContentSection
     while(this.content.lastChild) {
       this.content.removeChild(this.content.lastChild);
     }
+    this.groups.clear();
   }
 
   resetScroll() {

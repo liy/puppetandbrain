@@ -10,12 +10,12 @@ export default class
     
     this.element.appendChild(svgElement(SearchIcon,{width:20, height:20}));
 
-    this.searchInput = document.createElement('input');
-    this.searchInput.placeholder = 'Search...'
-    this.element.appendChild(this.searchInput);
+    this.input = document.createElement('input');
+    this.input.placeholder = 'Search...'
+    this.element.appendChild(this.input);
   }
 
   focus() {
-    this.searchInput.focus();
+    this.input.focus();
   }
 }

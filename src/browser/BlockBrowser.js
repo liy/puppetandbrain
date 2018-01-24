@@ -3,8 +3,8 @@ import Fuse from 'fuse.js'
 import Browser from "./Browser";
 import ArrayMap from "../utils/ArrayMap";
 import GroupSection from "./GroupSection";
-import Block from '../graph/blocks/Block';
 import DataType from '../data/DataType';
+import BlockBox from './BlockBox';
 
 // FIXME: clean up needed!!
 export default class BlockBrowser extends Browser
@@ -191,14 +191,9 @@ export default class BlockBrowser extends Browser
     this.clear();
 
     for(let template of tempaltes) {
-      let group = this.getGroup(template.category);
-      let block = BlockFactory.createTemplateBlock(template)
-      group.addBlock(block);
-      block.template(template);
-
-      this.blocks.push(block);
-
-      block.once('block.chosen', this.onSelect);
+      let box = new BlockBox(template);
+      console.log(template.category)
+      this.contentSection.add(box, template.category);
     }
   }
 
@@ -215,21 +210,8 @@ export default class BlockBrowser extends Browser
   }
 
   clear() {
-    for(let block of this.blocks) {
-      block.off('block.chosen', this.onSelect);
-    }
     this.contentSection.clear();
-    this.groups.clear();
-    this.blocks = [];
-  }
-
-  getGroup(name) {
-    let group = this.groups.get(name);
-    if(!group) {
-      group = new GroupSection(name);
-      this.groups.set(name, group);
-      this.contentSection.addGroup(group);
-    }
-    return group;
+    // this.groups.clear();
+    // this.blocks = [];
   }
 }

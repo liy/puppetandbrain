@@ -3,30 +3,32 @@ import ContentSection from './ContentSection';
 import BrowserHeader from './BrowserHeader';
 
 import PuppetBox from './PuppetBox'
+import Browser from './Browser';
 
-export default class
+export default class extends Browser
 {
   constructor() {
-    this.element = document.createElement('div');
-    this.element.classList.add('browser', 'puppet-browser');
+    super();
+    
+    this.element.classList.add('puppet-browser');
 
-    this.header = new BrowserHeader();
-    this.element.appendChild(this.header.element);
-
-    this.contentSection = new ContentSection();
-    this.element.appendChild(this.contentSection.element);
+    this.contentSection.colorPalette = {
+      'My Puppets': 0x4e84bf,
+      'Puppets': 0x976bb8,
+      'Widgets': 0xbd833c,
+    }
   }
 
   open() {
     document.body.appendChild(this.element);
 
     for(let i=0; i<10; ++i) {
-      this.contentSection.add(new PuppetBox(), 'test 1');
+      this.contentSection.add(new PuppetBox('test'), 'My Puppets');
     }
 
     
     for(let i=0; i<5; ++i) {
-      this.contentSection.add(new PuppetBox(), 'test 2');
+      this.contentSection.add(new PuppetBox('test'), 'Puppets');
     }
   }
 }

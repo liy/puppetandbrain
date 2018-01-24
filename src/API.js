@@ -15,6 +15,8 @@ class API {
     const id = firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).doc().id
     let promise = firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).doc(id).update({
       ...actor.export(),
+      // FIXME: ask user to type a name
+      name: `My ${actor.name}`,
       id,
       userID: LookUp.user.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
