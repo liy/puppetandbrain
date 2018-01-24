@@ -233,4 +233,24 @@ export default class Actor extends EventEmitter
   snapshot() {
     
   }
+
+  getUploadedFileNames() {
+    let fileNames = [];
+    for(let node of this.brain.nodes) {
+      let fileName = node.getUploadedFileName();
+      if(fileName) {
+        fileNames.push(fileName);
+      }
+    }
+  }
+
+  createUploadedMap(puppetID, map={}) {
+    for(let node of this.brain.nodes) {
+      let fileName = node.getUploadedFileName();
+      if(fileName) {
+        map[fileName] = puppetID;
+      }
+    }
+    return map;
+  }
 }

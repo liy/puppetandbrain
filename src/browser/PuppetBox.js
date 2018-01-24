@@ -8,6 +8,8 @@ export default class extends GridBox
 {
   constructor(pod) {
     super();
+    this.pod = pod;
+    
     this.element.classList.add('puppet-box');
 
     this.box = document.createElement('div');

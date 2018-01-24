@@ -5,7 +5,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 
 module.exports = {
-  entry: path.join(__dirname, 'src', 'main.js'),
+  entry: ['whatwg-fetch', path.join(__dirname, 'src', 'main.js')],
   output: {
     filename: 'bundle.js',
     // Where to put the final 'compiled' file

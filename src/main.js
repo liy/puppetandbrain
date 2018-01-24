@@ -22,6 +22,7 @@ require('./manifest.json')
 // imports
 require('./main.scss')
 
+import 'whatwg-fetch';
 import html2canvas from 'html2canvas';
 import 'pixi-spine';
 import './NodeTemplate';
@@ -111,13 +112,6 @@ function simpleInit() {
     cb.y = 300;
     Editor.stage.addActor(cb)
 
-
-    LookUp.getActors()[0].snapshot().then(canvas => {
-      // canvas.toBlob(blob => {
-      //   LookUp.uploadBlob(blob)
-      // })
-    })
-
     new AddActorButton();
     new DebugButton();
     new BrainButton();
@@ -180,4 +174,35 @@ firebase.auth().onAuthStateChanged(user => {
   else {
     LookUp.user = null;
   }
+})
+
+import Loader from './Loader';
+import { getExtension } from './utils/utils';
+
+var loader = new Loader();
+
+console.log(getExtension('https://firebasestorage.googleapis.com/v0/b/puppet-brain-staging.appspot.com/o/library%2Fpuppets%2FzqTVeCemqwv4Wr6A55tf%2Fcat.atlas?alt=media&token=3ca69f19-706c-4c03-8e48-1929511d85e5'));
+
+fetch(require('./assets/cat/cat.atlas')).then(async response => {
+  let rawAtlas = await response.text();
+  // console.log(rawAtlas)
+  var spineAtlas = new PIXI.spine.core.TextureAtlas(rawAtlas, function(line, callback) {
+      // pass the image here.
+      callback(PIXI.BaseTexture.fromImage(line));
+  }); 
+
+  var spineAtlasLoader = new PIXI.spine.core.AtlasAttachmentLoader(spineAtlas)
+  var spineJsonParser = new PIXI.spine.core.SkeletonJson(spineAtlasLoader);
+
+  
+  fetch(require('./assets/cat/cat.json')).then(async response => {
+    let rawSkeletonData = await response.json();
+    var spineData = spineJsonParser.readSkeletonData(rawSkeletonData);
+
+    // now we can create spine instance
+    var spine = new PIXI.spine.Spine(spineData);
+    Editor.stage.addChild(spine)
+  })
+
+  
 })

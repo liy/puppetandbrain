@@ -24,10 +24,16 @@ export default class extends Browser
   open() {
     document.body.appendChild(this.element);
 
-    API.getPuppets().then(pods => {
+    API.getMyPuppets().then(pods => {
       for(let pod of pods) {
         this.contentSection.add(new PuppetBox(pod), 'My Puppets')
       }
+    })
+
+    API.getLibraryPuppets().then(pods => {
+      // for(let pod of pods) {
+      //   this.contentSection.add(new PuppetBox(pod), 'My Puppets')
+      // }
     })
   }
 }

@@ -26,3 +26,12 @@ export function nextFrame() {
     setTimeout(resolve, 0);
   });
 }
+
+export const MimeType = {
+  JSON: 'application/json',
+  ATLAS: 'text/plain',
+  PNG: 'image/png',
+  JPG: 'image/jpg',
+  OGG: 'audio/ogg',
+  MP3: 'audio/mpeg',
+}
