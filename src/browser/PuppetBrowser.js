@@ -1,59 +1,20 @@
 import './PuppetBrowser.scss';
-import Fuse from 'fuse.js'
-import Browser from "./Browser";
-import PuppetEntry from './PuppetEntry'
-import GroupSection from './GroupSection';
+import ContentSection from './ContentSection';
 
-export default class extends Browser
+export default class
 {
   constructor() {
-    super();
+    this.element = document.createElement('div');
+    this.element.classList.add(['browser', 'puppet-browser']);
 
-    this.searchOptions = {
-      // id: 'className',
-      shouldSort: true,
-      threshold: 0.2,
-      keys: [{
-        name: 'category', weight: 0.05
-      }, {
-        name: 'keywords', weight: 0.05
-      }, {
-        name: 'name', weight: 0.9  
-      }] 
-    }
+    this.header = document.createElement('browser-header');
+    this.header.className = 'browser-header';
 
-
-    this.fuse = null;
+    this.contentSection = new ContentSection();
   }
 
   open(x, y) {
     super.open();
-
-    LookUp.getPuppets().then(collection => {
-      collection.forEach(doc => {
-        this.getGroup().append(new PuppetEntry(doc.data()));
-      })
-    })
-
-    return new Promise((resolve, reject) => {
-      this.resolve = resolve;
-
-    })
-  }
-
-  refresh() {
-    this.clear();
-  }
-
-  getGroup() {
-    if(!this.defaultGroup) {
-      this.defaultGroup = new GroupSection('puppets');
-      this.contentSection.addGroup(this.defaultGroup);
-    }
-    return this.defaultGroup;
-  }
-
-  clear() {
 
   }
 }

@@ -106,10 +106,11 @@ function simpleInit() {
     cb.y = 300;
     Editor.stage.addActor(cb)
 
+
     LookUp.getActors()[0].snapshot().then(canvas => {
-      canvas.toBlob(blob => {
-        LookUp.uploadBlob(blob)
-      })
+      // canvas.toBlob(blob => {
+      //   LookUp.uploadBlob(blob)
+      // })
     })
 
     new AddActorButton();

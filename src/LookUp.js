@@ -204,22 +204,22 @@ window.LookUp = {
     return id in STORE;
   },
 
-  getPuppets: function() {
-    // collection.forEach(doc => {
-    //   console.log(doc.id, doc.data())
-    // })
-    return firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).get();
-  },
+  // getPuppets: function() {
+  //   // collection.forEach(doc => {
+  //   //   console.log(doc.id, doc.data())
+  //   // })
+  //   return firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).get();
+  // },
 
-  uploadBlob: async function(blob) {
-    let {id} = await firebase.firestore().collection(`users/${LookUp.user.uid}/files`).add({
-      uploaded: firebase.firestore.FieldValue.serverTimestamp()
-    })
+  // uploadBlob: async function(blob) {
+  //   let {id} = await firebase.firestore().collection(`users/${LookUp.user.uid}/files`).add({
+  //     uploaded: firebase.firestore.FieldValue.serverTimestamp()
+  //   })
 
-    // upload file using the id
-    let storageRef = firebase.storage().ref();
-    storageRef.child(`users/${LookUp.user.uid}/${id}`).put(blob)
-  },
+  //   // upload file using the id
+  //   let storageRef = firebase.storage().ref();
+  //   storageRef.child(`users/${LookUp.user.uid}/${id}`).put(blob)
+  // },
 
   pod: function(detail=false) {
     let result = {};
