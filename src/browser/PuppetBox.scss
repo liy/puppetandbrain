@@ -1,0 +1,19 @@
+.puppet-box {
+  // background-color: aqua
+
+  flex-direction: column;
+
+  .box {
+    width: 120px;
+    height: 120px;
+
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  span {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    color: white;
+    margin-top: 10px;
+  }
+}

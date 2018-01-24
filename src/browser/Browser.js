@@ -1,5 +1,6 @@
 import FilterSection from './FilterSection';
-import SearchSection from './SearchSecion';
+import SearchField from './SearchField';
+import BrowserHeader from "./BrowserHeader";
 import ContentSection from "./ContentSection";
 require('./Browser.scss')
 
@@ -8,14 +9,15 @@ export default class Browser
   constructor() {
     this.element = document.createElement('div');
     this.element.className = 'browser'
-    this.header = document.createElement('div');
-    this.header.className = 'browser-header'
+
+    this.header = new BrowserHeader();
+    this.element.appendChild(this.header.element);
 
     this.contentSection = new ContentSection();
-    this.searchSection = new SearchSection();
+    this.searchField = new SearchField();
     this.filterSection = new FilterSection();
 
-    this.searchField = this.searchSection.searchInput;
+    this.searchField = this.searchField.searchInput;
     this.onSearch = this.onSearch.bind(this);
     this.searchField.addEventListener('input', this.onSearch);
 
@@ -51,10 +53,10 @@ export default class Browser
     
     this.element.appendChild(this.contentSection.element);
     this.element.appendChild(this.header);
-    this.header.appendChild(this.searchSection.element);
+    this.header.appendChild(this.searchField.element);
     this.header.appendChild(this.filterSection.element);
     document.body.appendChild(this.element);
-    this.searchSection.focus();
+    this.searchField.focus();
   }
 
   close() {
@@ -68,7 +70,7 @@ export default class Browser
       BrainGraph.blur = false;
       this.element.removeChild(this.contentSection.element);
       this.element.removeChild(this.header);
-      this.header.removeChild(this.searchSection.element);
+      this.header.removeChild(this.searchField.element);
       this.header.removeChild(this.filterSection.element);
       document.body.removeChild(this.element);
     }})

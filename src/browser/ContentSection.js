@@ -15,10 +15,18 @@ export default class ContentSection
     this.content.className = 'browser-content';
     this.content.setAttribute('placeholder', 'Cannot find the block you are looking for...👻 Please try other keywords.');
     this.scroll.appendChild(this.content);
+
+    this.groups = new Map();
   }
 
-  addGroup(group) {
-    this.content.appendChild(group.element);
+  add(gridBox, groupName) {
+    let group = this.groups.get(groupName);
+    if(!group) {
+      group = new GroupSection(groupName);
+      this.groups.set(groupName, group);
+      this.content.appendChild(group.element);
+    }
+    group.add(gridBox);
   }
 
   clear() {

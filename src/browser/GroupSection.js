@@ -10,6 +10,7 @@ export default class GroupSection
     this.title.className = 'group-name';
     this.title.textContent = name;
     this.element.appendChild(this.title);
+    
     this.grid = document.createElement('div');
     this.grid.className = 'group-grid';
     this.element.appendChild(this.grid);
@@ -23,11 +24,11 @@ export default class GroupSection
     this.grid.appendChild(gridBox)
   }
 
-  append(item) {
-    const gridBox = document.createElement('div');
-    gridBox.className = 'grid-box';
-    gridBox.appendChild(item.element);
-    
-    this.grid.appendChild(gridBox)
+  set color(c) {
+    this.element.style.backgroundColor = `#${c.toString(16)}`;
+  }
+
+  add(gridBox) {
+    this.grid.appendChild(gridBox.element)
   }
 }

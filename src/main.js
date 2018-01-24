@@ -175,3 +175,7 @@ firebase.auth().onAuthStateChanged(user => {
     LookUp.user = null;
   }
 })
+
+import PuppetBrowser from './browser/PuppetBrowser';
+let browser = new PuppetBrowser();
+browser.open();
