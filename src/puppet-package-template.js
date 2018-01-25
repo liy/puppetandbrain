@@ -1,0 +1,67 @@
+let bundle = {
+  // all the puppets are originated from the library puppet,
+  // this points to the original puppet doc
+  // 
+  // for accessing predefined spine files, etc.
+  libDir: "library/puppets/zqTVeCemqwv4Wr6A55tf",
+
+  name: "Fat cat",
+
+
+  
+  // actor id used during game play
+  actors: [123],
+  stores: {
+    123: {
+      libDir: "library/puppets/zqTVeCemqwv4Wr6A55tf",
+      
+      // read only
+      // list of files from libDir directory, these files are defined by default, officially.
+      libFiles: [],
+
+      // When user export an actor into MyPuppet, and ID will be generated.
+      // Any current user files will be write to fileRefs with the myPuppetID as key.
+      // In this case, if user delete the activity, certain file references will
+      // still retained by MyPuppet. 
+      //
+      // Therefore, cronjob will not delete the user files. Just like a garbage collection process... 
+      myPuppetID: null,
+
+      // list of file ids uploaded by user
+      // useful when loading the puppets, so we don't need to send extra request to
+      // fetch the list of user uploads
+      userFiles: [],
+
+
+      // this is the id for PIXI spine animation  
+      spineID: "cat",
+
+
+      // After this point, are the normal game play pod object.
+      // className: "SpineActor" 
+      // ......
+    }
+  }
+}
+
+
+
+
+
+// Cron job will scan this collection to decide which file to remove
+let fileRefs = {
+  activityID_1: {
+    fileID_1: true,
+    fileID_2: true
+  },
+  puppetID_1: {
+    fileID_3: true,
+    fileID_4: true,
+  }
+}
+
+let userFiles = {
+  fileID: {
+    activityID_1: true
+  }
+}

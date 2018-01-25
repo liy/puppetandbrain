@@ -1,6 +1,7 @@
 import JsonPromise from './utils/JsonPromise';
 import Variable from './data/Variable';
 import * as ObjecClasses from './objects';
+import {LoaderBucket} from './resources/Resource';
 
 export default class ActivityLoader
 {
@@ -17,9 +18,28 @@ export default class ActivityLoader
   }
 
   async parse(pod) {
-    await this.createActors(pod);
+    await this.preload(pod);
+
+    this.createActors(pod);
     // create nodes; link execution, input and outputs
     this.fillBrains(pod);
+  }
+
+  async preload(pod) {
+    let loader = new LoaderBucket();
+    
+    let urlPromises = [];
+    for(let id of pod.actors) {
+      let actorPod = pod.store[id];
+      for(let entry of actorPod.libFiles) {
+        let path = `${actorPod.libDir}/${entry.fileName}`;
+        urlPromises.push(API.getUrl(path).then(url => {
+          loader.add(path, url, entry.contentType)
+        }))
+      }
+    }
+    await Promise.all(urlPromises);
+    await loader.start();
   }
 
   createActors(pod) {

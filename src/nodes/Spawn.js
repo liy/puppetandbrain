@@ -9,7 +9,6 @@ export default class Spawn extends Task
   init(pod) {
     super.init(pod);
 
-    // TODO: require a puppetID reference to the user saved puppet.
-    // so I know I need to preload files.
+    // TODO: how to identify the spawn target?????
   }
 } 

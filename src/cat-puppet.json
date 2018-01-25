@@ -1,6 +1,6 @@
 {
     "name": "Bouncy Cat",
-    "sourceID": "zqTVeCemqwv4Wr6A55tf",
+    "libDir": "library/puppets/zqTVeCemqwv4Wr6A55tf",
 
     "actors": [
         682
@@ -366,7 +366,8 @@
                 "x": 512,
                 "y": 512
             },
-            "manifest": [
+            "libDir": "library/puppets/zqTVeCemqwv4Wr6A55tf",
+            "libFiles": [
                 {
                     "contentType": "application/json",
                     "fileName": "cat.json"
@@ -380,8 +381,11 @@
                     "fileName": "cat.png"
                 }
             ],
+            
+            "myPuppetID": null,
+            "userFiles": [],
+
             "spineID": "cat",
-            "sourceID": "zqTVeCemqwv4Wr6A55tf",
 
 
 

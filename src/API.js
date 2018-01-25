@@ -5,7 +5,7 @@ class API {
 
   // TODO: to be removed
   updateTest(pod) {
-    return firebase.firestore().doc(`puppets/${pod.sourceID}`).set(pod);
+    return firebase.firestore().doc(`puppets/zqTVeCemqwv4Wr6A55tf`).set(pod);
   }
 
   getUrl(path) {
@@ -25,7 +25,7 @@ class API {
     // collection.forEach(doc => {
     //   console.log(doc.id, doc.data())
     // })
-    let collections = await firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).get();
+    let collections = await firebase.firestore().collection(`users/${LookUp.user.uid}/myPuppets`).get();
     let pods = [];
     collections.forEach(doc => {
       pods.push(doc.data());
@@ -33,48 +33,73 @@ class API {
     return pods;
   }
 
-  async createPuppet(actor) {
+  async createMyPuppet(actor) {
     // generate entry in firestore
-    const puppetID = firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).doc().id
-    firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).doc(id).set({
+    const myPuppetID = firebase.firestore().collection(`users/${LookUp.user.uid}/myPuppets`).doc().id
+    firebase.firestore().collection(`users/${LookUp.user.uid}/myPuppets`).doc(id).set({
       ...actor.export(),
       // FIXME: ask user to type a name
       name: `My ${actor.name}`,
-      puppetID,
+      myPuppetID,
       userID: LookUp.user.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
     // get list of uploaded files used by the actor, write it to uploads collection
-    let map = actor.createUploadedMap(puppetID);
-    firebase.firestore().doc(`uploads/${puppetID}`).set(map)
+    let map = actor.createUserFileMap(myPuppetID);
+    firebase.firestore().doc(`fileRefs/${myPuppetID}`).set(map)
 
     // upload snapshot blob to firebase storage
     const canvas = await actor.snapshot();
     canvas.toBlob(blob => {
       // upload file using the id
-      firebase.storage().ref().child(`users/${LookUp.user.uid}/snapshots/${id}-puppet-snapshot`).put(blob);
+      firebase.storage().ref().child(`users/${LookUp.user.uid}/snapshots/${myPuppetID}-puppet-snapshot.png`).put(blob);
     });
 
-    return puppetID;
+    return myPuppetID;
   }
 
   async newCreation() {
     let pod = LookUp.pod();
 
-    const id = firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc().id;
-    await firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc(id).set({
+    const activityID = firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc().id;
+    await firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc(activityID).set({
       ...pod,
-      id, 
+      id: activityID,
       userID: LookUp.user.uid
     });
 
-    // No need to have manifest for the activity, as you can scan through actors to
-    // get all the files.
-    //
-    // Remember, everything on the stage is an Actor(puppet) 
+    // Update fileRefs
+    let userFiles = [];
+    for(let actor of LookUp.getActors()) {
+      userFiles = userFiles.concat(actor.getUserFiles());
+    }
+    let map = userFiles.map(userFile => {
+      return {
+        [userFile.fileID]: true
+      }
+    })
+    firebase.firestore().doc(`fileRefs/${activityID}`).set(map)
 
-    return id;
+    return activityID;
+  }
+
+  async updateCreation() {
+    let pod = LookUp.pod();
+    
+    await firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc(pod.activityID).set(pod);
+
+    // Update fileRefs
+    let userFiles = [];
+    for(let actor of LookUp.getActors()) {
+      userFiles = userFiles.concat(actor.getUserFiles());
+    }
+    let map = userFiles.map(userFile => {
+      return {
+        [userFile.fileID]: true
+      }
+    })
+    firebase.firestore().doc(`fileRefs/${pod.activityID}`).set(map)
   }
 }
 

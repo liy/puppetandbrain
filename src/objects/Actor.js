@@ -24,8 +24,6 @@ export default class Actor extends EventEmitter
     this.selected = false;
     this._clicks = 0;
 
-    this.name = this.className;
-
     // transform for the components
     // also be able to manipulate in the node graph property.
     this.position = {
@@ -50,24 +48,30 @@ export default class Actor extends EventEmitter
     Editor.on('game.stop', this.gameStop, this);
   }
 
+  preload(pod) {
+
+  }
+
   init(pod={}) {
     Object.defineProperties(this, {
-      "sourceID": {
-        value: pod.sourceID,
+      "libDir": {
+        value: pod.libDir,
         writable: false
       },
-      "puppetID": {
-        value: pod.puppetID,
+      "libFiles": {
+        value: pod.libFiles,
         writable: false
       },
-      "manifest": {
-        value: pod.manifest,
+      "myPuppetID": {
+        value: pod.myPuppetID || null,
         writable: false
-      }
+      },
     });
     // user uploaded file names
-    this.uploads = pod.uploads || [];
+    this.userFiles = pod.userFiles || [];
 
+    this.name = pod.name || 'Puppet';
+    
     this.position = pod.position || {x:0,y:0};
     this.rotation = pod.rotation || 0;
     this.scale = pod.scale || {x:1,y:1}
@@ -221,9 +225,10 @@ export default class Actor extends EventEmitter
 
   pod(detail=false) {
     let pod = {
-      sourceID: this.sourceID,
-      puppetID: this.puppetID,
-      manifest: this.manifest,
+      libDir: this.libDir,
+      libFiles: this.libFiles,
+      myPuppetID: this.myPuppetID,
+      userFiles: this.userFiles,
 
       className: this.className,
       id: this.id,
@@ -253,23 +258,21 @@ export default class Actor extends EventEmitter
     
   }
 
-  getUploadedFileNames() {
-    let fileNames = [];
+  getUserFiles() {
+    let userFiles = [];
     for(let node of this.brain.nodes) {
-      let fileName = node.getUploadedFileName();
-      if(fileName) {
-        fileNames.push(fileName);
-      }
+      userFiles = userFiles.concat(node.userFiles);
     }
+    return userFiles;
   }
 
-  createUploadedMap(puppetID, map={}) {
+  createFileRefs() {
+    let refs = {};
     for(let node of this.brain.nodes) {
-      let fileName = node.getUploadedFileName();
-      if(fileName) {
-        map[fileName] = puppetID;
+      for(let entry of node.userFiles) {
+        refs[entry.fileID] = true;
       }
     }
-    return map;
+    return refs;
   }
 }

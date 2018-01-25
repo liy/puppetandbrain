@@ -21,9 +21,6 @@ export default class ImportActors
       // note that I do not need to remove brainID from actorPod.
       // Because LookUp will generate a new ID if brainID exist.
       let actorPod = pod.store[id];
-      // TODO: do edge checking?
-      actorPod.position.x += 10;
-      actorPod.position.y += 10;
       let actor = new ObjecClasses[actorPod.className]();
       Editor.stage.addActor(actor);
 

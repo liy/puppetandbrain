@@ -24,9 +24,10 @@ export default class SpineActor extends Actor
     // official predefined resources
     // load all resources in parallel
     let loader = new LoaderBucket();
-    await Promise.all(pod.manifest.map(async entry => {
-      let url = await API.getUrl(`library/puppets/${pod.sourceID}/${entry.fileName}`)
-      loader.add(`${pod.sourceID}/${entry.fileName}`, url, entry.contentType)
+    await Promise.all(pod.libFiles.map(async entry => {
+      let path = `${pod.libDir}/${entry.fileName}`;
+      let url = await API.getUrl(path)
+      loader.add(path, url, entry.contentType)
     }))
     await loader.start();
 
@@ -41,16 +42,16 @@ export default class SpineActor extends Actor
     // Spine id is the file name of the spine json file.
     this.spineID = pod.spineID;
 
-    let rawAtlas = Resource.get(`${pod.sourceID}/${this.spineID}.atlas`);
+    let rawAtlas = Resource.get(`${pod.libDir}/${this.spineID}.atlas`);
     var spineAtlas = new PIXI.spine.core.TextureAtlas(rawAtlas, function(line, callback) {
         // pass the image here.
-        callback(PIXI.BaseTexture.from(Resource.get(`${pod.sourceID}/${line}`)));
+        callback(PIXI.BaseTexture.from(Resource.get(`${pod.libDir}/${line}`)));
     }); 
 
     var spineAtlasLoader = new PIXI.spine.core.AtlasAttachmentLoader(spineAtlas)
     var spineJsonParser = new PIXI.spine.core.SkeletonJson(spineAtlasLoader);
 
-    var spineData = spineJsonParser.readSkeletonData(Resource.get(`${pod.sourceID}/${this.spineID}.json`));
+    var spineData = spineJsonParser.readSkeletonData(Resource.get(`${pod.libDir}/${this.spineID}.json`));
 
     this.spineComponent = new SpineComponent(spineData);
     this.addComponent('animation', this.spineComponent);

@@ -110,12 +110,12 @@ function simpleInit() {
 
 
 
-    // fetch(require('./cat-puppet.json')).then(response => {
-    //   return response.json();
-    // }).then(pod => {
-    //   console.log(pod)
-    //   API.updateTest(pod)
-    // })
+    fetch(require('./cat-puppet.json')).then(response => {
+      return response.json();
+    }).then(pod => {
+      console.log(pod)
+      API.updateTest(pod)
+    })
 
 
 
