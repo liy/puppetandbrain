@@ -181,8 +181,6 @@ import { getExtension } from './utils/utils';
 
 var loader = new Loader();
 
-console.log(getExtension('https://firebasestorage.googleapis.com/v0/b/puppet-brain-staging.appspot.com/o/library%2Fpuppets%2FzqTVeCemqwv4Wr6A55tf%2Fcat.atlas?alt=media&token=3ca69f19-706c-4c03-8e48-1929511d85e5'));
-
 fetch(require('./assets/cat/cat.atlas')).then(async response => {
   let rawAtlas = await response.text();
   // console.log(rawAtlas)

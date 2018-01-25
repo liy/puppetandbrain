@@ -51,11 +51,24 @@ export default class Actor extends EventEmitter
   }
 
   init(pod={}) {
+    Object.defineProperties(this, {
+      "sourceID": {
+        value: pod.sourceID,
+        writable: false
+      },
+      "puppetID": {
+        value: pod.puppetID,
+        writable: false
+      },
+      "manifest": {
+        value: pod.manifest,
+        writable: false
+      }
+    });
+
     this.position = pod.position || {x:0,y:0};
     this.rotation = pod.rotation || 0;
     this.scale = pod.scale || {x:1,y:1}
-
-    // this.rotation = Math.PI/6;
 
     // Create empty brain but with exisitng ID if there is one.
     // in the future I might allow actors to sharing same brain.
@@ -206,6 +219,12 @@ export default class Actor extends EventEmitter
 
   pod(detail=false) {
     let pod = {
+      // TODO: these field are only used for serverside.
+      // should not be included during gameplay.
+      sourceID: this.sourceID,
+      puppetID: this.puppetID,
+      manifest: this.manifest,
+
       className: this.className,
       id: this.id,
       position: {...this.position},
