@@ -24,8 +24,14 @@ export default class extends GridBox
     this.title.textContent = pod.name
     this.element.appendChild(this.title);
 
-    // load the file
-    firebase.storage().ref(`users/${pod.userID}/snapshots/${pod.id}-puppet-snapshot`).getDownloadURL().then(url => {
+    this.element.addEventListener('click', e => {
+      this.emit('box.selected', this);
+    })
+  }
+
+  loadSnapshot() {
+    // load the snapshot
+    firebase.storage().ref(`library/puppets/${this.pod.sourceID}/snapshot.png`).getDownloadURL().then(url => {
       this.box.style.backgroundImage = `url("${url}")`
     })
   }

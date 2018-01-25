@@ -3,15 +3,13 @@ class API {
 
   }
 
-  async getLibraryPuppets() {
-    let collections = await firebase.firestore().collection('puppets').get();
-    collections.forEach(doc => {
-      console.log(doc.id, doc.data())
-    });
+  // TODO: to be removed
+  updateTest(pod) {
+    return firebase.firestore().doc(`puppets/${pod.sourceID}`).set(pod);
   }
 
-  async listPuppets() {
-    firebase.firestore().collection(`puppets`).get();
+  async listLibraryPuppets() {
+    let collections = await firebase.firestore().collection(`puppets`).get();
     let pods = [];
     collections.forEach(doc => {
       pods.push(doc.data());
@@ -67,12 +65,10 @@ class API {
       userID: LookUp.user.uid
     });
 
-    // get list of files used by this activity. Writes to uploads collection
-    let map = {};
-    for(let actor of LookUp.getActors()) {
-      actor.createUploadedMap(id, map);
-    }
-    firebase.firestore().doc(`uploads/${id}`).set(map)
+    // No need to have manifest for the activity, as you can scan through actors to
+    // get all the files.
+    //
+    // Remember, everything on the stage is an Actor(puppet) 
 
     return id;
   }

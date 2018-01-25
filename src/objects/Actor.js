@@ -65,6 +65,8 @@ export default class Actor extends EventEmitter
         writable: false
       }
     });
+    // user uploaded file names
+    this.uploads = pod.uploads || [];
 
     this.position = pod.position || {x:0,y:0};
     this.rotation = pod.rotation || 0;
@@ -219,8 +221,6 @@ export default class Actor extends EventEmitter
 
   pod(detail=false) {
     let pod = {
-      // TODO: these field are only used for serverside.
-      // should not be included during gameplay.
       sourceID: this.sourceID,
       puppetID: this.puppetID,
       manifest: this.manifest,

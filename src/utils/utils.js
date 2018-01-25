@@ -27,7 +27,7 @@ export function nextFrame() {
   });
 }
 
-export const MimeType = {
+export const ContentType = {
   JSON: 'application/json',
   ATLAS: 'text/plain',
   PNG: 'image/png',

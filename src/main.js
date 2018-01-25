@@ -36,6 +36,7 @@ import './commands/Commander'
 import './graph/BrainGraph'
 import './Editor'
 
+import './resources/Resource';
 import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
@@ -101,16 +102,24 @@ function simpleInit() {
   let promises = Editor.stage.actors.map(actor => {
     return actor.loaded;
   })
-  promises.push(Commander.create('CreateDemoActor').process())
+  // promises.push(Commander.create('CreateDemoActor').process())
   
   // start the activity when cow and donkey are loaded
   Promise.all(promises).then(async () => {
-    
-    let cb = new ChoiceBox();
-    cb.init();
-    cb.x = 600;
-    cb.y = 300;
-    Editor.stage.addActor(cb)
+
+
+
+
+    // fetch(require('./cat-puppet.json')).then(response => {
+    //   return response.json();
+    // }).then(pod => {
+    //   console.log(pod)
+    //   API.updateTest(pod)
+    // })
+
+
+
+
 
     new AddActorButton();
     new DebugButton();
@@ -176,31 +185,60 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-import Loader from './Loader';
-import { getExtension } from './utils/utils';
 
-var loader = new Loader();
 
-fetch(require('./assets/cat/cat.atlas')).then(async response => {
-  let rawAtlas = await response.text();
-  // console.log(rawAtlas)
-  var spineAtlas = new PIXI.spine.core.TextureAtlas(rawAtlas, function(line, callback) {
-      // pass the image here.
-      callback(PIXI.BaseTexture.fromImage(line));
-  }); 
 
-  var spineAtlasLoader = new PIXI.spine.core.AtlasAttachmentLoader(spineAtlas)
-  var spineJsonParser = new PIXI.spine.core.SkeletonJson(spineAtlasLoader);
 
-  
-  fetch(require('./assets/cat/cat.json')).then(async response => {
-    let rawSkeletonData = await response.json();
-    var spineData = spineJsonParser.readSkeletonData(rawSkeletonData);
 
-    // now we can create spine instance
-    var spine = new PIXI.spine.Spine(spineData);
-    Editor.stage.addChild(spine)
-  })
+
+
+
+
+// import Loader from './Loader';
+
+// fetch(require('./assets/cat/cat.atlas')).then(async response => {
+//   let rawAtlas = await response.text();
+//   // console.log(rawAtlas)
+//   var spineAtlas = new PIXI.spine.core.TextureAtlas(rawAtlas, function(line, callback) {
+//       // pass the image here.
+//       callback(PIXI.BaseTexture.fromImage(line));
+//   }); 
+
+//   var spineAtlasLoader = new PIXI.spine.core.AtlasAttachmentLoader(spineAtlas)
+//   var spineJsonParser = new PIXI.spine.core.SkeletonJson(spineAtlasLoader);
 
   
-})
+//   fetch(require('./assets/cat/cat.json')).then(async response => {
+//     let rawSkeletonData = await response.json();
+//     var spineData = spineJsonParser.readSkeletonData(rawSkeletonData);
+
+//     // now we can create spine instance
+//     var spine = new PIXI.spine.Spine(spineData);
+//     Editor.stage.addChild(spine)
+//   })
+// })
+
+import { ContentType } from './utils/utils';
+
+// Resource.add('cat.json', require('./assets/cat/cat.json'), ContentType.JSON);
+// Resource.add('cat.atlas', require('./assets/cat/cat.atlas'), ContentType.ATLAS);
+// Resource.add('cat.png', require('./assets/cat/cat.png'), ContentType.PNG);
+// Resource.start().then(r => {
+//   let rawAtlas = Resource.get('cat.atlas');
+//   // console.log(rawAtlas)
+//   var spineAtlas = new PIXI.spine.core.TextureAtlas(rawAtlas, function(line, callback) {
+//       // pass the image here.
+//       // TODO: append puppetID here for real id
+//       callback(PIXI.BaseTexture.from(Resource.get(line)));
+//   }); 
+
+//   var spineAtlasLoader = new PIXI.spine.core.AtlasAttachmentLoader(spineAtlas)
+//   var spineJsonParser = new PIXI.spine.core.SkeletonJson(spineAtlasLoader);
+
+//   // TODO: append puppetID here for real id
+//   var spineData = spineJsonParser.readSkeletonData(Resource.get('cat.json'));
+
+//   // now we can create spine instance
+//   var spine = new PIXI.spine.Spine(spineData);
+//   Editor.stage.addChild(spine)
+// })

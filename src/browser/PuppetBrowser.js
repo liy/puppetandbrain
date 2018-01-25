@@ -3,9 +3,11 @@ import ContentSection from './ContentSection';
 import BrowserHeader from './BrowserHeader';
 
 import PuppetBox from './PuppetBox'
+import MyPuppetBox from './MyPuppetBox'
 import Browser from './Browser';
 
 import API from '../API';
+import ImportActors from '../ImportActors';
 
 export default class extends Browser
 {
@@ -24,16 +26,25 @@ export default class extends Browser
   open() {
     document.body.appendChild(this.element);
 
-    API.getMyPuppets().then(pods => {
+    // API.listMyPuppets().then(pods => {
+    //   for(let pod of pods) {
+    //     this.contentSection.add(new MyPuppetBox(pod), 'My Puppets')
+    //   }
+    // })
+
+    API.listLibraryPuppets().then(pods => {
       for(let pod of pods) {
-        this.contentSection.add(new PuppetBox(pod), 'My Puppets')
+        let box = new PuppetBox(pod);
+        this.contentSection.add(box, 'Puppets');
+        box.loadSnapshot();
+        box.on('box.selected', this.onSelected, this);
       }
     })
+  }
 
-    API.getLibraryPuppets().then(pods => {
-      // for(let pod of pods) {
-      //   this.contentSection.add(new PuppetBox(pod), 'My Puppets')
-      // }
-    })
+  onSelected(box) {
+    this.close();
+    let importActor = new ImportActors();
+    importActor.start(box.pod);
   }
 }

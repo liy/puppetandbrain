@@ -1,0 +1,701 @@
+{
+    "name": "Fat Cat",
+    "sourceID": "zqTVeCemqwv4Wr6A55tf",
+
+    "actors": [
+        682
+    ],
+    "store": {
+        "43": {
+            "className": "StepLeft",
+            "id": 43,
+            "memory": {},
+            "ownerID": 682,
+            "inputs": [],
+            "outputs": [],
+            "x": 820,
+            "y": 437,
+            "execution": [
+                {
+                    "name": "default",
+                    "nodeID": null
+                },
+                {
+                    "name": "completed",
+                    "nodeID": null
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [
+                    {
+                        "nodeID": 312,
+                        "executionName": "default"
+                    }
+                ],
+                "enabled": true
+            }
+        },
+        "59": {
+            "className": "FlipRight",
+            "id": 59,
+            "memory": {},
+            "ownerID": 682,
+            "inputs": [],
+            "outputs": [],
+            "x": 590,
+            "y": 611,
+            "execution": [
+                {
+                    "name": "default",
+                    "nodeID": 842
+                },
+                {
+                    "name": "completed",
+                    "nodeID": null
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [
+                    {
+                        "nodeID": 544,
+                        "executionName": "false"
+                    },
+                    {
+                        "nodeID": 337,
+                        "executionName": "down"
+                    }
+                ],
+                "enabled": true
+            }
+        },
+        "219": {
+            "className": "Pointer",
+            "nodeID": 779,
+            "name": "sound url",
+            "id": 219,
+            "output": {
+                "nodeID": 514,
+                "name": "event name",
+                "isValue": true,
+                "type": 1
+            },
+            "type": 1
+        },
+        "249": {
+            "className": "Brain",
+            "id": 249,
+            "variables": [
+                788
+            ],
+            "nodes": [
+                710,
+                474,
+                330,
+                514,
+                779,
+                752,
+                544,
+                312,
+                59,
+                43,
+                842,
+                706,
+                721,
+                337
+            ]
+        },
+        "312": {
+            "className": "FlipLeft",
+            "id": 312,
+            "memory": {},
+            "ownerID": 682,
+            "inputs": [],
+            "outputs": [],
+            "x": 590,
+            "y": 488,
+            "execution": [
+                {
+                    "name": "default",
+                    "nodeID": 43
+                },
+                {
+                    "name": "completed",
+                    "nodeID": null
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [
+                    {
+                        "nodeID": 544,
+                        "executionName": "true"
+                    },
+                    {
+                        "nodeID": 721,
+                        "executionName": "down"
+                    }
+                ],
+                "enabled": true
+            }
+        },
+        "330": {
+            "className": "PlaySound",
+            "id": 330,
+            "memory": {
+                "sound url": "Jambalaya Loop.mp3",
+                "loop": false
+            },
+            "ownerID": 682,
+            "inputs": [
+                {
+                    "className": "Pointer",
+                    "nodeID": 330,
+                    "name": "sound url",
+                    "id": null,
+                    "output": null,
+                    "type": 1
+                },
+                {
+                    "className": "Pointer",
+                    "nodeID": 330,
+                    "name": "loop",
+                    "id": null,
+                    "output": null,
+                    "type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "nodeID": 330,
+                    "name": "audio",
+                    "isValue": true,
+                    "type": 1
+                }
+            ],
+            "x": 500,
+            "y": 50,
+            "execution": [
+                {
+                    "name": "default",
+                    "nodeID": null
+                },
+                {
+                    "name": "completed",
+                    "nodeID": 330
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [
+                    {
+                        "nodeID": 474,
+                        "executionName": "default"
+                    },
+                    {
+                        "nodeID": 330,
+                        "executionName": "completed"
+                    }
+                ],
+                "enabled": true
+            }
+        },
+        "337": {
+            "className": "Keyboard",
+            "id": 337,
+            "memory": {
+                "key name": "ArrowRight"
+            },
+            "ownerID": 682,
+            "inputs": [
+                {
+                    "className": "Pointer",
+                    "nodeID": 337,
+                    "name": "key name",
+                    "id": null,
+                    "output": null,
+                    "type": 1
+                }
+            ],
+            "outputs": [],
+            "x": 50,
+            "y": 717,
+            "execution": [
+                {
+                    "name": "down",
+                    "nodeID": 59
+                },
+                {
+                    "name": "up",
+                    "nodeID": null
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [],
+                "enabled": false
+            }
+        },
+        "474": {
+            "className": "Animation",
+            "id": 474,
+            "memory": {
+                "name": "run"
+            },
+            "ownerID": 682,
+            "inputs": [
+                {
+                    "className": "Pointer",
+                    "nodeID": 474,
+                    "name": "name",
+                    "id": null,
+                    "output": null,
+                    "type": 1
+                }
+            ],
+            "outputs": [],
+            "x": 250,
+            "y": 50,
+            "execution": [
+                {
+                    "name": "default",
+                    "nodeID": 330
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [
+                    {
+                        "nodeID": 710,
+                        "executionName": "default"
+                    }
+                ],
+                "enabled": true
+            }
+        },
+        "514": {
+            "className": "AnimationEvent",
+            "id": 514,
+            "memory": {},
+            "ownerID": 682,
+            "inputs": [],
+            "outputs": [
+                {
+                    "nodeID": 514,
+                    "name": "event name",
+                    "isValue": true,
+                    "type": 1
+                }
+            ],
+            "x": 50,
+            "y": 250,
+            "execution": [
+                {
+                    "name": "default",
+                    "nodeID": 779
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [],
+                "enabled": false
+            }
+        },
+        "544": {
+            "className": "Branch",
+            "id": 544,
+            "memory": {
+                "condition": true
+            },
+            "ownerID": 682,
+            "inputs": [
+                {
+                    "className": "Pointer",
+                    "nodeID": 544,
+                    "name": "condition",
+                    "id": 671,
+                    "output": {
+                        "nodeID": 706,
+                        "name": "value",
+                        "isValue": false,
+                        "type": 1
+                    },
+                    "type": 1
+                }
+            ],
+            "outputs": [],
+            "x": 383,
+            "y": 532,
+            "execution": [
+                {
+                    "name": "true",
+                    "nodeID": 312
+                },
+                {
+                    "name": "false",
+                    "nodeID": 59
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [
+                    {
+                        "nodeID": 752,
+                        "executionName": "down"
+                    }
+                ],
+                "enabled": true
+            }
+        },
+        "671": {
+            "className": "Pointer",
+            "nodeID": 544,
+            "name": "condition",
+            "id": 671,
+            "output": {
+                "nodeID": 706,
+                "name": "value",
+                "isValue": false,
+                "type": 1
+            },
+            "type": 1
+        },
+        "682": {
+            "dimension": {
+                "x": 512,
+                "y": 512
+            },
+            "manifest": [
+                {
+                    "contentType": "application/json",
+                    "fileName": "cat.json"
+                },
+                {
+                    "contentType": "text/plain",
+                    "fileName": "cat.atlas"
+                },
+                {
+                    "contentType": "image/png",
+                    "fileName": "cat.png"
+                }
+            ],
+            "name": "Fat Cat",
+            "sourceID": "zqTVeCemqwv4Wr6A55tf",
+
+
+
+            "className": "SpineActor",
+            "id": 682,
+            "position": {
+                "x": 613,
+                "y": 539.5
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5
+            },
+            "rotation": 0,
+            "name": "cat",
+            "brainID": 249,
+            "components": [
+                {
+                    "name": "PlaceHolderComponent"
+                },
+                {
+                    "name": "SpineComponent"
+                }
+            ],
+            "properties": {},
+            "url": "cat.info.json"
+        },
+        "706": {
+            "className": "Equal",
+            "id": 706,
+            "memory": {
+                "B": 1
+            },
+            "ownerID": 682,
+            "inputs": [
+                {
+                    "className": "Pointer",
+                    "nodeID": 706,
+                    "name": "A",
+                    "id": 883,
+                    "output": {
+                        "nodeID": 752,
+                        "name": "switch id",
+                        "isValue": true,
+                        "type": 1
+                    },
+                    "type": 1
+                },
+                {
+                    "className": "Pointer",
+                    "nodeID": 706,
+                    "name": "B",
+                    "id": null,
+                    "output": null,
+                    "type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "nodeID": 706,
+                    "name": "value",
+                    "isValue": false,
+                    "type": 1
+                }
+            ],
+            "x": 240,
+            "y": 600
+        },
+        "710": {
+            "className": "GameStart",
+            "id": 710,
+            "memory": {},
+            "ownerID": 682,
+            "inputs": [],
+            "outputs": [],
+            "x": 50,
+            "y": 50,
+            "execution": [
+                {
+                    "name": "default",
+                    "nodeID": 474
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [],
+                "enabled": false
+            }
+        },
+        "721": {
+            "className": "Keyboard",
+            "id": 721,
+            "memory": {
+                "key name": "ArrowLeft"
+            },
+            "ownerID": 682,
+            "inputs": [
+                {
+                    "className": "Pointer",
+                    "nodeID": 721,
+                    "name": "key name",
+                    "id": null,
+                    "output": null,
+                    "type": 1
+                }
+            ],
+            "outputs": [],
+            "x": 50,
+            "y": 406,
+            "execution": [
+                {
+                    "name": "down",
+                    "nodeID": 312
+                },
+                {
+                    "name": "up",
+                    "nodeID": null
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [],
+                "enabled": false
+            }
+        },
+        "752": {
+            "className": "SwitchAccess",
+            "id": 752,
+            "memory": {
+                "debounce": 0,
+                "pre-acceptance": 0
+            },
+            "ownerID": 682,
+            "inputs": [
+                {
+                    "className": "Pointer",
+                    "nodeID": 752,
+                    "name": "debounce",
+                    "id": null,
+                    "output": null,
+                    "type": 1
+                },
+                {
+                    "className": "Pointer",
+                    "nodeID": 752,
+                    "name": "pre-acceptance",
+                    "id": null,
+                    "output": null,
+                    "type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "nodeID": 752,
+                    "name": "switch id",
+                    "isValue": true,
+                    "type": 1
+                }
+            ],
+            "x": 50,
+            "y": 532,
+            "execution": [
+                {
+                    "name": "down",
+                    "nodeID": 544
+                },
+                {
+                    "name": "up",
+                    "nodeID": null
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [],
+                "enabled": false
+            }
+        },
+        "779": {
+            "className": "PlaySound",
+            "id": 779,
+            "memory": {
+                "loop": false
+            },
+            "ownerID": 682,
+            "inputs": [
+                {
+                    "className": "Pointer",
+                    "nodeID": 779,
+                    "name": "sound url",
+                    "id": 219,
+                    "output": {
+                        "nodeID": 514,
+                        "name": "event name",
+                        "isValue": true,
+                        "type": 1
+                    },
+                    "type": 1
+                },
+                {
+                    "className": "Pointer",
+                    "nodeID": 779,
+                    "name": "loop",
+                    "id": null,
+                    "output": null,
+                    "type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "nodeID": 779,
+                    "name": "audio",
+                    "isValue": true,
+                    "type": 1
+                }
+            ],
+            "x": 250,
+            "y": 250,
+            "execution": [
+                {
+                    "name": "default",
+                    "nodeID": null
+                },
+                {
+                    "name": "completed",
+                    "nodeID": null
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [
+                    {
+                        "nodeID": 514,
+                        "executionName": "default"
+                    }
+                ],
+                "enabled": true
+            }
+        },
+        "788": {
+            "id": 788,
+            "name": "text",
+            "type": 1,
+            "brainID": 249,
+            "data": "this is a fat cat"
+        },
+        "842": {
+            "className": "StepRight",
+            "id": 842,
+            "memory": {},
+            "ownerID": 682,
+            "inputs": [],
+            "outputs": [],
+            "x": 820,
+            "y": 661,
+            "execution": [
+                {
+                    "name": "default",
+                    "nodeID": null
+                },
+                {
+                    "name": "completed",
+                    "nodeID": null
+                }
+            ],
+            "enter": {
+                "name": "default",
+                "callers": [
+                    {
+                        "nodeID": 59,
+                        "executionName": "default"
+                    }
+                ],
+                "enabled": true
+            }
+        },
+        "883": {
+            "className": "Pointer",
+            "nodeID": 706,
+            "name": "A",
+            "id": 883,
+            "output": {
+                "nodeID": 752,
+                "name": "switch id",
+                "isValue": true,
+                "type": 1
+            },
+            "type": 1
+        }
+    },
+    "brains": [
+        249
+    ],
+    "nodes": [
+        710,
+        474,
+        330,
+        514,
+        779,
+        752,
+        544,
+        312,
+        59,
+        43,
+        842,
+        706,
+        721,
+        337
+    ],
+    "pointers": [
+        219,
+        671,
+        883
+    ],
+    "variables": [
+        788
+    ]
+}

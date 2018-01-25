@@ -16,6 +16,28 @@ export default class SpineActor extends Actor
   init(pod) {
     super.init(pod)
     this.url = pod.url;
+
+    this.loaded = JsonPromise.load(this.url).then(info => {
+      this.name = info.name;
+      this.addComponent('placeholder', new PlaceHolderComponent(info.dimension));
+      return info;
+    }).then(info => {
+      let loader = new PIXI.loaders.Loader();
+      loader.add(info.id)
+      return new Promise((resolve, reject) => {
+        loader.load((loader, resources) => {
+          // FIXIME: spine component not avaialble when it is fully loaded...
+          // mouseover event will try to accesss it before it is available...
+          this.spineComponent = new SpineComponent(resources[info.id].spineData);
+          this.addComponent('animation', this.spineComponent);
+          
+          //FIXME: !!!!!!!!!!!!!!!!!!!!! shoud not be called here!!!!!!!!!
+          this.spineComponent.onStage();
+          
+          resolve();
+        })
+      })
+    })
   }
 
   gameStop() {
