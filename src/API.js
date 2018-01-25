@@ -8,6 +8,10 @@ class API {
     return firebase.firestore().doc(`puppets/${pod.sourceID}`).set(pod);
   }
 
+  getUrl(path) {
+    return firebase.storage().ref(path).getDownloadURL();
+  }
+
   async listLibraryPuppets() {
     let collections = await firebase.firestore().collection(`puppets`).get();
     let pods = [];

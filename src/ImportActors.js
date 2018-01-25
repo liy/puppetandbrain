@@ -7,11 +7,33 @@ export default class ImportActors
     this.mapping = {};
   }
 
-  start(pod) {
+  async start(pod) {
     // TOOD: load manifest
-    
+    await this.loadResources(pod);
+
     this.createActors(pod);
     this.createNodes(pod)
+  }
+
+  async loadResources(pod) {
+    for(let id of pod.actors) {
+      let actorPod = pod.store[id];
+
+      // official predefined resources
+      for(let entry of actorPod.manifest) {
+        let url = await API.getUrl(`library/puppets/${actorPod.sourceID}/${entry.fileName}`)
+        Resource.add(`${actorPod.sourceID}/${entry.fileName}`, url, entry.contentType)
+      }
+
+      // user uploaded resources
+      if(actorPod.uploads) {
+        for(let file of actorPod.uploads) {
+          let url = await API.getUrl(`uploads/${file}`);
+          Resource.add(`${file}`, url)
+        }
+      }
+    }
+    return Resource.start();
   }
 
   createActors(pod) {

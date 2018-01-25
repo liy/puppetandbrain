@@ -9,6 +9,9 @@ let puppet = {
   // list of files from sourceID folder, these files are defined by default, officially.
   manifest: [],
 
+  // this is the id for PIXI spine animation  
+  spineID: "cat"
+
 
 
   
@@ -39,7 +42,9 @@ let puppet = {
   // no new upload list needs to be generated
   puppetID: "6VmBacRlJmoYrH8lkSW3",
 
-  // duplication of the root uploads for this puppet.
+
+  // list of file ids uploaded by user
+  // Kind of duplication of the root uploads for this puppet.
   // useful when loading the puppets, so we don't need to send extra request to
   // fetch the list of user uploads
   uploads: [],

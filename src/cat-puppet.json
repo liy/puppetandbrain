@@ -1,5 +1,5 @@
 {
-    "name": "Fat Cat",
+    "name": "Bouncy Cat",
     "sourceID": "zqTVeCemqwv4Wr6A55tf",
 
     "actors": [
@@ -380,7 +380,7 @@
                     "fileName": "cat.png"
                 }
             ],
-            "name": "Fat Cat",
+            "spineID": "cat",
             "sourceID": "zqTVeCemqwv4Wr6A55tf",
 
 
@@ -396,7 +396,7 @@
                 "y": 0.5
             },
             "rotation": 0,
-            "name": "cat",
+            "name": "Bouncy Cat",
             "brainID": 249,
             "components": [
                 {

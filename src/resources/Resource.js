@@ -13,6 +13,8 @@ class Resource extends Map
   }
 
   add(id, url, contentType) {
+    if(this.has(id)) return;
+
     switch(contentType) {
       case ContentType.JSON:
         this.loaders.push(new JSONLoader(id, url))
@@ -35,7 +37,9 @@ class Resource extends Map
     let promises = this.loaders.map(loader => {
       return loader.start();
     })
-    return Promise.all(promises);
+    return Promise.all(promises).then(() => {
+      this.loaders = [];
+    });
   }
 }
 

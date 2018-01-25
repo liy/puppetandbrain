@@ -20,15 +20,13 @@ export default class AnimationEvent extends Listener
   init(pod) {
     super.init(pod);
 
-    this.owner.loaded.then(() => {
-      let spineComponent = this.owner.getComponent('animation');
-      spineComponent.state.addListener({
-        event: (i, event) => {
-          
-          this.outputs.assignValue('event name', event.stringValue.trim());
-          this.run();
-        }
-      })
+    let spineComponent = this.owner.getComponent('animation');
+    spineComponent.state.addListener({
+      event: (i, event) => {
+        
+        this.outputs.assignValue('event name', event.stringValue.trim());
+        this.run();
+      }
     })
   }
 
