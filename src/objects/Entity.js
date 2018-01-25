@@ -3,6 +3,7 @@ import ArrayMap from "../utils/ArrayMap";
 export default class Entity
 {
   constructor() {
+    this.isOnStage = false;
     this.components = new ArrayMap();
   }
 
@@ -17,6 +18,7 @@ export default class Entity
     component.entity = this;
     this.components.set(name, component);
     component.added();
+    if(this.isOnStage) component.onStage();
     return component;
   }
 
@@ -25,17 +27,20 @@ export default class Entity
     if(component) {
       component.entity = null;
       component.removed();
+      if(this.isOnStage) component.offStage();
     }
     return component;
   }
 
   onStage() {
+    this.isOnStage = true;
     for(let component of this.components) {
       component.onStage();
     }
   }
 
   offStage() {
+    this.isOnStage = false;
     for(let component of this.components) {
       component.offStage();
     }

@@ -4,31 +4,31 @@ import TextLoader from './TextLoader';
 import ImageLoader from './ImageLoader';
 import SoundLoader from './SoundLoader';
 
-class Resource extends Map
+export const Resource = new Map();
+
+export class LoaderBucket
 {
   constructor() {
-    super();
-
     this.loaders = [];
   }
 
-  add(id, url, contentType) {
-    if(this.has(id)) return;
+  add(id, url, contentType, options=null) {
+    if(Resource.has(id)) return;
 
     switch(contentType) {
       case ContentType.JSON:
-        this.loaders.push(new JSONLoader(id, url))
+        this.loaders.push(new JSONLoader(id, url, options))
         break;
       case ContentType.ATLAS:
-        this.loaders.push(new TextLoader(id, url))
+        this.loaders.push(new TextLoader(id, url, options))
         break;
       case ContentType.PNG:
       case ContentType.JPG:
-        this.loaders.push(new ImageLoader(id, url))
+        this.loaders.push(new ImageLoader(id, url, options))
         break;
       case ContentType.OGG:
       case ContentType.MP3:
-        this.loaders.push(new SoundLoader(id, url))
+        this.loaders.push(new SoundLoader(id, url, options))
         break;
     }
   }
@@ -37,10 +37,6 @@ class Resource extends Map
     let promises = this.loaders.map(loader => {
       return loader.start();
     })
-    return Promise.all(promises).then(() => {
-      this.loaders = [];
-    });
+    return Promise.all(promises);
   }
 }
-
-window.Resource = new Resource();

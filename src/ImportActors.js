@@ -8,36 +8,16 @@ export default class ImportActors
   }
 
   async start(pod) {
-    // TOOD: load manifest
-    await this.loadResources(pod);
-
-    this.createActors(pod);
-    this.createNodes(pod)
+    await this.createActors(pod);
+    this.createNodes(pod);
   }
 
-  async loadResources(pod) {
-    for(let id of pod.actors) {
-      let actorPod = pod.store[id];
-
-      // official predefined resources
-      for(let entry of actorPod.manifest) {
-        let url = await API.getUrl(`library/puppets/${actorPod.sourceID}/${entry.fileName}`)
-        Resource.add(`${actorPod.sourceID}/${entry.fileName}`, url, entry.contentType)
-      }
-
-      // user uploaded resources
-      if(actorPod.uploads) {
-        for(let file of actorPod.uploads) {
-          let url = await API.getUrl(`uploads/${file}`);
-          Resource.add(`${file}`, url)
-        }
-      }
-    }
-    return Resource.start();
-  }
-
-  createActors(pod) {
-    for(let id of pod.actors) {
+  /**
+   * Importing will delegate actor assets preloading to individual actor
+   * @param {*} pod 
+   */
+  async createActors(pod) {
+    return Promise.all(pod.actors.map(async id => {
       // note that I do not need to remove brainID from actorPod.
       // Because LookUp will generate a new ID if brainID exist.
       let actorPod = pod.store[id];
@@ -45,8 +25,10 @@ export default class ImportActors
       actorPod.position.x += 10;
       actorPod.position.y += 10;
       let actor = new ObjecClasses[actorPod.className]();
-      actor.init(actorPod);
       Editor.stage.addActor(actor);
+
+      // preload actor and then initialize it
+      await actor.preload(actorPod);
 
       // map new item with old id
       this.mapping[id] = actor;
@@ -58,7 +40,7 @@ export default class ImportActors
         let variable = actor.brain.variables.create(pod.store[variableID])
         this.mapping[variableID] = variable;
       }
-    }
+    }))
   }
 
   createNodes(pod) {

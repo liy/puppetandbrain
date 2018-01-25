@@ -25,6 +25,13 @@ export default class PlaceHolderComponent extends ContainerComponent
     this.bg.endFill();
 
     this.hourGlass.scale.y = this.hourGlass.scale.x = s
+    
+    // show progress
+    this.container.addChild(this.bg);
+    this.container.addChild(this.hourGlass);
+    
+    // you cannot interact with place holder
+    this.container.interactive = false;
   }
 
   destroy() {
@@ -32,24 +39,16 @@ export default class PlaceHolderComponent extends ContainerComponent
     clearInterval(this.intervalID);
   }
 
-  async added() {
+  added() {
     super.added();
-    
-    // show progress
-    this.tickEnabled = true;
-    this.container.addChild(this.bg);
-    this.container.addChild(this.hourGlass);
 
     this.intervalID = setInterval(() => {
       this.targetRotation += Math.PI;
     }, 1000);
-    
-    // wait until it is loaded
-    await this.entity.loaded
-    this.container.removeChild(this.bg);
-    this.container.removeChild(this.hourGlass)
-    this.tickEnabled = false;
+  }
 
+  removed() {
+    super.removed();
     clearInterval(this.intervalID);
   }
 

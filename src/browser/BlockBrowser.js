@@ -192,7 +192,6 @@ export default class BlockBrowser extends Browser
 
     for(let template of tempaltes) {
       let box = new BlockBox(template);
-      console.log(template.category)
       this.contentSection.add(box, template.category);
     }
   }
@@ -211,7 +210,5 @@ export default class BlockBrowser extends Browser
 
   clear() {
     this.contentSection.clear();
-    // this.groups.clear();
-    // this.blocks = [];
   }
 }

@@ -3,6 +3,7 @@ import JsonPromise from '../utils/JsonPromise';
 import Actor from './Actor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import SpineComponent from '../components/SpineComponent';
+import {LoaderBucket, Resource} from '../resources/Resource';
 
 export default class SpineActor extends Actor
 {
@@ -11,6 +12,27 @@ export default class SpineActor extends Actor
     
     this.selectOutline = new filters.OutlineFilter(4, 0xc95ce8)
     this.hoverOutline = new filters.OutlineFilter(3, 0xdbace8)
+  }
+
+  async preload(pod) {
+    this.position = pod.position || {x:0,y:0};
+    this.rotation = pod.rotation || 0;
+    this.scale = pod.scale || {x:1,y:1}
+
+    this.addComponent('placeholder', new PlaceHolderComponent(pod.dimension));
+    
+    // official predefined resources
+    // load all resources in parallel
+    let loader = new LoaderBucket();
+    await Promise.all(pod.manifest.map(async entry => {
+      let url = await API.getUrl(`library/puppets/${pod.sourceID}/${entry.fileName}`)
+      loader.add(`${pod.sourceID}/${entry.fileName}`, url, entry.contentType)
+    }))
+    await loader.start();
+
+    this.removeComponent('placeholder');
+
+    this.init(pod);
   }
 
   init(pod) {
@@ -32,29 +54,6 @@ export default class SpineActor extends Actor
 
     this.spineComponent = new SpineComponent(spineData);
     this.addComponent('animation', this.spineComponent);
-
-
-    // this.loaded = JsonPromise.load(this.url).then(info => {
-    //   this.name = info.name;
-    //   this.addComponent('placeholder', new PlaceHolderComponent(info.dimension));
-    //   return info;
-    // }).then(info => {
-    //   let loader = new PIXI.loaders.Loader();
-    //   loader.add(info.id)
-    //   return new Promise((resolve, reject) => {
-    //     loader.load((loader, resources) => {
-    //       // FIXIME: spine component not avaialble when it is fully loaded...
-    //       // mouseover event will try to accesss it before it is available...
-    //       this.spineComponent = new SpineComponent(resources[info.id].spineData);
-    //       this.addComponent('animation', this.spineComponent);
-          
-    //       //FIXME: !!!!!!!!!!!!!!!!!!!!! shoud not be called here!!!!!!!!!
-    //       this.spineComponent.onStage();
-          
-    //       resolve();
-    //     })
-    //   })
-    // })
   }
 
   gameStop() {
