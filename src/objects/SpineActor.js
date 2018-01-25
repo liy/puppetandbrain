@@ -33,7 +33,6 @@ export default class SpineActor extends Actor
     this.spineComponent = new SpineComponent(spineData);
     this.addComponent('animation', this.spineComponent);
 
-    this.spineComponent.onStage();
 
     // this.loaded = JsonPromise.load(this.url).then(info => {
     //   this.name = info.name;
