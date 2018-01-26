@@ -3,11 +3,6 @@ class API {
 
   }
 
-  // TODO: to be removed
-  updateTest(pod) {
-    return firebase.firestore().doc(`puppets/zqTVeCemqwv4Wr6A55tf`).set(pod);
-  }
-
   getUrl(path) {
     return firebase.storage().ref(path).getDownloadURL();
   }

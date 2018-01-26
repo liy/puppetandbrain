@@ -8,8 +8,8 @@ export default class ImportActor
   }
 
   async start(pod) {
-    await this.createActor(pod);
-    this.createNodes(pod);
+    let actor = await this.createActor(pod);
+    this.createNodes(pod, actor);
   }
 
   /**
@@ -25,9 +25,6 @@ export default class ImportActor
     // Because LookUp will generate a new ID if brainID exist.
     await actor.preload(pod);
 
-    // map old id to the new item so we can reference the new item with the new id
-    this.mapping[pod.id] = actor;
-
     // create variable for the actor brain
     // Note that, there is only 1 brain for an actor, so you can simply grab
     // the newly created brain to start adding variables.
@@ -35,9 +32,11 @@ export default class ImportActor
       let variable = actor.brain.variables.create(pod.store[variableID])
       this.mapping[variableID] = variable;
     }
+
+    return actor;
   }
 
-  createNodes(pod) {
+  createNodes(pod, actor) {
     if(!pod.nodes) return;
 
     let performs= [];
@@ -45,8 +44,8 @@ export default class ImportActor
       let nodePod = pod.store[id];
       let node = NodeFactory.create(nodePod.className);
 
-      // change owner
-      nodePod.ownerID = this.mapping[nodePod.ownerID].id;
+      // change owner, no need to use mapping, since we can import only 1 actor at a time.
+      nodePod.ownerID = actor.id;
 
       switch(nodePod.className) {
         case 'Getter':

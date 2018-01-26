@@ -26,10 +26,7 @@ export default class Actor extends EventEmitter
 
     // transform for the components
     // also be able to manipulate in the node graph property.
-    this.position = {
-      x: 0,
-      y: 0,
-    }
+    this.position = {x:Editor.stage.stageWidth/2, y:Editor.stage.stageHeight/2}
     // in radian
     this.rotation = 0;
     this.scale = {
@@ -76,7 +73,7 @@ export default class Actor extends EventEmitter
 
     this.name = pod.name || 'Puppet';
     
-    this.position = pod.position || {x:0,y:0};
+    this.position = pod.position || {x:Editor.stage.stageWidth/2, y:Editor.stage.stageHeight/2};
     this.rotation = pod.rotation || 0;
     this.scale = pod.scale || {x:1,y:1}
 

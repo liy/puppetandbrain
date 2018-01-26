@@ -12,8 +12,8 @@ const ACTORS = [
   // require('../assets/sheep/sheep.info.json'),
   // require('../assets/goat/goat.info.json'),
   // require('../assets/duck/duck.info.json'),
-  require('../assets/cat/cat.info.json'),
-  require('../assets/mice/mice.info.json'),
+  // require('../assets/cat/cat.info.json'),
+  // require('../assets/mice/mice.info.json'),
 ]
 
 

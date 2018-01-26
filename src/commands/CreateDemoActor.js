@@ -22,14 +22,12 @@ export default class CreateDemoActor extends Command
 {
   constructor() {
     super();
-    this.url = require('../assets/cat/cat.info.json');
     this.actorID = null;
   }
 
   async process() {
     var actor = new SpineActor(this.actorID);
     actor.init({
-      url: this.url,
       scale: {
         x: 0.5,
         y: 0.5

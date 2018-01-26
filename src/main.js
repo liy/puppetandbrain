@@ -1,20 +1,3 @@
-// FIXME: for testing 
-// Needs to be removed quite soon!!
-// 
-
-require('./assets/cat/cat.json')
-require('./assets/cat/cat.png')
-require('./assets/cat/cat.atlas')
-require('./assets/cat/boing.mp3')
-
-require('./assets/mice/mice.json')
-require('./assets/mice/mice.png')
-require('./assets/mice/mice.atlas')
-
-//sound
-require('./assets/sounds/Jambalaya Loop.mp3')
-require('./assets/sounds/Jambalaya Loop.ogg')
-
 // favicons
 require("./assets/favicon-192.png")
 require('./manifest.json')
