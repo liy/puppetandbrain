@@ -31,7 +31,7 @@ export default class extends GridBox
 
   loadSnapshot() {
     // load the snapshot
-    firebase.storage().ref(`${this.pod.libDir}/snapshot.png`).getDownloadURL().then(url => {
+    firebase.storage().ref(`${this.pod.libDir}/${this.pod.puppetID}/snapshot.png`).getDownloadURL().then(url => {
       this.box.style.backgroundImage = `url("${url}")`
     })
   }

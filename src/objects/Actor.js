@@ -54,6 +54,10 @@ export default class Actor extends EventEmitter
 
   init(pod={}) {
     Object.defineProperties(this, {
+      "puppetID": {
+        value: pod.puppetID || null,
+        writable: false
+      },
       "libDir": {
         value: pod.libDir,
         writable: false
@@ -221,11 +225,14 @@ export default class Actor extends EventEmitter
 
   pod(detail=false) {
     let pod = {
+      // serverside, and assets preloading related
+      puppetID: this.puppetID,
       libDir: this.libDir,
       libFiles: this.libFiles,
       myPuppetID: this.myPuppetID,
       userFiles: this.userFiles,
 
+      // game play related
       className: this.className,
       id: this.id,
       position: {...this.position},

@@ -32,7 +32,7 @@ export default class ActivityLoader
     for(let id of pod.actors) {
       let actorPod = pod.store[id];
       for(let entry of actorPod.libFiles) {
-        let path = `${actorPod.libDir}/${entry.fileName}`;
+        let path = `${actorPod.libDir}/${actorPod.puppetID}/${entry.fileName}`;
         urlPromises.push(API.getUrl(path).then(url => {
           loader.add(path, url, entry.contentType)
         }))
