@@ -43,9 +43,7 @@ import DebugButton from './ui/DebugButton';
 import BrainButton from './ui/BrainButton';
 import ArrayMap from './utils/ArrayMap';
 
-
-import ImportActors from './ImportActors';
-import ExportActors from './ExportActors';
+import ExportActor from './ExportActors';
 import ChoiceBox from './objects/ChoiceBox'
 import PuppetBrowser from './browser/PuppetBrowser';
 import ActorSelection from './objects/ActorSelection';
@@ -110,12 +108,12 @@ function simpleInit() {
 
 
 
-    fetch(require('./cat-puppet.json')).then(response => {
-      return response.json();
-    }).then(pod => {
-      console.log(pod)
-      API.updateTest(pod)
-    })
+    // fetch(require('./cat-puppet.json')).then(response => {
+    //   return response.json();
+    // }).then(pod => {
+    //   console.log(pod)
+    //   API.updateTest(pod)
+    // })
 
 
 

@@ -7,7 +7,7 @@ import MyPuppetBox from './MyPuppetBox'
 import Browser from './Browser';
 
 import API from '../API';
-import ImportActors from '../ImportActors';
+import ImportActor from '../ImportActor';
 
 export default class extends Browser
 {
@@ -44,7 +44,7 @@ export default class extends Browser
 
   onSelected(box) {
     this.close();
-    let importActor = new ImportActors();
+    let importActor = new ImportActor();
     importActor.start(box.pod);
   }
 }

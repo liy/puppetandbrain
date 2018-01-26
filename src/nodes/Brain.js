@@ -66,12 +66,6 @@ export default class Brain
   }
 
   export(data={}) {
-    data.brains = data.brains || [];
-    data.brains.push(this.id);
-
-    data.store = data.store || {};
-    data.store[this.id] = this.pod()
-
     // nodes
     for(let node of this.nodes) {
       node.export(data);

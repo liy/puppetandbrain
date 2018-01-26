@@ -210,16 +210,12 @@ export default class Actor extends EventEmitter
     return this.position.y;
   }
 
-  export(data={}) {
-    data.actors = data.actors || [];
-    data.actors.push(this.id);
-
-    data.store = {
-      ...data.store,
-      [this.id]: this.pod()
+  export() {
+    let data = {
+      ...this.pod(),
+      ...this.brain.export(data)
     }
     
-    this.brain.export(data);
     return data
   }
 

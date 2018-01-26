@@ -1,43 +1,40 @@
 import * as ObjecClasses from './objects';
 import Variable from './data/Variable';
 
-export default class ImportActors
+export default class ImportActor
 {
   constructor() {
     this.mapping = {};
   }
 
   async start(pod) {
-    await this.createActors(pod);
+    await this.createActor(pod);
     this.createNodes(pod);
   }
 
   /**
-   * Importing will delegate actor assets preloading to individual actor
+   * Importing will delegate actor assets preloading to actor itself
    * @param {*} pod 
    */
-  async createActors(pod) {
-    return Promise.all(pod.actors.map(async id => {
-      // note that I do not need to remove brainID from actorPod.
-      // Because LookUp will generate a new ID if brainID exist.
-      let actorPod = pod.store[id];
-      let actor = new ObjecClasses[actorPod.className]();
-      Editor.stage.addActor(actor);
+  async createActor(pod) {
+    let actor = new ObjecClasses[pod.className]();
+    Editor.stage.addActor(actor);
 
-      // preload actor and then initialize it
-      await actor.preload(actorPod);
+    // preload actor and then initialize it
+    // note that I do not need to remove brainID from actorPod.
+    // Because LookUp will generate a new ID if brainID exist.
+    await actor.preload(pod);
 
-      // map new item with old id
-      this.mapping[id] = actor;
-      this.mapping[actorPod.brainID] = actor.brain;
+    // map old id to the new item so we can reference the new item with the new id
+    this.mapping[pod.id] = actor;
 
-      // create variable for the actor brain
-      let brainPod = pod.store[actorPod.brainID];
-      for(let variableID of brainPod.variables) {
-        let variable = actor.brain.variables.create(pod.store[variableID])
-        this.mapping[variableID] = variable;
-      }
-    }))
+    // create variable for the actor brain
+    // Note that, there is only 1 brain for an actor, so you can simply grab
+    // the newly created brain to start adding variables.
+    for(let variableID of pod.variables) {
+      let variable = actor.brain.variables.create(pod.store[variableID])
+      this.mapping[variableID] = variable;
+    }
   }
 
   createNodes(pod) {
