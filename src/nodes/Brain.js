@@ -24,6 +24,9 @@ export default class Brain
     for(let node of nodes) {
       node.destroy();
     }
+    for(let variable of this.variables) {
+      variable.destroy();
+    }
     Editor.off('game.prestart', this.prestart, this);
   }
 
