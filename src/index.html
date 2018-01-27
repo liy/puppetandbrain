@@ -33,10 +33,10 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
     <script src="https://pixijs.download/v4.5.4/pixi.js"></script>
-    <div>
+    <!-- <div>
       <div title="Undo" id='undo-button'></div>
       <div title="Redo" id='redo-button'></div>
-    </div>
+    </div> -->
     <div id='debug-trace'></div>
     <div id='activity-id' title="Copy activity link, and share it!"></div>
     <div id="app">
@@ -45,15 +45,15 @@
       <div id='stage-overlayer'></div>
       <span id='app-version'></span>
     </div>
-    <div id='control'>
-      <div id='at' title='@puppetandbrain | puppetandbrain[a]gmail.com'></div>
-      <div title="Press F6 to toggle start" id='debug-button' class="debug-start" style="visibility:hidden"></div>
-      <div id='add-actor-button' title="Add a fat cat or ..." style="visibility:hidden"></div>
-      <div id='brain-button' title="Open the brain..." style="visibility:hidden"></div>
-    </div>
     <div id='graph'>
       <div id='block-container' style="position:absolute; top:0; z-index:1;"></div>
       <svg id='svg' style="position:absolute; top:0" ></svg>
     </div>
+    <div id='control-panel'>
+        <div class='control-button' id='bin-button' title="Delete a puppet..." style="visibility:hidden"></div>
+        <div class='control-button' id='brain-button' title="Open the brain..." style="visibility:hidden"></div>
+        <div class='control-button' id='debug-button' title="Press F6 to toggle start" style="visibility:hidden"></div>
+        <div class='control-button' id='add-actor-button' title="Add a fat cat or ..." style="visibility:hidden"></div>
+      </div>
   </body>
 </html>

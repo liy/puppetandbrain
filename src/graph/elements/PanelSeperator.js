@@ -8,6 +8,6 @@ export default class
     this.element = document.createElement('div');
     this.element.className = 'panel-seperator';
     
-    this.element.append(svgElement(SeperatorIcon, {width:30, height:4}));
+    this.element.appendChild(svgElement(SeperatorIcon, {width:30, height:4}));
   }
 }

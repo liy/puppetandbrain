@@ -1,9 +1,12 @@
 
 import ActorSelection from '../objects/ActorSelection'
+import EventEmitter from '../utils/EventEmitter';
 
-class BlockSelection
+class BlockSelection extends EventEmitter
 {
   constructor() {
+    super();
+
     this.enabled = false;
     this.keydown = this.keydown.bind(this);
     this.downOnEmptySpace = this.downOnEmptySpace.bind(this);
@@ -38,6 +41,8 @@ class BlockSelection
     this.selected = block;
     this.selected.body.element.classList.add('block-selected');
     this.selected.focus();
+
+    this.emit('block.selection.change', this.selected);
   }
   
   downOnEmptySpace(e) {
@@ -49,6 +54,7 @@ class BlockSelection
       this.selected.body.element.classList.remove('block-selected')
       this.selected = null;
     }
+    this.emit('block.selection.change', this.selected);
   }
 
   delete() {

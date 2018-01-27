@@ -1,0 +1,31 @@
+#control-panel {
+  position: absolute;
+
+  bottom: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.control-button {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  visibility: hidden;
+
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+#add-actor-button {
+  width: 120px;
+  height: 120px;
+}
+
+#bin-button {
+  width: 68px;
+  width: 68px;
+}

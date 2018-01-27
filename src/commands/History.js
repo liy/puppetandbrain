@@ -1,3 +1,5 @@
+import HistoryPanel from '../ui/HistoryPanel';
+
 class History
 {
   constructor() {
@@ -5,29 +7,19 @@ class History
     this.redos = [];
     document.addEventListener('keydown', this.keydown.bind(this));
     
-    this.undoBtn = document.getElementById('undo-button');
-    this.undoBtn.style.backgroundImage = `url("${require('!file-loader!../assets/undo-arrow.svg')}")`
-    this.redoBtn = document.getElementById('redo-button');
-    this.redoBtn.style.backgroundImage = `url("${require('!file-loader!../assets/redo-arrow.svg')}")`
+    this.panel = new HistoryPanel();
+    document.body.appendChild(this.panel.element);
+    this.undoBtn = this.panel.undoButton;
+    this.redoBtn = this.panel.redoButton;
+
     this.undo = this.undo.bind(this);
     this.redo = this.redo.bind(this);
     this.undoBtn.addEventListener('click', this.undo)
     this.redoBtn.addEventListener('click', this.redo)
     this.updateButton()
+    
 
     this.enabled = true;
-  }
-
-  set blur(v) {
-    this.enabled = !v;
-    if(v) {
-      this.redoBtn.classList.add('blur');
-      this.undoBtn.classList.add('blur');
-    }
-    else {
-      this.redoBtn.classList.remove('blur');
-      this.undoBtn.classList.remove('blur');
-    }
   }
 
   keydown(e) {

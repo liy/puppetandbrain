@@ -18,13 +18,11 @@ import './commands/History'
 import './commands/Commander'
 import './graph/BrainGraph'
 import './Editor'
+import ControlPanel from './ui/ControlPanel';
 
 import './resources/Resource';
 import './Activity';
 import ActivityLoader from './ActivityLoader';
-import AddActorButton from './ui/AddActorButton';
-import DebugButton from './ui/DebugButton';
-import BrainButton from './ui/BrainButton';
 import ArrayMap from './utils/ArrayMap';
 
 import ExportActor from './ExportActors';
@@ -64,9 +62,7 @@ function signedIn(user) {
     }
   })
 
-  new AddActorButton();
-  new DebugButton();
-  new BrainButton();
+  window.controlPanel = new ControlPanel();
 }
 
 // Persist the sign in token in local machine, probably in local storage or something in browser... whatever.
@@ -92,8 +88,3 @@ firebase.auth().onAuthStateChanged(user => {
     // LookUp.user = null;
   }
 })
-
-setTimeout(() => {
-  Activity.clear();
-  router.navigate('/creations/1mUKfTiphvZ6yqxWfMnq');
-}, 10000 )

@@ -1,0 +1,9 @@
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    .stop-button-fill{fill:#69d6a4}
+  </style>
+  <circle class="stop-button-fill" cx="50" cy="50" r="50"/>
+  <circle cx="50" cy="50" r="40" fill="#22b573"/>
+  <path d="M62.5 67.5h-25c-2.8 0-5-2.3-5-5v-25c0-2.8 2.3-5 5-5h25c2.8 0 5 2.3 5 5v25c0 2.8-2.2 5-5 5z" fill="#b5ffde"/>
+  <path class="stop-button-fill" d="M37.5 64.5c-1.1 0-2-.9-2-2v-25c0-1.1.9-2 2-2h25c1.1 0 2 .9 2 2v25c0 1.1-.9 2-2 2h-25z"/>
+</svg>

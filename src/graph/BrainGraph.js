@@ -106,8 +106,6 @@ class BrainGraph
     // extract all variables of the brain
     ElementController.open(brain);
 
-    document.getElementById('control').classList.add('blur')
-
     this.resize = this.resize.bind(this);
     this.keydown = this.keydown.bind(this)
     this.pointerdown = this.pointerdown.bind(this);
@@ -134,11 +132,11 @@ class BrainGraph
     this.tween = TweenLite.to(this.container.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
       this.container.style.opacity = 1.0;
     }});
+
+    window.controlPanel.graphMode();
   }
 
   close() {
-
-    document.getElementById('control').classList.remove('blur')
     this.container.removeEventListener('contextmenu', this.openBlockBrowser);
     this.container.removeEventListener('mousedown', this.pointerdown);
     document.removeEventListener('keydown', this.keydown);
@@ -161,19 +159,19 @@ class BrainGraph
   
       Editor.stage.blurEnabled = false;
       BlockSelection.toggle();
+
+      window.controlPanel.stageMode();
     }})
   }
 
   hide() {
     Editor.stage.blurEnabled = false;
     this.container.style = "visibility:hidden"
-    document.getElementById('control').classList.remove('blur')
   }
 
   show() {
     Editor.stage.blurEnabled = true;
     this.container.style = "visibility:visible"
-    document.getElementById('control').classList.add('blur')
   }
 
   switchTo(brain) {
@@ -287,8 +285,8 @@ class BrainGraph
       var browser = new BlockBrowser();
       let blockPod = await browser.open();
       if(blockPod) {
-        blockPod.x = blockPod.x || e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-        blockPod.y = blockPod.y || e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+        blockPod.x = blockPod.x || (e.changedTouches ? e.changedTouches[0].clientX : e.clientX);
+        blockPod.y = blockPod.y || (e.changedTouches ? e.changedTouches[0].clientY : e.clientY);
         History.push(Commander.create('CreateBlock', blockPod, this.brain.owner.id).processAndSave());
       }
     }

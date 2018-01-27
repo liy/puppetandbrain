@@ -1,18 +1,17 @@
-require('./DebugButton.scss')
-
-import StartSvg from '../assets/start.svg';
-import StopSvg from '../assets/stop.svg';
-
+import StartButtonIcon from '../assets/play-button-icon.svg';
+import StopButtonIcon from '../assets/stop-button-icon.svg';
 import {svgElement} from '../utils/utils';
+import ControlButton from './ControlButton';
 
-export default class DebugButton
+export default class DebugButton extends ControlButton
 {
   constructor() {
+    super();
     this.element = document.getElementById('debug-button');
     this.element.style.visibility = 'visible';
 
-    this.stopIcon = svgElement(StopSvg);
-    this.startIcon = svgElement(StartSvg);
+    this.stopIcon = svgElement(StopButtonIcon, {width:100, height:100});
+    this.startIcon = svgElement(StartButtonIcon, {width:100, height:100});
 
     this.element.appendChild(this.startIcon);
 
