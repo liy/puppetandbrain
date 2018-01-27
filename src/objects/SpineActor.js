@@ -4,6 +4,7 @@ import Actor from './Actor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import SpineComponent from '../components/SpineComponent';
 import {LoaderBucket, Resource} from '../resources/Resource';
+import { aroundAt } from '../utils/utils';
 
 export default class SpineActor extends Actor
 {
@@ -15,7 +16,7 @@ export default class SpineActor extends Actor
   }
 
   async preload(pod) {
-    this.position = pod.position || {x:0,y:0};
+    this.position = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
     this.rotation = pod.rotation || 0;
     this.scale = pod.scale || {x:1,y:1}
 

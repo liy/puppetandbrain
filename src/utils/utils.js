@@ -35,3 +35,7 @@ export const ContentType = {
   OGG: 'audio/ogg',
   MP3: 'audio/mpeg',
 }
+
+export function aroundAt(v, range=10) {
+  return v + Math.random()*range*2-range;
+}

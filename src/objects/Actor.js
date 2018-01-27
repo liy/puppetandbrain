@@ -7,6 +7,7 @@ import ActorSelection from './ActorSelection';
 import Variable from '../data/Variable';
 import Matrix from '../math/Matrix';
 import PropertyList from '../data/PropertyList';
+import { aroundAt } from '../utils/utils';
 
 export default class Actor extends EventEmitter
 {
@@ -73,7 +74,7 @@ export default class Actor extends EventEmitter
 
     this.name = pod.name || 'Puppet';
     
-    this.position = pod.position || {x:Editor.stage.stageWidth/2, y:Editor.stage.stageHeight/2};
+    this.position = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
     this.rotation = pod.rotation || 0;
     this.scale = pod.scale || {x:1,y:1}
 
