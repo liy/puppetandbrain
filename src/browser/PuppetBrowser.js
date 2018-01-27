@@ -21,30 +21,40 @@ export default class extends Browser
       'Puppets': 0x976bb8,
       'Widgets': 0xbd833c,
     }
+
+    this.contentSection.placeholder = 'Loading, Please wait...☕'
+
+    this.closed = false;
   }
 
   open() {
     document.body.appendChild(this.element);
 
-    // API.listMyPuppets().then(pods => {
-    //   for(let pod of pods) {
-    //     this.contentSection.add(new MyPuppetBox(pod), 'My Puppets')
-    //   }
-    // })
+    API.listMyPuppets().then(pods => {
+      if(this.closed) return;
+      for(let pod of pods) {
+        this.add(new MyPuppetBox(pod), 'My Puppets')
+      }
+    })
 
     API.listLibraryPuppets().then(pods => {
+      if(this.closed) return;
       for(let pod of pods) {
-        let box = new PuppetBox(pod);
-        this.contentSection.add(box, 'Puppets');
-        box.loadSnapshot();
-        box.on('box.selected', this.onSelected, this);
+        this.add(new PuppetBox(pod), 'Puppets')
       }
     })
   }
 
-  onSelected(box) {
-    this.close();
-    let importActor = new ImportActor();
-    importActor.start(box.pod);
+  add(box, category) {
+    super.add(box, category)
+    // if(box.isInViewport()) box.loadSnapshot();
+    box.loadSnapshot();
+    this.boxes.push(box);
+    box.on('browser.close', this.close, this);
+  }
+
+  close() {
+    super.close();
+    this.closed = true;
   }
 }

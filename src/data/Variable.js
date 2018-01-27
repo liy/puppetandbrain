@@ -18,7 +18,7 @@ export default class Variable extends EventEmitter
   destroy() {
     LookUp.removeVariable(this.id);
     // clear listener
-    this.clear();
+    this.removeAllListeners();
   }
 
   init(pod) {

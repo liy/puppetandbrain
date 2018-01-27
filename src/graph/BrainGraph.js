@@ -279,13 +279,16 @@ class BrainGraph
     block.node.destroy();
   }
 
-  openBlockBrowser(e) {
+  async openBlockBrowser(e) {
     if(e.target == this.container) {
       e.stopPropagation();
       e.preventDefault();
       
-      let browser = new BlockBrowser();
-      browser.open(e.clientX, e.clientY);
+      var browser = new BlockBrowser();
+      let blockPod = await browser.open();
+      if(blockPod) {
+        History.push(Commander.create('CreateBlock', blockPod, this.brain.owner.id).processAndSave());
+      }
     }
   }
 

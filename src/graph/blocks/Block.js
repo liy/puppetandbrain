@@ -244,9 +244,5 @@ export default class Block extends EventEmitter
       pin.symbol.colorize(outputPod.type)
       this.body.addRight(pin);
     }
-
-    this.body.element.addEventListener('mousedown', e => {
-      this.emit('block.chosen', pod);
-    });
   }
 }

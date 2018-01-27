@@ -51,7 +51,7 @@ export default class extends EventEmitter
     this.keyField.off('gadget.state.change', this.onKeyChange, this)
     this.valueField.destroy();
     this.keyField.destroy();
-    this.clear();
+    this.removeAllListeners();
   }
 
   focus() {

@@ -16,14 +16,6 @@ export default class GroupSection
     this.element.appendChild(this.grid);
   }
 
-  addBlock(block) {
-    const gridBox = document.createElement('div');
-    gridBox.className = 'grid-box';
-    gridBox.appendChild(block.element);
-    
-    this.grid.appendChild(gridBox)
-  }
-
   set color(c) {
     this.element.style.backgroundColor = `#${c.toString(16)}`;
   }

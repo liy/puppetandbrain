@@ -3,14 +3,11 @@ import BlockSelection from '../graph/BlockSelection'
 
 export default class CreateBlock extends Command
 {
-  constructor(pod, ownerID, x, y) {
+  constructor(pod, ownerID) {
     super();
     this.ownerID = ownerID;
     this.pod = pod;
     
-    // Note the position needs to be transformed 
-    this.x = (x - BrainGraph.translateX) / BrainGraph.scale;
-    this.y = (y - BrainGraph.translateY) / BrainGraph.scale;
 
     // When redo, use this node id
     this.nodeID = null;
@@ -20,9 +17,7 @@ export default class CreateBlock extends Command
     let node = NodeFactory.create(this.pod.className, this.nodeID);
     node.init({
       ...this.pod,
-      ownerID: this.ownerID,
-      x: this.x,
-      y: this.y
+      ownerID: this.ownerID
     })
 
     this.nodeID = node.id;

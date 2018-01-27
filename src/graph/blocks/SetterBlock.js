@@ -71,12 +71,5 @@ export default class SetterBlock extends Block
     pin = new OutputPin(variable.name);
     pin.symbol.colorize(variable.type)
     this.body.addRight(pin);
-
-    this.body.element.addEventListener('mousedown', e => {
-      this.emit('block.chosen', pod);
-    }, {capture:true});
-    // this.body.element.addEventListener('touchstart', e => {
-    //   this.emit('block.chosen', pod);
-    // }, {capture:true});
   }
 }

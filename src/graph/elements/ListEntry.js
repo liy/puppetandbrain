@@ -38,7 +38,7 @@ export default class extends EventEmitter
   }
 
   destroy() {
-    this.clear();
+    this.removeAllListeners();
     this.valueField.off('gadget.state.change', this.onChange, this)
     this.valueField.destroy();
   }

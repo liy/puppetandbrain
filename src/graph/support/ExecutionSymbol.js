@@ -51,8 +51,10 @@ export default class ExecutionSymbol
         document.removeEventListener('mousemove', move);
         document.removeEventListener('mouseup', up);
 
-        await ConnectHelper.openBrowser(e);
-        ConnectHelper.stop(e);
+        if(e.target == BrainGraph.container) {
+          await ConnectHelper.openBrowser(e.clientX, e.clientY);
+          ConnectHelper.stop(e);
+        }
       }
 
       ConnectHelper.startExecutionSymbol(this);
@@ -78,7 +80,9 @@ export default class ExecutionSymbol
       document.removeEventListener('touchmove', move);
       document.removeEventListener('touchend', up);
 
-      await ConnectHelper.openBrowser(e);
+      if(e.target == BrainGraph.container) {
+        await ConnectHelper.openBrowser(e.touches[0].clientX, e.touches[0].clientY);
+      }
       ConnectHelper.stop(e);
     }
 

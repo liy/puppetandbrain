@@ -3,6 +3,7 @@ import GridBox from './GridBox';
 import { svgElement } from '../utils/utils';
 
 import Logo from '../assets/logo.svg';
+import ImportActor from '../ImportActor';
 
 export default class extends GridBox
 {
@@ -25,13 +26,17 @@ export default class extends GridBox
     this.element.appendChild(this.title);
 
     this.element.addEventListener('click', e => {
-      this.emit('box.selected', this);
+      let importActor = new ImportActor();
+      importActor.start(pod);
+
+      this.emit('browser.close');
     })
   }
 
   loadSnapshot() {
     // load the snapshot
     firebase.storage().ref(`${this.pod.libDir}/${this.pod.puppetID}/snapshot.png`).getDownloadURL().then(url => {
+      this.loaded = true;
       this.box.style.backgroundImage = `url("${url}")`
     })
   }

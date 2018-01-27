@@ -12,10 +12,6 @@ export default class BlockBrowser extends Browser
   constructor() {
     super();
 
-    this.onSelect = this.onSelect.bind(this);
-
-    this.groups = new ArrayMap();
-
     this.searchOptions = {
       // id: 'className',
       shouldSort: true,
@@ -47,15 +43,7 @@ export default class BlockBrowser extends Browser
     let template = this.filteredTemplates[0];
     if(!template) return;
 
-    let command = Commander.create('CreateBlock', template, BrainGraph.brain.owner.id, this.targetX, this.targetY).processAndSave();
-    History.push(command);
-    // Make sure there is a block created.
-    if(command) {
-      this.resolve(command.getCreatedNode());
-    }
-    else {
-      this.resolve();
-    }
+    this.resolve(template);
     this.close();
   }
 
@@ -165,26 +153,18 @@ export default class BlockBrowser extends Browser
     return templates;
   }
 
-  open(x, y) {
+  open() {
     super.open();
 
-    this.targetX = x;
-    this.targetY = y;
-
-    this.blocks = [];
     this.templates = this.getTemplates();
     this.fuse = new Fuse(this.templates, this.searchOptions);
 
     this.refresh(this.templates);
 
+    // delay resolving the promise
     return new Promise((resolve, reject) => {
       this.resolve = resolve;
-
-      this.contentSection.element.addEventListener('mousedown', e => {
-        this.close();
-        this.resolve();
-      })
-    })
+    });
   }
 
   refresh(tempaltes) {
@@ -192,23 +172,11 @@ export default class BlockBrowser extends Browser
 
     for(let template of tempaltes) {
       let box = new BlockBox(template);
-      this.contentSection.add(box, template.category);
+      this.add(box, template.category);
+      box.on('browser.close', pod => {
+        this.resolve(pod);
+        this.close();
+      })
     }
-  }
-
-  onSelect(data) {
-    let command = Commander.create('CreateBlock', data, BrainGraph.brain.owner.id, this.targetX, this.targetY).processAndSave();
-    History.push(command);
-    // Make sure there is a block created.
-    if(command) {
-      this.resolve(command.getCreatedNode());
-    }
-    else {
-      this.resolve();
-    }
-  }
-
-  clear() {
-    this.contentSection.clear();
   }
 }

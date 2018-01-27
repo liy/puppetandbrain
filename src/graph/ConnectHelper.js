@@ -49,34 +49,20 @@ class ConnectHelper
     }
   }
 
-  async openBrowser(e) {
-    if(e.target == BrainGraph.container) {
-      var browser = new BlockBrowser();
-      let createdNode = await browser.open(e.clientX, e.clientY);
-
-      if(createdNode) AutoConnect.process(this.startSymbol, createdNode);
+  /**
+   * Quick node selection, creation and connection process
+   * @param {Event} e Touch or Mouse event.
+   */
+  async openBrowser(x, y) {
+    var browser = new BlockBrowser();
+    let blockPod = await browser.open();
+    if(blockPod) {
+      blockPod.x = x;
+      blockPod.y = y;
+      let command = Commander.create('CreateBlock', blockPod, BrainGraph.brain.owner.id).processAndSave();
+      History.push(command);
+      AutoConnect.process(this.startSymbol, command.getCreatedNode());
     }
-  }
-
-  async touchStop(e) {
-    this._snapSymbol = null;
-
-    let touch = e.changedTouches[0];
-    let target = document.elementFromPoint(touch.clientX, touch.clientY);
-    if(target == BrainGraph.container) {
-
-      var browser = new BlockBrowser();
-      let createdNode = await browser.open(touch.clientX, touch.clientY);
-
-      // TODO: auto connect here
-      if(createdNode) AutoConnect.process(this.startSymbol, createdNode);
-    }
-
-    if(this.svg.contains(this.path)) {
-      this.svg.removeChild(this.path);
-    }
-
-    this.startSymbol = null;
   }
 
   startExecutionSymbol(symbol) {

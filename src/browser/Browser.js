@@ -2,11 +2,14 @@ import FilterSection from './FilterSection';
 import SearchField from './SearchField';
 import BrowserHeader from "./BrowserHeader";
 import ContentSection from "./ContentSection";
+import EventEmitter from '../utils/EventEmitter';
 require('./Browser.scss')
 
-export default class Browser
+export default class Browser extends EventEmitter
 {
   constructor() {
+    super();
+
     this.element = document.createElement('div');
     this.element.className = 'browser'
 
@@ -25,6 +28,11 @@ export default class Browser
 
     this.close = this.close.bind(this);
     this.header.closeButton.addEventListener('mousedown', this.close)
+
+    this.onScroll = this.onScroll.bind(this);
+    this.contentSection.scroll.addEventListener('scroll', this.onScroll, false);
+
+    this.boxes = [];
   }
 
   onSearch(e) {
@@ -45,7 +53,7 @@ export default class Browser
 
   }
 
-  open(x, y) {
+  open() {
     // BrainGraph.blur = true;
     // History.blur = true;
     // this.element.style.opacity = 0;
@@ -80,7 +88,29 @@ export default class Browser
     //   document.body.removeChild(this.element);
     // }})
     
+    // remove all listeners of the boxes
+    for(let box of this.boxes) {
+      box.destroy();
+    }
+    this.boxes = null;
+
+    // clear all the listener
+    this.removeAllListeners();
+
     this.element.removeEventListener('keydown', this.keydown);
     document.body.removeChild(this.element);
+  }
+
+  add(gridBox, groupName) {
+    this.contentSection.add(gridBox, groupName);
+    this.boxes.push(gridBox);
+  }
+
+  onScroll(e) {
+
+  }
+
+  clear() {
+    this.contentSection.clear();
   }
 }

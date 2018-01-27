@@ -15,7 +15,7 @@ export default class Gadget extends EventEmitter
    * @memberof Gadget
    */
   destroy() {
-    this.clear();
+    this.removeAllListeners();
   }
   
   get visible() {

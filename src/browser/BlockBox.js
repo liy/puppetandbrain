@@ -6,12 +6,20 @@ import Logo from '../assets/logo.svg';
 
 export default class extends GridBox
 {
-  constructor(template) {
+  constructor(pod) {
     super();
     this.element.classList.add('block-box');
 
-    let block = BlockFactory.createTemplateBlock(template);
-    block.template(template);
+    let block = BlockFactory.createTemplateBlock(pod);
+    block.template(pod);
     this.element.appendChild(block.element);
+
+    block.element.addEventListener('click', e => {
+      this.emit('browser.close', {
+        ...pod,
+        x: e.clientX,
+        y: e.clientY
+      });
+    })
   }
 }

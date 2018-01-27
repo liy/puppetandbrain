@@ -48,7 +48,7 @@ export default class EventEmitter
     });
   }
 
-  clear() {
+  removeAllListeners() {
     this.listeners = Object.create(null);
   }
 
