@@ -85,7 +85,7 @@ export default class extends Gadget
     
     this.emit('gadget.state.change', this.value);
 
-    this.lastX = e.clientX ? e.clientX : e.changedTouches[0].clientX;
+    this.lastX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
 
     this.updateLine();
     this.updateInput();
@@ -94,7 +94,7 @@ export default class extends Gadget
   onDrag(e) {
     e.stopImmediatePropagation();
     
-    let x = e.clientX ? e.clientX : e.changedTouches[0].clientX;
+    let x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
     // TODO: a better mapping, maybe not linear but power line.
     let inc = (this.max-this.min)/100;
     let sign = Math.sign(x - this.lastX);
