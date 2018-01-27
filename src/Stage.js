@@ -54,6 +54,13 @@ export default class Stage
     return this.container.removeChild(child);
   }
 
+  clear() {
+    console.log(this.actors)
+    for(let actor of this.actors) {
+      actor.destroy();
+    }
+  }
+
   set blurEnabled(v) {
     if(v) {
       this.container.filters = [new PIXI.filters.BlurFilter(2, 1)];

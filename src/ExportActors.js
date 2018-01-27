@@ -5,8 +5,8 @@ export default class
   }
 
   start(pod) {
-    pod.userID = LookUp.user.uid;
-    firebase.firestore().collection('users').doc(LookUp.user.uid).collection('puppets').add(pod).then(e => {
+    pod.userID = CurrentUser.uid;
+    firebase.firestore().collection('users').doc(CurrentUser.uid).collection('puppets').add(pod).then(e => {
       console.log(e);
     })
   }

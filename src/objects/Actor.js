@@ -91,6 +91,8 @@ export default class Actor extends EventEmitter
     Editor.off('game.stop', this.gameStop, this);
 
     this.brain.destroy();
+
+    console.log('destroy', this)
   }
 
   gamePrestart() {
@@ -154,7 +156,6 @@ export default class Actor extends EventEmitter
   }
 
   relaseOutside(e) {
-    console.log('outside')
     document.removeEventListener('mouseup', this.relaseOutside);
     document.removeEventListener('mousemove', this.dragMove);
     // update entity's new position

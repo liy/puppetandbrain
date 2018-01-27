@@ -20,6 +20,7 @@ import './graph/BrainGraph'
 import './Editor'
 
 import './resources/Resource';
+import './Activity';
 import ActivityLoader from './ActivityLoader';
 import AddActorButton from './ui/AddActorButton';
 import DebugButton from './ui/DebugButton';
@@ -35,103 +36,38 @@ import API from './API';
 window.ActorSelection = ActorSelection;
 window.API = API;
 
+import Grapnel from 'grapnel'
+window.router = new Grapnel({pushState:true});
+
 // prevent default context menu for the whole site
 document.addEventListener('contextmenu', e => {
   e.preventDefault();
-
-  console.log(ActorSelection.selected[0]);
 });
 
 firebase.initializeApp(FIREBASE_CONFIG);
 
-document.getElementById('app-version').textContent = APP_VERSION;
+function signedIn(user) {
+  console.log('signed in')
+  window.CurrentUser = user;
 
-// Editor.start();
-// setTimeout(() => {
-//   Editor.stop();
-// }, 5000)
-
-async function load(activityID) {
-  // TODO: get data from firestore
-  let snapshot = await firebase.firestore().collection('activities').doc(activityID).get();
-  var loader = new ActivityLoader();
-  let pod = snapshot.data();
-  loader.parse(pod)
-  LookUp.setActivityID(activityID);
-  LookUp.setOwnerID(pod.userID);
-
-  let promises = LookUp.getActors().map(actor => {
-    return actor.loaded;
+  // activity
+  router.get('/creations/:id', req => {
+    Activity.load(req.params.id);
+  })
+  router.get('/', req => {
+    Activity.new();
+  })
+  router.get('/*', (req, e) => {
+    if(!e.parent()){
+      console.log(404)
+      // Handle 404
+    }
   })
 
-  Promise.all(promises).then(() => {
-
-    
-
-    // let exportActors = new ExportActors();
-    // exportActors.start(LookUp.getActors()[0].export())
-
-    new AddActorButton();
-    new DebugButton();
-    new BrainButton();
-    console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
-  })
+  new AddActorButton();
+  new DebugButton();
+  new BrainButton();
 }
-
-
-function simpleInit() {
-  let promises = Editor.stage.actors.map(actor => {
-    return actor.loaded;
-  })
-  // promises.push(Commander.create('CreateDemoActor').process())
-  
-  // start the activity when cow and donkey are loaded
-  Promise.all(promises).then(async () => {
-
-
-
-
-    // fetch(require('./cat-puppet.json')).then(response => {
-    //   return response.json();
-    // }).then(pod => {
-    //   console.log(pod)
-    //   API.updateTest(pod)
-    // })
-
-
-
-
-
-    new AddActorButton();
-    new DebugButton();
-    new BrainButton();
-    // serialize everything before game start
-    console.log('%c Activity %o ', 'color: white; background-color: black', LookUp.pod());
-  })
-}
-
-
-// TODO: to be replaced by share API
-let idDiv = document.getElementById('activity-id');
-idDiv.addEventListener('mousedown', e => {
-  e.preventDefault();
-  e.stopImmediatePropagation();
-
-  let temp = document.createElement('div');
-  temp.style.position = 'absolute';
-  temp.style.bottom = '-999px';
-  temp.textContent = window.location.href;
-  document.body.appendChild(temp)
-
-  let range = document.createRange();
-  range.selectNodeContents(temp);
-  // https://stackoverflow.com/questions/43260617/selection-addrange-is-deprecated-and-will-be-removed-from-chrome
-  window.getSelection().removeAllRanges();
-  window.getSelection().addRange(range);
-  document.execCommand('copy');
-
-  document.body.removeChild(temp)
-})
 
 // Persist the sign in token in local machine, probably in local storage or something in browser... whatever.
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -145,23 +81,19 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                     console.error(errorCode, errorMessage)
                 });
 
-
 firebase.auth().onAuthStateChanged(user => {
   // sign in
   if(user) {
-    LookUp.user = user;
-
-    // TODO: check url
-    let activityID = window.location.href.split('#')[1];
-    if(activityID) {
-      load(activityID);
-    }
-    else {
-      simpleInit();
-    }
+    signedIn(user);
+    // LookUp.user = user;
   }
   // sign out
   else {
-    LookUp.user = null;
+    // LookUp.user = null;
   }
 })
+
+setTimeout(() => {
+  Activity.clear();
+  router.navigate('/creations/1mUKfTiphvZ6yqxWfMnq');
+}, 10000 )

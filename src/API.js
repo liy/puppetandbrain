@@ -7,6 +7,18 @@ class API {
     return firebase.storage().ref(path).getDownloadURL();
   }
 
+  async getActivity(id) {
+    return (await firebase.firestore().collection('activities').doc(id).get()).data();
+  }
+
+  async saveActivity(pod) {
+    await firebase.firestore().collection('activities').doc(pod.activityID).set(pod).then(() => {
+      console.info('Successfully saved activity')
+    }).catch(error => {
+      console.error('Error saving activity: ', error)
+    })
+  }
+
   async listLibraryPuppets() {
     let collections = await firebase.firestore().collection(`puppets`).get();
     let pods = [];
@@ -20,7 +32,7 @@ class API {
     // collection.forEach(doc => {
     //   console.log(doc.id, doc.data())
     // })
-    let collections = await firebase.firestore().collection(`users/${LookUp.user.uid}/myPuppets`).get();
+    let collections = await firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).get();
     let pods = [];
     collections.forEach(doc => {
       pods.push(doc.data());
@@ -30,13 +42,13 @@ class API {
 
   async createMyPuppet(actor) {
     // generate entry in firestore
-    const myPuppetID = firebase.firestore().collection(`users/${LookUp.user.uid}/myPuppets`).doc().id
-    firebase.firestore().collection(`users/${LookUp.user.uid}/myPuppets`).doc(id).set({
+    const myPuppetID = firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).doc().id
+    firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).doc(id).set({
       ...actor.export(),
       // FIXME: ask user to type a name
       name: `My ${actor.name}`,
       myPuppetID,
-      userID: LookUp.user.uid,
+      userID: CurrentUser.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
@@ -48,7 +60,7 @@ class API {
     const canvas = await actor.snapshot();
     canvas.toBlob(blob => {
       // upload file using the id
-      firebase.storage().ref().child(`users/${LookUp.user.uid}/snapshots/${myPuppetID}-puppet-snapshot.png`).put(blob);
+      firebase.storage().ref().child(`users/${CurrentUser.uid}/snapshots/${myPuppetID}-puppet-snapshot.png`).put(blob);
     });
 
     return myPuppetID;
@@ -57,11 +69,11 @@ class API {
   async newCreation() {
     let pod = LookUp.pod();
 
-    const activityID = firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc().id;
-    await firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc(activityID).set({
+    const activityID = firebase.firestore().collection(`users/${CurrentUser.uid}/creations`).doc().id;
+    await firebase.firestore().collection(`users/${CurrentUser.uid}/creations`).doc(activityID).set({
       ...pod,
       id: activityID,
-      userID: LookUp.user.uid
+      userID: CurrentUser.uid
     });
 
     // Update fileRefs
@@ -82,7 +94,7 @@ class API {
   async updateCreation() {
     let pod = LookUp.pod();
     
-    await firebase.firestore().collection(`users/${LookUp.user.uid}/creations`).doc(pod.activityID).set(pod);
+    await firebase.firestore().collection(`users/${CurrentUser.uid}/creations`).doc(pod.activityID).set(pod);
 
     // Update fileRefs
     let userFiles = [];
