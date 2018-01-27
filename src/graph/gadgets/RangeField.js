@@ -67,6 +67,8 @@ export default class extends Gadget
   }
 
   onDown(e) {
+    e.stopImmediatePropagation();
+    
     document.addEventListener('mousemove', this.onDrag);
     document.addEventListener('touchmove', this.onDrag);
     
@@ -90,7 +92,7 @@ export default class extends Gadget
   }
 
   onDrag(e) {
-    e.stopPropagation();
+    e.stopImmediatePropagation();
     
     let x = e.clientX ? e.clientX : e.changedTouches[0].clientX;
     // TODO: a better mapping, maybe not linear but power line.
@@ -116,7 +118,9 @@ export default class extends Gadget
     return this._value;
   }
 
-  onStop() {
+  onStop(e) {
+    e.stopImmediatePropagation();
+
     document.removeEventListener('mouseup', this.onStop);
     document.removeEventListener('touchend', this.onStop);
 
