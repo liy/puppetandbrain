@@ -33,11 +33,13 @@ export default class Block extends EventEmitter
     this.node = node;
 
     this.body.iconPath = node.iconPath; 
-
+    
     this.body.element.addEventListener('mousedown', this.dragstart);
     this.body.element.addEventListener('touchstart', this.dragstart);
     this.body.element.addEventListener('mouseup', this.dragstop);
     this.body.element.addEventListener('touchend', this.dragstop);
+
+
     
     if(node.elementClass) {
       for(let className of node.elementClass) {
@@ -90,6 +92,8 @@ export default class Block extends EventEmitter
   }
 
   destroy() {
+    this.removeAllListeners();
+
     this.body.element.removeEventListener('mousedown', this.dragstart);
     this.body.element.removeEventListener('touchstart', this.dragstart);
     this.body.element.removeEventListener('mouseup', this.dragstop);
@@ -105,21 +109,25 @@ export default class Block extends EventEmitter
   }
 
   dragstart(e) {
+    // bring block to front.
+    // note this will stop any child elements click event working.
+    // ie, I have separate down and up event handler in input pin to simulate label click event.  
+    this.element.parentElement.appendChild(this.element);
+
     let sx = e.clientX ? e.clientX : e.touches[0].clientX;
     let sy = e.clientY ? e.clientY : e.touches[0].clientY;
     this._dragOffset = {
       x: (this.element.getBoundingClientRect().left - sx),
       y: (this.element.getBoundingClientRect().top - sy)
     }
+    BlockSelection.select(this);
+
+    
     document.addEventListener('mousemove', this.dragmove)
     document.addEventListener('touchmove', this.dragmove)
     // when release on graph container, it is released outside of the block
     BrainGraph.container.addEventListener('mouseup', this.releaseOutside);
 
-    BlockSelection.select(this);
-
-    this.isFirstDragMove = true;
-   
     this.moveCommand = Commander.create('MoveBlock', this);
   }
 
@@ -145,14 +153,6 @@ export default class Block extends EventEmitter
   }
 
   dragmove(e) {
-    // bring to front
-    // doing the appendChild in the move allow sub elements to have "click" listener
-    // for example, input pin label can use click listener to expand gadget...
-    // better than using mouse down since it will triggers even when dragging.
-    if(!this.isFirstDragMove) {
-      this.isFirstDragMove = false;
-      this.element.parentElement.appendChild(this.element);
-    }
     
     let sx = e.clientX ? e.clientX : e.touches[0].clientX;
     let sy = e.clientY ? e.clientY : e.touches[0].clientY;

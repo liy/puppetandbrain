@@ -37,8 +37,18 @@ export default class extends DataPin
         break;
     }
 
-    this.labelClicked = this.labelClicked.bind(this);
-    this.label.addEventListener('click', this.labelClicked)
+    // simulate click event, since block.parent.appendChild(block) cancels any children's click events.
+    let downX = null;
+    let downY = null;
+    this.label.addEventListener('mousedown', e => {
+      downX = e.clientX;
+      downY = e.clientY;
+    })
+    this.label.addEventListener('mouseup', e => {
+      if(downX === e.clientX && downY === e.clientY) {
+        this.labelClicked();
+      }
+    })
     
     this.input = this.node.inputs.get(this.name);
     if(!this.input.isConnected) {
