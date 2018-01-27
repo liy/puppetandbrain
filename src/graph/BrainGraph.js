@@ -287,6 +287,8 @@ class BrainGraph
       var browser = new BlockBrowser();
       let blockPod = await browser.open();
       if(blockPod) {
+        blockPod.x = blockPod.x || e.clientX;
+        blockPod.y = blockPod.y || e.clientY;
         History.push(Commander.create('CreateBlock', blockPod, this.brain.owner.id).processAndSave());
       }
     }
