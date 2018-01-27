@@ -195,7 +195,7 @@ export default class Block extends EventEmitter
   translate(x, y) {
     this.element.style.transform = `translate(${x}px, ${y}px)`
     this.node.x = x;
-    this.node.y - y;
+    this.node.y = y;
   }
 
   get x() {
