@@ -27,9 +27,7 @@ export default class extends Browser
     this.closed = false;
   }
 
-  open() {
-    document.body.appendChild(this.element);
-
+  process() {
     API.listMyPuppets().then(pods => {
       if(this.closed) return;
       for(let pod of pods) {
@@ -53,8 +51,8 @@ export default class extends Browser
     box.on('browser.close', this.close, this);
   }
 
-  close() {
-    super.close();
+  close(data) {
+    super.close(data);
     this.closed = true;
   }
 }

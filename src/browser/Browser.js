@@ -26,13 +26,16 @@ export default class Browser extends EventEmitter
     this.keydown = this.keydown.bind(this);
     this.element.addEventListener('keydown', this.keydown);
 
-    this.close = this.close.bind(this);
-    this.header.closeButton.addEventListener('mousedown', this.close)
+    this.header.closeButton.addEventListener('mousedown', e => {
+      this.close();
+    })
 
     this.onScroll = this.onScroll.bind(this);
     this.contentSection.scroll.addEventListener('scroll', this.onScroll, false);
 
     this.boxes = [];
+
+    this.resolve = null;
   }
 
   onSearch(e) {
@@ -54,51 +57,42 @@ export default class Browser extends EventEmitter
   }
 
   open() {
-    // BrainGraph.blur = true;
-    // History.blur = true;
-    // this.element.style.opacity = 0;
-    // this.tween = TweenLite.to(this.element.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
-    //   this.element.style.opacity = 1.0;
-    // }});
+    this.element.style.opacity = 0;
+    this.tween = TweenLite.to(this.element.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
+      this.element.style.opacity = 1.0;
+    }});
     
-    // this.element.appendChild(this.contentSection.element);
-    // this.element.appendChild(this.header);
-    // this.header.appendChild(this.searchField.element);
-    // this.header.appendChild(this.filterSection.element);
-    // document.body.appendChild(this.element);
-    // this.searchField.focus();
-
     document.body.appendChild(this.element);
     this.searchField.focus();
+
+    return new Promise(resolve => {
+      this.resolve = resolve;
+      this.process();
+    })
   }
 
-  close() {
-    // this.element.removeEventListener('keydown', this.keydown);
-    // // TODO: not sure why I can't tween opacity directly. Have to manually set it.
-    // let opacity = {value: 1};
-    // TweenLite.to(opacity, 0.13, {value: 0, ease:Quad.easeIn, onUpdate: () => {
-    //   this.element.style.opacity = opacity.value;
-    // }, onComplete: () => {
-    //   History.blur = false;
-    //   BrainGraph.blur = false;
-    //   this.element.removeChild(this.contentSection.element);
-    //   this.element.removeChild(this.header);
-    //   this.header.removeChild(this.searchField.element);
-    //   this.header.removeChild(this.filterSection.element);
-    //   document.body.removeChild(this.element);
-    // }})
-    
-    // remove all listeners of the boxes
-    for(let box of this.boxes) {
-      box.destroy();
-    }
-    this.boxes = null;
+  process() {
+    // override me
+  }
 
-    // clear all the listener
-    this.removeAllListeners();
-
+  close(data) {
     this.element.removeEventListener('keydown', this.keydown);
-    document.body.removeChild(this.element);
+    // TODO: not sure why I can't tween opacity directly. Have to manually set it.
+    let opacity = {value: 1};
+    TweenLite.to(opacity, 0.13, {value: 0, ease:Quad.easeIn, onUpdate: () => {
+      this.element.style.opacity = opacity.value;
+    }, onComplete: () => {
+      // remove all listeners of the boxes
+      for(let box of this.boxes) {
+        box.destroy();
+      }
+      this.boxes = null;
+      // clear all the listener
+      this.removeAllListeners();
+      document.body.removeChild(this.element);
+    }})
+
+    this.resolve(data);
   }
 
   add(gridBox, groupName) {

@@ -53,8 +53,8 @@ export default class ExecutionSymbol
 
         if(e.target == BrainGraph.container) {
           await ConnectHelper.openBrowser(e.clientX, e.clientY);
-          ConnectHelper.stop(e);
         }
+        ConnectHelper.stop(e);
       }
 
       ConnectHelper.startExecutionSymbol(this);

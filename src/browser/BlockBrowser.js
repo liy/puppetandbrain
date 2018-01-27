@@ -43,8 +43,7 @@ export default class BlockBrowser extends Browser
     let template = this.filteredTemplates[0];
     if(!template) return;
 
-    this.resolve(template);
-    this.close();
+    this.close(template);
   }
 
   getTemplates() {
@@ -153,18 +152,11 @@ export default class BlockBrowser extends Browser
     return templates;
   }
 
-  open() {
-    super.open();
-
+  process() {
     this.templates = this.getTemplates();
     this.fuse = new Fuse(this.templates, this.searchOptions);
 
     this.refresh(this.templates);
-
-    // delay resolving the promise
-    return new Promise((resolve, reject) => {
-      this.resolve = resolve;
-    });
   }
 
   refresh(tempaltes) {
@@ -173,10 +165,7 @@ export default class BlockBrowser extends Browser
     for(let template of tempaltes) {
       let box = new BlockBox(template);
       this.add(box, template.category);
-      box.on('browser.close', pod => {
-        this.resolve(pod);
-        this.close();
-      })
+      box.on('browser.close', this.close, this);
     }
   }
 }
