@@ -31,9 +31,9 @@ import ChoiceBox from './objects/ChoiceBox'
 import PuppetBrowser from './browser/PuppetBrowser';
 import ActorSelection from './objects/ActorSelection';
 import API from './API';
+
 window.ActorSelection = ActorSelection;
 window.API = API;
-
 
 // prevent default context menu for the whole site
 document.addEventListener('contextmenu', e => {

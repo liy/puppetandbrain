@@ -9,6 +9,9 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 module.exports = {
   entry: path.join(__dirname, 'src', 'main.js'),
   output: {
+    // this make sure all the assets to be accessed from root, ie bundle.js be injected by HtmlWebpackPlugin
+    // as "/bundle.js". This is necessary in SPA.
+    publicPath: '/',
     filename: 'bundle.js',
     // Where to put the final 'compiled' file
     path: path.join(__dirname, 'dist'),
