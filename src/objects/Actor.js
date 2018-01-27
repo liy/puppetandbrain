@@ -36,10 +36,6 @@ export default class Actor extends EventEmitter
     }
     this.matrix = new Matrix();
 
-
-    // release outside
-    document.addEventListener('mouseup', this.relaseOutside);
-
     mixin(this, new Entity());
 
     Editor.on('game.prestart', this.gamePrestart, this);
@@ -132,6 +128,9 @@ export default class Actor extends EventEmitter
       y: this.position.y - mouseY
     }
 
+    // release outside
+    document.addEventListener('mouseup', this.relaseOutside);
+
     // crete move command, when move update it with new position
     if(!Editor.playing) this.moveCommand = Commander.create('MoveActor', this);
 
@@ -140,6 +139,10 @@ export default class Actor extends EventEmitter
 
   mouseUp(e) {
     document.removeEventListener('mousemove', this.dragMove);
+    document.removeEventListener('mouseup', this.relaseOutside);
+
+    // update entity's new position
+    if(this.moveCommand) History.push(this.moveCommand.processAndSave());
 
     // double click to open brain
     setTimeout(() => {
@@ -150,7 +153,9 @@ export default class Actor extends EventEmitter
     }
   }
 
-  relaseOutside() {
+  relaseOutside(e) {
+    console.log('outside')
+    document.removeEventListener('mouseup', this.relaseOutside);
     document.removeEventListener('mousemove', this.dragMove);
     // update entity's new position
     if(this.moveCommand) History.push(this.moveCommand.processAndSave());
