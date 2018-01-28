@@ -20,23 +20,32 @@ class API {
   }
 
   async listLibraryPuppets() {
-    let collections = await firebase.firestore().collection(`puppets`).get();
     let pods = [];
-    collections.forEach(doc => {
-      pods.push(doc.data());
-    });
+    try {
+      let collections = await firebase.firestore().collection(`puppets`).get();
+      collections.forEach(doc => {
+        pods.push(doc.data());
+      });
+    }
+    catch(err) {
+      throw err;
+    }
+    
     return pods;
   }
 
   async listMyPuppets() {
-    // collection.forEach(doc => {
-    //   console.log(doc.id, doc.data())
-    // })
-    let collections = await firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).get();
     let pods = [];
-    collections.forEach(doc => {
-      pods.push(doc.data());
-    });
+    try {
+      let collections = await firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).get();
+      collections.forEach(doc => {
+        pods.push(doc.data());
+      });
+    }
+    catch(err) {
+      throw err;
+    }
+
     return pods;
   }
 

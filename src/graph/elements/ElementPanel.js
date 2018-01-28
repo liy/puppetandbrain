@@ -64,6 +64,7 @@ export default class
   toggle() {
     this.element.style.right = this.visible ? '-280px' : 0;
     this.visible = !this.visible;
+    UIController.controlShifted = this.visible;
   }
 
   clear() {

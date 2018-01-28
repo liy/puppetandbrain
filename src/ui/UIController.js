@@ -5,11 +5,14 @@ import DebugButton from './DebugButton';
 import ModeButton from './ModeButton';
 import DeleteButton from './DeleteButton';
 import EventEmitter from '../utils/EventEmitter';
+import ElementController from '../graph/elements/ElementController'
 
 class UIController extends EventEmitter
 {
   constructor() {
     super();
+
+    this.controlPanel = document.getElementById('control-panel');
 
     this.addBtn = new AddButton(this);
     this.debugBtn = new DebugButton(this);
@@ -19,10 +22,21 @@ class UIController extends EventEmitter
 
   stageMode() {
     this.emit('mode.change', 'stage mode')
+    this.controlShifted = false;
   }
 
   brainMode() {
-    this.emit('mode.change', 'brain mode')
+    this.emit('mode.change', 'brain mode');
+    this.controlShifted = ElementController.panel.visible;
+  }
+
+  set controlShifted(v) {
+    if(v) {
+      this.controlPanel.style.right = '280px'
+    }
+    else {
+      this.controlPanel.style.right = 0
+    }
   }
 }
 
