@@ -9,7 +9,7 @@ import CreateActorButton from './CreateActorButton';
 import RemoveVariableButton from './RemoveVariableButton';
 import { svgElement } from '../../utils/utils';
 
-import DetailIcon from '../../assets/detail.svg';
+import PullIcon from '../../assets/pull-icon.svg';
 
 export default class
 {
@@ -38,7 +38,8 @@ export default class
     this.pullBtn.id = 'pull-button';
     this.element.appendChild(this.pullBtn);
     // detail icon
-    this.pullBtn.appendChild(svgElement(DetailIcon, {width:16, height:16}));
+    this.pullIcon = svgElement(PullIcon, {width:15, height:23});
+    this.pullBtn.appendChild(this.pullIcon);
     // toggle panel
     this.visible = false;
     this.pullBtn.addEventListener('mousedown', e => {
@@ -68,6 +69,7 @@ export default class
     this.element.style.right = this.visible ? `-${this.width}px` : 0;
     this.visible = !this.visible;
     UIController.controlShifted = this.visible;
+    this.pullIcon.style.transform = `scaleX(${this.visible?-1:1})`;
   }
 
   clear() {
