@@ -32,7 +32,7 @@ class UIController extends EventEmitter
 
   set controlShifted(v) {
     if(v) {
-      this.controlPanel.style.right = '280px'
+      this.controlPanel.style.right = `${ElementController.panel.width}px`
     }
     else {
       this.controlPanel.style.right = 0
