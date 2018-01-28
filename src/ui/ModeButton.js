@@ -1,0 +1,60 @@
+import './ModeButton.scss'
+import ActorSelection from '../objects/ActorSelection'
+import BrainButtonIcon from '../assets/brain-button-icon.svg';
+import StageButtonIcon from '../assets/stage-button-icon.svg';
+import {svgElement} from '../utils/utils';
+import ControlButton from './ControlButton';
+import BlockSelection from '../graph/BlockSelection';
+
+export default class extends ControlButton
+{
+  constructor(controller) {
+    super(controller);
+    this.element = document.getElementById('mode-button');
+    this.enabled = false;
+
+    this.brainBtn = svgElement(BrainButtonIcon);
+    this.stageBtn = svgElement(StageButtonIcon);
+
+    this.brainBtn.addEventListener('mousedown', e => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if(!this.enabled) return;
+
+      let brain = ActorSelection.selected[0].brain;
+      BrainGraph.open(brain)
+    })
+
+    this.stageBtn.addEventListener('mousedown', e => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if(!this.enabled) return;
+
+      BrainGraph.close()
+    })
+  }
+
+  stageMode() {
+    super.stageMode();
+
+    this.element.appendChild(this.brainBtn);
+    if(this.element.contains(this.stageBtn)) this.element.removeChild(this.stageBtn);
+    
+    ActorSelection.on('actor.selection.change', this.onActorSelected, this);
+    this.onActorSelected(ActorSelection.selected);
+  }
+
+  brainMode() {
+    super.brainMode();
+
+    this.element.appendChild(this.stageBtn);
+    if(this.element.contains(this.brainBtn)) this.element.removeChild(this.brainBtn);
+    
+    ActorSelection.off('actor.selection.change', this.onActorSelected, this);
+    this.enabled = true;
+  }
+
+  onActorSelected(selected) {
+    this.enabled = selected.length != 0;
+  }
+}

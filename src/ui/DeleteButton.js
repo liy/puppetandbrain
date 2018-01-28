@@ -6,42 +6,36 @@ import BlockSelection from '../graph/BlockSelection';
 
 export default class BrainButton extends ControlButton
 {
-  constructor() {
-    super();
+  constructor(controller) {
+    super(controller);
     this.element = document.getElementById('bin-button');
+    this.enabled = false;
+    
     this.element.appendChild(svgElement(BinButtonIcon));
 
-    this.onDeleteActor = this.onDeleteActor.bind(this);
-    this.onDeleteBlock = this.onDeleteBlock.bind(this);
+    this.element.addEventListener('mousedown', e => {
+      if(this.mode == 'stage mode') {
+        History.push(Commander.create('DeleteActor', ActorSelection.selected[0].id).processAndSave());
+      }
+      else {
+        BlockSelection.delete();
+      }
+    })
   }
 
   stageMode() {
-    ActorSelection.on('actor.selection.change', selected => {
-      this.element.style.visibility = (selected.length != 0) ? 'visible' : 'hidden';
-    })
-
-    this.element.addEventListener('mousedown', this.onDeleteActor)
-    this.element.removeEventListener('mousedown', this.onDeleteBlock)
+    BlockSelection.off('block.selection.change', this.onSelectChange, this)
+    ActorSelection.on('actor.selection.change', this.onSelectChange, this);
+    this.onSelectChange(ActorSelection.selected);
   }
 
-  graphMode() {
-    this.element.style.visibility = 'hidden';
-    
-    BlockSelection.on('block.selection.change', selected => {
-      this.element.style.visibility = (selected.length != 0) ? 'visible' : 'hidden';
-    })
-
-    this.element.removeEventListener('mousedown', this.onDeleteActor)
-    this.element.addEventListener('mousedown', this.onDeleteBlock)
+  brainMode() {
+    ActorSelection.off('actor.selection.change', this.onSelectChange, this);
+    BlockSelection.on('block.selection.change', this.onSelectChange, this);
+    this.onSelectChange(BlockSelection.selected);
   }
 
-  onDeleteBlock(e) {
-    BlockSelection.delete();
-  }
-
-  onDeleteActor(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    History.push(Commander.create('DeleteActor', ActorSelection.selected[0].id).processAndSave());
+  onSelectChange(selected) {
+    this.enabled = !(!selected || selected.length == 0);
   }
 }

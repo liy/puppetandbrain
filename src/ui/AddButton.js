@@ -2,11 +2,13 @@ import AddButtonIcon from '../assets/add-button-icon.svg';
 import {svgElement} from '../utils/utils';
 import PuppetBrowser from '../browser/PuppetBrowser';
 import ControlButton from './ControlButton';
+import BlockBrowser from '../browser/BlockBrowser';
 
 export default class AddActorButton extends ControlButton
 {
-  constructor() {
-    super();
+  constructor(controller) {
+    super(controller);
+
     this.element = document.getElementById('add-actor-button');
     this.element.style.visibility = 'visible';
     this.element.appendChild(svgElement(AddButtonIcon));
@@ -14,10 +16,15 @@ export default class AddActorButton extends ControlButton
     this.element.addEventListener('mousedown', e => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      // History.push(Commander.create('CreateActor', ACTORS[Math.floor(Math.random()*ACTORS.length)]).processAndSave());
 
-      var browser = new PuppetBrowser();
-      browser.open()
+      if(this.mode == 'stage mode') {
+        let browser = new PuppetBrowser();
+        browser.open()
+      }
+      else {
+        let browser = new BlockBrowser();
+        browser.open();
+      }
     })
   }
 }

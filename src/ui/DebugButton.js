@@ -5,14 +5,12 @@ import ControlButton from './ControlButton';
 
 export default class DebugButton extends ControlButton
 {
-  constructor() {
-    super();
+  constructor(controller) {
+    super(controller);
     this.element = document.getElementById('debug-button');
-    this.element.style.visibility = 'visible';
 
     this.stopIcon = svgElement(StopButtonIcon, {width:100, height:100});
     this.startIcon = svgElement(StartButtonIcon, {width:100, height:100});
-
     this.element.appendChild(this.startIcon);
 
     Editor.on('game.start', () => {

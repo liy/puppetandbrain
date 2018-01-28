@@ -1,14 +1,36 @@
 export default class
 {
-  constructor() {
-
+  constructor(controller) {
+    controller.on('mode.change', mode => {
+      this.mode = mode;
+      if(this.mode == 'stage mode') {
+        this.stageMode();
+      }
+      else {
+        this.brainMode();
+      }
+    })
   }
 
-  show() {
-    this.element.style.display = 'inherit';
+  stageMode() {
   }
 
-  hide() {
-    this.element.style.display = 'none';
+  brainMode() {
+  }
+
+  set enabled(v) {
+    this._enabled = v;
+    if(this._enabled) {
+      this.element.style.opacity = 1;
+      this.element.style.cursor = 'pointer';
+    }
+    else {
+      this.element.style.opacity = 0.2;
+      this.element.style.cursor = 'auto'
+    }
+  }
+
+  get enabled() {
+    return this._enabled;
   }
 }

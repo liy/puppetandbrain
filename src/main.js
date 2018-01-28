@@ -18,7 +18,7 @@ import './commands/History'
 import './commands/Commander'
 import './graph/BrainGraph'
 import './Editor'
-import ControlPanel from './ui/ControlPanel';
+import './ui/UIController';
 
 import './resources/Resource';
 import './Activity';
@@ -48,6 +48,8 @@ function signedIn(user) {
   console.log('signed in')
   window.CurrentUser = user;
 
+  UIController.stageMode();
+
   // activity
   router.get('/creations/:id', req => {
     Activity.load(req.params.id);
@@ -61,8 +63,6 @@ function signedIn(user) {
       // Handle 404
     }
   })
-
-  window.controlPanel = new ControlPanel();
 }
 
 // Persist the sign in token in local machine, probably in local storage or something in browser... whatever.

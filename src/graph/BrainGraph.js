@@ -133,7 +133,7 @@ class BrainGraph
       this.container.style.opacity = 1.0;
     }});
 
-    window.controlPanel.graphMode();
+    UIController.brainMode();
   }
 
   close() {
@@ -158,9 +158,9 @@ class BrainGraph
       this.container.style = "visibility:hidden"
   
       Editor.stage.blurEnabled = false;
-      BlockSelection.toggle();
+      BlockSelection.deselectAll();
 
-      window.controlPanel.stageMode();
+      UIController.stageMode();
     }})
   }
 
@@ -200,20 +200,14 @@ class BrainGraph
     }
     if(target == this.container) {
       e.preventDefault();
-      
-      if(++this.dbClicks%2 == 0) {
-        History.push(Commander.create('CloseGraph', this.brain.id).process());
-        return;
-      }
-      setTimeout(() => {
-        this.dbClicks = 0;
-      }, 300)
     }
   }
 
   keydown(e) {
     // escape
     if(e.keyCode == 27) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
       History.push(Commander.create('CloseGraph', this.brain.id).process());
     }
   }
