@@ -14,6 +14,9 @@ export default class extends Browser
   constructor() {
     super();
     
+    // TODO: to be removed when search is implemented
+    this.header.searchField.element.style.visibility = 'hidden'
+
     this.element.classList.add('puppet-browser');
 
     this.contentSection.colorPalette = {
