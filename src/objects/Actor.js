@@ -171,8 +171,8 @@ export default class Actor extends EventEmitter
   }
 
   dragMove(e) {
-    this.position.x = e.clientX + this.offset.x;
-    this.position.y = e.clientY + this.offset.y;
+    this.position.x = e.clientX + this.offset.x - Editor.stage.offsetX;
+    this.position.y = e.clientY + this.offset.y - Editor.stage.offsetY;
   }
 
   select() {

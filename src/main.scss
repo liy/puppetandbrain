@@ -8,6 +8,18 @@ body {
 #app {
   // disable text selection.(Input will override it)
   user-select: none;
+
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+#stage {
+  border-radius: 10px;
+  background-color: #F7F7F7;
 }
 
 #stage-grid {

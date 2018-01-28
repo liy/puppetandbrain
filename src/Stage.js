@@ -4,6 +4,10 @@ import ActorSelection from './objects/ActorSelection';
 export default class Stage
 {
   constructor() {
+    this.element = document.getElementById('stage');
+    console.log(this.element.offsetLeft)
+    console.log(this.element.offsetTop)
+
     this.actors = new ArrayMap();
 
     this.container = new PIXI.Container();
@@ -70,5 +74,13 @@ export default class Stage
       this.container.filters = [];
       document.getElementById('stage-overlayer').classList.remove('blur');
     }
+  }
+
+  get offsetX() {
+    return this.element.offsetLeft
+  }
+
+  get offsetY() {
+    return this.element.offsetTop
   }
 }
