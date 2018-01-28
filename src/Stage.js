@@ -1,9 +1,12 @@
 import ArrayMap from './utils/ArrayMap'
 import ActorSelection from './objects/ActorSelection';
+import EventEmitter from './utils/EventEmitter';
 
-export default class Stage
+export default class Stage extends EventEmitter
 {
   constructor() {
+    super();
+
     this.element = document.getElementById('stage');
 
     this.actors = new ArrayMap();
@@ -41,11 +44,15 @@ export default class Stage
     actor.updateTransform();
     this.actors.set(actor.id, actor);
     actor.onStage();
+
+    this.emit('stage.actor.added', actor);
   }
 
   removeActor(actor) {
     this.actors.remove(actor.id);
     actor.offStage();
+
+    this.emit('stage.actor.removed', actor);
   }
 
   addChild(child) {
@@ -57,7 +64,6 @@ export default class Stage
   }
 
   clear() {
-    console.log(this.actors)
     for(let actor of this.actors) {
       actor.destroy();
     }
@@ -72,6 +78,10 @@ export default class Stage
       this.container.filters = [];
       document.getElementById('stage-overlayer').classList.remove('blur');
     }
+  }
+
+  get numActors() {
+    return this.actors.length;
   }
 
   get offsetX() {

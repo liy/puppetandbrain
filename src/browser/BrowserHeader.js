@@ -18,6 +18,8 @@ export default class
     this.searchField = new SearchField();
     this.searchField.className = 'search-field'
     this.element.appendChild(this.searchField.element);
+    // TODO: to be removed when search is implemented
+    this.searchField.element.style.visibility = 'hidden'
 
     this.menuButton = svgElement(MenuButton, {width:48, height:48, className: 'header-button'});
     this.menuButton.style.visibility = 'hidden';

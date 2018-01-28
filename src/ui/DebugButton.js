@@ -9,6 +9,10 @@ export default class DebugButton extends ControlButton
     super(controller);
     this.element = document.getElementById('debug-button');
 
+    this.enabled = false;
+    Editor.stage.on('stage.actor.added', this.stageStateChange, this);
+    Editor.stage.on('stage.actor.removed', this.stageStateChange, this);
+
     this.stopIcon = svgElement(StopButtonIcon, {width:100, height:100});
     this.startIcon = svgElement(StartButtonIcon, {width:100, height:100});
     this.element.appendChild(this.startIcon);
@@ -30,5 +34,9 @@ export default class DebugButton extends ControlButton
       e.stopImmediatePropagation();
       Editor.toggle();
     })
+  }
+
+  stageStateChange(actor) {
+    this.enabled = !(Editor.stage.numActors == 0);
   }
 }
