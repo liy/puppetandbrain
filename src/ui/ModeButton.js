@@ -22,7 +22,7 @@ export default class extends ControlButton
       if(!this.enabled) return;
 
       let brain = ActorSelection.selected[0].brain;
-      BrainGraph.open(brain)
+      History.push(Commander.create('OpenGraph', brain.id).process());
     })
 
     this.stageBtn.addEventListener('mousedown', e => {
@@ -30,7 +30,7 @@ export default class extends ControlButton
       e.stopImmediatePropagation();
       if(!this.enabled) return;
 
-      BrainGraph.close()
+      History.push(Commander.create('CloseGraph', BrainGraph.brain.id).process());
     })
   }
 

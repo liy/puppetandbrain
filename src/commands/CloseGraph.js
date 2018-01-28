@@ -17,7 +17,7 @@ export default class CloseGraph extends Command
     let brain = LookUp.get(this.brainID);
     BrainGraph.open(brain);
     // make sure its owner is selected
-    brain.owner.getComponent('SelectionComponent').select();
+    brain.owner.select();
   }
 
   redo() {
