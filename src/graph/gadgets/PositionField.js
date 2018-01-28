@@ -43,8 +43,8 @@ export default class extends Gadget
       document.body.style.cursor = 'crosshair';
       let picked = e => {
         this.value = {
-          x: e.clientX,
-          y: e.clientY
+          x: e.clientX - Editor.stage.offsetX,
+          y: e.clientY - Editor.stage.offsetY
         }
         this.emit('gadget.state.change', this.value);
 
@@ -55,8 +55,8 @@ export default class extends Gadget
 
       let picking = e => {
         this.value = {
-          x: e.clientX,
-          y: e.clientY
+          x: e.clientX - Editor.stage.offsetX,
+          y: e.clientY - Editor.stage.offsetY
         }
         this.emit('gadget.state.change', this.value);
       }

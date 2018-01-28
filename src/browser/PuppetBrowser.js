@@ -34,7 +34,7 @@ export default class extends Browser
         this.add(new MyPuppetBox(pod), 'My Puppets')
       }
     }).catch(error => {
-      this.onError('Cannot load puppets, please try again...🤒')
+      this.onError('Cannot load puppets, please try again...🤒', error)
     })
 
     API.listLibraryPuppets().then(pods => {
@@ -43,7 +43,7 @@ export default class extends Browser
         this.add(new PuppetBox(pod), 'Puppets')
       }
     }).catch(error => {
-      this.onError('Cannot load puppets, please try again...🤒')
+      this.onError('Cannot load puppets, please try again...🤒', error)
     })
   }
 

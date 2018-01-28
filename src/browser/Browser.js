@@ -105,7 +105,7 @@ export default class Browser extends EventEmitter
   }
 
   onError(message) {
-    console.error(error)
+    console.error(message)
     this.contentSection.placeholder = message;
   }
 

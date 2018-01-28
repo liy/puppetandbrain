@@ -22,7 +22,7 @@ class Editor extends EventEmitter
 
     this.renderer = PIXI.autoDetectRenderer({
       autoStart: true,
-      width: 1366,
+      width: 1024,
       height: 768,
       view: canvas,
       transparent: true,

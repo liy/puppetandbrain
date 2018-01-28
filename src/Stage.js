@@ -5,8 +5,6 @@ export default class Stage
 {
   constructor() {
     this.element = document.getElementById('stage');
-    console.log(this.element.offsetLeft)
-    console.log(this.element.offsetTop)
 
     this.actors = new ArrayMap();
 
