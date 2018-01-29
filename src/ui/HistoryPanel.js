@@ -5,7 +5,7 @@ export default class
   constructor() {
     this.element = document.createElement('div');
     this.element.className = 'history-panel';
-    this.element.setAttribute('data-title', "Undo and Redo action");
+    this.element.setAttribute('data-title', "Undo Redo");
 
     this.historyButtons = new DOMParser().parseFromString(require('!raw-loader!../assets/history-buttons.svg'), "image/svg+xml").rootElement;
     this.historyButtons.setAttribute('height', 100);

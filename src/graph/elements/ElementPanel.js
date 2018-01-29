@@ -15,11 +15,9 @@ export default class
 {
   constructor() {
     this.width = 300;
-
     this.element = document.createElement('div');
     this.element.id = 'element-panel';
     this.element.style.width = `${this.width}px`
-    this.element.style.right = `-${this.width}px`
 
     this.title = document.createElement('span');
     this.title.id = 'element-panel-title';
@@ -66,7 +64,7 @@ export default class
   }
 
   toggle() {
-    this.element.style.right = this.visible ? `-${this.width}px` : 0;
+    this.element.style.transform = this.visible ? `translateX(100%)` : `translateX(0)`;
     this.visible = !this.visible;
     UIController.controlShifted = this.visible;
     this.pullIcon.style.transform = `scaleX(${this.visible?-1:1})`;

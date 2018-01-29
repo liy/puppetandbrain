@@ -20,13 +20,13 @@ export default class DebugButton extends ControlButton
     Editor.on('game.start', () => {
       this.element.removeChild(this.element.firstChild);
       this.element.appendChild(this.stopIcon);
-      this.element.title = 'Press F6 to stop'
+      this.element.setAttribute('data-title', 'Stop game')
     })
 
     Editor.on('game.stop', () => {
       this.element.removeChild(this.element.firstChild);
       this.element.appendChild(this.startIcon);
-      this.element.title = 'Press F6 to start'
+      this.element.setAttribute('data-title', 'Play game')
     })
 
     this.element.addEventListener('mousedown', e => {

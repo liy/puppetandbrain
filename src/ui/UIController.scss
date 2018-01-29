@@ -8,6 +8,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  transition: all ease 0.3s;
 }
 
 .control-button {
@@ -20,6 +22,8 @@
 
   margin-right: 20px;
   margin-bottom: 20px;
+
+  transition: all ease 0.2s;
 }
 
 #bin-button {

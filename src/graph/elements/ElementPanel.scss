@@ -1,14 +1,12 @@
-$width: 300px;
-
 #element-panel {
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   position: absolute;
   top: 0;
-  right: -$width;
+  right: 0;
   z-index: 2;
 
-  width: $width;
+  width: 300px;
   height: 100%;
   background-color: #5D5D8A;
   border-left: 2px solid #242747;
@@ -16,6 +14,10 @@ $width: 300px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  // TODO: this hides the border when collapsed, maybe use exact pixel value?
+  transform: translateX(100%);
+  transition: all ease 0.3s;
 }
 
 #element-panel-content {
