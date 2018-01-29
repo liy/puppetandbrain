@@ -8,6 +8,8 @@ export default class
     this.element = document.createElement('div');
     this.element.className = 'base-element';
     
+    this.element.setAttribute('data-title', "test");
+    
     this.content = document.createElement('div');
     this.element.appendChild(this.content);
     this.content.className = 'element-content';

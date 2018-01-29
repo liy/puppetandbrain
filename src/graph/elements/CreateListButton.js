@@ -7,6 +7,8 @@ export default class extends ElementControlButton
 {
   constructor() {
     super(svgElement(ListIcon,{width:17, height:14}));
+    
+    this.element.setAttribute('data-title', "Create list property");
   }
   
   pointerDown(e) {

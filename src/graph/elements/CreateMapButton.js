@@ -7,6 +7,7 @@ export default class extends ElementControlButton
 {
   constructor() {
     super(svgElement(MapIcon,{width:15, height:15}));
+    this.element.setAttribute('data-title', "Create map property");
   }
 
   pointerDown(e) {

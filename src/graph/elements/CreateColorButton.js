@@ -7,6 +7,7 @@ export default class extends ElementControlButton
 {
   constructor() {
     super(svgElement(BucketIcon,{width:18, height:18}));
+    this.element.setAttribute('data-title', "Create color property");
   }
 
   pointerDown(e) {

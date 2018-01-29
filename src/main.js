@@ -4,6 +4,7 @@ require('./manifest.json')
 
 // imports
 require('./main.scss')
+import './ui/Tooltip.scss'
 
 import 'whatwg-fetch';
 import html2canvas from 'html2canvas';

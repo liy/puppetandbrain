@@ -27,4 +27,14 @@ export default class AddActorButton extends ControlButton
       }
     })
   }
+
+  stageMode() {
+    super.stageMode();
+    this.element.setAttribute('data-title', "Add puppet");
+  }
+
+  brainMode() {
+    super.brainMode();
+    this.element.setAttribute('data-title', "Add block");
+  }
 }

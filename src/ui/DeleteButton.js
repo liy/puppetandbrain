@@ -24,12 +24,14 @@ export default class BrainButton extends ControlButton
   }
 
   stageMode() {
+    this.element.setAttribute('data-title', "Delete puppet");
     BlockSelection.off('block.selection.change', this.onSelectChange, this)
     ActorSelection.on('actor.selection.change', this.onSelectChange, this);
     this.onSelectChange(ActorSelection.selected);
   }
 
   brainMode() {
+    this.element.setAttribute('data-title', "Delete block");
     ActorSelection.off('actor.selection.change', this.onSelectChange, this);
     BlockSelection.on('block.selection.change', this.onSelectChange, this);
     this.onSelectChange(BlockSelection.selected);

@@ -23,10 +23,12 @@ export default class
     if(this._enabled) {
       this.element.style.opacity = 1;
       this.element.style.cursor = 'pointer';
+      this.element.style.pointerEvents = 'inherit';
     }
     else {
       this.element.style.opacity = 0.2;
-      this.element.style.cursor = 'auto'
+      this.element.style.cursor = 'auto',
+      this.element.style.pointerEvents = 'none';
     }
   }
 

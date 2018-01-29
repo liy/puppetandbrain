@@ -5,6 +5,7 @@ export default class extends ElementControlButton
 {
   constructor() {
     super(null, '🐶');
+    this.element.setAttribute('data-title', "Create puppet reference");
   }
 
   pointerDown(e) {

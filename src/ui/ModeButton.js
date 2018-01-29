@@ -37,6 +37,7 @@ export default class extends ControlButton
   stageMode() {
     super.stageMode();
 
+    this.element.setAttribute('data-title', "Open puppet brain");
     this.element.appendChild(this.brainBtn);
     if(this.element.contains(this.stageBtn)) this.element.removeChild(this.stageBtn);
     
@@ -47,6 +48,7 @@ export default class extends ControlButton
   brainMode() {
     super.brainMode();
 
+    this.element.setAttribute('data-title', "Back to stage");
     this.element.appendChild(this.stageBtn);
     if(this.element.contains(this.brainBtn)) this.element.removeChild(this.brainBtn);
     

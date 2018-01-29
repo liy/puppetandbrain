@@ -7,6 +7,7 @@ export default class extends ElementControlButton
 {
   constructor() {
     super(svgElement(PositionIcon,{width:10, height:16}));
+    this.element.setAttribute('data-title', "Create position property");
   }
 
   pointerDown(e) {

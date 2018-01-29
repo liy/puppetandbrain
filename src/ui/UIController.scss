@@ -11,12 +11,20 @@
 }
 
 .control-button {
+  // make tooltip work
+  position: relative;
+
   width: 100px;
   height: 100px;
   cursor: pointer;
 
   margin-right: 20px;
   margin-bottom: 20px;
+}
+
+#bin-button {
+  width: 68px;
+  height: 68px;
 }
 
 #add-actor-button {
