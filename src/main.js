@@ -32,6 +32,9 @@ import PuppetBrowser from './browser/PuppetBrowser';
 import ActorSelection from './objects/ActorSelection';
 import API from './API';
 
+
+document.getElementById('app-version').textContent = APP_VERSION;
+
 window.ActorSelection = ActorSelection;
 window.API = API;
 
