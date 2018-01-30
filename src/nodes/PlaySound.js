@@ -62,14 +62,9 @@ export default class PlaySound extends Task
   run() {
     super.run();
 
-    // // stop any looping sound...
-    if(this.sound && this.sound.loop()) {
-      this.sound.stop();
-    }
-
     this.sound = this.inputs.value('audio');
     this.sound.loop(Boolean(this.inputs.value('loop')));
-    this.sound.onend = this.complete;
+    this.sound.once('end', this.complete);
 
     let id = this.sound.play();
     this.outputs.assignValue('sound', {

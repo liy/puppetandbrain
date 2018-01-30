@@ -6,8 +6,13 @@ import FileHashTask from '../../utils/FileHashTask'
 
 export default class extends Gadget
 {
-  constructor(accept) {
+  constructor(accept, fileName) {
     super();
+    
+    this.fileName = fileName;
+
+    this.element.textContent = this.fileName;
+
     this.element.classList.add('file-button');
     this.element.appendChild(svgElement(CloudIcon, {width:29, height:16}));
 
@@ -18,7 +23,6 @@ export default class extends Gadget
 
     this.onUpload = this.onUpload.bind(this);
     input.addEventListener('change', this.onUpload)
-
     this.element.addEventListener('click', e => {
       input.click();
     });
@@ -26,8 +30,8 @@ export default class extends Gadget
 
   async onUpload(e) {
     if(e.target.files.length == 0) return;
-
     let file = e.target.files[0];
+
     let ext = file.name.split('.')[1];
     const contentType = getMimeType(ext);
 
@@ -37,6 +41,8 @@ export default class extends Gadget
     const path = `uploads/${hash}.${ext}`;
 
     API.uploadData(hashTask.data, hash, path, contentType, Activity.id).then(() => {
+      this.element.textContent = file.name;
+
       this.emit('file.ready', {
         path,
         data: hashTask.data

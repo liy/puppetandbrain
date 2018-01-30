@@ -3,14 +3,16 @@
   // make file input absolute related to this button
   position: relative;
 
-  min-width: 94px;
-  max-width: 94px;
+  min-width: 80px;
+  max-width: 80px;
+
+  padding-left: 5px;
+  padding-right: 5px;
 
   border-radius: 13px;
   line-height: 20px;
   height: 20px;
   
-  margin-right: -2px;
   background-color: #2D83BC;
   border: 3px solid #5193BF;
 
@@ -25,4 +27,7 @@
     display: none;
     pointer-events: none;
   }
+
+  color: white;
+  font-size: 13px;
 }

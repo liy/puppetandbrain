@@ -1,0 +1,19 @@
+.audio-field {
+  svg {
+    margin-left: 4px;
+  }
+}
+
+#circle-progress {
+  animation: dash 5s linear alternate infinite;
+}
+
+@keyframes dash {
+  from {
+    // precisely 75.36 
+    stroke-dashoffset: 76;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
