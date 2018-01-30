@@ -32,7 +32,6 @@
   border-radius: 21px 0 0 21px;
   width: 38px;
   height: 42px;
-  left: -40px;
 
   // vertical centre
   top: 50%;
@@ -48,6 +47,13 @@
   svg {
     margin-left: 4px;
   }
+
+  transform: translateX(-100%);
+  transition: width ease 0.3s;
+}
+
+#pull-button:hover {
+  width: 50px;
 }
 
 #element-panel-title {
