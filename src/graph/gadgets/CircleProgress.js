@@ -49,19 +49,30 @@ export default class extends Gadget
     })
   }
 
-  update(progress) {
+  tween(progress) {
     TweenLite.to(this, 0.5, {progress:progress, ease:Quad.easeIn, onUpdate: () => {
       let ratio = Math.abs(this.direction-this.progress);
       this.indictor.setAttribute('stroke-dashoffset', STROKE_DASHARRY*ratio);
     }});
   }
 
+  update(progress) {
+    this.progress = progress;
+    let ratio = Math.abs(this.direction-this.progress);
+    this.indictor.setAttribute('stroke-dashoffset', STROKE_DASHARRY*ratio);
+  }
+
   set enabled(f) {
     this._enabled = f;
     this.playPath.style.opacity = this.recordPath.style.opacity = this.corePath.style.opacity = this._enabled ? 1: 0.6;
+    this.element.style.pointerEvents = this._enabled ? 'inherit' : 'none';
   }
 
   get enabled() {
     return this._enabled;
+  }
+
+  set progressColor(color) {
+    this.indictor.setAttribute('stroke', `#${color.toString(16)}`);
   }
 }

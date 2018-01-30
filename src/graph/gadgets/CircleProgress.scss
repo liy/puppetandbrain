@@ -1,3 +1,7 @@
-.circle-progress *{
-  transition: opacity ease 0.5s;
+
+.circle-progress {
+  cursor: pointer;
+  * {
+    transition: opacity ease 0.5s;
+  }
 }
