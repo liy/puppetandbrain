@@ -16,7 +16,7 @@ export default class VariableList extends EventEmitter
 
   create(variablePod) {
     let variable;
-    if(variablePod.type == DataType.SOUND) {
+    if(variablePod.type == DataType.AUDIO) {
       variable = new SoundVariable(variablePod.id);
     }
     else {

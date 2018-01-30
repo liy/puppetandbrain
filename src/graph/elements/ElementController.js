@@ -90,7 +90,7 @@ class ElementController
       case DataType.VEC2:
         variableElement = new PositionElement(variable); 
         break;
-      case DataType.SOUND:
+      case DataType.AUDIO:
         variableElement = new SoundElement(variable); 
         break;
       default:

@@ -10,19 +10,19 @@ NodeTemplate.PlaySound = {
     name: 'completed'
   }],
   inputs: [{
-    name: 'sound url',
-    type: DataType.GENERIC,
+    name: 'audio',
+    type: DataType.AUDIO,
   },{
     name: 'loop',
     type: DataType.GENERIC,
   }],
   outputs: [{
-    name: 'audio',
+    name: 'sound',
     type: DataType.GENERIC
   }],
   memory: {
     loop: true,
-    'sound url': '',
+    audio: null,
   },
   category: 'Audio',
   elementClass: ['audio']
@@ -37,29 +37,45 @@ export default class PlaySound extends Task
     Editor.on('game.stop', this.stop, this)
   }
 
+  init(pod) {
+    super.init(pod);
+
+    this.path = pod.path || null;
+    if(this.path) {
+      API.getUrl(this.path).then(url => {
+        this.memory['audio'] = new Howl({
+          src: [url]
+        })
+      })
+    }
+  }
+
   destroy() {
     super.destroy();
     if(this.audio) {
-      this.audio.pause();
-      this.audio.removeEventListener('ended', this.complete);
+      this.audio.unload();
     }
     Editor.off('game.stop', this.stop, this)
   }
+  
 
   run() {
     super.run();
 
-    // stop any looping sound...
-    if(this.audio && this.audio.loop) {
-      this.audio.pause();
+    // // stop any looping sound...
+    if(this.sound && this.sound.loop()) {
+      this.sound.stop();
     }
-    
-    this.audio = new Audio(this.inputs.value('sound url'));
-    this.audio.loop = Boolean(this.inputs.value('loop'));
-    this.audio.addEventListener('ended', this.complete, {once: true})
 
-    this.audio.play();
-    this.outputs.assignValue('audio', this.audio);
+    this.sound = this.inputs.value('audio');
+    this.sound.loop(Boolean(this.inputs.value('loop')));
+    this.sound.onend = this.complete;
+
+    let id = this.sound.play();
+    this.outputs.assignValue('sound', {
+      id,
+      sound: this.sound,
+    })
 
     this.execution.run();
   }
@@ -69,13 +85,18 @@ export default class PlaySound extends Task
   }
 
   stop() {
-    if(this.audio) {
-      this.audio.pause();
-      this.audio.removeEventListener('ended', this.complete);
+    if(this.sound) {
+      this.sound.stop();
     }
   }
 
   get nodeName() {
     return 'Play Sound'
+  }
+
+  pod(detail) {
+    let pod = super.pod(detail);
+    pod.path = this.path;
+    return pod;
   }
 }

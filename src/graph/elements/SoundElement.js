@@ -9,7 +9,7 @@ export default class extends VariableElement
   constructor(variable) {
     super(variable);
     
-    this.type = DataType.SOUND;
+    this.type = DataType.AUDIO;
 
     this.icon.appendChild(svgElement(SoundIcon,{width:18, height:20}));
 
