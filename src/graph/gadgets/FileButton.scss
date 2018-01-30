@@ -28,6 +28,11 @@
     pointer-events: none;
   }
 
-  color: white;
-  font-size: 13px;
+  span {
+    color: white;
+    font-size: 13px;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }

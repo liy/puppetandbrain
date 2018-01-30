@@ -15,7 +15,7 @@ import PullIcon from '../../assets/pull-icon.svg';
 export default class
 {
   constructor() {
-    this.width = 300;
+    this.width = 340;
     this.element = document.createElement('div');
     this.element.id = 'element-panel';
     this.element.style.width = `${this.width}px`

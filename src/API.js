@@ -4,7 +4,7 @@ class API
   }
   
 
-  uploadData(data, hash, path, contentType, referenceByID) {
+  uploadData(data, hash, path, contentType, referenceByID, onProgress=null, onError=null) {
     // TODO: check whether file storage already contains the hash
     // by fetch the file doc using the hash
     // if it does, no need to upload file again...
@@ -22,12 +22,8 @@ class API
     return new Promise(resolve => {
       let task = ref.put(data, {contentType});
       task.on('state_changed', 
-        function progress(snapshot) {
-          console.log(snapshot)
-        }, 
-        function error(err) {
-          console.log(err)
-        },
+        onProgress, 
+        onError,
         function complete() {
           console.log('done');
           resolve();

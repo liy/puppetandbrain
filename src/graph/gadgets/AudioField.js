@@ -2,6 +2,7 @@ import './AudioField.scss'
 
 import Gadget from './Gadget'
 import FileButton from '../gadgets/FileButton'
+import CircleProgress from '../gadgets/CircleProgress'
 
 export default class extends Gadget
 {
@@ -12,8 +13,15 @@ export default class extends Gadget
     this.button = new FileButton('audio/*');
     this.element.appendChild(this.button.element);
 
-    // TODO: append play button
-    this.circleProgress = new DOMParser().parseFromString(require('!raw-loader!../../assets/audio-element-control.svg'), "image/svg+xml").rootElement;
-    this.element.appendChild(this.circleProgress)
+    this.circleProgress = new CircleProgress();
+    this.element.appendChild(this.circleProgress.element);
+
+    this.button.on('file.progress', progress => {
+      this.circleProgress.update(progress);
+    })
+
+    this.button.on('file.ready', () => {
+      this.circleProgress.enabled = true;
+    })
   }
 }

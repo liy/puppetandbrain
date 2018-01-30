@@ -11,10 +11,12 @@ export default class extends Gadget
     
     this.fileName = fileName;
 
-    this.element.textContent = this.fileName;
+    this.fileNameSpan = document.createElement('span');
+    this.element.appendChild(this.fileNameSpan);
 
     this.element.classList.add('file-button');
-    this.element.appendChild(svgElement(CloudIcon, {width:29, height:16}));
+    this.icon = svgElement(CloudIcon, {width:29, height:16});
+    this.element.appendChild(this.icon);
 
     let input = document.createElement('input');
     input.type = 'file';
@@ -32,6 +34,8 @@ export default class extends Gadget
     if(e.target.files.length == 0) return;
     let file = e.target.files[0];
 
+    this.emit('file.begin');
+
     let ext = file.name.split('.')[1];
     const contentType = getMimeType(ext);
 
@@ -40,13 +44,22 @@ export default class extends Gadget
 
     const path = `uploads/${hash}.${ext}`;
 
-    API.uploadData(hashTask.data, hash, path, contentType, Activity.id).then(() => {
-      this.element.textContent = file.name;
+    API.uploadData(hashTask.data, hash, path, contentType, Activity.id, 
+      (snapshot) => {
+        let progress = snapshot.bytesTransferred/snapshot.totalBytes;
+        this.emit('file.progress', progress)  
+      },
+      (error) => {
+        this.emit('file.error', error);
+      }
+    ).then(() => {
+      this.icon.style.display = 'none'
+      this.fileNameSpan.textContent = file.name;
 
-      this.emit('file.ready', {
-        path,
-        data: hashTask.data
-      });
-    })
+        this.emit('file.ready', {
+          path,
+          data: hashTask.data
+        });
+      })
   }
 }
