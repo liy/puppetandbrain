@@ -2,7 +2,7 @@ import VariableElement from './VariableElement';
 import DataType from '../../data/DataType';
 import SoundIcon from '../../assets/sound-icon.svg';
 import { svgElement } from '../../utils/utils';
-import FileButton from '../gadgets/FileButton'
+import AudioField from '../gadgets/AudioField'
 
 export default class extends VariableElement
 {
@@ -13,10 +13,12 @@ export default class extends VariableElement
 
     this.icon.appendChild(svgElement(SoundIcon,{width:18, height:20}));
 
-    this.fileBtn = new FileButton('audio/*', this.variable.data);
-    this.content.appendChild(this.fileBtn.element);
+    // this.fileBtn = new FileButton('audio/*', this.variable.data);
+    // this.content.appendChild(this.fileBtn.element);
+    this.audioField = new AudioField('audio/*');
+    this.content.appendChild(this.audioField.element);
 
-    this.fileBtn.on('file.uploaded', ({path, data}) => {
+    this.audioField.button.on('file.ready', ({path, data}) => {
       this.variable.updateSound(path);
     })
   }

@@ -21,7 +21,7 @@ NodeTemplate.PlaySound = {
     type: DataType.GENERIC
   }],
   memory: {
-    loop: true,
+    loop: false,
     audio: null,
   },
   category: 'Audio',
