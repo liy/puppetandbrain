@@ -9,14 +9,16 @@ export default class extends Gadget
   constructor(accept, fileName) {
     super();
     
+    this.element.classList.add('file-button');
+
     this.fileName = fileName;
 
     this.fileNameSpan = document.createElement('span');
+    this.fileNameSpan.textContent = this.fileName || 'Upload';
     this.element.appendChild(this.fileNameSpan);
 
-    this.element.classList.add('file-button');
-    this.icon = svgElement(CloudIcon, {width:29, height:16});
-    this.element.appendChild(this.icon);
+    // this.icon = svgElement(CloudIcon, {width:29, height:16});
+    // this.element.appendChild(this.icon);
 
     let input = document.createElement('input');
     input.type = 'file';
@@ -34,6 +36,7 @@ export default class extends Gadget
     if(e.target.files.length == 0) return;
     let file = e.target.files[0];
 
+    this.fileNameSpan.textContent = 'Uploading...';
     this.emit('file.begin');
 
     let ext = file.name.split('.')[1];
@@ -53,12 +56,14 @@ export default class extends Gadget
         this.emit('file.error', error);
       }
     ).then(() => {
-      this.icon.style.display = 'none'
+      // this.icon.style.display = 'none'
       this.fileNameSpan.textContent = file.name;
 
         this.emit('file.ready', {
           path,
-          data: hashTask.data
+          data: hashTask.data,
+          contentType,
+          ext,
         });
       })
   }

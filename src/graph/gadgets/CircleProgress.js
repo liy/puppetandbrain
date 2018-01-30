@@ -43,6 +43,10 @@ export default class extends Gadget
     this.direction = 1;
 
     this.enabled = false;
+
+    this.element.addEventListener('click', e => {
+      if(this.enabled) this.emit('click');
+    })
   }
 
   update(progress) {
