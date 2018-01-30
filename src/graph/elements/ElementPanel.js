@@ -6,6 +6,7 @@ import CreateMapButton from './CreateMapButton';
 import CreatePositionButton from './CreatePositionButton';
 import CreateColorButton from './CreateColorButton';
 import CreateActorButton from './CreateActorButton';
+import CreateSoundButton from './CreateSoundButton';
 import RemoveVariableButton from './RemoveVariableButton';
 import { svgElement } from '../../utils/utils';
 
@@ -51,6 +52,8 @@ export default class
     let positionButton = new CreatePositionButton();
     let pipetteButton = new CreateColorButton();
     let actorButton = new CreateActorButton();
+    let soundButton = new CreateSoundButton();
+
     this.binButton = new RemoveVariableButton();
     this.binButton.hide();
 
@@ -60,6 +63,7 @@ export default class
     this.control.appendChild(positionButton.element);
     this.control.appendChild(pipetteButton.element);
     this.control.appendChild(actorButton.element);
+    this.control.appendChild(soundButton.element);
     this.control.appendChild(this.binButton.element);
   }
 

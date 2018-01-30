@@ -1,0 +1,35 @@
+// this whole mess is a hack... don't even want to look at it...
+.file-button {
+  // make file input absolute related to this button
+  position: relative;
+
+  min-width: 94px;
+  max-width: 94px;
+
+  border-radius: 13px;
+  line-height: 20px;
+  height: 20px;
+  
+  margin-right: -2px;
+  background-color: #2D83BC;
+  border: 3px solid #5193BF;
+
+  // centre svg
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // hide extra input button shit
+  overflow: hidden;
+}
+
+.file-button input[type=file] {
+  font-size: 20px;
+  position: absolute;
+  left: -3px;
+  top: -3px;
+
+  opacity: 0;
+  // turn this on to see the whole shit...
+  // opacity: 0.5;
+}

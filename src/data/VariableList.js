@@ -1,6 +1,7 @@
 import EventEmitter from "../utils/EventEmitter";
 import ArrayMap from "../utils/ArrayMap";
 import Variable from './Variable';
+import SoundVariable from './SoundVariable';
 import DataType from "./DataType";
 
 export default class VariableList extends EventEmitter
@@ -14,7 +15,13 @@ export default class VariableList extends EventEmitter
   }
 
   create(variablePod) {
-    let variable = new Variable(variablePod.id);
+    let variable;
+    if(variablePod.type == DataType.SOUND) {
+      variable = new SoundVariable(variablePod.id);
+    }
+    else {
+      variable = new Variable(variablePod.id);
+    }
     variable.brain = this.brain;
     variable.init(variablePod);
     this.add(variable);

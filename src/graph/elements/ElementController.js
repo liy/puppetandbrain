@@ -15,6 +15,7 @@ import MapElement from './MapElement';
 import PositionElement from './PositionElement';
 import ColorElement from './ColorElement';
 import ActorElement from './ActorElement';
+import SoundElement from './SoundElement';
 import { nextFrame, svgElement } from "../../utils/utils";
 
 class ElementController
@@ -88,6 +89,9 @@ class ElementController
         break;
       case DataType.VEC2:
         variableElement = new PositionElement(variable); 
+        break;
+      case DataType.SOUND:
+        variableElement = new SoundElement(variable); 
         break;
       default:
         variableElement = new GenericElement(variable); 

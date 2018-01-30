@@ -36,6 +36,20 @@ export const ContentType = {
   MP3: 'audio/mpeg',
 }
 
+
+const MIME = {
+  'mp3': 'audio/mpeg',
+  'json': 'application/json',
+  'atlas': 'text/plain',
+  'png': 'image/png',
+  'jpg': 'image/jpg',
+  'ogg': 'audio/ogg',
+  'mp3': 'audio/mpeg',
+}
+export function getMimeType(ext) {
+  return MIME[ext];
+}
+
 export function aroundAt(v, range=10) {
   return v + Math.random()*range*2-range;
 }

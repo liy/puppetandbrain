@@ -1,6 +1,39 @@
-class API {
+class API 
+{
   constructor() {
+  }
+  
 
+  uploadData(data, hash, path, contentType, referenceByID) {
+    // TODO: check whether file storage already contains the hash
+    // by fetch the file doc using the hash
+    // if it does, no need to upload file again...
+
+    // write a file entry.
+    // note this is just a pure file entry and VAGUE look up list telling
+    // cronjob which activity or exported puppet MIGHT BE using this file.
+    //
+    // Only fileRefs collection contains the up to date file references.
+    firebase.firestore().collection('files').doc(hash).set({
+      [referenceByID]: true,
+    }, {merge:true});
+
+    let ref = firebase.storage().ref(path);
+    return new Promise(resolve => {
+      let task = ref.put(data, {contentType});
+      task.on('state_changed', 
+        function progress(snapshot) {
+          console.log(snapshot)
+        }, 
+        function error(err) {
+          console.log(err)
+        },
+        function complete() {
+          console.log('done');
+          resolve();
+        })
+    })
+    
   }
 
   getUrl(path) {

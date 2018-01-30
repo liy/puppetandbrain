@@ -61,11 +61,9 @@ export default class ActivityLoader
     // create all the variables first
     for(let id of pod.variables) {
       let variablePod = pod.store[id];
-      let variable = new Variable(id);
-      variable.init(variablePod);
       // put the variable into its brain
       let brain = LookUp.get(variablePod.brainID);
-      brain.variables.add(variable);
+      brain.variables.create(variablePod);
     }
 
     let performs = [];
