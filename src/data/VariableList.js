@@ -36,6 +36,7 @@ export default class VariableList extends EventEmitter
   }
 
   insert(variable, index) {
+    variable.brain = this.brain;
     this.variables.insert(variable.id, variable, index);
     this.emit('variable.added', variable)
     return variable;
