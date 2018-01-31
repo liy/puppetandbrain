@@ -3,7 +3,7 @@ import {Resource} from './Resource';
 
 export default class Loader extends EventEmitter
 {
-  constructor(id, url, options,) {
+  constructor(id, url, options) {
     super();
 
     this.id = id;
@@ -12,7 +12,7 @@ export default class Loader extends EventEmitter
   }
 
   start() {
-    return fetch(this.url, this.options).then(response => {
+    return fetch(this.url, this.options||{}).then(response => {
       if(response.ok) {
         // added to the resource
         return this.onSuccess(response).then(data => {
