@@ -111,7 +111,7 @@ class BrainGraph
     this.pointerdown = this.pointerdown.bind(this);
     this.onRightClick = this.onRightClick.bind(this)
 
-    this.container.style = "visibility:visible"
+    this.container.style.display = 'block'
 
     this.container.addEventListener('contextmenu', this.onRightClick);
     this.container.addEventListener('mousedown', this.pointerdown);
@@ -155,7 +155,7 @@ class BrainGraph
   
       ElementController.close();
       
-      this.container.style = "visibility:hidden"
+      this.container.style.display = 'none'
   
       Editor.stage.blurEnabled = false;
       GraphSelection.deselect();
@@ -167,12 +167,12 @@ class BrainGraph
 
   hide() {
     Editor.stage.blurEnabled = false;
-    this.container.style = "visibility:hidden"
+    this.container.style.display = 'none'
   }
 
   show() {
     Editor.stage.blurEnabled = true;
-    this.container.style = "visibility:visible"
+    this.container.style.display = 'block'
   }
 
   switchTo(brain) {

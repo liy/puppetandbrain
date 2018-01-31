@@ -26,6 +26,7 @@ export default class
 
     this.content = document.createElement('div');
     this.content.id = 'element-panel-content';
+    this.content.style.display = 'none'
     this.element.appendChild(this.content)
     
     this.control = document.createElement('div');
@@ -60,6 +61,18 @@ export default class
     this.control.appendChild(pipetteButton.element);
     this.control.appendChild(actorButton.element);
     this.control.appendChild(soundButton.element);
+
+    let onTransitionEnd = (e) => {
+      if(e.target == this.element) {
+        if(!this.visible) {
+          this.content.style.display = 'none'
+        }
+      }
+    }
+    
+    this.element.addEventListener('transitionend', onTransitionEnd)
+    this.element.addEventListener('webkitTransitionEnd', onTransitionEnd)
+    this.element.addEventListener('msTransitionEnd', onTransitionEnd)
   }
 
   toggle() {
@@ -67,6 +80,7 @@ export default class
     this.visible = !this.visible;
     UIController.controlShifted = this.visible;
     this.pullIcon.style.transform = `scaleX(${this.visible?-1:1})`;
+    if(this.visible) this.content.style.display = 'block'
   }
 
   clear() {
@@ -81,13 +95,5 @@ export default class
 
   remove(element) {
     this.content.removeChild(element);
-  }
-
-  showRemove() {
-
-  }
-
-  hideRemove() {
-
   }
 }
