@@ -11,7 +11,7 @@ export default class extends VariableElement
     
     this.type = DataType.AUDIO;
 
-    this.icon.appendChild(svgElement(SoundIcon,{width:18, height:20}));
+    this.icon.appendChild(this.createIcon());
 
     // this.fileBtn = new FileButton('audio/*', this.variable.data);
     // this.content.appendChild(this.fileBtn.element);
@@ -21,5 +21,9 @@ export default class extends VariableElement
     this.audioField.button.on('file.ready', ({path, data}) => {
       this.variable.updateSound(path);
     })
+  }
+
+  createIcon() {
+    return svgElement(SoundIcon,{width:18, height:20});
   }
 }

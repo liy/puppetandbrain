@@ -5,12 +5,12 @@
 
 .base-element {
   background-color: #393D5E;
-  margin-top: 10px;
   border-radius: 19px;
 
   padding-left: 2px;
   padding-right: 5px;
 
+  margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
 
@@ -47,4 +47,18 @@
 
 .element-selected {
   border: 3px solid #fcee21;
+}
+
+.drag-element {
+  position: absolute;
+  min-width: 100px;
+  height: 32px;
+
+  margin: 0;
+
+  // this act like an offset
+  top: -19px;
+  left: -40px;
+
+  z-index: 999;
 }

@@ -8,8 +8,7 @@ export default class extends PropertyElement
   constructor(actor) {
     super(actor, {name:'scale'});
 
-    let svg = svgElement(SizeIcon,{width:18, height:18});
-    this.icon.appendChild(svg);
+    this.icon.appendChild(this.createIcon());
 
     this.rangeField = new RangeField({value: actor.scale.x, min:-1, max:3, decimalPlaces:2});
     this.content.appendChild(this.rangeField.element);
@@ -23,5 +22,9 @@ export default class extends PropertyElement
   destroy() {
     this.rangeField.destroy();
     super.destroy();
+  }
+
+  createIcon() {
+    return svgElement(SizeIcon,{width:18, height:18});
   }
 }

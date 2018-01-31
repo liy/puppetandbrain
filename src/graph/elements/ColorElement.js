@@ -11,8 +11,7 @@ export default class extends VariableElement
     super(variable);
     this.type = DataType.COLOR;
 
-    let svg = svgElement(BucketIcon, {width:18, height:18});
-    this.icon.appendChild(svg);
+    this.icon.appendChild(this.createIcon());
 
     this.colorButton = new ColorButton(this.variable.data);
     this.content.appendChild(this.colorButton.element);
@@ -25,5 +24,9 @@ export default class extends VariableElement
   destroy() {
     this.colorButton.destroy();
     super.destroy();
+  }
+
+  createIcon() {
+    return svgElement(BucketIcon, {width:18, height:18});
   }
 }

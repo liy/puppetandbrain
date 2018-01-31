@@ -17,7 +17,7 @@ export default class extends VariableElement
     // store the list entry element
     this.entries = new ArrayMap()
 
-    this.icon.appendChild(svgElement(MapIcon,{width:16, height:16}));
+    this.icon.appendChild(this.createIcon());
 
     // only show up when selected
     this.addButton = document.createElement('div');
@@ -94,5 +94,9 @@ export default class extends VariableElement
     super.deselect();
     this.listElement.style.display = 'none';
     this.addButton.style.visibility = 'hidden';
+  }
+  
+  createIcon() {
+    return svgElement(MapIcon,{width:16, height:16});
   }
 }

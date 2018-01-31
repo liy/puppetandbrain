@@ -9,7 +9,7 @@ export default class extends VariableElement
 {
   constructor(variable) {
     super(variable);
-    this.icon.appendChild(svgElement(DotIcon,{width:10, height:10}));
+    this.icon.appendChild(this.createIcon());
 
     this.valueField = new ValueField(variable.data);
     this.content.appendChild(this.valueField.element);
@@ -21,5 +21,9 @@ export default class extends VariableElement
   onValueChange(e) {
     // set both actual data and initial data
     this.variable.set(e.target.value);
+  }
+
+  createIcon() {
+    return svgElement(DotIcon,{width:10, height:10});
   }
 }

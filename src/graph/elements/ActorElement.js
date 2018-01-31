@@ -23,4 +23,8 @@ export default class extends VariableElement
     this.actorPicker.destroy();
     super.destroy();
   }
+
+  createIcon() {
+    return '🐶';
+  }
 }

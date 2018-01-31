@@ -15,7 +15,7 @@ export default class extends VariableElement
     // store the list entry element
     this.entries = [];
 
-    this.icon.appendChild(svgElement(ListIcon, {width:17, height:14}));
+    this.icon.appendChild(this.createIcon());
 
     // only show up when selected
     this.addButton = document.createElement('div');
@@ -91,5 +91,9 @@ export default class extends VariableElement
     super.deselect();
     this.listElement.style.display = 'none';
     this.addButton.style.visibility = 'hidden';
+  }
+
+  createIcon() {
+    return svgElement(ListIcon, {width:17, height:14})
   }
 }

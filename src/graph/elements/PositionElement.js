@@ -11,8 +11,7 @@ export default class extends VariableElement
     
     this.type = DataType.VEC2;
 
-    let svg = svgElement(PositionIcon,{width:10, height:16});
-    this.icon.appendChild(svg);
+    this.icon.appendChild(this.createIcon());
 
     this.positionField = new PositionField(this.variable.data);
     this.content.appendChild(this.positionField.element);
@@ -25,5 +24,9 @@ export default class extends VariableElement
   destroy() {
     this.positionField.destroy();
     super.destroy();
+  }
+
+  createIcon() {
+    return svgElement(PositionIcon,{width:10, height:16})
   }
 }
