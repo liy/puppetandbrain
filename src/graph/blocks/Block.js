@@ -26,7 +26,6 @@ export default class Block extends EventEmitter
     this.dragstart = this.dragstart.bind(this);
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
-    this.releaseOutside = this.releaseOutside.bind(this);
 
     this.selected = false;
   }
@@ -38,9 +37,6 @@ export default class Block extends EventEmitter
     
     this.body.element.addEventListener('mousedown', this.dragstart);
     this.body.element.addEventListener('touchstart', this.dragstart);
-    this.body.element.addEventListener('mouseup', this.dragstop);
-    this.body.element.addEventListener('touchend', this.dragstop);
-
 
     
     if(node.elementClass) {
@@ -98,9 +94,9 @@ export default class Block extends EventEmitter
 
     this.body.element.removeEventListener('mousedown', this.dragstart);
     this.body.element.removeEventListener('touchstart', this.dragstart);
-    this.body.element.removeEventListener('mouseup', this.dragstop);
-    this.body.element.removeEventListener('touchend', this.dragstop);
+
     document.removeEventListener('mouseup', this.dragstop);
+    document.removeEventListener('touchend', this.dragstop);
 
     BrainGraph.removeBlock(this);
   }
@@ -127,31 +123,28 @@ export default class Block extends EventEmitter
     
     document.addEventListener('mousemove', this.dragmove)
     document.addEventListener('touchmove', this.dragmove)
-    // when release on graph container, it is released outside of the block
-    BrainGraph.container.addEventListener('mouseup', this.releaseOutside);
+
+    document.addEventListener('touchend', this.dragstop);
+    document.addEventListener('mouseup', this.dragstop);
 
     this.moveCommand = Commander.create('MoveBlock', this);
   }
 
   dragstop(e) {
-    BrainGraph.container.removeEventListener('mouseup', this.releaseOutside);
-    
+    document.removeEventListener('touchend', this.dragstop);
+    document.removeEventListener('mouseup', this.dragstop);
+    document.removeEventListener('mouseup', this.dragstop);
     document.removeEventListener('mousemove', this.dragmove);
     document.removeEventListener('touchmove', this.dragmove);
 
-    // process and push to history
-    if(this.moveCommand) History.push(this.moveCommand.processAndSave());
-  }
-
-  releaseOutside(e) {
-    BrainGraph.container.removeEventListener('mouseup', this.releaseOutside);
-    if(e.target == BrainGraph.container) {
-      document.removeEventListener('mousemove', this.dragmove);
-      document.removeEventListener('touchmove', this.dragmove);
-
-      // process and push to history
-      if(this.moveCommand) History.push(this.moveCommand.processAndSave());
+    // check if drag to delete button
+    if(e.target == UIController.deleteBtn.element) {
+      History.push(Commander.create('DeleteBlock', this.id, this.moveCommand.oldX, this.moveCommand.oldY).processAndSave());
+      return;
     }
+
+    // process and push to history
+    History.push(this.moveCommand.processAndSave());
   }
 
   dragmove(e) {

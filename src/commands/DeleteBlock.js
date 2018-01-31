@@ -3,15 +3,23 @@ import GraphSelection from '../graph/GraphSelection';
 
 export default class DeleteBlock extends Command
 {
-  constructor(blockID) {
+  constructor(blockID, oldX=null, oldY=null) {
     super();
     this.blockID = blockID;
+    // user drag block to delete button, oldX and oldY will be supplied.
+    // they will be used for reset block back to original place.
+    this.oldX = oldX;
+    this.oldY = oldY;
   }
   
   process() {
     // get detailed pod information of the node.
     // which includes all the input and output information nested in the pod
     this.pod = this.block.node.pod(true);
+    // when user drag block to delete button,
+    // we want to reset block back to original place.
+    this.pod.x = this.oldX || this.pod.x;
+    this.pod.y = this.oldY || this.pod.y;
     // TODO: may be instead of call functions, include command here??!?
     BrainGraph.deleteBlock(this.block);
 
