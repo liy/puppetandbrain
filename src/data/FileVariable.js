@@ -17,6 +17,7 @@ export default class extends Variable
 
   init(pod) {
     super.init(pod);
+    this.fileName = pod.fileName || null;
     this.path = pod.path || null;
   }
 
@@ -40,6 +41,7 @@ export default class extends Variable
       brainID: this.brain.id,
       // file variable data is created when loading
       data: null,
+      fileName: this.fileName,
       path: this.path
     }
   }

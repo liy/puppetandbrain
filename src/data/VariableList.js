@@ -1,7 +1,7 @@
 import EventEmitter from "../utils/EventEmitter";
 import ArrayMap from "../utils/ArrayMap";
 import Variable from './Variable';
-import SoundVariable from './SoundVariable';
+import AudioVariable from './AudioVariable';
 import DataType from "./DataType";
 
 export default class VariableList extends EventEmitter
@@ -17,7 +17,7 @@ export default class VariableList extends EventEmitter
   create(variablePod) {
     let variable;
     if(variablePod.type == DataType.AUDIO) {
-      variable = new SoundVariable(variablePod.id);
+      variable = new AudioVariable(variablePod.id);
     }
     else {
       variable = new Variable(variablePod.id);

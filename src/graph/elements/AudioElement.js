@@ -11,11 +11,11 @@ export default class extends VariableElement
     
     this.type = DataType.AUDIO;
 
-    this.audioField = new AudioField('audio/*');
+    this.audioField = new AudioField('audio/*', variable.fileName, variable.path);
     this.content.appendChild(this.audioField.element);
 
-    this.audioField.button.on('file.ready', ({path, data}) => {
-      this.variable.updateSound(path);
+    this.audioField.button.on('file.ready', ({path, data, fileName}) => {
+      this.variable.updateSound(path, fileName);
     })
   }
 

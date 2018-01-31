@@ -6,17 +6,25 @@ import CircleProgress from '../gadgets/CircleProgress'
 
 export default class extends Gadget
 {
-  constructor() {
+  constructor(accept, fileName, path) {
     super();
     this.element.classList.add('audio-field');
 
-    this.audio = null;
 
-    this.button = new FileButton('audio/*');
+    this.button = new FileButton(accept, fileName);
     this.element.appendChild(this.button.element);
 
     this.circleProgress = new CircleProgress();
     this.element.appendChild(this.circleProgress.element);
+
+    if(path) {
+      API.getUrl(path).then(url => {
+        this.audio = new Howl({
+          src: [url],
+        });
+        this.circleProgress.enabled = true;
+      })
+    }
 
     this.button.on('file.begin', () => {
       clearInterval(intervalID);
