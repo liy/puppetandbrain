@@ -53,6 +53,7 @@ function signedIn(user) {
   window.CurrentUser = user;
 
   UIController.stageMode();
+  UIController.addBtn.enabled = true;
 
   // activity
   router.get('/creations/:id', req => {
