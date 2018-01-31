@@ -137,9 +137,6 @@ class ElementController
   remove({variable, index}) {
     this.panel.remove(this.elements.get(variable.id).element);
     this.elements.remove(variable.id)
-    
-    let previous = this.elements.getAt(Math.max(index-1, 0));
-    if(previous) this.select(previous)
   }
 
   refresh() {

@@ -25,7 +25,7 @@ export default class BaseElement
     }
 
     this.onSelect = this.onSelect.bind(this);
-    this.element.addEventListener('mousedown', this.onSelect);
+    this.element.addEventListener('click', this.onSelect);
 
     this._selected = false;
     
@@ -35,7 +35,7 @@ export default class BaseElement
 
   destroy() {
     this.icon.removeEventListener('mousedown', this.dragStart);
-    this.element.removeEventListener('mousedown', this.onSelect);
+    this.element.removeEventListener('click', this.onSelect);
 
     // just in case user press exit while dragging the element
     if(this.dragElement) this.dragElement.destroy();
@@ -44,6 +44,7 @@ export default class BaseElement
   dragStart(e) {
     this.dragElement = new DragElement(this);
     this.dragElement.dragStart(e);
+    if(ElementController.selected) ElementController.selected.deselect();
   }
 
   onSelect(e) {
