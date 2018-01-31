@@ -13,11 +13,11 @@ export default class SetterBlock extends Block
   init(node) {
     super.init(node);
 
-    // actually use variable id as the name by default
-    this.inputPin = this.inputPins.get(node.variableID);
-    this.outputPin = this.outputPins.get(node.variableID);
+    // the input and output name are fixed.
+    this.inputPin = this.inputPins.get('input');
+    this.outputPin = this.outputPins.get('output');
     
-    // change the pin's name from id to actual name
+    // change the pin's name to actual variable name
     this.inputPin.label.textContent = node.variableName;
     this.outputPin.label.textContent = node.variableName;
 

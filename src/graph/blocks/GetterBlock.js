@@ -11,7 +11,7 @@ export default class GetterBlock extends Block
     super.init(node);
 
     // GetterNode actually use variable id as the name by default
-    this.outputPin = this.outputPins.get(node.variableID);
+    this.outputPin = this.outputPins.get('output');
 
     // change the output pin's name from id to actual name
     this.outputPin.label.textContent = node.variableName;
