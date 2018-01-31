@@ -19,7 +19,6 @@ export default class CreateVariable extends Command
   }
 
   undo() {
-    console.log(this.variablePod)
     Commander.create('DeleteVariable', this.variablePod.id, this.variablePod.brainID).process();
   }
 

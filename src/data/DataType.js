@@ -11,6 +11,6 @@ export default {
   VEC2: 5,
   // just not an object with key value pair
   MAP: 6,
-  SOUND: 7,
+  AUDIO: 7,
   IMAGE: 8,
 }

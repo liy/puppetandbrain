@@ -6,7 +6,7 @@ import CreateMapButton from './CreateMapButton';
 import CreatePositionButton from './CreatePositionButton';
 import CreateColorButton from './CreateColorButton';
 import CreateActorButton from './CreateActorButton';
-import CreateSoundButton from './CreateSoundButton';
+import CreateAudioButton from './CreateAudioButton';
 import { svgElement } from '../../utils/utils';
 
 import PullIcon from '../../assets/pull-icon.svg';
@@ -52,7 +52,7 @@ export default class
     let positionButton = new CreatePositionButton();
     let pipetteButton = new CreateColorButton();
     let actorButton = new CreateActorButton();
-    let soundButton = new CreateSoundButton();
+    let audioButton = new CreateAudioButton();
 
     this.control.appendChild(genericButton.element);
     this.control.appendChild(listButton.element);
@@ -60,7 +60,7 @@ export default class
     this.control.appendChild(positionButton.element);
     this.control.appendChild(pipetteButton.element);
     this.control.appendChild(actorButton.element);
-    this.control.appendChild(soundButton.element);
+    this.control.appendChild(audioButton.element);
 
     let onTransitionEnd = (e) => {
       if(e.target == this.element) {

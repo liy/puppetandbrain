@@ -15,7 +15,7 @@ import MapElement from './MapElement';
 import PositionElement from './PositionElement';
 import ColorElement from './ColorElement';
 import ActorElement from './ActorElement';
-import SoundElement from './SoundElement';
+import AudioElement from './AudioElement';
 import { nextFrame, svgElement } from "../../utils/utils";
 import GraphSelection from "../GraphSelection";
 
@@ -68,7 +68,7 @@ class ElementController
         variableElement = new PositionElement(variable); 
         break;
       case DataType.AUDIO:
-        variableElement = new SoundElement(variable); 
+        variableElement = new AudioElement(variable); 
         break;
       default:
         variableElement = new GenericElement(variable); 
