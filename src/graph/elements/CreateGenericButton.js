@@ -8,6 +8,7 @@ export default class extends ElementControlButton
   constructor() {
     super(svgElement(DotIcon,{width:10, height:10}));
     this.element.setAttribute('data-title', "Create generic property");
+    this.element.setAttribute('data-title-position', "right");
   }
 
   pointerDown(e) {

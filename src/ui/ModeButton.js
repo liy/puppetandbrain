@@ -4,7 +4,6 @@ import BrainButtonIcon from '../assets/brain-button-icon.svg';
 import StageButtonIcon from '../assets/stage-button-icon.svg';
 import {svgElement} from '../utils/utils';
 import ControlButton from './ControlButton';
-import BlockSelection from '../graph/BlockSelection';
 
 export default class extends ControlButton
 {
