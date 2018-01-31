@@ -50,7 +50,7 @@ export default class Getter extends Node
   }
 
   get nodeName() {
-    return `Get ${this.variableName}`;
+    return `${this.variableName}`;
   }
 
   pod(detail) {

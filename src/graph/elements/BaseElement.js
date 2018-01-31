@@ -24,8 +24,8 @@ export default class BaseElement
       this.icon.appendChild(icon);
     }
 
-    this.onSelect = this.onSelect.bind(this);
-    this.element.addEventListener('click', this.onSelect);
+    this.onClick = this.onClick.bind(this);
+    this.element.addEventListener('click', this.onClick);
     
     this.dragStart = this.dragStart.bind(this);
     this.icon.addEventListener('mousedown', this.dragStart);
@@ -35,20 +35,20 @@ export default class BaseElement
 
   destroy() {
     this.icon.removeEventListener('mousedown', this.dragStart);
-    this.element.removeEventListener('click', this.onSelect);
+    this.element.removeEventListener('click', this.onClick);
 
     // just in case user press exit while dragging the element
     if(this.dragElement) this.dragElement.destroy();
   }
 
   dragStart(e) {
+    GraphSelection.deselect();
+
     this.dragElement = new DragElement(this);
     this.dragElement.dragStart(e);
-
-    GraphSelection.deselect();
   }
 
-  onSelect(e) {
+  onClick(e) {
     GraphSelection.select(this);
   }
 

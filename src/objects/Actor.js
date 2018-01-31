@@ -218,6 +218,10 @@ export default class Actor extends EventEmitter
     return this.position.y;
   }
 
+  get deletable() {
+    return true;
+  }
+
   export() {
     let data = {
       ...this.pod(),

@@ -24,6 +24,12 @@
   margin-bottom: 20px;
 
   transition: all ease 0.2s;
+
+  // When checking draging deletion, I only want to
+  // get target of the control button, not its svg
+  svg {
+    pointer-events: none;
+  }
 }
 
 #bin-button {

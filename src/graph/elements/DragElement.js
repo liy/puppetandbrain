@@ -1,13 +1,14 @@
 import './DragElement.scss'
 import ElementController from './ElementController';
 import DataType from '../../data/DataType';
+import GraphSelection from '../GraphSelection';
 
 export default class {
   constructor(sourceElement) {
     this.sourceElement = sourceElement;
 
     this.element = document.createElement('div');
-    this.element.className = 'base-element drag-element element-selected';
+    this.element.className = 'base-element drag-element';
     
     this.icon = document.createElement('div');
     this.element.appendChild(this.icon);
@@ -32,10 +33,22 @@ export default class {
     document.body.removeChild(this.element);
     document.removeEventListener('mousemove', this.dragMove);
     document.removeEventListener('mouseup', this.dragStop);
+
+    GraphSelection.deselect();
+  }
+
+  select() {
+    this.selected = true;
+    this.element.classList.add('element-selected');
+  }
+
+  deselect() {
+    this.selected = false;
+    this.element.classList.remove('element-selected');
   }
 
   moveTo(x, y) {
-    this.element.style.transform = `translate(${x}px, ${y}px)`
+    this.element.style.transform = `translate(${x}px, ${y}px)`;
   }
 
   dragStart(e) {
@@ -44,6 +57,8 @@ export default class {
 
     document.addEventListener('mousemove', this.dragMove);
     document.addEventListener('mouseup', this.dragStop);
+
+    GraphSelection.select(this);
   }
 
   dragMove(e) {
@@ -54,6 +69,12 @@ export default class {
     document.removeEventListener('mouseup', this.dragStop);
     document.removeEventListener('mousemove', this.dragMove);
     this.destroy();
+
+    // drag over to the delete button, delete variable
+    if(e.target == UIController.deleteBtn.element) {
+      History.push(Commander.create('DeleteVariable', this.sourceElement.variable.id, BrainGraph.brain.id).processAndSave())
+      return;
+    }
 
     // anywhere outside of the panel is a valid drop area
     let rect = ElementController.panel.element.getBoundingClientRect();
@@ -86,9 +107,15 @@ export default class {
       pod.x = e.clientX - 60;
       pod.y = e.clientY - 60;
 
-      let command = Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave();
-      History.push(command);
+      History.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
     }
   }
 
+  get name() {
+    return this.sourceElement.name;
+  }
+
+  get deletable() {
+    return this.sourceElement.deletable;
+  }
 }

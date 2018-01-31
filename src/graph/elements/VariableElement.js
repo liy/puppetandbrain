@@ -33,4 +33,8 @@ export default class extends BaseElement
   get name() {
     return this.nameField.value;
   }
+
+  get deletable() {
+    return true;
+  }
 }

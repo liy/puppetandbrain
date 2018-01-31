@@ -219,6 +219,10 @@ export default class Block extends EventEmitter
     this.body.element.classList.remove('block-selected')
   }
 
+  get deletable() {
+    return true;
+  }
+
   template(pod) {
     this.element.classList.add('template-block');
 

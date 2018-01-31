@@ -14,6 +14,9 @@ export default class DeleteBlock extends Command
     this.pod = this.block.node.pod(true);
     // TODO: may be instead of call functions, include command here??!?
     BrainGraph.deleteBlock(this.block);
+
+    GraphSelection.deselect();
+
     return this;
   }
 
@@ -63,6 +66,7 @@ export default class DeleteBlock extends Command
   }
 
   redo() {
+    GraphSelection.select(this.block);
     this.process();
     BrainGraph.refresh();
   }
