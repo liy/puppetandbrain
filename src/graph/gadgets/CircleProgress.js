@@ -45,6 +45,9 @@ export default class extends Gadget
     this.enabled = false;
 
     this.element.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      
       if(this.enabled) this.emit('click');
     })
   }

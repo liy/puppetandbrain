@@ -1,6 +1,7 @@
 import './InputPin.scss';
 import DataPin from "./DataPin";
 import TextField from '../gadgets/TextField'
+import AudioField from '../gadgets/AudioField'
 import PositionField from '../gadgets/PositionField'
 import ActorPicker from '../gadgets/ActorPicker'
 import ColorButton from '../gadgets/ColorButton'
@@ -31,6 +32,9 @@ export default class extends DataPin
         break;
       case DataType.GENERIC:
         this.setGadget(new TextField(data));
+        break;
+      case DataType.AUDIO:
+        this.setGadget(new AudioField(data.fileName, data.path));
         break;
       default:
         this.setGadget(new TextField(data));

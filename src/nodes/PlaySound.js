@@ -22,7 +22,10 @@ NodeTemplate.PlaySound = {
   }],
   memory: {
     loop: false,
-    audio: null,
+    audio: {
+      fileName: 'boing.mp3',
+      path: 'uploads/4e6cc0a9e8ecfb5f1124c74af0126a329893f963.mp3'
+    },
   },
   category: 'Audio',
   elementClass: ['audio']

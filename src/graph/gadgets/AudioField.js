@@ -6,12 +6,11 @@ import CircleProgress from '../gadgets/CircleProgress'
 
 export default class extends Gadget
 {
-  constructor(accept, fileName, path) {
+  constructor(fileName, path) {
     super();
     this.element.classList.add('audio-field');
 
-
-    this.button = new FileButton(accept, fileName);
+    this.button = new FileButton('audio/*', fileName);
     this.element.appendChild(this.button.element);
 
     this.circleProgress = new CircleProgress();

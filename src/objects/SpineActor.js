@@ -32,6 +32,8 @@ export default class SpineActor extends Actor
     }))
     await loader.start();
 
+    console.log(Resource.keys());
+
     this.removeComponent('placeholder');
 
     this.init(pod);
@@ -42,6 +44,7 @@ export default class SpineActor extends Actor
 
     // Spine id is the file name of the spine json file.
     this.spineID = pod.spineID;
+    this.spineScale = pod.spineScale || 1;
 
     let spineDir = `${pod.libDir}/${pod.puppetID}`;
     let rawAtlas = Resource.get(`${spineDir}/${this.spineID}.atlas`);
@@ -52,6 +55,8 @@ export default class SpineActor extends Actor
 
     var spineAtlasLoader = new PIXI.spine.core.AtlasAttachmentLoader(spineAtlas)
     var spineJsonParser = new PIXI.spine.core.SkeletonJson(spineAtlasLoader);
+
+    spineJsonParser.scale = this.spineScale; 
 
     var spineData = spineJsonParser.readSkeletonData(Resource.get(`${spineDir}/${this.spineID}.json`));
 
@@ -106,6 +111,7 @@ export default class SpineActor extends Actor
   pod(detail) {
     let pod = super.pod(detail);
     pod.spineID = this.spineID;
+    pod.spineScale = this.spineScale;
     return pod;
   }
 

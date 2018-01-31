@@ -5,7 +5,7 @@ export default class extends ElementControlButton
 {
   constructor() {
     super(null, '🎵');
-    this.element.setAttribute('data-title', "Create Sound");
+    this.element.setAttribute('data-title', "Create Audio");
   }
 
   pointerDown(e) {
