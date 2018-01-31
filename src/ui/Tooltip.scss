@@ -23,7 +23,6 @@
 }
 
 [data-title]::after {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   content: attr(data-title);
 
   color: white;
