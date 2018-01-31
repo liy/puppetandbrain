@@ -10,7 +10,6 @@ export default class extends Gadget
     super();
     
     this.element.classList.add('file-button');
-
     this.fileName = fileName;
 
     this.fileNameSpan = document.createElement('span');
