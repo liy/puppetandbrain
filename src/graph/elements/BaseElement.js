@@ -1,5 +1,6 @@
 import './BaseElement.scss'
 import NameField from './NameField';
+import DragElement from './DragElement';
 import ElementController from './ElementController';
 
 export default class BaseElement
@@ -15,45 +16,34 @@ export default class BaseElement
     this.icon = document.createElement('div');
     this.content.appendChild(this.icon);
     this.icon.className = 'element-icon';
+    let icon = this.createIcon();
+    if(typeof icon == 'string') {
+      this.icon.textContent = icon;
+    }
+    else {
+      this.icon.appendChild(icon);
+    }
 
     this.onSelect = this.onSelect.bind(this);
     this.element.addEventListener('mousedown', this.onSelect);
 
     this._selected = false;
-
     
     this.dragStart = this.dragStart.bind(this);
-    this.dragMove = this.dragMove.bind(this);
-    this.dragStop = this.dragStop.bind(this);
     this.icon.addEventListener('mousedown', this.dragStart);
   }
 
   destroy() {
+    this.icon.removeEventListener('mousedown', this.dragStart);
     this.element.removeEventListener('mousedown', this.onSelect);
+
+    // just in case user press exit while dragging the element
+    if(this.dragElement) this.dragElement.destroy();
   }
 
   dragStart(e) {
-
-    this.dragElement = new BaseElement();
-    this.dragElement.element.classList.add('drag-element');
-    this.dragElement.icon.appendChild(this.createIcon());
-    document.body.appendChild(this.dragElement.element);
-    this.dragElement.element.classList.add('element-selected');
-    this.dragElement.element.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
-
-    document.addEventListener('mousemove', this.dragMove);
-    document.addEventListener('mouseup', this.dragStop);
-    
-  }
-
-  dragMove(e) {
-    this.deselect();
-    this.dragElement.element.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
-  }
-
-  dragStop() {
-    document.removeEventListener('mouseup', this.dragStop);
-    document.removeEventListener('mousemove', this.dragMove);
+    this.dragElement = new DragElement(this);
+    this.dragElement.dragStart(e);
   }
 
   onSelect(e) {

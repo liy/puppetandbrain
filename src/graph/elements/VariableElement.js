@@ -29,4 +29,8 @@ export default class extends BaseElement
   focus() {
     this.nameField.focus();
   }
+
+  get name() {
+    return this.nameField.value;
+  }
 }

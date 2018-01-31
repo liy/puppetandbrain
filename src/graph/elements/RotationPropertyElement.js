@@ -8,8 +8,6 @@ export default class extends PropertyElement
   constructor(actor) {
     super(actor, {name:'rotation'});
 
-    this.icon.appendChild(this.createIcon());
-
     this.rangeField = new RangeField({value:actor.rotation*toDegree, min:-360, max:360, decimalPlaces:0});
     this.content.appendChild(this.rangeField.element);
 

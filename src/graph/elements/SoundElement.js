@@ -11,8 +11,6 @@ export default class extends VariableElement
     
     this.type = DataType.AUDIO;
 
-    this.icon.appendChild(this.createIcon());
-
     // this.fileBtn = new FileButton('audio/*', this.variable.data);
     // this.content.appendChild(this.fileBtn.element);
     this.audioField = new AudioField('audio/*');

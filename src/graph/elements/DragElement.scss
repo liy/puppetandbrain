@@ -1,0 +1,23 @@
+.drag-element {
+  position: absolute;
+  min-width: 100px;
+  height: 32px;
+
+  margin: 0;
+
+  // this act like an offset
+  top: -19px;
+  left: -40px;
+
+  z-index: 999;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  // vertical centre fields in the content
+  align-items: center;
+
+  span {
+    color: white;
+  }
+}

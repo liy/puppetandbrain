@@ -9,8 +9,6 @@ export default class extends PropertyElement
   constructor(actor) {
     super(actor, {name:'position'})
 
-    this.icon.appendChild(svgElement(PositionIcon,{width:10, height:16}));
-
     this.positionField = new PositionField(actor.position);
     this.content.appendChild(this.positionField.element);
 
@@ -23,5 +21,9 @@ export default class extends PropertyElement
   destroy() {
     this.positionField.destroy();
     super.destroy();
+  }
+
+  createIcon() {
+    return svgElement(PositionIcon,{width:10, height:16});
   }
 }

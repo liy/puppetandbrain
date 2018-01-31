@@ -17,8 +17,6 @@ export default class extends VariableElement
     // store the list entry element
     this.entries = new ArrayMap()
 
-    this.icon.appendChild(this.createIcon());
-
     // only show up when selected
     this.addButton = document.createElement('div');
     this.addButton.appendChild(svgElement(AddIcon, {width:12, height:12}))

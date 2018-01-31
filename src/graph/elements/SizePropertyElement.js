@@ -8,8 +8,6 @@ export default class extends PropertyElement
   constructor(actor) {
     super(actor, {name:'scale'});
 
-    this.icon.appendChild(this.createIcon());
-
     this.rangeField = new RangeField({value: actor.scale.x, min:-1, max:3, decimalPlaces:2});
     this.content.appendChild(this.rangeField.element);
 

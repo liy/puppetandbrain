@@ -1,8 +1,3 @@
-.element-control-button-container {
-  // make tooltip work
-  position: relative;
-}
-
 .base-element {
   background-color: #393D5E;
   border-radius: 19px;
@@ -25,40 +20,26 @@
     justify-content: flex-start;
     // vertical centre fields in the content
     align-items: center;
-  
-    .element-icon {
-      flex-grow: 0;
-  
-      min-width: 32px;
-      width: 32px;
-      height: 32px;
-  
-      // background-color: aqua;
-  
-      // centre the svg
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  }
 
-      user-select: none;
-    }
+  .element-icon {
+    flex-grow: 0;
+
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+
+    // background-color: aqua;
+
+    // centre the svg
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
   }
 }
 
 .element-selected {
   border: 3px solid #fcee21;
-}
-
-.drag-element {
-  position: absolute;
-  min-width: 100px;
-  height: 32px;
-
-  margin: 0;
-
-  // this act like an offset
-  top: -19px;
-  left: -40px;
-
-  z-index: 999;
 }

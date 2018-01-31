@@ -9,7 +9,6 @@ export default class extends VariableElement
 {
   constructor(variable) {
     super(variable);
-    this.icon.appendChild(this.createIcon());
 
     this.valueField = new ValueField(variable.data);
     this.content.appendChild(this.valueField.element);

@@ -11,8 +11,6 @@ export default class extends VariableElement
     super(variable);
     this.type = DataType.COLOR;
 
-    this.icon.appendChild(this.createIcon());
-
     this.colorButton = new ColorButton(this.variable.data);
     this.content.appendChild(this.colorButton.element);
     

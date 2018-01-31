@@ -11,8 +11,6 @@ export default class extends VariableElement
     
     this.type = DataType.VEC2;
 
-    this.icon.appendChild(this.createIcon());
-
     this.positionField = new PositionField(this.variable.data);
     this.content.appendChild(this.positionField.element);
 
