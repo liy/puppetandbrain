@@ -7,7 +7,7 @@ import PositionField from '../gadgets/PositionField';
 export default class extends PropertyElement
 {
   constructor(actor) {
-    super(actor, {name:'position'})
+    super(actor, {property:'position'})
 
     this.positionField = new PositionField(actor.position);
     this.content.appendChild(this.positionField.element);

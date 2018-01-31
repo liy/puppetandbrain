@@ -71,7 +71,7 @@ export default class {
       else {
         pod = {
           ...NodeTemplate.PropertyGetter,
-          name: `Get ${this.sourceElement.descriptor.property}`,
+          name: `Get ${this.sourceElement.name}`,
           ownerID: BrainGraph.brain.owner.id,
           property: this.sourceElement.descriptor.property,
           outputs: [{

@@ -6,7 +6,7 @@ import RangeField from '../gadgets/RangeField';
 export default class extends PropertyElement
 {
   constructor(actor) {
-    super(actor, {name:'rotation'});
+    super(actor, {property:'rotation'});
 
     this.rangeField = new RangeField({value:actor.rotation*toDegree, min:-360, max:360, decimalPlaces:0});
     this.content.appendChild(this.rangeField.element);
