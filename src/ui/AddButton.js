@@ -11,7 +11,7 @@ export default class AddActorButton extends ControlButton
 
     this.element = document.getElementById('add-actor-button');
     this.element.style.visibility = 'visible';
-    this.element.appendChild(svgElement(AddButtonIcon));
+    this.element.appendChild(svgElement(AddButtonIcon, {width:120, height:120}));
     
     this.enabled = false;
 

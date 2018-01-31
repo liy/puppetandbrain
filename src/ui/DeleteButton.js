@@ -11,7 +11,7 @@ export default class BrainButton extends ControlButton
     this.element = document.getElementById('bin-button');
     this.enabled = false;
     
-    this.element.appendChild(svgElement(BinButtonIcon));
+    this.element.appendChild(svgElement(BinButtonIcon, {width:68, height:68}));
 
     this.element.addEventListener('mousedown', e => {
       if(this.mode == 'stage mode') {

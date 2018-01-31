@@ -12,8 +12,8 @@ export default class extends ControlButton
     this.element = document.getElementById('mode-button');
     this.enabled = false;
 
-    this.brainBtn = svgElement(BrainButtonIcon);
-    this.stageBtn = svgElement(StageButtonIcon);
+    this.brainBtn = svgElement(BrainButtonIcon, {width:100, height: 100});
+    this.stageBtn = svgElement(StageButtonIcon, {width:100, height: 100});
 
     this.brainBtn.addEventListener('mousedown', e => {
       e.preventDefault();
