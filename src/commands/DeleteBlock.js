@@ -1,5 +1,5 @@
 import Command from './Command';
-import BlockSelection from '../graph/BlockSelection';
+import GraphSelection from '../graph/GraphSelection';
 
 export default class DeleteBlock extends Command
 {
@@ -59,7 +59,7 @@ export default class DeleteBlock extends Command
     BlockFactory.create(node);
     BrainGraph.refresh();
 
-    BlockSelection.select(this.block);
+    GraphSelection.select(this.block);
   }
 
   redo() {

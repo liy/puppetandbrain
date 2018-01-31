@@ -2,7 +2,7 @@ import ActorSelection from '../objects/ActorSelection'
 import BinButtonIcon from '../assets/bin-button-icon.svg';
 import {svgElement} from '../utils/utils';
 import ControlButton from './ControlButton';
-import BlockSelection from '../graph/BlockSelection';
+import GraphSelection from '../graph/GraphSelection';
 
 export default class BrainButton extends ControlButton
 {
@@ -18,14 +18,14 @@ export default class BrainButton extends ControlButton
         History.push(Commander.create('DeleteActor', ActorSelection.selected[0].id).processAndSave());
       }
       else {
-        BlockSelection.delete();
+        GraphSelection.delete();
       }
     })
   }
 
   stageMode() {
     this.element.setAttribute('data-title', "Delete puppet");
-    BlockSelection.off('block.selection.change', this.onSelectChange, this)
+    GraphSelection.off('block.selection.change', this.onSelectChange, this)
     ActorSelection.on('actor.selection.change', this.onSelectChange, this);
     this.onSelectChange(ActorSelection.selected);
   }
@@ -33,8 +33,8 @@ export default class BrainButton extends ControlButton
   brainMode() {
     this.element.setAttribute('data-title', "Delete block");
     ActorSelection.off('actor.selection.change', this.onSelectChange, this);
-    BlockSelection.on('block.selection.change', this.onSelectChange, this);
-    this.onSelectChange(BlockSelection.selected);
+    GraphSelection.on('block.selection.change', this.onSelectChange, this);
+    this.onSelectChange(GraphSelection.selected);
   }
 
   onSelectChange(selected) {

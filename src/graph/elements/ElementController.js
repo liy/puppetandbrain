@@ -17,6 +17,7 @@ import ColorElement from './ColorElement';
 import ActorElement from './ActorElement';
 import SoundElement from './SoundElement';
 import { nextFrame, svgElement } from "../../utils/utils";
+import GraphSelection from "../GraphSelection";
 
 class ElementController
 {
@@ -27,8 +28,6 @@ class ElementController
   }
   
   open(brain) {
-    this._selected = null;
-
     this.brain = brain;
 
     this.elements = new ArrayMap();
@@ -48,28 +47,6 @@ class ElementController
     this.brain.variables.off('variable.added', this.add, this)
     this.brain.variables.off('variable.removed', this.remove, this)
     this.panel.clear();
-  }
-
-  async select(variableElement) {
-    if(this.selected && this.selected != variableElement) {
-      await this.selected.deselect();
-    }
-    
-    this._selected = variableElement;
-    if(!this.selected.expanded) {
-      this.selected.select();
-    }
-
-    if(this.selected instanceof PropertyElement) {
-      this.panel.binButton.hide();
-    }
-    else {
-      this.panel.binButton.show();
-    }
-  }
-
-  get selected() {
-    return this._selected;
   }
 
   add(variable, autoSelect=true) {
@@ -101,7 +78,7 @@ class ElementController
     this.elements.set(variable.id, variableElement);
 
     if(autoSelect) {
-      this.select(variableElement);
+      GraphSelection.select(variableElement);
       nextFrame().then(() => {
         variableElement.focus();
       });

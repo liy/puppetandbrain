@@ -10,14 +10,14 @@ export default class extends ElementControlButton
   }
 
   pointerDown(e) {
-    if(ElementController.selected.variable.inUse) {
-      let confirm = window.confirm('Variable is in use, do you really want to delete the varaible and its getters and setters?');
-      if(confirm) {
-        History.push(Commander.create('DeleteVariable', ElementController.selected.variable.id, BrainGraph.brain.id).processAndSave())
-      }
-    }
-    else {
-      History.push(Commander.create('DeleteVariable', ElementController.selected.variable.id, BrainGraph.brain.id).processAndSave())
-    }
+    // if(ElementController.selected.variable.inUse) {
+    //   let confirm = window.confirm('Variable is in use, do you really want to delete the varaible and its getters and setters?');
+    //   if(confirm) {
+    //     History.push(Commander.create('DeleteVariable', ElementController.selected.variable.id, BrainGraph.brain.id).processAndSave())
+    //   }
+    // }
+    // else {
+    //   History.push(Commander.create('DeleteVariable', ElementController.selected.variable.id, BrainGraph.brain.id).processAndSave())
+    // }
   }
 }

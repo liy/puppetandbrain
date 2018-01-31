@@ -1,7 +1,7 @@
 import './blocks/color-theme.scss';
 import './BrainGraph.scss';
 
-import BlockSelection from './BlockSelection';
+import GraphSelection from './GraphSelection';
 import ArrayMap from '../utils/ArrayMap';
 import BlockBrowser from '../browser/BlockBrowser';
 import ElementController from './elements/ElementController';
@@ -120,7 +120,7 @@ class BrainGraph
     this.resize();
 
     Editor.stage.blurEnabled = true;
-    BlockSelection.toggle();
+    GraphSelection.enable();
 
     for(let node of this.brain.getNodes()) {
       BlockFactory.create(node);
@@ -158,7 +158,8 @@ class BrainGraph
       this.container.style = "visibility:hidden"
   
       Editor.stage.blurEnabled = false;
-      BlockSelection.deselectAll();
+      GraphSelection.deselect();
+      GraphSelection.disable();
 
       UIController.stageMode();
     }})

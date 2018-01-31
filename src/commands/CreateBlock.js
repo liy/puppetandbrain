@@ -1,5 +1,5 @@
 import Command from './Command';
-import BlockSelection from '../graph/BlockSelection'
+import GraphSelection from '../graph/GraphSelection'
 
 export default class CreateBlock extends Command
 {
@@ -23,7 +23,7 @@ export default class CreateBlock extends Command
     this.nodeID = node.id;
 
     let block = BlockFactory.create(node);
-    BlockSelection.select(block);
+    GraphSelection.select(block);
 
     return this;
   }

@@ -1,7 +1,7 @@
 import './BaseElement.scss'
 import NameField from './NameField';
 import DragElement from './DragElement';
-import ElementController from './ElementController';
+import GraphSelection from '../GraphSelection';
 
 export default class BaseElement
 {
@@ -26,11 +26,11 @@ export default class BaseElement
 
     this.onSelect = this.onSelect.bind(this);
     this.element.addEventListener('click', this.onSelect);
-
-    this._selected = false;
     
     this.dragStart = this.dragStart.bind(this);
     this.icon.addEventListener('mousedown', this.dragStart);
+
+    this.selected = false;
   }
 
   destroy() {
@@ -44,34 +44,22 @@ export default class BaseElement
   dragStart(e) {
     this.dragElement = new DragElement(this);
     this.dragElement.dragStart(e);
-    if(ElementController.selected) ElementController.selected.deselect();
+
+    GraphSelection.deselect();
   }
 
   onSelect(e) {
-    ElementController.select(this);
+    GraphSelection.select(this);
   }
 
   select() {
-    this._selected = true;
+    this.selected = true;
     this.element.classList.add('element-selected');
   }
 
   deselect() {
-    this._selected = false;
+    this.selected = false;
     this.element.classList.remove('element-selected');
-  }
-
-  toggle() {
-    if(this._selected) {
-      this.deselect();
-    }
-    else {
-      this.select();
-    }
-  }
-
-  get selected() {
-    return this._selected;
   }
 
   focus() {

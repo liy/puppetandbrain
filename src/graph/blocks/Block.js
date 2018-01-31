@@ -5,7 +5,7 @@ import OutputPin from '../support/OutputPin';
 import InputPin from '../support/InputPin';
 import ExecutionInPin from '../support/ExecutionInPin';
 import ExecutionOutPin from '../support/ExecutionOutPin';
-import BlockSelection from '../BlockSelection';
+import GraphSelection from '../GraphSelection';
 import EventEmitter from '../../utils/EventEmitter';
 
 export default class Block extends EventEmitter
@@ -27,6 +27,8 @@ export default class Block extends EventEmitter
     this.dragstop = this.dragstop.bind(this);
     this.dragmove = this.dragmove.bind(this);
     this.releaseOutside = this.releaseOutside.bind(this);
+
+    this.selected = false;
   }
 
   init(node) {
@@ -105,7 +107,7 @@ export default class Block extends EventEmitter
 
   focus() {
     // override me if you want to have anything auto focused when node is created, or selected
-    // Invoked from BlockSelection.select();
+    // Invoked from GraphSelection.select();
   }
 
   dragstart(e) {
@@ -120,7 +122,7 @@ export default class Block extends EventEmitter
       x: (this.element.getBoundingClientRect().left - sx),
       y: (this.element.getBoundingClientRect().top - sy)
     }
-    BlockSelection.select(this);
+    GraphSelection.select(this);
 
     
     document.addEventListener('mousemove', this.dragmove)
@@ -206,6 +208,16 @@ export default class Block extends EventEmitter
     return this.node.y;
   }
 
+  select() {
+    this.selected = true;
+    this.body.element.classList.add('block-selected');
+    this.focus();
+  }
+
+  deselect() {
+    this.selected = false;
+    this.body.element.classList.remove('block-selected')
+  }
 
   template(pod) {
     this.element.classList.add('template-block');

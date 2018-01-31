@@ -2,6 +2,7 @@ import Command from './Command';
 import Variable from '../data/Variable';
 import DataType from '../data/DataType';
 import ElementController from '../graph/elements/ElementController';
+import GraphSelection from '../graph/GraphSelection';
 
 export default class DeleteVariable extends Command
 {
@@ -18,9 +19,19 @@ export default class DeleteVariable extends Command
   }
   
   process() {
+    if(this.variable.inUse) {
+      let confirm = window.confirm('Variable is in use, do you really want to delete the varaible and its getters and setters?');
+      if(!confirm) return false;
+    }
+
+    this.delete();
+
+    return this;
+  }
+
+  delete() {
     this.getterPods = [];
     this.setterPods = [];
-
 
     // remove the variable
     let brain = LookUp.get(this.brainID);
@@ -47,7 +58,7 @@ export default class DeleteVariable extends Command
     // destroy the variable, remove it from the look up
     variable.destroy();
 
-    return this;
+    GraphSelection.deselect();
   }
 
   undo() {
@@ -138,10 +149,12 @@ export default class DeleteVariable extends Command
 
     // as variable list has order, easiest way is refresh the whole panel.
     ElementController.refresh();
+
+    GraphSelection.select(ElementController.elements.get(this.variableID));
   }
 
   redo() {
-    this.process();
+    this.delete();
     BrainGraph.refresh();
   }
 }

@@ -1,5 +1,5 @@
 import Block from "./Block";
-import BlockSelection from '../BlockSelection';
+import GraphSelection from '../GraphSelection';
 import InputPin from "../support/InputPin";
 
 export default class PerformBlock extends Block
@@ -32,7 +32,7 @@ export default class PerformBlock extends Block
     }, 300);
     if(++this.clicks % 2 == 0) {
       BrainGraph.switchTo(this.node.target.brain);
-      BlockSelection.select(BrainGraph.getBlock(this.node.action.id));
+      GraphSelection.select(BrainGraph.getBlock(this.node.action.id));
       // Select the actor as well!
       this.node.action.owner.getComponent('SelectionComponent').select();
     }
