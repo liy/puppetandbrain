@@ -15,7 +15,7 @@ export default class AddActorButton extends ControlButton
     
     this.enabled = false;
 
-    this.element.addEventListener('mousedown', e => {
+    this.element.addEventListener('mousedown', async e => {
       e.preventDefault();
       e.stopImmediatePropagation();
 
@@ -25,7 +25,8 @@ export default class AddActorButton extends ControlButton
       }
       else {
         let browser = new BlockBrowser();
-        browser.open();
+        let pod = await browser.open();
+        History.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
       }
     })
   }

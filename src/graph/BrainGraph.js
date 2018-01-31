@@ -109,11 +109,11 @@ class BrainGraph
     this.resize = this.resize.bind(this);
     this.keydown = this.keydown.bind(this)
     this.pointerdown = this.pointerdown.bind(this);
-    this.openBlockBrowser = this.openBlockBrowser.bind(this)
+    this.onRightClick = this.onRightClick.bind(this)
 
     this.container.style = "visibility:visible"
 
-    this.container.addEventListener('contextmenu', this.openBlockBrowser);
+    this.container.addEventListener('contextmenu', this.onRightClick);
     this.container.addEventListener('mousedown', this.pointerdown);
     document.addEventListener('keydown', this.keydown);
     window.addEventListener('resize', this.resize);
@@ -137,7 +137,7 @@ class BrainGraph
   }
 
   close() {
-    this.container.removeEventListener('contextmenu', this.openBlockBrowser);
+    this.container.removeEventListener('contextmenu', this.onRightClick);
     this.container.removeEventListener('mousedown', this.pointerdown);
     document.removeEventListener('keydown', this.keydown);
     window.removeEventListener('resize', this.resize);
@@ -272,7 +272,7 @@ class BrainGraph
     block.node.destroy();
   }
 
-  async openBlockBrowser(e) {
+  async onRightClick(e) {
     if(e.target == this.container) {
       e.stopPropagation();
       e.preventDefault();
