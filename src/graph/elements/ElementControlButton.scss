@@ -23,10 +23,3 @@
   // make tooltip work
   position: relative;
 }
-
-.element-control-button-container:last-child {
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-end;
-  margin-right: 5px;
-}
