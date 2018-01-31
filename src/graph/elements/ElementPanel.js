@@ -7,7 +7,6 @@ import CreatePositionButton from './CreatePositionButton';
 import CreateColorButton from './CreateColorButton';
 import CreateActorButton from './CreateActorButton';
 import CreateSoundButton from './CreateSoundButton';
-import RemoveVariableButton from './RemoveVariableButton';
 import { svgElement } from '../../utils/utils';
 
 import PullIcon from '../../assets/pull-icon.svg';
@@ -54,9 +53,6 @@ export default class
     let actorButton = new CreateActorButton();
     let soundButton = new CreateSoundButton();
 
-    this.binButton = new RemoveVariableButton();
-    this.binButton.hide();
-
     this.control.appendChild(genericButton.element);
     this.control.appendChild(listButton.element);
     this.control.appendChild(mapButton.element);
@@ -64,7 +60,6 @@ export default class
     this.control.appendChild(pipetteButton.element);
     this.control.appendChild(actorButton.element);
     this.control.appendChild(soundButton.element);
-    this.control.appendChild(this.binButton.element);
   }
 
   toggle() {
