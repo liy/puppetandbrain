@@ -8,6 +8,9 @@ export default class CreateBlock extends Command
     this.ownerID = ownerID;
     this.pod = pod;
     
+    // position will be further transformed using brain graph's transformation
+    this.pod.x = (this.pod.x - BrainGraph.translateX) / BrainGraph.scale;
+    this.pod.y = (this.pod.y - BrainGraph.translateY) / BrainGraph.scale;
 
     // When redo, use this node id
     this.nodeID = null;
