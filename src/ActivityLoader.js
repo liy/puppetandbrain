@@ -31,11 +31,9 @@ export default class ActivityLoader
         }))
       }
       // user files
-      for(let fileName of actorPod.userFiles) {
-        let ext = fileName.split('.').pop();
-        let path = `uploads/${fileName}`;
-        urlPromises.push(API.getUrl(path).then(url => {
-          loader.add(path, url, getMimeType(ext))
+      for(let fileData of actorPod.userFiles) {
+        urlPromises.push(API.getUrl(fileData.path).then(url => {
+          loader.add(fileData.path, url, fileData.contentType)
         }))
       }
     }

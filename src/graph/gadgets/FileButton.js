@@ -36,10 +36,10 @@ export default class extends Gadget
     let file = e.target.files[0];
 
     // TODO: change the default alert with custom modal
-    if(file.size > 1024*1024*5) {
-      window.alert('Cannot upload file larger than 5MB')
-      return;
-    }
+    // if(file.size > 1024*1024*8) {
+    //   window.alert('Cannot upload file larger than 8MB')
+    //   return;
+    // }
 
     this.fileNameSpan.textContent = 'Uploading...';
     this.emit('file.begin');
@@ -61,6 +61,7 @@ export default class extends Gadget
         this.emit('file.error', error);
       }
     ).then(() => {
+      this.emit('file.progress', 1);
       // this.icon.style.display = 'none'
       this.fileNameSpan.textContent = file.name;
 

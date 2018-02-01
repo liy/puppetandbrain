@@ -35,6 +35,8 @@ export class LoaderBucket
         break;
       case ContentType.OGG:
       case ContentType.MP3:
+      case ContentType.WAV:
+      case ContentType.FLAC:
         this.loaders.push(new SoundLoader(id, url, options))
         break;
     }
