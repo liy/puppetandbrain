@@ -6,8 +6,8 @@ class HashManager
   constructor() {
     this.tasks = new Map();
 
-    this.onMessage = this.onMessage.bind(this);
-    if(isMobile) {
+    if(!isMobile) {
+      this.onMessage = this.onMessage.bind(this);
       this.worker = Rusha.createWorker();
       this.worker.addEventListener('message', this.onMessage);
     }
@@ -17,10 +17,9 @@ class HashManager
     this.tasks.set(task.id, task);
 
     // do not use web worker on web
-    if(true) {
-      let hash = Rusha.update(task.data).digest('hex');
-      console.log(hash)
-      // task.resolve(); 
+    if(isMobile) {
+      let hash = Rusha.createHash().update(task.data).digest('hex');
+      task.resolve(hash); 
     }
     else {
       this.worker.postMessage({
