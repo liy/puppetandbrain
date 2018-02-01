@@ -1,4 +1,5 @@
 import Rusha from 'rusha';
+import { isMobile } from './utils';
 
 class HashManager
 {
@@ -6,16 +7,27 @@ class HashManager
     this.tasks = new Map();
 
     this.onMessage = this.onMessage.bind(this);
-    this.worker = Rusha.createWorker();
-    this.worker.addEventListener('message', this.onMessage);
+    if(isMobile) {
+      this.worker = Rusha.createWorker();
+      this.worker.addEventListener('message', this.onMessage);
+    }
   }
 
   add(task) {
     this.tasks.set(task.id, task);
-    this.worker.postMessage({
-      id: task.id,
-      data: task.data
-    })
+
+    // do not use web worker on web
+    if(true) {
+      let hash = Rusha.update(task.data).digest('hex');
+      console.log(hash)
+      // task.resolve(); 
+    }
+    else {
+      this.worker.postMessage({
+        id: task.id,
+        data: task.data
+      })
+    }
   }
 
   onMessage(e) {
