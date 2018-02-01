@@ -17,7 +17,7 @@ window.Activity = {
     this.id = id;
     this.ownerID = pod.userID;
     var loader = new ActivityLoader();
-    loader.parse(pod);
+    return loader.parse(pod);
   },
 
   new: function() {

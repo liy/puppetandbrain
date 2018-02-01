@@ -51,16 +51,17 @@ firebase.initializeApp(FIREBASE_CONFIG);
 function signedIn(user) {
   console.log('signed in')
   window.CurrentUser = user;
-
   UIController.stageMode();
-  UIController.addBtn.enabled = true;
 
   // activity
-  router.get('/creations/:id', req => {
-    Activity.load(req.params.id);
+  router.get('/creations/:id', async req => {
+    await Activity.load(req.params.id);
+    console.log('loaded?')
+    UIController.addBtn.enabled = true;
   })
   router.get('/', req => {
     Activity.new();
+    UIController.addBtn.enabled = true;
   })
   router.get('/*', (req, e) => {
     if(!e.parent()){
@@ -68,6 +69,7 @@ function signedIn(user) {
       // Handle 404
     }
   })
+  
 }
 
 // Persist the sign in token in local machine, probably in local storage or something in browser... whatever.
