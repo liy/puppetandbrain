@@ -4,7 +4,7 @@ class API
   }
   
 
-  uploadData(data, hash, path, contentType, referenceByID, onProgress=null, onError=null) {
+  uploadFile(data, hash, ext, path, contentType, referenceByID, onProgress=null, onError=null) {
     // TODO: check whether file storage already contains the hash
     // by fetch the file doc using the hash
     // if it does, no need to upload file again...
@@ -14,7 +14,7 @@ class API
     // cronjob which activity or exported puppet MIGHT BE using this file.
     //
     // Only fileRefs collection contains the up to date file references.
-    firebase.firestore().collection('files').doc(hash).set({
+    firebase.firestore().collection('files').doc(`${hash}.${ext}`).set({
       [referenceByID]: true,
     }, {merge:true});
 
@@ -40,16 +40,7 @@ class API
     return (await firebase.firestore().collection('activities').doc(id).get()).data();
   }
 
-  async saveActivity(pod) {
-    // get fileRefs from all actors(local memory of nodes and actor's brain variable)
-    let fileRefs = {}
-    for(let actor of LookUp.getActors()) {
-      let userFiles = actor.getUserFiles();
-      for(let path of userFiles) {
-        fileRefs[path] = true;
-      }
-    }
-
+  async saveActivity(pod, fileRefs) {
     // ensure both file reference and activity save in atomical manner
     let batch = firebase.firestore().batch();
     let activityRef = firebase.firestore().collection('activities').doc(pod.activityID);

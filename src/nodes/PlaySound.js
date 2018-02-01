@@ -51,9 +51,7 @@ export default class PlaySound extends Task
     let path = this.memory['audio'].path;
     if(path) {
       // prefetch the not loaded local memory audio
-      // note it only need once, any later audio changes should already be handled
-      // by the resource loader automatically
-      this.inputs.get('audio').once('input.disconnected', () => {
+      this.inputs.get('audio').on('input.disconnected', () => {
         SoundLoader.fetch(path);
       });
     }

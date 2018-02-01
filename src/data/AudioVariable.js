@@ -31,7 +31,6 @@ export default class extends FileVariable
   }
 
   set(data) {
-    console.warn('where is set?', data)
     this.file = data;
   }
 

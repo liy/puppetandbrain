@@ -68,6 +68,7 @@ export default class Pointer extends EventEmitter
   
   destroy() {
     this.disconnect();
+    this.removeAllListeners();
   }
 
   get value() {

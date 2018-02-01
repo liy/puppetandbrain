@@ -11,7 +11,7 @@ export default class Command
 
   processAndSave() {
     let command = this.process();
-    if(command) Activity.save();
+    if(command) Activity.autoSave();
     return command;
   }
 

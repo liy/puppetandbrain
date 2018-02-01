@@ -52,7 +52,7 @@ class History
     cmd.undo();
     this.redos.push(cmd);
 
-    Activity.save();
+    Activity.autoSave();
 
     // if(cmd.passThrough) this.undo();
     this.updateButton()
@@ -64,7 +64,7 @@ class History
     cmd.redo();
     this.undos.push(cmd);
 
-    Activity.save();
+    Activity.autoSave();
 
     // if(cmd.passThrough) this.redo();
     this.updateButton()
