@@ -2,6 +2,7 @@ import JsonPromise from './utils/JsonPromise';
 import Variable from './data/Variable';
 import * as ObjecClasses from './objects';
 import {LoaderBucket} from './resources/Resource';
+import { getMimeType } from './utils/utils';
 
 export default class ActivityLoader
 {
@@ -9,13 +10,13 @@ export default class ActivityLoader
 
   }
 
-  load(url) {
-    return JsonPromise.load(url).then(pod => {
-      this.createActors(pod)
-      // create nodes; link execution, input and outputs
-      this.fillBrains(pod)
-    })
-  }
+  // load(url) {
+  //   return JsonPromise.load(url).then(pod => {
+  //     this.createActors(pod)
+  //     // create nodes; link execution, input and outputs
+  //     this.fillBrains(pod)
+  //   })
+  // }
 
   async parse(pod) {
     await this.preload(pod);
@@ -35,6 +36,13 @@ export default class ActivityLoader
         let path = `${actorPod.libDir}/${actorPod.puppetID}/${entry.fileName}`;
         urlPromises.push(API.getUrl(path).then(url => {
           loader.add(path, url, entry.contentType)
+        }))
+      }
+      // user files
+      for(let path of actorPod.userFiles) {
+        let ext = path.split('.').pop();
+        urlPromises.push(API.getUrl(path).then(url => {
+          loader.add(path, url, getMimeType(ext))
         }))
       }
     }

@@ -65,8 +65,6 @@ export default class Actor extends EventEmitter
         writable: false
       },
     });
-    // user uploaded file names
-    this.userFiles = pod.userFiles || [];
 
     this.name = pod.name || 'Puppet';
     
@@ -238,7 +236,7 @@ export default class Actor extends EventEmitter
       libDir: this.libDir,
       libFiles: this.libFiles,
       myPuppetID: this.myPuppetID,
-      userFiles: this.userFiles,
+      userFiles: this.getUserFiles(),
 
       // game play related
       className: this.className,
@@ -275,12 +273,14 @@ export default class Actor extends EventEmitter
     for(let node of this.brain.nodes) {
       let nodeUserFiles = node.getUserFiles();
       if(nodeUserFiles) {
+        console.log(nodeUserFiles)
         userFiles = userFiles.concat(nodeUserFiles);
       }
     }
     // brain variable user files
     for(let variable of this.brain.variables) {
       if(variable.path) {
+        console.log(variable.path)
         userFiles.push(variable.path);
       }
     }

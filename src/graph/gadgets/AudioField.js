@@ -3,10 +3,11 @@ import './AudioField.scss'
 import Gadget from './Gadget'
 import FileButton from '../gadgets/FileButton'
 import CircleProgress from '../gadgets/CircleProgress'
+import { Resource } from '../../resources/Resource';
 
 export default class extends Gadget
 {
-  constructor(fileName, path) {
+  constructor({fileName, path}) {
     super();
     this.element.classList.add('audio-field');
 
@@ -15,6 +16,8 @@ export default class extends Gadget
 
     this.circleProgress = new CircleProgress();
     this.element.appendChild(this.circleProgress.element);
+
+
 
     if(path) {
       API.getUrl(path).then(url => {
@@ -40,6 +43,11 @@ export default class extends Gadget
       this.circleProgress.enabled = true;
 
       let blob = new Blob([result.data], {type: result.contentType});
+
+      // Update the resource with audio data so other variable,
+      // node, input can read from it.
+      Resource.set(result.path, blob);
+      
       // let url = await API.getUrl(result.path);
       this.audio = new Howl({
         src: [URL.createObjectURL(blob)],

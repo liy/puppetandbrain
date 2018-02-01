@@ -18,20 +18,37 @@ export default class extends FileVariable
     this.updateSound(this.path, this.fileName, blob);
   }
 
+  
+  updateRuntime() {
+    this.runtime = {
+      path: this.path,
+      fileName: this.fileName,
+    };
+  }
+
+  get data() {
+    return this.file;
+  }
+
+  set(data) {
+    console.warn('where is set?', data)
+    this.file = data;
+  }
+
   async updateSound(path, fileName, blob=null) {
     this.path = path;
     this.fileName = fileName;
     
-    if(blob) {
-      this.file = new Howl({
-        src: [URL.createObjectURL(blob)]
-      })
-    }
-    else if(this.path){
-      let url = await API.getUrl(this.path);
-      this.file = new Howl({
-        src: [url]
-      })
-    }
+    // if(blob) {
+    //   this.file = new Howl({
+    //     src: [URL.createObjectURL(blob)]
+    //   })
+    // }
+    // else if(this.path){
+    //   let url = await API.getUrl(this.path);
+    //   this.file = new Howl({
+    //     src: [url]
+    //   })
+    // }
   }
 }

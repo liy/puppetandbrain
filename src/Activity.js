@@ -56,6 +56,8 @@ window.Activity = {
   },
 
   save: function(delay=true) {
+    // TODO: clean resource, remove any unused resources
+
     // only save when on in dev mode
     if(process.env.NODE_ENV !== 'dev') {
       if(this.id == null) {

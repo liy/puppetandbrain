@@ -23,7 +23,6 @@ export default class extends Variable
 
   updateRuntime() {
     this.runtime = this.file;
-    console.log(this.runtime)
   }
 
   get data() {

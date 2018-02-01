@@ -1,5 +1,8 @@
 import {Task, Template as ParentTemplate} from './Task'
 import DataType from "../data/DataType";
+import { Resource } from '../resources/Resource';
+import SoundLoader from '../resources/SoundLoader'
+
 
 NodeTemplate.PlaySound = {
   ...ParentTemplate,
@@ -23,8 +26,8 @@ NodeTemplate.PlaySound = {
   memory: {
     loop: false,
     audio: {
-      fileName: 'boing.mp3',
-      path: 'uploads/4e6cc0a9e8ecfb5f1124c74af0126a329893f963.mp3'
+      fileName: null,
+      path: null
     },
   },
   category: 'Audio',
@@ -43,37 +46,62 @@ export default class PlaySound extends Task
   init(pod) {
     super.init(pod);
 
-    this.path = pod.path || null;
-    if(this.path) {
-      API.getUrl(this.path).then(url => {
-        this.memory['audio'] = new Howl({
-          src: [url]
-        })
-      })
+    this.audio = new Audio();
+
+    let path = this.memory['audio'].path;
+    if(path) {
+      // prefetch the not loaded local memory audio
+      // note it only need once, any later audio changes should already be handled
+      // by the resource loader automatically
+      this.inputs.get('audio').once('input.disconnected', () => {
+        SoundLoader.fetch(path);
+      });
     }
   }
 
   destroy() {
     super.destroy();
     if(this.audio) {
-      this.audio.unload();
+      this.audio.pause();
+      this.audio.removeEventListener('ended', this.complete);
     }
     Editor.off('game.stop', this.stop, this)
   }
   
-  run() {
+  
+  async run() {
     super.run();
 
-    this.sound = this.inputs.value('audio');
-    console.log(this.sound)
-    this.sound.loop(Boolean(this.inputs.value('loop')));
-    this.sound.once('end', this.complete);
+    // stop any looping sound...
+    if(this.audio && this.audio.loop) {
+      this.audio.pause();
+    }
 
-    let id = this.sound.play();
-    this.outputs.assignValue('sound', {
-      id,
-      sound: this.sound,
-    })
+    let input = this.inputs.value('audio');
+
+    // passthrough if not sound avaiable
+    if(!input.path) {
+      this.execution.run();
+      return;
+    }
+
+    let blob = Resource.get(input.path);
+    if(blob) {
+      this.audio.src = URL.createObjectURL(blob);
+    }
+    else {
+      // After loading completed, if user disconnect a originally connected pointer.
+      // the local memory audio is not availble because it is not preloaded.
+      // therefore we need to await, fetch and put it into the Resource for next time use 
+      // 
+      // I did a prefetch when input is disconnected 
+      this.audio.src = URL.createObjectURL(await SoundLoader.fetch(input.path));
+    }
+    this.audio.loop = Boolean(this.inputs.value('loop'));
+    this.audio.addEventListener('ended', this.complete, {once: true})
+
+    this.audio.play();
+    this.outputs.assignValue('sound', this.audio);
 
     this.execution.run();
   }
@@ -83,8 +111,9 @@ export default class PlaySound extends Task
   }
 
   stop() {
-    if(this.sound) {
-      this.sound.stop();
+    if(this.audio) {
+      this.audio.pause();
+      this.audio.removeEventListener('ended', this.complete);
     }
   }
 
@@ -93,12 +122,13 @@ export default class PlaySound extends Task
   }
 
   getUserFiles() {
-    return [this.memory.audio.path];
-  }
-
-  pod(detail) {
-    let pod = super.pod(detail);
-    pod.path = this.path;
-    return pod;
+    // There is no way you can clear the local audio input
+    // It is unwise to load local memory audio file if it is not used
+    if(!this.inputs.get('audio').isConnected) {
+      if(this.memory.audio.path) {
+        return [this.memory.audio.path]
+      }
+    }
+    return null;
   }
 }

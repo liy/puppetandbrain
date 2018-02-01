@@ -32,8 +32,6 @@ export default class SpineActor extends Actor
     }))
     await loader.start();
 
-    console.log(Resource.keys());
-
     this.removeComponent('placeholder');
 
     this.init(pod);

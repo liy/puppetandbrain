@@ -17,6 +17,7 @@ export default class Loader extends EventEmitter
         // added to the resource
         return this.onSuccess(response).then(data => {
           Resource.set(this.id, data);
+          return data;
         })
       }
       // TODO: handle error..... whatever...
