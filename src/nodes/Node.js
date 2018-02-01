@@ -20,8 +20,6 @@ export default class Node extends EventEmitter
     // It might make sense... node still need a position
     this.x = 0;
     this.y = 0;
-
-    this.userFiles = [];
   }
 
   destroy() {
@@ -103,6 +101,10 @@ export default class Node extends EventEmitter
     }
 
     return data;
+  }
+
+  getUserFiles() {
+    return null;
   }
 
   pod(detail) {

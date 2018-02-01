@@ -1,5 +1,6 @@
 import FileVariable from './FileVariable';
 import {Howl, Howler} from 'howler';
+import { Resource } from '../resources/Resource';
 
 export default class extends FileVariable
 {
@@ -10,14 +11,24 @@ export default class extends FileVariable
   init(pod) {
     super.init(pod);
 
-    this.updateSound(this.path, this.fileName);
+    // It must be during activity loading or
+    // user just created this variable.
+    // We will try to get the audio blob data from the resource.
+    let blob = Resource.get(this.path);
+    this.updateSound(this.path, this.fileName, blob);
   }
 
-  async updateSound(path, fileName) {
+  async updateSound(path, fileName, blob=null) {
     this.path = path;
-    this.fileName = fileName
-    if(this.path) {
-      let url = await API.getUrl(path);
+    this.fileName = fileName;
+    
+    if(blob) {
+      this.file = new Howl({
+        src: [URL.createObjectURL(blob)]
+      })
+    }
+    else if(this.path){
+      let url = await API.getUrl(this.path);
       this.file = new Howl({
         src: [url]
       })

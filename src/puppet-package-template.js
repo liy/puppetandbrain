@@ -40,7 +40,7 @@ let bundle = {
 
 
 
-// Cron job will scan this collection to decide which file to remove
+// Cron job will check against this collection to decide which file to remove
 let fileRefs = {
   activityID_1: {
     fileID_1: true,
@@ -52,6 +52,9 @@ let fileRefs = {
   }
 }
 
+// Cron job scan this one by one, check activity id against fileRefs see whether this file is really
+// referenced by activity or myPuppet, if not, activity id and mypuppet id will be removed.
+// if no id exist in the entry anymore, the file is free to delete.
 let userFiles = {
   fileID: {
     activityID_1: true

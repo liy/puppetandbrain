@@ -41,11 +41,48 @@ class API
   }
 
   async saveActivity(pod) {
-    await firebase.firestore().collection('activities').doc(pod.activityID).set(pod).then(() => {
+    // await firebase.firestore().collection('activities').doc(pod.activityID).set(pod).then(() => {
+    //   console.info('Successfully saved activity')
+    // }).catch(error => {
+    //   console.error('Error saving activity: ', error);
+    //   throw(error);
+    // });
+
+    // // get fileRefs from all actors(local memory of nodes and actor's brain variable)
+    // let fileRefs = {}
+    // for(let actor of LookUp.getActors()) {
+    //   let userFiles = actor.getUserFiles();
+    //   for(let path of userFiles) {
+    //     fileRefs[path] = true;
+    //   }
+    // }
+
+    // // Update file references AFTER activity is SUCCESSFULLY saved
+    // return firebase.firestore().collection('fileRefs').doc(pod.activityID).set(fileRefs);
+
+
+    // get fileRefs from all actors(local memory of nodes and actor's brain variable)
+    let fileRefs = {}
+    for(let actor of LookUp.getActors()) {
+      let userFiles = actor.getUserFiles();
+      for(let path of userFiles) {
+        fileRefs[path] = true;
+      }
+    }
+
+    // ensure both file reference and activity save in atomical manner
+    let batch = firebase.firestore().batch();
+    let activityRef = firebase.firestore().collection('activities').doc(pod.activityID);
+    batch.set(activityRef, pod);
+    let fileRefsRef = firebase.firestore().collection('fileRefs').doc(pod.activityID);
+    batch.set(fileRefsRef, fileRefs)
+
+    return batch.commit().then(() => {
       console.info('Successfully saved activity')
     }).catch(error => {
-      console.error('Error saving activity: ', error)
-    })
+      console.error('Error saving activity: ', error);
+      throw(error);
+    });
   }
 
   async listLibraryPuppets() {

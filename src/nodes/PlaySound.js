@@ -61,11 +61,11 @@ export default class PlaySound extends Task
     Editor.off('game.stop', this.stop, this)
   }
   
-
   run() {
     super.run();
 
     this.sound = this.inputs.value('audio');
+    console.log(this.sound)
     this.sound.loop(Boolean(this.inputs.value('loop')));
     this.sound.once('end', this.complete);
 
@@ -90,6 +90,10 @@ export default class PlaySound extends Task
 
   get nodeName() {
     return 'Play Sound'
+  }
+
+  getUserFiles() {
+    return [this.memory.audio.path];
   }
 
   pod(detail) {

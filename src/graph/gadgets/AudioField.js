@@ -46,6 +46,11 @@ export default class extends Gadget
         // src: [url],
         format: [result.ext]
       });
+
+      this.emit('gadget.state.change', {
+        path: result.path,
+        fileName: result.fileName,
+      })
     })
 
     let intervalID = null;

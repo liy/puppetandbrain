@@ -271,8 +271,18 @@ export default class Actor extends EventEmitter
 
   getUserFiles() {
     let userFiles = [];
+    // local memory files
     for(let node of this.brain.nodes) {
-      userFiles = userFiles.concat(node.userFiles);
+      let nodeUserFiles = node.getUserFiles();
+      if(nodeUserFiles) {
+        userFiles = userFiles.concat(nodeUserFiles);
+      }
+    }
+    // brain variable user files
+    for(let variable of this.brain.variables) {
+      if(variable.path) {
+        userFiles.push(variable.path);
+      }
     }
     return userFiles;
   }

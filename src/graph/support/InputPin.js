@@ -89,9 +89,8 @@ export default class extends DataPin
     this.gadget.on('gadget.state.change', value => {
       // Note that, by default, it is a simple pin name which is enougth to identify
       // the pin and corresponding data.
-      // However, in setter block, this.name is actually a property id. Because user
-      // can change property name on the fly, it is better to use fixed id.
-      // It is hard to read, maybe an extra optional field "dataID" instead of "name"?
+      // setter block's name is actually called "input", and it is fixed.
+      console.log(this.name)
       this.node.memory[this.name] = value;
     });
   }

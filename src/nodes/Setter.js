@@ -1,4 +1,5 @@
 import {Task} from "./Task";
+import DataType from "../data/DataType";
 
 NodeTemplate.Setter = {
   className: 'Setter',
@@ -55,13 +56,24 @@ export default class Setter extends Task
   run() {
     super.run();
 
-    this.variable.runtime = this.inputs.value(this.variableID);
+    this.variable.runtime = this.inputs.value('input');
 
     this.execution.run();
   }
 
   get nodeName() {
     return `Set ${this.variableName}`;
+  }
+
+  getUserFiles() {
+    // TODO handle image type
+    if(this.variable.type == DataType.AUDIO) {
+      let data = this.memory['input']
+      if(data) {
+        return [data.path]
+      }
+    }
+    return [];
   }
 
   pod(detail) {

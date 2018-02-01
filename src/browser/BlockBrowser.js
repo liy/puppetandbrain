@@ -90,7 +90,7 @@ export default class BlockBrowser extends Browser
     for(let variable of BrainGraph.brain.variables) {
       templates.push({
         ...NodeTemplate.Getter,
-        name: `Get ${variable.name}`,
+        name: `${variable.name}`,
         ownerID: BrainGraph.brain.owner.id,
         variableID: variable.id,
       })
@@ -124,7 +124,7 @@ export default class BlockBrowser extends Browser
     for(let descriptor of actor.properties) {
       templates.push({
         ...NodeTemplate.PropertyGetter,
-        name: `Get ${descriptor.property}`,
+        name: `${descriptor.property}`,
         ownerID: BrainGraph.brain.owner.id,
         property: descriptor.property,
         outputs: [{

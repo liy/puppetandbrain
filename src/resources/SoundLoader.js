@@ -8,7 +8,7 @@ export default class extends Loader
 
   onSuccess(response) {
     return response.blob().then(blob => {
-      return new Audio(URL.createObjectURL(blob));
+      return blob;
     })
   }
 }
