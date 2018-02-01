@@ -8,7 +8,7 @@ import SoundLoader from '../../resources/SoundLoader';
 
 export default class extends Gadget
 {
-  constructor({fileName, path}) {
+  constructor({fileName, path, contentType, ext, hash}) {
     super();
     this.element.classList.add('audio-field');
 
