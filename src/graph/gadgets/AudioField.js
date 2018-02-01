@@ -50,22 +50,20 @@ export default class extends Gadget
       this.circleProgress.tween(progress);
     })
 
-    this.button.on('file.ready',  async result => {
+    this.button.on('file.ready',  async ({byteArray, ...other}) => {
       this.circleProgress.enabled = true;
 
-      let blob = new Blob([result.data], {type: result.contentType});
+      let blob = new Blob([byteArray], {type: other.contentType});
 
       // Update the resource with audio data so other variable,
       // node, input can read from it.
-      Resource.set(result.path, blob);
+      Resource.set(other.path, blob);
       
       // let url = await API.getUrl(result.path);
       this.audio.src = URL.createObjectURL(blob);
 
-      this.emit('gadget.state.change', {
-        path: result.path,
-        fileName: result.fileName,
-      })
+      // Note that I've removed data bytearray from the file upload result
+      this.emit('gadget.state.change', other)
     })
 
     this.circleProgress.on('click',() => {

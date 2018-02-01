@@ -8,6 +8,7 @@ import Variable from '../data/Variable';
 import Matrix from '../math/Matrix';
 import PropertyList from '../data/PropertyList';
 import { aroundAt } from '../utils/utils';
+import DataType from '../data/DataType';
 
 export default class Actor extends EventEmitter
 {
@@ -278,8 +279,8 @@ export default class Actor extends EventEmitter
     }
     // brain variable user files
     for(let variable of this.brain.variables) {
-      if(variable.path) {
-        userFiles.push(variable.path);
+      if(variable.type == DataType.AUDIO) {
+        userFiles.push(variable.data);
       }
     }
     return userFiles;

@@ -27,7 +27,9 @@ NodeTemplate.PlaySound = {
     loop: false,
     audio: {
       fileName: null,
-      path: null
+      path: null,
+      hash: null,
+      ext: null
     },
   },
   category: 'Audio',
@@ -123,8 +125,9 @@ export default class PlaySound extends Task
     // There is no way you can clear the local audio input
     // It is unwise to load local memory audio file if it is not used
     if(!this.inputs.get('audio').isConnected) {
-      if(this.memory.audio.path) {
-        return [this.memory.audio.path]
+      let data = this.memory.audio;
+      if(data.hash) {
+        return [data]
       }
     }
     return null;

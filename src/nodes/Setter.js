@@ -70,7 +70,7 @@ export default class Setter extends Task
     if(this.variable.type == DataType.AUDIO) {
       let data = this.memory['input']
       if(data) {
-        return [data.path]
+        return [data]
       }
     }
     return [];

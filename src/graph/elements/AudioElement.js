@@ -14,8 +14,9 @@ export default class extends VariableElement
     this.audioField = new AudioField({fileName: variable.fileName, path: variable.path});
     this.content.appendChild(this.audioField.element);
 
-    this.audioField.button.on('file.ready', ({path, data, fileName}) => {
-      this.variable.updateSound(path, fileName);
+    // Note that I removed byte array from the file data
+    this.audioField.button.on('file.ready', ({byteArray, ...other}) => {
+      this.variable.data = other
     })
   }
 

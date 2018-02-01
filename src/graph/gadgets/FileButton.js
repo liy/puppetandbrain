@@ -67,7 +67,7 @@ export default class extends Gadget
         this.emit('file.ready', {
           fileName: file.name,
           contentType,
-          data: hashTask.data,
+          byteArray: hashTask.data,
           hash,
           ext,
           path,

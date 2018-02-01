@@ -10,14 +10,6 @@ export default class ActivityLoader
 
   }
 
-  // load(url) {
-  //   return JsonPromise.load(url).then(pod => {
-  //     this.createActors(pod)
-  //     // create nodes; link execution, input and outputs
-  //     this.fillBrains(pod)
-  //   })
-  // }
-
   async parse(pod) {
     await this.preload(pod);
 
@@ -39,8 +31,9 @@ export default class ActivityLoader
         }))
       }
       // user files
-      for(let path of actorPod.userFiles) {
-        let ext = path.split('.').pop();
+      for(let fileName of actorPod.userFiles) {
+        let ext = fileName.split('.').pop();
+        let path = `uploads/${fileName}`;
         urlPromises.push(API.getUrl(path).then(url => {
           loader.add(path, url, getMimeType(ext))
         }))

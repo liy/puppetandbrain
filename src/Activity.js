@@ -29,10 +29,22 @@ window.Activity = {
     // TODO: fix me !!!! not tested yet
     let id = firebase.firestore().collection('activities').doc().id;
 
+    // generate files and fileRefs together
+    let files = {};
+    let fileRefs = {}
+    for(let actor of LookUp.getActors()) {
+      let userFiles = actor.getUserFiles()
+      for(let fileData of userFiles) {
+        // elminate the dupicate user files
+        files[`${fileData.hash}.${fileData.ext}`] = {[id]: true}
+        fileRefs[fileData.path] = true;
+      }
+    }
+
     let pod = LookUp.pod();
     pod.userID = CurrentUser.uid;
     pod.activityID = id;
-    await API.saveActivity(pod);
+    await API.clone(pod, files, fileRefs);
 
     router.navigate(`/creations/${id}`)
   },
@@ -118,8 +130,8 @@ window.Activity = {
     let fileRefs = {}
     for(let actor of LookUp.getActors()) {
       let userFiles = actor.getUserFiles();
-      for(let path of userFiles) {
-        fileRefs[path] = true;
+      for(let fileData of userFiles) {
+        fileRefs[fileData.path] = true;
       }
     }
     return fileRefs;

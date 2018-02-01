@@ -34,7 +34,6 @@ export default class extends DataPin
         this.setGadget(new TextField(data));
         break;
       case DataType.AUDIO:
-        console.log(data)
         this.setGadget(new AudioField(data||{}));
         break;
       default:
@@ -91,7 +90,6 @@ export default class extends DataPin
       // Note that, by default, it is a simple pin name which is enougth to identify
       // the pin and corresponding data.
       // setter block's name is actually called "input", and it is fixed.
-      console.log(this.name)
       this.node.memory[this.name] = value;
     });
   }
