@@ -34,7 +34,8 @@ export default class extends DataPin
         this.setGadget(new TextField(data));
         break;
       case DataType.AUDIO:
-        this.setGadget(new AudioField(data));
+        console.log(data)
+        this.setGadget(new AudioField(data||{}));
         break;
       default:
         this.setGadget(new TextField(data));

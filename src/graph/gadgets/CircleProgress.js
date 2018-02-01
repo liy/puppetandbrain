@@ -53,7 +53,7 @@ export default class extends Gadget
   }
 
   tween(progress) {
-    TweenLite.to(this, 0.5, {progress:progress, ease:Quad.easeIn, onUpdate: () => {
+    TweenLite.to(this, 0.2, {progress:progress, ease:Quad.easeIn, onUpdate: () => {
       let ratio = Math.abs(this.direction-this.progress);
       this.indictor.setAttribute('stroke-dashoffset', STROKE_DASHARRY*ratio);
     }});

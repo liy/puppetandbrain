@@ -4,6 +4,7 @@ import Gadget from './Gadget'
 import FileButton from '../gadgets/FileButton'
 import CircleProgress from '../gadgets/CircleProgress'
 import { Resource } from '../../resources/Resource';
+import SoundLoader from '../../resources/SoundLoader';
 
 export default class extends Gadget
 {
@@ -17,22 +18,32 @@ export default class extends Gadget
     this.circleProgress = new CircleProgress();
     this.element.appendChild(this.circleProgress.element);
 
-
-
+    this.audio = new Audio();
     if(path) {
-      API.getUrl(path).then(url => {
-        this.audio = new Howl({
-          src: [url],
-        });
+      SoundLoader.fetch(path).then(blob => {
+        this.audio.src = URL.createObjectURL(blob);
         this.circleProgress.enabled = true;
-      })
+      });
     }
 
+    this.audio.addEventListener('timeupdate', () => {
+      let ratio = this.audio.currentTime/this.audio.duration;
+      this.circleProgress.tween(ratio);
+    })
+
+    this.audio.addEventListener('ended', () => {
+      this.circleProgress.tween(0);
+    })
+
+    this.audio.addEventListener('pause', () => {
+      this.circleProgress.progressColor = 0x29ABE2;
+      this.circleProgress.tween(0);
+    })
+
     this.button.on('file.begin', () => {
-      clearInterval(intervalID);
       this.circleProgress.direction = 1;
       this.circleProgress.progressColor = 0x29ABE2;
-      if(this.audio) this.audio.unload();
+      if(this.audio) this.audio.pause();
     })
 
     this.button.on('file.progress', progress => {
@@ -49,11 +60,7 @@ export default class extends Gadget
       Resource.set(result.path, blob);
       
       // let url = await API.getUrl(result.path);
-      this.audio = new Howl({
-        src: [URL.createObjectURL(blob)],
-        // src: [url],
-        format: [result.ext]
-      });
+      this.audio.src = URL.createObjectURL(blob);
 
       this.emit('gadget.state.change', {
         path: result.path,
@@ -61,33 +68,18 @@ export default class extends Gadget
       })
     })
 
-    let intervalID = null;
     this.circleProgress.on('click',() => {
-      if(this.audio && this.audio.playing()) {
-        this.audio.stop();
+      if(this.audio && !this.audio.paused) {
+        this.audio.currentTime = 0;
+        this.audio.pause();
       }
       else {
-        this.sound = this.audio.play();
+        this.audio.currentTime = 0;
+        this.audio.play();
       }
 
       this.circleProgress.direction = 0;
       this.circleProgress.progressColor = 0xFF9900;
-      clearInterval(intervalID);
-      intervalID = setInterval(() => {
-        let ratio = this.audio.seek()/this.audio.duration();
-        this.circleProgress.update(ratio);
-      }, 200)
-
-      this.audio.on('end', () => {
-        clearInterval(intervalID);
-        this.circleProgress.tween(0);
-      })
-
-      this.audio.on('stop', () => {
-        this.circleProgress.progressColor = 0x29ABE2;
-        clearInterval(intervalID);
-        this.circleProgress.tween(0);
-      })
     })
   }
 }
