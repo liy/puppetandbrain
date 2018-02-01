@@ -30,6 +30,7 @@ import ExportActor from './ExportActors';
 import ChoiceBox from './objects/ChoiceBox'
 import PuppetBrowser from './browser/PuppetBrowser';
 import ActorSelection from './objects/ActorSelection';
+import notc from './ui/NotificationControl';
 import API from './API';
 
 
@@ -55,9 +56,11 @@ function signedIn(user) {
 
   // activity
   router.get('/creations/:id', async req => {
+    let chip = notc.notify('loading, please wait...');
     await Activity.load(req.params.id);
-    console.log('loaded?')
     UIController.addBtn.enabled = true;
+    chip.fadeOut();
+    notc.notify('loaded').delayFadeoutRemove();
   })
   router.get('/', req => {
     Activity.new();
