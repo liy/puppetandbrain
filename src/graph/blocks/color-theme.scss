@@ -71,8 +71,12 @@
 }
 
 .getter {
+  .title {
+    display: none;
+  }
+  
   .container {
-    min-height: 80px;
+    min-height: 0;
   }
 
   .left {
