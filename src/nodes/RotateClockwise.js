@@ -3,6 +3,7 @@ import {Task, Template as ParentTemplate} from './Task';
 
 NodeTemplate.RotateClockwise = {
   ...ParentTemplate,
+  className: 'RotateClockwise',
   name: 'Rotate Clockwise',
   execution: [{
     name: 'default'

@@ -3,6 +3,7 @@ import {toDegree} from '../utils/utils'
 import DataType from '../data/DataType';
 
 NodeTemplate.GetRotation = {
+  className: 'GetRotation',
   name: 'Get Rotation',
   inputs: [{
     name: 'puppet',

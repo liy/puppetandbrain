@@ -75,21 +75,35 @@ export default class {
       if(this.sourceElement.variable) {
         pod = {
           ...NodeTemplate.Getter,
-          name: `Get ${this.sourceElement.variable.name}`,
+          name: `${this.sourceElement.variable.name}`,
           ownerID: BrainGraph.brain.owner.id,
           variableID: this.sourceElement.variable.id,
         }
       }
       else {
-        pod = {
-          ...NodeTemplate.PropertyGetter,
-          name: `Get ${this.sourceElement.name}`,
-          ownerID: BrainGraph.brain.owner.id,
-          property: this.sourceElement.descriptor.property,
-          outputs: [{
-            name: this.sourceElement.descriptor.property,
-            type: this.sourceElement.descriptor.type
-          }]
+        let descriptor = this.sourceElement.descriptor;
+        switch(descriptor.property) {
+          case 'position':
+            pod = NodeTemplate.GetPosition
+            break;
+          case 'scale':
+            pod = NodeTemplate.GetScale
+            break;
+          case 'rotation':
+            pod = NodeTemplate.GetRotation
+            break;
+          default:
+            pod = {
+              ...NodeTemplate.PropertyGetter,
+              name: `${this.sourceElement.name}`,
+              ownerID: BrainGraph.brain.owner.id,
+              property: this.sourceElement.descriptor.property,
+              outputs: [{
+                name: this.sourceElement.descriptor.property,
+                type: this.sourceElement.descriptor.type
+              }]
+            }
+            break;
         }
       }
 

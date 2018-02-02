@@ -2,6 +2,7 @@ import Node from "./Node";
 import DataType from "../data/DataType";
 
 NodeTemplate.MakePosition = {
+  className: 'MakePosition',
   name: 'Make Position',
   inputs: [{
     name: 'x',

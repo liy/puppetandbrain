@@ -3,6 +3,8 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Loop = {
   ...ParentTemplate,
+  className: 'Loop',
+  name: 'Loop',
   execution: [{
     name: 'loop'
   }, {

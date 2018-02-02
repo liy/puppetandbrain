@@ -2,6 +2,7 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.PointerUp = {
   ...ParentTemplate,
+  className: 'PointerUp',
   name: 'Release',
   keywords: [...ParentTemplate.keywords, , 'mouse up']
 }

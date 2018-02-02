@@ -2,6 +2,7 @@ import {Task, Template as ParentTemplate} from './Task';
 
 NodeTemplate.FlipLeft = {
   ...ParentTemplate,
+  className: 'FlipLeft',
   name: 'Flip Left',
   execution: [{
     name: 'default'

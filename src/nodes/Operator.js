@@ -42,6 +42,7 @@ export class Operator extends Node
 
 NodeTemplate.Addition = {
   ...OperatorTemplate,
+  className: 'Addition',
   name: 'Add',
   keywords: [...OperatorTemplate.keywords, '+', 'addition']
 }
@@ -58,6 +59,7 @@ export class Addition extends Operator
 
 NodeTemplate.Multiply = {
   ...OperatorTemplate,
+  className: 'Multiply',
   name: 'Multiply',
   keywords: [...OperatorTemplate.keywords, '*', 'multiply']
 }
@@ -74,6 +76,7 @@ export class Multiply extends Operator
 
 NodeTemplate.Divide = {
   ...OperatorTemplate,
+  className: 'Divide',
   name: 'Divide',
   keywords: [...OperatorTemplate.keywords, '/', 'division']
 }
@@ -91,6 +94,7 @@ export class Divide extends Operator
 
 NodeTemplate.Equal = {
   ...OperatorTemplate,
+  className: 'Equal',
   name: '=',
   keywords: [...OperatorTemplate.keywords, '=', 'equal']
 }
@@ -114,6 +118,7 @@ export class Equal extends Operator
 
 NodeTemplate.LessThan = {
   ...OperatorTemplate,
+  className: 'LessThan',
   name: '<',
   keywords: [...OperatorTemplate.keywords, '<', 'less than', 'less']
 }
@@ -135,6 +140,7 @@ export class LessThan extends Operator
 
 NodeTemplate.LessEqual = {
   ...OperatorTemplate,
+  className: 'LessEqual',
   name: '<=',
   keywords: [...OperatorTemplate.keywords, '<=', 'less equal']
 }
@@ -156,6 +162,7 @@ export class LessEqual extends Operator
 
 NodeTemplate.RandomNumber = {
   ...OperatorTemplate,
+  className: 'RandomNumber',
   inputs: [],
   name: 'Random Number',
   keywords: [...OperatorTemplate.keywords, 'random']
@@ -177,6 +184,7 @@ export class RandomNumber extends Operator
 
 NodeTemplate.RandomInteger = {
   ...OperatorTemplate,
+  className: 'RandomInteger',
   name: 'Random Integer',
   inputs: [{
     name: 'min',

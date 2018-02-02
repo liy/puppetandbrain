@@ -88,23 +88,21 @@ class ElementController
   addProperties() {
     let actor = this.brain.owner;
 
-    for(let descriptor of actor.properties) {
-      let propertyElement;
-      switch(descriptor.property) {
-        case 'position':
-          propertyElement = new PositionPropertyElement(actor);
-          break;
-        case 'scale':
-          propertyElement = new SizePropertyElement(actor);
-          break;
-        case 'rotation':
-          propertyElement = new RotationPropertyElement(actor);
-          break;
-        default:
-          propertyElement = new GenericPropertyElement(actor, descriptor);
-          break;
-      }
+    let positionElement = new PositionPropertyElement(actor);
+    this.panel.append(positionElement.element);
+    this.elements.set('posiiton', positionElement);
 
+    let sizeElement = new SizePropertyElement(actor);
+    this.panel.append(sizeElement.element);
+    this.elements.set('size', sizeElement);
+
+    let rotationElement = new RotationPropertyElement(actor);
+    this.panel.append(rotationElement.element);
+    this.elements.set('rotation', rotationElement);
+
+    // extra properties if any
+    for(let descriptor of actor.properties) {
+      let propertyElement = new GenericPropertyElement(actor, descriptor);
       this.panel.append(propertyElement.element);
       this.elements.set(descriptor.property, propertyElement);
     }

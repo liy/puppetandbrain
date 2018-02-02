@@ -3,6 +3,7 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Tween = {
   ...ParentTemplate,
+  className: 'Tween',
   name: 'Move',
   execution: [{
     name: 'default'

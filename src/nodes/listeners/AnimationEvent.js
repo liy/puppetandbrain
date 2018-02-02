@@ -3,6 +3,7 @@ import DataType from "../../data/DataType";
 
 NodeTemplate.AnimationEvent = {
   ...ParentTemplate,
+  className: 'AnimationEvent',
   name: 'Animation Event',
   outputs: [{
     name: 'event name',

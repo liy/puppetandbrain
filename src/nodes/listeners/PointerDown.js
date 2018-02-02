@@ -2,6 +2,7 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.PointerDown = {
   ...ParentTemplate,
+  className: 'PointerDown',
   // I know it is not release and up, but click make sense to non-programmer
   name: 'Click',
   keywords: [...ParentTemplate.keywords, 'mouse down']

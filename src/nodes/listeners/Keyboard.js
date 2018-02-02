@@ -3,6 +3,7 @@ import DataType from "../../data/DataType";
 
 NodeTemplate.Keyboard = {
   ...ParentTemplate,
+  name: 'Keyboard',
   execution: [{
       name: 'down'
     }, {

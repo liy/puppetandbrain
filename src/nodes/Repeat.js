@@ -3,6 +3,8 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Repeat = {
   ...ParentTemplate,
+  className: 'Repeat',
+  name: 'Repeat',
   execution: [{
     name: 'repeat'
   }, {

@@ -3,6 +3,7 @@ import DataType from "../data/DataType";
 
 NodeTemplate.Break = {
   className: 'Break',
+  name: 'Break',
   enter: {
     enabled: false
   },

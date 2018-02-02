@@ -2,6 +2,7 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.PointerOver = {
   ...ParentTemplate,
+  className: 'PointerOver',
   name: 'Hover',
   keywords: [...ParentTemplate.keywords, 'roll over', 'mouse over']
 }

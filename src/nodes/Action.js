@@ -2,6 +2,7 @@ import {Task, Template as ParentTemplate} from './Task'
 
 NodeTemplate.Action = {
   ...ParentTemplate,
+  className: 'Action',
   name: 'Action',
   enter: {
     enabled: false

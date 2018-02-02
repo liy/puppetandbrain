@@ -1,22 +1,22 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.SetPosition = {
+NodeTemplate.SetScale = {
   ...ParentTemplate,
-  className: 'SetPosition',
-  name: 'Set Position',
+  className: 'SetScale',
+  name: 'Set Scale',
   inputs: [{
-    name: 'position',
+    name: 'scale',
     type: DataType.VEC2,
   }],
   memory: {
-    position: {x:0, y:0}
+    scale: {x:1, y:1}
   },
   elementClass: ['property'],
   category: 'Transformation'
 }
 
-export default class SetPosition extends Task
+export default class SetScale extends Task
 {
   constructor(id) {
     super(id)
@@ -25,8 +25,8 @@ export default class SetPosition extends Task
   run() {
     super.run();
 
-    let p = this.inputs.value('position');
-    this.owner.x = Number(p.x);
-    this.owner.y = Number(p.y);
+    let s = this.inputs.value('scale');
+    this.owner.scale.x = Number(s.x);
+    this.owner.scale.y = Number(s.y);
   }
 }

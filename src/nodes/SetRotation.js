@@ -4,6 +4,7 @@ import DataType from '../data/DataType';
 
 NodeTemplate.SetRotation = {
   ...ParentTemplate,
+  className: 'SetRotation',
   name: 'Set Rotation',
   inputs: [{
     name: 'rotation',

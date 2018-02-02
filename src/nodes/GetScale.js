@@ -1,22 +1,22 @@
 import Node from "./Node";
 import DataType from '../data/DataType';
 
-NodeTemplate.GetPosition = {
-  className: 'GetPosition',
-  name: 'Get Position',
+NodeTemplate.GetScale = {
+  className: 'GetScale',
+  name: 'Get Scale',
   inputs: [{
     name: 'puppet',
     type: DataType.ACTOR, 
   }],
   outputs: [{
-    name: 'position',
+    name: 'scale',
     type: DataType.VEC2
   }],
   elementClass: ['property', 'getter'],
   category: 'Property'
 }
 
-export default class GetPosition extends Node
+export default class GetScale extends Node
 {
   constructor(id) {
     super(id)
@@ -27,9 +27,9 @@ export default class GetPosition extends Node
 
     this.memory.puppet = this.owner.id;
 
-    this.outputs.assignProperty('position', {
+    this.outputs.assignProperty('scale', {
       get: () => {
-        return LookUp.get(this.inputs.value('puppet'))['position']
+        return LookUp.get(this.inputs.value('puppet'))['scale']
       }
     }, DataType.VEC2);
   }

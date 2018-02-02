@@ -2,6 +2,7 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.GameStart = {
   ...ParentTemplate,
+  className: 'GameStart',
   name: 'Game Start',
 }
 

@@ -6,6 +6,7 @@ import SoundLoader from '../resources/SoundLoader'
 
 NodeTemplate.PlaySound = {
   ...ParentTemplate,
+  className: 'PlaySound',
   name: 'Play Sound',
   execution: [{
     name: 'default'

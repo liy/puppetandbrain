@@ -2,6 +2,7 @@ import {Listener, Template as ParentTemplate} from "./Listener";
 
 NodeTemplate.PointerOut = {
   ...ParentTemplate,
+  className: 'PointerOut',
   name: 'Unhover',
   keywords: [...ParentTemplate.keywords, 'roll out', 'mouse out']
 }

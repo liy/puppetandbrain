@@ -2,6 +2,7 @@ import { Task, Template as ParentTemplate } from "./Task";
 
 NodeTemplate.SceneChange = {
   ...ParentTemplate,
+  className: 'SceneChange',
   name: 'Scene Change',
   inputs: [{
     name: 'creation id',

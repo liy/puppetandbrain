@@ -2,6 +2,7 @@ import {Task, Template as ParentTemplate} from './Task';
 
 NodeTemplate.StepRight = {
   ...ParentTemplate,
+  className: 'StepRight',
   name: 'Step Right',
   execution: [{
     name: 'default'

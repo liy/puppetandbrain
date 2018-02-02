@@ -3,6 +3,8 @@ import DataType from '../data/DataType';
 
 NodeTemplate.Branch = {
   ...ParentTemplate,
+  className: 'Branch',
+  name: 'Branch',
   execution: [{
     name: 'true'
   }, {

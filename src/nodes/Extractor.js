@@ -3,6 +3,7 @@ import DataType from "../data/DataType";
 
 NodeTemplate.Extractor = {
   className: 'Extractor',
+  name: 'Extractor',
   enter: {
     enabled: false
   },
