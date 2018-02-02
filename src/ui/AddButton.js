@@ -4,7 +4,7 @@ import PuppetBrowser from '../browser/PuppetBrowser';
 import ControlButton from './ControlButton';
 import BlockBrowser from '../browser/BlockBrowser';
 
-export default class AddActorButton extends ControlButton
+export default class extends ControlButton
 {
   constructor(controller) {
     super(controller);
@@ -26,7 +26,7 @@ export default class AddActorButton extends ControlButton
       else {
         let browser = new BlockBrowser();
         let pod = await browser.open();
-        History.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
+        if(pod) History.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
       }
     })
   }

@@ -4,7 +4,7 @@ import DataType from "../../data/DataType";
 
 NodeTemplate.SwitchAccess = {
   ...ParentTemplate,
-  name: 'Switch',
+  name: 'Switch Event',
   execution: [{
     name: 'down'
   }, {

@@ -40,10 +40,16 @@ export default class BlockBrowser extends Browser
   }
 
   quickSelect() {
-    let template = this.filteredTemplates[0];
-    if(!template) return;
+    // only allow quick selection when filtered number of results are small enough
+    if(this.filteredTemplates && this.filteredTemplates.length < 15) {
+      let template = this.filteredTemplates[0];
+      if(!template) return;
 
-    this.close(template);
+      template.x = template.x || window.innerWidth/2;
+      template.y = template.y || window.innerHeight/2;
+
+      this.close(template);
+    } 
   }
 
   getTemplates() {
@@ -153,7 +159,7 @@ export default class BlockBrowser extends Browser
   }
 
   process() {
-    this.templates = this.getTemplates();
+    this.filteredTemplates = this.templates = this.getTemplates();
     this.fuse = new Fuse(this.templates, this.searchOptions);
 
     this.refresh(this.templates);
