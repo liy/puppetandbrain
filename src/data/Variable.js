@@ -22,9 +22,13 @@ export default class Variable extends EventEmitter
   }
 
   init(pod) {
-    this.type = pod.type;
     this._name = pod.name;
+    this.descriptor = pod.descriptor;
     this.set(pod.data);
+  }
+
+  get type() {
+    return this.descriptor.type;
   }
 
   get inUse() {
@@ -88,7 +92,7 @@ export default class Variable extends EventEmitter
     return {
       id: this.id,
       name: this.name,
-      type: this.type,
+      descriptor: {...this.descriptor},
       brainID: this.brain.id,
       // Only record the initial data, not the runtime data...
       data: this.data,

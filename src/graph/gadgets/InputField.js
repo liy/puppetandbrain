@@ -3,11 +3,12 @@ import Gadget from './Gadget';
 
 export default class extends Gadget
 {
-  constructor(value, placeholder='...') {
+  constructor(value, type='text', placeholder='...') {
     super();
     this.element.classList.add('input-field');
 
     this.input = document.createElement('input');
+    this.input.type = type;
     this.element.appendChild(this.input);
 
     this.value = value;

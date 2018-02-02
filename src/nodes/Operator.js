@@ -5,18 +5,18 @@ const OperatorTemplate = {
   inputs: [{
     name: 'A',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }, {
     name: 'B',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }],
   outputs: [{
     name: 'value',
     descriptor: {
-      type: DataType.GENERIC
+      type: DataType.DOUBLE
     }
   }],
   memory: {
@@ -195,12 +195,18 @@ NodeTemplate.RandomInteger = {
   inputs: [{
     name: 'min',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.INTEGER,
     }
   }, {
     name: 'max',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.INTEGER,
+    }
+  }],
+  outputs: [{
+    name: 'value',
+    descriptor: {
+      type: DataType.INTEGER
     }
   }],
   memory: {

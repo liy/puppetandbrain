@@ -11,9 +11,11 @@ export default class extends ElementControlButton
   pointerDown(e) {
     History.push(Commander.create('CreateVariable', {
       brainID: BrainGraph.brain.id,
-      type: DataType.AUDIO,
       name: null,
       data: null,
+      descriptor: {
+        type: DataType.AUDIO,
+      }
     }).processAndSave());
   }
 }

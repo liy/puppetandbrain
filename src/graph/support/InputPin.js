@@ -1,6 +1,7 @@
 import './InputPin.scss';
 import DataPin from "./DataPin";
 import TextField from '../gadgets/TextField'
+import InputField from '../gadgets/InputField'
 import AudioField from '../gadgets/AudioField'
 import Vec2Field from '../gadgets/Vec2Field'
 import ActorPicker from '../gadgets/ActorPicker'
@@ -36,7 +37,9 @@ export default class extends DataPin
           this.setGadget(new Toggle(data));
           break;
         case DataType.DOUBLE:
-          this.setGadget(new TextField(data));
+          this.setGadget(new InputField(data, 'number'));
+          this.gadget.input.step = 0.01;
+          console.log(this.gadget)
           break;
         case DataType.INTEGER:
           this.setGadget(new TextField(data));

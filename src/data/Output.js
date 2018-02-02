@@ -63,7 +63,7 @@ export default class Output extends EventEmitter
       nodeID: this.node.id,
       name: this.name,
       isValue: this.isValue,
-      descriptor: this.descriptor,
+      descriptor: {...this.descriptor},
     }
 
     // TODO: make links into valid pointer pod?

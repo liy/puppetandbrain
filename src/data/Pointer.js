@@ -100,7 +100,7 @@ export default class Pointer extends EventEmitter
       // if id is null, it means this input uses node's memory
       id: this.id,
       name: this.name,
-      descriptor: this.descriptor,
+      descriptor: {...this.descriptor},
       nodeID: this.node.id,
       output: this.output ? this.output.pod() : null,
     }

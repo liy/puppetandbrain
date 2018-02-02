@@ -1,7 +1,7 @@
 import './NameField.scss'
-import InputField from '../gadgets/InputField';
+import TextField from '../gadgets/TextField';
 
-export default class extends InputField
+export default class extends TextField
 {
   constructor(v, p='name...') {
     super(v, p);
