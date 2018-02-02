@@ -2,9 +2,10 @@ import './InputPin.scss';
 import DataPin from "./DataPin";
 import TextField from '../gadgets/TextField'
 import AudioField from '../gadgets/AudioField'
-import PositionField from '../gadgets/PositionField'
+import Vec2Field from '../gadgets/Vec2Field'
 import ActorPicker from '../gadgets/ActorPicker'
 import ColorButton from '../gadgets/ColorButton'
+import Toggle from '../gadgets/Toggle';
 import InputSymbol from './InputSymbol';
 import DataType from '../../data/DataType';
 
@@ -28,20 +29,41 @@ export default class extends DataPin
     }
     else {
       switch(input.type) {
-        case DataType.VEC2:
-          this.setGadget(new PositionField(data));
+        case DataType.GENERIC:
+          this.setGadget(new TextField(data));
           break;
-        case DataType.COLOR:
-          this.setGadget(new ColorButton(data));
+        case DataType.BOOLEAN:
+          this.setGadget(new Toggle(data));
+          break;
+        case DataType.DOUBLE:
+          this.setGadget(new TextField(data));
+          break;
+        case DataType.INTEGER:
+          this.setGadget(new TextField(data));
+          break;
+        case DataType.STRING:
+          this.setGadget(new TextField(data));
           break;
         case DataType.ACTOR:
           this.setGadget(new ActorPicker(data));
           break;
-        case DataType.GENERIC:
-          this.setGadget(new TextField(data));
+        case DataType.COLOR:
+          this.setGadget(new ColorButton(data));
+          break;
+        case DataType.ARRAY:
+          // this.setGadget(new ColorButton(data));
+          break;
+        case DataType.VEC2:
+          this.setGadget(new Vec2Field(data));
+          break;
+        case DataType.MAP:
+          // this.setGadget(new TextField(data));
           break;
         case DataType.AUDIO:
           this.setGadget(new AudioField(data||{}));
+          break;
+        case DataType.IMAGE:
+          this.setGadget(new TextField(data));
           break;
         default:
           this.setGadget(new TextField(data));
