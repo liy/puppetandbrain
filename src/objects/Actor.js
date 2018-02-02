@@ -9,6 +9,7 @@ import Matrix from '../math/Matrix';
 import PropertyList from '../data/PropertyList';
 import { aroundAt } from '../utils/utils';
 import DataType from '../data/DataType';
+import IconStore from '../ui/IconStore';
 
 export default class Actor extends EventEmitter
 {
@@ -26,8 +27,7 @@ export default class Actor extends EventEmitter
     this.selected = false;
     this._clicks = 0;
 
-    // transform for the components
-    // also be able to manipulate in the node graph property.
+    // I defined it here just for transform the placeholder
     this.position = {x:Editor.stage.stageWidth/2, y:Editor.stage.stageHeight/2}
     // in radian
     this.rotation = 0;
@@ -35,6 +35,7 @@ export default class Actor extends EventEmitter
       x: 1,
       y: 1
     }
+
     this.matrix = new Matrix();
 
     mixin(this, new Entity());
@@ -68,10 +69,23 @@ export default class Actor extends EventEmitter
     });
 
     this.name = pod.name || 'Puppet';
-    
-    this.position = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
-    this.rotation = pod.rotation || 0;
-    this.scale = pod.scale || {x:1,y:1}
+
+    // default properties
+    this.properties.add({
+      value: { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) },
+      ...pod.properties.position,
+      property: 'position',
+    })
+    this.properties.add({
+      value: {x:1,y:1},
+      ...pod.properties.scale,
+      property: 'scale',
+    })
+    this.properties.add({
+      value: 0,
+      ...pod.properties.rotation,
+      property: 'rotation',
+    })
 
     // Create empty brain but with exisitng ID if there is one.
     // in the future I might allow actors to sharing same brain.
@@ -242,9 +256,9 @@ export default class Actor extends EventEmitter
       // game play related
       className: this.className,
       id: this.id,
-      position: {...this.position},
-      scale: {...this.scale},
-      rotation: this.rotation,
+      // position: {...this.position},
+      // scale: {...this.scale},
+      // rotation: this.rotation,
       name: this.name,
       brainID: this.brain.id,
       components: this.components.map((name, component) => {

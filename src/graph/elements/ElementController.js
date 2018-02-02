@@ -2,11 +2,11 @@ import DataType from "../../data/DataType";
 import ArrayMap from "../../utils/ArrayMap";
 import ElementPanel from './ElementPanel';
 
-import PropertyElement from './PropertyElement'
 import PositionPropertyElement from './PositionPropertyElement';
 import SizePropertyElement from './SizePropertyElement';
 import RotationPropertyElement from './RotationPropertyElement';
 import GenericPropertyElement from './GenericPropertyElement'
+
 import PanelSeperator from './PanelSeperator';
 
 import GenericElement from './GenericElement';
@@ -35,21 +35,21 @@ class ElementController
     this.addProperties();
 
     for(let variable of this.brain.variables) {
-      this.add(variable, false);
+      this.addVariable(variable, false);
     }
 
     
-    this.brain.variables.on('variable.added', this.add, this)
+    this.brain.variables.on('variable.added', this.addVariable, this)
     this.brain.variables.on('variable.removed', this.remove, this)
   }
 
   close() {
-    this.brain.variables.off('variable.added', this.add, this)
+    this.brain.variables.off('variable.added', this.addVariable, this)
     this.brain.variables.off('variable.removed', this.remove, this)
     this.panel.clear();
   }
 
-  add(variable, autoSelect=true) {
+  addVariable(variable, autoSelect=true) {
     let variableElement = null;
     switch(variable.type) {
       case DataType.ACTOR:
@@ -88,21 +88,23 @@ class ElementController
   addProperties() {
     let actor = this.brain.owner;
 
-    let positionElement = new PositionPropertyElement(actor);
-    this.panel.append(positionElement.element);
-    this.elements.set('posiiton', positionElement);
-
-    let sizeElement = new SizePropertyElement(actor);
-    this.panel.append(sizeElement.element);
-    this.elements.set('size', sizeElement);
-
-    let rotationElement = new RotationPropertyElement(actor);
-    this.panel.append(rotationElement.element);
-    this.elements.set('rotation', rotationElement);
-
-    // extra properties if any
     for(let descriptor of actor.properties) {
-      let propertyElement = new GenericPropertyElement(actor, descriptor);
+      let propertyElement;
+      switch(descriptor.property) {
+        case 'position':
+          propertyElement = new PositionPropertyElement(actor);
+          break;
+        case 'scale':
+          propertyElement = new SizePropertyElement(actor);
+          break;
+        case 'rotation':
+          propertyElement = new RotationPropertyElement(actor);
+          break;
+        default:
+          propertyElement = new GenericPropertyElement(actor, descriptor);
+          break;
+      }
+
       this.panel.append(propertyElement.element);
       this.elements.set(descriptor.property, propertyElement);
     }
@@ -122,7 +124,7 @@ class ElementController
     this.addProperties();
 
     for(let variable of this.brain.variables) {
-      this.add(variable);
+      this.addVariable(variable);
     }
   }
 }
