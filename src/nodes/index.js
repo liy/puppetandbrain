@@ -14,8 +14,6 @@ export const RandomNumber = Operators.RandomNumber;
 export const RandomInteger = Operators.RandomInteger;
 export Break from './Break';
 export MakePosition from './MakePosition';
-export GetPosition from './GetPosition';
-export GetRotation from './GetRotation';
 export Getter from './Getter';
 export PropertyGetter from './PropertyGetter';
 export PropertySetter from './PropertySetter';
@@ -37,10 +35,8 @@ export StepUp from './StepUp';
 export StepDown from './StepDown';
 export StepRight from './StepRight';
 export StepLeft from './StepLeft';
-export SetRotation from './SetRotation';
 export RotateAntiClockwise from './RotateAntiClockwise';
 export RotateClockwise from './RotateClockwise';
-export SetPosition from './SetPosition';
 export Extractor from './Extractor';
 
 // listeners

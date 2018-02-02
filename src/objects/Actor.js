@@ -75,6 +75,7 @@ export default class Actor extends EventEmitter
       value: { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) },
       ...pod.properties.position,
       property: 'position',
+      type: DataType.VEC2,
     })
     this.properties.add({
       value: {x:1,y:1},
