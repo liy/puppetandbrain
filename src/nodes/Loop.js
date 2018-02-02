@@ -12,7 +12,9 @@ NodeTemplate.Loop = {
   }],
   inputs: [{
     name: 'condition',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   outputs: [{
     name: 'count',

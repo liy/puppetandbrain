@@ -7,7 +7,9 @@ NodeTemplate.GetRotation = {
   name: 'Get Rotation',
   inputs: [{
     name: 'puppet',
-    type: DataType.ACTOR, 
+    descriptor: {
+      type: DataType.ACTOR, 
+    }
   }],
   outputs: [{
     name: 'rotation',

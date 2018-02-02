@@ -7,7 +7,9 @@ NodeTemplate.Print = {
   name: 'Print',
   inputs: [{
     name: 'text',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   memory: {
     text: 'default text'

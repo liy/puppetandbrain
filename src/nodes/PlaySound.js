@@ -15,10 +15,14 @@ NodeTemplate.PlaySound = {
   }],
   inputs: [{
     name: 'audio',
-    type: DataType.AUDIO,
+    descriptor: {
+      type: DataType.AUDIO,
+    }
   },{
     name: 'loop',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   outputs: [{
     name: 'sound',

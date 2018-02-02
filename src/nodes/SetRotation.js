@@ -8,7 +8,9 @@ NodeTemplate.SetRotation = {
   name: 'Set Rotation',
   inputs: [{
     name: 'rotation',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   output: [{
     name: 'rotation',

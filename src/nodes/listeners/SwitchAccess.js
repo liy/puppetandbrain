@@ -13,10 +13,14 @@ NodeTemplate.SwitchAccess = {
   }],
   inputs: [{
     name: 'debounce',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }, {
     name: 'pre-acceptance',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   outputs: [{
     name: 'switch id',

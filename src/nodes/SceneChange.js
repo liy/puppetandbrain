@@ -6,7 +6,9 @@ NodeTemplate.SceneChange = {
   name: 'Scene Change',
   inputs: [{
     name: 'creation id',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   elementClass: ['utility'],
   category: 'Utilities'

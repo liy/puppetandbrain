@@ -8,6 +8,8 @@ import ColorButton from '../gadgets/ColorButton'
 import InputSymbol from './InputSymbol';
 import DataType from '../../data/DataType';
 
+import * as gadgetClasses from '../gadgets';
+
 export default class extends DataPin
 {
   constructor(name, label=name) {
@@ -20,27 +22,33 @@ export default class extends DataPin
     // setup gadget
     let input = node.inputs.get(this.name);
     let data = node.memory[this.name];
-    console.log(input.descriptor)
-    switch(input.type) {
-      case DataType.VEC2:
-        this.setGadget(new PositionField(data));
-        break;
-      case DataType.COLOR:
-        this.setGadget(new ColorButton(data));
-        break;
-      case DataType.ACTOR:
-        this.setGadget(new ActorPicker(data));
-        break;
-      case DataType.GENERIC:
-        this.setGadget(new TextField(data));
-        break;
-      case DataType.AUDIO:
-        this.setGadget(new AudioField(data||{}));
-        break;
-      default:
-        this.setGadget(new TextField(data));
-        break;
+    let gadgetClassName = input.descriptor.gadgetClassName;
+    if(gadgetClassName) {
+      this.setGadget(new gadgetClasses[gadgetClassName](data));
     }
+    else {
+      switch(input.type) {
+        case DataType.VEC2:
+          this.setGadget(new PositionField(data));
+          break;
+        case DataType.COLOR:
+          this.setGadget(new ColorButton(data));
+          break;
+        case DataType.ACTOR:
+          this.setGadget(new ActorPicker(data));
+          break;
+        case DataType.GENERIC:
+          this.setGadget(new TextField(data));
+          break;
+        case DataType.AUDIO:
+          this.setGadget(new AudioField(data||{}));
+          break;
+        default:
+          this.setGadget(new TextField(data));
+          break;
+      }
+    }
+    
 
     // simulate click event, since block.parent.appendChild(block) cancels any children's click events.
     let downX = null;

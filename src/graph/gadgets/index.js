@@ -9,3 +9,4 @@ export TextField from './TextField';
 export ValueField from './ValueField';
 export ImageField from './ImageField';
 export Toggle from './Toggle';
+export Vec2Field from './Vec2Field';

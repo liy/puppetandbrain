@@ -12,10 +12,14 @@ NodeTemplate.Tween = {
   }],
   inputs: [{
     name: 'position',
-    type: DataType.VEC2,
+    descriptor: {
+      type: DataType.VEC2,
+    }
   }, {
     name: 'duration',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   memory: {
     position: {x:0,y:0},

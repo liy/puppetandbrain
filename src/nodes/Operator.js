@@ -4,10 +4,14 @@ import DataType from "../data/DataType";
 const OperatorTemplate = {
   inputs: [{
     name: 'A',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }, {
     name: 'B',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   outputs: [{
     name: 'value',
@@ -188,10 +192,14 @@ NodeTemplate.RandomInteger = {
   name: 'Random Integer',
   inputs: [{
     name: 'min',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }, {
     name: 'max',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   memory: {
     min: 0,

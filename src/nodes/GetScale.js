@@ -6,7 +6,9 @@ NodeTemplate.GetScale = {
   name: 'Get Scale',
   inputs: [{
     name: 'puppet',
-    type: DataType.ACTOR, 
+    descriptor: {
+      type: DataType.ACTOR,
+    }
   }],
   outputs: [{
     name: 'scale',

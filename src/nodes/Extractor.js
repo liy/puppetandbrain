@@ -10,7 +10,9 @@ NodeTemplate.Extractor = {
   execution: [],
   inputs: [{
     name: 'in',
-    type: DataType.MAP
+    descriptor: {
+      type: DataType.MAP
+    }
   }],
   outputs: [],
   elementClass: ['utility', 'center-input'],

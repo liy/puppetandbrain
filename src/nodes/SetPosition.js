@@ -7,7 +7,9 @@ NodeTemplate.SetPosition = {
   name: 'Set Position',
   inputs: [{
     name: 'position',
-    type: DataType.VEC2,
+    descriptor: {
+      type: DataType.VEC2,
+    }
   }],
   outputs: [{
     name: 'position',

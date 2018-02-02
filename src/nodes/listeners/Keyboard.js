@@ -12,7 +12,9 @@ NodeTemplate.Keyboard = {
   ],
   inputs: [{
     name: 'key name',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   memory: {
     'key name': 'Space'

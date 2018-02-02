@@ -12,7 +12,9 @@ NodeTemplate.Branch = {
   }],
   inputs: [{
     name: 'condition',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   memory: {
     condition: true

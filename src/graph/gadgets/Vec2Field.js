@@ -1,4 +1,4 @@
-import './PositionField.scss';
+import './Vec2Field.scss';
 import InputField from "./InputField";
 import Gadget from './Gadget';
 
@@ -27,18 +27,18 @@ export default class extends Gadget
     this.yInputField.input.type = 'number'
     this.yInputField.input.step = 0.01
     this.element.appendChild(this.yInputField.element);
-    this._scale = vec2; 
+    this.vec2 = vec2; 
 
     this.xInputField.on('gadget.state.change', x => {
-      this._scale.x = Number(x);
-      this.value = this._scale;
-      this.emit('gadget.state.change', this._scale)
+      this.vec2.x = Number(x);
+      this.value = this.vec2;
+      this.emit('gadget.state.change', this.vec2)
     })
 
     this.yInputField.on('gadget.state.change', y => {
-      this._scale.y = Number(y);
-      this.value = this._scale
-      this.emit('gadget.state.change', this._scale)
+      this.vec2.y = Number(y);
+      this.value = this.vec2
+      this.emit('gadget.state.change', this.vec2)
     })
 
     this.xInputField.input.addEventListener('click', e => {
@@ -56,11 +56,11 @@ export default class extends Gadget
   }
 
   get value() {
-    return this._scale
+    return this.vec2
   }
 
   set value(vec2) {
-    this._scale = {
+    this.vec2 = {
       x: vec2.x,
       y: vec2.y
     }

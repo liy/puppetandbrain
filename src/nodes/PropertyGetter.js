@@ -5,7 +5,9 @@ NodeTemplate.PropertyGetter = {
   className: 'PropertyGetter',
   inputs: [{
     name: 'puppet',
-    type: DataType.ACTOR, 
+    descriptor: {
+      type: DataType.ACTOR, 
+    }
   }],
   outputs: [],
   elementClass: ['property', 'getter'],

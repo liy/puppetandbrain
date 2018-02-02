@@ -6,7 +6,9 @@ NodeTemplate.GetPosition = {
   name: 'Get Position',
   inputs: [{
     name: 'puppet',
-    type: DataType.ACTOR, 
+    descriptor: {
+      type: DataType.ACTOR, 
+    }
   }],
   outputs: [{
     name: 'position',
