@@ -9,6 +9,10 @@ NodeTemplate.SetPosition = {
     name: 'position',
     type: DataType.VEC2,
   }],
+  outputs: [{
+    name: 'position',
+    type: DataType.VEC2,
+  }],
   memory: {
     position: {x:0, y:0}
   },
@@ -20,6 +24,16 @@ export default class SetPosition extends Task
 {
   constructor(id) {
     super(id)
+  }
+
+  init(pod) {
+    super.init(pod);
+
+    this.outputs.assignProperty('position', {
+      get: () => {
+        return this.owner.position
+      }
+    });
   }
 
   run() {

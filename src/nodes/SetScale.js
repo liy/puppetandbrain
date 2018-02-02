@@ -8,6 +8,11 @@ NodeTemplate.SetScale = {
   inputs: [{
     name: 'scale',
     type: DataType.VEC2,
+    gadgetClassName: 'Vec2Field'
+  }],
+  outputs: [{
+    name: 'scale',
+    type: DataType.VEC2,
   }],
   memory: {
     scale: {x:1, y:1}
@@ -20,6 +25,18 @@ export default class SetScale extends Task
 {
   constructor(id) {
     super(id)
+  }
+
+  init(pod) {
+    super.init(pod);
+
+    console.log(pod)
+
+    this.outputs.assignProperty('scale', {
+      get: () => {
+        return this.owner.scale
+      }
+    });
   }
 
   run() {

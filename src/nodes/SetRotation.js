@@ -10,6 +10,10 @@ NodeTemplate.SetRotation = {
     name: 'rotation',
     type: DataType.GENERIC,
   }],
+  output: [{
+    name: 'rotation',
+    type: DataType.GENERIC,
+  }],
   memory: {
     rotation: 0
   },
@@ -21,6 +25,16 @@ export default class SetRotation extends Task
 {
   constructor(id) {
     super(id)
+  }
+
+  init(pod) {
+    super.init(pod);
+
+    this.outputs.assignProperty('rotation', {
+      get: () => {
+        return this.owner.rotation
+      }
+    });
   }
 
   run() {

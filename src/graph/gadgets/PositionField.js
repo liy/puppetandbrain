@@ -18,6 +18,7 @@ export default class extends Gadget
 
     this.xInputField = new InputField(position.x)
     this.xInputField.input.type = 'number'
+    this.xInputField.input.step = 0.01
     this.element.appendChild(this.xInputField.element);
 
     this.ySpan = document.createElement('span');
@@ -27,6 +28,7 @@ export default class extends Gadget
 
     this.yInputField = new InputField(position.y);
     this.yInputField.input.type = 'number'
+    this.yInputField.input.step = 0.01
     this.element.appendChild(this.yInputField.element);
     this._position = position; 
 
