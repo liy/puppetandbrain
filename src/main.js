@@ -60,7 +60,6 @@ function signedIn(user) {
     await Activity.load(req.params.id);
     UIController.addBtn.enabled = true;
     chip.fadeOut();
-    notc.notify('loaded').delayFadeoutRemove();
   })
   router.get('/', req => {
     Activity.new();
