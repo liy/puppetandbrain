@@ -5,7 +5,7 @@ export AnimationBlock from './AnimationBlock';
 export BranchBlock from './BranchBlock';
 export GetterBlock from './GetterBlock';
 export KeyboardBlock from './KeyboardBlock';
-export LoopBlock from './LoopBlock';
+// export LoopBlock from './LoopBlock';
 export PerformBlock from './PerformBlock';
 export PlaySoundBlock from './PlaySoundBlock';
 export SetterBlock from './SetterBlock';

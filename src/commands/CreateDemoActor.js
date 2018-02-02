@@ -203,7 +203,7 @@ export default class CreateDemoActor extends Command
     this.actorID = actor.id;
 
     actor.brain.variables.create({
-      type: DataType.GENERIC,
+      type: DataType.STRING,
       name: 'text',
       data: 'this is a fat cat'
     });

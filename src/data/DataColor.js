@@ -2,7 +2,11 @@ import DataType from "./DataType";
 
 export default {
   [DataType.GENERIC]: 0xA9C4D2,
-  // [DataType.ACTOR]: 0xFFA6E0,
+  [DataType.BOOLEAN]: 0xA9C4D2,
+  [DataType.DOUBLE]: 0xA9C4D2,
+  [DataType.INTEGER]: 0xA9C4D2,
+  [DataType.STRING]: 0xA9C4D2,
+  
   [DataType.ACTOR]: 0xC6A37D,
   [DataType.COLOR]: 0xE884C9,
   [DataType.ARRAY]: 0xFF9900,

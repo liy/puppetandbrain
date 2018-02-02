@@ -8,7 +8,7 @@ NodeTemplate.Animation = {
   inputs: [{
     name: 'name',
     descriptor: {
-      type: DataType.GENERIC
+      type: DataType.STRING
     }
   }],
   outputs: [],

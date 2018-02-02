@@ -14,6 +14,7 @@ NodeTemplate.Loop = {
     name: 'condition',
     descriptor: {
       type: DataType.GENERIC,
+      gadgetClassName: 'Toggle'
     }
   }],
   outputs: [{

@@ -13,7 +13,7 @@ NodeTemplate.Branch = {
   inputs: [{
     name: 'condition',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.BOOLEAN,
     }
   }],
   memory: {

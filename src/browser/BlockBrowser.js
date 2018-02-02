@@ -121,12 +121,12 @@ export default class BlockBrowser extends Browser
       outputs: [{
         name:'x',
         descriptor: {
-          type: DataType.GENERIC
+          type: DataType.DOUBLE
         }
       },{
         name:'y',
         descriptor: {
-          type: DataType.GENERIC
+          type: DataType.DOUBLE
         }
       }],
       memory: {

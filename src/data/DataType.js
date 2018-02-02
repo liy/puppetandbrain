@@ -1,16 +1,21 @@
 export default {
-  // string, number, or other generic data...
-  GENERIC: 1,
+  GENERIC: 'generic',
+  BOOLEAN: 'boolean',
+  DOUBLE: 'double',
+  INTEGER: 'integer',
+  STRING: 'string',
+  
   // reference to another actor
-  ACTOR: 2,
+  ACTOR: 'actor',
   // color value, should be either string or number
-  COLOR: 3,
+  COLOR: 'color',
+  
   // array
-  ARRAY: 4,
+  ARRAY: 'array',
   // position
-  VEC2: 5,
+  VEC2: 'vec2',
   // just not an object with key value pair
-  MAP: 6,
-  AUDIO: 7,
-  IMAGE: 8,
+  MAP: 'map',
+  AUDIO: 'audio',
+  IMAGE: 'image',
 }
