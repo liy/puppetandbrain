@@ -7,9 +7,8 @@ import ActorPicker from '../gadgets/ActorPicker';
 export default class extends VariableElement
 {
   constructor(variable) {
-    super(variable);
+    super(variable, '🐶');
     this.type = DataType.ACTOR;
-    this.icon.textContent = '🐶';
     
     this.actorPicker = new ActorPicker(this.variable.data);
     this.content.appendChild(this.actorPicker.element);
@@ -22,9 +21,5 @@ export default class extends VariableElement
   destroy() {
     this.actorPicker.destroy();
     super.destroy();
-  }
-
-  createIcon() {
-    return '🐶';
   }
 }

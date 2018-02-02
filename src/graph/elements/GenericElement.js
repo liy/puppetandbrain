@@ -8,7 +8,7 @@ import DataType from '../../data/DataType';
 export default class extends VariableElement
 {
   constructor(variable) {
-    super(variable);
+    super(variable, svgElement(DotIcon,{width:10, height:10}));
 
     this.valueField = new ValueField(variable.data);
     this.content.appendChild(this.valueField.element);
@@ -20,9 +20,5 @@ export default class extends VariableElement
   onValueChange(e) {
     // set both actual data and initial data
     this.variable.set(e.target.value);
-  }
-
-  createIcon() {
-    return svgElement(DotIcon,{width:10, height:10});
   }
 }

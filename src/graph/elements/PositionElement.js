@@ -7,7 +7,7 @@ import PositionField from '../gadgets/PositionField';
 export default class extends VariableElement
 {
   constructor(variable) {
-    super(variable);
+    super(variable, svgElement(PositionIcon,{width:10, height:16}));
     
     this.type = DataType.VEC2;
 
@@ -22,9 +22,5 @@ export default class extends VariableElement
   destroy() {
     this.positionField.destroy();
     super.destroy();
-  }
-
-  createIcon() {
-    return svgElement(PositionIcon,{width:10, height:16})
   }
 }

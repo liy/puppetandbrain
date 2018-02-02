@@ -5,7 +5,7 @@ import GraphSelection from '../GraphSelection';
 
 export default class BaseElement
 {
-  constructor() {
+  constructor(icon) {
     this.element = document.createElement('div');
     this.element.className = 'base-element';
     
@@ -16,7 +16,6 @@ export default class BaseElement
     this.icon = document.createElement('div');
     this.content.appendChild(this.icon);
     this.icon.className = 'element-icon';
-    let icon = this.createIcon();
     if(typeof icon == 'string') {
       this.icon.textContent = icon;
     }
@@ -31,6 +30,10 @@ export default class BaseElement
     this.icon.addEventListener('mousedown', this.dragStart);
 
     this.selected = false;
+  }
+
+  init() {
+    
   }
 
   destroy() {
@@ -64,10 +67,6 @@ export default class BaseElement
 
   focus() {
     // override this
-  }
-
-  createIcon() {
-    
   }
 
   get name() {

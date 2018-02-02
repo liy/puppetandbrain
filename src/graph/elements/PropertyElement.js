@@ -5,7 +5,7 @@ import IconStore from '../../ui/IconStore';
 export default class extends BaseElement
 {
   constructor(actor, descriptor) {
-    super();
+    super(IconStore.get(descriptor.iconID));
 
     this.descriptor = descriptor;
     this.actor = actor;
@@ -20,9 +20,5 @@ export default class extends BaseElement
 
   get name() {
     return this.label.textContent;
-  }
-  
-  createIcon() {
-    return IconStore.get(this.descriptor.iconID);
   }
 }

@@ -4,8 +4,8 @@ import ElementController from './ElementController';
 
 export default class extends BaseElement
 {
-  constructor(variable) {
-    super();
+  constructor(variable, icon) {
+    super(icon);
 
     this.variable = variable;
     this.type = this.variable.type;

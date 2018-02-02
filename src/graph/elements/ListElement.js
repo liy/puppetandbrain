@@ -9,7 +9,7 @@ import DataType from '../../data/DataType';
 export default class extends VariableElement
 {
   constructor(variable) {
-    super(variable);
+    super(variable, svgElement(ListIcon, {width:17, height:14}));
     this.type = DataType.ARRAY;
 
     // store the list entry element
@@ -89,9 +89,5 @@ export default class extends VariableElement
     super.deselect();
     this.listElement.style.display = 'none';
     this.addButton.style.visibility = 'hidden';
-  }
-
-  createIcon() {
-    return svgElement(ListIcon, {width:17, height:14})
   }
 }

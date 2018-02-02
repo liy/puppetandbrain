@@ -10,16 +10,7 @@ export default class {
     this.element = document.createElement('div');
     this.element.className = 'base-element drag-element';
     
-    this.icon = document.createElement('div');
-    this.element.appendChild(this.icon);
-    this.icon.className = 'element-icon';
-    let icon = this.sourceElement.createIcon();
-    if(typeof icon == 'string') {
-      this.icon.textContent = icon;
-    }
-    else {
-      this.icon.appendChild(icon);
-    }
+    this.element.appendChild(this.sourceElement.icon.cloneNode(true));
 
     this.nameSpan = document.createElement('span');
     this.nameSpan.textContent = this.sourceElement.name;

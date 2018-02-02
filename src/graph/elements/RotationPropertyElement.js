@@ -2,11 +2,12 @@ import PropertyElement from './PropertyElement';
 import RotationIcon from '../../assets/rotation-icon.svg';
 import { svgElement, toDegree, toRadian } from '../../utils/utils';
 import RangeField from '../gadgets/RangeField';
+import IconStore from '../../ui/IconStore';
 
 export default class extends PropertyElement
 {
   constructor(actor) {
-    super(actor, {property:'rotation'});
+    super(actor, {property:'rotation', iconID:IconStore.ROTATION});
 
     this.rangeField = new RangeField({value:actor.rotation*toDegree, min:-360, max:360, decimalPlaces:0});
     this.content.appendChild(this.rangeField.element);
@@ -19,9 +20,5 @@ export default class extends PropertyElement
   destroy() {
     this.rangeField.destroy();
     super.destroy();
-  }
-
-  createIcon() {
-    return svgElement(RotationIcon,{width:18, height:18})
   }
 }

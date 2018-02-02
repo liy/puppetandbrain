@@ -12,7 +12,7 @@ let tokenGenerator = new TimeToken(4, 1, [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e
 export default class extends VariableElement
 {
   constructor(variable) {
-    super(variable);
+    super(variable, svgElement(MapIcon,{width:16, height:16}));
 
     // store the list entry element
     this.entries = new ArrayMap()
@@ -92,9 +92,5 @@ export default class extends VariableElement
     super.deselect();
     this.listElement.style.display = 'none';
     this.addButton.style.visibility = 'hidden';
-  }
-  
-  createIcon() {
-    return svgElement(MapIcon,{width:16, height:16});
   }
 }

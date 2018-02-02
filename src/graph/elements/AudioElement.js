@@ -7,7 +7,7 @@ import AudioField from '../gadgets/AudioField'
 export default class extends VariableElement
 {
   constructor(variable) {
-    super(variable);
+    super(variable, svgElement(SoundIcon,{width:18, height:20}));
     
     this.type = DataType.AUDIO;
 
@@ -18,9 +18,5 @@ export default class extends VariableElement
     this.audioField.button.on('file.ready', ({byteArray, ...other}) => {
       this.variable.data = other
     })
-  }
-
-  createIcon() {
-    return svgElement(SoundIcon,{width:18, height:20});
   }
 }
