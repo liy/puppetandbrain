@@ -3,15 +3,22 @@ import EventEmitter from '../utils/EventEmitter';
 // pointer
 export default class Pointer extends EventEmitter
 {
-  constructor(node, name, type) {
+  constructor(node, name, descriptor) {
     super();
 
     // assigned in the connect method
     this.id = null;
 
-    this.type = type;
-    this.node = node;
+    if(typeof descriptor != 'object') {
+      throw new Error('wrong descriptor !!!!!!')
+    }
+
     this.name = name;
+
+    this.descriptor = descriptor;
+
+    
+    this.node = node;
     // connected to nothing by default
     this.output = null;
     // by default it is a local node memory pointer
@@ -26,6 +33,12 @@ export default class Pointer extends EventEmitter
       let output = LookUp.get(pod.output.nodeID).outputs.get(pod.output.name);
       this.connect(output, pod.id);
     }
+  }
+
+  // TODO: to be removed, just for testing, whether there are someone try to set it at runtime!!!
+  // which is definitely bad bad bad...
+  get type() {
+    return this.descriptor.type;
   }
 
   get isConnected() {
@@ -90,13 +103,12 @@ export default class Pointer extends EventEmitter
 
   pod() {
     return {
-      className: this.__proto__.constructor.name,
-      nodeID: this.node.id,
-      name: this.name,
       // if id is null, it means this input uses node's memory
       id: this.id,
+      name: this.name,
+      descriptor: this.descriptor,
+      nodeID: this.node.id,
       output: this.output ? this.output.pod() : null,
-      type: this.type,
     }
   }
 }

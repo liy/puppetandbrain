@@ -20,6 +20,7 @@ export default class extends DataPin
     // setup gadget
     let input = node.inputs.get(this.name);
     let data = node.memory[this.name];
+    console.log(input.descriptor)
     switch(input.type) {
       case DataType.VEC2:
         this.setGadget(new PositionField(data));
