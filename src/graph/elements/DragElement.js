@@ -81,8 +81,9 @@ export default class {
         }
       }
       else {
+        let propertyName = this.sourceElement.propertyName;
         let descriptor = this.sourceElement.descriptor;
-        switch(descriptor.property) {
+        switch(propertyName) {
           case 'position':
             pod = NodeTemplate.GetPosition
             break;
@@ -97,9 +98,9 @@ export default class {
               ...NodeTemplate.PropertyGetter,
               name: `${this.sourceElement.name}`,
               ownerID: BrainGraph.brain.owner.id,
-              property: this.sourceElement.descriptor.property,
+              propertyName: propertyName,
               outputs: [{
-                name: this.sourceElement.descriptor.property,
+                name: propertyName,
                 type: this.sourceElement.descriptor.type
               }]
             }

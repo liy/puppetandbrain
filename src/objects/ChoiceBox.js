@@ -33,34 +33,30 @@ export default class ChoiceBox extends Actor
     // if it does not exist
     pod.properties = pod.properties || {};
     // setup properties
-    this.properties.add({
+    this.properties.add('text', {
       ...pod.properties.text,
-      property: 'text',
       iconID: '🏷️'
     })
-    this.properties.add({
+    this.properties.add('boxColor', {
       value: 0xFF9900,
       ...pod.properties.boxColor,
-      property: 'boxColor',
-      name: 'box color',
-      gadgetClass: 'ColorButton',
+      friendlyName: 'box color',
+      gadgetClassName: 'ColorButton',
       type: DataType.COLOR,
       iconID: IconStore.COLOR
     })
-    this.properties.add({
+    this.properties.add('textColor', {
       value: 0x000000,
       ...pod.properties.textColor,
-      property: 'textColor',
-      name: 'text color',
-      gadgetClass: 'ColorButton',
+      friendlyName: 'text color',
+      gadgetClassName: 'ColorButton',
       type: DataType.COLOR,
       iconID: IconStore.COLOR
     });
-    this.properties.add({
+    this.properties.add('image', {
       value: require('!file-loader!../assets/icons/logo@4x.png'),
       ...pod.properties.image,
-      property: 'image', 
-      gadgetClass: 'ImageField',
+      gadgetClassName: 'ImageField',
       iconID: "🖼️"
     });
   }

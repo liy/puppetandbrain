@@ -29,12 +29,12 @@ export default class PropertyGetter extends Node
     this.memory.puppet = this.memory.puppet || this.owner.id;
 
     // property name is authoring time settings.
-    this.property = pod.property;
+    this.propertyName = pod.propertyName;
 
     // dynamic output
-    this.outputs.assignProperty(this.property, {
+    this.outputs.assignProperty(this.propertyName, {
       get: () => {
-        return LookUp.get(this.inputs.value('puppet'))[this.property]
+        return LookUp.get(this.inputs.value('puppet'))[this.propertyName]
       }
       // TODO: note that if puppet change, in theory the type should be changed as well
       // I did not handle that yet...
@@ -42,13 +42,13 @@ export default class PropertyGetter extends Node
   }
   
   get nodeName() {
-    return `${this.property}`;
+    return `${this.propertyName}`;
   }
   
   pod(detail=false) {
     return {
       ...super.pod(detail),
-      property: this.property,
+      propertyName: this.propertyName,
     }
   }
 }

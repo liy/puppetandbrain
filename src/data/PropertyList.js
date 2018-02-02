@@ -7,26 +7,27 @@ export default class extends ArrayMap
     this.actor = actor;
   }
 
-  add(descriptor) {
-    if(typeof descriptor === 'string') {
-      this.set(descriptor, {property: descriptor});
-    }
-    else {
-      this.set(descriptor.property, descriptor);
-      // handles initial and default value
-      this.actor[descriptor.property] = descriptor.value;
-    }
+  add(propertyName, descriptor) {
+    this.set(propertyName, {
+      // default user friendly name to be the property text
+      friendlyName: propertyName,
+      ...descriptor
+    });
+    // handles initial and default value
+    this.actor[propertyName] = descriptor.value;
   }
 
-  getType(property) {
-    return this.get(property).type;
+  getType(propertyName) {
+    return this.get(propertyName).type;
   }
 
   pod() {
     const properties = {};
-    this.map((property, descriptor) => {
-      descriptor.value = this.actor[property];
-      properties[property] = descriptor;
+    this.map((propertyName, descriptor) => {
+      // TODO: I think I only need to serailzie the current value of the property
+      // not everything, since they are all fixed and defined in class
+      descriptor.value = this.actor[propertyName];
+      properties[propertyName] = descriptor;
     })
     return properties;
   }

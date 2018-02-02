@@ -8,7 +8,7 @@ import IconStore from '../../ui/IconStore';
 export default class extends PropertyElement
 {
   constructor(actor) {
-    super(actor, {property:'position', iconID:IconStore.VEC2})
+    super(actor, 'position', {iconID:IconStore.VEC2})
 
     this.positionField = new PositionField(actor.position);
     this.content.appendChild(this.positionField.element);

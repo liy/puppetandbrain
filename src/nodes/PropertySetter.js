@@ -24,13 +24,13 @@ export default class PropertySetter extends Task
   init(pod) {
     super.init(pod);
 
-    this.property = pod.property;
+    this.propertyName = pod.propertyName;
 
-    this.memory[pod.property] = this.memory[pod.property] || this.owner[this.property];
+    this.memory[pod.propertyName] = this.memory[pod.propertyName] || this.owner[this.propertyName];
     
-    this.outputs.assignProperty(this.property, {
+    this.outputs.assignProperty(this.propertyName, {
       get: () => {
-        return this.owner[this.property]
+        return this.owner[this.propertyName]
       }
     });
   }
@@ -38,18 +38,18 @@ export default class PropertySetter extends Task
   run() {
     super.run();
 
-    this.owner[this.property] = this.inputs.value(this.property);
+    this.owner[this.propertyName] = this.inputs.value(this.propertyName);
 
     this.execution.run();
   }
 
   get nodeName() {
-    return `Set ${this.property}`;
+    return `Set ${this.propertyName}`;
   }
 
   pod(detail) {
     let pod = super.pod(detail);
-    pod.property = this.property;
+    pod.propertyName = this.propertyName;
     return pod;
   }
 }

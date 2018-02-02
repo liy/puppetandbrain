@@ -7,7 +7,7 @@ import IconStore from '../../ui/IconStore';
 export default class extends PropertyElement
 {
   constructor(actor) {
-    super(actor, {property:'scale', iconID:IconStore.SIZE});
+    super(actor, 'scale', {iconID:IconStore.SIZE});
 
     this.rangeField = new RangeField({value: actor.scale.x, min:-1, max:3, decimalPlaces:2});
     this.content.appendChild(this.rangeField.element);

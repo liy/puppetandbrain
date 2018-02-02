@@ -110,7 +110,9 @@ export default class BlockBrowser extends Browser
       inputName: 'position',
       inputs: [{
         name: 'position',
-        type: DataType.VEC2,
+        descriptor: {
+          type: DataType.VEC2,
+        }
       }],
       outputs: [{name:'x'},{name:'y'}],
       memory: {
@@ -120,32 +122,32 @@ export default class BlockBrowser extends Browser
 
     // actor properties
     let actor = BrainGraph.brain.owner;
-    for(let descriptor of actor.properties) {
+    actor.properties.map((propertyName, descriptor) => {
       templates.push({
         ...NodeTemplate.PropertyGetter,
-        name: `${descriptor.property}`,
+        name: `${descriptor.friendlyName}`,
         ownerID: BrainGraph.brain.owner.id,
-        property: descriptor.property,
+        propertyName,
         outputs: [{
-          name: descriptor.property,
+          name: propertyName,
           type: descriptor.type || DataType.GENERIC
         }]
       })
       templates.push({
         ...NodeTemplate.PropertySetter,
-        name: `Set ${descriptor.property}`,
+        name: `Set ${descriptor.friendlyName}`,
         ownerID: BrainGraph.brain.owner.id,
-        property: descriptor.property,
+        propertyName,
         inputs: [{
-          name: descriptor.property,
-          type: descriptor.type || DataType.GENERIC
+          name: propertyName,
+          descriptor
         }],
         outputs: [{
-          name: descriptor.property,
+          name: propertyName,
           type: descriptor.type || DataType.GENERIC
         }]
       })
-    }
+    })
 
   
     return templates;

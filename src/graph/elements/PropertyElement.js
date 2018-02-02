@@ -4,9 +4,10 @@ import IconStore from '../../ui/IconStore';
 
 export default class extends BaseElement
 {
-  constructor(actor, descriptor) {
+  constructor(actor, propertyName, descriptor) {
     super(IconStore.get(descriptor.iconID));
 
+    this.propertyName = propertyName;
     this.descriptor = descriptor;
     this.actor = actor;
 
@@ -14,7 +15,7 @@ export default class extends BaseElement
 
     this.label = document.createElement('span');
     this.label.className = 'property-name';
-    this.label.textContent = descriptor.name || descriptor.property;
+    this.label.textContent = descriptor.friendlyName || propertyName;
     this.content.appendChild(this.label);
   }
 
