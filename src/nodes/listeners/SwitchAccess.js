@@ -24,7 +24,9 @@ NodeTemplate.SwitchAccess = {
   }],
   outputs: [{
     name: 'switch id',
-    type: DataType.GENERIC
+    descriptor: {
+      type: DataType.GENERIC
+    }
   }],
   memory: {
     debounce: 0,

@@ -4,10 +4,14 @@ import DataType from "./DataType";
 
 export default class Output extends EventEmitter
 {
-  constructor(node, data, name, type=DataType.GENERIC) {
+  constructor(node, data, name, outputDescriptor) {
     super();
 
-    this.type = type;
+    if(!outputDescriptor) {
+      throw new Error('output descriptor not set')
+    }
+
+    this.descriptor = outputDescriptor;
     this.node = node;
     this.data = data;
     this.name = name;
@@ -16,9 +20,9 @@ export default class Output extends EventEmitter
     this.links = {};
   }
 
-  assignProperty(name, descriptor) {
+  assignProperty(name, propertyDescriptor) {
     this.isValue = false;
-    Object.defineProperty(this.data, name, descriptor);
+    Object.defineProperty(this.data, name, propertyDescriptor);
   }
 
   assignValue(name, value) {
@@ -59,7 +63,7 @@ export default class Output extends EventEmitter
       nodeID: this.node.id,
       name: this.name,
       isValue: this.isValue,
-      type: this.type,
+      descriptor: this.descriptor,
     }
 
     // TODO: make links into valid pointer pod?

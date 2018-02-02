@@ -40,7 +40,7 @@ export default class Getter extends Node
       get: () => {
         return this.variable.runtime;
       }
-    }, this.variable.type);
+    }, this.variable.descriptor);
   }
 
   destroy() {

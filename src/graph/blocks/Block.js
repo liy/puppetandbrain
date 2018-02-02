@@ -7,6 +7,7 @@ import ExecutionInPin from '../support/ExecutionInPin';
 import ExecutionOutPin from '../support/ExecutionOutPin';
 import GraphSelection from '../GraphSelection';
 import EventEmitter from '../../utils/EventEmitter';
+import DataType from '../../data/DataType';
 
 export default class Block extends EventEmitter
 {
@@ -244,13 +245,13 @@ export default class Block extends EventEmitter
 
     for(let inputPod of pod.inputs) {
       pin = new InputPin(inputPod.name);
-      pin.symbol.colorize(inputPod.type)
+      pin.symbol.colorize(inputPod.descriptor.type)
       this.body.addLeft(pin);
     }
 
     for(let outputPod of pod.outputs) {
       pin = new OutputPin(outputPod.name);
-      pin.symbol.colorize(outputPod.type)
+      pin.symbol.colorize(outputPod.descriptor.type)
       this.body.addRight(pin);
     }
   }

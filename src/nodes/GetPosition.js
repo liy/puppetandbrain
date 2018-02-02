@@ -12,7 +12,9 @@ NodeTemplate.GetPosition = {
   }],
   outputs: [{
     name: 'position',
-    type: DataType.VEC2
+    descriptor: {
+      type: DataType.VEC2
+    }
   }],
   elementClass: ['property', 'getter'],
   category: 'Property'
@@ -33,6 +35,6 @@ export default class GetPosition extends Node
       get: () => {
         return LookUp.get(this.inputs.value('puppet'))['position']
       }
-    }, DataType.VEC2);
+    });
   }
 }

@@ -51,7 +51,8 @@ export default class Extractor extends Node
         get: () => {
           return LookUp.auto(input.value)[name]
         }
-      });
+        // FIXME: get the descriptor from the added output
+      }, {type: DataType.GENERIC});
     });
   }
 }

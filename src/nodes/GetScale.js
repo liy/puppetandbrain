@@ -12,7 +12,9 @@ NodeTemplate.GetScale = {
   }],
   outputs: [{
     name: 'scale',
-    type: DataType.VEC2
+    descriptor: {
+      type: DataType.VEC2
+    }
   }],
   elementClass: ['property', 'getter'],
   category: 'Property'
@@ -33,6 +35,6 @@ export default class GetScale extends Node
       get: () => {
         return LookUp.get(this.inputs.value('puppet'))['scale']
       }
-    }, DataType.VEC2);
+    });
   }
 }

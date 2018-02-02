@@ -13,7 +13,9 @@ NodeTemplate.SetPosition = {
   }],
   outputs: [{
     name: 'position',
-    type: DataType.VEC2,
+    descriptor: {
+      type: DataType.VEC2,
+    }
   }],
   memory: {
     position: {x:0, y:0}

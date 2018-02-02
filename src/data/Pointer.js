@@ -3,20 +3,14 @@ import EventEmitter from '../utils/EventEmitter';
 // pointer
 export default class Pointer extends EventEmitter
 {
-  constructor(node, name, descriptor) {
+  constructor(node, name, descriptor={}) {
     super();
 
     // assigned in the connect method
     this.id = null;
 
-    if(typeof descriptor != 'object') {
-      throw new Error('wrong descriptor !!!!!!')
-    }
-
     this.name = name;
-
     this.descriptor = descriptor;
-
     
     this.node = node;
     // connected to nothing by default

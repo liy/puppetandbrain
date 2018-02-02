@@ -66,7 +66,7 @@ export default class OutputSymbol extends DataSymbol
   }
 
   get color() {
-    return DataColor[this.output.type] || DataColor[DataType.GENERIC];
+    return DataColor[this.output.descriptor.type] || DataColor[DataType.GENERIC];
   }
 
   colorize(dataType) {

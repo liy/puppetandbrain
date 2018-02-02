@@ -17,7 +17,9 @@ NodeTemplate.MakePosition = {
   }],
   outputs: [{
     name: 'position',
-    type: DataType.VEC2,
+    descriptor: {
+      type: DataType.VEC2,
+    }
   }],
   elementClass: ['getter'],
   memory: {
@@ -45,6 +47,6 @@ export default class MakePosition extends Node
           y: this.inputs.value('y')
         }
       }
-    }, DataType.VEC2);
+    });
   }
 }

@@ -13,7 +13,9 @@ NodeTemplate.GetRotation = {
   }],
   outputs: [{
     name: 'rotation',
-    type: DataType.GENERIC
+    descriptor: {
+      type: DataType.GENERIC
+    }
   }],
   elementClass: ['property', 'getter'],
   category: 'Property'

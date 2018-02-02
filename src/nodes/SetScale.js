@@ -14,7 +14,9 @@ NodeTemplate.SetScale = {
   }],
   outputs: [{
     name: 'scale',
-    type: DataType.VEC2,
+    descriptor: {
+      type: DataType.VEC2,
+    }
   }],
   memory: {
     scale: {x:1, y:1}

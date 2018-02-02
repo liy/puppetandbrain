@@ -78,8 +78,12 @@ export default class BlockBrowser extends Browser
           // the node going to be created is owned by the current opening brain
           ownerID: BrainGraph.brain.owner.id,
           actionID: actor.brain.actions[actionName].id,
-          inputs: action.outputs.names.map(name => {
-            return {name}
+          // create input and its descriptor from the action's outputs
+          inputs: action.outputs.map((name, output) => {
+            return {
+              name,
+              descriptor: output.descriptor
+            }
           }),
         })
       }
@@ -114,7 +118,17 @@ export default class BlockBrowser extends Browser
           type: DataType.VEC2,
         }
       }],
-      outputs: [{name:'x'},{name:'y'}],
+      outputs: [{
+        name:'x',
+        descriptor: {
+          type: DataType.GENERIC
+        }
+      },{
+        name:'y',
+        descriptor: {
+          type: DataType.GENERIC
+        }
+      }],
       memory: {
         position: {x:0,y:0}
       }
@@ -130,7 +144,7 @@ export default class BlockBrowser extends Browser
         propertyName,
         outputs: [{
           name: propertyName,
-          type: descriptor.type || DataType.GENERIC
+          descriptor: descriptor
         }]
       })
       templates.push({
@@ -144,7 +158,7 @@ export default class BlockBrowser extends Browser
         }],
         outputs: [{
           name: propertyName,
-          type: descriptor.type || DataType.GENERIC
+          descriptor
         }]
       })
     })

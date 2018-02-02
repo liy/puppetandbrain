@@ -55,8 +55,15 @@ export default class Node extends EventEmitter
     }
 
     if(pod.outputs) {
+      // Output descriptor should already been assigned for authoring time node, such as GetPosition,
+      // Loop, Break(defined in BlockBrowser), PropertySetter(defined in BlockBrowser), they should not need to include 
+      // the output descriptor in the property or value assignment method call.
+      // 
+      // However, any dynamic node needs to assign the descriptor manually, ie, Action(it is handled in the ActionBlock)
+      // 
+      // VariableSetter needs to get the descriptor from the variable
       for(let outputPod of pod.outputs) {
-        this.outputs.add(outputPod.name, outputPod.type);
+        this.outputs.add(outputPod.name, outputPod.descriptor);
       }
     }
 

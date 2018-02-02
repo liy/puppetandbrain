@@ -27,6 +27,23 @@ export default class OutputList extends EventEmitter
     Editor.off('game.stop', this.clearValues, this);
   }
 
+  [Symbol.iterator]() {
+    let index = 0;
+
+    return {
+      next: () => {
+        if(index < this.list.length) {
+          return {
+            value: this.list.values[this.list.keys[index++]],
+            done: false
+          }
+        }
+
+        return {done: true}
+      }
+    }
+  }
+
   map(callback) {
     return this.names.map(name => {
       return callback(name, this.list.values[name]);
@@ -58,22 +75,23 @@ export default class OutputList extends EventEmitter
     return this.list.length;
   }
 
-  add(name, type) {
+  add(name, outputDescriptor) {
     let output = this.list.get(name);
     if(!output) {
-      output = new Output(this.node, this.data, name, type)
+      output = new Output(this.node, this.data, name, outputDescriptor)
       this.list.set(name, output);
+      // FIXME: send out the descriptor of the output insteand of just one name
       this.emit('output.added', name)
     }
     return output;
   }
 
-  assignProperty(name, descriptor, type) {
-    this.add(name, type).assignProperty(name, descriptor);
+  assignProperty(name, propertyDescriptor, outputDescriptor) {
+    this.add(name, outputDescriptor).assignProperty(name, propertyDescriptor);
   }
 
-  assignValue(name, value, type) {
-    this.add(name, type).assignValue(name, value);
+  assignValue(name, value, outputDescriptor) {
+    this.add(name, outputDescriptor).assignValue(name, value);
   }
 
   clearValues() {

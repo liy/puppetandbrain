@@ -1,4 +1,5 @@
 import {Task, Template as ParentTemplate} from './Task';
+import DataType from '../data/DataType';
 
 NodeTemplate.Perform = {
   ...ParentTemplate,
@@ -29,6 +30,7 @@ export default class Perform extends Task
   }
 
   init(pod) {
+    console.log(pod)
     super.init(pod);
 
     this.actionID = pod.actionID;
@@ -40,8 +42,8 @@ export default class Perform extends Task
       this.action.outputs.on('output.added', this.onOutputAdded, this);
       // Get all the outputs of the target action, and presented as Call inputs
       // When task runs, all the Call input value will be assigned to Function's output
-      for(let name of this.action.outputs.names) {
-        this.inputs.add(name);
+      for(let output of this.action.outputs) {
+        this.inputs.add(output.name, output.descriptor);
       }
     }
     else {
@@ -50,7 +52,8 @@ export default class Perform extends Task
   }
 
   onOutputAdded(name) {
-    this.inputs.add(name);
+    // TODO: better way to get descriptor from the output
+    this.inputs.add(name, this.action.outputs.get(name).descriptor);
   }
 
   get action() {

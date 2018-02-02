@@ -39,7 +39,7 @@ export default class Break extends Node
         get: () => {
           return this.inputs.value(this.inputName)[outputPod.name]
         }
-      }, outputPod.type);
+      });
     }
   }
 

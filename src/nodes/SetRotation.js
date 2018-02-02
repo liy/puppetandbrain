@@ -14,7 +14,9 @@ NodeTemplate.SetRotation = {
   }],
   output: [{
     name: 'rotation',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   memory: {
     rotation: 0

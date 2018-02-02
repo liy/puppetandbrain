@@ -65,7 +65,7 @@ export default class SetterBlock extends Block
     let variable = LookUp.get(pod.variableID);
 
     pin = new InputPin(variable.name);
-    pin.symbol.colorize(variable.type)
+    pin.symbol.colorize(variable.descriptor.type)
     this.body.addLeft(pin);
 
     pin = new OutputPin(variable.name);

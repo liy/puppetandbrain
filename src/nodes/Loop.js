@@ -18,7 +18,9 @@ NodeTemplate.Loop = {
   }],
   outputs: [{
     name: 'count',
-    type: DataType.GENERIC,
+    descriptor: {
+      type: DataType.GENERIC,
+    }
   }],
   memory: {
     condition: true,

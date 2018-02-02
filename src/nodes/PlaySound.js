@@ -26,7 +26,9 @@ NodeTemplate.PlaySound = {
   }],
   outputs: [{
     name: 'sound',
-    type: DataType.GENERIC
+    descriptor: {
+      type: DataType.GENERIC
+    }
   }],
   memory: {
     loop: false,

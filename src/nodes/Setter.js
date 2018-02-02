@@ -45,7 +45,7 @@ export default class Setter extends Task
       get: () => {
         return this.variable.runtime;
       }
-    }, this.variable.type);
+    }, this.variable.descriptor);
   }
   
   destroy() {

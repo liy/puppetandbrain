@@ -15,7 +15,9 @@ const OperatorTemplate = {
   }],
   outputs: [{
     name: 'value',
-    type: DataType.GENERIC
+    descriptor: {
+      type: DataType.GENERIC
+    }
   }],
   memory: {
     A: 0,
@@ -25,7 +27,7 @@ const OperatorTemplate = {
   category: 'Math',
   keywords: ['operator']
 }
-// FIXME: find a better way to handle type parsing!!
+
 export class Operator extends Node
 {
   constructor(id) {
