@@ -12,7 +12,7 @@ NodeTemplate.GetPosition = {
     type: DataType.VEC2
   }],
   elementClass: ['property', 'getter'],
-  category: 'Transformation'
+  category: 'Property'
 }
 
 export default class GetPosition extends Node

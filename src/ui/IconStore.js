@@ -9,7 +9,7 @@ import { svgElement } from '../utils/utils';
 
 const NAMES = {
   GENERIC: 'generic',
-  POSITION: 'position',
+  VEC2: 'position',
   SIZE: 'size',
   ROTATION: 'rotation',
   COLOR: 'color',
@@ -19,7 +19,7 @@ const NAMES = {
 }
 
 const STORE = {
-  [NAMES.POSITION]: {
+  [NAMES.VEC2]: {
     icon: PositionIcon,
     width: 10,
     height: 16
