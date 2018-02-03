@@ -15,6 +15,7 @@
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     color: white;
+    
     line-height: 24px;
 
     white-space: nowrap;
@@ -30,10 +31,9 @@
 
   // place holder
   span:empty:before {
-    font-weight: 300;
     content: attr(placeholder);
     display: block; /* For Firefox */
-    color: rgb(175, 175, 175);
+    color: rgb(124, 124, 124);
     cursor: text;
   }
 }

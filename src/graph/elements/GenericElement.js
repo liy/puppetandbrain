@@ -11,7 +11,7 @@ export default class extends VariableElement
     super(variable, svgElement(DotIcon,{width:10, height:10}));
     this.element.classList.add('generic-element');
 
-    this.valueField = new InputField(variable.data);
+    this.valueField = new InputField(variable.data, null, 'value...');
     this.valueField.element.classList.add('element-value-field');
     this.content.appendChild(this.valueField.element);
 

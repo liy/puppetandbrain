@@ -24,7 +24,8 @@ export default class extends Gadget
 
     this.value = actorID;
 
-    this.picker.addEventListener('mousedown', e => {
+    this.element.addEventListener('mousedown', e => {
+      e.preventDefault();
       e.stopPropagation();
       
       BrainGraph.hide();
