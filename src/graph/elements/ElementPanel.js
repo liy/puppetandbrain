@@ -35,6 +35,8 @@ export default class
 
     this.pullBtn = document.createElement('div');
     this.pullBtn.id = 'pull-button';
+    this.pullBtn.setAttribute('data-title', 'toggle property panel')
+    this.pullBtn.setAttribute('data-title-position', 'left')
     this.element.appendChild(this.pullBtn);
     // detail icon
     this.pullIcon = svgElement(PullIcon, {width:15, height:23});

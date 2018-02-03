@@ -3,6 +3,7 @@ import Block from "./Block";
 import AddOutputPin from '../support/AddOutputPin'
 import OutputPin from "../support/OutputPin";
 import { nextFrame } from '../../utils/utils';
+import DataType from "../../data/DataType";
 
 export default class ExtractorBlock extends Block
 {
@@ -36,7 +37,10 @@ export default class ExtractorBlock extends Block
 
   addPinTrigger(name) {
     // let node to deal with the detail output assignment
-    this.node.outputs.add(name);
+    this.node.outputs.add(name, {
+      // TODO: ask user what type of data is?
+      type: DataType.GENERIC
+    });
   }
 
   onOutputAdded(name) {

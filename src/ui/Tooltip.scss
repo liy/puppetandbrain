@@ -55,3 +55,14 @@
   margin-left:6px;
   transform: translateX(0%) translateY(-50%);
 }
+
+
+[data-title-position='left']::before {
+  display: none;
+}
+[data-title-position='left']::after {
+  left:0;
+  top:50%;
+  margin-left:-6px;
+  transform: translateX(-100%) translateY(-50%);
+}
