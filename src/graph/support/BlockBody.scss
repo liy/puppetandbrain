@@ -12,7 +12,6 @@
   display: flex;
 
   .base {
-    background-color: rgba(22, 25, 49, 0.85);
     border-radius: 10px;
     padding-bottom: 8px;
     
@@ -24,7 +23,6 @@
     display: flex;
     
     .body {
-      background-color: rgba(57, 61, 94, 0.6);
       border-radius: 10px;
 
       // fill available space
@@ -66,9 +64,11 @@
           flex-direction: column;
         }
       }
+
     }
   }
 }
+
 
 .block-selected {
   border-radius: 13px;

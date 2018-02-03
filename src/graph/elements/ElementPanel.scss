@@ -12,10 +12,6 @@
   background-color: #5D5D8A;
   border-left: 2px solid #242747;
 
-  // display: flex;
-  // flex-direction: column;
-  // align-items: flex-start;
-
   // TODO: this hides the border when collapsed, maybe use exact pixel value?
   transform: translateX(100%);
   transition: transform ease 0.3s;
@@ -84,10 +80,7 @@
   width: 100%;
   height: 52px;
 
-  // flex-grow: 1;
-  // align-items: flex-end;
-
-  // centre svg
+  // vertical centre 
   display: flex;
   justify-content: flex-start;
   align-items: center;
