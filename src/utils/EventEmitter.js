@@ -28,7 +28,8 @@ export default class EventEmitter
     {
       for(let i=typedListeners.length-1; i>=0; --i) {
         let listener = typedListeners[i];
-        if(listener.fn === fn && listener.context === context) {
+        // Note that, I also check the wrapped function in order to remove "once" listener
+        if((listener.fn === fn && listener.context === context) || listener.once == fn) {
           typedListeners.splice(i, 1);
         }
       }
@@ -44,6 +45,8 @@ export default class EventEmitter
     }
     this.listeners[type].push({
       fn: wrapper,
+      //
+      once: fn,
       context
     });
   }

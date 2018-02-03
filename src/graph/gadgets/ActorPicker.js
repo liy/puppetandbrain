@@ -13,6 +13,7 @@ export default class extends Gadget
     super();
 
     this.element.classList.add('actor-picker');
+    this.element.tabIndex = 0;
 
     this.nameField = new TextField('','pick a puppet...')
     this.element.appendChild(this.nameField.element);
@@ -24,23 +25,46 @@ export default class extends Gadget
 
     this.value = actorID;
 
+    this.keyDown = this.keyDown.bind(this);
+
     this.element.addEventListener('mousedown', e => {
       e.preventDefault();
       e.stopPropagation();
+
+      document.addEventListener('keydown', this.keyDown, true);
       
       BrainGraph.hide();
 
       document.body.style.cursor = 'crosshair';
-      ActorSelection.once('actor.selection.selected', selected => {
-        BrainGraph.show();
-        document.body.style.cursor = 'auto';
-        
-        if(selected[0]) {
-          this.value = selected[0].id;
-          this.emit('gadget.state.change', this.value);
-        }
-      })
+      ActorSelection.once('actor.selection.selected', this.onActorSelection, this)
     })
+  }
+
+  onActorSelection(selected) {
+    ActorSelection.off('actor.selection.selected', this.onActorSelection, this)
+    document.removeEventListener('keydown', this.keyDown);
+
+    BrainGraph.show();
+    document.body.style.cursor = 'auto';
+    
+    if(selected[0]) {
+      this.value = selected[0].id;
+      this.emit('gadget.state.change', this.value);
+    }
+  }
+
+  keyDown(e) {
+    if(e.keyCode == 27) {
+      ActorSelection.off('actor.selection.selected', this.onActorSelection, this)
+      document.removeEventListener('keydown', this.keyDown, true);
+
+      // makes sure only exit from picking mode
+      e.stopPropagation();
+      e.stopImmediatePropagation()
+
+      BrainGraph.show();
+      document.body.style.cursor = 'auto';
+    }
   }
 
   get value() {
