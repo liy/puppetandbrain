@@ -1,6 +1,12 @@
-.clickable {
-  cursor: pointer;
+.data-pin {
+  .clickable {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+  }
+  .clickable:hover {
+    color: white;
+  }
 }
-.clickable:hover {
-  color: white;
-}
+
+
