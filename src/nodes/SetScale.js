@@ -9,7 +9,6 @@ NodeTemplate.SetScale = {
     name: 'scale',
     descriptor: {
       type: DataType.VEC2,
-      gadgetClassName: 'Vec2Field'
     }
   }],
   outputs: [{

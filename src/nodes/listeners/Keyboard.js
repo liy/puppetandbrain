@@ -4,6 +4,7 @@ import DataType from "../../data/DataType";
 NodeTemplate.Keyboard = {
   ...ParentTemplate,
   name: 'Keyboard',
+  className: 'Keyboard',
   execution: [{
       name: 'down'
     }, {
@@ -13,7 +14,8 @@ NodeTemplate.Keyboard = {
   inputs: [{
     name: 'key name',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.STRING,
+      gadgetClassName: 'KeyNameCatcher',
     }
   }],
   memory: {

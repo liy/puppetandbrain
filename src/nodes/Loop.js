@@ -13,14 +13,13 @@ NodeTemplate.Loop = {
   inputs: [{
     name: 'condition',
     descriptor: {
-      type: DataType.GENERIC,
-      gadgetClassName: 'Toggle'
+      type: DataType.BOOLEAN,
     }
   }],
   outputs: [{
     name: 'count',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.INTEGER,
     }
   }],
   memory: {

@@ -9,13 +9,13 @@ NodeTemplate.SetRotation = {
   inputs: [{
     name: 'rotation',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }],
   outputs: [{
     name: 'rotation',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }],
   memory: {

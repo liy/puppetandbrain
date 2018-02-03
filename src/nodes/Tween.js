@@ -14,11 +14,12 @@ NodeTemplate.Tween = {
     name: 'position',
     descriptor: {
       type: DataType.VEC2,
+      gadgetClassName: 'PositionField',
     }
   }, {
     name: 'duration',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }],
   memory: {

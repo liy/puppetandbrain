@@ -21,7 +21,7 @@ NodeTemplate.PlaySound = {
   },{
     name: 'loop',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.BOOLEAN,
     }
   }],
   outputs: [{

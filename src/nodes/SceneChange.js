@@ -1,4 +1,5 @@
 import { Task, Template as ParentTemplate } from "./Task";
+import DataType from "../data/DataType";
 
 NodeTemplate.SceneChange = {
   ...ParentTemplate,
@@ -7,7 +8,7 @@ NodeTemplate.SceneChange = {
   inputs: [{
     name: 'creation id',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.STRING,
     }
   }],
   elementClass: ['utility'],

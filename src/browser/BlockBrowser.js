@@ -116,6 +116,7 @@ export default class BlockBrowser extends Browser
         name: 'position',
         descriptor: {
           type: DataType.VEC2,
+          gadgetClassName: 'PositionField'
         }
       }],
       outputs: [{

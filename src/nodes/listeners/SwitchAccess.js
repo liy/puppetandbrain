@@ -14,18 +14,26 @@ NodeTemplate.SwitchAccess = {
   inputs: [{
     name: 'debounce',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
+      gadgetClassName: 'RangeField',
+      min:0,
+      max:10,
+      decimalPlaces:1
     }
   }, {
     name: 'pre-acceptance',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
+      gadgetClassName: 'RangeField',
+      min: 0,
+      max: 5,
+      decimalPlaces: 1
     }
   }],
   outputs: [{
     name: 'switch id',
     descriptor: {
-      type: DataType.GENERIC
+      type: DataType.DOUBLE
     }
   }],
   memory: {

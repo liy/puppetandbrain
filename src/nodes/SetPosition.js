@@ -9,13 +9,13 @@ NodeTemplate.SetPosition = {
     name: 'position',
     descriptor: {
       type: DataType.VEC2,
+      gadgetClassName: 'PositionField'
     }
   }],
   outputs: [{
     name: 'position',
     descriptor: {
       type: DataType.VEC2,
-      gadgetClassName: 'PositionField'
     }
   }],
   memory: {

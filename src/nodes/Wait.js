@@ -8,7 +8,7 @@ NodeTemplate.Wait = {
   inputs: [{
     name: 'seconds',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }],
   memory: {

@@ -13,13 +13,13 @@ NodeTemplate.Repeat = {
   inputs: [{
     name: 'count',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.INTEGER,
     }
   }],
   outputs: [{
     name: 'index',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.INTEGER,
     }
   }],
   memory: {

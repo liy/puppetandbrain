@@ -7,12 +7,12 @@ NodeTemplate.MakePosition = {
   inputs: [{
     name: 'x',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }, {
     name: 'y',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }],
   outputs: [{
