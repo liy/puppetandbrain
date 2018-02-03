@@ -5,7 +5,6 @@
   height: 32px;
 
   margin-left: 5px;
-  margin-bottom: 5px;
 
   background-color: #393D5E;
   border-radius: 2px;
@@ -17,9 +16,4 @@
 
   user-select: none;
   cursor: pointer;
-}
-
-.element-control-button-container {
-  // make tooltip work
-  position: relative;
 }

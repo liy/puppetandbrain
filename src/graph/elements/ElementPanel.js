@@ -73,6 +73,11 @@ export default class
     this.element.addEventListener('transitionend', onTransitionEnd)
     this.element.addEventListener('webkitTransitionEnd', onTransitionEnd)
     this.element.addEventListener('msTransitionEnd', onTransitionEnd)
+
+    // stop zoom gragh
+    this.element.addEventListener('wheel', e => {
+      e.stopPropagation();
+    })
   }
 
   toggle() {

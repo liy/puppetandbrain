@@ -4,17 +4,16 @@ export default class
 {
   constructor(icon, emoji) {
     this.element = document.createElement('div');
-    this.element.className = 'element-control-button-container';
+    // this.element.className = 'element-control-button-container';
 
-    this.button = document.createElement('div');
-    this.button.className = 'element-control-button';
-    this.element.appendChild(this.button);
+    this.element.className = 'element-control-button';
+    // this.element.appendChild(this.element);
     
     if(icon) {
-      this.button.appendChild(icon);
+      this.element.appendChild(icon);
     }
     if(emoji) {
-      this.button.textContent = emoji;
+      this.element.textContent = emoji;
     }
 
     this.pointerDown = this.pointerDown.bind(this);

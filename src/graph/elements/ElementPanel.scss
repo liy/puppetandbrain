@@ -1,7 +1,8 @@
 #element-panel {
+  position: absolute;
+
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-  position: absolute;
   top: 0;
   right: 0;
   z-index: 2;
@@ -11,9 +12,9 @@
   background-color: #5D5D8A;
   border-left: 2px solid #242747;
 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: flex-start;
 
   // TODO: this hides the border when collapsed, maybe use exact pixel value?
   transform: translateX(100%);
@@ -21,7 +22,9 @@
 }
 
 #element-panel-content {
-  margin-top: 30px;
+  padding-top: 40px;
+  padding-bottom: 52px;
+  height: calc(100vh - 40px - 52px);
   overflow-y: scroll;
 }
 
@@ -58,11 +61,14 @@
 
 #element-panel-title {
   position: absolute;
+  z-index: 1;
   color: rgb(255, 255, 255);
   width: 100%;
-  line-height: 30px;
-  top: 5px;
+  line-height: 40px;
+  height: 40px;
   text-align: center;
+
+  background-color: rgba(93, 93, 138, 0.8);
 }
 
 #element-panel-content {
@@ -70,14 +76,21 @@
 }
 
 #element-panel-control {
-  // background-color:chartreuse;
-  margin-top: 10px;
+  position: absolute;
+  z-index: 1;
+  
+  bottom: 0;
+
   width: 100%;
-  height: 30px;
+  height: 52px;
 
-  flex-grow: 1;
-  align-items: flex-end;
+  // flex-grow: 1;
+  // align-items: flex-end;
 
+  // centre svg
   display: flex;
-  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  background-color: rgba(93, 93, 138, 0.8);
 }
