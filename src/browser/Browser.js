@@ -44,6 +44,9 @@ export default class Browser extends EventEmitter
 
   keydown(e) {
     if(e.keyCode == 27) {
+      // makes sure only browser is closed, not the  whole graph
+      e.stopPropagation();
+
       this.close();
     }
     //enter

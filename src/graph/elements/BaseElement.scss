@@ -43,6 +43,10 @@
   }
 }
 
+.base-element:first-child {
+  margin-top: 0;
+}
+
 .element-selected {
   border: 3px solid #fcee21;
 }
