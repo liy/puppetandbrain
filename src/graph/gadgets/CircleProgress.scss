@@ -1,5 +1,9 @@
 
 .circle-progress {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  
   cursor: pointer;
   * {
     transition: opacity ease 0.5s;

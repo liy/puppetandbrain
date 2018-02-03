@@ -26,7 +26,7 @@ export default class extends VariableElement
 
     this.listElement = document.createElement('ol');
     this.listElement.setAttribute('placeholder', 'Empty... 😭') 
-    this.listElement.className = 'list'
+    this.listElement.className = 'list map'
     this.element.appendChild(this.listElement);
 
     this.addButton.addEventListener('mousedown', e => {

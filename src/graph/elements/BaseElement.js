@@ -1,5 +1,4 @@
 import './BaseElement.scss'
-import NameField from './NameField';
 import DragElement from './DragElement';
 import GraphSelection from '../GraphSelection';
 

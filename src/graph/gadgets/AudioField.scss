@@ -1,4 +1,8 @@
 .audio-field {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
   svg {
     margin-left: 4px;
   }

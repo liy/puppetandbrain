@@ -1,4 +1,8 @@
 .actor-picker {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
   height: 24px;
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.15);

@@ -1,4 +1,8 @@
 .position-field {
+  .input-field {
+    padding-left: 0;
+    padding-right: 0;
+  }
   div:last-child {
     position: relative;
     right: -6px;

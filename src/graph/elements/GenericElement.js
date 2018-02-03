@@ -1,5 +1,5 @@
 import VariableElement from './VariableElement';
-import ValueField from '../gadgets/ValueField';
+import InputField from '../gadgets/InputField';
 
 import DotIcon from '../../assets/dot.svg';
 import { svgElement } from '../../utils/utils';
@@ -9,8 +9,10 @@ export default class extends VariableElement
 {
   constructor(variable) {
     super(variable, svgElement(DotIcon,{width:10, height:10}));
+    this.element.classList.add('generic-element');
 
-    this.valueField = new ValueField(variable.data);
+    this.valueField = new InputField(variable.data);
+    this.valueField.element.classList.add('element-value-field');
     this.content.appendChild(this.valueField.element);
 
     this.onValueChange = this.onValueChange.bind(this);

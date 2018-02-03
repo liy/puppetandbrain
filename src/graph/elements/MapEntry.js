@@ -2,6 +2,7 @@ import './MapEntry.scss'
 
 import EventEmitter from "../../utils/EventEmitter";
 import InputField from '../gadgets/InputField';
+import TextField from '../gadgets/TextField';
 
 import CrossIcon from '../../assets/cross.svg';
 import { svgElement } from '../../utils/utils';
@@ -19,7 +20,7 @@ export default class extends EventEmitter
 
     this.element = document.createElement('li');
 
-    this.keyField = new InputField();
+    this.keyField = new TextField();
     this.keyField.element.classList.add('key-field');
     this.keyField.placeholder = 'key';
     this.keyField.value = key;

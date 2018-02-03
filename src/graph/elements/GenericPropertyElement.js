@@ -13,7 +13,8 @@ export default class extends PropertyElement
       this.gadget = new GadgetClasses[descriptor.gadgetClassName](value)
     }
     else {
-      this.gadget = new GadgetClasses.ValueField(value)
+      this.gadget = new GadgetClasses.InputField(value)
+      this.gadget.element.classList.add('element-value-field');
     }
     this.content.appendChild(this.gadget.element);
 

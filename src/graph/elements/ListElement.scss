@@ -1,25 +1,38 @@
 .base-element {
   ol {
     list-style-type: none;
+
+    font-size: 14px;
+
     margin: 0;
+
     padding-top: 5px;
     padding-bottom: 10px;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 0;
+    padding-right: 0;
     
-    // background-color: rgba(255, 228, 196, 0.288);
+    li {
+      margin-left: 10px;
+    }
+
+    .input-field {
+      background-color: rgba(0, 0, 0, 0.0);
+      transition: background-color 0.3s ease;
+    }
+
+    .input-field:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .input-field:focus-within {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
   }
 
   .add-entry-icon {
     flex-grow: 0;
     
     min-width: 32px;
-    width: 32px;
-    height: 32px;
-
-    margin-right: 5px;
-
-    // background-color: aqua;
 
     // centre the svg
     display: flex;
@@ -33,6 +46,8 @@
   ol:empty {
     display: none;
   }
+
+  // placeholder
   ol:empty:before {
     font-weight: 300;
     content: attr(placeholder);

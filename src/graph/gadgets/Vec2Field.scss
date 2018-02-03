@@ -3,7 +3,6 @@
   align-items: center;
   flex-direction: row;
 
-  min-width: 110px;
   padding-left: 10px;
   padding-right: 10px;
 
@@ -11,23 +10,17 @@
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.15);
 
-  input {
-    text-align: left;
-    color: white;
-    font-size: 14px;
-
-    height: 24px;
-    line-height: 24px;
-
-    text-align: center;
+  .input-field {
+    border-radius: 0;
+    background: none;
+    
+    input {
+      width: 30;
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-      /* display: none; <- Crashes Chrome on hover */
-      -webkit-appearance: none;
-      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-  }
+  
 
   span {
     font-family: 'Times New Roman', Times, serif;

@@ -1,29 +1,35 @@
 .text-field {
-  max-width: 120px;
+  width: 100%;
+
   overflow-x: hidden;
   text-align: center;
 
-  height: 20px;
-  border-radius: 10px;
+  height: 24px;
+  border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.2);
 
   padding-left: 10px;
   padding-right: 10px;
 
-  .data-text {
+  span {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: white;
+    line-height: 24px;
+
     white-space: nowrap;
     min-width: 30px;
     display: block;
 
-    font-size: 12px;
-    color: rgb(220, 220, 220);
-    line-height: 20px;
-
     outline: none;
+
+    width: 100%;
+    
+    overflow-x: hidden;
   }
 
   // place holder
-  .data-text:empty:before {
+  span:empty:before {
     font-weight: 300;
     content: attr(placeholder);
     display: block; /* For Firefox */

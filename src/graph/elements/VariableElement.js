@@ -1,5 +1,5 @@
 import BaseElement from './BaseElement';
-import NameField from './NameField';
+import TextField from '../gadgets/TextField';
 import ElementController from './ElementController';
 
 export default class extends BaseElement
@@ -10,7 +10,8 @@ export default class extends BaseElement
     this.variable = variable;
     this.type = this.variable.type;
 
-    this.nameField = new NameField(this.variable.name);
+    this.nameField = new TextField(this.variable.name, 'name...');
+    this.nameField.element.classList.add('element-name-field');
     this.content.appendChild(this.nameField.element);
     
     this.nameField.on('gadget.state.change', this.onNameChange, this);

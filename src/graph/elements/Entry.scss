@@ -27,8 +27,7 @@
     }
 
     .entry-value-field {
-      // background-color: bisque;
-      input {
+      .input-field {
         font-size: 14px;
         color: #d3d3d3;
       }
@@ -42,14 +41,7 @@
     .remove-entry-icon {
       flex-grow: 0;
   
-      min-width: 24px;
-      width: 24px;
-      height: 24px;
-  
-      margin-right: -3px;
-      margin-left: 10px;
-  
-      // background-color: aqua;
+      min-width: 32px;
   
       // centre the svg
       display: flex;
@@ -57,6 +49,17 @@
       align-items: center;
 
       cursor: pointer;
+
+      opacity: 0;
+      transition: opacity ease 0.3s;
     }
+  }
+
+  li:hover .remove-entry-icon {
+    opacity: 1;
+  }
+
+  li:focus-within .remove-entry-icon {
+    opacity: 1;
   }
 }

@@ -1,23 +1,32 @@
 .base-element {
-  .key-field  {
-    text-align: left;
-    width: 100px;
-    margin-right: 5px;
-    input {
-      color: #d3d3d3;
-      font-size: 14px;
-
-      // background-color: aquamarine;
-      height: 24px;
-
-      overflow-x: hidden;
+  .map {
+    .text-field  {
+      span {
+        font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: rgb(231, 231, 231);
+      }
+      
+      width: 100px;
+      margin-right: 5px;
+  
+      ::placeholder {
+        color: rgb(139, 139, 139);
+        font-weight: 300;
+      }
+  
+      background-color: rgba(0, 0, 0, 0.0);
+      transition: background-color 0.3s ease;
     }
-
-    ::placeholder {
-      color: rgb(139, 139, 139);
-      font-weight: 300;
+  
+    .text-field:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  
+    .text-field:focus-within {
+      background-color: rgba(0, 0, 0, 0.2);
     }
   }
+
 
   .invalid-key-field {
     input {
