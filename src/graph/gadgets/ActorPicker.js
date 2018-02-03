@@ -42,7 +42,7 @@ export default class extends Gadget
 
   onActorSelection(selected) {
     ActorSelection.off('actor.selection.selected', this.onActorSelection, this)
-    document.removeEventListener('keydown', this.keyDown);
+    document.removeEventListener('keydown', this.keyDown, true);
 
     BrainGraph.show();
     document.body.style.cursor = 'auto';
