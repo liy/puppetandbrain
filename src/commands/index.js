@@ -21,3 +21,5 @@ export CreateDemoActor from './CreateDemoActor';
 export CreateVariable from './CreateVariable';
 export RenameVariable from './RenameVariable';
 export DeleteVariable from './DeleteVariable';
+
+export AddOutput from './AddOutput';

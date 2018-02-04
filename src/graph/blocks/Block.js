@@ -217,6 +217,26 @@ export default class Block extends EventEmitter
     return true;
   }
 
+  addInputPin(pin) {
+    this.inputPins.set(pin.name, pin);
+    this.body.addLeft(pin)
+  }
+
+  removeInputPin(pin) {
+    this.inputPins.remove(pin.name);
+    this.body.removePin(pin);
+  }
+
+  addOutputPin(pin) {
+    this.outputPins.set(pin.name, pin);
+    this.body.addRight(pin)
+  }
+
+  removeOutPin(pin) {
+    this.outputPins.remove(pin.name);
+    this.body.removePin(pin);
+  }
+
   template(pod) {
     this.element.classList.add('template-block');
 

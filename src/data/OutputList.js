@@ -86,6 +86,13 @@ export default class OutputList extends EventEmitter
     return output;
   }
 
+  remove(name) {
+    let output = this.list.get(name);
+    this.list.remove(name);
+    this.emit('output.removed', output)
+    return output;
+  }
+
   assignProperty(name, propertyDescriptor, outputDescriptor) {
     this.add(name, outputDescriptor).assignProperty(name, propertyDescriptor);
   }

@@ -41,13 +41,15 @@ export default class BlockBody
   }
 
   addLeft(pin) {
-    // pin.element.classList.add('pin-left')
     this.left.appendChild(pin.element)
   }
 
   addRight(pin) {
-    // pin.element.classList.add('pin-right')
     this.right.appendChild(pin.element)
+  }
+
+  removePin(pin) {
+    pin.element.parentElement.removeChild(pin.element);
   }
 
   set minHeight(v) {

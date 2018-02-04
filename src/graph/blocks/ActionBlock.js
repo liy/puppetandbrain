@@ -20,7 +20,7 @@ export default class ActionBlock extends Block
   }
 
   destroy() {
-    this.addOutputPin.off('addPin.trigger', this.addPinTrigger, this)
+    this.addPinBtn.off('addPin.trigger', this.addPinTrigger, this)
     this.node.outputs.off('output.added', this.onOutputAdded, this)
     
     super.destroy();
@@ -31,10 +31,11 @@ export default class ActionBlock extends Block
 
     this.title.textContent = this.node.actionName;
 
-    this.addOutputPin = new AddOutputPin();
-    this.body.addRight(this.addOutputPin);
-    this.addOutputPin.on('addPin.trigger', this.addPinTrigger, this)
+    this.addPinBtn = new AddOutputPin();
+    this.body.addRight(this.addPinBtn);
+    this.addPinBtn.on('addPin.trigger', this.addPinTrigger, this)
     this.node.outputs.on('output.added', this.onOutputAdded, this)
+    this.node.outputs.on('output.removed', this.onOutputRemoved, this)
     
     this.title.addEventListener('input', this.onTitleInput);
   }
@@ -46,7 +47,7 @@ export default class ActionBlock extends Block
         this.title.focus();
       }
       else {
-        this.addOutputPin.focus();
+        this.addPinBtn.focus();
       }
     }) 
   }
@@ -63,18 +64,22 @@ export default class ActionBlock extends Block
 
   addPinTrigger(name) {
     // TODO: ask user what type of data is?
-    this.node.outputs.add(name, {
+    History.push(Commander.create('AddOutput', this.node.id, name, {
       type: DataType.GENERIC
-    });
+    }).process())
   }
 
   onOutputAdded(name) {
     let pin = new OutputPin(name);
     pin.init(this.node);
-    this.body.addRight(pin);
-    // make sure the add pin is the last
-    this.body.addRight(this.addOutputPin);
+    this.addOutputPin(pin);
 
-    this.outputPins.set(name, pin);
+    // make sure the add pin button is the last
+    this.body.addRight(this.addPinBtn);
+  }
+
+  onOutputRemoved(output) {
+    let pin = this.outputPins.get(output.name);
+    if(pin) this.removeOutPin(pin);
   }
 }
