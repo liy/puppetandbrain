@@ -16,6 +16,12 @@ export default class extends Gadget
 
     this.onInput = this.onInput.bind(this);
     this.input.addEventListener('input', this.onInput);
+
+    this.input.addEventListener('keydown', e => {
+      if (e.ctrlKey && (e.key === 'z' || e.key === 'y')) {
+        e.stopImmediatePropagation();
+      }
+    })
   }
 
   destroy() {

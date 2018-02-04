@@ -13,6 +13,15 @@ class BrainGraph
     this.blockContainer = document.getElementById('block-container');
     this.svg = document.getElementById('svg');
 
+    // this make everything else lose focus, which is necessary when you want to force make
+    // input field or texti field lose focus.
+    // When input is focused, only input undo and redo is allowed. Therefore, people will tend
+    // to click to other place to make input lose focus and re-enable editor undoredo.
+    this.container.setAttribute('tabIndex', 0);
+    this.container.addEventListener('mousedown', e => {
+      this.container.focus();
+    })
+
     ElementController.init();
     this.container.appendChild(ElementController.panel.element);
 
