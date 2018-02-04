@@ -1,0 +1,20 @@
+.tutorial-cursor {
+  position: absolute;
+
+  top:-16px;
+  left:-16px;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 16px;
+
+  background-color: rgba(255, 81, 0, 0.8);
+
+  z-index: 6;
+
+  pointer-events: none;
+  
+  opacity: 0;
+  transition: opacity ease 0.3s;
+}

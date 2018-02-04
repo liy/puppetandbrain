@@ -40,6 +40,7 @@ window.ActorSelection = ActorSelection;
 window.API = API;
 
 import Grapnel from 'grapnel'
+import { setTimeout } from "timers";
 window.router = new Grapnel({pushState:true});
 
 // prevent default context menu for the whole site
@@ -61,6 +62,13 @@ function signedIn(user) {
     UIController.addBtn.enabled = true;
     chip.fadeOut();
   })
+
+  // dynamically load tutorials
+  router.get('/tutorials/:tutorial', async req => {
+    const tutorial = (await import(`./tutorials/${req.params.tutorial}`)).default;
+    tutorial.start();
+  })
+
   router.get('/', req => {
     Activity.new();
     UIController.addBtn.enabled = true;
