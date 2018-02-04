@@ -7,7 +7,6 @@ import MyPuppetBox from './MyPuppetBox'
 import Browser from './Browser';
 
 import API from '../API';
-import ImportActor from '../ImportActor';
 
 export default class extends Browser
 {

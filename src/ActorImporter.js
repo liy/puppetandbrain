@@ -1,7 +1,7 @@
 import * as ObjecClasses from './objects';
 import Variable from './data/Variable';
 
-export default class ImportActor
+export default class
 {
   constructor() {
     this.mapping = {};
@@ -10,6 +10,8 @@ export default class ImportActor
   async start(pod) {
     let actor = await this.createActor(pod);
     this.createNodes(pod, actor);
+
+    return actor;
   }
 
   /**

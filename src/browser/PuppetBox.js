@@ -3,7 +3,6 @@ import GridBox from './GridBox';
 import { svgElement } from '../utils/utils';
 
 import Logo from '../assets/logo.svg';
-import ImportActor from '../ImportActor';
 
 export default class extends GridBox
 {
@@ -25,11 +24,13 @@ export default class extends GridBox
     this.title.textContent = pod.name
     this.element.appendChild(this.title);
 
-    this.element.addEventListener('click', e => {
-      let importActor = new ImportActor();
-      importActor.start(pod);
+    this.element.addEventListener('click', async e => {
+      // let importActor = new ImportActor();
+      // importActor.start(pod);
 
       this.emit('browser.close');
+
+      History.push(await Commander.create('ImportActor', pod).process());
     })
   }
 
