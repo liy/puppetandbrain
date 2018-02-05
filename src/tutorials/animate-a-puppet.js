@@ -103,7 +103,7 @@ class AnimatePuppet extends Tutorial
                  .push("You can combine them to make the puppet alive...well, sort of alive...")
                  .push("Let's find one called <b>Animation</b>", true)
       await this.banner.start();
-      this.banner.info('You might want to scroll down, to find it');
+      this.banner.info('You might want to scroll down, to find the <b>Animation</b> block', true);
       
       this.cursor.fadeIn();
       
@@ -163,9 +163,9 @@ class AnimatePuppet extends Tutorial
       let pin = animationBlock.inputPins.get('name');
       this.cursor.moveTo(pin.label, 'right');
       
-      this.banner.push('Click the name label to view what animations are available...')
-      await this.banner.start();
-      this.banner.info('Pick an animation you like')
+      this.banner.info('Click the name label to view what animations are available.')
+      this.banner.info(' Pick an animation you like')
+     
 
       pin.gadget.once('gadget.state.change', name => {
         this.next();
@@ -188,7 +188,7 @@ class AnimatePuppet extends Tutorial
     })
 
     this.addStep(async () => {
-      this.banner.push("Let's click the play button and see the magic happens!")
+      this.banner.push("Now the puppet is ready...")
       await this.banner.start();
 
       this.banner.info('Click the magic play button');
@@ -203,7 +203,7 @@ class AnimatePuppet extends Tutorial
         this.cursor.fadeOut();
         
         this.banner.push('See, an animating puppet on the stage!')
-          .push("A fake 🍭 for you... real one is bad for your teeth anyway.");
+          .push("A 🍭 for you...")
         await this.banner.start();
 
         this.next();

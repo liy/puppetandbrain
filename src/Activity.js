@@ -65,6 +65,9 @@ window.Activity = {
   },
 
   create: async function(fileRefs) {
+    // no activity id cannot save
+    if(!this.activityID) return;
+
     // no longer a new activity
     this.isNew = false;
 

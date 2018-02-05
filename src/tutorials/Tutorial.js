@@ -1,14 +1,19 @@
 import './Tutorial.scss';
 import Cursor from './Cursor';
 import TutorialBanner from './TutorialBanner'
+import TutorialOverlay from './TutorialOverlay'
 
 export default class Tutorial 
 {
   constructor() {
-    this.cursor = new Cursor();
     this.steps = [];
 
-    this.banner = new TutorialBanner();
+    // overlay
+    this.overlay = new TutorialOverlay();
+    // banner text
+    this.banner = new TutorialBanner(this.overlay);
+    // cusor pointer
+    this.cursor = new Cursor();
   }
 
   start() {
@@ -28,9 +33,10 @@ export default class Tutorial
       this.currentStep.call();
     }
     else {
+      this.overlay.hide();
+
       this.banner.push('🤖Me, author speaking again...')
-        .push('You have completed this tutorial!')
-        .push('Now, go out play hide and seek. I have lots of clean up jobs to do');
+        .push('You have completed this tutorial sucessfully!')
       this.banner.start();
     }
   }

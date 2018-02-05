@@ -4,10 +4,13 @@ import HandIcon from '../assets/hand-pointer.svg';
 
 export default class 
 {
-  constructor() {
+  constructor(overlay) {
+    this.overlay = overlay;
+
     this.element = document.createElement('div');
     this.element.className = 'tutorial-banner-container'
     document.body.appendChild(this.element);
+
 
     this.banner = document.createElement('div');
     this.banner.id = 'tutorial-banner';
@@ -36,6 +39,8 @@ export default class
   }
 
   info(text, isHtml=false) {
+    this.overlay.hide();
+
     this.fadeIn();
     this.infoMode = true;
     if(isHtml) {
@@ -89,6 +94,7 @@ export default class
   }
 
   next() {
+    this.overlay.show();
     let step = this.steps.shift();
     if(step) {
       step.call();
