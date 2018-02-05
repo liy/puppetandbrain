@@ -7,6 +7,7 @@ export default class Tutorial
 {
   constructor() {
     this.steps = [];
+    this.prevSteps = [];
 
     // overlay
     this.overlay = new TutorialOverlay();
