@@ -33,11 +33,12 @@ export default class Tutorial
       this.currentStep.call();
     }
     else {
-      this.overlay.hide();
-
       this.banner.push('🤖Me, author speaking again...')
         .push('You have completed this tutorial sucessfully!')
-      this.banner.start();
+      this.banner.start().then(() => {
+        this.overlay.hide();
+      })
+        
     }
   }
 

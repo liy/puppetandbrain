@@ -4,6 +4,10 @@ export default class EventEmitter
     this.listeners = Object.create(null);
   }
 
+  destroy() {
+    this.removeAllListeners();
+  }
+
   /**
    * [on description]
    * @param {[type]} type       [description]

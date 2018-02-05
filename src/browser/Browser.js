@@ -7,6 +7,8 @@ require('./Browser.scss')
 
 export default class Browser extends EventEmitter
 {
+  static eventEmitter = new EventEmitter()
+
   constructor() {
     super();
 
@@ -60,8 +62,6 @@ export default class Browser extends EventEmitter
   }
 
   open() {
-    Browser.openedBrowser = this;
-
     this.element.style.opacity = 0;
     this.tween = TweenLite.to(this.element.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
       this.element.style.opacity = 1.0;
@@ -69,6 +69,8 @@ export default class Browser extends EventEmitter
     
     document.body.appendChild(this.element);
     this.searchField.focus();
+
+    this.element.dispatchEvent(new CustomEvent('browser.opened', {detail:this, bubbles:true}));
 
     return new Promise(resolve => {
       this.resolve = resolve;

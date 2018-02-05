@@ -64,7 +64,6 @@ class BrainGraph
 
       this.updateTransform();
     });
-
   }
 
   startPan(e) {
@@ -143,6 +142,8 @@ class BrainGraph
     }});
 
     UIController.brainMode();
+
+    this.container.dispatchEvent(new CustomEvent('graph.opened', {bubbles:true, detail: this}));
   }
 
   close() {
@@ -171,6 +172,8 @@ class BrainGraph
       GraphSelection.disable();
 
       UIController.stageMode();
+
+      this.container.dispatchEvent(new CustomEvent('graph.closed', {bubbles:true}));
     }})
   }
 
@@ -244,6 +247,8 @@ class BrainGraph
   addBlock(block) {
     this.blocks.set(block.id, block);
     this.blockContainer.appendChild(block.element);
+
+    this.container.dispatchEvent(new CustomEvent('graph.block.added', {bubbles:true, detail:{block}}))
   }
 
   getBlock(id) {

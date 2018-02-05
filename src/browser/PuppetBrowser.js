@@ -49,7 +49,7 @@ export default class extends Browser
     })
 
     Promise.all([p1, p2]).then(() => {
-      this.emit('browser.content.ready', this);
+      this.element.dispatchEvent(new CustomEvent('browser.content.ready', {detail:this, bubbles:true}));
     })
   }
 

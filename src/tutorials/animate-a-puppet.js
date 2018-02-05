@@ -1,7 +1,5 @@
 import Tutorial from './Tutorial';
 import Browser from '../browser/Browser';
-import { nextFrame } from '../utils/utils';
-import Delay from '../switch/Delay';
 import ActorSelection from '../objects/ActorSelection';
 import TutorialBanner from './TutorialBanner';
 
@@ -12,11 +10,9 @@ class AnimatePuppet extends Tutorial
   }
 
   init() {
-    let addButton = document.getElementById('add-actor-button');
-
     this.addStep(async () => {
       this.banner.push('Me🤖, the author speaking...')
-                 .push('You fancy fat bouncy cat🐱?')
+                 .push('You fancy a fat bouncy cat🐱?')
                  .push("OK, let's make one...")
       await this.banner.start();
       this.next();
@@ -25,8 +21,10 @@ class AnimatePuppet extends Tutorial
     this.addStep(() => {
       this.banner.info("Click the <b>Add puppet</b> to add a... puppet! Obviously...", true);
 
+      let addButton = document.getElementById('add-actor-button');
       this.cursor.moveTo(addButton, 'left')
-      addButton.addEventListener('mousedown', e => {
+
+      document.addEventListener('browser.opened', e => {
         this.next();
       }, {once: true})
     });
@@ -34,7 +32,7 @@ class AnimatePuppet extends Tutorial
     this.addStep(() => {
       this.banner.info('It might take a while to load all the avaiable puppets, be patient...');
 
-      Browser.openedBrowser.on('browser.content.ready', async e => {
+      document.addEventListener('browser.content.ready', async e => {
         this.banner.info('Now, I know you want to pick that yellow fat cat');
 
         let box = this.getPuppetFromBrowser('Bouncy Cat');
@@ -77,8 +75,7 @@ class AnimatePuppet extends Tutorial
       this.cursor.moveTo(button, 'bottom');
       button.focus()
 
-      button.addEventListener('mousedown', e => {
-        button.classList.remove('data-title-show')
+      document.addEventListener('graph.opened', e => {
         this.next();
       }, {once: true})
     });
@@ -90,8 +87,10 @@ class AnimatePuppet extends Tutorial
       await this.banner.start();
       this.banner.info('Click the add button to add a block');
 
+      let addButton = document.getElementById('add-actor-button');
       this.cursor.moveTo(addButton, 'left');
-      addButton.addEventListener('mousedown', e => {
+
+      document.addEventListener('browser.opened', e => {
         this.next();
       }, {once: true})
     });
@@ -107,17 +106,31 @@ class AnimatePuppet extends Tutorial
       
       this.cursor.fadeIn();
       
-      let block = this.getBlockFromBrowser('Animation');
+      let templateBlock = this.getBlockFromBrowser('Animation');
       let intervalID = setInterval(() => {
-        this.cursor.moveTo(block, 'bottom');
+        this.cursor.moveTo(templateBlock, 'bottom');
       }, 300);
 
-      // FIXME: get the block creation event instead of 
-      // listening on click event
-      block.addEventListener('click', e => {
+      var onBlockCreation = async (e) => {
         clearInterval(intervalID);
-        this.next();
-      }, {once: true})
+        console.log(e, e.detail)
+        if(e.detail.block.node.nodeName == 'Animation' ) {
+          document.removeEventListener('graph.block.added', onBlockCreation);
+          this.next();
+        }
+        else {
+          this.cursor.fadeOut();
+          this.banner.push('Are you sure this is an <b>Animation</b> block?', true)
+                     .push("Otherwise I cannot help you");
+          await this.banner.start();
+          this.banner.info('Click the add button and find <b>Animation</b> block', true);
+          
+          let addButton = document.getElementById('add-actor-button');
+          this.cursor.moveTo(addButton, 'left');
+        }
+      }
+
+      document.addEventListener('graph.block.added', onBlockCreation);
     })
 
     this.addStep(async () => {
@@ -155,7 +168,7 @@ class AnimatePuppet extends Tutorial
     this.addStep(async () => {
       this.banner.push("Well done, you just made the puppet ali...well, ready to animated.")
         .push('By connecting two blocks, it basically means...')
-        .push('When the game start...')
+        .push('When the game starts...')
         .push('Do an animation!')
         .push('What animation, you might wondering...')
       await this.banner.start();
