@@ -36,6 +36,7 @@
   align-items: center;
 
   svg {
+    display: inherit;
     margin-left: 20px;
   }
 
@@ -47,4 +48,13 @@
   pointer-events: auto;
   
   z-index: 8;
+}
+
+#tutorial-banner.info-banner {
+  border: 4px solid rgba(129, 198, 228, 0);
+  background-color: #57bce6;
+
+  svg {
+    display: none;
+  }
 }

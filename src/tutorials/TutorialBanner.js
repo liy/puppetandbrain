@@ -116,10 +116,10 @@ export default class
   set infoMode(flag) {
     this._infoMode = flag;
     if(flag) {
-      this.handIcon.style.display = 'none';
+      this.banner.classList.add('info-banner')
     }
     else {
-      this.handIcon.style.display = 'inherit';
+      this.banner.classList.remove('info-banner')
     }
   }
 

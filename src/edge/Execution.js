@@ -2,21 +2,28 @@ import ArrayMap from "../utils/ArrayMap";
 
 export default class Execution extends ArrayMap
 {
-  constructor() {
+  constructor(node) {
     super();
 
     this.names = this.keys;
     this.nodes = this.values;
+
+    this.node = node;
   }
 
-  connect(name, node) {
+  connect(name, targetNode) {
     // Only be able to connect the node has enabled enter.
-    if(node.enter.enabled) {
-      this.set(name, node);
+    if(targetNode.enter.enabled) {
+      this.set(name, targetNode);
     }
     else {
       console.warn('Target node has no enter');
     }
+    
+    this.node.emit('execution.connected', {source:{
+      name,
+      node: this.node,
+    }, targetNode})
   }
 
   disconnect(name) {

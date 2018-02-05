@@ -38,7 +38,6 @@ export default class Tutorial
       this.banner.start().then(() => {
         this.overlay.hide();
       })
-        
     }
   }
 

@@ -24,7 +24,7 @@ export class Task extends Node
     super(id);
 
     this.enter = new Enter();
-    this.execution = new Execution();
+    this.execution = new Execution(this);
   }
 
   init(pod) {

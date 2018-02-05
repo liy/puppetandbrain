@@ -111,6 +111,7 @@ class AnimatePuppet extends Tutorial
         this.cursor.moveTo(templateBlock, 'bottom');
       }, 300);
 
+      // FIXME: better way to handle things, maybe revert the step
       var onBlockCreation = async (e) => {
         clearInterval(intervalID);
         console.log(e, e.detail)
@@ -152,17 +153,20 @@ class AnimatePuppet extends Tutorial
       }
     })
 
-    var animationBlock = null;
     this.addStep(() => {
       this.banner.info("and connect to the <b>Animaton</b>'s left white pin...", true);
 
-      animationBlock = this.getBlock('Animation');
+      let gameStartBlock = this.getBlock('Game Start');
+
+      let animationBlock = this.getBlock('Animation');
       let target = this.getInPinSvg(animationBlock);
       this.cursor.moveTo(target, 'left');
 
-      target.addEventListener('mouseup', e => {
-        this.next();
-      }, {once: true});
+      gameStartBlock.node.once('execution.connected', data => {
+        if(data.source.node == gameStartBlock.node && data.targetNode == animationBlock.node) {
+          this.next();
+        }
+      })
     })
 
     this.addStep(async () => {
@@ -173,12 +177,18 @@ class AnimatePuppet extends Tutorial
         .push('What animation, you might wondering...')
       await this.banner.start();
 
+      let animationBlock = this.getBlock('Animation');
       let pin = animationBlock.inputPins.get('name');
       this.cursor.moveTo(pin.label, 'right');
       
-      this.banner.info('Click the name label to view what animations are available.')
-      this.banner.info(' Pick an animation you like')
-     
+      this.banner.info('Click the name label to see what animations are available.')
+      // This is not once event... not a big deal, once the label is removed, the event should be gb.
+      pin.label.addEventListener('mouseup', e => {
+        // make sure the gadget is visible
+        if(pin.gadget.visible) {
+          this.banner.info('Pick an animation you like');
+        }
+      })
 
       pin.gadget.once('gadget.state.change', name => {
         this.next();
@@ -195,7 +205,7 @@ class AnimatePuppet extends Tutorial
       let modeBtn = document.getElementById('mode-button');
       this.cursor.moveTo(modeBtn, 'bottom');
 
-      modeBtn.addEventListener('mousedown', e => {
+      document.addEventListener('graph.closed', e => {
         this.next();
       }, {once:true})
     })
@@ -209,8 +219,7 @@ class AnimatePuppet extends Tutorial
       let debugBtn = document.getElementById('debug-button');
       this.cursor.moveTo(debugBtn, 'left');
 
-      debugBtn.addEventListener('mousedown', async e => {
-
+      Editor.once('game.start', async e => {
         window.localStorage.setItem('animate-a-puppet', true);
 
         this.cursor.fadeOut();
