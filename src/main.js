@@ -73,6 +73,11 @@ function signedIn(user) {
   })
 
   router.get('/', req => {
+    if(!window.localStorage.getItem('animate-a-puppet')) {
+      router.navigate(`/tutorials/animate-a-puppet`);
+      return;
+    }
+
     Activity.new();
     UIController.addBtn.enabled = true;
   })

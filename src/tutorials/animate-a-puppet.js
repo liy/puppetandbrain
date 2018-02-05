@@ -198,6 +198,8 @@ class AnimatePuppet extends Tutorial
 
       debugBtn.addEventListener('mousedown', async e => {
 
+        window.localStorage.setItem('animate-a-puppet', true);
+
         this.cursor.fadeOut();
         
         this.banner.push('See, an animating puppet on the stage!')
