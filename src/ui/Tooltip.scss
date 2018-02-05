@@ -45,6 +45,10 @@
   transition-delay: 0.3s;
 }
 
+[data-title].data-title-show::after,  [data-title].data-title-show::before{
+  opacity:1;
+}
+
 
 [data-title-position='right']::before {
   display: none;

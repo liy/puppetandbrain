@@ -30,7 +30,7 @@ export default class extends Browser
   }
 
   process() {
-    API.listMyPuppets().then(pods => {
+    let p1 = API.listMyPuppets().then(pods => {
       if(this.closed) return;
       for(let pod of pods) {
         this.add(new MyPuppetBox(pod), 'My Puppets')
@@ -39,13 +39,17 @@ export default class extends Browser
       this.onError('Cannot load puppets, please try again...🤒', error)
     })
 
-    API.listLibraryPuppets().then(pods => {
+    let p2 = API.listLibraryPuppets().then(pods => {
       if(this.closed) return;
       for(let pod of pods) {
         this.add(new PuppetBox(pod), 'Puppets')
       }
     }).catch(error => {
       this.onError('Cannot load puppets, please try again...🤒', error)
+    })
+
+    Promise.all([p1, p2]).then(() => {
+      this.emit('browser.content.ready', this);
     })
   }
 

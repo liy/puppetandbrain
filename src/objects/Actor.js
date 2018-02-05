@@ -286,6 +286,14 @@ export default class Actor extends EventEmitter
     return userFiles;
   }
 
+  get screenX() {
+    return this.x + Editor.stage.offsetX
+  }
+
+  get screenY() {
+    return this.y + Editor.stage.offsetY
+  }
+
   createFileRefs() {
     let refs = {};
     for(let node of this.brain.nodes) {

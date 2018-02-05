@@ -60,6 +60,8 @@ export default class Browser extends EventEmitter
   }
 
   open() {
+    Browser.openedBrowser = this;
+
     this.element.style.opacity = 0;
     this.tween = TweenLite.to(this.element.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
       this.element.style.opacity = 1.0;

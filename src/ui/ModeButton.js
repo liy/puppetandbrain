@@ -16,8 +16,6 @@ export default class extends ControlButton
     this.stageBtn = svgElement(StageButtonIcon, {width:100, height: 100});
 
     this.brainBtn.addEventListener('mousedown', e => {
-      e.preventDefault();
-      e.stopImmediatePropagation();
       if(!this.enabled) return;
 
       let brain = ActorSelection.selected[0].brain;
@@ -25,8 +23,6 @@ export default class extends ControlButton
     })
 
     this.stageBtn.addEventListener('mousedown', e => {
-      e.preventDefault();
-      e.stopImmediatePropagation();
       if(!this.enabled) return;
 
       History.push(Commander.create('CloseGraph', BrainGraph.brain.id).process());

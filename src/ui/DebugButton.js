@@ -30,8 +30,6 @@ export default class DebugButton extends ControlButton
     })
 
     this.element.addEventListener('mousedown', e => {
-      e.preventDefault();
-      e.stopImmediatePropagation();
       Editor.toggle();
     })
   }

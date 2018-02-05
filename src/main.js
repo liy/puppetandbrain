@@ -65,6 +65,9 @@ function signedIn(user) {
 
   // dynamically load tutorials
   router.get('/tutorials/:tutorial', async req => {
+    // Activity.new();
+    UIController.addBtn.enabled = true;
+
     const tutorial = (await import(`./tutorials/${req.params.tutorial}`)).default;
     tutorial.start();
   })

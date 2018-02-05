@@ -16,9 +16,6 @@ export default class extends ControlButton
     this.enabled = false;
 
     this.element.addEventListener('mousedown', async e => {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-
       if(this.mode == 'stage mode') {
         let browser = new PuppetBrowser();
         browser.open()
