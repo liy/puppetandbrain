@@ -1,15 +1,11 @@
-.tutorial-cursor {
+#tutorial-cursor {
   position: absolute;
 
-  top:-16px;
-  left:-16px;
+  top:-60px;
+  left:-60px;
 
-  width: 32px;
-  height: 32px;
-
-  border-radius: 16px;
-
-  background-color: rgba(255, 81, 0, 0.8);
+  width: 120px;
+  height: 120px;
 
   z-index: 6;
 
@@ -17,5 +13,14 @@
   
   opacity: 0;
   transition: opacity ease 0.3s;
-  transition: transform ease 0.3s;
+  transition: transform ease 1s;
+  
+  svg {
+    position: absolute;
+  }
+}
+
+#tutorial-pointer {
+  position: absolute;
+
 }

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 2 2">
+    <circle cx="0" cy="0" r="1" fill="aqua" opacity="1">
+      <animateTransform attributeName="transform" type="scale" additive="sum" from="0 0" to="1 1" begin="0s" dur="1s" repeatCount="indefinite"></animateTransform>
+      <animate attributeName="opacity" from="1" to="0" dur="1s" repeatCount="indefinite" />
+    </circle>
+</svg>

@@ -1,11 +1,14 @@
 import './Tutorial.scss';
 import Cursor from './Cursor';
+import TutorialBanner from './TutorialBanner'
 
 export default class Tutorial 
 {
   constructor() {
     this.cursor = new Cursor();
     this.steps = [];
+
+    this.banner = new TutorialBanner();
   }
 
   start() {
@@ -18,13 +21,17 @@ export default class Tutorial
 
   next() {
     this.cursor.fadeOut();
+    this.banner.fadeOut();
     
     this.currentStep = this.steps.shift();
     if(this.currentStep) {
       this.currentStep.call();
     }
     else {
-      console.log('tutorial complete!')
+      this.banner.push('🤖Me, author speaking again...')
+        .push('You have completed this tutorial!')
+        .push('Now, go out play hide and seek. I have lots of clean up jobs to do');
+      this.banner.start();
     }
   }
 
