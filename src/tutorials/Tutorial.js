@@ -7,7 +7,7 @@ export default class Tutorial
 {
   constructor() {
     this.steps = [];
-    this.prevSteps = [];
+    this.stepIndex = 0;
 
     // overlay
     this.overlay = new TutorialOverlay();
@@ -29,7 +29,7 @@ export default class Tutorial
     this.cursor.fadeOut();
     this.banner.fadeOut();
     
-    this.currentStep = this.steps.shift();
+    this.currentStep = this.steps[this.stepIndex++];
     if(this.currentStep) {
       this.currentStep.call();
     }
@@ -39,6 +39,21 @@ export default class Tutorial
       this.banner.start().then(() => {
         this.overlay.hide();
       })
+    }
+  }
+
+  redo() {
+    this.currentStep = this.steps[--this.stepIndex];
+    if(this.currentStep) {
+      this.currentStep.call();
+    }
+  }
+
+  gotoLastStep() {
+    this.stepIndex-=2;
+    this.currentStep = this.steps[this.stepIndex];
+    if(this.currentStep) {
+      this.currentStep.call();
     }
   }
 

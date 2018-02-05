@@ -122,12 +122,17 @@ class AnimatePuppet extends Tutorial
         else {
           this.cursor.fadeOut();
           this.banner.push('Are you sure this is an <b>Animation</b> block?', true)
-                     .push("Otherwise I cannot help you");
+                     .push("Let's try it again...");
           await this.banner.start();
-          this.banner.info('Click the add button and find <b>Animation</b> block', true);
-          
+
+          this.banner.info('Click the add button to add <b>Animation</b> block', true);
           let addButton = document.getElementById('add-actor-button');
           this.cursor.moveTo(addButton, 'left');
+
+          document.addEventListener('browser.opened', e => {
+            this.cursor.fadeOut();
+            this.redo();
+          }, {once: true})
         }
       }
 
@@ -135,7 +140,7 @@ class AnimatePuppet extends Tutorial
     })
 
     this.addStep(async () => {
-      this.banner.push("Now you have 2 blocks in the puppe's brain")
+      this.banner.push("Now you have an <b>Animation</b> blocks in the puppe's brain", true)
         .push("The other green one is called <b>Game Start</b> block", true)
         .push("Let's try to connect them together see what will happen...")
       await this.banner.start();
