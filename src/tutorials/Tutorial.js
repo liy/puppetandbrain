@@ -111,11 +111,11 @@ export default class Tutorial
   
 
   getInPin(block) {
-    return block.inPin.symbol.svg;
+    return block.inPin.symbol.element;
   }
 
   getOutPin(block, name='default') {
-    return block.outPins.get(name).symbol.svg;
+    return block.outPins.get(name).symbol.element;
   }
 
   getBlock(name) {

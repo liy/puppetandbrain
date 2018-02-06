@@ -36,7 +36,6 @@ class ConnectHelper
   }
 
   mouseOut() {
-    console.log('out')
     this._snapSymbol = null;
   }
 

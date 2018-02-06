@@ -49,7 +49,9 @@ import PuppetBrowser from './browser/PuppetBrowser';
 import ActorSelection from './objects/ActorSelection';
 import notc from './ui/NotificationControl';
 import API from './API';
+import Menu from './ui/Menu';
 
+var menu = new Menu();
 
 document.getElementById('app-version').textContent = APP_VERSION;
 
@@ -97,6 +99,11 @@ function signedIn(user) {
     Activity.new();
     UIController.addBtn.enabled = true;
   })
+
+  router.get('/about', (req, e) => {
+    
+  })
+  
   router.get('/*', (req, e) => {
     if(!e.parent()){
       console.log(404)
