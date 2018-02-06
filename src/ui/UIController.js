@@ -6,6 +6,7 @@ import ModeButton from './ModeButton';
 import DeleteButton from './DeleteButton';
 import EventEmitter from '../utils/EventEmitter';
 import ElementController from '../graph/elements/ElementController'
+import Menu from './Menu';
 
 class UIController extends EventEmitter
 {
@@ -18,6 +19,7 @@ class UIController extends EventEmitter
     this.debugBtn = new DebugButton(this);
     this.modeBtn = new ModeButton(this);
     this.deleteBtn = new DeleteButton(this);
+    this.menu = new Menu();
   }
 
   stageMode() {
@@ -33,9 +35,11 @@ class UIController extends EventEmitter
   set controlShifted(v) {
     if(v) {
       this.controlPanel.style.transform = `translateX(${-ElementController.panel.width}px)`
+      this.menu.element.style.transform = `translateX(${-ElementController.panel.width}px)`
     }
     else {
       this.controlPanel.style.transform = `translateX(0)`
+      this.menu.element.style.transform = `translateX(0)`
     }
   }
 }

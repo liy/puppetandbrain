@@ -49,9 +49,6 @@ import PuppetBrowser from './browser/PuppetBrowser';
 import ActorSelection from './objects/ActorSelection';
 import notc from './ui/NotificationControl';
 import API from './API';
-import Menu from './ui/Menu';
-
-var menu = new Menu();
 
 document.getElementById('app-version').textContent = APP_VERSION;
 
