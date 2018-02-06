@@ -78,7 +78,7 @@ class AnimatePuppet extends Tutorial
                  .push("Let's find one called <b>Animation</b>", true)
       await this.banner.start();
 
-      this.banner.info('You might want to scroll down, to find the <b>Animation</b> block', true);
+      this.banner.info('You might want to scroll down to find the <b>Animation</b> block', true);
       
       this.cursor.follow(this.browserBlock('Animation'), 'bottom');
 
