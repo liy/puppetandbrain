@@ -1,5 +1,6 @@
 import AutoConnect from './AutoConnect';
 import BlockBrowser from '../browser/BlockBrowser';
+import SoundEffect from '../SoundEffect';
 
 class ConnectHelper
 {
@@ -8,8 +9,6 @@ class ConnectHelper
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     
     this._snapSymbol = null;
-
-    this.snapSound = new Audio(require('../assets/sounds/snap.mp3'))
   }
 
   get snapSymbol() {
@@ -21,7 +20,7 @@ class ConnectHelper
     // first time
     if(this.startSymbol && this.startSymbol.canConnect(target.symbol)) {
       // first time, play snap sound
-      if(this._snapSymbol != target.symbol) this.snapSound.play();
+      if(this._snapSymbol != target.symbol) SoundEffect.snap.play();
       this._snapSymbol = target.symbol;
     }
     else {
@@ -31,7 +30,7 @@ class ConnectHelper
 
   mouseOver(symbol) {
     if(this.startSymbol && this.startSymbol.canConnect(symbol)) {
-      this.snapSound.play();
+      SoundEffect.play('snap');
     }
     this._snapSymbol = symbol;
   }

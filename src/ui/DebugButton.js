@@ -2,6 +2,7 @@ import StartButtonIcon from '../assets/play-button-icon.svg';
 import StopButtonIcon from '../assets/stop-button-icon.svg';
 import {svgElement} from '../utils/utils';
 import ControlButton from './ControlButton';
+import SoundEffect from '../SoundEffect';
 
 export default class DebugButton extends ControlButton
 {
@@ -30,9 +31,7 @@ export default class DebugButton extends ControlButton
     })
 
     this.element.addEventListener('mousedown', e => {
-      // TODO: make it into generic method
-      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
-      audio.play();
+      SoundEffect.play('click');
       
       Editor.toggle();
     })

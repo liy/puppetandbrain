@@ -3,6 +3,7 @@ import BinButtonIcon from '../assets/bin-button-icon.svg';
 import {svgElement} from '../utils/utils';
 import ControlButton from './ControlButton';
 import GraphSelection from '../graph/GraphSelection';
+import SoundEffect from '../SoundEffect';
 
 export default class BrainButton extends ControlButton
 {
@@ -14,9 +15,7 @@ export default class BrainButton extends ControlButton
     this.element.appendChild(svgElement(BinButtonIcon, {width:68, height:68}));
 
     this.element.addEventListener('mousedown', e => {
-      // TODO: make it into generic method
-      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
-      audio.play();
+      SoundEffect.play('click');
       
       if(this.mode == 'stage mode') {
         History.push(Commander.create('DeleteActor', ActorSelection.selected[0].id).processAndSave());

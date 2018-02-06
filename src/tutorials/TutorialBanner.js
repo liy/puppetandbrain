@@ -1,6 +1,7 @@
 import './TutorialBanner.scss';
 import { svgElement } from '../utils/utils';
 import HandIcon from '../assets/hand-pointer.svg';
+import SoundEffect from '../SoundEffect';
 
 export default class 
 {
@@ -71,8 +72,7 @@ export default class
       }
     }
     else {
-      let audio = new Audio(require('../assets/sounds/switch27.ogg'))
-      audio.play();
+      SoundEffect.play('banner-click');
       this.next();
     }
   }

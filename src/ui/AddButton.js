@@ -3,6 +3,7 @@ import {svgElement} from '../utils/utils';
 import PuppetBrowser from '../browser/PuppetBrowser';
 import ControlButton from './ControlButton';
 import BlockBrowser from '../browser/BlockBrowser';
+import SoundEffect from '../SoundEffect';
 
 export default class extends ControlButton
 {
@@ -16,9 +17,7 @@ export default class extends ControlButton
     this.enabled = false;
 
     this.element.addEventListener('mousedown', async e => {
-      // TODO: make it into generic method
-      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
-      audio.play();
+      SoundEffect.play('click');
 
       if(this.mode == 'stage mode') {
         let browser = new PuppetBrowser();

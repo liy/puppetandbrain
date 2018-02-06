@@ -4,6 +4,7 @@ import BrainButtonIcon from '../assets/brain-button-icon.svg';
 import StageButtonIcon from '../assets/stage-button-icon.svg';
 import {svgElement} from '../utils/utils';
 import ControlButton from './ControlButton';
+import SoundEffect from '../SoundEffect';
 
 export default class extends ControlButton
 {
@@ -18,9 +19,7 @@ export default class extends ControlButton
     this.brainBtn.addEventListener('mousedown', e => {
       if(!this.enabled) return;
 
-      // TODO: make it into generic method
-      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
-      audio.play();
+      SoundEffect.play('click');
 
       let brain = ActorSelection.selected[0].brain;
       History.push(Commander.create('OpenGraph', brain.id).process());
@@ -29,9 +28,7 @@ export default class extends ControlButton
     this.stageBtn.addEventListener('mousedown', e => {
       if(!this.enabled) return;
 
-      // TODO: make it into generic method
-      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
-      audio.play();
+      SoundEffect.play('click');
 
       History.push(Commander.create('CloseGraph', BrainGraph.brain.id).process());
     })

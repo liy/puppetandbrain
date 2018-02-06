@@ -2,8 +2,7 @@ import ConnectHelper from "../ConnectHelper";
 import ExecutionSymbol from "./ExecutionSymbol";
 import {svgElement} from '../../utils/utils';
 import ExecutionOutIcon from '../../assets/execution-out.svg';
-
-const linkSound = new Audio(require('../../assets/sounds/link.mp3'))
+import SoundEffect from '../../SoundEffect';
 
 export default class ExecutionOutSymbol extends ExecutionSymbol
 {
@@ -50,7 +49,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
 
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
-      linkSound.play();      
+      SoundEffect.play('link');
       History.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.startSymbol.node.id).processAndSave());
     }
     ConnectHelper.stop(e);
