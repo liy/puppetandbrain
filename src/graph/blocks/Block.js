@@ -8,6 +8,7 @@ import ExecutionOutPin from '../support/ExecutionOutPin';
 import GraphSelection from '../GraphSelection';
 import EventEmitter from '../../utils/EventEmitter';
 import DataType from '../../data/DataType';
+import SoundEffect from '../../SoundEffect';
 
 export default class Block extends EventEmitter
 {
@@ -140,6 +141,7 @@ export default class Block extends EventEmitter
 
     // check if drag to delete button
     if(e.target == UIController.deleteBtn.element) {
+      SoundEffect.play('trash');
       History.push(Commander.create('DeleteBlock', this.id, this.moveCommand.oldX, this.moveCommand.oldY).processAndSave());
       return;
     }

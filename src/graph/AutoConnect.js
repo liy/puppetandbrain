@@ -1,3 +1,5 @@
+import SoundEffect from '../SoundEffect';
+
 export default 
 {
   process(pin, createdNode) {
@@ -18,6 +20,8 @@ export default
       else if(!targetNode.enter.enabled){
         return;
       }
+
+      SoundEffect.play('link')
       History.push(Commander.create('CreateExecution', sourceNode.id, executionName, targetNode.id).processAndSave());
     }
     // If dragging from data pin, connect data pin only
@@ -26,13 +30,14 @@ export default
       if(pin.flow == 'in') {
         let firstOutput = createdNode.outputs.get(createdNode.outputs.names[0]);
         if(firstOutput) {
-          console.log(pin.node, pin.name, createdNode, firstOutput.name)
+          SoundEffect.play('link')
           History.push(Commander.create('CreateDataLink', pin.node.id, pin.name, createdNode.id, firstOutput.name).processAndSave())
         }
       }
       else {
         let firstInput = createdNode.inputs.get(createdNode.inputs.names[0]);
         if(firstInput) {
+          SoundEffect.play('link')
           History.push(Commander.create('CreateDataLink', createdNode.id, firstInput.name, pin.node.id, pin.name).processAndSave())
         }
       }

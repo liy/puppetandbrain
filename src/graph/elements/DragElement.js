@@ -2,6 +2,7 @@ import './DragElement.scss'
 import ElementController from './ElementController';
 import DataType from '../../data/DataType';
 import GraphSelection from '../GraphSelection';
+import SoundEffect from '../../SoundEffect';
 
 export default class {
   constructor(sourceElement) {
@@ -63,6 +64,7 @@ export default class {
 
     // drag over to the delete button, delete variable
     if(e.target == UIController.deleteBtn.element) {
+      SoundEffect.play('trash');
       History.push(Commander.create('DeleteVariable', this.sourceElement.variable.id, BrainGraph.brain.id).processAndSave())
       return;
     }
