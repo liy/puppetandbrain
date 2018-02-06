@@ -1,6 +1,6 @@
 {
   "name": "puppet-editor",
-  "version": "0.2.2-13",
+  "version": "0.2.2-14",
   "description": "",
   "main": "./src",
   "scripts": {
