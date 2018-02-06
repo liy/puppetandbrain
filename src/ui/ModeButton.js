@@ -18,12 +18,20 @@ export default class extends ControlButton
     this.brainBtn.addEventListener('mousedown', e => {
       if(!this.enabled) return;
 
+      // TODO: make it into generic method
+      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
+      audio.play();
+
       let brain = ActorSelection.selected[0].brain;
       History.push(Commander.create('OpenGraph', brain.id).process());
     })
 
     this.stageBtn.addEventListener('mousedown', e => {
       if(!this.enabled) return;
+
+      // TODO: make it into generic method
+      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
+      audio.play();
 
       History.push(Commander.create('CloseGraph', BrainGraph.brain.id).process());
     })

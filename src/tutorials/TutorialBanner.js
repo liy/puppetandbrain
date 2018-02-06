@@ -71,6 +71,8 @@ export default class
       }
     }
     else {
+      let audio = new Audio(require('../assets/sounds/switch27.ogg'))
+      audio.play();
       this.next();
     }
   }

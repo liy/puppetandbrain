@@ -13,6 +13,7 @@ export default class
     this.element.className = 'browser-header';
 
     this.closeButton = svgElement(CloseButton, {width:48, height:48, className: 'header-button'});
+    this.closeButton.id = 'close-browser-button'
     this.element.appendChild(this.closeButton);
 
     this.searchField = new SearchField();

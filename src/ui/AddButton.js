@@ -16,6 +16,10 @@ export default class extends ControlButton
     this.enabled = false;
 
     this.element.addEventListener('mousedown', async e => {
+      // TODO: make it into generic method
+      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
+      audio.play();
+
       if(this.mode == 'stage mode') {
         let browser = new PuppetBrowser();
         browser.open()

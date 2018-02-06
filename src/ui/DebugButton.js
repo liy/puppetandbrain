@@ -30,6 +30,10 @@ export default class DebugButton extends ControlButton
     })
 
     this.element.addEventListener('mousedown', e => {
+      // TODO: make it into generic method
+      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
+      audio.play();
+      
       Editor.toggle();
     })
   }

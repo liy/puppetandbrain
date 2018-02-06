@@ -26,6 +26,7 @@ export default class
     // note that I do not need to remove brainID from actorPod.
     // Because LookUp will generate a new ID if brainID exist.
     await actor.preload(pod);
+    actor.init(pod);
 
     // create variable for the actor brain
     // Note that, there is only 1 brain for an actor, so you can simply grab

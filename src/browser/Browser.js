@@ -96,8 +96,12 @@ export default class Browser extends EventEmitter
       this.boxes = null;
       // clear all the listener
       this.removeAllListeners();
+      
+      // dispatch bubble event before it is removed from the stage... 
+      this.element.dispatchEvent(new CustomEvent('browser.closed', {detail:this, bubbles:true}));
       document.body.removeChild(this.element);
     }})
+
 
     this.resolve(data);
   }

@@ -14,6 +14,10 @@ export default class BrainButton extends ControlButton
     this.element.appendChild(svgElement(BinButtonIcon, {width:68, height:68}));
 
     this.element.addEventListener('mousedown', e => {
+      // TODO: make it into generic method
+      let audio = new Audio(require('../assets/sounds/switch11.ogg'))
+      audio.play();
+      
       if(this.mode == 'stage mode') {
         History.push(Commander.create('DeleteActor', ActorSelection.selected[0].id).processAndSave());
       }

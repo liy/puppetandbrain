@@ -33,8 +33,6 @@ export default class SpineActor extends Actor
     await loader.start();
 
     this.removeComponent('placeholder');
-
-    this.init(pod);
   }
 
   init(pod) {
@@ -60,6 +58,8 @@ export default class SpineActor extends Actor
 
     this.spineComponent = new SpineComponent(spineData);
     this.addComponent('animation', this.spineComponent);
+    
+    this.emit('actor.ready', this);
   }
 
   gameStop() {

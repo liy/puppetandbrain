@@ -7,7 +7,7 @@ export default class Tutorial
 {
   constructor() {
     this.steps = [];
-    this.stepIndex = 0;
+    this.stepIndex = -1;
 
     // overlay
     this.overlay = new TutorialOverlay();
@@ -15,6 +15,8 @@ export default class Tutorial
     this.banner = new TutorialBanner(this.overlay);
     // cusor pointer
     this.cursor = new Cursor();
+
+    this.eventHandlers = [];
   }
 
   start() {
@@ -25,52 +27,94 @@ export default class Tutorial
     this.steps.push(step);
   }
 
-  next() {
-    this.cursor.fadeOut();
-    this.banner.fadeOut();
-    
-    this.currentStep = this.steps[this.stepIndex++];
-    if(this.currentStep) {
-      this.currentStep.call();
+  when(type, callback, target=document) {
+    let handler = callback.bind(this);
+    if(typeof target.addEventListener === 'function') {
+      this.eventHandlers.push({
+        target,
+        type,
+        handler
+      });
+      target.addEventListener(type, handler, {once:true})
     }
     else {
-      this.banner.push('🤖Me, author speaking again...')
-        .push('You have completed this tutorial sucessfully!')
-      this.banner.start().then(() => {
-        this.overlay.hide();
+      this.eventHandlers.push({
+        target,
+        type,
+        handler
       })
+      target.once(type, handler);
+    }
+  }
+
+  nextWhen(type, target=document) {
+    this.when(type, this.next, target);
+  }
+
+  clearEventHandlers() {
+    for(let {target, type, handler} of this.eventHandlers) {
+      if(typeof target.removeEventListener === 'function') {
+        target.removeEventListener(type, handler);
+      }
+      else {
+        target.off(type, handler);
+      }
+    }
+  }
+
+  next(param) {
+    // clear the event handlers of every step
+    this.clearEventHandlers();
+    this.cursor.clear();
+    this.banner.fadeOut();
+    
+    this.currentStep = this.steps[++this.stepIndex];
+    if(this.currentStep) {
+      this.currentStep.call(this, param);
+    }
+    else {
+      this.overlay.hide();
     }
   }
 
   redo() {
-    this.currentStep = this.steps[--this.stepIndex];
-    if(this.currentStep) {
-      this.currentStep.call();
-    }
-  }
+    // clear the event handlers of every step
+    this.clearEventHandlers();
+    this.cursor.clear();
+    this.banner.fadeOut();
 
-  gotoLastStep() {
-    this.stepIndex-=2;
     this.currentStep = this.steps[this.stepIndex];
     if(this.currentStep) {
       this.currentStep.call();
     }
   }
 
-  getPuppetFromBrowser(puppetName) {
+  gotoLastStep() {
+    // clear the event handlers of every step
+    this.clearEventHandlers();
+    this.cursor.clear();
+    this.banner.fadeOut();
+
+    this.currentStep = this.steps[--this.stepIndex];
+    if(this.currentStep) {
+      this.currentStep.call();
+    }
+  }
+
+  browserPuppet(puppetName) {
     return document.evaluate(`//span[text() = '${puppetName}']/..`, document.body).iterateNext()
   }
 
-  getBlockFromBrowser(blockName) {
+  browserBlock(blockName) {
     return document.evaluate(`//div[text() = '${blockName}']/..`, document.body).iterateNext()
   }
   
 
-  getInPinSvg(block) {
+  getInPin(block) {
     return block.inPin.symbol.svg;
   }
 
-  getOutPinSvg(block, name='default') {
+  getOutPin(block, name='default') {
     return block.outPins.get(name).symbol.svg;
   }
 
@@ -81,5 +125,9 @@ export default class Tutorial
       }
     }
     return null;
+  }
+
+  element(id) {
+    return document.getElementById(id);
   }
 }
