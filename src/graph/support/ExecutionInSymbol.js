@@ -9,7 +9,7 @@ export default class ExecutionInSymbol extends ExecutionSymbol
   constructor() {
     super('', 'in');
     
-    this.svg = svgElement(ExecutionInIcon, {className: 'execution-svg', width:43, height:22})
+    this.svg = svgElement(ExecutionInIcon, {width:43, height:22})
     this.element.appendChild(this.svg)
 
     this._offsetX = 20;

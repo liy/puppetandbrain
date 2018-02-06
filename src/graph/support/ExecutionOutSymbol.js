@@ -9,7 +9,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
   constructor(name) {
     super(name, 'out');
     
-    this.svg = svgElement(ExecutionOutIcon, {className: 'execution-svg', width:43, height:22})
+    this.svg = svgElement(ExecutionOutIcon, {width:43, height:22})
     this.element.appendChild(this.svg)
 
     this.connectionPath = document.createElementNS('http://www.w3.org/2000/svg','path');

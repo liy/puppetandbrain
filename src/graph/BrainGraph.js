@@ -11,7 +11,7 @@ class BrainGraph
   constructor() {
     this.container = document.getElementById('graph');
     this.blockContainer = document.getElementById('block-container');
-    this.svg = document.getElementById('svg');
+    this.svg = document.getElementById('graph-svg');
 
     // this make everything else lose focus, which is necessary when you want to force make
     // input field or texti field lose focus.

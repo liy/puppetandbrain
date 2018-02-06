@@ -1,3 +1,15 @@
+.execution-symbol {
+  // background-color: aqua;
+  height: 22px;
+  width: 43px;
+
+  cursor: pointer;
+
+  svg {
+    pointer-events: none;
+  }
+}
+
 .execution-pin:first-child {
   margin-top: 0;
 }
@@ -24,7 +36,7 @@
     user-select: none;
   }
 
-  .execution-svg {
+  .execution-symbol {
     position: absolute;
     margin-top: 8px;
   }
@@ -36,7 +48,7 @@
     .label {
       margin-left: 10px;
     }
-    .execution-svg {
+    .execution-symbol {
       left: -32px;
     }
   }
@@ -45,7 +57,7 @@
 .right {
   .execution-pin {
     flex-direction: row-reverse;
-    .execution-svg {
+    .execution-symbol {
       right: -35px;
     }
     .label {

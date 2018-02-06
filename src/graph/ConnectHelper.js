@@ -5,7 +5,7 @@ import SoundEffect from '../SoundEffect';
 class ConnectHelper
 {
   constructor() {
-    this.svg = document.getElementById('svg');
+    this.svg = document.getElementById('graph-svg');
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     
     this._snapSymbol = null;
@@ -36,6 +36,7 @@ class ConnectHelper
   }
 
   mouseOut() {
+    console.log('out')
     this._snapSymbol = null;
   }
 

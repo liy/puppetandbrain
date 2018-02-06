@@ -4,7 +4,7 @@ export default class ExecutionSymbol
 {
   constructor(name, flow) {
     this.element = document.createElement('div');
-    this.element.style.cursor = 'pointer';
+    this.element.className = 'execution-symbol'
 
     this.name = name;
     this.flow = flow;
