@@ -9,6 +9,7 @@ import GraphSelection from '../GraphSelection';
 import EventEmitter from '../../utils/EventEmitter';
 import DataType from '../../data/DataType';
 import SoundEffect from '../../SoundEffect';
+import { isMobile } from '../../utils/utils';
 
 export default class Block extends EventEmitter
 {
@@ -25,9 +26,12 @@ export default class Block extends EventEmitter
     this.body = new BlockBody();
     this.element.appendChild(this.body.element);
     
-    this.dragstart = this.dragstart.bind(this);
-    this.dragstop = this.dragstop.bind(this);
-    this.dragmove = this.dragmove.bind(this);
+    this.dragStart = this.dragStart.bind(this);
+    this.dragStop = this.dragStop.bind(this);
+    this.dragMove = this.dragMove.bind(this);
+    this.touchDragStart = this.touchDragStart.bind(this);
+    this.touchDragStop = this.touchDragStop.bind(this);
+    this.touchDragMove = this.touchDragMove.bind(this);
 
     this.selected = false;
   }
@@ -37,8 +41,8 @@ export default class Block extends EventEmitter
 
     this.body.iconPath = node.iconPath; 
     
-    this.body.element.addEventListener('mousedown', this.dragstart);
-    this.body.element.addEventListener('touchstart', this.dragstart);
+    this.body.element.addEventListener('mousedown', this.dragStart);
+    this.body.element.addEventListener('touchstart', this.touchDragStart);
 
     
     if(node.elementClass) {
@@ -94,11 +98,11 @@ export default class Block extends EventEmitter
   destroy() {
     this.removeAllListeners();
 
-    this.body.element.removeEventListener('mousedown', this.dragstart);
-    this.body.element.removeEventListener('touchstart', this.dragstart);
+    this.body.element.removeEventListener('mousedown', this.dragStart);
+    document.removeEventListener('mouseup', this.dragStop);
 
-    document.removeEventListener('mouseup', this.dragstop);
-    document.removeEventListener('touchend', this.dragstop);
+    this.body.element.removeEventListener('touchstart', this.touchDragStart);
+    document.removeEventListener('touchend', this.touchDragStop);
 
     BrainGraph.removeBlock(this);
   }
@@ -108,39 +112,55 @@ export default class Block extends EventEmitter
     // Invoked from GraphSelection.select();
   }
 
-  dragstart(e) {
+  dragStart(e) {
     // bring block to front.
     // note this will stop any child elements click event working.
     // ie, I have separate down and up event handler in input pin to simulate label click event.  
     this.element.parentElement.appendChild(this.element);
 
-    let sx = e.clientX ? e.clientX : e.touches[0].clientX;
-    let sy = e.clientY ? e.clientY : e.touches[0].clientY;
     this._dragOffset = {
-      x: (this.element.getBoundingClientRect().left - sx),
-      y: (this.element.getBoundingClientRect().top - sy)
+      x: (this.element.getBoundingClientRect().left - e.clientX),
+      y: (this.element.getBoundingClientRect().top - e.clientY)
     }
     GraphSelection.select(this);
 
     
-    document.addEventListener('mousemove', this.dragmove)
-    document.addEventListener('touchmove', this.dragmove)
-
-    document.addEventListener('touchend', this.dragstop);
-    document.addEventListener('mouseup', this.dragstop);
+    document.addEventListener('mousemove', this.dragMove)
+    document.addEventListener('mouseup', this.dragStop);
 
     this.moveCommand = Commander.create('MoveBlock', this);
   }
 
-  dragstop(e) {
-    document.removeEventListener('touchend', this.dragstop);
-    document.removeEventListener('mouseup', this.dragstop);
-    document.removeEventListener('mouseup', this.dragstop);
-    document.removeEventListener('mousemove', this.dragmove);
-    document.removeEventListener('touchmove', this.dragmove);
+  touchDragStart(e) {
+    e.preventDefault();
+
+    // bring block to front.
+    // note this will stop any child elements click event working.
+    // ie, I have separate down and up event handler in input pin to simulate label click event.  
+    this.element.parentElement.appendChild(this.element);
+
+    this._dragOffset = {
+      x: (this.element.getBoundingClientRect().left - e.changedTouches[0].clientX),
+      y: (this.element.getBoundingClientRect().top - e.changedTouches[0].clientY)
+    }
+    GraphSelection.select(this);
+
+    document.addEventListener('touchmove', this.touchDragMove)
+    document.addEventListener('touchend', this.touchDragStop);
+
+    this.moveCommand = Commander.create('MoveBlock', this);
+  }
+
+  dragStop(e) {
+    document.removeEventListener('mouseup', this.dragStop);
+    document.removeEventListener('mousemove', this.dragMove);
+
+    let target = e.target;
+    let x = e.clientX;
+    let y = e.clientY;
 
     // check if drag to delete button
-    if(e.target == UIController.deleteBtn.element) {
+    if(target == UIController.deleteBtn.element) {
       SoundEffect.play('trash');
       History.push(Commander.create('DeleteBlock', this.id, this.moveCommand.oldX, this.moveCommand.oldY).processAndSave());
       return;
@@ -150,13 +170,40 @@ export default class Block extends EventEmitter
     History.push(this.moveCommand.processAndSave());
   }
 
-  dragmove(e) {
+  touchDragStop(e) {
+    e.preventDefault();
     
-    let sx = e.clientX ? e.clientX : e.touches[0].clientX;
-    let sy = e.clientY ? e.clientY : e.touches[0].clientY;
+    document.removeEventListener('touchend', this.touchDragStop);
+    document.removeEventListener('touchmove', this.touchDragMove);
+
+    let x = e.changedTouches[0].clientX;
+    let y = e.changedTouches[0].clientY;
+    let target = document.elementFromPoint(x,y);
+
+    // check if drag to delete button
+    if(target == UIController.deleteBtn.element) {
+      SoundEffect.play('trash');
+      History.push(Commander.create('DeleteBlock', this.id, this.moveCommand.oldX, this.moveCommand.oldY).processAndSave());
+      return;
+    }
+
+    // process and push to history
+    History.push(this.moveCommand.processAndSave());
+  }
+
+  dragMove(e) {
     // Make sure all of the values are in client coordincate system. Then apply a scale
-    const x = (sx - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale;
-    const y = (sy - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale;
+    const x = (e.clientX - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale;
+    const y = (e.clientY - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale;
+    this.translate(x, y);
+
+    this.drawConnection();
+  }
+
+  touchDragMove(e) {
+    // Make sure all of the values are in client coordincate system. Then apply a scale
+    const x = (e.touches[0].clientX - BrainGraph.blockContainer.getBoundingClientRect().left + this._dragOffset.x)/BrainGraph.scale;
+    const y = (e.touches[0].clientY - BrainGraph.blockContainer.getBoundingClientRect().top + this._dragOffset.y)/BrainGraph.scale;
     this.translate(x, y);
 
     this.drawConnection();

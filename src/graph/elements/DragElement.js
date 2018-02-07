@@ -3,8 +3,10 @@ import ElementController from './ElementController';
 import DataType from '../../data/DataType';
 import GraphSelection from '../GraphSelection';
 import SoundEffect from '../../SoundEffect';
+import { isMobile } from '../../utils/utils';
 
-export default class {
+export default class 
+{
   constructor(sourceElement) {
     this.sourceElement = sourceElement;
 
@@ -19,12 +21,16 @@ export default class {
     
     this.dragMove = this.dragMove.bind(this);
     this.dragStop = this.dragStop.bind(this);
+    this.touchDragMove = this.touchDragMove.bind(this);
+    this.touchDragStop = this.touchDragStop.bind(this);
   }
 
   destroy() {
     document.body.removeChild(this.element);
     document.removeEventListener('mousemove', this.dragMove);
     document.removeEventListener('mouseup', this.dragStop);
+    document.removeEventListener('touchmove', this.touchDragMove);
+    document.removeEventListener('touchend', this.touchDragStop);
 
     GraphSelection.deselect();
   }
@@ -43,12 +49,24 @@ export default class {
     this.element.style.transform = `translate(${x}px, ${y}px)`;
   }
 
-  dragStart(e) {
+  dragStart(x, y) {
+    console.log('mouse start', x, y)
     document.body.appendChild(this.element);
-    this.moveTo(e.clientX, e.clientY);
+    this.moveTo(x, y);
 
     document.addEventListener('mousemove', this.dragMove);
     document.addEventListener('mouseup', this.dragStop);
+
+    GraphSelection.select(this);
+  }
+
+  touchDragStart(x, y) {
+    console.log('touch start', x, y)
+    document.body.appendChild(this.element);
+    this.moveTo(x, y);
+
+    document.addEventListener('touchmove', this.touchDragMove);
+    document.addEventListener('touchend', this.touchDragStop);
 
     GraphSelection.select(this);
   }
@@ -57,13 +75,38 @@ export default class {
     this.moveTo(e.clientX, e.clientY);
   }
 
+  touchDragMove(e) {
+    this.moveTo(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+  }
+
   dragStop(e) {
-    document.removeEventListener('mouseup', this.dragStop);
     document.removeEventListener('mousemove', this.dragMove);
+    document.removeEventListener('mouseup', this.dragStop);
+    let target = e.target;
+    let x = e.clientX;
+    let y = e.clientY;
+    this.drop(target, x, y)
+  }
+
+  touchDragStop(e) {
+    // stop mouse up firing:
+    // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Supporting_both_TouchEvent_and_MouseEvent
+    e.preventDefault();
+
+    document.removeEventListener('touchmove', this.touchDragMove);
+    document.removeEventListener('touchend', this.touchDragStop);
+
+    let x = e.changedTouches[0].clientX;
+    let y = e.changedTouches[0].clientY;
+    let target = document.elementFromPoint(x,y);
+    this.drop(target, x, y)
+  }
+
+  drop(target, x, y) {
     this.destroy();
 
     // drag over to the delete button, delete variable
-    if(e.target == UIController.deleteBtn.element) {
+    if(target == UIController.deleteBtn.element) {
       SoundEffect.play('trash');
       History.push(Commander.create('DeleteVariable', this.sourceElement.variable.id, BrainGraph.brain.id).processAndSave())
       return;
@@ -71,7 +114,7 @@ export default class {
 
     // anywhere outside of the panel is a valid drop area
     let rect = ElementController.panel.element.getBoundingClientRect();
-    if(e.clientX < rect.left) {
+    if(x < rect.left) {
       let pod = null;
       // create variable or property getter
       if(this.sourceElement.variable) {
@@ -112,8 +155,8 @@ export default class {
 
       // just naive way to centre the new block
       // getter setter usually have this size;
-      pod.x = e.clientX - 60;
-      pod.y = e.clientY - 60;
+      pod.x = x - 60;
+      pod.y = y - 60;
 
       History.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
     }

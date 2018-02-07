@@ -23,10 +23,12 @@ export default class BaseElement
     }
 
     this.onClick = this.onClick.bind(this);
-    this.element.addEventListener('click', this.onClick);
-    
     this.dragStart = this.dragStart.bind(this);
+    this.touchDragStart = this.touchDragStart.bind(this)
+
+    this.element.addEventListener('click', this.onClick);
     this.icon.addEventListener('mousedown', this.dragStart);
+    this.icon.addEventListener('touchstart', this.touchDragStart);
 
     this.selected = false;
   }
@@ -36,6 +38,7 @@ export default class BaseElement
   }
 
   destroy() {
+    this.icon.removeEventListener('touchstart', this.touchDragStart);
     this.icon.removeEventListener('mousedown', this.dragStart);
     this.element.removeEventListener('click', this.onClick);
 
@@ -47,7 +50,16 @@ export default class BaseElement
     GraphSelection.deselect();
 
     this.dragElement = new DragElement(this);
-    this.dragElement.dragStart(e);
+    this.dragElement.dragStart(e.clientX, e.clientY);
+  }
+
+  touchDragStart(e) {
+    e.preventDefault();
+    
+    GraphSelection.deselect();
+    
+    this.dragElement = new DragElement(this);
+    this.dragElement.touchDragStart(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
   }
 
   onClick(e) {
