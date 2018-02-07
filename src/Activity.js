@@ -66,7 +66,8 @@ window.Activity = {
 
   create: async function(fileRefs) {
     // no activity id cannot save
-    if(!this.activityID) return;
+    if(!this.id) return;
+
 
     // no longer a new activity
     this.isNew = false;
@@ -92,7 +93,7 @@ window.Activity = {
       // might be ok?
       let fileRefs = this.getFileRefs();
 
-      if(this.id == null) {
+      if(Activity.isNew) {
         Activity.create(fileRefs);
       }
       else {
