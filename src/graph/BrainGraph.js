@@ -145,7 +145,7 @@ class BrainGraph
       BlockFactory.create(node);
     }
 
-    this.redraw();
+    this.refresh();
 
     this.container.style.opacity = 0;
     this.tween = TweenLite.to(this.container.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
