@@ -13,6 +13,18 @@ class BrainGraph
     this.blockContainer = document.getElementById('block-container');
     this.svg = document.getElementById('graph-svg');
 
+    // #MobileDevices specific:
+    // Both these two listeners are for mobile devices.
+    // They prevent scrolling the container while panning the graph.
+    this.container.addEventListener('touchmove', e => {
+      // stop mobile drag to refresh action
+      e.preventDefault();
+    })
+    this.blockContainer.addEventListener('touchmove', e => {
+      // stop block container scrolling while it is panning
+      e.preventDefault();
+    })
+
     // this make everything else lose focus, which is necessary when you want to force make
     // input field or texti field lose focus.
     // When input is focused, only input undo and redo is allowed. Therefore, people will tend
@@ -79,8 +91,6 @@ class BrainGraph
   }
 
   onPan(e) {
-    // stop mobile drag to refresh action
-    e.preventDefault();
 
     if(e.touches) {
       this.translateX += e.touches[0].clientX - this.lastTouchX
