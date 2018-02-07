@@ -61,7 +61,6 @@ export default class
   }
 
   touchDragStart(x, y) {
-    console.log('touch start', x, y)
     document.body.appendChild(this.element);
     this.moveTo(x, y);
 
@@ -76,6 +75,8 @@ export default class
   }
 
   touchDragMove(e) {
+    // Cannot preventDefault on document level touchstart and touchmove event listener
+    // https://www.chromestatus.com/features/5093566007214080
     this.moveTo(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
   }
 
