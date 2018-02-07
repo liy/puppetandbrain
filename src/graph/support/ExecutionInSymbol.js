@@ -45,6 +45,9 @@ export default class ExecutionInSymbol extends ExecutionSymbol
     // Loop through all callers to remove execution, note that process
     // does not refresh, manual refresh has to be made
     History.push(Commander.create('RemoveParentExecution', this.node.id).processAndSave());
+    
+    // As the link is broken, make sense to deselect the selected symbol
+    ConnectHelper.deselectSymbol();
   }
 
   mouseUp(e) {
@@ -56,6 +59,19 @@ export default class ExecutionInSymbol extends ExecutionSymbol
     ConnectHelper.stop(e);
   }
   
+  touchDown(e) {
+    if(this.canConnect(ConnectHelper.selectedSymbol)) {
+      SoundEffect.play('link');
+      History.push(Commander.create('CreateExecution', ConnectHelper.selectedSymbol.node.id, 
+        ConnectHelper.selectedSymbol.name, this.node.id).processAndSave());
+      
+      // once a valid connection is made, deselect the sybmosl
+      ConnectHelper.deselectSymbol()
+      return;
+    }
+    ConnectHelper.selectSymbol(this);
+  }
+
   getConnectedPins() {
     return this.node.getCallers().map(caller => {
       let block = BrainGraph.getBlock(caller.nodeID);

@@ -55,6 +55,18 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
     ConnectHelper.stop(e);
   }
 
+  touchDown(e) {
+    if(this.canConnect(ConnectHelper.selectedSymbol)) {
+      SoundEffect.play('link')
+      History.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.selectedSymbol.node.id).processAndSave());
+      
+      // once a valid connection is made, deselect the sybmosl
+      ConnectHelper.deselectSymbol()
+      return;
+    }
+    ConnectHelper.selectSymbol(this);
+  }
+
   getConnectedPin() {
     const targetTask = this.node.execution.get(this.name);
     if(!targetTask) return null;
@@ -66,6 +78,9 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
   onContextMenu(e) {
     super.onContextMenu(e)
     History.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
+    
+    // Hold the symbol to break the link
+    ConnectHelper.deselectSymbol();
   }
 
   drawConnection() {

@@ -16,6 +16,9 @@ export default class ExecutionSymbol
   init(node) {
     this.node = node;
 
+    // FIXME: hack for touches, get the symbol from dom element
+    this.element.symbol = this;
+
     this.mouseOver = this.mouseOver.bind(this)
     this.mouseOut = this.mouseOut.bind(this)
     this.mouseDown = this.mouseDown.bind(this);
@@ -26,9 +29,9 @@ export default class ExecutionSymbol
     this.element.addEventListener('mouseup', this.mouseUp);
 
     this.touchUp = this.touchUp.bind(this);
+    this.element.addEventListener('touchend', this.touchUp);
     this.touchDown = this.touchDown.bind(this);
     this.element.addEventListener('touchstart', this.touchDown);
-    this.element.addEventListener('touchend', this.touchUp);
 
     this.onContextMenu = this.onContextMenu.bind(this);
     this.element.addEventListener('contextmenu', this.onContextMenu);
@@ -65,35 +68,11 @@ export default class ExecutionSymbol
   }
 
   touchDown(e) {
-    e.stopPropagation();
-
-    const move = e => {
-      const touch = e.touches[0];
-      let x = touch.clientX;
-      let y = touch.clientY;
-      // snap
-      this.drawLineSnap(x, y);
-      ConnectHelper.touchMove(touch);
-    }
-
-    const up = async e => {
-      document.removeEventListener('touchmove', move);
-      document.removeEventListener('touchend', up);
-
-      if(e.target == BrainGraph.container) {
-        await ConnectHelper.openBrowser(e.touches[0].clientX, e.touches[0].clientY);
-      }
-      ConnectHelper.stop(e);
-    }
-
-    ConnectHelper.startExecutionSymbol(this);
-    this.drawLineSnap(e.touches[0].clientX, e.touches[0].clientY);
-    document.addEventListener('touchmove', move);
-    document.addEventListener('touchend', up);
+    // override this to make connection in touch mode
   }
 
   touchUp(e) {
-    // override this to make connection
+    // TODO: to be removed
   }
 
   mouseUp(e) {

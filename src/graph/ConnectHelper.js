@@ -9,23 +9,26 @@ class ConnectHelper
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     
     this._snapSymbol = null;
+
+    // only used when touch is happening
+    this._selectedSymbol = null;
+  }
+
+  selectSymbol(symbol) {
+    // toggle
+    this._selectedSymbol = (this._selectedSymbol == symbol) ? null : symbol;
+  }
+
+  deselectSymbol() {
+    this._selectedSymbol = null;
+  }
+
+  get selectedSymbol() {
+    return this._selectedSymbol;
   }
 
   get snapSymbol() {
     return this._snapSymbol;
-  }
-
-  touchMove(touch) {
-    let target = document.elementFromPoint(touch.clientX, touch.clientY);
-    // first time
-    if(this.startSymbol && this.startSymbol.canConnect(target.symbol)) {
-      // first time, play snap sound
-      if(this._snapSymbol != target.symbol) SoundEffect.snap.play();
-      this._snapSymbol = target.symbol;
-    }
-    else {
-      this._snapSymbol = null;
-    }
   }
 
   mouseOver(symbol) {
