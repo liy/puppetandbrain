@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const OfflinePlugin = require('offline-plugin');
  
 
 module.exports = {
@@ -106,7 +107,8 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: ['whatwg-fetch', 'rusha'], // Specify the common bundle's name.
       minChunks: Infinity,
-    })
+    }),
+    new OfflinePlugin(),
   ],
   
   // Export full source map for debugging, maps to original source

@@ -1,3 +1,6 @@
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+OfflinePluginRuntime.install();
+
 // custom event polyfill
 (function () {
   if ( typeof window.CustomEvent === "function" ) return false;
@@ -133,3 +136,4 @@ firebase.auth().onAuthStateChanged(user => {
     // LookUp.user = null;
   }
 })
+
