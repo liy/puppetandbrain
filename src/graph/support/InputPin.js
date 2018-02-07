@@ -39,7 +39,6 @@ export default class extends DataPin
         case DataType.DOUBLE:
           this.setGadget(new InputField(data, 'number'));
           this.gadget.input.step = 0.01;
-          console.log(this.gadget)
           break;
         case DataType.INTEGER:
           this.setGadget(new TextField(data));

@@ -47,7 +47,7 @@ export default class ExecutionInSymbol extends ExecutionSymbol
     History.push(Commander.create('RemoveParentExecution', this.node.id).processAndSave());
     
     // As the link is broken, make sense to deselect the selected symbol
-    ConnectHelper.deselectSymbol();
+    ConnectHelper.stop();
   }
 
   mouseUp(e) {
@@ -66,10 +66,10 @@ export default class ExecutionInSymbol extends ExecutionSymbol
         ConnectHelper.selectedSymbol.name, this.node.id).processAndSave());
       
       // once a valid connection is made, deselect the sybmosl
-      ConnectHelper.deselectSymbol()
+      ConnectHelper.stop()
       return;
     }
-    ConnectHelper.selectSymbol(this);
+    ConnectHelper.startExecutionSymbol(this);
   }
 
   getConnectedPins() {
@@ -80,6 +80,8 @@ export default class ExecutionInSymbol extends ExecutionSymbol
   }
   
   drawConnection() {
+    super.drawConnection();
+    
     let pins = this.getConnectedPins();
     for(let pin of pins) {
       pin.drawConnection();

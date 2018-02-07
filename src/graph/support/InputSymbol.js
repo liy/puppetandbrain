@@ -68,6 +68,19 @@ export default class InputSymbol extends DataSymbol
     ConnectHelper.stop(e);
   }
 
+  touchDown(e) {
+    if(this.canConnect(ConnectHelper.selectedSymbol)) {
+      SoundEffect.play('link');
+      History.push(Commander.create('CreateDataLink', this.node.id, this.name, 
+        ConnectHelper.selectedSymbol.node.id, ConnectHelper.selectedSymbol.name).processAndSave())
+      
+      // once a valid connection is made, deselect the sybmosl
+      ConnectHelper.stop()
+      return;
+    }
+    ConnectHelper.startDataSymbol(this);
+  }
+
   getOutputPin() {
     if(!this.input.isConnected) return null;
     return BrainGraph.getBlock(this.input.output.node.id).outputPins.get(this.input.output.name);
@@ -77,8 +90,17 @@ export default class InputSymbol extends DataSymbol
     super.onContextMenu(e);
     History.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).processAndSave());
   }
+
+  drawSelectionIndicator() {
+    let p = this.position;
+
+    console.log(p.x - 100, p.y)
+    this.drawLine(p.x - 100, p.y, ConnectHelper.path);
+  }
   
   drawConnection() {
+    super.drawConnection();
+    
     const pin = this.getOutputPin();
     if(!pin) return;
 

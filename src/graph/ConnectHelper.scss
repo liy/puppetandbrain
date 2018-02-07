@@ -1,0 +1,20 @@
+@keyframes dash {
+  from {
+    stroke-dashoffset: 200;
+  }
+}
+
+@keyframes reversedDash {
+  from {
+    stroke-dashoffset: -200;
+  }
+}
+
+.symbol-indicator {
+  stroke-dasharray: 0, 6;
+  animation: dash 10s linear infinite;
+}
+
+.symbol-indicator-reversed {
+  animation: reversedDash 10s linear infinite;
+}

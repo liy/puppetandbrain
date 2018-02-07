@@ -5,6 +5,7 @@ import GraphSelection from './GraphSelection';
 import ArrayMap from '../utils/ArrayMap';
 import BlockBrowser from '../browser/BlockBrowser';
 import ElementController from './elements/ElementController';
+import ConnectHelper from './ConnectHelper';
 
 class BrainGraph
 {
@@ -113,8 +114,8 @@ class BrainGraph
 
   updateTransform() {
     this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale})  translate(${this.zoomX}px, ${this.zoomY}px)`;
-    // FIXME: might have performance issue!!!!
-    this.refresh();
+    // Only need to redraw all the svg paths
+    this.redraw();
   }
 
   open(brain) {
@@ -144,7 +145,7 @@ class BrainGraph
       BlockFactory.create(node);
     }
 
-    this.draw();
+    this.redraw();
 
     this.container.style.opacity = 0;
     this.tween = TweenLite.to(this.container.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
@@ -235,7 +236,45 @@ class BrainGraph
     }
   }
 
-  draw() {
+  /**
+   * redraw method does not remove any connections
+   * Simply redraw all the paths
+   */
+  redraw() {
+    for(let block of this.blocks.getValues()) {
+      // draw connection
+      // refresh in pin, only update the in pin icon status
+      if(block.inPin) block.inPin.drawConnection();
+      if(block.outPins) {
+        block.outPins.getValues().forEach(pin => {
+          pin.drawConnection();
+        })
+      }
+      block.inputPins.getValues().forEach(pin => {
+        pin.drawConnection();
+      })
+      block.outputPins.getValues().forEach(pin => {
+        pin.drawConnection();
+      })
+    }
+
+    // draw connect helper indicator
+    if(ConnectHelper.selectedSymbol) {
+      ConnectHelper.drawIndicator(ConnectHelper.selectedSymbol);
+    }
+  }
+
+  /**
+   * Refresh remove all the paths.
+   * Then recreate them and draw them.
+   * It is useful if there is MINUS action on the graph.
+   * ie. delete a block, removed a pin
+   */
+  refresh() {
+    while(this.svg.lastChild) {
+      this.svg.removeChild(this.svg.lastChild)
+    }
+
     for(let block of this.blocks.getValues()) {
       // draw connection
       // refresh in pin, only update the in pin icon status
@@ -251,6 +290,12 @@ class BrainGraph
       block.outputPins.getValues().forEach(pin => {
         pin.refreshSymbol();
       })
+    }
+
+    // draw connect helper indicator
+    if(ConnectHelper.selectedSymbol) {
+      ConnectHelper.drawIndicator(ConnectHelper.selectedSymbol);
+      this.svg.appendChild(ConnectHelper.path);
     }
   }
 
@@ -318,13 +363,6 @@ class BrainGraph
     else {
       this.container.classList.remove('blur')
     }
-  }
-
-  refresh() {
-    while(this.svg.lastChild) {
-      this.svg.removeChild(this.svg.lastChild)
-    }
-    this.draw();
   }
 
   resize() {

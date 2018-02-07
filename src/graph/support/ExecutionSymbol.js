@@ -1,4 +1,5 @@
 import ConnectHelper from '../ConnectHelper';
+import { isMobile } from '../../utils/utils';
 
 export default class ExecutionSymbol
 {
@@ -19,14 +20,16 @@ export default class ExecutionSymbol
     // FIXME: hack for touches, get the symbol from dom element
     this.element.symbol = this;
 
-    this.mouseOver = this.mouseOver.bind(this)
-    this.mouseOut = this.mouseOut.bind(this)
-    this.mouseDown = this.mouseDown.bind(this);
-    this.mouseUp = this.mouseUp.bind(this);
-    this.element.addEventListener('mouseover', this.mouseOver);
-    this.element.addEventListener('mouseout', this.mouseOut);
-    this.element.addEventListener('mousedown', this.mouseDown);
-    this.element.addEventListener('mouseup', this.mouseUp);
+    if(!isMobile) {  
+      this.mouseOver = this.mouseOver.bind(this)
+      this.mouseOut = this.mouseOut.bind(this)
+      this.mouseDown = this.mouseDown.bind(this);
+      this.mouseUp = this.mouseUp.bind(this);
+      this.element.addEventListener('mouseover', this.mouseOver);
+      this.element.addEventListener('mouseout', this.mouseOut);
+      this.element.addEventListener('mousedown', this.mouseDown);
+      this.element.addEventListener('mouseup', this.mouseUp);
+    }
 
     this.touchUp = this.touchUp.bind(this);
     this.element.addEventListener('touchend', this.touchUp);
@@ -90,6 +93,12 @@ export default class ExecutionSymbol
   onContextMenu(e) {
     e.preventDefault();
     e.stopPropagation();
+  }
+
+  drawConnection() {
+    if(ConnectHelper.selectedSymbol == this) {
+      ConnectHelper.drawIndicator(this)
+    }
   }
 
   drawLineSnap(x, y) {

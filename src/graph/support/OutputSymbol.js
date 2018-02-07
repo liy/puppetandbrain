@@ -41,6 +41,18 @@ export default class OutputSymbol extends DataSymbol
     }
     ConnectHelper.stop(e);
   }
+
+  touchDown(e) {
+    if(this.canConnect(ConnectHelper.selectedSymbol)) {
+      SoundEffect.play('link');
+      History.push(Commander.create('CreateDataLink', ConnectHelper.selectedSymbol.node.id, ConnectHelper.selectedSymbol.name, 
+        this.node.id, this.name).processAndSave());
+
+      // once a valid connection is made, deselect the sybmosl
+      ConnectHelper.stop(e)
+    }
+    ConnectHelper.startDataSymbol(this);
+  }
   
   onContextMenu(e) {
     super.onContextMenu(e);
@@ -48,6 +60,8 @@ export default class OutputSymbol extends DataSymbol
   }
 
   drawConnection() {
+    super.drawConnection();
+    
     let pointers = this.output.getPointers();
     for(let pointer of pointers) {
       let inputBlock = BrainGraph.getBlock(pointer.node.id);

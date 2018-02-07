@@ -26,13 +26,17 @@ export default class MoveBlock extends Command
     let block = BrainGraph.getBlock(this.blockID);
     block.x = this.oldX;
     block.y = this.oldY;
-    BrainGraph.refresh();
+
+    // TODO: just need to redraw the block?
+    BrainGraph.redraw();
   }
 
   redo() {
     let block = BrainGraph.getBlock(this.blockID);
     block.x = this.newX;
     block.y = this.newY;
-    BrainGraph.refresh();
+    
+    // TODO: just need to redraw the block?
+    BrainGraph.redraw();
   }
 }

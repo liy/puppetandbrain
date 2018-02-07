@@ -1,34 +1,32 @@
+import './ConnectHelper.scss'
+
 import AutoConnect from './AutoConnect';
 import BlockBrowser from '../browser/BlockBrowser';
 import SoundEffect from '../SoundEffect';
+import { isMobile } from '../utils/utils';
 
 class ConnectHelper
 {
   constructor() {
     this.svg = document.getElementById('graph-svg');
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    this.path.setAttribute('stroke-linecap', 'round');
+    this.path.classList.add('symbol-indicator')
     
+    this._startSymbol = null;
     this._snapSymbol = null;
-
-    // only used when touch is happening
-    this._selectedSymbol = null;
-  }
-
-  selectSymbol(symbol) {
-    // toggle
-    this._selectedSymbol = (this._selectedSymbol == symbol) ? null : symbol;
-  }
-
-  deselectSymbol() {
-    this._selectedSymbol = null;
-  }
-
-  get selectedSymbol() {
-    return this._selectedSymbol;
   }
 
   get snapSymbol() {
     return this._snapSymbol;
+  }
+
+  get startSymbol() {
+    return this._startSymbol;
+  }
+
+  get selectedSymbol() {
+    return this._startSymbol;
   }
 
   mouseOver(symbol) {
@@ -44,7 +42,9 @@ class ConnectHelper
 
   stop(e) {
     this._snapSymbol = null;
-    this.startSymbol = null;
+    this._startSymbol = null;
+
+    console.log('stpop')
 
     if(this.svg.contains(this.path)) {
       this.svg.removeChild(this.path);
@@ -68,21 +68,59 @@ class ConnectHelper
   }
 
   startExecutionSymbol(symbol) {
-    this.startSymbol = symbol;
+    if(isMobile && symbol == this.selectedSymbol) {
+      this.stop();
+      return;
+    }
+    
+    this._startSymbol = symbol;
     this.path.setAttribute('stroke', '#c6d4f7');
+    this.path.setAttribute('stroke-width', 4);
+    this.path.setAttribute('stroke-opacity', 1);
+    this.path.setAttribute('fill', 'transparent');
+    this.svg.appendChild(this.path);
+
+    this.updateDashDirection(symbol);
+    this.drawIndicator(symbol);
+  }
+
+  startDataSymbol(symbol) {
+    if(isMobile && symbol == this.selectedSymbol) {
+      this.stop();
+      return;
+    }
+
+    this._startSymbol = symbol;
+    this.path.setAttribute('stroke', symbol.hexColor);
     this.path.setAttribute('stroke-width', 3);
     this.path.setAttribute('stroke-opacity', 1);
     this.path.setAttribute('fill', 'transparent');
     this.svg.appendChild(this.path);
+
+    this.updateDashDirection(symbol);
+    this.drawIndicator(symbol);
   }
 
-  startDataSymbol(symbol) {
-    this.startSymbol = symbol;
-    this.path.setAttribute('stroke', symbol.hexColor);
-    this.path.setAttribute('stroke-width', 2);
-    this.path.setAttribute('stroke-opacity', 1);
-    this.path.setAttribute('fill', 'transparent');
-    this.svg.appendChild(this.path);
+  updateDashDirection(symbol) {
+    if(symbol.flow == 'in') {
+      this.path.classList.add('symbol-indicator-reversed')
+    }
+    else {
+      this.path.classList.remove('symbol-indicator-reversed')
+    }
+  }
+
+  drawIndicator(symbol) {
+    if(isMobile && symbol) {
+      let p = symbol.position;
+
+      if(symbol.flow == 'in') {
+        this.path.setAttribute('d', `M${p.x},${p.y} l-50,0`);
+      }
+      else {
+        this.path.setAttribute('d', `M${p.x},${p.y} l50,0`);
+      }
+    }
   }
 }
 

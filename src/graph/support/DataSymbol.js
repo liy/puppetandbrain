@@ -2,6 +2,7 @@ import './DataSymbol.scss';
 import ConnectHelper from '../ConnectHelper';
 import DataColor from '../../data/DataColor';
 import DataType from '../../data/DataType';
+import { isMobile } from '../../utils/utils';
 
 export default class DataSymbol
 {
@@ -25,14 +26,18 @@ export default class DataSymbol
     // FIXME: hack for touches, get the symbol from dom element
     this.element.symbol = this;
 
-    this.mouseOver = this.mouseOver.bind(this)
-    this.mouseOut = this.mouseOut.bind(this)
-    this.mouseDown = this.mouseDown.bind(this);
-    this.mouseUp = this.mouseUp.bind(this);
-    this.element.addEventListener('mouseover', this.mouseOver);
-    this.element.addEventListener('mouseout', this.mouseOut);
-    this.element.addEventListener('mousedown', this.mouseDown);
-    this.element.addEventListener('mouseup', this.mouseUp);
+
+    if(!isMobile) {  
+      this.mouseOver = this.mouseOver.bind(this)
+      this.mouseOut = this.mouseOut.bind(this)
+      this.mouseDown = this.mouseDown.bind(this);
+      this.mouseUp = this.mouseUp.bind(this);
+
+      this.element.addEventListener('mouseover', this.mouseOver);
+      this.element.addEventListener('mouseout', this.mouseOut);
+      this.element.addEventListener('mousedown', this.mouseDown);
+      this.element.addEventListener('mouseup', this.mouseUp);
+    }
 
     this.touchUp = this.touchUp.bind(this);
     this.touchDown = this.touchDown.bind(this);
@@ -78,32 +83,13 @@ export default class DataSymbol
   }
 
   touchDown(e) {
-    e.stopPropagation();
-
-    const move = e => {
-      const touch = e.touches[0];
-      this.drawLineSnap(touch.clientX, touch.clientY);
-      ConnectHelper.touchMove(touch);
-    }
-
-    const up = async e => {
-      document.removeEventListener('touchmove', move);
-      document.removeEventListener('touchend', up);
-
-      if(e.target == BrainGraph.container) {
-        await ConnectHelper.openBrowser(e.touches[0].clientX, e.touches[0].clientY);
-      }
-      ConnectHelper.stop(e);
-    }
-
+    // override this to make connection in touch mode
     ConnectHelper.startDataSymbol(this);
-    this.drawLineSnap(e.touches[0].clientX, e.touches[0].clientY);
-    document.addEventListener('touchmove', move);
-    document.addEventListener('touchend', up);
   }
 
   touchUp(e) {
-    // override this to make connection
+    // TODO: to be removed
+    console.log('touch up')
   }
 
   mouseUp(e) {
@@ -121,6 +107,12 @@ export default class DataSymbol
   onContextMenu(e) {
     e.preventDefault();
     e.stopPropagation();
+  }
+
+  drawConnection() {
+    if(ConnectHelper.selectedSymbol == this) {
+      ConnectHelper.drawIndicator(this)
+    }
   }
 
   

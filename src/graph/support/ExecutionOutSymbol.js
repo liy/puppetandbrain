@@ -61,10 +61,10 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
       History.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.selectedSymbol.node.id).processAndSave());
       
       // once a valid connection is made, deselect the sybmosl
-      ConnectHelper.deselectSymbol()
+      ConnectHelper.stop()
       return;
     }
-    ConnectHelper.selectSymbol(this);
+    ConnectHelper.startExecutionSymbol(this);
   }
 
   getConnectedPin() {
@@ -80,10 +80,12 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
     History.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
     
     // Hold the symbol to break the link
-    ConnectHelper.deselectSymbol();
+    ConnectHelper.stop();
   }
 
   drawConnection() {
+    super.drawConnection();
+    
     const pin = this.getConnectedPin();
     if(!pin) return;
 
