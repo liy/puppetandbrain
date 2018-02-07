@@ -19,15 +19,11 @@ export default class extends Gadget
     this.colorInput = document.createElement('input');
     this.colorInput.className = 'color-hex';
     this.colorInput.type = 'color'
+    console.log(this.colorInput)
     this.element.appendChild(this.colorInput);
     this.colorInput.addEventListener('change', this.onChange.bind(this));
 
     this.value = color;
-  }
-
-  destroy() {
-    super.destroy();
-    this.element.removeEventListener('mousedown', this.onDown);
   }
 
   onChange(e) {

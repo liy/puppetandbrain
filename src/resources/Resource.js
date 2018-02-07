@@ -1,5 +1,5 @@
 import { ContentType } from "../utils/utils";
-import JSONLoader from './JSONLoader';
+import JsonLoader from './JsonLoader';
 import TextLoader from './TextLoader';
 import ImageLoader from './ImageLoader';
 import SoundLoader from './SoundLoader';
@@ -24,7 +24,7 @@ export class LoaderBucket
 
     switch(contentType) {
       case ContentType.JSON:
-        this.loaders.push(new JSONLoader(id, url, options))
+        this.loaders.push(new JsonLoader(id, url, options))
         break;
       case ContentType.ATLAS:
         this.loaders.push(new TextLoader(id, url, options))

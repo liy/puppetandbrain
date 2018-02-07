@@ -1,4 +1,3 @@
-import JsonPromise from './utils/JsonPromise';
 import Variable from './data/Variable';
 import * as ObjecClasses from './objects';
 import {LoaderBucket} from './resources/Resource';

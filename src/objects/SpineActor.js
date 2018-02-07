@@ -1,5 +1,4 @@
 const filters = require('pixi-filters');
-import JsonPromise from '../utils/JsonPromise';
 import Actor from './Actor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import SpineComponent from '../components/SpineComponent';
