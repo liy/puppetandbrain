@@ -1,6 +1,7 @@
 import Tutorial from './Tutorial';
 import ActorSelection from '../objects/ActorSelection';
 import TutorialBanner from './TutorialBanner';
+import { isMobile } from '../utils/utils';
 
 class AnimatePuppet extends Tutorial
 {
@@ -110,7 +111,12 @@ class AnimatePuppet extends Tutorial
         .push("The other green one is called <b>Game Start</b> block", true)
         .push("Let's try to connect them together see what will happen...")
       await this.banner.start();
-      this.banner.info('Drag the <b>Game Start</b> white pin...', true);
+      if(isMobile) {
+        this.banner.info('Tap the <b>Game Start</b> white pin...', true);
+      }
+      else {
+        this.banner.info('Drag the <b>Game Start</b> white pin...', true);
+      }
 
       const gameStartBlock = this.getBlock('Game Start');
       const outPin = this.getOutPin(gameStartBlock);
@@ -118,7 +124,12 @@ class AnimatePuppet extends Tutorial
 
       const animationBlock = this.getBlock('Animation');
       this.when('mousedown', () => {
-        this.banner.info("and connect to the <b>Animaton</b>'s left white pin...", true);
+        if(isMobile) {
+          this.banner.info("and tap the left white pin of the <b>Animaton</b> block to make the connection...", true);
+        }
+        else {
+          this.banner.info("and connect to the <b>Animaton</b>'s left white pin...", true);
+        }
 
         const target = this.getInPin(animationBlock);
         this.cursor.moveTo(target, 'right');
