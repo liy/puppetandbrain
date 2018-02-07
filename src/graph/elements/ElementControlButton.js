@@ -19,7 +19,6 @@ export default class
     this.pointerDown = this.pointerDown.bind(this);
 
     this.element.addEventListener('mousedown', this.pointerDown);
-    this.element.addEventListener('touchstart', this.pointerDown);
   }
 
   pointerDown() {
