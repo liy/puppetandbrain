@@ -30,11 +30,11 @@ export default class ContainerComponent extends Component
 
   pointerDown(e) {
     let p = e.data.getLocalPosition(this.container.parent)
-    this.entity.mouseDown(p.x, p.y);
+    this.entity.pointerDown(p.x, p.y);
   }
 
   pointerUp(e) {
-    this.entity.mouseUp(e);
+    this.entity.pointerUp(e);
   }
 
   mouseOver(e) {

@@ -20,8 +20,8 @@ export default class Actor extends EventEmitter
     // create an entry in the reference look up
     this.id = LookUp.addActor(this, id);
 
-    this.relaseOutside = this.relaseOutside.bind(this)
-    this.dragMove = this.dragMove.bind(this);
+    this.pointerRelease = this.pointerRelease.bind(this)
+    this.mouseDragMove = this.mouseDragMove.bind(this);
     this.touchDragMove = this.touchDragMove.bind(this)
 
     this.selected = false;
@@ -85,8 +85,8 @@ export default class Actor extends EventEmitter
     this.removeComponents();
     LookUp.removeActor(this.id);
     document.removeEventListener('touchmove', this.touchDragMove);
-    document.removeEventListener('mousemove', this.dragMove);
-    document.removeEventListener('mouseup', this.relaseOutside);
+    document.removeEventListener('mousemove', this.mouseDragMove);
+    document.removeEventListener('mouseup', this.pointerRelease);
 
     Editor.off('game.prestart', this.gamePrestart, this);
     Editor.off('game.stop', this.gameStop, this);
@@ -123,30 +123,30 @@ export default class Actor extends EventEmitter
     }
   }
 
-  mouseDown(mouseX, mouseY) {
+  pointerDown(x, y) {
     this.select();
 
     this.offset = {
-      x: this.position.x - mouseX,
-      y: this.position.y - mouseY
+      x: this.position.x - x,
+      y: this.position.y - y
     }
 
     // release outside
-    document.addEventListener('mouseup', this.relaseOutside);
-    document.addEventListener('touchend', this.relaseOutside);
+    document.addEventListener('mouseup', this.pointerRelease);
+    document.addEventListener('touchend', this.pointerRelease);
 
     // crete move command, when move update it with new position
     if(!Editor.playing) this.moveCommand = Commander.create('MoveActor', this);
 
-    document.addEventListener('mousemove', this.dragMove);
+    document.addEventListener('mousemove', this.mouseDragMove);
     document.addEventListener('touchmove', this.touchDragMove)
   }
 
-  mouseUp(e) {
+  pointerUp(e) {
     document.removeEventListener('touchmove', this.touchDragMove)
-    document.removeEventListener('mousemove', this.dragMove);
-    document.removeEventListener('mouseup', this.relaseOutside);
-    document.removeEventListener('touchend', this.relaseOutside);
+    document.removeEventListener('mousemove', this.mouseDragMove);
+    document.removeEventListener('mouseup', this.pointerRelease);
+    document.removeEventListener('touchend', this.pointerRelease);
 
     // update entity's new position
     if(this.moveCommand) History.push(this.moveCommand.processAndSave());
@@ -160,11 +160,11 @@ export default class Actor extends EventEmitter
     }
   }
 
-  relaseOutside(e) {
+  pointerRelease(e) {
     document.removeEventListener('touchmove', this.touchDragMove)
-    document.removeEventListener('touchend', this.relaseOutside);
-    document.removeEventListener('mouseup', this.relaseOutside);
-    document.removeEventListener('mousemove', this.dragMove);
+    document.removeEventListener('touchend', this.pointerRelease);
+    document.removeEventListener('mouseup', this.pointerRelease);
+    document.removeEventListener('mousemove', this.mouseDragMove);
     // update entity's new position
     if(this.moveCommand) History.push(this.moveCommand.processAndSave());
   }
@@ -177,7 +177,7 @@ export default class Actor extends EventEmitter
     this.emit('pointerout', this);
   }
 
-  dragMove(e) {
+  mouseDragMove(e) {
     this.position.x = e.clientX + this.offset.x - Editor.stage.offsetX;
     this.position.y = e.clientY + this.offset.y - Editor.stage.offsetY;
   }

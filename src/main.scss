@@ -5,6 +5,9 @@ body {
   // background-color:#151515;
   background-color: #eeeeee;
   overflow: hidden;
+
+  // remove mobile selection hightlight
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 #app {
