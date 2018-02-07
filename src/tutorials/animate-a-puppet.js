@@ -123,17 +123,20 @@ class AnimatePuppet extends Tutorial
       this.cursor.moveTo(outPin, 'right');
 
       const animationBlock = this.getBlock('Animation');
-      this.when('mousedown', () => {
-        if(isMobile) {
+      if(isMobile) {
+        this.when('touchstart', () => {
           this.banner.info("and tap the left white pin of the <b>Animaton</b> block to make the connection...", true);
-        }
-        else {
+          const target = this.getInPin(animationBlock);
+          this.cursor.moveTo(target, 'right');
+        }, outPin);
+      }
+      else {
+        this.when('mousedown', () => {
           this.banner.info("and connect to the <b>Animaton</b>'s left white pin...", true);
-        }
-
-        const target = this.getInPin(animationBlock);
-        this.cursor.moveTo(target, 'right');
-      }, outPin);
+          const target = this.getInPin(animationBlock);
+          this.cursor.moveTo(target, 'right');
+        }, outPin);
+      }
 
       // handles user quick connect
       this.when('browser.opened', async e => {
@@ -171,6 +174,13 @@ class AnimatePuppet extends Tutorial
       this.banner.info('Click the name label to see what animations are available.')
       // This is not once event... not a big deal, once the label is removed, the event should be gb.
       this.when('mouseup', e => {
+        // make sure the gadget is visible
+        if(pin.gadget.visible) {
+          this.banner.info('Pick an animation you like');
+        }
+      }, pin.label)
+
+      this.when('touchend', e => {
         // make sure the gadget is visible
         if(pin.gadget.visible) {
           this.banner.info('Pick an animation you like');

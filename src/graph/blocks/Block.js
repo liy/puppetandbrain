@@ -132,7 +132,10 @@ export default class Block extends EventEmitter
   }
 
   touchDragStart(e) {
-    e.preventDefault();
+    // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Supporting_both_TouchEvent_and_MouseEvent
+    // Note I did not call preventDefault here, as it interfere with side gadget touch events
+    // although both dragStart and touchDragStart will be called when user tapping block.
+    // All the logic in the methods have no side effect when called twice.
 
     // bring block to front.
     // note this will stop any child elements click event working.
@@ -155,6 +158,8 @@ export default class Block extends EventEmitter
     document.removeEventListener('mouseup', this.dragStop);
     document.removeEventListener('mousemove', this.dragMove);
 
+    console.log('mouse drag stop')
+
     let target = e.target;
     let x = e.clientX;
     let y = e.clientY;
@@ -171,8 +176,10 @@ export default class Block extends EventEmitter
   }
 
   touchDragStop(e) {
-    e.preventDefault();
-    
+    // Note I did not call preventDefault here, as it interfere with side gadget touch events
+    // It stops mouseup firing, and this event is required for the gadget
+
+    console.log('touch drag stop')
     document.removeEventListener('touchend', this.touchDragStop);
     document.removeEventListener('touchmove', this.touchDragMove);
 
@@ -187,6 +194,9 @@ export default class Block extends EventEmitter
       return;
     }
 
+    // Note that touchDragStop and dragStop might both be called when user tap the block
+    // but the movecommand.processAndSave will return null anyway, as there is no position change
+    // so, it is safe to call History.push() twice here.
     // process and push to history
     History.push(this.moveCommand.processAndSave());
   }

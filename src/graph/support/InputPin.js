@@ -86,6 +86,12 @@ export default class extends DataPin
         this.labelClicked();
       }
     })
+
+    // this.label.addEventListener('touchstart', e => {
+    //   // prevent 
+    //   // e.preventDefault();
+    //   this.labelClicked();
+    // })
     
     this.input = this.node.inputs.get(this.name);
     if(!this.input.isConnected) {
