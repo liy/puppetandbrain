@@ -22,6 +22,7 @@ export default class Actor extends EventEmitter
 
     this.relaseOutside = this.relaseOutside.bind(this)
     this.dragMove = this.dragMove.bind(this);
+    this.touchDragMove = this.touchDragMove.bind(this)
 
     this.selected = false;
     this._clicks = 0;
@@ -83,6 +84,7 @@ export default class Actor extends EventEmitter
   destroy() {
     this.removeComponents();
     LookUp.removeActor(this.id);
+    document.removeEventListener('touchmove', this.touchDragMove);
     document.removeEventListener('mousemove', this.dragMove);
     document.removeEventListener('mouseup', this.relaseOutside);
 
@@ -131,16 +133,20 @@ export default class Actor extends EventEmitter
 
     // release outside
     document.addEventListener('mouseup', this.relaseOutside);
+    document.addEventListener('touchend', this.relaseOutside);
 
     // crete move command, when move update it with new position
     if(!Editor.playing) this.moveCommand = Commander.create('MoveActor', this);
 
     document.addEventListener('mousemove', this.dragMove);
+    document.addEventListener('touchmove', this.touchDragMove)
   }
 
   mouseUp(e) {
+    document.removeEventListener('touchmove', this.touchDragMove)
     document.removeEventListener('mousemove', this.dragMove);
     document.removeEventListener('mouseup', this.relaseOutside);
+    document.removeEventListener('touchend', this.relaseOutside);
 
     // update entity's new position
     if(this.moveCommand) History.push(this.moveCommand.processAndSave());
@@ -155,6 +161,8 @@ export default class Actor extends EventEmitter
   }
 
   relaseOutside(e) {
+    document.removeEventListener('touchmove', this.touchDragMove)
+    document.removeEventListener('touchend', this.relaseOutside);
     document.removeEventListener('mouseup', this.relaseOutside);
     document.removeEventListener('mousemove', this.dragMove);
     // update entity's new position
@@ -172,6 +180,13 @@ export default class Actor extends EventEmitter
   dragMove(e) {
     this.position.x = e.clientX + this.offset.x - Editor.stage.offsetX;
     this.position.y = e.clientY + this.offset.y - Editor.stage.offsetY;
+  }
+
+  touchDragMove(e) {
+    let x = e.touches[0].clientX;
+    let y = e.touches[0].clientY
+    this.position.x = x + this.offset.x - Editor.stage.offsetX;
+    this.position.y = y + this.offset.y - Editor.stage.offsetY;
   }
 
   select() {
