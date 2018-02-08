@@ -15,8 +15,8 @@ export default class extends AdaptorBlock
     })
   }
 
-  onEntryClick(e) {
-    super.onEntryClick(e);
-    this.node.operationName = e.currentTarget.textContent
+  onSelection(e) {
+    super.onSelection(e);
+    this.node.operationName = this.selectedItem.name;
   }
 }

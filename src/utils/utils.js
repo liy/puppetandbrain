@@ -57,3 +57,19 @@ export function getMimeType(ext) {
 export function aroundAt(v, range=10) {
   return v + Math.random()*range*2-range;
 }
+
+export function everyframe(callback) {
+  let id = 0;
+  const handler = {
+    cancel: function() {
+      cancelAnimationFrame(id);
+    }
+  };
+
+  (function loop() {
+    callback();
+    id = requestAnimationFrame(loop);
+  })();
+
+  return handler;
+}
