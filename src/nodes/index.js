@@ -43,8 +43,6 @@ export Branch from './Branch';
 export Loop from './Loop';
 export Repeat from './Repeat';
 export PlaySound from './PlaySound';
-export FlipLeft from './FlipLeft';
-export FlipRight from './FlipRight';
 export StepUp from './StepUp';
 export StepDown from './StepDown';
 export StepRight from './StepRight';
