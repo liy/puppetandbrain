@@ -12,12 +12,7 @@
 // export const RandomNumber = Operators.RandomNumber;
 // export const RandomInteger = Operators.RandomInteger;
 
-import * as Arithmetics from './Arithmetic';
-export const Addition = Arithmetics.Addition;
-export const Substract = Arithmetics.Substract;
-export const Divide = Arithmetics.Divide;
-export const Multiply = Arithmetics.Multiply;
-export const Power = Arithmetics.Power;
+export Arithmetic from './Arithmetic';
 
 export Break from './Break';
 export MakePosition from './MakePosition';

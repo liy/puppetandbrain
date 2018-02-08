@@ -3,8 +3,7 @@ import Block from './blocks/Block';
 
 window.BlockFactory = {
   create: function(node) {
-    let blockClassName = node.blockClassName || node.className+'Block';
-    let blockClass = BlockClasses[blockClassName];
+    let blockClass = BlockClasses[node.className+'Block'];
     let block = null;
     if(blockClass) {
       block = new blockClass();

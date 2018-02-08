@@ -1,8 +1,9 @@
 import Node from "./Node";
 import DataType from "../data/DataType";
 
-const ArithmeticTemplate = {
-  blockClassName: 'ArithmeticBlock',
+NodeTemplate.Arithmetic = {
+  className: 'Arithmetic',
+  name: '+ Add',
   inputs: [{
     name: 'A',
     descriptor: {
@@ -21,29 +22,27 @@ const ArithmeticTemplate = {
     }
   }],
   memory: {
-    A: 0,
-    B: 0,
+    A: 1,
+    B: 1,
   },
-  // operationNames: {
-  //   '+ add': 'Addition',
-  //   '- substract': 'Substract',
-  //   '× multiply': 'Multiply',
-  //   '÷ divide': 'Divide',
-  //   '^ power': 'Power',
-  // },
   operationNames: {
-    '+ add': 'Addition',
-    '- substract': 'Substract',
-    '× multiply': 'Multiply',
-    '÷ divide': 'Divide',
-    '^ power': 'Power',
+    '+ Add': 'add',
+    '- Substract': 'substract',
+    '× Multiply': 'multiply',
+    '÷ Divide': 'divide',
+    '^ Power': 'power',
   },
   elementClass: ['arithmetic'],
   category: 'Math',
-  keywords: ['arithmetic']
+  keywords: ['arithmetic', 
+    'add', 'addition', 'plus', '+' , 
+    'substract', 'minus',  '-', 
+    'multiply', 'times', '*', 
+    'divide', 'division', '/', 
+    'power', '^']
 }
 
-export class Arithmetic extends Node
+export default class Arithmetic extends Node
 {
   constructor(id) {
     super(id);
@@ -52,95 +51,48 @@ export class Arithmetic extends Node
   init(pod) {
     super.init(pod);
 
+    this.operationName = pod.operationName || '+ Add';
+
     this.outputs.assignProperty('value', {
       get: () => {
-        return this.value;
+        return this[this.operation](this);
       }
     });
   }
-}
 
-NodeTemplate.Addition = {
-  ...ArithmeticTemplate,
-  className: 'Addition',
-  name: '+ Add',
-  keywords: [...ArithmeticTemplate.keywords, '+', 'addition']
-}
-export class Addition extends Arithmetic
-{
-  constructor(id) {
-    super(id);
+  set operationName(name) {
+    this.operation = NodeTemplate.Arithmetic.operationNames[name];
+    this._operationName = name;
+  }
+ 
+  get operationName() {
+    return this._operationName;
   }
 
-  get value() {
+  add() {
     return Number(this.inputs.value('A')) + Number(this.inputs.value('B'));
   }
-}
 
-NodeTemplate.Substract = {
-  ...ArithmeticTemplate,
-  className: 'Substract',
-  name: '- Substract',
-  keywords: [...ArithmeticTemplate.keywords, '-', 'substract', 'minus']
-}
-export class Substract extends Arithmetic
-{
-  constructor(id) {
-    super(id);
-  }
-
-  get value() {
+  substract() {
     return Number(this.inputs.value('A')) - Number(this.inputs.value('B'));
   }
-}
 
-NodeTemplate.Multiply = {
-  ...ArithmeticTemplate,
-  className: 'Multiply',
-  name: '× Multiply',
-  keywords: [...ArithmeticTemplate.keywords, '*', 'multiply']
-}
-export class Multiply extends Arithmetic
-{
-  constructor(id) {
-    super(id);
-  }
-
-  get value() {
+  multiply() {
     return Number(this.inputs.value('A')) * Number(this.inputs.value('B'));
   }
-}
 
-NodeTemplate.Divide = {
-  ...ArithmeticTemplate,
-  className: 'Divide',
-  name: '÷ Divide',
-  keywords: [...ArithmeticTemplate.keywords, '/', 'division']
-}
-export class Divide extends Arithmetic
-{
-  constructor(id) {
-    super(id);
-  }
-
-  get value() {
+  divide() {
     return Number(this.inputs.value('A')) / Number(this.inputs.value('B'));
   }
-}
 
-NodeTemplate.Power = {
-  ...ArithmeticTemplate,
-  className: 'Power',
-  name: '^ Power',
-  keywords: [...ArithmeticTemplate.keywords, '^', 'Power']
-}
-export class Power extends Arithmetic
-{
-  constructor(id) {
-    super(id);
+  power() {
+    return Math.pow(Number(this.inputs.value('A')), Number(this.inputs.value('B')));
   }
 
-  get value() {
-    return Math.pow(Number(this.inputs.value('A')), Number(this.inputs.value('B')));
+  pod() {
+    return {
+      ...super.pod(),
+      operationName: this.operationName
+    }
   }
 }
