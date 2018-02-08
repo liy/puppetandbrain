@@ -13,9 +13,11 @@
 // export const RandomInteger = Operators.RandomInteger;
 
 export Arithmetic from './Arithmetic';
+export Compare from './Compare';
 
-export Break from './Break';
-export MakePosition from './MakePosition';
+export RandomNumber from './RandomNumber';
+export RandomInteger from './RandomInteger';
+
 
 // These are for brain variable setter and getter
 export Getter from './Getter';
@@ -49,7 +51,6 @@ export StepRight from './StepRight';
 export StepLeft from './StepLeft';
 export RotateAntiClockwise from './RotateAntiClockwise';
 export RotateClockwise from './RotateClockwise';
-export Extractor from './Extractor';
 
 // listeners
 export GameStart from './listeners/GameStart'
@@ -62,3 +63,10 @@ export PointerOut from './listeners/PointerOut'
 export PointerUp from './listeners/PointerUp'
 export SwitchAccess from './listeners/SwitchAccess'
 export AnimationEvent from './listeners/AnimationEvent'
+
+
+// not used 
+// hidden for now
+// export Extractor from './Extractor';
+// export Break from './Break';
+// export MakePosition from './MakePosition';

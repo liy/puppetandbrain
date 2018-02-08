@@ -7,3 +7,4 @@ export PerformBlock from './PerformBlock';
 export SetterBlock from './SetterBlock';
 export ExtractorBlock from './ExtractorBlock';
 export ArithmeticBlock from './ArithmeticBlock';
+export CompareBlock from './CompareBlock';

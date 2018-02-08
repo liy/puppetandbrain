@@ -105,35 +105,36 @@ export default class BlockBrowser extends Browser
       })
     }
 
+    // Not used for now
     // break position block
-    templates.push({
-      ...NodeTemplate.Break,
-      name: `Break Position`,
-      // the node going to be created is owned by the current opening brain
-      ownerID: BrainGraph.brain.owner.id,
-      inputName: 'position',
-      inputs: [{
-        name: 'position',
-        descriptor: {
-          type: DataType.VEC2,
-          gadgetClassName: 'PositionField'
-        }
-      }],
-      outputs: [{
-        name:'x',
-        descriptor: {
-          type: DataType.DOUBLE
-        }
-      },{
-        name:'y',
-        descriptor: {
-          type: DataType.DOUBLE
-        }
-      }],
-      memory: {
-        position: {x:0,y:0}
-      }
-    })
+    // templates.push({
+    //   ...NodeTemplate.Break,
+    //   name: `Break Position`,
+    //   // the node going to be created is owned by the current opening brain
+    //   ownerID: BrainGraph.brain.owner.id,
+    //   inputName: 'position',
+    //   inputs: [{
+    //     name: 'position',
+    //     descriptor: {
+    //       type: DataType.VEC2,
+    //       gadgetClassName: 'PositionField'
+    //     }
+    //   }],
+    //   outputs: [{
+    //     name:'x',
+    //     descriptor: {
+    //       type: DataType.DOUBLE
+    //     }
+    //   },{
+    //     name:'y',
+    //     descriptor: {
+    //       type: DataType.DOUBLE
+    //     }
+    //   }],
+    //   memory: {
+    //     position: {x:0,y:0}
+    //   }
+    // })
 
     // actor properties
     let actor = BrainGraph.brain.owner;

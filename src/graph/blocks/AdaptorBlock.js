@@ -11,10 +11,6 @@ export default class extends Block
   constructor() {
     super();
 
-    this.onTransitionEnd = this.onTransitionEnd.bind(this)
-    this.onSelection = this.onSelection.bind(this);
-    this.toggle = this.toggle.bind(this)
-
     this.element.removeChild(this.title);
 
     // TODO: replace this with a proper gadget?
@@ -37,28 +33,44 @@ export default class extends Block
 
     this.list = document.createElement('ol');
     this.selector.append(this.list);
-
-    this.header.addEventListener('click', this.toggle);
-
-    
-    this.selector.addEventListener('transitionend', this.onTransitionEnd)
-    this.selector.addEventListener('webkitTransitionEnd', this.onTransitionEnd)
-    this.selector.addEventListener('msTransitionEnd', this.onTransitionEnd)
   }
 
   init(node) {
     super.init(node);
+    
+    this.onTransitionEnd = this.onTransitionEnd.bind(this)
+    this.onSelection = this.onSelection.bind(this);
+    this.toggle = this.toggle.bind(this)
 
-    this.headerName.textContent = this.node.name;
+    this.headerName.textContent = this.node.operationName;
+
+    let operations = NodeTemplate[node.className].operations;
+    for(let operation of operations) {
+      this.addSelection(operation.name, operation)
+    }
+
+    this.selector.addEventListener('transitionend', this.onTransitionEnd)
+    this.selector.addEventListener('webkitTransitionEnd', this.onTransitionEnd)
+    this.selector.addEventListener('msTransitionEnd', this.onTransitionEnd)
+
+    this.header.addEventListener('click', this.toggle);
   }
 
-  addSelection(name, data) {
+  destroy() {
+    super.destroy();
+    this.selector.removeEventListener('transitionend', this.onTransitionEnd)
+    this.selector.removeEventListener('webkitTransitionEnd', this.onTransitionEnd)
+    this.selector.removeEventListener('msTransitionEnd', this.onTransitionEnd)
+    this.header.removeEventListener('click', this.toggle);
+  }
+
+  addSelection(name, operation) {
     let item = document.createElement('li');
     this.list.appendChild(item);
-    item.name = name;
+    item.operation = operation;
     
     let itemName = document.createElement('span');
-    itemName.textContent = name;
+    itemName.textContent = operation.description;
     item.appendChild(itemName)
     
     let icon = document.createElement('div');
@@ -69,7 +81,6 @@ export default class extends Block
     if(name == this.headerName.textContent) {
       this.selectedItem = item;
       this.selectedItem.classList.add('selected');
-      console.log(this.selectedItem)
     }
 
     item.addEventListener('click', this.onSelection)
@@ -82,7 +93,7 @@ export default class extends Block
     this.selectedItem = e.currentTarget;
     e.currentTarget.classList.add('selected');
 
-    this.headerName.textContent = this.selectedItem.textContent;
+    this.headerName.textContent = this.selectedItem.operation.name;
 
     this.toggle();
     
