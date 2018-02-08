@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-const OfflinePlugin = require('offline-plugin');
+// const OfflinePlugin = require('offline-plugin');
 
 
 module.exports = {
@@ -81,7 +81,7 @@ module.exports = {
       })
     }),
     new SpriteLoaderPlugin(),
-    new OfflinePlugin(),
+    // new OfflinePlugin(),
   ],
   
   // Export full source map for debugging, maps to original source

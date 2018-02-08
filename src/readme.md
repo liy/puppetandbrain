@@ -72,3 +72,20 @@ let userFiles = {
   }
 }
 ```
+
+# Merge
+Flip Left & Flip Right
+Step Up & Step Down & Step Right & Step Left
+Rotate aniticlockwise & Rotate clockwise
+Hover & Unhover => Hover.on Hover.off
+Click & Release => Mouse.down & Mouse.up
+Operators into 1 block
+logic into 1 block
+
+Game start & Game Loop into Game?
+
+# Hide
+Make Position
+Extractor
+Break Position
+Release

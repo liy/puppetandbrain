@@ -16,7 +16,6 @@ export CloseGraph from './CloseGraph';
 export MoveActor from './MoveActor';
 export ImportActor from './ImportActor';
 export DeleteActor from './DeleteActor';
-export CreateDemoActor from './CreateDemoActor';
 
 export CreateVariable from './CreateVariable';
 export RenameVariable from './RenameVariable';

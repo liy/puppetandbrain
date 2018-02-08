@@ -62,6 +62,12 @@ export default class BlockBrowser extends Browser
       }
     })
 
+    // filter out the unncessary arithemtic template
+    templates = templates.filter(template => {
+      return template.blockClassName != 'ArithmeticBlock';
+    })
+    templates.push(NodeTemplate['Addition']);
+
     // Make sure template does not have circular reference. I've changed all references into id.
     // Because fuse.js:
     //  this._log('\n\nOutput:\n\n', JSON.stringify(results));

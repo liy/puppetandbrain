@@ -1,17 +1,24 @@
 // Cannot use export * from './Operator'
 // for some reason, have to mannually export individual one for index
-import * as Operators from './Operator'
+// import * as Operators from './Operator'
+// // operator nodes
+// export const Operator = Operators.Operator;
+// export const Addition = Operators.Addition;
+// export const Divide = Operators.Divide;
+// export const Multiply = Operators.Multiply;
+// export const Equal = Operators.Equal;
+// export const LessEqual = Operators.LessEqual;
+// export const LessThan = Operators.LessThan;
+// export const RandomNumber = Operators.RandomNumber;
+// export const RandomInteger = Operators.RandomInteger;
 
-// operator nodes
-export const Operator = Operators.Operator;
-export const Addition = Operators.Addition;
-export const Divide = Operators.Divide;
-export const Multiply = Operators.Multiply;
-export const Equal = Operators.Equal;
-export const LessEqual = Operators.LessEqual;
-export const LessThan = Operators.LessThan;
-export const RandomNumber = Operators.RandomNumber;
-export const RandomInteger = Operators.RandomInteger;
+import * as Arithmetics from './Arithmetic';
+export const Addition = Arithmetics.Addition;
+export const Substract = Arithmetics.Substract;
+export const Divide = Arithmetics.Divide;
+export const Multiply = Arithmetics.Multiply;
+export const Power = Arithmetics.Power;
+
 export Break from './Break';
 export MakePosition from './MakePosition';
 

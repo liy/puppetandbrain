@@ -31,6 +31,7 @@ export default class Node extends EventEmitter
   }
 
   init(pod) {
+    console.log(pod.ownerID)
     this.owner = LookUp.get(pod.ownerID);
     this.owner.brain.addNode(this);
 
@@ -78,6 +79,11 @@ export default class Node extends EventEmitter
   get nodeName() {
     // default node name to be the class name
     return NodeTemplate[this.className].name || this.className;
+  }
+
+  get blockClassName() {
+    // default node name to be the class name
+    return NodeTemplate[this.className].blockClassName;
   }
 
   get elementClass() {

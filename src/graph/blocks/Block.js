@@ -44,7 +44,6 @@ export default class Block extends EventEmitter
     this.body.element.addEventListener('mousedown', this.dragStart);
     this.body.element.addEventListener('touchstart', this.touchDragStart);
 
-    
     if(node.elementClass) {
       for(let className of node.elementClass) {
         this.element.classList.add(className);
@@ -105,6 +104,27 @@ export default class Block extends EventEmitter
     document.removeEventListener('touchend', this.touchDragStop);
 
     BrainGraph.removeBlock(this);
+  }
+
+  clear() {
+    this.body.element.removeEventListener('mousedown', this.dragStart);
+    this.body.element.removeEventListener('touchstart', this.touchDragStart);
+
+    if(this.inPin) {
+      this.body.removePin(this.inPin);
+    }
+
+    for(let pin of this.outPins) {
+      this.body.removePin(pin);
+    }
+
+    for(let pin of this.inputPins) {
+      this.body.removePin(pin);
+    }
+
+    for(let pin of this.outputPins) {
+      this.body.removePin(pin);
+    }
   }
 
   focus() {
