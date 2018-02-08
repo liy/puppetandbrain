@@ -31,6 +31,7 @@ export default class Node extends EventEmitter
   }
 
   init(pod) {
+    console.log(pod)
     this.owner = LookUp.get(pod.ownerID);
     this.owner.brain.addNode(this);
 

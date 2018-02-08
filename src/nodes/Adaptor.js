@@ -22,7 +22,6 @@ export default class extends Node
 
   set operationName(name) {
     this.operation = NodeTemplate[this.className].operations.find(operation => {
-      console.log(operation.name, name)
       return operation.name == name;
     });
     this._operationName = name;

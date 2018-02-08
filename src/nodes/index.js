@@ -65,6 +65,9 @@ export SwitchAccess from './listeners/SwitchAccess'
 export AnimationEvent from './listeners/AnimationEvent'
 
 
+export Flip from './Flip'
+
+
 // not used 
 // hidden for now
 // export Extractor from './Extractor';

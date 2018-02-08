@@ -3,7 +3,7 @@ import Gadget from './Gadget';
 
 export default class extends Gadget
 {
-  constructor(list=[]) {
+  constructor({list=[], value}) {
     super()
     this.element.classList.add('drop-down');
 
@@ -21,7 +21,7 @@ export default class extends Gadget
       this.emit('gadget.state.change', e.target.value);
     })
 
-    this.setList(list);
+    this.setList(list, value);
   }
 
   setList(list, defaultValue) {

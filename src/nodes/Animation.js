@@ -25,6 +25,12 @@ export default class Animation extends Task
     super(id);
   }
 
+  init(pod) {
+    super.init(pod);
+
+    this.list = this.owner.getAnimations().map(animation => animation.name);
+  }
+
   run() {
     super.run()
 

@@ -70,7 +70,7 @@ export default class SpineActor extends Actor
     this.spineComponent.setAnimation(name, loop, track);
   }
 
-  async getAnimations() {
+  getAnimations() {
     return this.spineComponent.getAnimations();
   }
   
