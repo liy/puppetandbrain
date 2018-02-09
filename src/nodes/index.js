@@ -43,10 +43,6 @@ export Branch from './Branch';
 export Loop from './Loop';
 export Repeat from './Repeat';
 export PlaySound from './PlaySound';
-export StepUp from './StepUp';
-export StepDown from './StepDown';
-export StepRight from './StepRight';
-export StepLeft from './StepLeft';
 export RotateAntiClockwise from './RotateAntiClockwise';
 export RotateClockwise from './RotateClockwise';
 
@@ -64,6 +60,7 @@ export AnimationEvent from './listeners/AnimationEvent'
 
 
 export Flip from './Flip'
+export Step from './Step'
 
 
 // not used 

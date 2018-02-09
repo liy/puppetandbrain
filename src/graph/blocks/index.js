@@ -9,3 +9,4 @@ export ExtractorBlock from './ExtractorBlock';
 export ArithmeticBlock from './ArithmeticBlock';
 export CompareBlock from './CompareBlock';
 export FlipBlock from './FlipBlock';
+export StepBlock from './StepBlock'
