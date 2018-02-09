@@ -6,7 +6,7 @@ import { svgElement, everyframe } from '../../utils/utils';
 import ArrayMap from '../../utils/ArrayMap';
 
 // has extra dropdown on title to allow swapping to similar nodes
-export default class extends Block
+export default class AdaptorBlock extends Block
 {
   constructor() {
     super();
@@ -122,6 +122,6 @@ export default class extends Block
 
   template(pod) {
     super.template(pod);
-    this.headerName.textContent = pod.name;
+    this.headerName.textContent = pod.operations[0].description;
   }
 }

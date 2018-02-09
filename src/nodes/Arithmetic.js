@@ -3,6 +3,7 @@ import DataType from "../data/DataType";
 
 NodeTemplate.Arithmetic = {
   className: 'Arithmetic',
+  blockClassName: 'AdaptorBlock',
   name: '+',
   operationName: 'add',
   inputs: [{

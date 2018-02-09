@@ -14,6 +14,7 @@
 
 export Arithmetic from './Arithmetic';
 export Compare from './Compare';
+export Trigonometry from './Trigonometry';
 
 export RandomNumber from './RandomNumber';
 export RandomInteger from './RandomInteger';

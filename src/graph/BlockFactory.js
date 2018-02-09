@@ -4,6 +4,12 @@ import Block from './blocks/Block';
 window.BlockFactory = {
   create: function(node) {
     let blockClass = BlockClasses[node.className+'Block'];
+    let blockClassName = NodeTemplate[node.className].blockClassName;
+    console.log(blockClassName)
+    if(blockClassName) {
+      blockClass = BlockClasses[blockClassName];
+    }
+
     let block = null;
     if(blockClass) {
       block = new blockClass();
@@ -17,8 +23,13 @@ window.BlockFactory = {
   },
 
   createTemplateBlock: function(template) {
-    // node and block are 1 to 1 mapping
     let blockClass = BlockClasses[template.className+'Block'];
+    let blockClassName = NodeTemplate[template.className].blockClassName;
+    console.log(blockClassName)
+    if(blockClassName) {
+      blockClass = BlockClasses[blockClassName];
+    }
+
     let block = null;
     if(blockClass) {
       block = new blockClass();

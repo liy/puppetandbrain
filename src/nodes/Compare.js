@@ -3,6 +3,7 @@ import DataType from "../data/DataType";
 
 NodeTemplate.Compare = {
   className: 'Compare',
+  blockClassName: 'AdaptorBlock',
   name: '=',
   operationName: 'equal',
   inputs: [{
