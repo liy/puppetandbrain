@@ -72,7 +72,7 @@ class AnimatePuppet extends Tutorial
 
     this.addStep(async () => {
       this.banner.push('What is a <b>Block</b> you might wondering.', true)
-                 .push("It basically hepls define the behaviour of a puppet.")
+                 .push("It basically helps define the behaviour of a puppet.")
                  .push("Just like your brain cells which helps you think.")
                  .push("Let's find one called <b>Animation</b>.", true)
       await this.banner.start();
