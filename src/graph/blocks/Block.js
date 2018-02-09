@@ -100,17 +100,20 @@ export default class Block extends EventEmitter
     let pin = this.outPins.get(data.executionName);
     pin.symbol.visualize();
 
-    // recursively visualze input
     let block = BrainGraph.getBlock(data.targetNode.id);
     if(block) block.inputVisualization();
   }
 
+  // recursively visualze input data flow
   inputVisualization() {
     for(let inputPin of this.inputPins) {
       inputPin.symbol.visualize();
 
-      let block = BrainGraph.getBlock(inputPin.input.output.node.id);
-      if(block) block.inputVisualization();
+      // make sure the input is connected to a node
+      if(inputPin.input.isConnected) {
+        let block = BrainGraph.getBlock(inputPin.input.output.node.id);
+        if(block) block.inputVisualization();
+      }
     }
   }
 
