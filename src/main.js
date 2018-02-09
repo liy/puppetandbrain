@@ -1,5 +1,8 @@
-// import * as OfflinePluginRuntime from 'offline-plugin/runtime';
-// OfflinePluginRuntime.install();
+
+if(process.env.NODE_ENV !== 'dev') {  
+  import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+  OfflinePluginRuntime.install();
+}
 
 // custom event polyfill
 (function () {
