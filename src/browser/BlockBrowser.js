@@ -165,6 +165,13 @@ export default class BlockBrowser extends Browser
       })
     })
 
+    templates.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    })
+
+    templates.sort((a, b) => {
+      return a.category.localeCompare(b.category);
+    })
   
     return templates;
   }
