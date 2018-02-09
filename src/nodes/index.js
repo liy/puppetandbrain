@@ -43,8 +43,6 @@ export Branch from './Branch';
 export Loop from './Loop';
 export Repeat from './Repeat';
 export PlaySound from './PlaySound';
-export RotateAntiClockwise from './RotateAntiClockwise';
-export RotateClockwise from './RotateClockwise';
 
 // listeners
 export GameStart from './listeners/GameStart'
@@ -61,6 +59,7 @@ export AnimationEvent from './listeners/AnimationEvent'
 
 export Flip from './Flip'
 export Step from './Step'
+export Rotate from './Rotate'
 
 
 // not used 
