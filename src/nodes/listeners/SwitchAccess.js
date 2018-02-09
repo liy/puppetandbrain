@@ -1,4 +1,4 @@
-import Switch from '../../switch/Switch';
+import Switch from '../../access/Switch';
 import {Listener, Template as ParentTemplate} from "./Listener";
 import DataType from "../../data/DataType";
 

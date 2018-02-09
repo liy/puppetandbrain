@@ -1,6 +1,6 @@
 // import shortid from 'shortid';
 import Task from './nodes/Task';
-import Delay from './switch/Delay';
+import Delay from './access/Delay';
 
 // var STORE = Object.create(null);
 var STORE = {};

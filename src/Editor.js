@@ -1,5 +1,6 @@
 import Stage from './Stage';
 import EventEmitter from './utils/EventEmitter';
+import Mouse from './access/Mouse';
 
 class Editor extends EventEmitter
 {
@@ -12,6 +13,8 @@ class Editor extends EventEmitter
     this.playing = false;
 
     this.stage = new Stage();
+
+    this.mouse = new Mouse();
     
     document.addEventListener('keydown', (e) => {
       if(e.key == 'F6' || e.key == 'F4') {
@@ -44,6 +47,7 @@ class Editor extends EventEmitter
 
   start() {
     this.playing = true;
+    this.mouse.gamePreStart();
     this.emit('game.prestart')
     this.emit('game.start')
   }
@@ -51,6 +55,7 @@ class Editor extends EventEmitter
   stop() {
     this.playing = false;
     this.emit('game.stop')
+    this.mouse.gameStop();
   }
 
   toggle() {

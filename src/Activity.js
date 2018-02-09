@@ -1,6 +1,6 @@
 import ActivityLoader from "./ActivityLoader";
 import { Resource } from "./resources/Resource";
-import Delay from './switch/Delay'
+import Delay from './access/Delay'
 import NotificationControl from "./ui/NotificationControl";
 
 const delaySave = new Delay();
