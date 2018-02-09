@@ -19,6 +19,11 @@ export default class
    * @param {*} pod 
    */
   async createActor(pod) {
+    // just in case pod has no varialbe, node, or pointers
+    pod.variables = pod.variables || [];
+    pod.nodes = pod.nodes || [];
+    pod.pointers = pod.pointers || [];  
+
     let actor = new ObjecClasses[pod.className]();
     Editor.stage.addActor(actor);
 
