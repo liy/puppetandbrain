@@ -74,7 +74,7 @@ export default class BlockBrowser extends Browser
         let action = actor.brain.actions[actionName];
         templates.push({
           ...NodeTemplate.Perform,
-          name: `Perform ${actionName}`,
+          name: `${action.owner.name} Perform ${actionName}`,
           // the node going to be created is owned by the current opening brain
           ownerID: BrainGraph.brain.owner.id,
           actionID: actor.brain.actions[actionName].id,
@@ -166,13 +166,9 @@ export default class BlockBrowser extends Browser
     })
 
     templates.sort((a, b) => {
-      return a.name.localeCompare(b.name);
+      return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
     })
 
-    templates.sort((a, b) => {
-      return a.category.localeCompare(b.category);
-    })
-  
     return templates;
   }
 
