@@ -71,8 +71,8 @@ class AnimatePuppet extends Tutorial
     });
 
     this.addStep(async () => {
-      this.banner.push('What is a <b>Block</b> you might wondering.', true)
-                 .push("It basically helps define the behaviour of a puppet.")
+      this.banner.push('What is a <b>Block</b> you might be wondering.', true)
+                 .push("It basically helps to define the behaviour of a puppet.")
                  .push("Just like your brain cells which helps you think.")
                  .push("Let's find one called <b>Animation</b>.", true)
       await this.banner.start();
@@ -162,7 +162,7 @@ class AnimatePuppet extends Tutorial
         .push('By connecting two blocks, it basically means:')
         .push('When the game starts...')
         .push('Do an animation!')
-        .push('What kind of animation you might wondering.')
+        .push('What kind of animation?')
       await this.banner.start();
 
       let animationBlock = this.getBlock('Animation');
