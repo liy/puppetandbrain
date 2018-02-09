@@ -4,6 +4,7 @@ import DataType from "../data/DataType";
 NodeTemplate.Arithmetic = {
   className: 'Arithmetic',
   name: '+',
+  operationName: 'add',
   inputs: [{
     name: 'A',
     descriptor: {

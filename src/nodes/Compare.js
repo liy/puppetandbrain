@@ -4,6 +4,7 @@ import DataType from "../data/DataType";
 NodeTemplate.Compare = {
   className: 'Compare',
   name: '=',
+  operationName: 'equal',
   inputs: [{
     name: 'A',
     descriptor: {
@@ -98,6 +99,6 @@ export default class Compare extends Adaptor
   }
 
   greaterOrEqual() {
-    return Number(this.inputs.value('A')) <= Number(this.inputs.value('B'));
+    return Number(this.inputs.value('A')) >= Number(this.inputs.value('B'));
   }
 }

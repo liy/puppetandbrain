@@ -42,11 +42,11 @@ export default class extends Block
     this.onSelection = this.onSelection.bind(this);
     this.toggle = this.toggle.bind(this)
 
-    this.headerName.textContent = this.node.operationName;
+    this.headerName.textContent = this.node.operation.name;
 
     let operations = NodeTemplate[node.className].operations;
     for(let operation of operations) {
-      this.addSelection(operation.name, operation)
+      this.addSelection(operation)
     }
 
     this.selector.addEventListener('transitionend', this.onTransitionEnd)
@@ -64,7 +64,7 @@ export default class extends Block
     this.header.removeEventListener('click', this.toggle);
   }
 
-  addSelection(name, operation) {
+  addSelection(operation) {
     let item = document.createElement('li');
     this.list.appendChild(item);
     item.operation = operation;
@@ -78,7 +78,7 @@ export default class extends Block
     icon.appendChild(svgElement(TickIcon, {width:11, height:8}));
     item.appendChild(icon);
 
-    if(name == this.headerName.textContent) {
+    if(operation.operationName == this.node.operationName) {
       this.selectedItem = item;
       this.selectedItem.classList.add('selected');
     }
@@ -97,7 +97,7 @@ export default class extends Block
 
     this.toggle();
     
-    // TODO: override to change node
+    this.node.operationName = this.selectedItem.operation.operationName;
   }
 
   toggle() {
