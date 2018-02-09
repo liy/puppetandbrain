@@ -1,3 +1,4 @@
+import './InputSymbol.scss';
 import DataSymbol from "./DataSymbol";
 import ConnectHelper from "../ConnectHelper";
 import InputIcon from '../../assets/input.svg';
@@ -16,6 +17,7 @@ export default class InputSymbol extends DataSymbol
     this.element.appendChild(this.svg);
 
     this.connectionPath = document.createElementNS('http://www.w3.org/2000/svg','path');
+    this.connectionPath.setAttribute('stroke-linecap', 'round');
     this.connectionPath.setAttribute('stroke-width', 2);
     this.connectionPath.setAttribute('stroke-opacity', 1);
     this.connectionPath.setAttribute('fill', 'none');
@@ -38,6 +40,16 @@ export default class InputSymbol extends DataSymbol
       this.svg.style.setProperty('--fill', 'none');
       // this.svg.style.setProperty('--stroke', '#98C6DE');
       this.svg.style.setProperty('--stroke', this.hexColor);
+    }
+  }
+
+  visualize() {
+    // Do not constantly add class....ie game tick execution
+    if(!this.connectionPath.classList.contains('input-visualization')) {
+      this.connectionPath.classList.add('input-visualization');
+      setTimeout(() => {
+        this.connectionPath.classList.remove('input-visualization');
+      }, 500);
     }
   }
 

@@ -88,7 +88,6 @@ export class Task extends Node
   }
 
   run() {
-    this.emit('task.start', this);
     // console.log('run', this.nodeName, this.id);
   }
 

@@ -1,3 +1,4 @@
+import './ExecutionOutSymbol.scss'
 import ConnectHelper from "../ConnectHelper";
 import ExecutionSymbol from "./ExecutionSymbol";
 import {svgElement} from '../../utils/utils';
@@ -13,23 +14,13 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
     this.element.appendChild(this.svg)
 
     this.connectionPath = document.createElementNS('http://www.w3.org/2000/svg','path');
+    this.connectionPath.setAttribute('stroke-linecap', 'round');
     this.connectionPath.setAttribute('stroke', '#d0e400');
     this.connectionPath.setAttribute('stroke-width', 3);
     this.connectionPath.setAttribute('stroke-opacity', 1);
     this.connectionPath.setAttribute('fill', 'none');
 
     this._offsetX = -20;
-  }
-
-  init(node) {
-    super.init(node);
-
-    // this.node.on('task.start', task => {
-    //   this.connectionPath.setAttribute('stroke', '#ffbb00');
-    //   setTimeout(() => {
-    //     this.connectionPath.setAttribute('stroke', '#d0e400');
-    //   }, 500);
-    // })
   }
   
   get isConnected() {
@@ -90,6 +81,16 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
     if(!pin) return;
 
     this.drawLine(pin.symbol.position.x, pin.symbol.position.y, this.connectionPath);
+  }
+
+  visualize() {
+    // Do not constantly add class....ie game tick execution
+    if(!this.connectionPath.classList.contains('exec-visualization')) {
+      this.connectionPath.classList.add('exec-visualization');
+      setTimeout(() => {
+        this.connectionPath.classList.remove('exec-visualization');
+      }, 500);
+    }
   }
 
   get position() {
