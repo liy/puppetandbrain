@@ -1,9 +1,9 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
 
-NodeTemplate.Hover = {
+NodeTemplate.HoverEvent = {
   ...ParentTemplate,
-  className: 'Hover',
-  name: 'Hover',
+  className: 'HoverEvent',
+  name: 'Hover Event',
   execution: [{
     name: 'enter'
   }, {
@@ -12,7 +12,7 @@ NodeTemplate.Hover = {
   keywords: [...ParentTemplate.keywords, 'roll over', 'mouse over', 'roll out', 'mouse out']
 }
 
-export default class Hover extends Listener
+export default class HoverEvent extends Listener
 {
   constructor(id) {
     super(id);

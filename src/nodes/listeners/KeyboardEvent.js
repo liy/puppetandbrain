@@ -1,10 +1,10 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
 import DataType from "../../data/DataType";
 
-NodeTemplate.Keyboard = {
+NodeTemplate.KeyboardEvent = {
   ...ParentTemplate,
-  name: 'Keyboard',
-  className: 'Keyboard',
+  className: 'KeyboardEvent',
+  name: 'Keyboard Event',
   execution: [{
       name: 'down'
     }, {
@@ -21,9 +21,10 @@ NodeTemplate.Keyboard = {
   memory: {
     'key name': 'Space'
   },
+  keywords: ['key down', 'key up', 'key']
 }
 
-export default class Keyboard extends Listener
+export default class KeyboardEvent extends Listener
 {
   constructor(id) {
     super(id);

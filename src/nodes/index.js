@@ -48,11 +48,11 @@ export PlaySound from './PlaySound';
 // export GameStart from './listeners/GameStart'
 // export Ticker from './listeners/Ticker'
 export GameEvent from "./listeners/GameEvent";
-export Keyboard from './listeners/Keyboard'
-export SwitchAccess from './listeners/SwitchAccess'
+export KeyboardEvent from './listeners/KeyboardEvent'
+export SwitchEvent from './listeners/SwitchEvent'
 export AnimationEvent from './listeners/AnimationEvent'
-export Hover from './listeners/Hover'
-export Click from './listeners/Click'
+export HoverEvent from './listeners/HoverEvent'
+export ClickEvent from './listeners/ClickEvent'
 export MouseEvent from './listeners/MouseEvent'
 
 

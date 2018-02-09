@@ -9,6 +9,7 @@ NodeTemplate.GameEvent = {
     name: 'tick'
   }],
   name: 'Game Event',
+  keywords: ['game start', 'game loop', 'tick']
 }
 
 export default class GameEvent extends Listener
