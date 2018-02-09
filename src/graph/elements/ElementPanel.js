@@ -61,7 +61,7 @@ export default class
     this.control.appendChild(mapButton.element);
     this.control.appendChild(positionButton.element);
     this.control.appendChild(pipetteButton.element);
-    this.control.appendChild(actorButton.element);
+    // this.control.appendChild(actorButton.element);
     this.control.appendChild(audioButton.element);
 
     let onTransitionEnd = (e) => {

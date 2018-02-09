@@ -178,8 +178,6 @@ export default class Block extends EventEmitter
     document.removeEventListener('mouseup', this.dragStop);
     document.removeEventListener('mousemove', this.dragMove);
 
-    console.log('mouse drag stop')
-
     let target = e.target;
     let x = e.clientX;
     let y = e.clientY;

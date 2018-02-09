@@ -139,7 +139,9 @@ export default class Actor extends EventEmitter
     if(!Editor.playing) this.moveCommand = Commander.create('MoveActor', this);
 
     document.addEventListener('mousemove', this.mouseDragMove);
-    document.addEventListener('touchmove', this.touchDragMove)
+    document.addEventListener('touchmove', this.touchDragMove);
+
+    this.emit('pointerdown', this)
   }
 
   pointerUp(e) {
@@ -158,6 +160,8 @@ export default class Actor extends EventEmitter
     if(++this._clicks%2 == 0) {
       History.push(Commander.create('OpenGraph', this.brain.id).process());
     }
+
+    this.emit('pointerup', this)
   }
 
   pointerRelease(e) {

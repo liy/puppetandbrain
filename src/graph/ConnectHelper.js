@@ -44,8 +44,6 @@ class ConnectHelper
     this._snapSymbol = null;
     this._startSymbol = null;
 
-    console.log('stpop')
-
     if(this.svg.contains(this.path)) {
       this.svg.removeChild(this.path);
     }
