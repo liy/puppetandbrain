@@ -47,8 +47,8 @@ export default class Flip extends Task
   }
 
   prestart() {
-    this.scaleX = this.owner.scale.x;
-    this.scaleY = this.owner.scale.y;
+    // this.scaleX = this.owner.scale.x;
+    // this.scaleY = this.owner.scale.y;
   }
 
   stop() {
@@ -58,16 +58,16 @@ export default class Flip extends Task
   run() {
     super.run();
 
-    let sx = this.scaleX;
-    let sy = this.scaleY;
+    let sx = Math.abs(this.owner.scale.x);
+    let sy = Math.abs(this.owner.scale.y);
 
     switch(this.inputs.value('direction')) {
       case 'left':
-        sx = -this.scaleX
+        sx = -sx
         break;
       case 'down':
-        sy = -this.scaleY
-        break
+        sy = -sy
+        break;
     }
     
     this.tween = TweenLite.to(this.owner.scale, 0.15, {x:sx, y:sy, ease:Quad.easeIn, onComplete: () => {
