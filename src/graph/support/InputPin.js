@@ -25,51 +25,53 @@ export default class extends DataPin
     let input = node.inputs.get(this.name);
     let data = node.memory[this.name];
     let gadgetClassName = input.descriptor.gadgetClassName;
-    if(gadgetClassName) {
-      this.setGadget(new gadgetClasses[gadgetClassName](data));
-    }
-    else {
-      switch(input.type) {
-        case DataType.GENERIC:
-          this.setGadget(new TextField(data));
-          break;
-        case DataType.BOOLEAN:
-          this.setGadget(new Toggle(data));
-          break;
-        case DataType.DOUBLE:
-          this.setGadget(new InputField(data, 'number'));
-          this.gadget.input.step = 0.01;
-          break;
-        case DataType.INTEGER:
-          this.setGadget(new TextField(data));
-          break;
-        case DataType.STRING:
-          this.setGadget(new TextField(data));
-          break;
-        case DataType.ACTOR:
-          this.setGadget(new ActorPicker(data));
-          break;
-        case DataType.COLOR:
-          this.setGadget(new ColorButton(data));
-          break;
-        case DataType.ARRAY:
-          // this.setGadget(new ColorButton(data));
-          break;
-        case DataType.VEC2:
-          this.setGadget(new Vec2Field(data));
-          break;
-        case DataType.MAP:
-          // this.setGadget(new TextField(data));
-          break;
-        case DataType.AUDIO:
-          this.setGadget(new AudioField(data||{}));
-          break;
-        case DataType.IMAGE:
-          this.setGadget(new TextField(data));
-          break;
-        default:
-          this.setGadget(new TextField(data));
-          break;
+    if(!input.descriptor.gadgetDisabled) {
+      if(gadgetClassName) {
+        this.setGadget(new gadgetClasses[gadgetClassName](data));
+      }
+      else {
+        switch(input.type) {
+          case DataType.GENERIC:
+            this.setGadget(new TextField(data));
+            break;
+          case DataType.BOOLEAN:
+            this.setGadget(new Toggle(data));
+            break;
+          case DataType.DOUBLE:
+            this.setGadget(new InputField(data, 'number'));
+            this.gadget.input.step = 0.01;
+            break;
+          case DataType.INTEGER:
+            this.setGadget(new TextField(data));
+            break;
+          case DataType.STRING:
+            this.setGadget(new TextField(data));
+            break;
+          case DataType.ACTOR:
+            this.setGadget(new ActorPicker(data));
+            break;
+          case DataType.COLOR:
+            this.setGadget(new ColorButton(data));
+            break;
+          case DataType.ARRAY:
+            // this.setGadget(new ColorButton(data));
+            break;
+          case DataType.VEC2:
+            this.setGadget(new Vec2Field(data));
+            break;
+          case DataType.MAP:
+            // this.setGadget(new TextField(data));
+            break;
+          case DataType.AUDIO:
+            this.setGadget(new AudioField(data||{}));
+            break;
+          case DataType.IMAGE:
+            this.setGadget(new TextField(data));
+            break;
+          default:
+            this.setGadget(new TextField(data));
+            break;
+        }
       }
     }
     
@@ -87,18 +89,10 @@ export default class extends DataPin
       }
     })
 
-    // this.label.addEventListener('touchstart', e => {
-    //   // prevent 
-    //   // e.preventDefault();
-    //   this.labelClicked();
-    // })
-    
     this.input = this.node.inputs.get(this.name);
-    if(!this.input.isConnected) {
-      this.label.classList.add('clickable');
-    }
     this.input.on('input.connected', this.connectionChanged, this);
     this.input.on('input.disconnected', this.connectionChanged, this);
+    this.connectionChanged();
   }
 
   destroy() {
@@ -139,7 +133,8 @@ export default class extends DataPin
       this.label.classList.remove('clickable');
     }
     else {
-      this.label.classList.add('clickable');
+      // only if there is a gadget to open
+      if(this.gadget) this.label.classList.add('clickable');
     }
   }
 

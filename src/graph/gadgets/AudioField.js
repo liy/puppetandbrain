@@ -80,4 +80,9 @@ export default class extends Gadget
       this.circleProgress.progressColor = 0xFF9900;
     })
   }
+
+  destroy() {
+    super.destroy();
+    this.audio.pause();
+  }
 }

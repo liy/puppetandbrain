@@ -43,6 +43,7 @@ export Branch from './Branch';
 export Loop from './Loop';
 export Repeat from './Repeat';
 export PlaySound from './PlaySound';
+export StopSound from './StopSound';
 
 // listeners
 // export GameStart from './listeners/GameStart'

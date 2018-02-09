@@ -38,6 +38,7 @@ export default class Setter extends Task
     // SetterBlock will change the label using actual variable name.
     //
     // TODO: assign variable's descriptor
+    console.log(this.variable.type)
     this.inputs.add('input', {type:this.variable.type});
     this.memory['input'] = this.memory['input'] || this.variable.data;
     // same rule as the input...

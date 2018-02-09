@@ -97,6 +97,11 @@ export default class Block extends EventEmitter
   destroy() {
     this.removeAllListeners();
 
+    // input pins have gadgets, needs to be destroy.
+    for(let pin of this.inputPins) {
+      pin.destroy();
+    }
+
     this.body.element.removeEventListener('mousedown', this.dragStart);
     document.removeEventListener('mouseup', this.dragStop);
 
@@ -119,6 +124,8 @@ export default class Block extends EventEmitter
     }
 
     for(let pin of this.inputPins) {
+      // input pin has gadget, needs to be destroyed
+      pin.destroy();
       this.body.removePin(pin);
     }
 
