@@ -15,7 +15,6 @@ export default class extends Gadget
 
     this.line = this.element.querySelector('#line');
 
-
     this.colorInput = document.createElement('input');
     this.colorInput.className = 'color-hex';
     this.colorInput.type = 'color'

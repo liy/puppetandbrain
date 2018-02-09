@@ -25,13 +25,13 @@
     top: 0;
 
     cursor: pointer;
-    // display: block;
+    display: block;
     white-space: nowrap;
 
     opacity: 0;
   }
 
   svg {
-    cursor: pointer;
+    pointer-events: none;
   }
 }
