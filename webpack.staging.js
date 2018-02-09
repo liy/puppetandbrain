@@ -108,7 +108,7 @@ module.exports = {
       name: ['whatwg-fetch', 'rusha'], // Specify the common bundle's name.
       minChunks: Infinity,
     }),
-    new OfflinePlugin(),
+    // new OfflinePlugin(),
   ],
   
   // Export full source map for debugging, maps to original source
