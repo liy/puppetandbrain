@@ -15,7 +15,7 @@
 }
 
 #tutorial-banner {
-  min-width: 200px;
+  // min-width: 200px;
 
   height: 44px;
   line-height: 44px;
@@ -32,7 +32,7 @@
   
   // centre svg
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   svg {
