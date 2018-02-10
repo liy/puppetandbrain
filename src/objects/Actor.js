@@ -6,6 +6,7 @@ import Brain from '../nodes/Brain';
 import ActorSelection from './ActorSelection';
 import Variable from '../data/Variable';
 import Matrix from '../math/Matrix';
+import Vec2 from '../math/Vec2';
 import PropertyList from '../data/PropertyList';
 import { aroundAt } from '../utils/utils';
 import DataType from '../data/DataType';
@@ -29,7 +30,7 @@ export default class Actor extends EventEmitter
 
     // transform for the components
     // also be able to manipulate in the node graph property.
-    this.position = {x:Editor.stage.stageWidth/2, y:Editor.stage.stageHeight/2}
+    this.position = new Vec2(Editor.stage.stageWidth/2, Editor.stage.stageHeight/2);
     // in radian
     this.rotation = 0;
     this.scale = {
@@ -70,7 +71,8 @@ export default class Actor extends EventEmitter
 
     this.name = pod.name || 'Puppet';
     
-    this.position = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
+    let pos = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
+    this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
     this.scale = pod.scale || {x:1,y:1}
 
@@ -98,9 +100,7 @@ export default class Actor extends EventEmitter
 
   gamePrestart() {
     this.initialState = {
-      position: {
-        ...this.position
-      },
+      position: this.position.clone(),
       scale: {
         ...this.scale
       },
@@ -114,7 +114,7 @@ export default class Actor extends EventEmitter
 
   gameStop() {
     if(this.initialState) {
-      this.position = {...this.initialState.position} 
+      this.position = this.initialState.position;
       this.scale = {...this.initialState.scale};
       this.rotation = this.initialState.rotation;
     }
@@ -261,7 +261,7 @@ export default class Actor extends EventEmitter
       // game play related
       className: this.className,
       id: this.id,
-      position: {...this.position},
+      position: this.position.pod(),
       scale: {...this.scale},
       rotation: this.rotation,
       name: this.name,

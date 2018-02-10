@@ -41,7 +41,7 @@ class Editor extends EventEmitter
   }
 
   loop(delta) {
-    this.emit('tick', delta);
+    this.emit('tick', {delta, deltaTime:delta/60});
     this.stage.updateTransform();
     this.renderer.render(this.stage.container);
   }

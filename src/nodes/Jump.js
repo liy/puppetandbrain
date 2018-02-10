@@ -34,15 +34,12 @@ export default class Jump extends Task
   constructor(id) {
     super(id);
 
-    Editor.on('game.start', this.start, this)
     Editor.on('game.stop', this.stop, this)
-    this.g = -20;
   }
 
   destroy() {
     super.destroy();
 
-    Editor.off('game.start', this.start, this)
     Editor.off('game.stop', this.stop, this)
     Editor.off('tick', this.tick, this);
   }
@@ -50,28 +47,33 @@ export default class Jump extends Task
   stop() {
     Editor.off('tick', this.tick, this);
   }
-  
-  start(e) {
-    this.height = this.inputs.value('height');
-    this.duration = this.inputs.value('duration');
-    this.t = 0;
-    this.startY = this.owner.y;
-  }
 
-  tick(delta) {
-    this.t += delta/60;
-    let x = Math.min(this.t/this.duration, 1);
-    console.log(this.owner.y-this.startY)
+  tick({delta, deltaTime:dt}) {
+    this.time += dt;
 
-
-    let d = (1-2*x)/Math.sqrt((1-x)*x);
-    if(Number.isFinite(d)) {
-      this.owner.y -= d;
+    if(this.time <= this.duration) {
+      this.owner.y -= this.v*dt + 0.5*this.g*dt*dt;
+      this.v += this.g*dt;
+    }
+    else {
+      this.owner.y = this.startY;
+      Editor.off('tick', this.tick, this);
+      this.execution.run('completed');
     }
   }
 
   run() {
-    // this.owner.y -= this.offset;
+    const height = this.inputs.value('height');
+    this.duration = this.inputs.value('duration');
+    const hTime = this.duration/2;
+
+    this.v = 2*height/hTime
+    this.g = -2*height/(hTime*hTime);
+
+    this.time = 0;
+    this.startY = this.owner.y;
+
     Editor.on('tick', this.tick, this);
+    this.execution.run();
   }
 }

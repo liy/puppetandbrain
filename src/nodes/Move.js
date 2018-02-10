@@ -1,9 +1,10 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
+import Vec2 from '../math/Vec2';
 
-NodeTemplate.Tween = {
+NodeTemplate.Move = {
   ...ParentTemplate,
-  className: 'Tween',
+  className: 'Move',
   name: 'Move',
   execution: [{
     name: 'default'
@@ -29,7 +30,7 @@ NodeTemplate.Tween = {
   category: 'Animation',
 }
 
-export default class Tween extends Task
+export default class Move extends Task
 {
   constructor(id) {
     super(id);
@@ -40,20 +41,35 @@ export default class Tween extends Task
   destroy() {
     super.destroy();
     Editor.off('game.stop', this.stop, this)
-    if(this.tween) this.tween.kill()
+    Editor.off('tick', this.tick, this);
   }
 
   stop() {
-    if(this.tween) this.tween.kill()
+    Editor.off('tick', this.tick, this);
+  }
+
+  tick({delta, deltaTime:dt}) {
+    this.time += dt;
+
+    if(this.time <= this.duration) {
+      this.owner.position.add(Vec2.scale(this.velocity, dt));
+    }
+    else {
+      this.owner.position = this.target;
+      Editor.off('tick', this.tick, this);
+      this.execution.run('completed');
+    }
   }
 
   run() {
-    super.run()
-    let pos = this.inputs.value('position');
+    super.run();
 
-    this.tween = TweenLite.to(this.owner, this.inputs.value('duration'), {x: pos.x, y: pos.y, ease:Linear.easeNone, onComplete: () => {
-      this.execution.run('completed');
-    }});
+    this.time = 0;
+    this.duration = this.inputs.value('duration');
+    this.target = new Vec2(this.inputs.value('position'));
+    this.velocity = Vec2.sub(this.target, this.owner.position).scale(1/this.duration);
+
+    Editor.on('tick', this.tick, this);
     this.execution.run();
   }
 }
