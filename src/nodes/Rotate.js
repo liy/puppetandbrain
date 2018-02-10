@@ -53,7 +53,6 @@ export default class Rotate extends Task
     this.time += dt;
 
     if(this.time <= this.duration) {
-      console.log(this.rotator*dt)
       this.owner.rotation += this.rotator*dt;
     }
     else {

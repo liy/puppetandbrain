@@ -62,6 +62,7 @@ window.API = API;
 
 import Grapnel from 'grapnel'
 import { setTimeout } from "timers";
+import { toDegree } from "./utils/utils";
 window.router = new Grapnel({pushState:true});
 
 // prevent default context menu for the whole site
@@ -139,3 +140,9 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
+// document.addEventListener('mousemove', e => {
+//   let dx = e.clientX - window.innerWidth/2;
+//   let dy = e.clientY - window.innerHeight/2;
+//   console.log((Math.atan2(dy, dx) * toDegree + 360)%360)
+//   // console.log(Math.atan(dy/dx) * toDegree)
+// })

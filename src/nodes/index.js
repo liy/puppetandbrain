@@ -37,10 +37,12 @@ export SetScale from './SetScale';
 export Wait from './Wait';
 export Action from './Action';
 export Perform from './Perform'
-export MoveTo from './MoveTo';
 export Print from './Print';
+export MoveTo from './MoveTo';
 export Animation from './Animation';
 export Jump from './Jump'
+export Orbit from './Orbit'
+
 export Branch from './Branch';
 export Loop from './Loop';
 export Repeat from './Repeat';
