@@ -10,9 +10,15 @@ NodeTemplate.Flip = {
     descriptor: {
       type: DataType.STRING,
     }
+  }, {
+    name: 'duration',
+    descriptor: {
+      type: DataType.DOUBLE
+    }
   }],
   memory: {
     direction: 'left',
+    duration: 0.15,
   },
   execution: [{
     name: 'default'
@@ -35,18 +41,64 @@ export default class Flip extends Task
 
   destroy() {
     super.destroy();
-    if(this.tween) this.tween.kill()
-    Editor.off('game.stop', this.stop, this);
+    Editor.off('game.stop', this.stop, this)
+    Editor.off('tick', this.tick, this);
   }
 
   stop() {
-    if(this.tween) this.tween.kill()
+    Editor.off('tick', this.tick, this);
+  }
+
+  tick({delta, deltaTime:dt}) {
+    this.time += dt;
+
+    console.log(this.owner.scale.x)
+
+    if(this.time <= this.duration) {
+      this.owner.scale.x += this.dx*dt;
+      this.owner.scale.y += this.dy*dt;
+    }
+    else {
+      this.owner.scale.x = this.targetScaleX;
+      this.owner.scale.y = this.targetScaleY;
+      Editor.off('tick', this.tick, this);
+      this.execution.run('completed');
+    }
   }
 
   run() {
     super.run();
 
-    this[this.inputs.value('direction')]();
+    this.time = 0;
+
+    this.duration = this.inputs.value('duration');
+    const direction = this.inputs.value('direction');
+    // this.targetRotation = this.owner.rotation + this.rotator;
+    
+    this.dx = 0;
+    this.dy = 0;
+    this.targetScaleX = Math.abs(this.owner.scale.x);
+    this.targetScaleY = Math.abs(this.owner.scale.y);
+    switch(direction) {
+      case 'left':
+        this.targetScaleX = -Math.abs(this.owner.scale.x)
+        break;
+      case 'right':
+        this.targetScaleX = Math.abs(this.owner.scale.x)
+        break;
+      case 'up':
+        this.targetScaleY = Math.abs(this.owner.scale.y);
+        break;
+      case 'down':
+        this.targetScaleY = -Math.abs(this.owner.scale.y);
+        break;
+    }
+    this.dx = (this.targetScaleX - this.owner.scale.x)/this.duration; 
+    this.dy = (this.targetScaleY - this.owner.scale.y)/this.duration;
+
+    Editor.on('tick', this.tick, this);
+
+    // this[this.inputs.value('direction')]();
     this.execution.run();
   }
 

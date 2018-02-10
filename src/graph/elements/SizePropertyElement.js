@@ -13,8 +13,8 @@ export default class extends PropertyElement
     this.content.appendChild(this.rangeField.element);
 
     this.rangeField.on('gadget.state.change', value => {
-      actor.scale.x = value;
-      actor.scale.y = value;
+      actor.scale.x = parseFloat(value);
+      actor.scale.y = parseFloat(value);
     })
   }
 
