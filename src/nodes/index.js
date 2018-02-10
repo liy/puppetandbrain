@@ -63,7 +63,7 @@ export GameLoop from "./listeners/GameLoop";
 
 
 export Flip from './Flip'
-export Step from './Step'
+export Move from './Move'
 export Rotate from './Rotate'
 
 
