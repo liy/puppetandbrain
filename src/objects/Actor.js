@@ -100,7 +100,7 @@ export default class Actor extends EventEmitter
 
   gamePrestart() {
     this.initialState = {
-      position: this.position.clone(),
+      position: this.position.pod(),
       scale: {
         ...this.scale
       },
@@ -114,7 +114,7 @@ export default class Actor extends EventEmitter
 
   gameStop() {
     if(this.initialState) {
-      this.position = this.initialState.position;
+      this.position = new Vec2(this.initialState.position);
       this.scale = {...this.initialState.scale};
       this.rotation = this.initialState.rotation;
     }
