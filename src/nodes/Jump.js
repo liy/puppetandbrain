@@ -22,8 +22,8 @@ NodeTemplate.Jump = {
     }
   }],
   memory: {
-    height: 20,
-    duration: 2,
+    height: 250,
+    duration: 1,
   },
   category: 'Animation',
   keywords: ['jump']
