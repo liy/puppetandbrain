@@ -37,9 +37,11 @@ export default class Node extends EventEmitter
     //icon
     this.iconPath = NodeTemplate[this.className].iconPath;
 
-    // Set the memory! I can just do normal ref assignment
-    // But do a property assignment, just be safe...
-    if(pod.memory) Object.assign(this.memory, pod.memory);
+    // You need to do a deep copy of the pod. Since pod can be a template
+    // template will be shared cross same type of nodes.
+    // Simple Object.assign only copy first level property.
+    // A deep copy is required!
+    if(pod.memory) this.memory = JSON.parse(JSON.stringify(pod.memory));
 
     // Since there are "Action" node which has dynamic ouputs
     // I cannot make input and ouput connections in initialization process
