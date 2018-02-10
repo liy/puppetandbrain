@@ -40,6 +40,7 @@ export Perform from './Perform'
 export Tween from './Tween';
 export Print from './Print';
 export Animation from './Animation';
+export Jump from './Jump'
 export Branch from './Branch';
 export Loop from './Loop';
 export Repeat from './Repeat';

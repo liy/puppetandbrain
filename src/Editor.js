@@ -40,7 +40,8 @@ class Editor extends EventEmitter
     PIXI.ticker.shared.add(this.loop);
   }
 
-  loop() {
+  loop(delta) {
+    this.emit('tick', delta);
     this.stage.updateTransform();
     this.renderer.render(this.stage.container);
   }

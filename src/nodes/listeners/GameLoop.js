@@ -31,14 +31,15 @@ export default class GameLoop extends Listener
 
     Editor.off('game.start', this.start, this)
     Editor.off('game.stop', this.stop, this)
+    Editor.off('tick', this.tick, this);
   }
 
   stop() {
-    PIXI.ticker.shared.remove(this.tick, this);
+    Editor.off('tick', this.tick, this);
   }
   
   start(e) {
-    PIXI.ticker.shared.add(this.tick, this);
+    Editor.on('tick', this.tick, this);
   }
 
   tick(delta) {
