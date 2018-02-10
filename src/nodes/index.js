@@ -37,7 +37,7 @@ export SetScale from './SetScale';
 export Wait from './Wait';
 export Action from './Action';
 export Perform from './Perform'
-export Move from './Move';
+export MoveTo from './MoveTo';
 export Print from './Print';
 export Animation from './Animation';
 export Jump from './Jump'

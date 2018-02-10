@@ -2,10 +2,10 @@ import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 import Vec2 from '../math/Vec2';
 
-NodeTemplate.Move = {
+NodeTemplate.MoveTo = {
   ...ParentTemplate,
-  className: 'Move',
-  name: 'Move',
+  className: 'MoveTo',
+  name: 'Move To',
   execution: [{
     name: 'default'
   }, {
@@ -30,7 +30,7 @@ NodeTemplate.Move = {
   category: 'Animation',
 }
 
-export default class Move extends Task
+export default class MoveTo extends Task
 {
   constructor(id) {
     super(id);
