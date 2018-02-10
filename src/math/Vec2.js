@@ -27,16 +27,16 @@ export default class Vec2
 
 	constructor(x=0, y=0) {
 		if(typeof x === 'object') {
-			this.x = x.x;
-			this.y = x.y;
+			this.set(x.x, x.y);
 		}
 		else {
-			this.x = x;
-			this.y = y;
+			this.set(x, y);
 		}
 	}
 
 	set(x, y) {
+		x = parseFloat(x);
+		y = parseFloat(y);
 		this.x = x;
 		this.y = y;
 	}

@@ -1,11 +1,11 @@
 @keyframes inputDash {
   from {
-    stroke-dashoffset: -200;
+    stroke-dashoffset: -250;
   }
 }
 
 .input-visualization {
-  stroke-width: 3;
-  stroke-dasharray: 0, 6;
+  stroke-width: 4;
+  stroke-dasharray: 0, 7;
   animation: inputDash 10s linear infinite;
 }

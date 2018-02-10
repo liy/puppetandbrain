@@ -89,7 +89,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
       this.connectionPath.classList.add('exec-visualization');
       setTimeout(() => {
         this.connectionPath.classList.remove('exec-visualization');
-      }, 500);
+      }, 1000);
     }
   }
 

@@ -49,7 +49,7 @@ export default class InputSymbol extends DataSymbol
       this.connectionPath.classList.add('input-visualization');
       setTimeout(() => {
         this.connectionPath.classList.remove('input-visualization');
-      }, 500);
+      }, 1000);
     }
   }
 

@@ -53,7 +53,7 @@ export default class Move extends Task
     this.time += dt;
 
     if(this.time <= this.duration) {
-      this.owner.position.add(Vec2.scale(this.step, dt));
+      this.owner.position.add(Vec2.scale(this.velocity, dt));
     }
     else {
       this.owner.position = this.target;
@@ -68,8 +68,10 @@ export default class Move extends Task
     this.time = 0;
 
     this.duration = this.inputs.value('duration');
-    this.step = new Vec2(this.inputs.value('step'));
-    this.target = Vec2.add(this.owner.position, this.step);
+    const step = new Vec2(this.inputs.value('step'));
+
+    this.velocity = step.clone().scale(1/this.duration);
+    this.target = Vec2.add(this.owner.position, step);
 
     Editor.on('tick', this.tick, this);
     this.execution.run();
