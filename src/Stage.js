@@ -31,9 +31,9 @@ export default class Stage extends EventEmitter
     catcher.on('mousedown', ActorSelection.deselectAll, ActorSelection);
   }
 
-  updateTransform() {
+  updateTransform(delta, deltaTime) {
     for(let actor of this.actors) {
-      actor.updateTransform();
+      actor.updateTransform(delta, deltaTime);
     }
   }
 

@@ -6,10 +6,10 @@ NodeTemplate.GameEvent = {
   execution: [{
     name: 'start'
   }, {
-    name: 'tick'
+    name: 'stop'
   }],
   name: 'Game Event',
-  keywords: ['game start', 'game loop', 'tick']
+  keywords: ['game start', 'game stop']
 }
 
 export default class GameEvent extends Listener
@@ -27,19 +27,14 @@ export default class GameEvent extends Listener
     Editor.off('game.start', this.start, this)
     Editor.off('game.stop', this.stop, this)
   }
-
-  stop() {
-    PIXI.ticker.shared.remove(this.tick, this);
-  }
   
   start(e) {
     super.run();
-    PIXI.ticker.shared.add(this.tick, this);
     this.execution.run('start');
   }
 
-  tick() {
+  stop(e) {
     super.run();
-    this.execution.run('tick');
+    this.execution.run('stop');
   }
 }

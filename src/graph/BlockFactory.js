@@ -5,7 +5,6 @@ window.BlockFactory = {
   create: function(node) {
     let blockClass = BlockClasses[node.className+'Block'];
     let blockClassName = NodeTemplate[node.className].blockClassName;
-    console.log(blockClassName)
     if(blockClassName) {
       blockClass = BlockClasses[blockClassName];
     }
@@ -25,7 +24,6 @@ window.BlockFactory = {
   createTemplateBlock: function(template) {
     let blockClass = BlockClasses[template.className+'Block'];
     let blockClassName = NodeTemplate[template.className].blockClassName;
-    console.log(blockClassName)
     if(blockClassName) {
       blockClass = BlockClasses[blockClassName];
     }

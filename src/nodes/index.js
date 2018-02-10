@@ -46,9 +46,10 @@ export Repeat from './Repeat';
 export PlaySound from './PlaySound';
 export StopSound from './StopSound';
 
+export Break from './Break';
+export MakePosition from './MakePosition';
+
 // listeners
-// export GameStart from './listeners/GameStart'
-// export Ticker from './listeners/Ticker'
 export GameEvent from "./listeners/GameEvent";
 export KeyboardEvent from './listeners/KeyboardEvent'
 export SwitchEvent from './listeners/SwitchEvent'
@@ -56,6 +57,7 @@ export AnimationEvent from './listeners/AnimationEvent'
 export HoverEvent from './listeners/HoverEvent'
 export ClickEvent from './listeners/ClickEvent'
 export MouseEvent from './listeners/MouseEvent'
+export GameLoop from "./listeners/GameLoop";
 
 
 
@@ -67,5 +69,3 @@ export Rotate from './Rotate'
 // not used 
 // hidden for now
 // export Extractor from './Extractor';
-// export Break from './Break';
-// export MakePosition from './MakePosition';
