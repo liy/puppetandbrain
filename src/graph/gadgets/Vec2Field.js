@@ -13,9 +13,7 @@ export default class extends Gadget
     this.xSpan.textContent = 'x'
     this.element.appendChild(this.xSpan);
 
-    this.xInputField = new InputField(vec2.x)
-    this.xInputField.input.type = 'number'
-    this.xInputField.input.step = 0.01
+    this.xInputField = new InputField(vec2.x, 'number')
     this.element.appendChild(this.xInputField.element);
 
     this.ySpan = document.createElement('span');
@@ -23,21 +21,17 @@ export default class extends Gadget
     this.ySpan.textContent = 'y'
     this.element.appendChild(this.ySpan);
 
-    this.yInputField = new InputField(vec2.y);
-    this.yInputField.input.type = 'number'
-    this.yInputField.input.step = 0.01
+    this.yInputField = new InputField(vec2.y, 'number');
     this.element.appendChild(this.yInputField.element);
     this.vec2 = vec2; 
 
     this.xInputField.on('gadget.state.change', x => {
-      this.vec2.x = Number(x);
-      this.value = this.vec2;
+      this.vec2.x = x;
       this.emit('gadget.state.change', this.vec2)
     })
 
     this.yInputField.on('gadget.state.change', y => {
-      this.vec2.y = Number(y);
-      this.value = this.vec2
+      this.vec2.y = y;
       this.emit('gadget.state.change', this.vec2)
     })
 
