@@ -48,5 +48,6 @@ export default class SetScale extends Task
     let s = this.inputs.value('scale');
     this.owner.scale.x = Number(s.x);
     this.owner.scale.y = Number(s.y);
+    this.execution.run();
   }
 }

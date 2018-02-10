@@ -45,5 +45,6 @@ export default class SetRotation extends Task
     super.run();
 
     this.owner.rotation = Number(this.inputs.value('rotation')) * toRadian;
+    this.execution.run();
   }
 }

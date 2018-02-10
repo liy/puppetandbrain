@@ -49,22 +49,32 @@ export default class Flip extends Task
     Editor.off('tick', this.tick, this);
   }
 
-  tick({delta, deltaTime:dt}) {
+  flipX({delta, deltaTime:dt}) {
     this.time += dt;
-
-    console.log(this.owner.scale.x)
 
     if(this.time <= this.duration) {
       this.owner.scale.x += this.dx*dt;
-      this.owner.scale.y += this.dy*dt;
     }
     else {
       this.owner.scale.x = this.targetScaleX;
-      this.owner.scale.y = this.targetScaleY;
-      Editor.off('tick', this.tick, this);
+      Editor.off('tick', this.flipX, this);
       this.execution.run('completed');
     }
   }
+
+  flipY({delta, deltaTime:dt}) {
+    this.time += dt;
+
+    if(this.time <= this.duration) {
+      this.owner.scale.y += this.dy*dt;
+    }
+    else {
+      this.owner.scale.y = this.targetScaleY;
+      Editor.off('tick', this.flipY, this);
+      this.execution.run('completed');
+    }
+  }
+
 
   run() {
     super.run();
@@ -73,32 +83,20 @@ export default class Flip extends Task
 
     this.duration = this.inputs.value('duration');
     const direction = this.inputs.value('direction');
-    // this.targetRotation = this.owner.rotation + this.rotator;
     
-    this.dx = 0;
-    this.dy = 0;
     this.targetScaleX = Math.abs(this.owner.scale.x);
     this.targetScaleY = Math.abs(this.owner.scale.y);
-    switch(direction) {
-      case 'left':
-        this.targetScaleX = -Math.abs(this.owner.scale.x)
-        break;
-      case 'right':
-        this.targetScaleX = Math.abs(this.owner.scale.x)
-        break;
-      case 'up':
-        this.targetScaleY = Math.abs(this.owner.scale.y);
-        break;
-      case 'down':
-        this.targetScaleY = -Math.abs(this.owner.scale.y);
-        break;
+    if(direction =='left' || direction == 'right') {
+      if(direction == 'left') this.targetScaleX = -this.targetScaleX;
+      this.dx = (this.targetScaleX - this.owner.scale.x)/this.duration; 
+      Editor.on('tick', this.flipX, this);
     }
-    this.dx = (this.targetScaleX - this.owner.scale.x)/this.duration; 
-    this.dy = (this.targetScaleY - this.owner.scale.y)/this.duration;
+    else {
+      if(direction == 'down') this.targetScaleY = -this.targetScaleY;
+      this.dy = (this.targetScaleY - this.owner.scale.y)/this.duration;
+      Editor.on('tick', this.flipY, this);
+    }
 
-    Editor.on('tick', this.tick, this);
-
-    // this[this.inputs.value('direction')]();
     this.execution.run();
   }
 

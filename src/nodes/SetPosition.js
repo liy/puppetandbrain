@@ -47,5 +47,6 @@ export default class SetPosition extends Task
     let p = this.inputs.value('position');
     this.owner.x = Number(p.x);
     this.owner.y = Number(p.y);
+    this.execution.run();
   }
 }
