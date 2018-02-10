@@ -2,7 +2,8 @@ body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   margin:0; 
-  background-color: #eeeeee;
+  // background-color: #eeeeee;
+  background-color: #f5f5f5;
   
   // remove mobile selection hightlight
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -22,7 +23,8 @@ body {
 
 #stage {
   border-radius: 10px;
-  background-color: #F7F7F7;
+  // background-color: #F7F7F7;
+  background-color: #f0f0f0;
 }
 
 #stage-grid {

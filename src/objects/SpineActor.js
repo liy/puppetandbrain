@@ -59,7 +59,7 @@ export default class SpineActor extends Actor
 
     this.spineComponent = new SpineComponent(spineData);
     this.addComponent('animation', this.spineComponent);
-    
+
     this.emit('actor.ready', this);
   }
 
@@ -86,7 +86,7 @@ export default class SpineActor extends Actor
 
   deselect() {
     super.deselect();
-    this.spineComponent.container.filters = [];
+    this.spineComponent.defaultFilter();
   }
 
   mouseOver() {
@@ -99,7 +99,7 @@ export default class SpineActor extends Actor
   mouseOut() {
     super.mouseOut();
     if(!this.selected) {
-      this.spineComponent.container.filters = []
+      this.spineComponent.defaultFilter();
     }
     else {
       this.spineComponent.container.filters = [this.selectOutline]

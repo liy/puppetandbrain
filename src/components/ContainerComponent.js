@@ -1,3 +1,4 @@
+const filters = require('pixi-filters');
 import Component from "./Component";
 
 /**
@@ -10,6 +11,24 @@ export default class ContainerComponent extends Component
 
     this.container = new PIXI.Container();
     this.container.interactive = true;
+    
+    this.paperOutlineTickness = 8;
+    this.paperOutline = new filters.OutlineFilter(this.paperOutlineTickness, 0xFFFFFF)
+    this.paper = false;
+  }
+
+  set paper(p) {
+    this._paper = p;
+    if(p) {
+      this.container.filters = [this.paperOutline];
+    }
+    else {
+      this.container.filters = [];
+    }
+  }
+
+  get paper() {
+    return this._paper;
   }
 
   onStage() {
@@ -45,6 +64,10 @@ export default class ContainerComponent extends Component
     this.entity.mouseOut(e);
   } 
 
+  defaultFilter() {
+    this.container.filters = this.paper ? [this.paperOutline] : [];
+  }
+
   updateTransform() {
     // I have no idea how to update pixi's matrix... so manual transform here. But it is 
     // probably has better perfomance, since we did not have matrix calculation twice...
@@ -52,5 +75,11 @@ export default class ContainerComponent extends Component
     this.container.y = this.entity.position.y;
     this.container.rotation = this.entity.rotation;
     this.container.scale = this.entity.scale;
+
+    if(this.paper) {
+      let filterArea = this.container.getBounds();
+      filterArea.pad(this.paperOutlineTickness);
+      this.container.filterArea = filterArea;
+    }
   }
 }
