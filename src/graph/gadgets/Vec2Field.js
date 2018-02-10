@@ -26,12 +26,12 @@ export default class extends Gadget
     this.vec2 = vec2; 
 
     this.xInputField.on('gadget.state.change', x => {
-      this.vec2.x = x;
+      this.vec2.x = parseFloat(x);
       this.emit('gadget.state.change', this.vec2)
     })
 
     this.yInputField.on('gadget.state.change', y => {
-      this.vec2.y = y;
+      this.vec2.y = parseFloat(y);
       this.emit('gadget.state.change', this.vec2)
     })
 
