@@ -1,11 +1,14 @@
 import './Vec2Field.scss';
 import InputField from "./InputField";
 import Gadget from './Gadget';
+import { numericVector } from '../../utils/utils';
 
 export default class extends Gadget
 {
   constructor(vec2={x:1,y:1}) {
     super();
+    vec2 = numericVector(vec2);
+    
     this.element.classList.add('vec2-field');
 
     this.xSpan = document.createElement('span');
@@ -26,12 +29,12 @@ export default class extends Gadget
     this.vec2 = vec2; 
 
     this.xInputField.on('gadget.state.change', x => {
-      this.vec2.x = parseFloat(x);
+      this.vec2.x = Number(x);
       this.emit('gadget.state.change', this.vec2)
     })
 
     this.yInputField.on('gadget.state.change', y => {
-      this.vec2.y = parseFloat(y);
+      this.vec2.y = Number(y);
       this.emit('gadget.state.change', this.vec2)
     })
 

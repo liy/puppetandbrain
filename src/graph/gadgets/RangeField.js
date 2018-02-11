@@ -140,6 +140,6 @@ export default class extends Gadget
   }
 
   updateInput() {
-    this.rangeInput.value = Number.parseFloat(this.value).toFixed(this.decimalPlaces);
+    this.rangeInput.value = Number(this.value).toFixed(this.decimalPlaces);
   }
 }

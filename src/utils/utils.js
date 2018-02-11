@@ -73,3 +73,9 @@ export function everyframe(callback) {
 
   return handler;
 }
+
+export function numericVector(data) {
+  data.x = Number(data.x);
+  data.y = Number(data.y);
+  return data;
+}

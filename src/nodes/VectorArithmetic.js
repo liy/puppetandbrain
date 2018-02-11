@@ -1,6 +1,7 @@
 import Adaptor from './Adaptor';
 import DataType from '../data/DataType';
 import Vec2 from '../math/Vec2';
+import { numericVector } from '../utils/utils';
 
 NodeTemplate.VectorArithmetic = {
   className: 'VectorArithmetic',
@@ -61,10 +62,11 @@ export default class VectorArithmetic extends Adaptor
   }
 
   add() {
-    return Vec2.add(this.inputs.value('vector A'), this.inputs.value('vector B'));
+    
+    return Vec2.add(numericVector(this.inputs.value('vector A')), numericVector(this.inputs.value('vector B')));
   }
 
   sub() {
-    return Vec2.sub(this.inputs.value('vector A'), this.inputs.value('vector B'));
+    return Vec2.sub(numericVector(this.inputs.value('vector A')), numericVector(this.inputs.value('vector B')));
   }
 }

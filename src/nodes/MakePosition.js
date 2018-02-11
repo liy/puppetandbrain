@@ -1,5 +1,6 @@
 import Node from "./Node";
 import DataType from "../data/DataType";
+import Vec2 from "../math/Vec2";
 
 NodeTemplate.MakePosition = {
   className: 'MakePosition',
@@ -42,10 +43,7 @@ export default class MakePosition extends Node
 
     this.outputs.assignProperty('position', {
       get: () => {
-        return {
-          x: this.inputs.value('x'),
-          y: this.inputs.value('y')
-        }
+        return new Vec2(this.inputs.value('x'), this.inputs.value('y'));
       }
     });
   }

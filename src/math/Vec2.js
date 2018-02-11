@@ -1,26 +1,21 @@
 export default class Vec2
 {
-	// TODO: ensure parse to float?
 	static min(v1, v2) {
 		return new Vec2(Math.min(v1.x, v2.x), Math.min(v1.y, v2.y));
 	}
 
-	// TODO: ensure parse to float?
 	static max(v1, v2) {
 		return new Vec2(Math.max(v1.x, v2.x), Math.max(v1.y, v2.y));
 	}
 
-	// TODO: ensure parse to float?
 	static sub(v1, v2) {
 		return new Vec2(v1.x-v2.x, v1.y-v2.y);
 	}
 
-	// TODO: ensure parse to float?
 	static add(v1, v2) {
 		return new Vec2(v1.x+v2.x, v1.y+v2.y);
 	}
 
-	// TODO: ensure parse to float?
 	static reflect(i, n) {
 		// R = 2 * N  * (I . N) - I
 		return n.clone().scale(2).scale(i.dot(n)).sub(i);
@@ -40,8 +35,6 @@ export default class Vec2
 	}
 
 	set(x, y) {
-		x = parseFloat(x);
-		y = parseFloat(y);
 		this.x = x;
 		this.y = y;
 	}
