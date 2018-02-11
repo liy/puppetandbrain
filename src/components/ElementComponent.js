@@ -59,11 +59,11 @@ export default class ElementComponent extends Component
   }
 
   mouseDown(e) {
-    this.entity.mouseDown(e.clientX, e.clientY);
+    this.entity.pointerDown(e.clientX, e.clientY, e);
   }
 
   mouseUp(e) {
-    this.entity.mouseUp(e);
+    this.entity.pointerUp(e);
   }
 
   mouseOver(e) {

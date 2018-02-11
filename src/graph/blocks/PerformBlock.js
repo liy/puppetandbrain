@@ -34,7 +34,7 @@ export default class PerformBlock extends Block
       BrainGraph.switchTo(this.node.target.brain);
       GraphSelection.select(BrainGraph.getBlock(this.node.action.id));
       // Select the actor as well!
-      this.node.action.owner.getComponent('SelectionComponent').select();
+      this.node.action.owner.select();
     }
   }
 

@@ -1,9 +1,7 @@
-import CanvasActor from './CanvasActor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
-import SelectionComponent from '../components/SelectionComponent';
-import DragComponent from '../components/DragComponent';
+import Actor from './Actor';
 
-export default class SpriteActor extends CanvasActor
+export default class SpriteActor extends Actor
 {
   constructor(url, id) {
     super(id);
@@ -15,7 +13,5 @@ export default class SpriteActor extends CanvasActor
     this.addChild(sprite);
 
     this.addComponent(new PlaceHolderComponent());
-    this.addComponent(new SelectionComponent());
-    this.addComponent(new DragComponent());
   }
 }

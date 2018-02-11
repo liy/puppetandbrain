@@ -42,6 +42,7 @@ import './commands/Commander'
 import './graph/BrainGraph'
 import './Editor'
 import './ui/UIController';
+import './ui/ContextMenu';
 
 import './resources/Resource';
 import './Activity';
@@ -66,6 +67,7 @@ import { toDegree } from "./utils/utils";
 window.router = new Grapnel({pushState:true});
 
 // prevent default context menu for the whole site
+// unless it is from canvas, which pixi needs it to handle right click.
 document.addEventListener('contextmenu', e => {
   e.preventDefault();
 });

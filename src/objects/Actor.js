@@ -10,6 +10,7 @@ import Vec2 from '../math/Vec2';
 import PropertyList from '../data/PropertyList';
 import { aroundAt } from '../utils/utils';
 import DataType from '../data/DataType';
+import ContextMenu from '../ui/ContextMenu';
 
 export default class Actor extends EventEmitter
 {
@@ -118,7 +119,7 @@ export default class Actor extends EventEmitter
     }
   }
 
-  pointerDown(x, y) {
+  pointerDown(x, y, e) {
     this.select();
 
     this.offset = {
@@ -137,6 +138,10 @@ export default class Actor extends EventEmitter
     document.addEventListener('touchmove', this.touchDragMove);
 
     this.emit('pointerdown', this)
+    
+    if(e.which === '3') {
+      ContextMenu.openActorMenu();
+    }
   }
 
   pointerUp(e) {
