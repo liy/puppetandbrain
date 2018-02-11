@@ -13,7 +13,7 @@ export default class extends Node
 
     this.operationName = pod.operationName;
 
-    this.outputs.assignProperty('value', {
+    this.outputs.assignProperty(pod.outputs[0].name, {
       get: () => {
         return this[this.operation.operationName]();
       }
