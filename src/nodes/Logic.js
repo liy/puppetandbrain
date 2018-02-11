@@ -29,12 +29,12 @@ NodeTemplate.Logic = {
   },
   operations: [
     {
-      description: 'And &&',
+      description: 'And',
       name: 'And',
       operationName: 'and'
     },
     {
-      description: 'Or ||',
+      description: 'Or',
       name: 'Or',
       operationName: 'or'
     }

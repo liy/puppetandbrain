@@ -1,17 +1,21 @@
 import DataType from "./DataType";
 
 export default {
-  // [DataType.GENERIC]: 0xA9C4D2,
-  
   [DataType.GENERIC]: 0xFFFFFF,
-  [DataType.BOOLEAN]: 0xA9C4D2,
-  [DataType.DOUBLE]: 0xA9C4D2,
-  [DataType.INTEGER]: 0xA9C4D2,
-  [DataType.STRING]: 0xA9C4D2,
+
+  [DataType.BOOLEAN]: 0xb5a3ff,
+
+  [DataType.DOUBLE]: 0x98c6de,
+  [DataType.INTEGER]: 0x98c6de,
+
+  [DataType.STRING]: 0xcffffe,
   
   [DataType.ACTOR]: 0xC6A37D,
   [DataType.COLOR]: 0xE884C9,
   [DataType.ARRAY]: 0xFF9900,
-  [DataType.VEC2]: 0xCC5050,
-  [DataType.MAP]: 0x82C341
+  [DataType.VEC2]: 0xE06C6C,
+  [DataType.MAP]: 0x82C341,
+
+  [DataType.AUDIO]: 0xFFFA63,
+  [DataType.IMAGE]: 0xFFFA63,
 }
