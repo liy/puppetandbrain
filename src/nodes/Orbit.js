@@ -24,6 +24,12 @@ NodeTemplate.Orbit = {
       gadgetClassName: 'PositionField'
     }
   }],
+  outputs: [{
+      name: 'position',
+      descriptor: {
+        type: DataType.VEC2
+      }
+  }],
   execution: [{
     name: 'default'
   }],
@@ -71,6 +77,7 @@ export default class Orbit extends Task
     this.owner.x = point.x + Math.cos(this.rotation)*radius;
     this.owner.y = point.y + Math.sin(this.rotation)*radius;
     
+    this.outputs.assignValue('position', this.owner.position);
 
     this.execution.run();
   }

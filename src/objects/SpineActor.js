@@ -19,7 +19,7 @@ export default class SpineActor extends Actor
     let pos = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
-    this.scale = pod.scale || {x:1,y:1}
+    this.scale = new Vec2(pod.scale || {x:1,y:1});
 
     this.addComponent('placeholder', new PlaceHolderComponent(pod.dimension));
     

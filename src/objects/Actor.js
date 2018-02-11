@@ -33,10 +33,7 @@ export default class Actor extends EventEmitter
     this.position = new Vec2(Editor.stage.stageWidth/2, Editor.stage.stageHeight/2);
     // in radian
     this.rotation = 0;
-    this.scale = {
-      x: 1,
-      y: 1
-    }
+    this.scale = new Vec2(1, 1);
     this.matrix = new Matrix();
 
     mixin(this, new Entity());
@@ -74,7 +71,7 @@ export default class Actor extends EventEmitter
     let pos = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
-    this.scale = pod.scale || {x:1,y:1}
+    this.scale = new Vec2(pod.scale || {x:1,y:1});
 
     // Create empty brain but with exisitng ID if there is one.
     // in the future I might allow actors to sharing same brain.
@@ -101,9 +98,7 @@ export default class Actor extends EventEmitter
   gamePrestart() {
     this.initialState = {
       position: this.position.pod(),
-      scale: {
-        ...this.scale
-      },
+      scale: this.scale.pod(),
       rotation: this.rotation
     }
 
@@ -115,7 +110,7 @@ export default class Actor extends EventEmitter
   gameStop() {
     if(this.initialState) {
       this.position = new Vec2(this.initialState.position);
-      this.scale = {...this.initialState.scale};
+      this.scale = new Vec2(this.initialState.scale);
       this.rotation = this.initialState.rotation;
     }
     for(let descriptor of this.properties) {
@@ -262,7 +257,7 @@ export default class Actor extends EventEmitter
       className: this.className,
       id: this.id,
       position: this.position.pod(),
-      scale: {...this.scale},
+      scale: this.scale.pod(),
       rotation: this.rotation,
       name: this.name,
       brainID: this.brain.id,

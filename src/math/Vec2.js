@@ -156,7 +156,11 @@ export default class Vec2
 
 	clone() {
 		return new Vec2(this.x, this.y);
-  }
+	}
+	
+	toString() {
+		return `x: ${this.x}, y: ${this.y}`
+	}
   
   pod() {
     return {
