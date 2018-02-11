@@ -8,7 +8,7 @@ export default {
   [DataType.DOUBLE]: 0x98c6de,
   [DataType.INTEGER]: 0x98c6de,
 
-  [DataType.STRING]: 0xcffffe,
+  [DataType.STRING]: 0xB5FFEB,
   
   [DataType.ACTOR]: 0xC6A37D,
   [DataType.COLOR]: 0xE884C9,
