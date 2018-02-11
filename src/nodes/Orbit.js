@@ -1,4 +1,4 @@
-import {toRadian, toDegree} from '../utils/utils';
+import {toRadian, toDegree, numericVector} from '../utils/utils';
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 import Vec2 from '../math/Vec2';
@@ -64,10 +64,10 @@ export default class Orbit extends Task
   run() {
     super.run()
 
-    const point = new Vec2(this.inputs.value('point'));
-    const radius = this.inputs.value('radius');
+    const point = new Vec2(numericVector(this.inputs.value('point')));
+    const radius = Number(this.inputs.value('radius'));
 
-    this.rotation += this.inputs.value('degree')*toRadian;
+    this.rotation += Number(this.inputs.value('degree'))*toRadian;
     this.owner.x = point.x + Math.cos(this.rotation)*radius;
     this.owner.y = point.y + Math.sin(this.rotation)*radius;
     

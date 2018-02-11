@@ -1,6 +1,6 @@
 import VariableElement from './VariableElement';
 import PositionIcon from '../../assets/position-icon.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement, numericVector } from '../../utils/utils';
 import DataType from '../../data/DataType';
 import PositionField from '../gadgets/PositionField';
 
@@ -11,7 +11,7 @@ export default class extends VariableElement
     
     this.type = DataType.VEC2;
 
-    this.positionField = new PositionField(this.variable.data);
+    this.positionField = new PositionField(numericVector(this.variable.data));
     this.content.appendChild(this.positionField.element);
 
     this.positionField.on('gadget.state.change', position => {

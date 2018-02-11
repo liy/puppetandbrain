@@ -1,6 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 import Vec2 from '../math/Vec2';
+import { numericVector } from '../utils/utils';
 
 NodeTemplate.MoveTo = {
   ...ParentTemplate,
@@ -65,8 +66,8 @@ export default class MoveTo extends Task
     super.run();
 
     this.time = 0;
-    this.duration = this.inputs.value('duration');
-    this.target = new Vec2(this.inputs.value('position'));
+    this.duration = Number(this.inputs.value('duration'));
+    this.target = new Vec2(numericVector(this.inputs.value('position')));
     this.velocity = Vec2.sub(this.target, this.owner.position).scale(1/this.duration);
 
     Editor.on('tick', this.tick, this);
