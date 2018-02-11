@@ -24,7 +24,11 @@ export default class
     pod.nodes = pod.nodes || [];
     pod.pointers = pod.pointers || [];  
 
-    let actor = new ObjecClasses[pod.className]();
+    // Passing in the template actor id
+    // Have to try to use the exisiting id, as command calling this process can be
+    // undo and redo. Further redo action might have nodes who are referencing this actor.
+    // Therefore, we need to try to keep the id the same.
+    let actor = new ObjecClasses[pod.className](pod.id);
     Editor.stage.addActor(actor);
 
     // preload actor and then initialize it

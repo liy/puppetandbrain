@@ -3,18 +3,26 @@ import ActorImporter from '../ActorImporter';
 
 export default class ImportActor extends Command
 {
-  constructor(template) {
+  constructor(actorPod) {
     super();
 
-    this.template = template;
+    this.actorPod = actorPod;
   }
 
   process() {
+    // as process will be called again in redo,
+    // we should try to keep actor id the same, just in case
+    // there are other nodes in futher redo process, who are referencing this actor
     let importActor = new ActorImporter();
-    return importActor.start(this.template).then(actor => {
-      this.actorID = actor.id;
+    return importActor.start(this.actorPod).then(actor => {
+      this.actor = actor;
+      this.actorPod.id = actor.id;
       return this;
     })
+  }
+
+  getActor() {
+    return this.actor;
   }
 
   undo() {
