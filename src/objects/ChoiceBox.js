@@ -61,6 +61,10 @@ export default class ChoiceBox extends Actor
     });
   }
 
+  hitTest(x, y) {
+    return this.box.graphics.containsPoint(new PIXI.Point(x,y));
+  }
+
   select() {
     super.select();
 

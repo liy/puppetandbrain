@@ -1,6 +1,5 @@
-import './Menu.scss';
-import { svgElement, aroundAt } from '../utils/utils';
-import MenuIcon from '../assets/menu-icon.svg';
+import './ContextMenu.scss';
+import { aroundAt } from '../utils/utils';
 import ActorSelection from '../objects/ActorSelection';
 import GraphSelection from '../graph/GraphSelection'
 import API from '../API';
@@ -32,8 +31,12 @@ class ContextMenu
     document.addEventListener('click', this.close);
 
     document.getElementById('canvas').addEventListener('contextmenu', e => {
-      if(ActorSelection.selected.length != 0) {
-        this.openActorMenu();
+      const canvas = document.getElementById('canvas');
+      const rect = canvas.getBoundingClientRect();
+      // FIXIME: handle scale!!
+      let actor = ActorSelection.selected[0]
+      if(actor && actor.hitTest(e.clientX-rect.left, e.clientY-rect.top)) {
+        this.openActorMenu(e);
       }
     })
 
@@ -44,14 +47,21 @@ class ContextMenu
     })
   }
 
-  openActorMenu() {
+  openActorMenu(e) {
+    this.opened = true;
+
+    this.element.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
     // override me, hehe...
     console.log(ActorSelection.selected);
     this.element.appendChild(this.actorMenuList);
+    document.body.appendChild(this.element);
   }
 
   openBlockMenu() {
+    this.opened = true;
+    
     console.log(GraphSelection.selected);
+    document.body.appendChild(this.element);
   }
 
   addItem(list, text, handler) {
@@ -64,16 +74,13 @@ class ContextMenu
     })
   }
 
-  toggle(e) {
-    this.opened = !this.opened;
-    this.element.style.display = this.opened ? 'block': 'none';
-  }
-
   close(e) {
-    this.opened = false;
-    this.element.style.display = 'none';
-    if(this.element.contains(this.actorMenuList)) this.element.removeChild(this.actorMenuList);
-    if(this.element.contains(this.blockMenuList)) this.element.removeChild(this.blockMenuList);
+    if(this.opened) {
+      this.opened = false;
+      if(this.element.contains(this.actorMenuList)) this.element.removeChild(this.actorMenuList);
+      if(this.element.contains(this.blockMenuList)) this.element.removeChild(this.blockMenuList);
+      document.body.removeChild(this.element);
+    }
   }
 }
 

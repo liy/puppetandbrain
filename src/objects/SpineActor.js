@@ -63,6 +63,11 @@ export default class SpineActor extends Actor
     this.emit('actor.ready', this);
   }
 
+  hitTest(x, y) {
+    // TODO: override me 
+    return Editor.renderer.plugins.interaction.hitTest(new PIXI.Point(x, y)) == this.spineComponent.spine;
+  }
+
   gameStop() {
     super.gameStop();
     this.spineComponent.setToSetupPose();

@@ -66,7 +66,7 @@ let fileRefs = {
 // Cron job scan this one by one, check activity id against fileRefs see whether this file is really
 // referenced by activity or myPuppet, if not, activity id and mypuppet id will be removed.
 // if no id exist in the entry anymore, the file is free to delete.
-let userFiles = {
+let files = {
   fileID: {
     activityID_1: true
   }

@@ -96,6 +96,11 @@ export default class Actor extends EventEmitter
     console.log('destroy', this)
   }
 
+  hitTest(x, y) {
+    // TODO: override me 
+    return false;
+  }
+
   gamePrestart() {
     this.initialState = {
       position: this.position.pod(),

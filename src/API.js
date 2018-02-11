@@ -142,11 +142,15 @@ class API
       files[`${fileData.hash}.${fileData.ext}`] = {[myPuppetID]: true}
     }
     
-    // update file references pair
+    // update puppet to file references pair
     firebase.firestore().doc(`fileRefs/${myPuppetID}`).set(fileRefs)
-    firebase.firestore().collection('files').doc(`${hash}.${ext}`).set({
-      [referenceByID]: true,
-    }, {merge:true});
+
+    // Update file to puppet pair
+    Object.keys(files).forEach(file => {
+      firebase.firestore().collection('files').doc(file).set({
+        [myPuppetID]: true,
+      }, {merge:true});
+    })
 
 
     // upload snapshot blob to firebase storage
