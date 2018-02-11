@@ -1,7 +1,9 @@
 import DataType from "./DataType";
 
 export default {
-  [DataType.GENERIC]: 0xA9C4D2,
+  // [DataType.GENERIC]: 0xA9C4D2,
+  
+  [DataType.GENERIC]: 0xFFFFFF,
   [DataType.BOOLEAN]: 0xA9C4D2,
   [DataType.DOUBLE]: 0xA9C4D2,
   [DataType.INTEGER]: 0xA9C4D2,

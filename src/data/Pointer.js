@@ -29,10 +29,14 @@ export default class Pointer extends EventEmitter
     }
   }
 
-  // TODO: to be removed, just for testing, whether there are someone try to set it at runtime!!!
-  // which is definitely bad bad bad...
+
   get type() {
     return this.descriptor.type;
+  }
+
+  set type(t) {
+    this.descriptor.type = t;
+    this.emit('input.type.change', this.type);
   }
 
   get isConnected() {

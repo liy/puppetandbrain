@@ -64,13 +64,14 @@ export default class Orbit extends Task
   }
 
   start() {
-    this.rotation = Math.atan2(this.owner.position.y, this.owner.position.x)
+    let v = Vec2.sub(this.owner.position, numericVector(this.inputs.value('point')));
+    this.rotation = Math.atan2(v.y, v.x)
   }
 
   run() {
     super.run()
 
-    const point = new Vec2(numericVector(this.inputs.value('point')));
+    const point = numericVector(this.inputs.value('point'));
     const radius = Number(this.inputs.value('radius'));
 
     this.rotation += Number(this.inputs.value('degree'))*toRadian;

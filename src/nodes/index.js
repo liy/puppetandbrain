@@ -13,13 +13,15 @@
 // export const RandomInteger = Operators.RandomInteger;
 
 export Arithmetic from './Arithmetic';
-export Compare from './Compare';
 export Trigonometry from './Trigonometry';
 export VectorArithmetic from './VectorArithmetic';
+export VectorLen from './VectorLen';
 
 export RandomNumber from './RandomNumber';
 export RandomInteger from './RandomInteger';
 
+export Compare from './Compare';
+export Logic from './Logic';
 
 // These are for brain variable setter and getter
 export Getter from './Getter';

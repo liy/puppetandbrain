@@ -32,13 +32,11 @@ export default class InputSymbol extends DataSymbol
     this.connectionPath.setAttribute('stroke', this.hexColor);
 
     if(this.isConnected) {
-      // this.svg.style.setProperty('--fill', '#98C6DE');
       this.svg.style.setProperty('--fill', this.hexColor);
       this.svg.style.setProperty('--stroke', 'none');
     }
     else {
       this.svg.style.setProperty('--fill', 'none');
-      // this.svg.style.setProperty('--stroke', '#98C6DE');
       this.svg.style.setProperty('--stroke', this.hexColor);
     }
   }
@@ -58,6 +56,8 @@ export default class InputSymbol extends DataSymbol
   }
 
   refresh() {
+    // when input type changes, the connection line stroke color needs changing as well
+    this.connectionPath.setAttribute('stroke', this.hexColor);
     if(this.isConnected) {
       this.drawConnection();
       BrainGraph.svg.appendChild(this.connectionPath);

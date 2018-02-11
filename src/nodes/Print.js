@@ -6,13 +6,13 @@ NodeTemplate.Print = {
   className: 'Print',
   name: 'Print',
   inputs: [{
-    name: 'text',
+    name: 'data',
     descriptor: {
-      type: DataType.STRING,
+      type: DataType.GENERIC,
     }
   }],
   memory: {
-    text: 'default text'
+    data: 'default text'
   },
   category: 'Utilities',
   elementClass: ['utility'],
@@ -30,7 +30,7 @@ export default class Print extends Task
   run() {
     super.run()
 
-    let message = this.inputs.value('text');
+    let message = this.inputs.value('data');
     console.log('%c%s', 'color: green', message);
     
     let p = document.createElement('p');

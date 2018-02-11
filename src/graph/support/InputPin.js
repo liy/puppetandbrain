@@ -91,6 +91,7 @@ export default class extends DataPin
 
     this.input.on('input.connected', this.connectionChanged, this);
     this.input.on('input.disconnected', this.connectionChanged, this);
+    this.input.on('input.type.change', this.inputTypeChanged, this);
     this.connectionChanged();
   }
 
@@ -100,6 +101,7 @@ export default class extends DataPin
     this.label.removeEventListener('click', this.labelClicked);
     this.input.off('input.connected', this.connectionChanged, this);
     this.input.off('input.disconnected', this.connectionChanged, this);
+    this.input.off('input.type.change', this.inputTypeChanged, this);
   }
 
   setGadget(gadget) {
@@ -135,6 +137,10 @@ export default class extends DataPin
       // only if there is a gadget to open
       if(this.gadget) this.label.classList.add('clickable');
     }
+  }
+
+  inputTypeChanged(type) {
+    this.symbol.refresh(type);
   }
 
   labelClicked() {

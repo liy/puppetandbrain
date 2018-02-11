@@ -24,6 +24,20 @@ export default class extends Node
     this.operation = NodeTemplate[this.className].operations.find(operation => {
       return operation.operationName == operationName;
     });
+
+    // change input type
+    let types = this.operation.inputType;
+    if(!types) {
+      types = {};
+      // default template types
+      for(let input of NodeTemplate[this.className].inputs) {
+        types[input.name] = input.descriptor.type;
+      }
+    }
+    for(let input of this.inputs) {
+      input.type = types[input.name];
+    }
+
     this._operationName = operationName;
   }
  

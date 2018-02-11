@@ -9,12 +9,12 @@ NodeTemplate.Compare = {
   inputs: [{
     name: 'A',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }, {
     name: 'B',
     descriptor: {
-      type: DataType.GENERIC,
+      type: DataType.DOUBLE,
     }
   }],
   outputs: [{
@@ -31,12 +31,20 @@ NodeTemplate.Compare = {
     {
       description: '= Equal',
       name: '=',
-      operationName: 'equal'
+      operationName: 'equal',
+      inputType: {
+        'A': DataType.GENERIC,
+        'B': DataType.GENERIC
+      }
     },
     {
       description: '≠ Not equal',
       name: '≠',
-      operationName: 'notEqual'
+      operationName: 'notEqual',
+      inputType: {
+        'A': DataType.GENERIC,
+        'B': DataType.GENERIC
+      }
     },
     {
       description: '< Less',
