@@ -9,6 +9,7 @@ NodeTemplate.Animation = {
     name: 'name',
     descriptor: {
       type: DataType.STRING,
+      gadgetClassName: 'DropDown'
     }
   }],
   outputs: [],
@@ -36,5 +37,12 @@ export default class Animation extends Task
 
     this.owner.setAnimation(this.inputs.value('name'));
     this.execution.run();
+  }
+
+  getGadgetConstructorData(inputName) {
+    return {
+      list: this.list,
+      value: this.memory[inputName]
+    }
   }
 }

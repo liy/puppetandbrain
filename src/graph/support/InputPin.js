@@ -22,15 +22,15 @@ export default class extends DataPin
     super.init(node);
 
     // setup gadget
-    let input = node.inputs.get(this.name);
-    let data = node.memory[this.name];
-    let gadgetClassName = input.descriptor.gadgetClassName;
-    if(!input.descriptor.gadgetDisabled) {
+    this.input = node.inputs.get(this.name);
+    let data = node.getGadgetConstructorData(this.name);
+    let gadgetClassName = this.input.descriptor.gadgetClassName;
+    if(!this.input.descriptor.gadgetDisabled) {
       if(gadgetClassName) {
         this.setGadget(new gadgetClasses[gadgetClassName](data));
       }
       else {
-        switch(input.type) {
+        switch(this.input.type) {
           case DataType.GENERIC:
             this.setGadget(new TextField(data));
             break;
@@ -89,7 +89,6 @@ export default class extends DataPin
       }
     })
 
-    this.input = this.node.inputs.get(this.name);
     this.input.on('input.connected', this.connectionChanged, this);
     this.input.on('input.disconnected', this.connectionChanged, this);
     this.connectionChanged();

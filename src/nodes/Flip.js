@@ -9,6 +9,7 @@ NodeTemplate.Flip = {
     name: 'direction',
     descriptor: {
       type: DataType.STRING,
+      gadgetClassName: 'DropDown'
     }
   }, {
     name: 'duration',
@@ -126,5 +127,13 @@ export default class Flip extends Task
 
   get list() {
     return LIST;
+  }
+
+  getGadgetConstructorData(inputName) {
+    if(inputName == 'duration') return super.getGadgetConstructorData(inputName);
+    return {
+      list: LIST,
+      value: this.memory[inputName]
+    }
   }
 }

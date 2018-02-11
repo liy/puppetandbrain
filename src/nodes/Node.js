@@ -112,6 +112,16 @@ export default class Node extends EventEmitter
     return data;
   }
 
+  /**
+   * Call this method to get the constructor data for initializing a gadget instance.
+   * By default, it fetch the data in the memory object using input name.
+   * Override this to provide more specific data, ie, dropdown list data
+   * @param {*} inputName The input name
+   */
+  getGadgetConstructorData(inputName) {
+    return this.memory[inputName];
+  } 
+
   getUserFiles() {
     return null;
   }
