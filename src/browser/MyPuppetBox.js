@@ -27,7 +27,7 @@ export default class extends PuppetBox
   loadSnapshot() {
     // load the file
     firebase.storage().ref(`users/${this.pod.userID}/snapshots/${this.pod.myPuppetID}-puppet-snapshot.png`).getDownloadURL().then(url => {
-      this.box.style.backgroundImage = `url("${url}")`
+      this.thumb.style.backgroundImage = `url("${url}")`
     })
   }
 }

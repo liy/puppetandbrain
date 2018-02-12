@@ -22,7 +22,7 @@ class ContextMenu
       actor.y = aroundAt(actor.y);
       // TODO: display some notification once completed
     })
-    this.addItem(this.actorMenuList, 'Export to My Puppet', async () => {
+    this.addItem(this.actorMenuList, 'Save to My Puppets', async () => {
       let actor = ActorSelection.selected[0];
       let {action, data:name} = await InputModal.exportMyPuppet(actor.name);
       if(action) {

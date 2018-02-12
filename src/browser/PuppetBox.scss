@@ -8,10 +8,15 @@
     
     width: 120px;
     height: 120px;
-
     border-radius: 5px;
 
     background-color: rgba(255, 255, 255, 0.1);
+    
+    .thumbnail {
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+      margin: 10px;
+    }
   
     cursor: pointer;
   }
@@ -19,6 +24,6 @@
   span {
     font-size: 18px;
     color: white;
-    margin-top: 10px;
+    margin-top: 15px;
   }
 }

@@ -26,7 +26,7 @@ export default class ImportActor extends Command
   }
 
   undo() {
-    this.deleteCommand = Commander.create('DeleteActor', this.actorID).process();
+    this.deleteCommand = Commander.create('DeleteActor', this.actorPod.id).process();
   }
 
   redo() {

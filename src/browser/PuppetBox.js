@@ -14,10 +14,14 @@ export default class extends GridBox
 
     this.box = document.createElement('div');
     this.box.className = 'box';
-    this.box.style.backgroundRepeat = 'no-repeat';
-    this.box.style.backgroundPosition = 'center';
-    this.box.style.backgroundSize = 'contain';
     this.element.appendChild(this.box);
+
+    this.thumb = document.createElement('div')
+    this.thumb.className = 'thumbnail';
+    this.thumb.style.backgroundRepeat = 'no-repeat';
+    this.thumb.style.backgroundPosition = 'center';
+    this.thumb.style.backgroundSize = 'contain';
+    this.box.appendChild(this.thumb);
 
     this.title = document.createElement('span');
     this.title.className = 'title';
@@ -38,7 +42,7 @@ export default class extends GridBox
     // load the snapshot
     firebase.storage().ref(`${this.pod.libDir}/${this.pod.puppetID}/snapshot.png`).getDownloadURL().then(url => {
       this.loaded = true;
-      this.box.style.backgroundImage = `url("${url}")`
+      this.thumb.style.backgroundImage = `url("${url}")`
     })
   }
 }
