@@ -33,20 +33,24 @@ export default class DeleteVariable extends Command
     let {variable, index} = brain.variables.remove(this.variablePod.id);
     this.variableIndex = index;
 
+    let getters = this.variable.getters.concat();
+    let setters = this.variable.setters.concat();
+
     // Get all and delete the getters and setters related to this variable
     // Note that I put the actual deletion in separate loop.
     // Just because I need the actual original pod of the nodes. Delete block
     // would have changed the data(e.g., execution input output link )
-    for(let getter of this.variable.getters) {
+    for(let getter of getters) {
       this.getterPods.push(getter.pod(true));
     }
-    for(let setter of this.variable.setters) {
+    for(let setter of setters) {
       this.setterPods.push(setter.pod(true));
     }
-    for(let getter of this.variable.getters) {
+    for(let getter of getters) {
+      console.log(getter.id);
       BrainGraph.deleteBlock(BrainGraph.getBlock(getter.id))
     }
-    for(let setter of this.variable.setters) {
+    for(let setter of setters) {
       BrainGraph.deleteBlock(BrainGraph.getBlock(setter.id))
     }
 
