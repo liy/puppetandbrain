@@ -5,7 +5,7 @@ import TextField from '../graph/gadgets/TextField'
 export default class InputModal extends Modal
 {
   static exportMyPuppet(name) {
-    let modal = new InputModal(name, 'Please enter the name of the puppet, so you can find it later.');
+    let modal = new InputModal(name, 'Please enter the name of the puppet. So you can find it later in <b>My Puppets</b> when adding a new puppet.');
     return modal.open();
   }
 
@@ -22,7 +22,7 @@ export default class InputModal extends Modal
 
     this.description = document.createElement('span');
     this.description.className = 'input-description';
-    this.description.textContent = description;
+    this.description.innerHTML = description;
     this.content.appendChild(this.description);
   }
 

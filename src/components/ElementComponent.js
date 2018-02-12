@@ -59,7 +59,7 @@ export default class ElementComponent extends Component
   }
 
   mouseDown(e) {
-    this.entity.pointerDown(e.clientX, e.clientY, e);
+    this.entity.pointerDown(e.clientX - Editor.stage.offsetX, e.clientY - Editor.stage.offsetY, e);
   }
 
   mouseUp(e) {
@@ -79,7 +79,7 @@ export default class ElementComponent extends Component
     
     this.matrix.rotate(this.rotation);
     this.matrix.scale(this.scale.x, this.scale.y);
-    this.matrix.translate(this.position.x, this.position.y);
+    this.matrix.translate(this.position.x + Editor.stage.offsetX, this.position.y + Editor.stage.offsetY);
     // centre the element to its origin
     this.matrix.translate(-this.element.offsetWidth/2, -this.element.offsetHeight/2)
 

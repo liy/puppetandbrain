@@ -103,6 +103,10 @@ function signedIn(user) {
 
     Activity.new();
     UIController.addBtn.enabled = true;
+
+    var box = new ChoiceBox();
+    box.init();
+    Editor.stage.addActor(box);
   })
 
   router.get('/about', (req, e) => {
