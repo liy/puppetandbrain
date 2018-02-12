@@ -2,6 +2,7 @@ import './MyPuppetBox.scss';
 import PuppetBox from './PuppetBox'
 import { svgElement } from '../utils/utils';
 import BinIcon from '../assets/bin.svg';
+import ConfirmModal from '../ui/ConfirmModal';
 
 export default class extends PuppetBox
 {
@@ -11,10 +12,11 @@ export default class extends PuppetBox
     this.deletBtn = svgElement(BinIcon, {width:24, height:24});
     this.box.appendChild(this.deletBtn)
 
-    this.deletBtn.addEventListener('click', e => {
+    this.deletBtn.addEventListener('click', async e => {
       e.stopPropagation();
-      let confirm = window.confirm(`How you sure to delete ${pod.name}?`)
-      if(confirm) {
+      
+      let confirmed = await ConfirmModal.open(`You are about to delete ${pod.name}. This action cannot be undone.`);
+      if(confirmed) {
         API.deleteMyPuppet(pod.myPuppetID).then(() => {
           this.emit('puppet.deleted', this);
         })
