@@ -46,11 +46,16 @@ body {
   height: 100%;
   top: 0;
   left: 0;
-  user-select: none;
   overflow: hidden;
+  
+  // Prevent user drag select div elements
+  user-select: none;
+  // overlay must not block mouse event, so PIXI.js canvas can still receive the event
   pointer-events: none;
-
   * {
+    // only allow select text in children
+    user-select: text;
+    // only children of the overlay can accept mouse event
     pointer-events: all;
   }
 }
