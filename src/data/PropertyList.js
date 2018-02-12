@@ -9,6 +9,7 @@ export default class extends ArrayMap
 
   add(propertyName, descriptor) {
     this.set(propertyName, {
+      propertyName,
       // default user friendly name to be the property text
       friendlyName: propertyName,
       ...descriptor

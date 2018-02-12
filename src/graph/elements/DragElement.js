@@ -155,7 +155,7 @@ export default class
               propertyName: propertyName,
               outputs: [{
                 name: propertyName,
-                type: this.sourceElement.descriptor.type
+                descriptor: this.sourceElement.descriptor
               }]
             }
             break;

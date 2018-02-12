@@ -5,9 +5,9 @@ import * as GadgetClasses from '../gadgets';
 
 export default class extends PropertyElement
 {
-  constructor(actor, propertyName, descriptor) {
-    super(actor, propertyName, descriptor);
-    let value = this.actor[propertyName];
+  constructor(actor, descriptor) {
+    super(actor, descriptor.propertyName, descriptor);
+    let value = this.actor[descriptor.propertyName];
     this.gadget = null;
     if(descriptor.gadgetClassName) {
       this.gadget = new GadgetClasses[descriptor.gadgetClassName](value)

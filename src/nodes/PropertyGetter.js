@@ -3,12 +3,13 @@ import DataType from "../data/DataType";
 
 NodeTemplate.PropertyGetter = {
   className: 'PropertyGetter',
-  inputs: [{
-    name: 'puppet',
-    descriptor: {
-      type: DataType.ACTOR, 
-    }
-  }],
+  // inputs: [{
+  //   name: 'puppet',
+  //   descriptor: {
+  //     type: DataType.ACTOR, 
+  //   }
+  // }],
+  inputs: [],
   outputs: [],
   elementClass: ['property', 'getter'],
   category: 'Property'

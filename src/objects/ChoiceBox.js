@@ -35,7 +35,8 @@ export default class ChoiceBox extends Actor
     // setup properties
     this.properties.add('text', {
       ...pod.properties.text,
-      iconID: '🏷️'
+      iconID: '🏷️',
+      type: DataType.STRING
     })
     this.properties.add('boxColor', {
       value: 0xFF9900,
@@ -57,6 +58,7 @@ export default class ChoiceBox extends Actor
       value: require('!file-loader!../assets/icons/logo@4x.png'),
       ...pod.properties.image,
       gadgetClassName: 'ImageField',
+      type: DataType.IMAGE,
       iconID: "🖼️"
     });
   }
