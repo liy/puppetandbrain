@@ -121,9 +121,15 @@ export default class SpineActor extends Actor
 
   snapshot() {
     return new Promise(resolve => {
+      // do not show filters in snapshot
+      let outlineFilters = this.spineComponent.container.filters;
+      this.spineComponent.container.filters = []
+
       let texture = Editor.renderer.generateTexture(this.spineComponent.container);
       let canvas = Editor.renderer.extract.canvas(texture);
       canvas.id = 'snapshot-canvas';
+      // reset back to original state
+      this.spineComponent.container.filters = outlineFilters
       resolve(canvas);
     })
   }

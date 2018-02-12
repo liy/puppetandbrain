@@ -10,10 +10,6 @@ export default class extends EventEmitter
     this.element.className = 'grid-box';
   }
 
-  destroy() {
-    this.removeAllListeners();
-  }
-
   isInViewport() {
     var rect = this.element.getBoundingClientRect();
 

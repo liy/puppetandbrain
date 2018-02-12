@@ -59,10 +59,18 @@ export default class extends Browser
     box.loadSnapshot();
     this.boxes.push(box);
     box.on('browser.close', this.close, this);
+    box.on('puppet.deleted', this.puppetedDeleted, this);
   }
 
   close(data) {
     super.close(data);
     this.closed = true;
+  }
+
+  puppetedDeleted(box) {
+    let index = this.boxes.indexOf(box);
+    this.boxes.splice(index, 1);
+    box.element.parentElement.removeChild(box.element);
+    box.destroy();
   }
 }

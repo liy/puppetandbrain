@@ -1,0 +1,16 @@
+.box {
+  svg {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    cursor: pointer;
+
+    opacity: 0.5;
+  }
+
+  svg:hover {
+    --fill: rgb(252, 46, 56);
+    opacity: 1;
+  }
+}

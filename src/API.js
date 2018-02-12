@@ -56,7 +56,7 @@ class API
 
     // file refs, this will tell crontjob that this activity is using this
     // set of files
-    let fileRefsRef = firebase.firestore().collection('fileRefs').doc(pod.activityID);
+    let fileRefsRef = firebase.firestore().collection('activityFileRefs').doc(pod.activityID);
     batch.set(fileRefsRef, fileRefs)
     // actual cloned activity
     let activityRef = firebase.firestore().collection('activities').doc(pod.activityID);
@@ -79,8 +79,11 @@ class API
     let batch = firebase.firestore().batch();
     let activityRef = firebase.firestore().collection('activities').doc(pod.activityID);
     batch.set(activityRef, pod);
-    let fileRefsRef = firebase.firestore().collection('fileRefs').doc(pod.activityID);
-    batch.set(fileRefsRef, fileRefs)
+
+    if(Object.keys(fileRefs).length != 0) {
+      let fileRefsRef = firebase.firestore().collection('activityFileRefs').doc(pod.activityID);
+      batch.set(fileRefsRef, fileRefs)
+    }
 
     return batch.commit().then(() => {
       console.info('Successfully saved activity')
@@ -143,7 +146,9 @@ class API
     }
     
     // update puppet to file references pair
-    firebase.firestore().doc(`fileRefs/${myPuppetID}`).set(fileRefs)
+    if(userFiles.length != 0) {
+      firebase.firestore().doc(`myPuppetFileRefs/${myPuppetID}`).set(fileRefs)
+    }
 
     // Update file to puppet pair
     Object.keys(files).forEach(file => {
@@ -161,6 +166,16 @@ class API
     });
 
     return myPuppetID;
+  }
+
+  deleteMyPuppet(myPuppetID, userID=CurrentUser.uid) {
+    let batch = firebase.firestore().batch();
+
+    let ref1 = firebase.firestore().doc(`users/${userID}/myPuppets/${myPuppetID}`);
+    batch.delete(ref1);
+    let ref2 = firebase.firestore().doc(`myPuppetFileRefs/${myPuppetID}`);
+    batch.delete(ref2);
+    return batch.commit();
   }
 
   getUrl(path) {
