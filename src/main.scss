@@ -48,6 +48,11 @@ body {
   left: 0;
   user-select: none;
   overflow: hidden;
+  pointer-events: none;
+
+  * {
+    pointer-events: all;
+  }
 }
 
 #activity-id {
