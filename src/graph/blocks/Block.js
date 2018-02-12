@@ -114,8 +114,7 @@ export default class Block extends EventEmitter
       if(inputPin.input.isConnected) {
         let block = BrainGraph.getBlock(inputPin.input.output.node.id);
         if(block) {
-          // Make sure the input connected node is a pure node, that is,
-          // non-task node.
+          // Make sure the input connected node is a pure node, that is, non-task node.
           // As only pure node will re-compute the data and propagate when the data is used.
           // If connected node is task node, there is not need to go further. Since the output
           // data is stored, cached in the task output data object

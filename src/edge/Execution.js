@@ -32,7 +32,7 @@ export default class Execution extends ArrayMap
 
   run(name='default') {
     if(this.nodes[name]) {
-      // notify the execution run start, useful when visualize the execution flow
+      // notify the execution run has started, useful when visualize the execution flow
       this.node.emit('execution.run', {executionName:name, targetNode: this.nodes[name]});
       this.nodes[name].run();
     }
