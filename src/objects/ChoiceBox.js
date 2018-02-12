@@ -33,33 +33,42 @@ export default class ChoiceBox extends Actor
     // if it does not exist
     pod.properties = pod.properties || {};
     // setup properties
-    this.properties.add('text', {
-      ...pod.properties.text,
-      iconID: '🏷️',
-      type: DataType.STRING
+    this.properties.add({
+      value: pod.properties.text,
+      propertyName: 'text',
+      descriptor: {
+        iconID: '🏷️',
+        type: DataType.STRING
+      }
     })
-    this.properties.add('boxColor', {
-      value: 0xFF9900,
-      ...pod.properties.boxColor,
-      friendlyName: 'box color',
-      gadgetClassName: 'ColorButton',
-      type: DataType.COLOR,
-      iconID: IconStore.COLOR
+    this.properties.add({
+      value: pod.properties.boxColor || 0xFF9900,
+      propertyName: 'boxColor',
+      descriptor: {
+        friendlyName: 'box color',
+        gadgetClassName: 'ColorButton',
+        type: DataType.COLOR,
+        iconID: IconStore.COLOR
+      }
     })
-    this.properties.add('textColor', {
-      value: 0x000000,
-      ...pod.properties.textColor,
-      friendlyName: 'text color',
-      gadgetClassName: 'ColorButton',
-      type: DataType.COLOR,
-      iconID: IconStore.COLOR
+    this.properties.add({
+      value: pod.properties.textColor || 0x000000,
+      propertyName: 'textColor',
+      descriptor: {
+        friendlyName: 'text color',
+        gadgetClassName: 'ColorButton',
+        type: DataType.COLOR,
+        iconID: IconStore.COLOR
+      }
     });
-    this.properties.add('image', {
-      value: require('!file-loader!../assets/icons/logo@4x.png'),
-      ...pod.properties.image,
-      gadgetClassName: 'ImageField',
-      type: DataType.IMAGE,
-      iconID: "🖼️"
+    this.properties.add({
+      value: pod.properties.image || require('!file-loader!../assets/icons/logo@4x.png'),
+      propertyName: 'image',
+      descriptor: {
+        gadgetClassName: 'ImageField',
+        type: DataType.IMAGE,
+        iconID: "🖼️"
+      }
     });
   }
 

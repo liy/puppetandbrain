@@ -10,6 +10,7 @@ export default class ActivityLoader
   }
 
   async parse(pod) {
+    console.log('Loading', pod)
     await this.preload(pod);
 
     this.createActors(pod);

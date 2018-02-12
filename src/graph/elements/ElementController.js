@@ -101,10 +101,11 @@ class ElementController
     this.elements.set('rotation', rotationElement);
 
     // extra properties if any
-    for(let descriptor of actor.properties) {
-      let propertyElement = new GenericPropertyElement(actor, descriptor);
+    for(let property of actor.properties) {
+      console.log(property)
+      let propertyElement = new GenericPropertyElement(actor, property);
       this.panel.append(propertyElement.element);
-      this.elements.set(descriptor.property, propertyElement);
+      this.elements.set(property.propertyName, propertyElement);
     }
 
     // seperator

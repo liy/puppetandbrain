@@ -5,9 +5,9 @@ import * as GadgetClasses from '../gadgets';
 
 export default class extends PropertyElement
 {
-  constructor(actor, descriptor) {
-    super(actor, descriptor.propertyName, descriptor);
-    let value = this.actor[descriptor.propertyName];
+  constructor(actor, {propertyName, descriptor}) {
+    super(actor, propertyName, descriptor);
+    let value = this.actor[this.propertyName];
     this.gadget = null;
     if(descriptor.gadgetClassName) {
       this.gadget = new GadgetClasses[descriptor.gadgetClassName](value)
@@ -19,7 +19,7 @@ export default class extends PropertyElement
     this.content.appendChild(this.gadget.element);
 
     this.gadget.on('gadget.state.change', value => {
-      actor[descriptor.property] = value;
+      actor[propertyName] = value;
     })
   }
 

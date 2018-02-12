@@ -29,6 +29,11 @@ export default class BoxComponent extends ElementComponent
     this.textElement.addEventListener('input', this.onInput);
 
     this.textColor = 0x000000;
+
+    // TODO: Should I allow text drag select???
+    this.textElement.addEventListener('mousedown', e => {
+      e.stopPropagation();
+    })
   }
   
   onInput(e) {
