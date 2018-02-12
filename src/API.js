@@ -123,13 +123,12 @@ class API
     return pods;
   }
 
-  async createMyPuppet(actor) {
+  async createMyPuppet(actor, name) {
     // generate entry in firestore
     const myPuppetID = firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).doc().id
     firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).doc(myPuppetID).set({
       ...actor.export(),
-      // FIXME: ask user to type a name
-      name: `My ${actor.name}`,
+      name,
       myPuppetID,
       userID: CurrentUser.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()

@@ -19,11 +19,6 @@ export default class DeleteVariable extends Command
   }
   
   process() {
-    if(this.variable.inUse) {
-      let confirm = window.confirm('Variable is in use, do you really want to delete the varaible and its getters and setters?');
-      if(!confirm) return false;
-    }
-
     this.delete();
 
     return this;

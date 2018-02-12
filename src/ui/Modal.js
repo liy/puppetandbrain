@@ -1,6 +1,6 @@
 import './Modal.scss';
 
-export default class
+export default class Modal
 {
   constructor() {
     this.element = document.createElement('div');
@@ -29,28 +29,39 @@ export default class
     this.secondaryBtn.textContent = 'Cancel'
     this.action.appendChild(this.secondaryBtn)
 
+    this.container.addEventListener('click', e => {
+      e.stopPropagation();
+    })
+
     this.primaryBtn.addEventListener('click', this.onPrimaryClick.bind(this), {once: true})
     this.secondaryBtn.addEventListener('click', this.onSecondaryClick.bind(this), {once: true})
     this.element.addEventListener('click', this.onOverlayClick.bind(this), {once:true})
   }
 
-  open() {
-    this.element.style.display = 'flex'
-
-    document.body.appendChild(this.element);
-
+  process() {
     return new Promise(resolve => {
       this.resolve = (action) => {
         this.close();
-        resolve(action);
+        resolve({action, data:this.data});
       };
     });
+  }
+
+  open() {
+    this.element.style.display = 'flex'
+    document.body.appendChild(this.element);
+    this.focus();
+    return this.process();
   }
 
   close() {
     this.element.style.display = 'none';
 
     document.body.removeChild(this.element);
+  }
+
+  get data() {
+    return null;
   }
 
   onPrimaryClick(e) {
@@ -67,5 +78,10 @@ export default class
 
   onOverlayClick(e) {
     this.resolve(false);
+  }
+
+  focus() {
+    // TODO: called after append to screen
+    this.primaryBtn.focus();
   }
 }

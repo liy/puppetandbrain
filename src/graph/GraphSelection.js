@@ -3,6 +3,8 @@ import ActorSelection from '../objects/ActorSelection'
 import EventEmitter from '../utils/EventEmitter';
 import ElementController from './elements/ElementController';
 import Block from './blocks/Block'
+import ConfirmModal from '../ui/ConfirmModal';
+import SoundEffect from '../SoundEffect';
 
 class GraphSelection extends EventEmitter
 {
@@ -59,12 +61,19 @@ class GraphSelection extends EventEmitter
     this.emit('block.selection.change', this.selected);
   }
 
-  delete() {
+  async delete() {
     if(this.selected instanceof Block) {
       History.push(Commander.create('DeleteBlock', this.selected.id).processAndSave());
     }
     else {
-      History.push(Commander.create('DeleteVariable', this.selected.variable.id, BrainGraph.brain.id).processAndSave())
+      if(this.selected.variable.inUse) {
+        var {action} = await ConfirmModal.open('Variable is in use, do you really want to delete the varaible and its getters and setters?');
+      }
+      
+      if(action) {
+        SoundEffect.play('trash');
+        History.push(Commander.create('DeleteVariable', this.selected.variable.id, BrainGraph.brain.id).processAndSave())
+      }
     }
     this.selected = null;
   }

@@ -15,8 +15,8 @@ export default class extends PuppetBox
     this.deletBtn.addEventListener('click', async e => {
       e.stopPropagation();
       
-      let confirmed = await ConfirmModal.open(`You are about to delete ${pod.name}. This action cannot be undone.`);
-      if(confirmed) {
+      let {action} = await ConfirmModal.open(`You are about to delete ${pod.name}. This action cannot be undone.`);
+      if(action) {
         API.deleteMyPuppet(pod.myPuppetID).then(() => {
           this.emit('puppet.deleted', this);
         })

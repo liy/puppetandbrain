@@ -141,10 +141,3 @@ firebase.auth().onAuthStateChanged(user => {
     // LookUp.user = null;
   }
 })
-
-// document.addEventListener('mousemove', e => {
-//   let dx = e.clientX - window.innerWidth/2;
-//   let dy = e.clientY - window.innerHeight/2;
-//   console.log((Math.atan2(dy, dx) * toDegree + 360)%360)
-//   // console.log(Math.atan(dy/dx) * toDegree)
-// })

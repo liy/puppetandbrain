@@ -4,6 +4,7 @@ import DataType from '../../data/DataType';
 import GraphSelection from '../GraphSelection';
 import SoundEffect from '../../SoundEffect';
 import { isMobile } from '../../utils/utils';
+import ConfirmModal from '../../ui/ConfirmModal';
 
 export default class 
 {
@@ -103,13 +104,20 @@ export default class
     this.drop(target, x, y)
   }
 
-  drop(target, x, y) {
+  async drop(target, x, y) {
     this.destroy();
 
     // drag over to the delete button, delete variable
     if(target == UIController.deleteBtn.element) {
-      SoundEffect.play('trash');
-      History.push(Commander.create('DeleteVariable', this.sourceElement.variable.id, BrainGraph.brain.id).processAndSave())
+      if(this.sourceElement.variable.inUse) {
+        var {action} = await ConfirmModal.open('Variable is in use, do you really want to delete the varaible and its getters and setters?');
+      }
+
+      if(action) {
+        SoundEffect.play('trash');
+        History.push(Commander.create('DeleteVariable', this.sourceElement.variable.id, BrainGraph.brain.id).processAndSave())
+      }
+      
       return;
     }
 

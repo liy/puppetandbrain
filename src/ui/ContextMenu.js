@@ -4,6 +4,8 @@ import ActorSelection from '../objects/ActorSelection';
 import GraphSelection from '../graph/GraphSelection'
 import API from '../API';
 import Command from '../commands/Command';
+import InputModal from './InputModal';
+import NotificationControl from './NotificationControl';
 
 class ContextMenu 
 {
@@ -20,9 +22,17 @@ class ContextMenu
       actor.y = aroundAt(actor.y);
       // TODO: display some notification once completed
     })
-    this.addItem(this.actorMenuList, 'Export to My Puppet', () => {
-      API.createMyPuppet(ActorSelection.selected[0]);
-      // TODO: display some notification once completed
+    this.addItem(this.actorMenuList, 'Export to My Puppet', async () => {
+      let actor = ActorSelection.selected[0];
+      let {action, data:name} = await InputModal.exportMyPuppet(actor.name);
+      if(action) {
+        API.createMyPuppet(actor, name).then(() => {
+          // display some notification once completed
+          NotificationControl.notify(`${name} has been added to your library`).delayFadeoutRemove();
+        }).catch(() => {
+          NotificationControl.notify('Error adding My Puppet').delayFadeoutRemove();
+        })
+      }
     })
 
     this.opened = false;
