@@ -56,6 +56,6 @@ export default class extends EventEmitter
   // }
 
   pod() {
-    return JSON.parse(JSON.stringify(this.data || null));
+    return JSON.parse(JSON.stringify(this.data));
   }
 }
