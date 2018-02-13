@@ -66,13 +66,14 @@ class GraphSelection extends EventEmitter
       History.push(Commander.create('DeleteBlock', this.selected.id).processAndSave());
     }
     else {
+      let action = true;
       if(this.selected.variable.inUse) {
-        var {action} = await ConfirmModal.open('Variable is in use, do you really want to delete the varaible and its getters and setters?');
+        action = (await ConfirmModal.open('Variable is in use, do you really want to delete the varaible and its getters and setters?')).action;
       }
       
       if(action) {
-        SoundEffect.play('trash');
         History.push(Commander.create('DeleteVariable', this.selected.variable.id, BrainGraph.brain.id).processAndSave())
+        SoundEffect.play('trash');
       }
     }
     this.selected = null;

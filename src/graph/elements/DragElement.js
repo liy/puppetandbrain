@@ -109,13 +109,14 @@ export default class
 
     // drag over to the delete button, delete variable
     if(target == UIController.deleteBtn.element) {
+      let action = true;
       if(this.sourceElement.variable.inUse) {
-        var {action} = await ConfirmModal.open('Variable is in use, do you really want to delete the varaible and its getters and setters?');
+        action = (await ConfirmModal.open('Variable is in use, do you really want to delete the varaible and its getters and setters?')).action;
       }
 
       if(action) {
-        SoundEffect.play('trash');
         History.push(Commander.create('DeleteVariable', this.sourceElement.variable.id, BrainGraph.brain.id).processAndSave())
+        SoundEffect.play('trash');
       }
       
       return;

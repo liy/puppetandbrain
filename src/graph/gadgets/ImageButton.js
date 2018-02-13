@@ -12,16 +12,14 @@ export default class extends FileButton
     this.image = new Image();
     this.element.appendChild(this.image)
 
-    if(fileData) {
-      ImageLoader.fetch(fileData).then(image => {
-        this.image.src = image.src;
-      })
-    }
+    ImageLoader.fetch(fileData).then(image => {
+      this.image.src = image.src;
+    })
 
     this.on('file.ready', ({byteArray, ...other}) => {
       let blob = new Blob([byteArray]);
       this.image.src = URL.createObjectURL(blob);
-      
+
       this.emit('gadget.state.change', other)
     })
   }

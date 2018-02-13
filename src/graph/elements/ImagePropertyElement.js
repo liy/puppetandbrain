@@ -14,10 +14,6 @@ export default class extends PropertyElement
     this.content.appendChild(this.gadget.element);
 
     this.gadget.on('gadget.state.change', ({byteArray, ...other}) => {
-      console.log(other)
-      // let blob = new Blob([byteArray]);
-      // actor[this.propertyName] = URL.createObjectURL(blob);
-      // for serialization
       actor.properties.get(this.propertyName).set(other);
     })
   }
