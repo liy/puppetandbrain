@@ -138,29 +138,29 @@ export default class BlockBrowser extends Browser
 
     // actor properties
     let actor = BrainGraph.brain.owner;
-    actor.properties.map((propertyName, descriptor) => {
+    actor.properties.map((propertyName, property) => {
       templates.push({
         ...NodeTemplate.PropertyGetter,
-        name: `${descriptor.friendlyName}`,
+        name: `${property.descriptor.friendlyName}`,
         ownerID: BrainGraph.brain.owner.id,
         propertyName,
         outputs: [{
           name: propertyName,
-          descriptor: descriptor
+          descriptor: property.descriptor
         }]
       })
       templates.push({
         ...NodeTemplate.PropertySetter,
-        name: `Set ${descriptor.friendlyName}`,
+        name: `Set ${property.descriptor.friendlyName}`,
         ownerID: BrainGraph.brain.owner.id,
         propertyName,
         inputs: [{
           name: propertyName,
-          descriptor
+          descriptor: property.descriptor
         }],
         outputs: [{
           name: propertyName,
-          descriptor
+          descriptor: property.descriptor
         }]
       })
     })
@@ -168,6 +168,8 @@ export default class BlockBrowser extends Browser
     templates.sort((a, b) => {
       return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
     })
+
+    console.log(templates)
 
     return templates;
   }

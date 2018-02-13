@@ -6,6 +6,7 @@ import AudioField from '../gadgets/AudioField'
 import Vec2Field from '../gadgets/Vec2Field'
 import ActorPicker from '../gadgets/ActorPicker'
 import ColorButton from '../gadgets/ColorButton'
+import ImageButton from '../gadgets/ImageButton'
 import Toggle from '../gadgets/Toggle';
 import InputSymbol from './InputSymbol';
 import DataType from '../../data/DataType';
@@ -66,7 +67,7 @@ export default class extends DataPin
             this.setGadget(new AudioField(data||{}));
             break;
           case DataType.IMAGE:
-            this.setGadget(new TextField(data));
+            this.setGadget(new ImageButton(data));
             break;
           default:
             this.setGadget(new TextField(data));

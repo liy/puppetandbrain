@@ -108,8 +108,8 @@ export default class Actor extends EventEmitter
       rotation: this.rotation
     }
 
-    for(let descriptor of this.properties) {
-      this.initialState[descriptor.property] = this[descriptor.property];
+    for(let property of this.properties) {
+      this.initialState[property.propertyName] = property.pod();
     }
   }
 
@@ -119,8 +119,9 @@ export default class Actor extends EventEmitter
       this.scale = new Vec2(this.initialState.scale);
       this.rotation = this.initialState.rotation;
     }
-    for(let descriptor of this.properties) {
-      this[descriptor.property] = this.initialState[descriptor.property];
+
+    for(let property of this.properties) {
+      property.set(this.initialState[property.propertyName]);
     }
   }
 
