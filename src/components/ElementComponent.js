@@ -1,6 +1,7 @@
 import './ElementComponent.scss'
 import Component from "./Component";
 import Matrix from '../math/Matrix';
+import { isMobile } from '../utils/utils';
 
 const stageOverlayer = document.getElementById('stage-overlayer')
 
@@ -13,6 +14,8 @@ export default class ElementComponent extends Component
     this.width = width;
     this.height = height;
 
+    this.touchStart = this.touchStart.bind(this);
+    this.touchEnd = this.touchEnd.bind(this);
     this.mouseDown = this.mouseDown.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
     this.mouseOver = this.mouseOver.bind(this);
@@ -44,14 +47,22 @@ export default class ElementComponent extends Component
 
   onStage() {
     this.element.style.opacity = 1;
-    this.element.addEventListener('mousedown', this.mouseDown)
-    this.element.addEventListener('mouseup', this.mouseUp);
+    if(isMobile) {
+      this.element.addEventListener('touchstart', this.touchStart)
+      this.element.addEventListener('touchend', this.touchEnd);
+    } 
+    else {
+      this.element.addEventListener('mousedown', this.mouseDown)
+      this.element.addEventListener('mouseup', this.mouseUp);
+    }
     this.element.addEventListener('mouseover', this.mouseOver)
     this.element.addEventListener('mouseout', this.mouseOut)
   }
 
   offStage() {
     stageOverlayer.removeChild(this.element);
+    this.element.removeEventListener('touchstart', this.touchStart)
+    this.element.removeEventListener('touchend', this.touchEnd);
     this.element.removeEventListener('mousedown', this.mouseDown)
     this.element.removeEventListener('mouseup', this.mouseUp)
     this.element.removeEventListener('mouseover', this.mouseOver)
@@ -62,9 +73,14 @@ export default class ElementComponent extends Component
     // note the stage offset applied, since clientX and clientY is in window coordinate.
     // TODO: In theory, scale and rotation also needs to be applied. 
     this.entity.pointerDown(e.clientX - Editor.stage.offsetX, e.clientY - Editor.stage.offsetY, e);
+
+    if(e.button == 2) {
+      this.entity.contextMenu(e);
+    }
   }
 
   mouseUp(e) {
+    console.log('mouse up')
     this.entity.pointerUp(e);
   }
 
@@ -74,6 +90,19 @@ export default class ElementComponent extends Component
 
   mouseOut(e) {
     this.entity.mouseOut(e);
+  }
+
+  touchStart(e) {
+    console.log('touch start')
+    // stop mouse down event firing, otherwise double pointerDown() will trigger
+    // e.preventDefault();
+    // note the stage offset applied, since clientX and clientY is in window coordinate.
+    // TODO: In theory, scale and rotation also needs to be applied. 
+    this.entity.pointerDown(e.changedTouches[0].clientX - Editor.stage.offsetX, e.changedTouches[0].clientY - Editor.stage.offsetY, e);
+  }
+
+  touchEnd(e) {
+    this.entity.pointerUp(e);
   }
 
   updateTransform() {
