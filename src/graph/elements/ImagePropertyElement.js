@@ -15,10 +15,10 @@ export default class extends PropertyElement
 
     this.gadget.on('gadget.state.change', ({byteArray, ...other}) => {
       console.log(other)
-      let blob = new Blob([byteArray]);
-      actor[this.propertyName] = URL.createObjectURL(blob);
+      // let blob = new Blob([byteArray]);
+      // actor[this.propertyName] = URL.createObjectURL(blob);
       // for serialization
-      actor.properties.get(this.propertyName).value = other;
+      actor.properties.get(this.propertyName).set(other);
     })
   }
 

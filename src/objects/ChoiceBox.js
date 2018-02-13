@@ -35,7 +35,7 @@ export default class ChoiceBox extends Actor
     pod.properties = pod.properties || {};
     // setup properties
     this.properties.add({
-      value: pod.properties.text,
+      data: pod.properties.text,
       propertyName: 'text',
       descriptor: {
         iconID: '🏷️',
@@ -43,7 +43,7 @@ export default class ChoiceBox extends Actor
       }
     })
     this.properties.add({
-      value: pod.properties.boxColor || 0xFF9900,
+      data: pod.properties.boxColor || 0xFF9900,
       propertyName: 'boxColor',
       descriptor: {
         friendlyName: 'box color',
@@ -53,7 +53,7 @@ export default class ChoiceBox extends Actor
       }
     })
     this.properties.add({
-      value: pod.properties.textColor || 0x000000,
+      data: pod.properties.textColor || 0x000000,
       propertyName: 'textColor',
       descriptor: {
         friendlyName: 'text color',
@@ -63,16 +63,13 @@ export default class ChoiceBox extends Actor
       }
     });
     this.properties.add({
-      value: pod.properties.image,
+      data: pod.properties.image,
       propertyName: 'image',
       descriptor: {
         type: DataType.IMAGE,
         iconID: "🖼️"
       }
     });
-    ImageLoader.fetch(pod.properties.image.path).then(image => {
-      this.image = image.src;
-    })
   }
 
   hitTest(x, y) {
@@ -126,12 +123,18 @@ export default class ChoiceBox extends Actor
     return this.content.textColor;
   }
 
-  set image(url) {
-    this.content.imageUrl = url
+  set image(fileData) {
+    if(!fileData) return;
+
+    // ImageLoader.fetch(fileData.path).then(image => {
+      // this.content.imageUrl = image.src;
+    // })
+    this.content.imageUrl = fileData.url;
   }
 
   get image() {
-    return this.content.imageUrl
+    // return this.content.imageUrl
+    return this.properties.get('image').data
   }
 
   set text(text) {

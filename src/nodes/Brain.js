@@ -32,6 +32,7 @@ export default class Brain
 
   prestart() {
     this.variables.updateRuntime();
+    this.owner.properties.updateRuntime();
   }
 
   addNode(node) {

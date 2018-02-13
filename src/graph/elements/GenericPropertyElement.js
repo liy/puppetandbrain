@@ -19,11 +19,11 @@ export default class extends PropertyElement
     }
     this.content.appendChild(this.gadget.element);
 
-    this.gadget.on('gadget.state.change', value => {
+    this.gadget.on('gadget.state.change', data => {
       // console.log(value)
       // actor.property
-      actor[this.propertyName] = value;
-      actor.properties.get(this.propertyName).value = value;
+      // actor[this.propertyName] = value;
+      actor.properties.get(this.propertyName).set(data);
     })
   }
 

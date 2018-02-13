@@ -35,8 +35,8 @@ class API
       task.on('state_changed', 
         onProgress, 
         onError,
-        function complete() {
-          console.log('done');
+        function complete(data) {
+          console.log('done', data);
           resolve();
         })
     })

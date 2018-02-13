@@ -1,5 +1,6 @@
 import ArrayMap from "../utils/ArrayMap";
 import DataType from "./DataType";
+import Property from "./Property";
 
 export default class extends ArrayMap
 {
@@ -8,24 +9,33 @@ export default class extends ArrayMap
     this.actor = actor;
   }
 
-  add(property) {
-    let propertyName = property.propertyName;
-    this.set(propertyName, {
-      propertyName: propertyName,
-      descriptor: {
-        // default user friendly name to be the property text
-        friendlyName: propertyName,
-        ...property.descriptor,
-      }
-    });
-    if(property.descriptor.type != DataType.AUDIO || property.descriptor.type != DataType.IMAGE) {
-      // handles initial and default value
-      this.actor[propertyName] = property.value;
-    }
+  add(pod) {
+    // let propertyName = property.propertyName;
+    // this.set(propertyName, {
+    //   propertyName: propertyName,
+    //   descriptor: {
+    //     // default user friendly name to be the property text
+    //     friendlyName: propertyName,
+    //     ...property.descriptor,
+    //   }
+    // });
+    // if(property.descriptor.type != DataType.AUDIO || property.descriptor.type != DataType.IMAGE) {
+    //   // handles initial and default value
+    //   this.actor[propertyName] = property.value;
+    // }
+    let property = new Property(this.actor, pod);
+    this.set(property.propertyName, property);
   }
 
   getType(propertyName) {
     return this.get(propertyName).type;
+  }
+  
+  
+  updateRuntime() {
+    for(let property of this.values) {
+      property.updateRuntime();
+    }
   }
 
   pod() {

@@ -60,19 +60,24 @@ export default class extends Gadget
       (error) => {
         this.emit('file.error', error);
       }
-    ).then(() => {
+    ).then(async () => {
       this.emit('file.progress', 1);
       // this.icon.style.display = 'none'
       this.fileNameSpan.textContent = file.name;
 
-        this.emit('file.ready', {
-          fileName: file.name,
-          contentType,
-          byteArray: hashTask.data,
-          hash,
-          ext,
-          path,
-        });
-      })
+      // this is a signed url, try to keep it in the data,
+      // so we can load image directly using the url
+      let url = await API.getUrl(path);
+
+      this.emit('file.ready', {
+        fileName: file.name,
+        contentType,
+        byteArray: hashTask.data,
+        hash,
+        ext,
+        path,
+        url,
+      });
+    })
   }
 }

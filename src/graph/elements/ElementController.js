@@ -104,7 +104,7 @@ class ElementController
     // extra properties if any
     for(let property of actor.properties) {
       let propertyElement
-      if(property.descriptor.type == DataType.IMAGE) {
+      if(property.type == DataType.IMAGE) {
         propertyElement = new ImagePropertyElement(actor, property);
       }
       else {
