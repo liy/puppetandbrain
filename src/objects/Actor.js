@@ -305,15 +305,18 @@ export default class Actor extends EventEmitter
     // brain variable user files
     for(let variable of this.brain.variables) {
       if(variable.type == DataType.AUDIO || variable.type == DataType.IMAGE) {
-        userFiles.push(variable.data);
+        if(variable.data.hash) {
+          userFiles.push(variable.data);
+        }
       }
     }
+    
     // properties
     for(let property of this.properties) {
       if(property.type == DataType.AUDIO || property.type == DataType.IMAGE) {
-        // set in the property element when gadget.state.change received
-        // TODO: change value to some meaningful name, suppose to be a path...
-        userFiles.push(property.data);
+        if(property.data.hash) {
+          userFiles.push(property.data);
+        }
       }
     }
 

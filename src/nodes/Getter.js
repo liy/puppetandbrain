@@ -16,7 +16,7 @@ NodeTemplate.Getter = {
 /**
  * Variable(brain property) getter
  */
-export default class Getter extends Node
+export default class VariableGetter extends Node
 {
   constructor(id) {
     super(id);

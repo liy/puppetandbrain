@@ -46,14 +46,15 @@ export default class PropertySetter extends Task
 
   
   getUserFiles() {
-    let property = this.owner.properties.get(this.propertyName);
-    if(property) {
-      // TODO handle image type
-      if(property.type == DataType.AUDIO || property.type == DataType.IMAGE) {
-        return [property.data]
+    // If the input is connected, ignore the local memory file
+    if(!this.inputs.get(this.propertyName).isConnected) {
+      let data = this.memory[this.propertyName];
+      // make sure the data is a file data
+      if(data.hash) {
+        return [data]
       }
     }
-    return [];
+    return null;
   }
 
   get nodeName() {

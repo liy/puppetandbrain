@@ -169,8 +169,6 @@ export default class BlockBrowser extends Browser
       return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
     })
 
-    console.log(templates)
-
     return templates;
   }
 

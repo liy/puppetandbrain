@@ -75,7 +75,8 @@ export default class Setter extends Task
     // TODO handle image type
     if(this.variable.type == DataType.AUDIO || this.variable.type == DataType.IMAGE) {
       let data = this.memory['input']
-      if(data) {
+      // make sure the data is a file data
+      if(data.hash) {
         return [data]
       }
     }
