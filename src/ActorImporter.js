@@ -71,8 +71,8 @@ export default class
             // check the puppet is also imported, then change the id.
             let actor = this.mapping[nodePod.memory.puppet];
             nodePod.memory.puppet = actor ? actor.id : nodePod.memory.puppet;
-            node.init(nodePod);
           }
+          node.init(nodePod);
           break;
         case 'Perform':
           // delay init 
