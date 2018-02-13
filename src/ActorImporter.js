@@ -60,16 +60,19 @@ export default class
       nodePod.ownerID = actor.id;
 
       switch(nodePod.className) {
-        case 'Getter':
-        case 'Setter':
+        case 'VariableGetter':
+        case 'VariableSetter':
           nodePod.variableID = this.mapping[nodePod.variableID].id;
           node.init(nodePod);
           break;
         case 'PropertyGetter':
-          // check the puppet is also imported, then change the id.
-          let actor = this.mapping[nodePod.memory.puppet];
-          nodePod.memory.puppet = actor ? actor.id : nodePod.memory.puppet;
-          node.init(nodePod);
+          // Size, position, rotation property getter has a puppet input
+          if(nodePod.memory.puppet) {
+            // check the puppet is also imported, then change the id.
+            let actor = this.mapping[nodePod.memory.puppet];
+            nodePod.memory.puppet = actor ? actor.id : nodePod.memory.puppet;
+            node.init(nodePod);
+          }
           break;
         case 'Perform':
           // delay init 

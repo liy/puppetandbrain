@@ -56,7 +56,7 @@ export default class BlockBrowser extends Browser
     // these are dynmaic templates
     let templates = []
     Object.keys(NodeTemplate).map(className => {
-      if(className != 'Getter' && className != 'Setter' && className != 'PropertyGetter' && className != 'PropertySetter' && 
+      if(className != 'VariableGetter' && className != 'VariableSetter' && className != 'PropertyGetter' && className != 'PropertySetter' && 
          className != 'Perform' && className != 'Break') {
         templates.push(NodeTemplate[className])
       }
