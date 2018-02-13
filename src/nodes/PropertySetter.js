@@ -1,4 +1,5 @@
 import {Task} from "./Task";
+import DataType from '../data/DataType';
 
 NodeTemplate.PropertySetter = {
   className: 'PropertySetter',
@@ -41,6 +42,18 @@ export default class PropertySetter extends Task
     this.owner[this.propertyName] = this.inputs.value(this.propertyName);
 
     this.execution.run();
+  }
+
+  
+  getUserFiles() {
+    let property = this.owner.properties.get(this.propertyName);
+    if(property) {
+      // TODO handle image type
+      if(property.type == DataType.AUDIO || property.type == DataType.IMAGE) {
+        return [property.data]
+      }
+    }
+    return [];
   }
 
   get nodeName() {

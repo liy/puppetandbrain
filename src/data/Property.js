@@ -56,13 +56,6 @@ export default class extends EventEmitter
   // }
 
   pod() {
-    // return {
-    //   propertyName: this.name,
-    //   descriptor: {...this.descriptor},
-    //   // Only record the initial data, not the runtime data...
-    //   data: this.data,
-    // }
-    console.log(this.data)
     return JSON.parse(JSON.stringify(this.data || null));
   }
 }

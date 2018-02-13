@@ -304,7 +304,7 @@ export default class Actor extends EventEmitter
     }
     // brain variable user files
     for(let variable of this.brain.variables) {
-      if(variable.type == DataType.AUDIO) {
+      if(variable.type == DataType.AUDIO || variable.type == DataType.IMAGE) {
         userFiles.push(variable.data);
       }
     }

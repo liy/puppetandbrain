@@ -18,10 +18,11 @@ export default class extends FileButton
       })
     }
 
-    this.on('file.ready', result => {
-      let blob = new Blob([result.byteArray]);
+    this.on('file.ready', ({byteArray, ...other}) => {
+      let blob = new Blob([byteArray]);
       this.image.src = URL.createObjectURL(blob);
-      this.emit('gadget.state.change', result)
+      
+      this.emit('gadget.state.change', other)
     })
   }
 }
