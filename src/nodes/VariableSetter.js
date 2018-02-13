@@ -1,8 +1,9 @@
 import {Task} from "./Task";
 import DataType from "../data/DataType";
 
-NodeTemplate.Setter = {
-  className: 'Setter',
+NodeTemplate.VariableSetter = {
+  className: 'VariableSetter',
+  name: 'Setter',
   enter: {
     name: 'default',
     enabled: true,
@@ -20,7 +21,7 @@ NodeTemplate.Setter = {
  * Variable Setter!!!!!!!!! Not other setter, variable, the variable used by brain, you added into
  * the side panel
  */
-export default class Setter extends Task
+export default class VariableSetter extends Task
 {
   constructor(id) {
     super(id);

@@ -24,8 +24,9 @@ export Compare from './Compare';
 export Logic from './Logic';
 
 // These are for brain variable setter and getter
-export Getter from './Getter';
-export Setter from './Setter';
+export VariableGetter from './VariableGetter';
+export VariableSetter from './VariableSetter';
+
 // These are for dynamic property getter and setter
 export PropertyGetter from './PropertyGetter';
 export PropertySetter from './PropertySetter';

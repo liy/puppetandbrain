@@ -1,7 +1,8 @@
 import Node from "./Node";
 
-NodeTemplate.Getter = {
-  className: 'Getter',
+NodeTemplate.VariableGetter = {
+  className: 'VariableGetter',
+  name: 'Getter',
   enter: {
     name: 'default',
     enabled: false,
