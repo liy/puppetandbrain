@@ -20,7 +20,7 @@ export default class extends Gadget
     this.colorInput.type = 'color'
     this.element.appendChild(this.colorInput);
     this.colorInput.addEventListener('change', this.onChange.bind(this));
-
+    
     this.value = color;
   }
 
@@ -33,10 +33,14 @@ export default class extends Gadget
   set value(c) {
     this._color = c;
 
-    if(Number.isInteger(c)) {
+    if(c === 0) {
+      c = '#000000';
+    }
+    else if(Number.isInteger(c)) {
       c = `#${c.toString(16)}`;
     }
     this.line.setAttribute('stroke', c);
+    this.colorInput.value = c;
   }
 
   get value() {
