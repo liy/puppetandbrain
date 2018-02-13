@@ -63,7 +63,7 @@ export default class ChoiceBox extends Actor
       }
     });
     this.properties.add({
-      data: pod.properties.image,
+      data: pod.properties.image || {},
       propertyName: 'image',
       descriptor: {
         type: DataType.IMAGE,
@@ -124,12 +124,9 @@ export default class ChoiceBox extends Actor
   }
 
   set image(fileData) {
-    if(!fileData) return;
-
-    // ImageLoader.fetch(fileData.path).then(image => {
-      // this.content.imageUrl = image.src;
-    // })
-    this.content.imageUrl = fileData.url;
+    ImageLoader.fetch(fileData).then(image => {
+      this.content.imageUrl = image.src;
+    })
   }
 
   get image() {

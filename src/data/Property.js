@@ -39,21 +39,21 @@ export default class extends EventEmitter
     this.runtime = JSON.parse(JSON.stringify(this.data));
   }
 
-  get data() {
-    return this._data;
-  }
+  // get data() {
+  //   return this._data;
+  // }
 
-  /**
-   * Update the data only. NOT the initial data
-   */
-  set data(v) {
-    let old = this._data;
-    this._data = v;
-    this.emit('property.data.changed', {
-      old,
-      data: v
-    })
-  }
+  // /**
+  //  * Update the data only. NOT the initial data
+  //  */
+  // set data(v) {
+  //   let old = this._data;
+  //   this._data = v;
+  //   this.emit('property.data.changed', {
+  //     old,
+  //     data: v
+  //   })
+  // }
 
   pod() {
     // return {
@@ -62,6 +62,7 @@ export default class extends EventEmitter
     //   // Only record the initial data, not the runtime data...
     //   data: this.data,
     // }
-    return JSON.parse(JSON.stringify(this.data));
+    console.log(this.data)
+    return JSON.parse(JSON.stringify(this.data || null));
   }
 }

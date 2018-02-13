@@ -33,21 +33,26 @@ export default class extends ArrayMap
   
   
   updateRuntime() {
-    for(let property of this.values) {
+    for(let property of this) {
       property.updateRuntime();
     }
   }
 
   pod() {
-    var properties = {};
-    this.map((propertyName, property) => {
-      // // TODO: I think I only need to serailzie the current value of the property
-      // // not everything, since they are all fixed and defined in class
-      // descriptor.value = this.actor[propertyName];
-      // properties[propertyName] = descriptor;
-      // properties[propertyName] = this.actor[propertyName];
+    // var properties = {};
+    // this.map((propertyName, property) => {
+    //   // // TODO: I think I only need to serailzie the current value of the property
+    //   // // not everything, since they are all fixed and defined in class
+    //   // descriptor.value = this.actor[propertyName];
+    //   // properties[propertyName] = descriptor;
+    //   // properties[propertyName] = this.actor[propertyName];
       
-      properties[propertyName] = property.value || null;
+    //   properties[propertyName] = property.value || null;
+    // })
+    // return properties;
+    let properties = {}
+    this.map((propertyName, property) => {
+      properties[propertyName] = property.pod();
     })
     return properties;
   }

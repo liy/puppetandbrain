@@ -19,6 +19,7 @@ import AudioElement from './AudioElement';
 import { nextFrame, svgElement } from "../../utils/utils";
 import GraphSelection from "../GraphSelection";
 import ImagePropertyElement from "./ImagePropertyElement";
+import ImageElement from "./ImageElement";
 
 class ElementController
 {
@@ -70,6 +71,9 @@ class ElementController
         break;
       case DataType.AUDIO:
         variableElement = new AudioElement(variable); 
+        break;
+      case DataType.IMAGE:
+        variableElement = new ImageElement(variable); 
         break;
       default:
         variableElement = new GenericElement(variable); 

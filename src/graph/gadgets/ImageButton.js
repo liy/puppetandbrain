@@ -5,16 +5,15 @@ import ImageLoader from '../../resources/ImageLoader';
 
 export default class extends FileButton
 {
-  constructor(path) {
-    super('image/*', '');
+  constructor(fileData) {
+    super('image/*', fileData.fileName);
 
     this.element.classList.add('image-button');
     this.image = new Image();
     this.element.appendChild(this.image)
 
-    console.log(path)
-    if(path) {
-      ImageLoader.fetch(path).then(image => {
+    if(fileData) {
+      ImageLoader.fetch(fileData).then(image => {
         this.image.src = image.src;
       })
     }

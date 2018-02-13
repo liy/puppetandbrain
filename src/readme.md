@@ -89,3 +89,28 @@ Make Position
 Extractor
 Break Position
 Release
+
+# FileData
+File data has the information below:
+```javascript
+{
+  // original file name
+  fileName,
+  // mime type
+  contentType,
+  // content hash of the file
+  hash,
+  // extension of the file, in lowercase
+  ext,
+  // the file path on the server, of course only for uploaded item
+  path,
+  // url of the file
+  url,
+}
+
+```
+It might also have byteArray which happens during file uploading process.
+
+If user upload file local drive, all the fields will be presented. 
+
+If however, user choose to get resource directly using a online url, which means file is not uploaded. Therefore, "hash" and "path" field will not be presented.
