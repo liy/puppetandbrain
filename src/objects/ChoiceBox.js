@@ -37,7 +37,7 @@ export default class ChoiceBox extends Actor
     pod.properties = pod.properties || {};
     // setup properties
     this.properties.add({
-      data: pod.properties.text,
+      data: pod.properties.text || '',
       propertyName: 'text',
       descriptor: {
         iconID: '🏷️',
@@ -129,11 +129,68 @@ export default class ChoiceBox extends Actor
   }
 
   set image(fileData) {
-    ImageLoader.fetch(fileData).then(image => {
+    ImageLoader.fetch(fileData).then(({image, blob, url}) => {
       this.content.imageUrl = image.src;
+      // this.content.imageUrl =  URL.createObjectURL(blob)
+      // this.content.imageUrl = url;
+
+
+      // let read = new FileReader();
+      // read.onload = e => {
+      //   this.content.imageUrl = e.target.result;
+      // }
+      // read.readAsDataURL(blob);
+
+
+
+
+      // let test = new Image();
+      // test.crossOrigin = 'Anonymous'
+      // test.src = url;
+      // this.content.setImage(test);
     }).catch(e => {
       this.content.imageUrl = require('!file-loader!../assets/icons/dots.svg');
     })
+
+    // function getDataUri(url, callback) {
+    //   var image = new Image();
+    //   image.crossOrigin = 'Anonymous'
+  
+    //   image.onload = function () {
+    //       var canvas = document.createElement('canvas');
+    //       canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+    //       canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+  
+    //       canvas.getContext('2d').drawImage(this, 0, 0);
+  
+    //       // Get raw image data
+    //       //callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
+  
+    //       // ... or get as Data URI
+    //       callback(canvas.toDataURL('image/png'));
+    //   };
+  
+    //   image.src = url;
+    // }
+    // getDataUri('https://firebasestorage.googleapis.com/v0/b/puppet-brain-staging.appspot.com/o/uploads%2F61ff88c53b2d9883998a099a9f861c386ce0efc6.png?alt=media&token=9a09439c-2d35-4c0c-b2d8-3972cd4e2735', (data) => {
+    //   this.content.imageUrl = data;
+    // })
+    // fetch('https://firebasestorage.googleapis.com/v0/b/puppet-brain-staging.appspot.com/o/uploads%2F61ff88c53b2d9883998a099a9f861c386ce0efc6.png?alt=media&token=9a09439c-2d35-4c0c-b2d8-3972cd4e2735',{
+    //   // mode: 'cors',
+    // })
+    //   .then(response => {
+    //     console.log(response.type)
+    //     if(response.ok) {
+    //       response.blob().then(blob => {
+    //         // this.content.imageUrl = URL.createObjectURL(blob);
+    //         let read = new FileReader();
+    //         read.onload = e => {
+    //           this.content.imageUrl = e.target.result;
+    //         }
+    //         read.readAsDataURL(blob);
+    //       })
+    //     }
+    //   })
   }
 
   get image() {
@@ -149,7 +206,9 @@ export default class ChoiceBox extends Actor
     return this.properties.get('text').data;
   }
 
-  snapshot() {
+  async snapshot() {
+    let fileData = this.properties.get('image').data;
+
     let texture = Editor.renderer.generateTexture(this.box.container);
     let canvas = Editor.renderer.extract.canvas(texture);
     // TODO: to be removed
@@ -158,7 +217,10 @@ export default class ChoiceBox extends Actor
     // draw dom element to canvas
     return html2canvas(this.content.element, {
       backgroundColor: null,
-      // allowTaint: true,
+      // Load the cross domain images!!!
+      // As all the authoring time data will be uploaded to the server,
+      // there will be no issue to access cors image.
+      allowTaint: true,
     }).then(domCanvas => {
       canvas.getContext('2d').drawImage(domCanvas, 0, 0);
       return canvas;
