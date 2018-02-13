@@ -6,6 +6,7 @@ export KeyNameCatcher from './KeyNameCatcher';
 export PositionField from './PositionField';
 export RangeField from './RangeField';
 export TextField from './TextField';
-export ImageField from './ImageField';
+// export ImageField from './ImageField';
+export ImageButton from './ImageButton';
 export Toggle from './Toggle';
 export Vec2Field from './Vec2Field';

@@ -307,6 +307,15 @@ export default class Actor extends EventEmitter
         userFiles.push(variable.data);
       }
     }
+    // properties
+    for(let property of this.properties) {
+      if(property.descriptor.type == DataType.AUDIO || property.descriptor.type == DataType.IMAGE) {
+        // set in the property element when gadget.state.change received
+        // TODO: change value to some meaningful name, suppose to be a path...
+        userFiles.push(property.value);
+      }
+    }
+
     return userFiles;
   }
 

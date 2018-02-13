@@ -32,6 +32,7 @@ export default class ActivityLoader
       }
       // user files
       for(let fileData of actorPod.userFiles) {
+        console.log(fileData)
         urlPromises.push(API.getUrl(fileData.path).then(url => {
           loader.add(fileData.path, url, fileData.contentType)
         }))

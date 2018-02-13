@@ -1,4 +1,5 @@
 import ArrayMap from "../utils/ArrayMap";
+import DataType from "./DataType";
 
 export default class extends ArrayMap
 {
@@ -17,8 +18,10 @@ export default class extends ArrayMap
         ...property.descriptor,
       }
     });
-    // handles initial and default value
-    this.actor[propertyName] = property.value;
+    if(property.descriptor.type != DataType.AUDIO || property.descriptor.type != DataType.IMAGE) {
+      // handles initial and default value
+      this.actor[propertyName] = property.value;
+    }
   }
 
   getType(propertyName) {
@@ -32,7 +35,9 @@ export default class extends ArrayMap
       // // not everything, since they are all fixed and defined in class
       // descriptor.value = this.actor[propertyName];
       // properties[propertyName] = descriptor;
-      properties[propertyName] = this.actor[propertyName];
+      // properties[propertyName] = this.actor[propertyName];
+      
+      properties[propertyName] = property.value || null;
     })
     return properties;
   }

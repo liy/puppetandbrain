@@ -6,6 +6,7 @@ import GraphicsComponent from "../components/GraphicsComponent";
 import DataType from '../data/DataType';
 import IconStore from '../ui/IconStore';
 import html2canvas from 'html2canvas';
+import ImageLoader from '../resources/ImageLoader';
 
 export default class ChoiceBox extends Actor
 {
@@ -62,14 +63,16 @@ export default class ChoiceBox extends Actor
       }
     });
     this.properties.add({
-      value: pod.properties.image || require('!file-loader!../assets/icons/logo@4x.png'),
+      value: pod.properties.image,
       propertyName: 'image',
       descriptor: {
-        gadgetClassName: 'ImageField',
         type: DataType.IMAGE,
         iconID: "🖼️"
       }
     });
+    ImageLoader.fetch(pod.properties.image.path).then(image => {
+      this.image = image.src;
+    })
   }
 
   hitTest(x, y) {

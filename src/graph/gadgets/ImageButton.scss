@@ -1,0 +1,21 @@
+.image-button > * {
+}
+
+.image-button {
+  overflow: hidden;
+
+  // direct children of image button, make sure they are above img 
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  // set the image behind other siblings
+  img {
+    position: absolute;
+    width: 100%;
+    float: left;
+    z-index: 0;
+    opacity: 0.8;
+  }
+}

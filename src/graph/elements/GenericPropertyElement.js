@@ -5,12 +5,13 @@ import * as GadgetClasses from '../gadgets';
 
 export default class extends PropertyElement
 {
-  constructor(actor, {propertyName, descriptor}) {
-    super(actor, propertyName, descriptor);
+  constructor(actor, property) {
+    super(actor, property.propertyName, property.descriptor);
+
     let value = this.actor[this.propertyName];
     this.gadget = null;
-    if(descriptor.gadgetClassName) {
-      this.gadget = new GadgetClasses[descriptor.gadgetClassName](value)
+    if(property.descriptor.gadgetClassName) {
+      this.gadget = new GadgetClasses[property.descriptor.gadgetClassName](value)
     }
     else {
       this.gadget = new GadgetClasses.InputField(value)
@@ -19,7 +20,10 @@ export default class extends PropertyElement
     this.content.appendChild(this.gadget.element);
 
     this.gadget.on('gadget.state.change', value => {
-      actor[propertyName] = value;
+      // console.log(value)
+      // actor.property
+      actor[this.propertyName] = value;
+      actor.properties.get(this.propertyName).value = value;
     })
   }
 

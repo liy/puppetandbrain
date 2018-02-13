@@ -18,6 +18,7 @@ import ActorElement from './ActorElement';
 import AudioElement from './AudioElement';
 import { nextFrame, svgElement } from "../../utils/utils";
 import GraphSelection from "../GraphSelection";
+import ImagePropertyElement from "./ImagePropertyElement";
 
 class ElementController
 {
@@ -102,8 +103,13 @@ class ElementController
 
     // extra properties if any
     for(let property of actor.properties) {
-      console.log(property)
-      let propertyElement = new GenericPropertyElement(actor, property);
+      let propertyElement
+      if(property.descriptor.type == DataType.IMAGE) {
+        propertyElement = new ImagePropertyElement(actor, property);
+      }
+      else {
+        propertyElement = new GenericPropertyElement(actor, property);
+      }
       this.panel.append(propertyElement.element);
       this.elements.set(property.propertyName, propertyElement);
     }

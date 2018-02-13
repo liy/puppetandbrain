@@ -44,7 +44,7 @@ export default class extends Gadget
     this.fileNameSpan.textContent = 'Uploading...';
     this.emit('file.begin');
 
-    let ext = file.name.split('.')[1];
+    let ext = file.name.split('.')[1].toLowerCase();
     const contentType = getMimeType(ext);
 
     let hashTask = new FileHashTask();
