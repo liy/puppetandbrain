@@ -64,6 +64,7 @@ class GraphSelection extends EventEmitter
   async delete() {
     if(this.selected instanceof Block) {
       History.push(Commander.create('DeleteBlock', this.selected.id).processAndSave());
+      SoundEffect.play('trash');
     }
     else {
       let action = true;
