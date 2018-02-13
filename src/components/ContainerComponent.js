@@ -37,6 +37,7 @@ export default class ContainerComponent extends Component
     this.container.on('pointerup', this.pointerUp, this);
     this.container.on('mouseover', this.mouseOver, this);
     this.container.on('mouseout', this.mouseOut, this);
+    this.container.on('rightclick', this.rightClick, this);
   }
 
   offStage() {
@@ -62,7 +63,11 @@ export default class ContainerComponent extends Component
 
   mouseOut(e) {
     this.entity.mouseOut(e);
-  } 
+  }
+
+  rightClick(e) {
+    this.entity.contextMenu(e.originalEvent);
+  }
 
   defaultFilter() {
     this.container.filters = this.paper ? [this.paperOutline] : [];

@@ -1,7 +1,10 @@
-export default class Component
+import EventEmitter from "../utils/EventEmitter";
+
+export default class Component extends EventEmitter
 {
-  constructor(name=this.className) {
-    this.name = name;
+  constructor(name) {
+    super();
+    this.name = name || this.className;
     this.entity = null;
   }
 

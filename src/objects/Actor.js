@@ -82,7 +82,10 @@ export default class Actor extends EventEmitter
   }
 
   destroy() {
-    this.removeComponents();
+    for(let component of this.components) {
+      this.removeComponent(component.name);
+      component.destroy();
+    }
     LookUp.removeActor(this.id);
     document.removeEventListener('touchmove', this.touchDragMove);
     document.removeEventListener('mousemove', this.mouseDragMove);
@@ -197,6 +200,10 @@ export default class Actor extends EventEmitter
     let y = e.touches[0].clientY
     this.position.x = x + this.offset.x - Editor.stage.offsetX;
     this.position.y = y + this.offset.y - Editor.stage.offsetY;
+  }
+
+  contextMenu(e) {
+    Editor.emit('contextmenu', {actor:this, event:e});
   }
 
   select() {

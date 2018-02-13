@@ -129,7 +129,7 @@ export default class
       // create variable or property getter
       if(this.sourceElement.variable) {
         pod = {
-          ...NodeTemplate.Getter,
+          ...NodeTemplate.VariableGetter,
           name: `${this.sourceElement.variable.name}`,
           ownerID: BrainGraph.brain.owner.id,
           variableID: this.sourceElement.variable.id,

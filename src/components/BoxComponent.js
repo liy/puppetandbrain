@@ -41,6 +41,7 @@ export default class BoxComponent extends ElementComponent
       // this removes any br, div... so the placeholder can correctly show up
       this.textElement.textContent = this.textElement.textContent;
     }
+    this.emit('input', this.textElement.textContent);
   }
 
   set contentEditable(v) {

@@ -1,6 +1,8 @@
 import Stage from './Stage';
 import EventEmitter from './utils/EventEmitter';
 import Mouse from './access/Mouse';
+import './ui/ContextMenu';
+import ContextMenu from './ui/ContextMenu';
 
 class Editor extends EventEmitter
 {
@@ -31,6 +33,8 @@ class Editor extends EventEmitter
       transparent: true,
       antialias: true
     });
+    
+    this.contextMenu = new ContextMenu(this);
   }
 
   init() {

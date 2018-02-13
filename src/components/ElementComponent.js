@@ -93,11 +93,6 @@ export default class ElementComponent extends Component
   }
 
   touchStart(e) {
-    console.log('touch start')
-    // stop mouse down event firing, otherwise double pointerDown() will trigger
-    // e.preventDefault();
-    // note the stage offset applied, since clientX and clientY is in window coordinate.
-    // TODO: In theory, scale and rotation also needs to be applied. 
     this.entity.pointerDown(e.changedTouches[0].clientX - Editor.stage.offsetX, e.changedTouches[0].clientY - Editor.stage.offsetY, e);
   }
 

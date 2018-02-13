@@ -7,9 +7,9 @@ import Command from '../commands/Command';
 import InputModal from './InputModal';
 import NotificationControl from './NotificationControl';
 
-class ContextMenu 
+export default class ContextMenu 
 {
-  constructor() {
+  constructor(Editor) {
     this.element = document.createElement('div');
     this.element.className = 'context-menu';
 
@@ -40,15 +40,21 @@ class ContextMenu
     this.close = this.close.bind(this)
     document.addEventListener('click', this.close);
 
-    document.getElementById('canvas').addEventListener('contextmenu', e => {
-      const canvas = document.getElementById('canvas');
-      const rect = canvas.getBoundingClientRect();
-      // FIXIME: handle scale!!
-      let actor = ActorSelection.selected[0]
-      if(actor && actor.hitTest(e.clientX-rect.left, e.clientY-rect.top)) {
-        this.openActorMenu(e);
+    // document.getElementById('canvas').addEventListener('contextmenu', e => {
+    //   const canvas = document.getElementById('canvas');
+    //   const rect = canvas.getBoundingClientRect();
+    //   // FIXIME: handle scale!!
+    //   let actor = ActorSelection.selected[0]
+    //   if(actor && actor.hitTest(e.clientX-rect.left, e.clientY-rect.top)) {
+    //     this.openActorMenu(e);
+    //   }
+    // })
+
+    Editor.on('contextmenu', ({actor, event}) => {
+      if(actor) {
+        this.openActorMenu(event);
       }
-    })
+    }, this)
 
     document.getElementById('block-container').addEventListener('contextmenu', e => {
       if(GraphSelection.selected) {
@@ -93,5 +99,3 @@ class ContextMenu
     }
   }
 }
-
-export default new ContextMenu();

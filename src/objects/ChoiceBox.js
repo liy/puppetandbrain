@@ -28,7 +28,9 @@ export default class ChoiceBox extends Actor
     let boxHeight = this.height-this.padding*2;
 
     this.content = this.addComponent('content', new BoxComponent(boxWidth, boxHeight));
+    this.content.on('input', this.onInput, this);
     this.box = this.addComponent('box', new GraphicsComponent());
+
 
     // just make code a little bit easier to read by define a properties field
     // if it does not exist
@@ -43,7 +45,7 @@ export default class ChoiceBox extends Actor
       }
     })
     this.properties.add({
-      data: pod.properties.boxColor || 0xFF9900,
+      data: pod.properties.boxColor || 0xFFFFFF,
       propertyName: 'boxColor',
       descriptor: {
         friendlyName: 'box color',
@@ -70,6 +72,10 @@ export default class ChoiceBox extends Actor
         iconID: "🖼️"
       }
     });
+  }
+
+  onInput(text) {
+    this.properties.get('text').data = text;
   }
 
   hitTest(x, y) {
@@ -105,14 +111,13 @@ export default class ChoiceBox extends Actor
   }
 
   set boxColor(c) {
-    this._boxColor = c;
-    this.box.graphics.beginFill(this.boxColor, 1);
+    this.box.graphics.beginFill(c, 1);
     this.box.graphics.drawRoundedRect (-this.width/2, -this.height/2, this.width, this.width, 10);
     this.box.graphics.endFill();
   }
 
   get boxColor() {
-    return this._boxColor;
+    return this.properties.get('boxColor').data;
   }
 
   set textColor(c) {
@@ -120,12 +125,14 @@ export default class ChoiceBox extends Actor
   }
 
   get textColor() {
-    return this.content.textColor;
+    return this.properties.get('textColor').data;
   }
 
   set image(fileData) {
     ImageLoader.fetch(fileData).then(image => {
       this.content.imageUrl = image.src;
+    }).catch(e => {
+      this.content.imageUrl = require('!file-loader!../assets/icons/dots.svg');
     })
   }
 
@@ -135,11 +142,11 @@ export default class ChoiceBox extends Actor
   }
 
   set text(text) {
-    this.content.text = text
+    this.content.text = text;
   }
 
   get text() {
-    return this.content.text;
+    return this.properties.get('text').data;
   }
 
   snapshot() {

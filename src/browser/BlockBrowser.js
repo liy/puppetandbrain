@@ -92,13 +92,13 @@ export default class BlockBrowser extends Browser
     // Populate all the variable getter and setter for this actor
     for(let variable of BrainGraph.brain.variables) {
       templates.push({
-        ...NodeTemplate.Getter,
+        ...NodeTemplate.VariableGetter,
         name: `${variable.name}`,
         ownerID: BrainGraph.brain.owner.id,
         variableID: variable.id,
       })
       templates.push({
-        ...NodeTemplate.Setter,
+        ...NodeTemplate.VariableSetter,
         name: `Set ${variable.name}`,
         ownerID: BrainGraph.brain.owner.id,
         variableID: variable.id,

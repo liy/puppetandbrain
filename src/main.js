@@ -42,7 +42,6 @@ import './commands/Commander'
 import './graph/BrainGraph'
 import './Editor'
 import './ui/UIController';
-import './ui/ContextMenu';
 
 import './resources/Resource';
 import './Activity';
@@ -96,10 +95,10 @@ function signedIn(user) {
   })
 
   router.get('/', req => {
-    if(!window.localStorage.getItem('animate-a-puppet')) {
-      router.navigate(`/tutorials/animate-a-puppet`);
-      return;
-    }
+    // if(!window.localStorage.getItem('animate-a-puppet')) {
+    //   router.navigate(`/tutorials/animate-a-puppet`);
+    //   return;
+    // }
 
     Activity.new();
     UIController.addBtn.enabled = true;
