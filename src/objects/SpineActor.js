@@ -47,7 +47,7 @@ export default class SpineActor extends Actor
     let rawAtlas = Resource.get(`${spineDir}/${this.spineID}.atlas`);
     var spineAtlas = new PIXI.spine.core.TextureAtlas(rawAtlas, function(line, callback) {
         // pass the image here.
-        callback(PIXI.BaseTexture.from(Resource.get(`${spineDir}/${line}`)));
+        callback(PIXI.BaseTexture.from(Resource.get(`${spineDir}/${line}`).image));
     }); 
 
     var spineAtlasLoader = new PIXI.spine.core.AtlasAttachmentLoader(spineAtlas)

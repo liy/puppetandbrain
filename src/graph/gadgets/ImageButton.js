@@ -12,9 +12,11 @@ export default class extends FileButton
     this.image = new Image();
     this.element.appendChild(this.image)
 
-    ImageLoader.fetch(fileData).then(image => {
-      this.image.src = image.src;
-    })
+    if(fileData.path || fileData.url) {
+      ImageLoader.fetch(fileData).then(image => {
+        this.image.src = image.src;
+      })
+    }
 
     this.on('file.ready', ({byteArray, ...other}) => {
       let blob = new Blob([byteArray]);

@@ -10,12 +10,13 @@ export default class BoxComponent extends ElementComponent
     this.element.style.width = `${width}px`;
     this.element.style.height = `${height}px`;
 
-    this.image = document.createElement('div')
-    this.image.className = 'image';
-    this.image.style.backgroundRepeat = 'no-repeat';
-    this.image.style.backgroundPosition = 'center';
-    this.image.style.backgroundSize = 'contain';
-    this.element.appendChild(this.image);
+    this.imageContainer = document.createElement('div')
+    this.imageContainer.className = 'image';
+    this.element.appendChild(this.imageContainer);
+    this.image = new Image();
+    this.image.crossOrigin = 'Anonymous'
+    this.image.draggable = false;
+    this.imageContainer.appendChild(this.image);
 
     this.textElement = document.createElement('div');
     this.textElement.className = 'label';
@@ -71,7 +72,8 @@ export default class BoxComponent extends ElementComponent
 
   set imageUrl(url) {
     this._imageUrl = url;
-    this.image.style.backgroundImage = `url(${url})`
+    // this.image.style.backgroundImage = `url(${url})`
+    this.image.src = url;
   }
 
   get imageUrl() {

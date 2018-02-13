@@ -18,8 +18,9 @@ export default class ImageLoader extends Loader
   onSuccess(response) {
     return response.blob().then(blob => {
       let image = new Image();
+      image.crossOrigin = 'Anonymous'
       image.src = URL.createObjectURL(blob);
-      return image;
+      return {image, blob, url: this.url};
     })
   }
 }
