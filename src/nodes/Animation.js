@@ -29,13 +29,25 @@ export default class Animation extends Task
   init(pod) {
     super.init(pod);
 
-    this.list = this.owner.getAnimations().map(animation => animation.name);
+    try {
+      this.list = this.owner.getAnimations().map(animation => animation.name);
+    }
+    catch(err) {
+      console.warn('This is not a spine actor, no animations')
+      this.list = [];
+    }
   }
 
   run() {
     super.run()
 
-    this.owner.setAnimation(this.inputs.value('name'));
+    try {
+      this.owner.setAnimation(this.inputs.value('name'));
+    }
+    catch(err) {
+      console.warn('This is not a spine actor, cannot play animtion')
+    }
+
     this.execution.run();
   }
 
