@@ -63,6 +63,7 @@ window.API = API;
 import Grapnel from 'grapnel'
 import { setTimeout } from "timers";
 import { toDegree } from "./utils/utils";
+import SpriteActor from "./objects/SpriteActor";
 window.router = new Grapnel({pushState:true});
 
 // prevent default context menu for the whole site
@@ -99,6 +100,10 @@ function signedIn(user) {
     //   router.navigate(`/tutorials/animate-a-puppet`);
     //   return;
     // }
+
+    // var spriteActor = new SpriteActor();
+    // spriteActor.init();
+    // Editor.stage.addActor(spriteActor);
 
     Activity.new();
     UIController.addBtn.enabled = true;

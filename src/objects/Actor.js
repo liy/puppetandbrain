@@ -1,3 +1,4 @@
+const filters = require('pixi-filters');
 import Entity from './Entity';
 import mixin from '../utils/mixin';
 import EventEmitter from '../utils/EventEmitter';
@@ -28,6 +29,9 @@ export default class Actor extends EventEmitter
 
     this.selected = false;
     this._clicks = 0;
+
+    this.selectOutline = new filters.OutlineFilter(4, 0xc95ce8)
+    this.hoverOutline = new filters.OutlineFilter(3, 0xdbace8)
 
     // transform for the components
     // also be able to manipulate in the node graph property.

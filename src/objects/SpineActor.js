@@ -1,4 +1,3 @@
-const filters = require('pixi-filters');
 import Actor from './Actor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import SpineComponent from '../components/SpineComponent';
@@ -11,8 +10,6 @@ export default class SpineActor extends Actor
   constructor(id) {
     super(id);
     
-    this.selectOutline = new filters.OutlineFilter(4, 0xc95ce8)
-    this.hoverOutline = new filters.OutlineFilter(3, 0xdbace8)
   }
 
   async preload(pod) {
