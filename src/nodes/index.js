@@ -55,7 +55,6 @@ export StopSound from './StopSound';
 
 export Break from './Break';
 export MakePosition from './MakePosition';
-export OnlineImage from './OnlineImage'
 
 // listeners
 export GameEvent from "./listeners/GameEvent";

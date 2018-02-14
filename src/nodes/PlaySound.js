@@ -57,11 +57,11 @@ export default class PlaySound extends Task
 
     this.audio = new Audio();
 
-    let path = this.memory['audio'].path;
-    if(path) {
+    let fileData = this.memory['audio'];
+    if(fileData) {
       // prefetch the not loaded local memory audio
       this.inputs.get('audio').on('input.disconnected', () => {
-        SoundLoader.fetch(path);
+        SoundLoader.fetch(fileData);
       });
     }
   }
@@ -102,7 +102,7 @@ export default class PlaySound extends Task
       // therefore we need to await, fetch and put it into the Resource for next time use 
       // 
       // I did a prefetch when input is disconnected 
-      this.audio.src = URL.createObjectURL(await SoundLoader.fetch(input.path));
+      this.audio.src = URL.createObjectURL(await SoundLoader.fetch(input));
     }
     this.audio.loop = Boolean(this.inputs.value('loop'));
     this.audio.addEventListener('ended', this.complete, {once: true})
