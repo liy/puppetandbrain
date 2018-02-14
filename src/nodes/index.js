@@ -54,7 +54,7 @@ export PlaySound from './PlaySound';
 export StopSound from './StopSound';
 
 export Break from './Break';
-export MakePosition from './MakePosition';
+export MakeVector from './MakeVector';
 
 // listeners
 export GameEvent from "./listeners/GameEvent";

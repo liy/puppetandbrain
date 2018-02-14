@@ -105,7 +105,22 @@ export default class BlockBrowser extends Browser
       })
     }
 
-    // Not used for now
+    // make position version of MakeVector
+    templates.push({
+      ...NodeTemplate.MakeVector,
+      name: 'Make Position',
+      // the node going to be created is owned by the current opening brain
+      ownerID: BrainGraph.brain.owner.id,
+      outputName: 'position',
+      outputs: [{
+        name: 'position',
+        descriptor: {
+          type: DataType.VEC2,
+        }
+      }],
+      keywords: [...NodeTemplate.MakeVector.keywords, 'position']
+    })
+
     // break position block
     templates.push({
       ...NodeTemplate.Break,
@@ -133,6 +148,35 @@ export default class BlockBrowser extends Browser
       }],
       memory: {
         position: {x:0,y:0}
+      }
+    })
+
+    templates.push({
+      ...NodeTemplate.Break,
+      name: `Break Vector`,
+      // the node going to be created is owned by the current opening brain
+      ownerID: BrainGraph.brain.owner.id,
+      inputName: 'vector',
+      inputs: [{
+        name: 'vector',
+        descriptor: {
+          type: DataType.VEC2,
+          gadgetClassName: 'Vec2Field'
+        }
+      }],
+      outputs: [{
+        name:'x',
+        descriptor: {
+          type: DataType.DOUBLE
+        }
+      },{
+        name:'y',
+        descriptor: {
+          type: DataType.DOUBLE
+        }
+      }],
+      memory: {
+        vector: {x:0,y:0}
       }
     })
 
