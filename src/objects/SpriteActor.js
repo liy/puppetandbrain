@@ -3,20 +3,32 @@ import Actor from './Actor';
 import SpriteComponet from '../components/SpriteComponent';
 import DataType from '../data/DataType';
 import ImageLoader from '../resources/ImageLoader';
+import { aroundAt } from '../utils/utils';
+import Vec2 from '../math/Vec2';
 
 export default class SpriteActor extends Actor
 {
   constructor(id) {
     super(id);
+  }
+
+  async preload(pod) {
+    let pos = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
+    this.position = new Vec2(pos);
+    this.rotation = pod.rotation || 0;
+    this.scale = new Vec2(pod.scale || {x:1,y:1});
+
+    this.addComponent('placeholder', new PlaceHolderComponent());
     
-    // let sprite = PIXI.Sprite.fromImage(url);
-    // this.loaded = new Promise((resolve, reject) => {
-    //   sprite.texture.baseTexture.on('loaded', resolve)
-    // })
-    // this.addChild(sprite);
+    let fileData = pod.properties.image;
+    // official predefined resources
+    // load all resources in parallel
+    await ImageLoader.fetch(fileData).then(({image, blob, url}) => {
+    }).catch(e => {
+      return ImageLoader.fetch({url:require('!file-loader!../assets/icons/sprite-actor.png')})
+    })
 
-    // this.addComponent(new PlaceHolderComponent());
-
+    this.removeComponent('placeholder');
   }
 
   init(pod={}) {
