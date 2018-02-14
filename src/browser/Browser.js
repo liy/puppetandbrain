@@ -83,6 +83,7 @@ export default class Browser extends EventEmitter
   }
 
   close(data) {
+    this.searchField.input.removeEventListener('input', this.onSearch);
     this.element.removeEventListener('keydown', this.keydown);
     // TODO: not sure why I can't tween opacity directly. Have to manually set it.
     let opacity = {value: 1};

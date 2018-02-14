@@ -79,6 +79,14 @@ export default class Node extends EventEmitter
     return this.__proto__.constructor.name;
   }
 
+  set nodeName(name) {
+    this._nodeName = name;
+  }
+
+  get nodeName() {
+    return this._nodeName;
+  }
+
   get elementClass() {
     return NodeTemplate[this.className].elementClass
   }
