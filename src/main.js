@@ -45,12 +45,8 @@ import './ui/UIController';
 
 import './resources/Resource';
 import './Activity';
-import ActivityLoader from './ActivityLoader';
-import ArrayMap from './utils/ArrayMap';
 
-import ExportActor from './ExportActors';
 // import ChoiceBox from './objects/ChoiceBox'
-import PuppetBrowser from './browser/PuppetBrowser';
 import ActorSelection from './objects/ActorSelection';
 import notc from './ui/NotificationControl';
 import API from './API';

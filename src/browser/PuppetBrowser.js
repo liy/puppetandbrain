@@ -18,10 +18,11 @@ export default class extends Browser
 
     this.element.classList.add('puppet-browser');
 
+    // TODO: put it into css
     this.contentSection.colorPalette = {
       'My Puppets': 0x4e84bf,
       'Puppets': 0x976bb8,
-      'Widgets': 0xbd833c,
+      'Widgets': 0x6d9409,
       'Sprite': 0xa02d6b,
     }
 
