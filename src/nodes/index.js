@@ -74,6 +74,9 @@ export Flip from './Flip'
 export Move from './Move'
 export Rotate from './Rotate'
 
+export SceneChange from './SceneChange'
+
+
 
 // not used 
 // hidden for now

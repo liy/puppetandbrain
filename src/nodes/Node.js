@@ -34,7 +34,7 @@ export default class Node extends EventEmitter
     this.owner = LookUp.get(pod.ownerID);
     this.owner.brain.addNode(this);
 
-    this.nodeName = pod.name;
+    this._nodeName = pod.name || NodeTemplate[this.className].name;
 
     //icon
     this.iconPath = NodeTemplate[this.className].iconPath;
@@ -135,6 +135,7 @@ export default class Node extends EventEmitter
     return {
       className: this.className,
       id: this.id,
+      name: this.nodeName,
       memory: this.memory,
       ownerID: this.owner.id,
       inputs: this.inputs.pod(),

@@ -64,7 +64,10 @@ export default class Stage extends EventEmitter
   }
 
   clear() {
-    for(let actor of this.actors) {
+    let keys = this.actors.keys.concat();
+    for(let key of keys) {
+      let actor = this.actors.get(key);
+      this.removeActor(actor);
       actor.destroy();
     }
   }

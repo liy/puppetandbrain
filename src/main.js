@@ -77,6 +77,9 @@ function signedIn(user) {
 
   // activity
   router.get('/creations/:id', async req => {
+    // clear current activity
+    Activity.clear();
+    
     let chip = notc.notify('loading, please wait...');
     await Activity.load(req.params.id);
     UIController.addBtn.enabled = true;

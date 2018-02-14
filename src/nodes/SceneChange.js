@@ -24,7 +24,6 @@ export default class SceneChange extends Task
   run() {
     super.run();
 
-    Activity.clear();
     router.navigate(`/creations/${this.inputs.value('creation id')}`);
     // TODO: auto start
   }
