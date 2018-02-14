@@ -3,8 +3,9 @@ import Actor from './Actor';
 import SpriteComponet from '../components/SpriteComponent';
 import DataType from '../data/DataType';
 import ImageLoader from '../resources/ImageLoader';
-import { aroundAt } from '../utils/utils';
+import { aroundAt, getMimeType } from '../utils/utils';
 import Vec2 from '../math/Vec2';
+import { LoaderBucket } from '../resources/Resource';
 
 export default class SpriteActor extends Actor
 {
@@ -20,14 +21,17 @@ export default class SpriteActor extends Actor
 
     this.addComponent('placeholder', new PlaceHolderComponent());
     
-    let fileData = pod.properties.image;
-    // official predefined resources
-    // load all resources in parallel
-    await ImageLoader.fetch(fileData).then(({image, blob, url}) => {
-    }).catch(e => {
-      return ImageLoader.fetch({url:require('!file-loader!../assets/icons/sprite-actor.png')})
-    })
+    let loader = new LoaderBucket();
+    let promises = pod.userFiles.map(async entry => {
+      loader.add(entry.path, entry.url, entry.contentType)
+    });
+    
+    // default sprite...
+    let url = require('!file-loader!../assets/icons/sprite-actor.png');
+    promises.push(loader.add(url, url, getMimeType('png')));
 
+    // load
+    await loader.start();
     this.removeComponent('placeholder');
   }
 
@@ -49,10 +53,13 @@ export default class SpriteActor extends Actor
 
   set image(fileData) {
     ImageLoader.fetch(fileData).then(({image, blob, url}) => {
-      // this.content.imageUrl = image.src;
       this.spriteContainer.sprite.texture = PIXI.Texture.from(image);
     }).catch(e => {
-      this.spriteContainer.sprite.texture = PIXI.Texture.from(require('!file-loader!../assets/icons/sprite-actor.png'));
+      // In theory the default sprite is already in Resource, you can directly get it without fetch
+      // default sprite
+      ImageLoader.fetch({url:require('!file-loader!../assets/icons/sprite-actor.png')}).then(({image}) => {
+        this.spriteContainer.sprite.texture = PIXI.Texture.from(image);
+      })
     })
   }
 

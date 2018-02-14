@@ -49,6 +49,7 @@ const MIME = {
   'mp3': 'audio/mpeg',
   'wav': 'audio/wav',
   'flac': 'audio/flac',
+  'svg': 'image/svg+xml'
 }
 export function getMimeType(ext) {
   return MIME[ext];

@@ -9,6 +9,9 @@ import html2canvas from 'html2canvas';
 import ImageLoader from '../resources/ImageLoader';
 import Vec2 from '../math/Vec2';
 import Matrix from '../math/Matrix';
+import PlaceHolderComponent from '../components/PlaceHolderComponent';
+import { LoaderBucket } from '../resources/Resource';
+import { getMimeType } from '../utils/utils';
 
 export default class ChoiceBox extends Actor
 {
@@ -17,6 +20,27 @@ export default class ChoiceBox extends Actor
     
     this.selectOutline = new filters.OutlineFilter(4, 0xc95ce8)
     this.hoverOutline = new filters.OutlineFilter(3, 0xdbace8)
+  }
+
+  async preload(pod) {
+    let pos = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
+    this.position = new Vec2(pos);
+    this.rotation = pod.rotation || 0;
+    this.scale = new Vec2(pod.scale || {x:1,y:1});
+
+    this.addComponent('placeholder', new PlaceHolderComponent());
+    
+    let loader = new LoaderBucket();
+    let promises = pod.userFiles.map(async entry => {
+      loader.add(entry.path, entry.url, entry.contentType)
+    });
+    
+    // default sprite...
+    let url = require('!file-loader!../assets/icons/choice-box-icon.svg');
+    promises.push(loader.add(url, url, getMimeType('svg')));
+
+    await loader.start();
+    this.removeComponent('placeholder');
   }
 
   init(pod={}) {
@@ -134,7 +158,7 @@ export default class ChoiceBox extends Actor
     ImageLoader.fetch(fileData).then(({image, blob, url}) => {
       this.content.imageUrl = image.src;
     }).catch(e => {
-      this.content.imageUrl = require('!file-loader!../assets/icons/dots.svg');
+      this.content.imageUrl = require('!file-loader!../assets/icons/choice-box-icon.svg');
     })
   }
 
