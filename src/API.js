@@ -174,7 +174,11 @@ class API
     batch.delete(ref1);
     let ref2 = firebase.firestore().doc(`myPuppetFileRefs/${myPuppetID}`);
     batch.delete(ref2);
-    return batch.commit();
+
+    return batch.commit().then(() => {
+      // delete snapshot
+      return firebase.storage().ref(`/users/${userID}/snapshots/${myPuppetID}-puppet-snapshot.png`).delete()
+    })
   }
 
   getUrl(path) {

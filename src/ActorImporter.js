@@ -91,9 +91,13 @@ export default class
 
     // init perform node
     for(let data of performs) {
-      console.log(data);
-      // change actionID
+      // Action might not be part of this export,
+      // therefore, it the action node id is not presented
+      // in the mapping, just ignore it. Simply use the existing
+      // actionID. 
+      // Note the action node might exist, but nothing you can do about it.
       if(this.mapping[data.pod.actionID]) {
+        // change actionID
         data.pod.actionID = this.mapping[data.pod.actionID].id;
       }
       data.node.init(data.pod);
