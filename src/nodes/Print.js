@@ -31,7 +31,7 @@ export default class Print extends Task
     super.run()
 
     let message = this.inputs.value('data');
-    console.log('%c%s', 'color: green', message);
+    console.dir(message);
     
     let p = document.createElement('p');
     p.textContent = message;

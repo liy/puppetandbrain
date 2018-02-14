@@ -39,7 +39,8 @@ export default class PropertySetter extends Task
   run() {
     super.run();
 
-    this.owner[this.propertyName] = this.inputs.value(this.propertyName);
+    // set both property data and actor's setter(visual changes)
+    this.owner.properties.get(this.propertyName).data = this.owner[this.propertyName] = this.inputs.value(this.propertyName);
 
     this.execution.run();
   }
