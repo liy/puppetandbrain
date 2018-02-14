@@ -61,4 +61,18 @@ export default class SpriteActor extends Actor
     super.deselect();
     this.spriteContainer.defaultFilter();
   }
+
+  snapshot() {
+    return new Promise(resolve => {
+      // do not show filters in snapshot
+      let outlineFilters = this.spriteContainer.container.filters;
+      this.spriteContainer.container.filters = []
+
+      let texture = Editor.renderer.generateTexture(this.spriteContainer.container);
+      let canvas = Editor.renderer.extract.canvas(texture);
+      // reset back to original state
+      this.spriteContainer.container.filters = outlineFilters
+      resolve(canvas);
+    })
+  }
 }
