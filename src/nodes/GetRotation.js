@@ -31,7 +31,7 @@ export default class GetRotation extends Node
   init(pod) {
     super.init(pod)
 
-    this.memory.puppet = this.owner.id;
+    this.memory.puppet = this.memory.puppet || this.owner.id;
     
     this.outputs.assignProperty('rotation', {
       get: () => {
