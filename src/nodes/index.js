@@ -16,9 +16,11 @@ export Arithmetic from './Arithmetic';
 export Trigonometry from './Trigonometry';
 export VectorArithmetic from './VectorArithmetic';
 export VectorLen from './VectorLen';
+export AbsoluteVector from './AbsoluteVector';
 
 export RandomNumber from './RandomNumber';
 export RandomInteger from './RandomInteger';
+export Absolute from './Absolute';
 
 export Compare from './Compare';
 export Logic from './Logic';
