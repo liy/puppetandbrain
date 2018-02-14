@@ -33,10 +33,6 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
     <script src="https://pixijs.download/v4.5.4/pixi.js"></script>
-    <!-- <div>
-      <div title="Undo" id='undo-button'></div>
-      <div title="Redo" id='redo-button'></div>
-    </div> -->
     <div id='debug-trace'></div>
     <div id='activity-id' title="Copy activity link, and share it!"></div>
     <div id="app">
@@ -45,6 +41,13 @@
         <canvas id='canvas'></canvas>
         <div id='stage-overlayer'></div>
       </div>
+
+      <svg id='mask-container' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768">
+        <clipPath id="mask">
+          <circle id="mask-circle" class='' cx="512" cy="384" r="1024">
+          </circle>
+        </clipPath>
+      </svg>
     </div>
     <div id='graph'>
       <div id='block-container' style="position:absolute; top:0; z-index:1;"></div>
@@ -67,17 +70,16 @@
         </ul>
       </div>
     </div>
-    <!-- <div id='modal' style="display:none;">
-      <div class='modal-container'>
-        <h2>Title</h2>
-        <div class='modal-content'>
-          This is a test content
-        </div>
-        <div class='modal-action'>
-          <button class='primary'>Confirm</button>
-          <button>Cancel</button>
-        </div>
-      </div>
-    </div> -->
+    <!-- <svg version="1.2" width="0" height="0" viewBox="0 0 740 600">
+      <defs>
+        <clipPath id="mask">
+          <rect x="0" y="0" width="200" height="768">
+            <animate attributeName="x" from="-200" to="740"
+                dur="10s" repeatCount="indefinite"/>
+          </rect>
+        </clipPath>
+      </defs>
+    </svg> -->
+
   </body>
 </html>

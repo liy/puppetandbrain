@@ -14,6 +14,9 @@ window.Activity = {
     // do not load the same activity twice, ie, after creation.
     if(this.id == id) return;
 
+    // clear old activity
+    Activity.clear();
+
     let pod = await API.getActivity(id);
     this.id = id;
     this.ownerID = pod.userID;

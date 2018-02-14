@@ -19,12 +19,60 @@ export default class SceneChange extends Task
 {
   constructor(id) {
     super(id);
+
+    this.onTransitionEnd = this.onTransitionEnd.bind(this);
+  }
+
+  init(pod) {
+    super.init(pod);
+
+    Editor.on('game.stop', this.stop, this);
+    Editor.on('game.start', this.start, this);
+    
+    this.stageElement = Editor.stage.element;
+    this.maskCircle = document.getElementById('mask-circle');
+    
+    
+  }
+
+  stop() {
+    this.maskCircle.classList.remove('circle-mask-close');
+    this.maskCircle.classList.remove('circle-mask-open');
+    this.stageElement.classList.remove('masking')
+
+    this.maskCircle.removeEventListener('animationend', this.onTransitionEnd)
+    this.maskCircle.removeEventListener('webkitAnimationEnd', this.onTransitionEnd)
+    this.maskCircle.removeEventListener('MSAnimationEnd', this.onTransitionEnd)
+  }
+
+  start() {
+    this.maskCircle.addEventListener('animationend', this.onTransitionEnd)
+    this.maskCircle.addEventListener('webkitAnimationEnd', this.onTransitionEnd)
+    this.maskCircle.addEventListener('MSAnimationEnd', this.onTransitionEnd)
   }
 
   run() {
     super.run();
 
-    router.navigate(`/creations/${this.inputs.value('creation id')}`);
+    this.maskCircle.classList.add('circle-mask-close');
+    this.stageElement.classList.add('masking')
+
     // TODO: auto start
+  }
+
+  onTransitionEnd(e) {
+    console.log('!!')
+    this.maskCircle.removeEventListener('animationend', this.onTransitionEnd)
+    this.maskCircle.removeEventListener('webkitAnimationEnd', this.onTransitionEnd)
+    this.maskCircle.removeEventListener('MSAnimationEnd', this.onTransitionEnd)
+
+    
+    // Activity.clear();
+    router.navigate(`/creations/${this.inputs.value('creation id')}`);
+
+    setTimeout(() => {
+      this.maskCircle.classList.remove('circle-mask-close');
+      this.maskCircle.classList.add('circle-mask-open');
+    }, 1000)
   }
 }
