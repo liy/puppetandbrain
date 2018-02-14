@@ -2,6 +2,7 @@ import './ImageButton.scss';
 import FileButton from './FileButton';
 import API from '../../API';
 import ImageLoader from '../../resources/ImageLoader';
+import { getMimeType } from '../../utils/utils';
 
 export default class extends FileButton
 {
@@ -19,7 +20,7 @@ export default class extends FileButton
     }
 
     this.on('file.ready', ({byteArray, ...other}) => {
-      let blob = new Blob([byteArray]);
+      let blob = new Blob([byteArray], {type: getMimeType(other.ext)});
       this.image.src = URL.createObjectURL(blob);
 
       this.emit('gadget.state.change', other)
