@@ -22,6 +22,7 @@ export default class extends Browser
       'My Puppets': 0x4e84bf,
       'Puppets': 0x976bb8,
       'Widgets': 0xbd833c,
+      'Sprite': 0xa02d6b,
     }
 
     this.contentSection.placeholder = 'Loading, Please wait...☕'

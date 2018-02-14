@@ -40,7 +40,7 @@ export default class SpriteActor extends Actor
       // this.content.imageUrl = image.src;
       this.spriteContainer.sprite.texture = PIXI.Texture.from(image);
     }).catch(e => {
-      this.spriteContainer.sprite.texture = PIXI.Texture.from(require('!file-loader!../assets/icons/logo@4x.png'));
+      this.spriteContainer.sprite.texture = PIXI.Texture.from(require('!file-loader!../assets/icons/sprite-actor.png'));
     })
   }
 
