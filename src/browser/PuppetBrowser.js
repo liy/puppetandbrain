@@ -42,7 +42,7 @@ export default class extends Browser
     let p2 = API.listLibraryPuppets().then(pods => {
       if(this.closed) return;
       for(let pod of pods) {
-        this.add(new PuppetBox(pod), 'Puppets')
+        this.add(new PuppetBox(pod), pod.category || 'Puppets')
       }
     }).catch(error => {
       this.onError('Cannot load puppets, please try again...🤒', error)

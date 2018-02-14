@@ -13,7 +13,7 @@ export default class extends FileButton
     this.element.appendChild(this.image)
 
     if(fileData.path || fileData.url) {
-      ImageLoader.fetch(fileData).then(image => {
+      ImageLoader.fetch(fileData).then(({image}) => {
         this.image.src = image.src;
       })
     }

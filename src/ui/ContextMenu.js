@@ -29,9 +29,10 @@ export default class ContextMenu
         API.createMyPuppet(actor, name).then(() => {
           // display some notification once completed
           NotificationControl.notify(`${name} has been added to your library`).delayFadeoutRemove();
-        }).catch(() => {
-          NotificationControl.notify('Error adding My Puppet').delayFadeoutRemove();
         })
+        // }).catch(() => {
+        //   NotificationControl.notify('Error adding My Puppet').delayFadeoutRemove();
+        // })
       }
     })
 

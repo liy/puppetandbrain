@@ -91,8 +91,11 @@ export default class
 
     // init perform node
     for(let data of performs) {
+      console.log(data);
       // change actionID
-      data.pod.actionID = this.mapping[data.pod.actionID].id;
+      if(this.mapping[data.pod.actionID]) {
+        data.pod.actionID = this.mapping[data.pod.actionID].id;
+      }
       data.node.init(data.pod);
     }
 

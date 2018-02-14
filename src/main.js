@@ -49,7 +49,7 @@ import ActivityLoader from './ActivityLoader';
 import ArrayMap from './utils/ArrayMap';
 
 import ExportActor from './ExportActors';
-import ChoiceBox from './objects/ChoiceBox'
+// import ChoiceBox from './objects/ChoiceBox'
 import PuppetBrowser from './browser/PuppetBrowser';
 import ActorSelection from './objects/ActorSelection';
 import notc from './ui/NotificationControl';
@@ -102,10 +102,6 @@ function signedIn(user) {
 
     Activity.new();
     UIController.addBtn.enabled = true;
-
-    var box = new ChoiceBox();
-    box.init();
-    Editor.stage.addActor(box);
   })
 
   router.get('/about', (req, e) => {

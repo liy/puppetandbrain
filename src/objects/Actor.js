@@ -54,7 +54,7 @@ export default class Actor extends EventEmitter
         writable: false
       },
       "libDir": {
-        value: pod.libDir || [],
+        value: pod.libDir || "library/puppets",
         writable: false
       },
       "libFiles": {

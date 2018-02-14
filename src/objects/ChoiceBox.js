@@ -7,6 +7,8 @@ import DataType from '../data/DataType';
 import IconStore from '../ui/IconStore';
 import html2canvas from 'html2canvas';
 import ImageLoader from '../resources/ImageLoader';
+import Vec2 from '../math/Vec2';
+import Matrix from '../math/Matrix';
 
 export default class ChoiceBox extends Actor
 {
@@ -131,66 +133,9 @@ export default class ChoiceBox extends Actor
   set image(fileData) {
     ImageLoader.fetch(fileData).then(({image, blob, url}) => {
       this.content.imageUrl = image.src;
-      // this.content.imageUrl =  URL.createObjectURL(blob)
-      // this.content.imageUrl = url;
-
-
-      // let read = new FileReader();
-      // read.onload = e => {
-      //   this.content.imageUrl = e.target.result;
-      // }
-      // read.readAsDataURL(blob);
-
-
-
-
-      // let test = new Image();
-      // test.crossOrigin = 'Anonymous'
-      // test.src = url;
-      // this.content.setImage(test);
     }).catch(e => {
       this.content.imageUrl = require('!file-loader!../assets/icons/dots.svg');
     })
-
-    // function getDataUri(url, callback) {
-    //   var image = new Image();
-    //   image.crossOrigin = 'Anonymous'
-  
-    //   image.onload = function () {
-    //       var canvas = document.createElement('canvas');
-    //       canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
-    //       canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
-  
-    //       canvas.getContext('2d').drawImage(this, 0, 0);
-  
-    //       // Get raw image data
-    //       //callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
-  
-    //       // ... or get as Data URI
-    //       callback(canvas.toDataURL('image/png'));
-    //   };
-  
-    //   image.src = url;
-    // }
-    // getDataUri('https://firebasestorage.googleapis.com/v0/b/puppet-brain-staging.appspot.com/o/uploads%2F61ff88c53b2d9883998a099a9f861c386ce0efc6.png?alt=media&token=9a09439c-2d35-4c0c-b2d8-3972cd4e2735', (data) => {
-    //   this.content.imageUrl = data;
-    // })
-    // fetch('https://firebasestorage.googleapis.com/v0/b/puppet-brain-staging.appspot.com/o/uploads%2F61ff88c53b2d9883998a099a9f861c386ce0efc6.png?alt=media&token=9a09439c-2d35-4c0c-b2d8-3972cd4e2735',{
-    //   // mode: 'cors',
-    // })
-    //   .then(response => {
-    //     console.log(response.type)
-    //     if(response.ok) {
-    //       response.blob().then(blob => {
-    //         // this.content.imageUrl = URL.createObjectURL(blob);
-    //         let read = new FileReader();
-    //         read.onload = e => {
-    //           this.content.imageUrl = e.target.result;
-    //         }
-    //         read.readAsDataURL(blob);
-    //       })
-    //     }
-    //   })
   }
 
   get image() {
@@ -209,20 +154,50 @@ export default class ChoiceBox extends Actor
   async snapshot() {
     let fileData = this.properties.get('image').data;
 
-    let texture = Editor.renderer.generateTexture(this.box.container);
-    let canvas = Editor.renderer.extract.canvas(texture);
-    // TODO: to be removed
-    canvas.id = 'snapshot-canvas';
+    // do not show filters in snapshot
+    let outlineFilters = this.box.container.filters;
+    this.box.container.filters = []
 
-    // draw dom element to canvas
+    // this texture does not contains any transformation.
+    // the image is later transformed manually use actor's transformation
+    let texture = Editor.renderer.generateTexture(this.box.container);
+    let pixiCanvas = Editor.renderer.extract.canvas(texture);
+
+    this.box.container.filters = outlineFilters
+
     return html2canvas(this.content.element, {
       backgroundColor: null,
+      // width: 200/this.scale.x,
+      // height: 200/this.scale.y,
       // Load the cross domain images!!!
       // As all the authoring time data will be uploaded to the server,
       // there will be no issue to access cors image.
       allowTaint: true,
     }).then(domCanvas => {
-      canvas.getContext('2d').drawImage(domCanvas, 0, 0);
+
+      let canvas = document.createElement('canvas')
+      canvas.width = domCanvas.width;
+      canvas.height = domCanvas.height;
+      let context = canvas.getContext('2d');
+
+      // Since the pixi
+      let m = new Matrix();
+      // rotate, scale at pivot 0.5, 0.5
+      m.translate(-0.5*this.width, -0.5*this.height);
+      // Note this does not consider the box component transformation...
+      // only actor transformation.
+      m.rotate(this.rotation);
+      m.scale(this.scale.x, this.scale.y);
+      // translate back to the centre of the domCanvas
+      m.translate(canvas.width/2, canvas.height/2);
+      // transform the context ready for draw the canvas
+      context.transform(m.a, m.b, m.c, m.d, m.tx, m.ty);
+      context.drawImage(pixiCanvas, 0, 0)
+
+      // draw dom canvas, which is above pixi canvas
+      context.setTransform(1, 0, 0, 1, 0, 0);
+      context.drawImage(domCanvas, 0, 0)
+
       return canvas;
     })
   }

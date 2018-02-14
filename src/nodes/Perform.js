@@ -83,7 +83,9 @@ export default class Perform extends Task
   }
 
   get nodeName() {
-    return this.action.owner.name + ' Perform '  + this.actionName;
+    let actionOwnerName = '';
+    if(this.action) actionOwnerName = this.action.owner.name;
+    return actionOwnerName + ' Perform '  + this.actionName;
   }
 
   pod(detail=false) {
