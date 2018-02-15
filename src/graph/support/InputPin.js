@@ -43,7 +43,7 @@ export default class extends DataPin
             this.gadget.input.step = 0.01;
             break;
           case DataType.INTEGER:
-            this.setGadget(new TextField(data));
+            this.setGadget(new InputField(data, 'number'));
             break;
           case DataType.STRING:
             this.setGadget(new TextField(data));
@@ -85,7 +85,7 @@ export default class extends DataPin
       downY = e.clientY;
     })
     this.label.addEventListener('mouseup', e => {
-      if(downX === e.clientX && downY === e.clientY) {
+      if(Math.abs(downX - e.clientX) < 10 && Math.abs(downY - e.clientY) < 10) {
         this.labelClicked();
       }
     })
