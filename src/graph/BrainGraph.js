@@ -6,6 +6,7 @@ import ArrayMap from '../utils/ArrayMap';
 import BlockBrowser from '../browser/BlockBrowser';
 import ElementController from './elements/ElementController';
 import ConnectHelper from './ConnectHelper';
+import Matrix from '../math/Matrix'
 
 class BrainGraph
 {
@@ -49,6 +50,7 @@ class BrainGraph
     this.zoomX = 0;
     this.zoomY = 0;
 
+
     this.tween = null;
 
     this.startPan = this.startPan.bind(this);
@@ -75,12 +77,39 @@ class BrainGraph
       // this.zoomY = e.clientY/this.scale - e.clientY
 
 
+
+      this.matrix = new Matrix();
+      let rect = this.blockContainer.getBoundingClientRect()
+      console.log(e.clientX-rect.x, e.clientY - rect.y)
+      // this.zoomX = e.clientX - rect.x;
+      // this.zoomY = e.clientY - rect.y;
+      this.zoomX = e.clientX;
+      this.zoomY = e.clientY;
+      console.log(this.zoomX, this.zoomY)
+
+
+
+
+
+
       this.updateTransform();
     });
+
+    let test = document.createElement('div');
+    test.style.width = '1024px';
+    test.style.height = '768px';
+    test.style.position = 'absolute';
+    test.style.top = 0;
+    test.style.left = 0;
+    test.style.backgroundColor ='#FF9900'
+    test.style.opacity = 0.5;
+    test.style.pointerEvents = 'none';
+    this.blockContainer.appendChild(test);
   }
 
   startPan(e) {
-    if(e.which == 0) {
+    // touches
+    if(e.touches) {
       this.lastTouchX = e.touches[0].clientX 
       this.lastTouchY = e.touches[0].clientY 
     }
@@ -92,7 +121,6 @@ class BrainGraph
   }
 
   onPan(e) {
-
     if(e.touches) {
       this.translateX += e.touches[0].clientX - this.lastTouchX
       this.translateY += e.touches[0].clientY - this.lastTouchY
@@ -104,6 +132,7 @@ class BrainGraph
       this.translateX += e.movementX;
       this.translateY += e.movementY;
     }
+    
     this.updateTransform();
   }
 
@@ -113,7 +142,10 @@ class BrainGraph
   }
 
   updateTransform() {
-    this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale})  translate(${this.zoomX}px, ${this.zoomY}px)`;
+    let rect = this.blockContainer.getBoundingClientRect()
+    this.blockContainer.style.transform = `translate(${-window.innerWidth/2 * this.scale}px, ${-window.innerHeight/2 * this.scale}px) translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale}) `;
+
+    // this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale})  translate(${this.zoomX}px, ${this.zoomY}px)`;
     // Only need to redraw all the svg paths
     this.redraw();
   }
