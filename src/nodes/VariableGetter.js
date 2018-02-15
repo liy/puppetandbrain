@@ -10,7 +10,7 @@ NodeTemplate.VariableGetter = {
   execution: [],
   inputs: [],
   outputs: [],
-  elementClass: ['property', 'getter'],
+  elementClass: ['property', 'collapsed'],
   category: 'Property'
 }
 

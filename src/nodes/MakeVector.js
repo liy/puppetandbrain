@@ -23,7 +23,6 @@ NodeTemplate.MakeVector = {
       type: DataType.VEC2,
     }
   }],
-  elementClass: ['getter'],
   memory: {
     x: 0,
     y: 0,

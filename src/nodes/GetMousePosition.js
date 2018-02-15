@@ -12,8 +12,8 @@ NodeTemplate.GetMousePosition = {
       type: DataType.VEC2
     }
   }],
-  elementClass: ['property', 'getter'],
-  category: 'Property',
+  elementClass: ['utility', 'collapsed'],
+  category: 'Utilities',
   keywords: ['mouse', 'position']
 }
 

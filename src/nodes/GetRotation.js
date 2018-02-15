@@ -4,7 +4,7 @@ import DataType from '../data/DataType';
 
 NodeTemplate.GetRotation = {
   className: 'GetRotation',
-  name: 'Get Rotation',
+  name: 'Rotation',
   inputs: [{
     name: 'puppet',
     descriptor: {
@@ -17,7 +17,7 @@ NodeTemplate.GetRotation = {
       type: DataType.DOUBLE
     }
   }],
-  elementClass: ['property', 'getter'],
+  elementClass: ['property', 'collapsed'],
   category: 'Property'
 }
 

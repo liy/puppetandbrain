@@ -8,7 +8,7 @@ NodeTemplate.AnimationEvent = {
   outputs: [{
     name: 'event name',
     descriptor: {
-      type: DataType.GENERIC
+      type: DataType.STRING
     }
   }],
   keyboards: [ParentTemplate.keywords, 'animation'],

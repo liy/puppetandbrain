@@ -39,7 +39,7 @@ NodeTemplate.Trigonometry = {
       operationName: 'tan'
     }
   ],
-  elementClass: ['arithmetic'],
+  elementClass: ['arithmetic', 'collapsed'],
   category: 'Math',
   keywords: [ 
     'sin', 'sine',

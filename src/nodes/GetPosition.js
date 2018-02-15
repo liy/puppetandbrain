@@ -3,7 +3,7 @@ import DataType from '../data/DataType';
 
 NodeTemplate.GetPosition = {
   className: 'GetPosition',
-  name: 'Get Position',
+  name: 'Position',
   inputs: [{
     name: 'puppet',
     descriptor: {
@@ -16,7 +16,7 @@ NodeTemplate.GetPosition = {
       type: DataType.VEC2
     }
   }],
-  elementClass: ['property', 'getter'],
+  elementClass: ['property', 'collapsed'],
   category: 'Property'
 }
 

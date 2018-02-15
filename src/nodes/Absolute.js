@@ -19,7 +19,7 @@ NodeTemplate.Absolute = {
   memory: {
     number: -1,
   },
-  elementClass: ['arithmetic'],
+  elementClass: ['arithmetic', 'collapsed'],
   category: 'Math',
 }
 

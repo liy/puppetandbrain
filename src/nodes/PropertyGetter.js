@@ -11,7 +11,7 @@ NodeTemplate.PropertyGetter = {
   // }],
   inputs: [],
   outputs: [],
-  elementClass: ['property', 'getter'],
+  elementClass: ['property', 'collapsed'],
   category: 'Property'
 }
 

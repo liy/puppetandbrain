@@ -20,7 +20,7 @@ NodeTemplate.Not = {
   memory: {
     boolean: false,
   },
-  elementClass: ['logic'],
+  elementClass: ['logic', 'collapsed'],
   category: 'Logic',
   keywords: ['logic','!','not']
 }

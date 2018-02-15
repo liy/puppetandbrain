@@ -3,7 +3,7 @@ import DataType from '../data/DataType';
 
 NodeTemplate.GetScale = {
   className: 'GetScale',
-  name: 'Get Scale',
+  name: 'Scale',
   inputs: [{
     name: 'puppet',
     descriptor: {
@@ -16,7 +16,7 @@ NodeTemplate.GetScale = {
       type: DataType.VEC2
     }
   }],
-  elementClass: ['property', 'getter'],
+  elementClass: ['property', 'collapsed'],
   category: 'Property'
 }
 

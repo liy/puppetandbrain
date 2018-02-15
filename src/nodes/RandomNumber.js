@@ -11,7 +11,7 @@ NodeTemplate.RandomNumber = {
       type: DataType.DOUBLE
     }
   }],
-  elementClass: ['arithmetic'],
+  elementClass: ['arithmetic', 'collapsed'],
   category: 'Math',
   keywords: ['random']
 }

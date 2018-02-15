@@ -105,24 +105,6 @@
   }
 }
 
-.getter {
-  .title {
-    display: none;
-  }
-  
-  .container {
-    min-height: 0;
-  }
-
-  .left {
-    justify-content: center;
-  }
-
-  .right {
-    justify-content: center;
-  }
-}
-
 .arithmetic, .logic {
   .container {
     min-height: 80px;
@@ -343,6 +325,20 @@
 }
 
 .center-output {
+  .right {
+    justify-content: center;
+  }
+}
+
+.collapsed {
+  .container {
+    min-height: 0;
+  }
+
+  .left {
+    justify-content: center;
+  }
+
   .right {
     justify-content: center;
   }
