@@ -34,7 +34,7 @@ NodeTemplate.Orbit = {
     name: 'default'
   }],
   memory: {
-    degree: 0.1,
+    degree: 1,
     radius: 100,
     point: {x:0, y:0}
   },
