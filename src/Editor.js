@@ -14,9 +14,6 @@ class Editor extends EventEmitter
     // whether game is playing or not
     this.playing = false;
 
-    this.stage = new Stage();
-
-    this.mouse = new Mouse();
     
     document.addEventListener('keydown', (e) => {
       if(e.key == 'F6' || e.key == 'F4') {
@@ -34,6 +31,8 @@ class Editor extends EventEmitter
       antialias: true
     });
     
+    this.stage = new Stage();
+    this.mouse = new Mouse();
     this.contextMenu = new ContextMenu(this);
   }
 

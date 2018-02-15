@@ -41,6 +41,8 @@ export SetPosition from './SetPosition';
 export SetRotation from './SetRotation';
 export SetScale from './SetScale';
 
+export GetMousePosition from './GetMousePosition';
+
 export Wait from './Wait';
 export Action from './Action';
 export Perform from './Perform'

@@ -62,7 +62,6 @@ export default class VectorArithmetic extends Adaptor
   }
 
   add() {
-    
     return Vec2.add(numericVector(this.inputs.value('vector A')), numericVector(this.inputs.value('vector B')));
   }
 

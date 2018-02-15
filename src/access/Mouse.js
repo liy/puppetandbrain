@@ -1,14 +1,24 @@
 import EventEmitter from "../utils/EventEmitter";
+import Vec2 from '../math/Vec2'
 
 export default class extends EventEmitter
 {
   constructor() {
     super();
 
-    this.move = this.move.bind(this)
+    this.move = this.move.bind(this);
 
     this.threshold = 300; 
     this.thresholdID = 0;
+
+    this._position = new Vec2();
+  }
+
+  get position() {
+    var p = Editor.renderer.plugins.interaction.mouse.global;
+    this._position.x = p.x;
+    this._position.y = p.y;
+    return this._position;
   }
 
   destroy() {
@@ -32,7 +42,7 @@ export default class extends EventEmitter
 
   move(e) {
     clearTimeout(this.thresholdID);
-    this.emit('mouse.move', e)
+    this.emit('mouse.move', e);
     this.thresholdID = setTimeout(() => {
       this.stop(e)
     }, this.threshold);
