@@ -24,6 +24,7 @@ export Absolute from './Absolute';
 
 export Compare from './Compare';
 export Logic from './Logic';
+export Not from './Not';
 
 // These are for brain variable setter and getter
 export VariableGetter from './VariableGetter';
