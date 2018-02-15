@@ -26,6 +26,13 @@ export Compare from './Compare';
 export Logic from './Logic';
 export Not from './Not';
 
+// array
+export ArrayLen from './array/ArrayLen';
+export GetByIndex from './array/GetByIndex';
+export ItemIndex from './array/ItemIndex';
+export PushItem from './array/PushItem';
+export RemoveByIndex from './array/RemoveByIndex';
+
 // These are for brain variable setter and getter
 export VariableGetter from './VariableGetter';
 export VariableSetter from './VariableSetter';
@@ -78,6 +85,8 @@ export Move from './Move'
 export Rotate from './Rotate'
 
 export SceneChange from './SceneChange'
+
+
 
 
 
