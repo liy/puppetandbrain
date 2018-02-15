@@ -19,7 +19,7 @@ NodeTemplate.ArrayLen = {
   memory: {
     list: []
   },
-  elementClass: ['array'],
+  elementClass: ['array', 'collapsed'],
   category: 'List'
 }
 

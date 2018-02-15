@@ -19,7 +19,7 @@ NodeTemplate.MapSize = {
   memory: {
     map: {}
   },
-  elementClass: ['map'],
+  elementClass: ['map', 'collapsed'],
   category: 'Map'
 }
 

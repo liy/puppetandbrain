@@ -24,7 +24,7 @@ NodeTemplate.GetItem = {
   memory: {
     map: {}
   },
-  elementClass: ['map'],
+  elementClass: ['map', 'center-output'],
   category: 'Map'
 }
 

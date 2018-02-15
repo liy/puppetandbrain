@@ -24,7 +24,7 @@ NodeTemplate.ItemIndex = {
   memory: {
     list: []
   },
-  elementClass: ['array'],
+  elementClass: ['array', 'center-output'],
   category: 'List'
 }
 

@@ -254,6 +254,70 @@
   }
 }
 
+.array {
+  $baseR: 152;
+  $baseG: 46;
+  $baseB: 46;
+  $baseA: 0.85;
+  $r: 181;
+  $g: 63;
+  $b: 63;
+  $a: 0.6;
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin, .execution-pin {
+    color: #D9D9D9
+  }
+}
+
+.map {
+  $baseR: 115;
+  $baseG: 33;
+  $baseB: 79;
+  $baseA: 0.85;
+  $r: 144;
+  $g: 48;
+  $b: 102;
+  $a: 0.6;
+
+  .base {
+    // background-color: #B39100;
+    background-color: rgba($baseR, $baseG, $baseB, $baseA);
+    .body {
+      // background-color: #CCA600;
+      background-color: rgba($r, $g, $b, $a)
+    }
+  }
+  .data-head {
+    // background-color: #CCA600;
+    // rgb = base + (overlay - base)*overlay.alpha
+    // alpha = base.alpha + (1-base.alpha)*overlay.alpha
+    background-color: rgba(($baseR + ($r - $baseR)*$a), 
+                           ($baseG + ($g - $baseG)*$a), 
+                           ($baseB + ($b - $baseB)*$a), 
+                           ($baseA + (1 - $baseA)*$a))
+  }
+  .data-pin, .execution-pin {
+    color: #D9D9D9
+  }
+}
+
 .flow-control {
   $baseR: 57;
   $baseG: 87;
