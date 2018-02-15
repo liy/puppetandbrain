@@ -33,6 +33,13 @@ export ItemIndex from './array/ItemIndex';
 export PushItem from './array/PushItem';
 export RemoveByIndex from './array/RemoveByIndex';
 
+// map
+export Contains from './map/Contains';
+export GetItem from './map/GetItem';
+export MapSize from './map/MapSize';
+export RemoveItem from './map/RemoveItem';
+export SetItem from './map/SetItem';
+
 // These are for brain variable setter and getter
 export VariableGetter from './VariableGetter';
 export VariableSetter from './VariableSetter';

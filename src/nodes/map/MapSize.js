@@ -1,0 +1,42 @@
+import Node from '../Node';
+import DataType from '../../data/DataType';
+
+NodeTemplate.MapSize = {
+  className: 'MapSize',
+  name: 'Map Size',
+  inputs: [{
+    name: 'map',
+    descriptor: {
+      type: DataType.MAP,
+    }
+  }],
+  outputs: [{
+    name: 'size',
+    descriptor: {
+      type: DataType.INTEGER,
+    }
+  }],
+  memory: {
+    map: {}
+  },
+  elementClass: ['map'],
+  category: 'Map'
+}
+
+export default class MapSize extends Node
+{
+  constructor(id) {
+    super(id)
+  }
+
+  init(pod) {
+    super.init(pod);
+
+    this.outputs.assignProperty('size', {
+      get: () => {
+        let map = this.inputs.value('map');
+        return Object.keys(map).length;
+      }
+    });
+  }
+}
