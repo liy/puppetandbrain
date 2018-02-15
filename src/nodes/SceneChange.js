@@ -61,13 +61,11 @@ export default class SceneChange extends Task
   }
 
   onTransitionEnd(e) {
-    console.log('!!')
     this.maskCircle.removeEventListener('animationend', this.onTransitionEnd)
     this.maskCircle.removeEventListener('webkitAnimationEnd', this.onTransitionEnd)
     this.maskCircle.removeEventListener('MSAnimationEnd', this.onTransitionEnd)
 
     
-    // Activity.clear();
     router.navigate(`/creations/${this.inputs.value('creation id')}`);
 
     setTimeout(() => {
