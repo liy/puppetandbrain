@@ -49,8 +49,7 @@ class BrainGraph
     this.translateY = 0;
     this.zoomX = 0;
     this.zoomY = 0;
-
-
+    
     this.tween = null;
 
     this.startPan = this.startPan.bind(this);
@@ -61,8 +60,9 @@ class BrainGraph
     document.addEventListener('mouseup', this.stopPan);
     document.addEventListener('touchend', this.stopPan);
     this.container.addEventListener('wheel', e => {
-      let ox = e.clientX * this.scale ;
-      let oy = e.clientY * this.scale  
+      let sx = (e.clientX - this.translateX)/this.scale;
+      let sy = (e.clientY - this.translateY)/this.scale;
+      
       if(e.deltaY<0) {
         this.scale += 0.05;
         this.scale = Math.min(this.scale, 2)
@@ -72,39 +72,11 @@ class BrainGraph
         this.scale = Math.max(this.scale, 0.2);
       }
 
-      // FIXME: implement zoom towards a point!!!
-      // this.zoomX = e.clientX/this.scale - e.clientX
-      // this.zoomY = e.clientY/this.scale - e.clientY
-
-
-
-      this.matrix = new Matrix();
-      let rect = this.blockContainer.getBoundingClientRect()
-      console.log(e.clientX-rect.x, e.clientY - rect.y)
-      // this.zoomX = e.clientX - rect.x;
-      // this.zoomY = e.clientY - rect.y;
-      this.zoomX = e.clientX;
-      this.zoomY = e.clientY;
-      console.log(this.zoomX, this.zoomY)
-
-
-
-
-
+      this.translateX = e.clientX - sx * this.scale;
+      this.translateY = e.clientY - sy * this.scale;
 
       this.updateTransform();
     });
-
-    let test = document.createElement('div');
-    test.style.width = '1024px';
-    test.style.height = '768px';
-    test.style.position = 'absolute';
-    test.style.top = 0;
-    test.style.left = 0;
-    test.style.backgroundColor ='#FF9900'
-    test.style.opacity = 0.5;
-    test.style.pointerEvents = 'none';
-    this.blockContainer.appendChild(test);
   }
 
   startPan(e) {
@@ -142,10 +114,8 @@ class BrainGraph
   }
 
   updateTransform() {
-    let rect = this.blockContainer.getBoundingClientRect()
-    this.blockContainer.style.transform = `translate(${-window.innerWidth/2 * this.scale}px, ${-window.innerHeight/2 * this.scale}px) translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale}) `;
+    this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
 
-    // this.blockContainer.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}, ${this.scale})  translate(${this.zoomX}px, ${this.zoomY}px)`;
     // Only need to redraw all the svg paths
     this.redraw();
   }
