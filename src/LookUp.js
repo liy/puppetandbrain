@@ -34,71 +34,10 @@ function create(entry, id) {
 
 
 window.LookUp = {
-  store: STORE,
-  // user: null,
-
-  // setOwnerID: function(id) {
-  //   ownerID = id;
-  // },
-
-  // setActivityID: function(id) {
-  //   activityID = id;
-  //   document.getElementById('activity-id').textContent = activityID;
-  // },
-
-  // save: async function(delay=true) {
-  //   if(!this.user.uid) {
-  //     console.error('User id cannot be null', this.user.uid); 
-  //     return;
-  //   }
-
-  //   if(delay) {
-  //     // Wait for 3 second then start saving
-  //     delaySave.cancel();
-  //     await delaySave.wait(6000);
-  //   }
-
-  //   let pod = this.pod();
-  //   // Set the new activity's owner to be the user
-  //   pod.userID = this.user.uid;
-
-  //   // If it is brand activity created locally and also make sure
-  //   // the activity owned by the user
-  //   if(activityID && ownerID == this.user.uid) {
-  //     console.log('Updating activity...')
-  //     await firebase.firestore().collection('activities').doc(activityID).set(pod).then(() => {
-  //       console.info('Successfully updating activity')
-  //     }).catch(error => {
-  //       console.error('Error updating activity: ', error)
-  //     })
-  //   }
-  //   else {
-  //     console.log('Creating new activity...')
-  //     if(creating) {
-  //       console.info('Waiting for activity creation...')
-  //       return;
-  //     }
-
-  //     creating = true;
-  //     await firebase.firestore().collection('activities').add(pod).then(docRef => {
-  //       this.setActivityID(docRef.id);
-  //       this.setOwnerID(this.user.uid);
-  //       creating = false;
-  //       console.info('Sucessfully creating activity')
-  //       window.location.href = window.location.href.split('#')[0] + '#' + docRef.id;
-  //     }).catch(error => {
-  //       console.error('Error creating activity: ', error)
-  //       creating = false;
-  //     })
-  //   }
-
-  //   // activity look up for the user
-  //   firebase.firestore().collection('users').doc(this.user.uid).set({
-  //     activities: {[activityID]: {
-  //       updated: firebase.firestore.FieldValue.serverTimestamp()
-  //     }}
-  //   }, {merge: true})
-  // },
+  // for debugging...
+  get store() {
+    return STORE;
+  },
 
   addActor: function(entry, id) {
     id = create(entry, id)
@@ -206,29 +145,12 @@ window.LookUp = {
     VARIABLES = [];
   },
 
-  // getPuppets: function() {
-  //   // collection.forEach(doc => {
-  //   //   console.log(doc.id, doc.data())
-  //   // })
-  //   return firebase.firestore().collection(`users/${LookUp.user.uid}/puppets`).get();
-  // },
-
-  // uploadBlob: async function(blob) {
-  //   let {id} = await firebase.firestore().collection(`users/${LookUp.user.uid}/files`).add({
-  //     uploaded: firebase.firestore.FieldValue.serverTimestamp()
-  //   })
-
-  //   // upload file using the id
-  //   let storageRef = firebase.storage().ref();
-  //   storageRef.child(`users/${LookUp.user.uid}/${id}`).put(blob)
-  // },
-
   pod: function(detail=false) {
     let result = {};
     result.activityID = activityID
     result.store = {};
-    for(let id in this.store) {
-      result.store[id] = this.store[id].pod(detail);
+    for(let id in STORE) {
+      result.store[id] = STORE[id].pod(detail);
     }
     result.actors = ACTORS;
     result.nodes = NODES;

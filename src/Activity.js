@@ -14,9 +14,8 @@ window.Activity = {
     // do not load the same activity twice, ie, after creation.
     if(this.id == id) return;
 
-    // FIXME: find a place to clear the activity!!!
-    // clear old activity
-    // Activity.clear();
+    // clear old activity if any...
+    Activity.clear();
 
     let pod = await API.getActivity(id);
     this.id = id;
