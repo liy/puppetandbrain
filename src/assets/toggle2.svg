@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 20">
+  <path id="slot" d="M25 20H10C4.5 20 0 15.5 0 10S4.5 0 10 0h15c5.5 0 10 4.5 10 10s-4.5 10-10 10z" fill="#BD80FF"/>
+  <circle id="knob" cx="10" cy="10" r="6" fill="#FFF"/>
+</svg>

@@ -1,22 +1,22 @@
 import ElementControlButton from './ElementControlButton';
-import SoundIcon from '../../assets/sound-icon.svg';
-import DataType from '../../data/DataType';
+import BooleanIcon from '../../assets/boolean-icon.svg';
 import { svgElement } from '../../utils/utils';
+import DataType from '../../data/DataType';
 
 export default class extends ElementControlButton
 {
   constructor() {
-    super(svgElement(SoundIcon,{width:18, height:20}));
-    this.element.setAttribute('data-title', "Create Audio");
+    super(svgElement(BooleanIcon,{width:15, height:10}));
+    this.element.setAttribute('data-title', "Create boolean property");
   }
 
   pointerDown(e) {
     History.push(Commander.create('CreateVariable', {
       brainID: BrainGraph.brain.id,
       name: null,
-      data: null,
+      data: true,
       descriptor: {
-        type: DataType.AUDIO,
+        type: DataType.BOOLEAN,
       }
     }).processAndSave());
   }

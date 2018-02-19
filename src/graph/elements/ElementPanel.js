@@ -11,6 +11,7 @@ import { svgElement } from '../../utils/utils';
 
 import PullIcon from '../../assets/pull-icon.svg';
 import CreateImageButton from './CreateImageButton';
+import CreateBooleanButton from './CreateBooleanButton';
 
 export default class
 {
@@ -57,8 +58,10 @@ export default class
     let actorButton = new CreateActorButton();
     let audioButton = new CreateAudioButton();
     let imageButton = new CreateImageButton();
+    let booleanButton = new CreateBooleanButton();
 
     this.control.appendChild(genericButton.element);
+    this.control.appendChild(booleanButton.element);
     this.control.appendChild(listButton.element);
     this.control.appendChild(mapButton.element);
     this.control.appendChild(positionButton.element);

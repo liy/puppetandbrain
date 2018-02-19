@@ -20,6 +20,7 @@ import { nextFrame, svgElement } from "../../utils/utils";
 import GraphSelection from "../GraphSelection";
 import ImagePropertyElement from "./ImagePropertyElement";
 import ImageElement from "./ImageElement";
+import BooleanElement from "./BooleanElement";
 
 class ElementController
 {
@@ -74,6 +75,9 @@ class ElementController
         break;
       case DataType.IMAGE:
         variableElement = new ImageElement(variable); 
+        break;
+      case DataType.BOOLEAN:
+        variableElement = new BooleanElement(variable); 
         break;
       default:
         variableElement = new GenericElement(variable); 
