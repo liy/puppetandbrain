@@ -316,7 +316,7 @@ export default class Actor extends EventEmitter
     // brain variable user files
     for(let variable of this.brain.variables) {
       if(variable.type == DataType.AUDIO || variable.type == DataType.IMAGE) {
-        if(variable.data.hash) {
+        if(variable.data && variable.data.hash) {
           userFiles.push(variable.data);
         }
       }
@@ -325,7 +325,7 @@ export default class Actor extends EventEmitter
     // properties
     for(let property of this.properties) {
       if(property.type == DataType.AUDIO || property.type == DataType.IMAGE) {
-        if(property.data.hash) {
+        if(property.data && property.data.hash) {
           userFiles.push(property.data);
         }
       }
