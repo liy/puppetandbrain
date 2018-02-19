@@ -13,9 +13,6 @@ export default class ActionBlock extends Block
     this.title.contentEditable = true;
     this.title.setAttribute('placeholder', 'Action Name');
 
-    this.body.minWidth = 140;
-    this.body.minHeight = 120;
-
     this.onTitleInput = this.onTitleInput.bind(this)
   }
 
