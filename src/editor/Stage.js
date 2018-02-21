@@ -1,6 +1,6 @@
-import ArrayMap from './utils/ArrayMap'
+import ArrayMap from '@/utils/ArrayMap'
 import ActorSelection from './objects/ActorSelection';
-import EventEmitter from './utils/EventEmitter';
+import EventEmitter from '@/utils/EventEmitter';
 
 export default class Stage extends EventEmitter
 {

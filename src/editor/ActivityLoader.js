@@ -1,7 +1,7 @@
 import Variable from './data/Variable';
 import * as ObjecClasses from './objects';
 import {LoaderBucket} from './resources/Resource';
-import { getMimeType } from './utils/utils';
+import { getMimeType } from '@/utils/utils';
 
 export default class ActivityLoader
 {

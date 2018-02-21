@@ -1,6 +1,6 @@
 import './Editor.scss'
 import Stage from './Stage';
-import EventEmitter from './utils/EventEmitter';
+import EventEmitter from '@/utils/EventEmitter';
 import Mouse from './access/Mouse';
 import './ui/ContextMenu';
 import ContextMenu from './ui/ContextMenu';

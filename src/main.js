@@ -58,7 +58,7 @@
 
 // import Grapnel from 'grapnel'
 // import { setTimeout } from "timers";
-// import { toDegree } from "./utils/utils";
+// import { toDegree } from "@/utils/utils";
 // import SpriteActor from "./objects/SpriteActor";
 // window.router = new Grapnel({pushState:true});
 
@@ -152,7 +152,7 @@ import './manifest.json';
 
 import API from './API';
 window.API = API;
-import './editor'
+// import './editor'
 
 document.getElementById('app-version').textContent = APP_VERSION;
 
@@ -170,10 +170,12 @@ firebase.initializeApp(FIREBASE_CONFIG);
 function signedIn(user) {
   console.log('signed in')
   window.CurrentUser = user;
-  UIController.stageMode();
+  // UIController.stageMode();
 
   // activity
   router.get('/creations/:id', async req => {
+    import('./editor')
+
     let chip = notc.notify('loading, please wait...');
     await Activity.load(req.params.id);
     UIController.addBtn.enabled = true;
@@ -182,6 +184,7 @@ function signedIn(user) {
 
   // dynamically load tutorials
   router.get('/tutorials/:tutorial', async req => {
+    await import('./editor')
     UIController.addBtn.enabled = true;
 
     const tutorial = (await import(`./tutorials/${req.params.tutorial}`)).default;
@@ -194,8 +197,8 @@ function signedIn(user) {
     //   return;
     // }
 
-    Activity.new();
-    UIController.addBtn.enabled = true;
+    // Activity.new();
+    // UIController.addBtn.enabled = true;
   })
 
   router.get('/about', (req, e) => {

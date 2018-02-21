@@ -6,12 +6,18 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 
 module.exports = {
-  entry: ['whatwg-fetch', path.join(__dirname, 'src', 'main.js')],
+  // entry: ['whatwg-fetch', path.join(__dirname, 'src', 'main.js')],
+  entry: {
+    'whatwg-fetch': 'whatwg-fetch',
+    rusha: 'rusha',
+    // editor: path.resolve(__dirname, 'src/editor/index.js'),
+    main: path.join(__dirname, 'src', 'main.js'),
+  },
   output: {
     // this make sure all the assets to be accessed from root, ie bundle.js be injected by HtmlWebpackPlugin
     // as "/bundle.js". This is necessary in SPA.
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].js',
     // Where to put the final 'compiled' file
     path: path.join(__dirname, 'dist'),
   },
@@ -84,6 +90,10 @@ module.exports = {
       })
     }),
     new SpriteLoaderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['whatwg-fetch', 'rusha'], // Specify the common bundle's name.
+      minChunks: Infinity,
+    }),
     // new OfflinePlugin(),
   ],
   
