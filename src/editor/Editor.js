@@ -1,3 +1,4 @@
+import './Editor.scss'
 import Stage from './Stage';
 import EventEmitter from './utils/EventEmitter';
 import Mouse from './access/Mouse';

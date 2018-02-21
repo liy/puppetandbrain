@@ -1,6 +1,6 @@
 import Debounce from './Debounce';
 import PreAcceptance from './PreAcceptance';
-import EventEmitter from '../utils/EventEmitter';
+import EventEmitter from '@/utils/EventEmitter';
 
 export default class Switch extends EventEmitter
 {

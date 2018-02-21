@@ -1,9 +1,9 @@
 import ActorSelection from '../objects/ActorSelection'
 import BinButtonIcon from '@/assets/bin-button-icon.svg';
-import {svgElement} from '../utils/utils';
+import {svgElement} from '@/utils/utils';
 import ControlButton from './ControlButton';
 import GraphSelection from '../graph/GraphSelection';
-import SoundEffect from '../SoundEffect';
+import SoundEffect from '@/SoundEffect';
 
 export default class BrainButton extends ControlButton
 {

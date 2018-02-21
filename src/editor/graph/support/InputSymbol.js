@@ -2,10 +2,10 @@ import './InputSymbol.scss';
 import DataSymbol from "./DataSymbol";
 import ConnectHelper from "../ConnectHelper";
 import InputIcon from '@/assets/input.svg';
-import {svgElement} from '../../utils/utils';
+import {svgElement} from '@/utils/utils';
 import DataColor from "../../data/DataColor";
 import DataType from "../../data/DataType";
-import SoundEffect from '../../SoundEffect';
+import SoundEffect from '@/SoundEffect';
 
 export default class InputSymbol extends DataSymbol
 {

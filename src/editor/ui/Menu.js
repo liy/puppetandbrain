@@ -1,5 +1,5 @@
 import './Menu.scss';
-import { svgElement } from '../utils/utils';
+import { svgElement } from '@/utils/utils';
 import MenuIcon from '@/assets/menu-icon.svg';
 
 export default class 

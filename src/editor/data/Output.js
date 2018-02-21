@@ -1,5 +1,5 @@
-import ArrayMap from "../utils/ArrayMap";
-import EventEmitter from "../utils/EventEmitter";
+import ArrayMap from "@/utils/ArrayMap";
+import EventEmitter from "@/utils/EventEmitter";
 import DataType from "./DataType";
 
 export default class Output extends EventEmitter

@@ -1,6 +1,6 @@
 import VariableElement from './VariableElement';
 import PositionIcon from '@/assets/position-icon.svg';
-import { svgElement, numericVector } from '../../utils/utils';
+import { svgElement, numericVector } from '@/utils/utils';
 import DataType from '../../data/DataType';
 import PositionField from '../gadgets/PositionField';
 

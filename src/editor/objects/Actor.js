@@ -1,7 +1,7 @@
 const filters = require('pixi-filters');
 import Entity from './Entity';
-import mixin from '../utils/mixin';
-import EventEmitter from '../utils/EventEmitter';
+import mixin from '@/utils/mixin';
+import EventEmitter from '@/utils/EventEmitter';
 import TextComponent from '../components/TextComponent';
 import Brain from '../nodes/Brain';
 import ActorSelection from './ActorSelection';
@@ -9,7 +9,7 @@ import Variable from '../data/Variable';
 import Matrix from '../math/Matrix';
 import Vec2 from '../math/Vec2';
 import PropertyList from '../data/PropertyList';
-import { aroundAt } from '../utils/utils';
+import { aroundAt } from '@/utils/utils';
 import DataType from '../data/DataType';
 import ContextMenu from '../ui/ContextMenu';
 

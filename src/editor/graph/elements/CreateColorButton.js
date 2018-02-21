@@ -1,6 +1,6 @@
 import ElementControlButton from './ElementControlButton';
 import BucketIcon from '@/assets/paint-bucket.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 import DataType from '../../data/DataType';
 
 export default class extends ElementControlButton

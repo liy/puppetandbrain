@@ -1,8 +1,8 @@
 import './FileButton.scss';
 import Gadget from './Gadget'
-import { svgElement, getMimeType } from '../../utils/utils';
+import { svgElement, getMimeType } from '@/utils/utils';
 import CloudIcon from '@/assets/cloud-icon.svg';
-import FileHashTask from '../../utils/FileHashTask'
+import FileHashTask from '@/utils/FileHashTask'
 
 export default class extends Gadget
 {

@@ -1,6 +1,6 @@
 import './PanelSeperator.scss'
 import SeperatorIcon from '@/assets/panel-seperator.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 
 export default class
 {

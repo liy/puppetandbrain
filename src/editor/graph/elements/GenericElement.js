@@ -2,7 +2,7 @@ import VariableElement from './VariableElement';
 import InputField from '../gadgets/InputField';
 
 import DotIcon from '@/assets/dot.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 import DataType from '../../data/DataType';
 
 export default class extends VariableElement

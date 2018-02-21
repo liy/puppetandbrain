@@ -2,7 +2,7 @@ import './blocks/color-theme.scss';
 import './BrainGraph.scss';
 
 import GraphSelection from './GraphSelection';
-import ArrayMap from '../utils/ArrayMap';
+import ArrayMap from '@/utils/ArrayMap';
 import BlockBrowser from '../browser/BlockBrowser';
 import ElementController from './elements/ElementController';
 import ConnectHelper from './ConnectHelper';

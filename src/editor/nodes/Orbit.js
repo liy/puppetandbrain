@@ -1,4 +1,4 @@
-import {toRadian, toDegree, numericVector} from '../utils/utils';
+import {toRadian, toDegree, numericVector} from '@/utils/utils';
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 import Vec2 from '../math/Vec2';

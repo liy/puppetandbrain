@@ -2,7 +2,7 @@ import './ActionBlock.scss'
 import Block from "./Block";
 import AddOutputPin from '../support/AddOutputPin'
 import OutputPin from "../support/OutputPin";
-import { nextFrame } from '../../utils/utils';
+import { nextFrame } from '@/utils/utils';
 import DataType from '../../data/DataType'
 
 export default class ActionBlock extends Block

@@ -1,8 +1,8 @@
 import StartButtonIcon from '@/assets/play-button-icon.svg';
 import StopButtonIcon from '@/assets/stop-button-icon.svg';
-import {svgElement} from '../utils/utils';
+import {svgElement} from '@/utils/utils';
 import ControlButton from './ControlButton';
-import SoundEffect from '../SoundEffect';
+import SoundEffect from '@/SoundEffect';
 
 export default class DebugButton extends ControlButton
 {

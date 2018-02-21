@@ -1,7 +1,7 @@
 import Tutorial from './Tutorial';
-import ActorSelection from '../objects/ActorSelection';
+import ActorSelection from '@/editor/objects/ActorSelection';
 import TutorialBanner from './TutorialBanner';
-import { isMobile } from '../utils/utils';
+import { isMobile } from '@/utils/utils';
 
 class AnimatePuppet extends Tutorial
 {

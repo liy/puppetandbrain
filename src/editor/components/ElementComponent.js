@@ -1,7 +1,7 @@
 import './ElementComponent.scss'
 import Component from "./Component";
 import Matrix from '../math/Matrix';
-import { isMobile } from '../utils/utils';
+import { isMobile } from '@/utils/utils';
 
 const stageOverlayer = document.getElementById('stage-overlayer')
 

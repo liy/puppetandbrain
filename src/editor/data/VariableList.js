@@ -1,5 +1,5 @@
-import EventEmitter from "../utils/EventEmitter";
-import ArrayMap from "../utils/ArrayMap";
+import EventEmitter from "@/utils/EventEmitter";
+import ArrayMap from "@/utils/ArrayMap";
 import Variable from './Variable';
 import DataType from "./DataType";
 

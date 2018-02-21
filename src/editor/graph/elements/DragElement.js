@@ -2,8 +2,8 @@ import './DragElement.scss'
 import ElementController from './ElementController';
 import DataType from '../../data/DataType';
 import GraphSelection from '../GraphSelection';
-import SoundEffect from '../../SoundEffect';
-import { isMobile } from '../../utils/utils';
+import SoundEffect from '@/SoundEffect';
+import { isMobile } from '@/utils/utils';
 import ConfirmModal from '../../ui/ConfirmModal';
 
 export default class 

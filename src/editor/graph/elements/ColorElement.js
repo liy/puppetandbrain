@@ -1,6 +1,6 @@
 import VariableElement from './VariableElement';
 import BucketIcon from '@/assets/paint-bucket.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 
 import ColorButton from '../gadgets/ColorButton';
 import DataType from '../../data/DataType';

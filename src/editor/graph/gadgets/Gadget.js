@@ -1,5 +1,5 @@
 import './Gadget.scss'
-import EventEmitter from '../../utils/EventEmitter'
+import EventEmitter from '@/utils/EventEmitter'
 
 export default class Gadget extends EventEmitter
 {

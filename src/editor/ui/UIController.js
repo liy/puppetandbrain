@@ -4,7 +4,7 @@ import AddButton from './AddButton';
 import DebugButton from './DebugButton';
 import ModeButton from './ModeButton';
 import DeleteButton from './DeleteButton';
-import EventEmitter from '../utils/EventEmitter';
+import EventEmitter from '@/utils/EventEmitter';
 import ElementController from '../graph/elements/ElementController'
 import Menu from './Menu';
 

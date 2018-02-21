@@ -1,6 +1,6 @@
 import './PuppetBox.scss';
 import GridBox from './GridBox';
-import { svgElement } from '../utils/utils';
+import { svgElement } from '@/utils/utils';
 
 import Logo from '@/assets/logo.svg';
 

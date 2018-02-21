@@ -1,6 +1,3 @@
-import '@/assets/favicon-192.png';
-import '@/manifest.json';
-import '@/main.scss'
 import './ui/Tooltip.scss'
 
 import 'whatwg-fetch';
@@ -23,4 +20,6 @@ import './Activity';
 
 import ActorSelection from './objects/ActorSelection';
 import notc from './ui/NotificationControl';
-import API from './API';
+
+
+window.ActorSelection = ActorSelection;

@@ -1,8 +1,8 @@
 import './ContextMenu.scss';
-import { aroundAt } from '../utils/utils';
+import { aroundAt } from '@/utils/utils';
 import ActorSelection from '../objects/ActorSelection';
 import GraphSelection from '../graph/GraphSelection'
-import API from '../API';
+import API from '@/API';
 import Command from '../commands/Command';
 import InputModal from './InputModal';
 import NotificationControl from './NotificationControl';

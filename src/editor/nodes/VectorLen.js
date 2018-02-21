@@ -1,5 +1,5 @@
 import Node from "./Node";
-import {toDegree} from '../utils/utils'
+import {toDegree} from '@/utils/utils'
 import DataType from '../data/DataType';
 
 NodeTemplate.VectorLen = {

@@ -1,8 +1,8 @@
 import './AddOutputPin.scss';
 import TextField from '../gadgets/TextField';
 import PlusIcon from '@/assets/plus.svg';
-import {svgElement} from '../../utils/utils'
-import EventEmitter from '../../utils/EventEmitter';
+import {svgElement} from '@/utils/utils'
+import EventEmitter from '@/utils/EventEmitter';
 
 export default class extends EventEmitter
 {

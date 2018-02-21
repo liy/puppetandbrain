@@ -3,7 +3,7 @@ import VariableElement from './VariableElement';
 import ListEntry from './ListEntry';
 import ListIcon from '@/assets/list-icon.svg';
 import AddIcon from '@/assets/plus.svg'
-import { svgElement, nextFrame } from '../../utils/utils';
+import { svgElement, nextFrame } from '@/utils/utils';
 import DataType from '../../data/DataType';
 
 export default class extends VariableElement

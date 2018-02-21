@@ -1,6 +1,6 @@
 import Adaptor from "./Adaptor";
 import DataType from "../data/DataType";
-import {toRadian} from '../utils/utils'
+import {toRadian} from '@/utils/utils'
 
 NodeTemplate.Trigonometry = {
   className: 'Trigonometry',

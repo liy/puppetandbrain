@@ -1,8 +1,8 @@
 import ConnectHelper from "../ConnectHelper";
 import ExecutionSymbol from "./ExecutionSymbol";
-import {svgElement} from '../../utils/utils';
+import {svgElement} from '@/utils/utils';
 import ExecutionInIcon from '@/assets/execution-in.svg';
-import SoundEffect from '../../SoundEffect';
+import SoundEffect from '@/SoundEffect';
 
 export default class ExecutionInSymbol extends ExecutionSymbol
 {

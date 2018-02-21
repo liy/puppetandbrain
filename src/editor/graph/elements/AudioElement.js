@@ -1,7 +1,7 @@
 import VariableElement from './VariableElement';
 import DataType from '../../data/DataType';
 import SoundIcon from '@/assets/sound-icon.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 import AudioField from '../gadgets/AudioField'
 
 export default class extends VariableElement

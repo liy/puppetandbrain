@@ -6,7 +6,7 @@ import PuppetBox from './PuppetBox'
 import MyPuppetBox from './MyPuppetBox'
 import Browser from './Browser';
 
-import API from '../API';
+import API from '@/API';
 
 export default class extends Browser
 {

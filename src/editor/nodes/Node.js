@@ -1,7 +1,7 @@
 import InputList from "../data/InputList";
 import OutputList from "../data/OutputList";
 import Execution from "../edge/Execution";
-import EventEmitter from "../utils/EventEmitter";
+import EventEmitter from "@/utils/EventEmitter";
 
 export default class Node extends EventEmitter
 {

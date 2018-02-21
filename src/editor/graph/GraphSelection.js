@@ -1,10 +1,10 @@
 
 import ActorSelection from '../objects/ActorSelection'
-import EventEmitter from '../utils/EventEmitter';
+import EventEmitter from '@/utils/EventEmitter';
 import ElementController from './elements/ElementController';
 import Block from './blocks/Block'
 import ConfirmModal from '../ui/ConfirmModal';
-import SoundEffect from '../SoundEffect';
+import SoundEffect from '@/SoundEffect';
 
 class GraphSelection extends EventEmitter
 {

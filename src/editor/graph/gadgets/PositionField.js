@@ -3,7 +3,7 @@ import InputField from "./InputField";
 import Vec2Field from './Vec2Field';
 
 import PipetteIcon from '@/assets/pipette.svg'; 
-import {svgElement} from '../../utils/utils';
+import {svgElement} from '@/utils/utils';
 
 export default class extends Vec2Field
 {

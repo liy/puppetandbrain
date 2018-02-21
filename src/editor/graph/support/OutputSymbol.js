@@ -1,10 +1,10 @@
 import DataSymbol from "./DataSymbol";
 import ConnectHelper from '../ConnectHelper';
 import OutputIcon from '@/assets/output.svg';
-import {svgElement} from '../../utils/utils';
+import {svgElement} from '@/utils/utils';
 import DataColor from "../../data/DataColor";
 import DataType from "../../data/DataType";
-import SoundEffect from '../../SoundEffect';
+import SoundEffect from '@/SoundEffect';
 
 export default class OutputSymbol extends DataSymbol
 {

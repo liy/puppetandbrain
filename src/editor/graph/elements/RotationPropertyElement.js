@@ -1,6 +1,6 @@
 import PropertyElement from './PropertyElement';
 import RotationIcon from '@/assets/rotation-icon.svg';
-import { svgElement, toDegree, toRadian } from '../../utils/utils';
+import { svgElement, toDegree, toRadian } from '@/utils/utils';
 import RangeField from '../gadgets/RangeField';
 import IconStore from '../../ui/IconStore';
 

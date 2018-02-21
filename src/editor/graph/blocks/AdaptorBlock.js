@@ -2,8 +2,8 @@ import './AdaptorBlock.scss'
 import Block from "./Block";
 import SelectorIcon from '@/assets/adaptor-selector-arrow.svg'
 import TickIcon from '@/assets/adaptor-selector-tick.svg'
-import { svgElement, everyframe } from '../../utils/utils';
-import ArrayMap from '../../utils/ArrayMap';
+import { svgElement, everyframe } from '@/utils/utils';
+import ArrayMap from '@/utils/ArrayMap';
 
 // has extra dropdown on title to allow swapping to similar nodes
 export default class AdaptorBlock extends Block

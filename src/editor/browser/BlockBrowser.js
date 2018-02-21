@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js'
 
 import Browser from "./Browser";
-import ArrayMap from "../utils/ArrayMap";
+import ArrayMap from "@/utils/ArrayMap";
 import GroupSection from "./GroupSection";
 import DataType from '../data/DataType';
 import BlockBox from './BlockBox';

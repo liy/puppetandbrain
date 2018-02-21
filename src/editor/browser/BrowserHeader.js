@@ -1,6 +1,6 @@
 import './BrowserHeader.scss';
 
-import { svgElement } from "../utils/utils";
+import { svgElement } from "@/utils/utils";
 import CloseButton from '@/assets/big-cross.svg';
 import MenuButton from '@/assets/menu-icon.svg';
 

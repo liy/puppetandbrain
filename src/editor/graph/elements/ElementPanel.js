@@ -7,7 +7,7 @@ import CreatePositionButton from './CreatePositionButton';
 import CreateColorButton from './CreateColorButton';
 import CreateActorButton from './CreateActorButton';
 import CreateAudioButton from './CreateAudioButton';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 
 import PullIcon from '@/assets/pull-icon.svg';
 import CreateImageButton from './CreateImageButton';

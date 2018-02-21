@@ -1,6 +1,6 @@
 import PropertyElement from './PropertyElement';
 import DotIcon from '@/assets/dot.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 import * as GadgetClasses from '../gadgets';
 
 export default class extends PropertyElement

@@ -1,6 +1,6 @@
 import './MyPuppetBox.scss';
 import PuppetBox from './PuppetBox'
-import { svgElement } from '../utils/utils';
+import { svgElement } from '@/utils/utils';
 import BinIcon from '@/assets/bin.svg';
 import ConfirmModal from '../ui/ConfirmModal';
 

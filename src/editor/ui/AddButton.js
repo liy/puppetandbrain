@@ -1,9 +1,9 @@
 import AddButtonIcon from '@/assets/add-button-icon.svg';
-import {svgElement} from '../utils/utils';
+import {svgElement} from '@/utils/utils';
 import PuppetBrowser from '../browser/PuppetBrowser';
 import ControlButton from './ControlButton';
 import BlockBrowser from '../browser/BlockBrowser';
-import SoundEffect from '../SoundEffect';
+import SoundEffect from '@/SoundEffect';
 
 export default class extends ControlButton
 {

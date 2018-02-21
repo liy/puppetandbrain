@@ -1,7 +1,7 @@
 import ElementControlButton from './ElementControlButton';
 import SoundIcon from '@/assets/sound-icon.svg';
 import DataType from '../../data/DataType';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 
 export default class extends ElementControlButton
 {

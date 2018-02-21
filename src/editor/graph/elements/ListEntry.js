@@ -2,8 +2,8 @@ import './Entry.scss';
 import InputField from '../gadgets/InputField';
 
 import CrossIcon from '@/assets/cross.svg';
-import { svgElement } from '../../utils/utils';
-import EventEmitter from '../../utils/EventEmitter';
+import { svgElement } from '@/utils/utils';
+import EventEmitter from '@/utils/EventEmitter';
 
 export default class extends EventEmitter
 {

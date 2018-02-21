@@ -1,5 +1,5 @@
 import Pointer from './Pointer';
-import ArrayMap from '../utils/ArrayMap';
+import ArrayMap from '@/utils/ArrayMap';
 
 export default class InputList extends ArrayMap
 {

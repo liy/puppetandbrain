@@ -1,7 +1,7 @@
 import Adaptor from './Adaptor';
 import DataType from '../data/DataType';
 import Vec2 from '../math/Vec2';
-import { numericVector } from '../utils/utils';
+import { numericVector } from '@/utils/utils';
 
 NodeTemplate.VectorArithmetic = {
   className: 'VectorArithmetic',

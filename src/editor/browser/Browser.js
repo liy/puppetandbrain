@@ -2,7 +2,7 @@ import FilterSection from './FilterSection';
 import SearchField from './SearchField';
 import BrowserHeader from "./BrowserHeader";
 import ContentSection from "./ContentSection";
-import EventEmitter from '../utils/EventEmitter';
+import EventEmitter from '@/utils/EventEmitter';
 require('./Browser.scss')
 
 export default class Browser extends EventEmitter

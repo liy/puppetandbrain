@@ -1,4 +1,4 @@
-import EventEmitter from "../utils/EventEmitter";
+import EventEmitter from "@/utils/EventEmitter";
 import Vec2 from '../math/Vec2'
 
 export default class extends EventEmitter

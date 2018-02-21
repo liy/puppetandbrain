@@ -5,7 +5,7 @@ import BucketIcon from '@/assets/paint-bucket.svg';
 import ListIcon from '@/assets/list-icon.svg';
 import DictionaryIcon from '@/assets/dictionary-icon.svg';
 import DotIcon from '@/assets/dot.svg';
-import { svgElement } from '../utils/utils';
+import { svgElement } from '@/utils/utils';
 
 const NAMES = {
   GENERIC: 'generic',

@@ -4,7 +4,7 @@ import Gadget from "./Gadget";
 import TextField from "./TextField";
 
 import PipetteIcon from '@/assets/pipette.svg'; 
-import {svgElement} from '../../utils/utils';
+import {svgElement} from '@/utils/utils';
 import ActorSelection from '../../objects/ActorSelection';
 
 export default class extends Gadget

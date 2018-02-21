@@ -1,5 +1,5 @@
 import DataType from "../../data/DataType";
-import ArrayMap from "../../utils/ArrayMap";
+import ArrayMap from "@/utils/ArrayMap";
 import ElementPanel from './ElementPanel';
 
 import PositionPropertyElement from './PositionPropertyElement';
@@ -16,7 +16,7 @@ import PositionElement from './PositionElement';
 import ColorElement from './ColorElement';
 import ActorElement from './ActorElement';
 import AudioElement from './AudioElement';
-import { nextFrame, svgElement } from "../../utils/utils";
+import { nextFrame, svgElement } from "@/utils/utils";
 import GraphSelection from "../GraphSelection";
 import ImagePropertyElement from "./ImagePropertyElement";
 import ImageElement from "./ImageElement";

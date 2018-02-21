@@ -1,5 +1,5 @@
 import './SearchField.scss';
-import { svgElement } from '../utils/utils';
+import { svgElement } from '@/utils/utils';
 import SearchIcon from '@/assets/search-icon.svg';
 
 export default class

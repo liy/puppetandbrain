@@ -1,11 +1,11 @@
 import './MapEntry.scss'
 
-import EventEmitter from "../../utils/EventEmitter";
+import EventEmitter from "@/utils/EventEmitter";
 import InputField from '../gadgets/InputField';
 import TextField from '../gadgets/TextField';
 
 import CrossIcon from '@/assets/cross.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 import DataType from '../../data/DataType';
 
 export default class extends EventEmitter

@@ -1,7 +1,7 @@
 import './Vec2Field.scss';
 import InputField from "./InputField";
 import Gadget from './Gadget';
-import { numericVector } from '../../utils/utils';
+import { numericVector } from '@/utils/utils';
 
 export default class extends Gadget
 {

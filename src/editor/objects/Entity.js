@@ -1,4 +1,4 @@
-import ArrayMap from "../utils/ArrayMap";
+import ArrayMap from "@/utils/ArrayMap";
 
 export default class Entity
 {

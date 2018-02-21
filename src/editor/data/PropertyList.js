@@ -1,4 +1,4 @@
-import ArrayMap from "../utils/ArrayMap";
+import ArrayMap from "@/utils/ArrayMap";
 import DataType from "./DataType";
 import Property from "./Property";
 

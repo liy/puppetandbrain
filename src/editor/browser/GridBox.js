@@ -1,5 +1,5 @@
 import './GridBox.scss';
-import EventEmitter from "../utils/EventEmitter";
+import EventEmitter from "@/utils/EventEmitter";
 
 export default class extends EventEmitter
 {

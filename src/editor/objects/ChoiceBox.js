@@ -11,7 +11,7 @@ import Vec2 from '../math/Vec2';
 import Matrix from '../math/Matrix';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import { LoaderBucket } from '../resources/Resource';
-import { getMimeType } from '../utils/utils';
+import { getMimeType } from '@/utils/utils';
 
 export default class ChoiceBox extends Actor
 {

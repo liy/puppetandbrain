@@ -1,5 +1,5 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
-import EventEmitter from "../../utils/EventEmitter";
+import EventEmitter from "@/utils/EventEmitter";
 
 NodeTemplate.MouseEvent = {
   ...ParentTemplate,

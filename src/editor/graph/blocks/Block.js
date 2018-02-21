@@ -1,15 +1,15 @@
 import './Block.scss'
 import BlockBody from '../support/BlockBody';
-import ArrayMap from '../../utils/ArrayMap';
+import ArrayMap from '@/utils/ArrayMap';
 import OutputPin from '../support/OutputPin';
 import InputPin from '../support/InputPin';
 import ExecutionInPin from '../support/ExecutionInPin';
 import ExecutionOutPin from '../support/ExecutionOutPin';
 import GraphSelection from '../GraphSelection';
-import EventEmitter from '../../utils/EventEmitter';
+import EventEmitter from '@/utils/EventEmitter';
 import DataType from '../../data/DataType';
-import SoundEffect from '../../SoundEffect';
-import { isMobile } from '../../utils/utils';
+import SoundEffect from '@/SoundEffect';
+import { isMobile } from '@/utils/utils';
 
 export default class Block extends EventEmitter
 {

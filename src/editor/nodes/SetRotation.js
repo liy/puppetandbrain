@@ -1,4 +1,4 @@
-import {toRadian} from '../utils/utils';
+import {toRadian} from '@/utils/utils';
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 

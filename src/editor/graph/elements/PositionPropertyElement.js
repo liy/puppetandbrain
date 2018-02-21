@@ -1,7 +1,7 @@
 import './PropertyElement.scss'
 import PropertyElement from './PropertyElement'
 import PositionIcon from '@/assets/position-icon.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 import PositionField from '../gadgets/PositionField';
 import IconStore from '../../ui/IconStore';
 

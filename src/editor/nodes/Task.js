@@ -1,7 +1,7 @@
 import Execution from '../edge/Execution'
 import Enter from '../edge/Enter'
 import Node from './Node';
-import ArrayMap from '../utils/ArrayMap';
+import ArrayMap from '@/utils/ArrayMap';
 
 export const Template = {
   enter: {

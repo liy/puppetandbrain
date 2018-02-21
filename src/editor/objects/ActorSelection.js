@@ -1,4 +1,4 @@
-import EventEmitter from "../utils/EventEmitter";
+import EventEmitter from "@/utils/EventEmitter";
 
 // TODO: to be simplified
 /**

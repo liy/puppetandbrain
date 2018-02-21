@@ -1,6 +1,6 @@
 import PropertyElement from './PropertyElement';
 import SizeIcon from '@/assets/size-icon.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 import RangeField from '../gadgets/RangeField';
 import IconStore from '../../ui/IconStore';
 

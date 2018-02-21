@@ -2,8 +2,8 @@ import './ConnectHelper.scss'
 
 import AutoConnect from './AutoConnect';
 import BlockBrowser from '../browser/BlockBrowser';
-import SoundEffect from '../SoundEffect';
-import { isMobile } from '../utils/utils';
+import SoundEffect from '@/SoundEffect';
+import { isMobile } from '@/utils/utils';
 
 class ConnectHelper
 {

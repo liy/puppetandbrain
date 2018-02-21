@@ -2,7 +2,7 @@ import VariableElement from './VariableElement';
 import Toggle from '../gadgets/Toggle';
 
 import BooleanIcon from '@/assets/boolean-icon.svg';
-import { svgElement } from '../../utils/utils';
+import { svgElement } from '@/utils/utils';
 import DataType from '../../data/DataType';
 
 export default class extends VariableElement

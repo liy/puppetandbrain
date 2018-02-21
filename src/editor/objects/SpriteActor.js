@@ -3,7 +3,7 @@ import Actor from './Actor';
 import SpriteComponet from '../components/SpriteComponent';
 import DataType from '../data/DataType';
 import ImageLoader from '../resources/ImageLoader';
-import { aroundAt, getMimeType } from '../utils/utils';
+import { aroundAt, getMimeType } from '@/utils/utils';
 import Vec2 from '../math/Vec2';
 import { LoaderBucket } from '../resources/Resource';
 

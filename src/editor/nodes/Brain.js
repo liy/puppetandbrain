@@ -1,4 +1,4 @@
-import ArrayMap from '../utils/ArrayMap';
+import ArrayMap from '@/utils/ArrayMap';
 import Task from './Task';
 import VariableList from '../data/VariableList';
 import Variable from '../data/Variable';

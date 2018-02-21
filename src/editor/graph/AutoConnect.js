@@ -1,4 +1,4 @@
-import SoundEffect from '../SoundEffect';
+import SoundEffect from '@/SoundEffect';
 
 export default 
 {

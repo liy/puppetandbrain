@@ -1,4 +1,4 @@
-import { ContentType } from "../utils/utils";
+import { ContentType } from "@/utils/utils";
 import JsonLoader from './JsonLoader';
 import TextLoader from './TextLoader';
 import ImageLoader from './ImageLoader';

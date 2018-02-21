@@ -1,9 +1,9 @@
 import './ExecutionOutSymbol.scss'
 import ConnectHelper from "../ConnectHelper";
 import ExecutionSymbol from "./ExecutionSymbol";
-import {svgElement} from '../../utils/utils';
+import {svgElement} from '@/utils/utils';
 import ExecutionOutIcon from '@/assets/execution-out.svg';
-import SoundEffect from '../../SoundEffect';
+import SoundEffect from '@/SoundEffect';
 
 export default class ExecutionOutSymbol extends ExecutionSymbol
 {

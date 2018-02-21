@@ -2,7 +2,7 @@ import Actor from './Actor';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import SpineComponent from '../components/SpineComponent';
 import {LoaderBucket, Resource} from '../resources/Resource';
-import { aroundAt } from '../utils/utils';
+import { aroundAt } from '@/utils/utils';
 import Vec2 from '../math/Vec2';
 
 export default class SpineActor extends Actor
