@@ -194,10 +194,6 @@ function signedIn(user) {
     //   return;
     // }
 
-    // var spriteActor = new SpriteActor();
-    // spriteActor.init();
-    // Editor.stage.addActor(spriteActor);
-
     Activity.new();
     UIController.addBtn.enabled = true;
   })
@@ -231,10 +227,9 @@ firebase.auth().onAuthStateChanged(user => {
   // sign in
   if(user) {
     signedIn(user);
-    // LookUp.user = user;
   }
   // sign out
   else {
-    // LookUp.user = null;
+    
   }
 })
