@@ -1,6 +1,6 @@
 import './TutorialBanner.scss';
 import { svgElement } from '../utils/utils';
-import HandIcon from '../assets/hand-pointer.svg';
+import HandIcon from '@/assets/hand-pointer.svg';
 import SoundEffect from '../SoundEffect';
 
 export default class 

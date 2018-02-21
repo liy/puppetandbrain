@@ -1,5 +1,5 @@
 import './Cursor.scss'
-import rippleStr from '!raw-loader!../assets/ripple.svg'
+import rippleStr from '!raw-loader!@/assets/ripple.svg'
 import pointerStr from '!raw-loader!./tutorial-pointer.svg'
 
 export default class Cursor
