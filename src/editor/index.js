@@ -21,7 +21,6 @@ import './ui/UIController';
 import './resources/Resource';
 import './Activity';
 
-// import ChoiceBox from '@/objects/ChoiceBox'
 import ActorSelection from './objects/ActorSelection';
 import notc from './ui/NotificationControl';
 import API from './API';
