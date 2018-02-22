@@ -152,7 +152,6 @@ import './manifest.json';
 
 import API from './API';
 window.API = API;
-// import './editor'
 
 document.getElementById('app-version').textContent = APP_VERSION;
 
@@ -167,14 +166,13 @@ document.addEventListener('contextmenu', e => {
 
 firebase.initializeApp(FIREBASE_CONFIG);
 
-function signedIn(user) {
+async function signedIn(user) {
   console.log('signed in')
   window.CurrentUser = user;
-  // UIController.stageMode();
 
   // activity
   router.get('/creations/:id', async req => {
-    import('./editor')
+    await import('./editor')
 
     let chip = notc.notify('loading, please wait...');
     await Activity.load(req.params.id);
@@ -185,20 +183,23 @@ function signedIn(user) {
   // dynamically load tutorials
   router.get('/tutorials/:tutorial', async req => {
     await import('./editor')
+    
     UIController.addBtn.enabled = true;
 
     const tutorial = (await import(`./tutorials/${req.params.tutorial}`)).default;
     tutorial.start();
   })
 
-  router.get('/', req => {
+  router.get('/', async req => {
+    await import('./editor')
+    UIController.stageMode();
     // if(!window.localStorage.getItem('animate-a-puppet')) {
     //   router.navigate(`/tutorials/animate-a-puppet`);
     //   return;
     // }
 
-    // Activity.new();
-    // UIController.addBtn.enabled = true;
+    Activity.new();
+    UIController.addBtn.enabled = true;
   })
 
   router.get('/about', (req, e) => {

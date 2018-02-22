@@ -1,18 +1,19 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-// const OfflinePlugin = require('offline-plugin');
-
+const OfflinePlugin = require('offline-plugin');
+ 
 
 module.exports = {
   // entry: ['whatwg-fetch', path.join(__dirname, 'src', 'main.js')],
   entry: {
     'whatwg-fetch': 'whatwg-fetch',
     rusha: 'rusha',
-    // editor: path.resolve(__dirname, 'src/editor/index.js'),
-    main: path.join(__dirname, 'src', 'main.js'),
+    app: path.join(__dirname, 'src', 'main.js')
   },
   output: {
     // this make sure all the assets to be accessed from root, ie bundle.js be injected by HtmlWebpackPlugin
@@ -71,15 +72,31 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'game',
       filename: 'index.html',
       inject: 'body',
       template: './src/index.html'
     }),
+    new UglifyJSPlugin({
+      // do not minify rusha, which is web worker.
+      // it cause problem when it is uglified.
+      exclude: [/rusha/],
+      uglifyOptions: {
+        sourceMap: false,
+        mangle: {
+          keep_fnames: true,
+        },
+        // remove console
+        compress: {
+          drop_console: true
+        }
+      }
+    }),
     new webpack.DefinePlugin({
       APP_VERSION: JSON.stringify(require("./package.json").version),
-      'process.env.NODE_ENV': JSON.stringify('dev'),
+      'process.env.NODE_ENV': JSON.stringify('staging'),
       // staging
       FIREBASE_CONFIG: JSON.stringify({
         apiKey: "AIzaSyC760Njk0wan_MlFKoiHYawfSYy0CaeLUA",
@@ -95,8 +112,8 @@ module.exports = {
       name: ['whatwg-fetch', 'rusha'], // Specify the common bundle's name.
       minChunks: Infinity,
     }),
-    new BundleAnalyzerPlugin(),
     // new OfflinePlugin(),
+    new BundleAnalyzerPlugin()
   ],
   
   // Export full source map for debugging, maps to original source
