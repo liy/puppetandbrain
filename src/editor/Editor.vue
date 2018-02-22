@@ -1,13 +1,60 @@
-body {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+<template>
+  <div>
+    <div id='debug-trace'></div>
+    <div id='activity-id' title="Copy activity link, and share it!"></div>
+    <div id="editor">
+      <div id="stage">
+        <div id='stage-grid'></div>
+        <canvas id='canvas'></canvas>
+        <div id='stage-overlayer'></div>
+      </div>
 
-  margin:0; 
-  // background-color: #eeeeee;
-  background-color: #f5f5f5;
-  
-  // remove mobile selection hightlight
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+      <svg id='mask-container' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768">
+        <clipPath id="mask">
+          <circle id="mask-circle" class='' cx="512" cy="384" r="1024">
+          </circle>
+        </clipPath>
+      </svg>
+    </div>
+    <div id='graph'>
+      <div id='block-container' style="position:absolute; top:0; z-index:1;"></div>
+      <svg id='graph-svg' style="position:absolute; top:0" ></svg>
+    </div>
+    <div class='control-button tooltip-right' id='mode-button' data-title="Open puppet brain" data-title-position="right"></div>
+    <div id='control-panel'>
+      <div class='control-button' id='bin-button' data-title="Delete puppet"></div>
+      <div class='control-button' id='debug-button' data-title="Play game"></div>
+      <div class='control-button' id='add-actor-button' data-title="Add puppet"></div>
+    </div>
+    <span id='app-version'></span>
+    <div id='menu'>
+      <div id='menu-content' style="visibility: hidden;">
+        <div class='menu-arrow'></div>
+        <ul>
+          <li><a href='/'>Home</a></li>
+          <li><a href='/tutorials/animate-a-puppet'>Tutorials</a></li>
+          <li><a href='/about'>About</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Editor',
+  mounted() {
+    (async function() {
+      await import('pixi.js')
+      await import('@/API');
+      await import('./index')
+    }());
+  }
 }
+</script>
+
+<style lang='scss'>
+
 
 #editor {
   // disable text selection.(Input will override it)
@@ -216,3 +263,4 @@ body {
 
   pointer-events: none;
 }
+</style>

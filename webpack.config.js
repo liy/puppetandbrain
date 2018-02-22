@@ -24,6 +24,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
+      'vue$': 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, 'src'),
       // 'pixi.js': path.resolve(__dirname, 'node_modules/pixi.js/dist/pixi.min.js'),
       'rusha': path.resolve(__dirname, 'node_modules/rusha/dist/rusha.min.js'),
@@ -32,6 +33,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
       {
         test: /\.js?$/,
         loader: 'babel-loader',
