@@ -25,7 +25,10 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
+      'pixi.js': path.resolve(__dirname, 'node_modules/pixi.js/dist/pixi.min.js'),
+      'rusha': path.resolve(__dirname, 'node_modules/rusha/dist/rusha.min.js'),
+      'html2canvas': path.resolve(__dirname, 'node_modules/html2canvas/dist/html2canvas.min.js'),
     }
   },
   module: {
@@ -110,6 +113,9 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: ['whatwg-fetch', 'rusha'], // Specify the common bundle's name.
       minChunks: Infinity,
+    }),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 5,
     }),
     // new OfflinePlugin(),
   ],

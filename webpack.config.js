@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const OfflinePlugin = require('offline-plugin');
 
 
@@ -12,7 +11,7 @@ module.exports = {
     'whatwg-fetch': 'whatwg-fetch',
     rusha: 'rusha',
     // editor: path.resolve(__dirname, 'src/editor/index.js'),
-    main: path.join(__dirname, 'src', 'main.js'),
+    app: path.join(__dirname, 'src', 'main.js'),
   },
   output: {
     // this make sure all the assets to be accessed from root, ie bundle.js be injected by HtmlWebpackPlugin
@@ -25,7 +24,10 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
+      // 'pixi.js': path.resolve(__dirname, 'node_modules/pixi.js/dist/pixi.min.js'),
+      'rusha': path.resolve(__dirname, 'node_modules/rusha/dist/rusha.min.js'),
+      'html2canvas': path.resolve(__dirname, 'node_modules/html2canvas/dist/html2canvas.min.js'),
     }
   },
   module: {
@@ -33,6 +35,7 @@ module.exports = {
       {
         test: /\.js?$/,
         loader: 'babel-loader',
+        exclude: /node_modules/,
         include: [
           path.join(__dirname, 'src')
         ],
@@ -95,7 +98,9 @@ module.exports = {
       name: ['whatwg-fetch', 'rusha'], // Specify the common bundle's name.
       minChunks: Infinity,
     }),
-    new BundleAnalyzerPlugin(),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 5,
+    }),
     // new OfflinePlugin(),
   ],
   
