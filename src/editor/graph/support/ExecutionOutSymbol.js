@@ -41,7 +41,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
       SoundEffect.play('link');
-      History.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.startSymbol.node.id).processAndSave());
+      EditorHistory.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.startSymbol.node.id).processAndSave());
     }
     ConnectHelper.stop(e);
   }
@@ -49,7 +49,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
   touchDown(e) {
     if(this.canConnect(ConnectHelper.selectedSymbol)) {
       SoundEffect.play('link')
-      History.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.selectedSymbol.node.id).processAndSave());
+      EditorHistory.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.selectedSymbol.node.id).processAndSave());
       
       // once a valid connection is made, deselect the sybmosl
       ConnectHelper.stop()
@@ -68,7 +68,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
 
   onContextMenu(e) {
     super.onContextMenu(e)
-    History.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
+    EditorHistory.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
     
     // Hold the symbol to break the link
     ConnectHelper.stop();

@@ -54,7 +54,7 @@ class ActorSelection extends EventEmitter
 
   delete() {
     if(this.selected[0]) {
-      History.push(Commander.create('DeleteActor', this.selected[0].id).processAndSave());
+      EditorHistory.push(Commander.create('DeleteActor', this.selected[0].id).processAndSave());
     }
   }
 }

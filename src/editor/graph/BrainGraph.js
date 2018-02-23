@@ -233,7 +233,7 @@ class BrainGraph
     if(e.keyCode == 27) {
       e.preventDefault();
       e.stopImmediatePropagation();
-      History.push(Commander.create('CloseGraph', this.brain.id).process());
+      EditorHistory.push(Commander.create('CloseGraph', this.brain.id).process());
     }
   }
 
@@ -352,7 +352,7 @@ class BrainGraph
       if(blockPod) {
         blockPod.x = blockPod.x || (e.changedTouches ? e.changedTouches[0].clientX : e.clientX);
         blockPod.y = blockPod.y || (e.changedTouches ? e.changedTouches[0].clientY : e.clientY);
-        History.push(Commander.create('CreateBlock', blockPod, this.brain.owner.id).processAndSave());
+        EditorHistory.push(Commander.create('CreateBlock', blockPod, this.brain.owner.id).processAndSave());
       }
     }
   }

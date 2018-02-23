@@ -36,7 +36,7 @@ export default class OutputSymbol extends DataSymbol
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
       SoundEffect.play('link');
-      History.push(Commander.create('CreateDataLink', ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name, 
+      EditorHistory.push(Commander.create('CreateDataLink', ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name, 
         this.node.id, this.name).processAndSave());
     }
     ConnectHelper.stop(e);
@@ -45,7 +45,7 @@ export default class OutputSymbol extends DataSymbol
   touchDown(e) {
     if(this.canConnect(ConnectHelper.selectedSymbol)) {
       SoundEffect.play('link');
-      History.push(Commander.create('CreateDataLink', ConnectHelper.selectedSymbol.node.id, ConnectHelper.selectedSymbol.name, 
+      EditorHistory.push(Commander.create('CreateDataLink', ConnectHelper.selectedSymbol.node.id, ConnectHelper.selectedSymbol.name, 
         this.node.id, this.name).processAndSave());
 
       // once a valid connection is made, deselect the sybmosl
@@ -56,7 +56,7 @@ export default class OutputSymbol extends DataSymbol
   
   onContextMenu(e) {
     super.onContextMenu(e);
-    History.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).processAndSave());
+    EditorHistory.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).processAndSave());
   }
 
   drawConnection() {

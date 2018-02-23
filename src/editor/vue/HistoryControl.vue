@@ -3,12 +3,12 @@
   <svg id='blob' width=164 height=98>
     <use :xlink:href="`#${HistoryButtonBlob.id}`" :viewBox="HistoryButtonBlob.viewBox"/>
   </svg>
-  <div id='undo' data-title='Undo'>
+  <div id='undo' class='history-button' :class="{disabled: !canUndo()}" data-title='Undo' @click="undoClicked">
     <svg  width=78 height=78 >
       <use :xlink:href="`#${UndoButton.id}`" :viewBox="UndoButton.viewBox"/>
     </svg>
   </div>
-  <div id='redo' data-title='Redo'>
+  <div id='redo' class='history-button' :class="{disabled: !canRedo()}" data-title='Redo' @click="redoClicked">
     <svg width=55 height=55>
       <use :xlink:href="`#${RedoButton.id}`" :viewBox="RedoButton.viewBox"/>
     </svg>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import EditorHistory from '@/editor/commands/EditorHistory'
 import HistoryButtonBlob from '@/assets/history-button-blob.svg';
 import UndoButton from '@/assets/undo-button.svg';
 import RedoButton from '@/assets/redo-button.svg';
@@ -28,6 +29,26 @@ export default {
       HistoryButtonBlob,
       UndoButton,
       RedoButton
+    }
+  },
+  mounted() {
+    EditorHistory.on('history.updated', () => {
+      this.$forceUpdate()
+    })
+  },
+  methods: {
+    undoClicked() {
+      EditorHistory.undo();
+    },
+    redoClicked() {
+      EditorHistory.redo();
+    },
+    canUndo() {
+      console.log(EditorHistory.undos.length != 0)
+      return EditorHistory.undos.length != 0;
+    },
+    canRedo() {
+      return EditorHistory.redos.length != 0;
     }
   }
 }
@@ -51,6 +72,18 @@ export default {
   left: 129px;
   top: 49px;
   transform: translate(-50%, -50%);
+}
+
+.history-button {
+  opacity: 1;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.history-button.disabled {
+  opacity: 0.2;
+  cursor: default;
+  pointer-events: none;
 }
 
 </style>

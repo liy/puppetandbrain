@@ -8,7 +8,7 @@ import './LookUp'
 import './nodes/NodeFactory'
 import './objects/ActorFactory'
 import './graph/BlockFactory'
-import './commands/History'
+import './commands/EditorHistory'
 import './commands/Commander'
 import './graph/BrainGraph'
 

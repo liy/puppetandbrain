@@ -1,24 +1,22 @@
-class History
+import EventEmitter from '@/utils/EventEmitter';
+
+class History extends EventEmitter
 {
   constructor() {
+    super();
+
     this.undos = [];
     this.redos = [];
     this.keydown = this.keydown.bind(this);
     document.addEventListener('keydown', this.keydown);
-    
-    this.undoBtn = document.getElementById('undo');
-    this.redoBtn = document.getElementById('redo');
 
-    this.undo = this.undo.bind(this);
-    this.redo = this.redo.bind(this);
-    this.undoBtn.addEventListener('click', this.undo)
-    this.redoBtn.addEventListener('click', this.redo)
     this.updateButton()
     
     this.enabled = true;
   }
 
   destroy() {
+    super.destroy();
     this.undos = null;
     this.redos = null;
     document.body.removeChild(this.panel.element);
@@ -81,28 +79,9 @@ class History
   }
 
   updateButton() {
-    if(this.undos.length == 0) {
-      this.undoBtn.style.opacity = 0.2;
-      this.undoBtn.style.cursor = 'default'
-      this.undoBtn.style.pointerEvents = 'none';
-    }
-    else {
-      this.undoBtn.style.opacity = 1;
-      this.undoBtn.style.cursor = 'pointer'
-      this.undoBtn.style.pointerEvents = 'auto';
-    }
-
-    if(this.redos.length == 0) {
-      this.redoBtn.style.opacity = 0.2;
-      this.redoBtn.style.cursor = 'default'
-      this.redoBtn.style.pointerEvents = 'none';
-    }
-    else {
-      this.redoBtn.style.opacity = 1;
-      this.redoBtn.style.cursor = 'pointer'
-      this.redoBtn.style.pointerEvents = 'auto';
-    }
+    this.emit('history.updated')
   }
 }
 
-window.History = new History();
+window.EditorHistory = new History();
+export default EditorHistory; 

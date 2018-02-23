@@ -22,7 +22,7 @@ export default class extends ControlButton
       SoundEffect.play('click');
 
       let brain = ActorSelection.selected[0].brain;
-      History.push(Commander.create('OpenGraph', brain.id).process());
+      EditorHistory.push(Commander.create('OpenGraph', brain.id).process());
     })
 
     this.stageBtn.addEventListener('mousedown', e => {
@@ -30,7 +30,7 @@ export default class extends ControlButton
 
       SoundEffect.play('click');
 
-      History.push(Commander.create('CloseGraph', BrainGraph.brain.id).process());
+      EditorHistory.push(Commander.create('CloseGraph', BrainGraph.brain.id).process());
     })
   }
 

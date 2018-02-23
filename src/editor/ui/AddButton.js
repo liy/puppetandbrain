@@ -26,7 +26,7 @@ export default class extends ControlButton
       else {
         let browser = new BlockBrowser();
         let pod = await browser.open();
-        if(pod) History.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
+        if(pod) EditorHistory.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
       }
     })
   }

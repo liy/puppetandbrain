@@ -60,7 +60,7 @@ class ConnectHelper
       blockPod.x = x;
       blockPod.y = y;
       let command = Commander.create('CreateBlock', blockPod, BrainGraph.brain.owner.id).processAndSave();
-      History.push(command);
+      EditorHistory.push(command);
       AutoConnect.process(this.startSymbol, command.getCreatedNode());
     }
   }

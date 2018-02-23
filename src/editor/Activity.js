@@ -125,7 +125,7 @@ window.Activity = {
     // TODO: clear resources necessary??
     Resource.clear();
 
-    History.clear();
+    EditorHistory.clear();
     Editor.stage.clear();
     LookUp.clear();
   },

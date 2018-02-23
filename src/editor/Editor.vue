@@ -61,7 +61,7 @@ export default {
   beforeDestroy() {
     // clear everything...
     Activity.clear();
-    History.destroy();
+    EditorHistory.destroy();
     NotificationControl.destroy();
   }
 }
