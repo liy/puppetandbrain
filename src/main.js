@@ -4,7 +4,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import Button from './vueComponents/Button.vue';
+
 Vue.config.productionTip = false
+
+Vue.component('app-button', Button);
 
 /* eslint-disable no-new */
 new Vue({
@@ -13,3 +17,4 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+

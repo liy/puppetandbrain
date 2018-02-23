@@ -41,14 +41,51 @@
 </template>
 
 <script>
+firebase.initializeApp(FIREBASE_CONFIG);
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                .then(function() {
+                  return firebase.auth().signInAnonymously()
+                })
+                .catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.error(errorCode, errorMessage)
+                });
+
+firebase.auth().onAuthStateChanged(user => {
+  // sign in
+  if(user) {
+    window.CurrentUser = user;
+  }
+  // sign out
+  else {
+    
+  }
+})
+
 export default {
   name: 'Editor',
   mounted() {
-    (async function() {
+    (async () => {
       await import('pixi.js')
-      await import('@/API');
+      await import('@/API')
       await import('./index')
-    }());
+
+      UIController.stageMode();
+      UIController.addBtn.enabled = true;
+
+      let tutorialName = this.$route.params.tutorialName;
+      if(tutorialName) {
+        const tutorial = (await import(`@/tutorials/${tutorialName}`)).default;
+        tutorial.start();
+      }
+
+    })();
+  },
+  beforeDestroy() {
+    // clear everything...
+    Activity.clear();
   }
 }
 </script>

@@ -9,6 +9,8 @@ module.exports = {
   // entry: ['whatwg-fetch', path.join(__dirname, 'src', 'main.js')],
   entry: {
     'whatwg-fetch': 'whatwg-fetch',
+    'vue': 'vue',
+    'vue-router': 'vue-router',
     rusha: 'rusha',
     // editor: path.resolve(__dirname, 'src/editor/index.js'),
     app: path.join(__dirname, 'src', 'main.js'),
@@ -100,7 +102,7 @@ module.exports = {
     }),
     new SpriteLoaderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['whatwg-fetch', 'rusha'], // Specify the common bundle's name.
+      name: ['whatwg-fetch', 'vue', 'vue-router', 'rusha'], // Specify the common bundle's name.
       minChunks: Infinity,
     }),
     new webpack.optimize.LimitChunkCountPlugin({

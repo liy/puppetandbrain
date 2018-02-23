@@ -4,6 +4,7 @@ import SpineComponent from '../components/SpineComponent';
 import {LoaderBucket, Resource} from '../resources/Resource';
 import { aroundAt } from '@/utils/utils';
 import Vec2 from '../math/Vec2';
+import API from '../../API';
 
 export default class SpineActor extends Actor
 {
