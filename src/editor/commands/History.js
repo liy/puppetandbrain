@@ -5,7 +5,8 @@ class History
   constructor() {
     this.undos = [];
     this.redos = [];
-    document.addEventListener('keydown', this.keydown.bind(this));
+    this.keydown = this.keydown.bind(this);
+    document.addEventListener('keydown', this.keydown);
     
     this.panel = new HistoryPanel();
     document.body.appendChild(this.panel.element);
@@ -18,8 +19,14 @@ class History
     this.redoBtn.addEventListener('click', this.redo)
     this.updateButton()
     
-
     this.enabled = true;
+  }
+
+  destroy() {
+    this.undos = null;
+    this.redos = null;
+    document.body.removeChild(this.panel.element);
+    document.removeEventListener('keydown', this.keydown);
   }
 
   keydown(e) {

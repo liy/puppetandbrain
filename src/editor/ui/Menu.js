@@ -20,31 +20,6 @@ export default class
 
     this.close = this.close.bind(this)
     document.addEventListener('click', this.close);
-
-    // links
-    // let links = [{
-    //   name: 'Home',
-    //   path: '/'
-    // }, {
-    //   name: 'Tutorials',
-    //   path: '/tutorials/animate-a-puppet'
-    // }, {
-    //   name: 'About',
-    //   path: '/about'
-    // }]
-
-    // let list = document.createElement('ul');
-    // for(let link of links) {
-    //   let entry = document.createElement('li');
-    //   entry.textContent = link.name;
-    //   list.appendChild(entry);
-    //   entry.addEventListener('click', e => {
-    //     e.preventDefault();
-    //     this.toggle();
-    //     router.navigate(link.path);
-    //   })
-    // }
-    // this.content.appendChild(list);
   }
 
   toggle(e) {

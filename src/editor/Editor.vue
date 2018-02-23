@@ -1,98 +1,80 @@
 <template>
-  <div>
-    <div id='debug-trace'></div>
-    <div id='activity-id' title="Copy activity link, and share it!"></div>
-    <div id="editor">
-      <div id="stage">
-        <div id='stage-grid'></div>
-        <canvas id='canvas'></canvas>
-        <div id='stage-overlayer'></div>
-      </div>
+<div>
+  <div id='debug-trace'></div>
+  <div id='activity-id' title="Copy activity link, and share it!"></div>
+  <div id="editor">
+    <div id="stage">
+      <div id='stage-grid'></div>
+      <canvas id='canvas'></canvas>
+      <div id='stage-overlayer'></div>
+    </div>
 
-      <svg id='mask-container' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768">
-        <clipPath id="mask">
-          <circle id="mask-circle" class='' cx="512" cy="384" r="1024">
-          </circle>
-        </clipPath>
-      </svg>
-    </div>
-    <div id='graph'>
-      <div id='block-container' style="position:absolute; top:0; z-index:1;"></div>
-      <svg id='graph-svg' style="position:absolute; top:0" ></svg>
-    </div>
-    <div class='control-button tooltip-right' id='mode-button' data-title="Open puppet brain" data-title-position="right"></div>
-    <div id='control-panel'>
-      <div class='control-button' id='bin-button' data-title="Delete puppet"></div>
-      <div class='control-button' id='debug-button' data-title="Play game"></div>
-      <div class='control-button' id='add-actor-button' data-title="Add puppet"></div>
-    </div>
-    <span id='app-version'></span>
-    <div id='menu'>
-      <div id='menu-content' style="visibility: hidden;">
-        <div class='menu-arrow'></div>
-        <ul>
-          <li><a href='/'>Home</a></li>
-          <li><a href='/tutorials/animate-a-puppet'>Tutorials</a></li>
-          <li><a href='/about'>About</a></li>
-        </ul>
-      </div>
+    <svg id='mask-container' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768">
+      <clipPath id="mask">
+        <circle id="mask-circle" class='' cx="512" cy="384" r="1024">
+        </circle>
+      </clipPath>
+    </svg>
+  </div>
+  <div id='graph'>
+    <div id='block-container' style="position:absolute; top:0; z-index:1;"></div>
+    <svg id='graph-svg' style="position:absolute; top:0" ></svg>
+  </div>
+  <div class='control-button tooltip-right' id='mode-button' data-title="Open puppet brain" data-title-position="right"></div>
+  <div id='control-panel'>
+    <div class='control-button' id='bin-button' data-title="Delete puppet"></div>
+    <div class='control-button' id='debug-button' data-title="Play game"></div>
+    <div class='control-button' id='add-actor-button' data-title="Add puppet"></div>
+  </div>
+  <span id='app-version'></span>
+  <div id='menu'>
+    <div id='menu-content' style="visibility: hidden;">
+      <div class='menu-arrow'></div>
+      <ul>
+        <router-link to='/' tag='li'><a>Home</a></router-link>
+        <router-link to='/tutorials/animate-a-puppet' tag='li'><a>Tutorials</a></router-link>
+      </ul>
     </div>
   </div>
+</div>
 </template>
 
 <script>
-firebase.initializeApp(FIREBASE_CONFIG);
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-                .then(function() {
-                  return firebase.auth().signInAnonymously()
-                })
-                .catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.error(errorCode, errorMessage)
-                });
+import NotificationControl from './ui/NotificationControl';
 
-firebase.auth().onAuthStateChanged(user => {
-  // sign in
-  if(user) {
-    window.CurrentUser = user;
-  }
-  // sign out
-  else {
-    
-  }
-})
+var once = false;
 
 export default {
   name: 'Editor',
-  mounted() {
-    (async () => {
+  async mounted() {
+    if(!once) {
+      console.log(once)
       await import('pixi.js')
       await import('@/API')
       await import('./index')
+      once = true;
+    }
 
-      UIController.stageMode();
-      UIController.addBtn.enabled = true;
+    UIController.stageMode();
+    UIController.addBtn.enabled = true;
+    
 
-      let tutorialName = this.$route.params.tutorialName;
-      if(tutorialName) {
-        const tutorial = (await import(`@/tutorials/${tutorialName}`)).default;
-        tutorial.start();
-      }
-
-    })();
+    let tutorialName = this.$route.params.tutorialName;
+    if(tutorialName) {
+      const tutorial = (await import(`@/tutorials/${tutorialName}`)).default;
+      tutorial.start();
+    }
   },
   beforeDestroy() {
     // clear everything...
     Activity.clear();
+    History.destroy();
+    NotificationControl.destroy();
   }
 }
 </script>
 
-<style lang='scss'>
-
-
+<style lang="scss" scoped>
 #editor {
   // disable text selection.(Input will override it)
   user-select: none;

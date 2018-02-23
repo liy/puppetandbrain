@@ -10,6 +10,10 @@ class NotificationControl
     document.body.appendChild(this.element);
   }
 
+  destroy() {
+    document.body.removeChild(this.element);
+  }
+
   notify(text) {
     let chip = new NotificationChip(text);
     this.element.prepend(chip.element);

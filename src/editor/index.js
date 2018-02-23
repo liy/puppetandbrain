@@ -1,6 +1,5 @@
 import './ui/Tooltip.scss'
 
-import 'whatwg-fetch';
 import html2canvas from 'html2canvas';
 import 'pixi-spine';
 import './NodeTemplate';
