@@ -1,3 +1,17 @@
+<template>
+<div id='graph'>
+  <div id='block-container' style="position:absolute; top:0; z-index:1;"></div>
+  <svg id='graph-svg' style="position:absolute; top:0" ></svg>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'node-graph'
+}
+</script>
+
+<style lang="scss">
 #graph
 {
   position: absolute;
@@ -38,3 +52,4 @@
 //   height: 1px;
 //   background-color:rgb(255, 0, 0);
 // }
+</style>

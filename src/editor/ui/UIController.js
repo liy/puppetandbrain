@@ -1,5 +1,3 @@
-import './UIController.scss'
-
 import AddButton from './AddButton';
 import DebugButton from './DebugButton';
 import ModeButton from './ModeButton';
@@ -13,7 +11,7 @@ class UIController extends EventEmitter
   constructor() {
     super();
 
-    this.controlPanel = document.getElementById('control-panel');
+    this.toolbar = document.getElementById('stage-toolbar');
 
     this.addBtn = new AddButton(this);
     this.debugBtn = new DebugButton(this);
@@ -34,11 +32,11 @@ class UIController extends EventEmitter
 
   set controlShifted(v) {
     if(v) {
-      this.controlPanel.style.transform = `translateX(${-ElementController.panel.width}px)`
+      this.toolbar.style.transform = `translateX(${-ElementController.panel.width}px)`
       this.menu.element.style.transform = `translateX(${-ElementController.panel.width}px)`
     }
     else {
-      this.controlPanel.style.transform = `translateX(0)`
+      this.toolbar.style.transform = `translateX(0)`
       this.menu.element.style.transform = `translateX(0)`
     }
   }

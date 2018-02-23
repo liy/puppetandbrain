@@ -1,5 +1,4 @@
 import './blocks/color-theme.scss';
-import './BrainGraph.scss';
 
 import GraphSelection from './GraphSelection';
 import ArrayMap from '@/utils/ArrayMap';

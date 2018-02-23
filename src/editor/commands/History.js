@@ -1,5 +1,3 @@
-import HistoryPanel from '../ui/HistoryPanel';
-
 class History
 {
   constructor() {
@@ -8,10 +6,8 @@ class History
     this.keydown = this.keydown.bind(this);
     document.addEventListener('keydown', this.keydown);
     
-    this.panel = new HistoryPanel();
-    document.body.appendChild(this.panel.element);
-    this.undoBtn = this.panel.undoButton;
-    this.redoBtn = this.panel.redoButton;
+    this.undoBtn = document.getElementById('undo');
+    this.redoBtn = document.getElementById('redo');
 
     this.undo = this.undo.bind(this);
     this.redo = this.redo.bind(this);
@@ -88,19 +84,23 @@ class History
     if(this.undos.length == 0) {
       this.undoBtn.style.opacity = 0.2;
       this.undoBtn.style.cursor = 'default'
+      this.undoBtn.style.pointerEvents = 'none';
     }
     else {
       this.undoBtn.style.opacity = 1;
       this.undoBtn.style.cursor = 'pointer'
+      this.undoBtn.style.pointerEvents = 'auto';
     }
 
     if(this.redos.length == 0) {
       this.redoBtn.style.opacity = 0.2;
       this.redoBtn.style.cursor = 'default'
+      this.redoBtn.style.pointerEvents = 'none';
     }
     else {
       this.redoBtn.style.opacity = 1;
       this.redoBtn.style.cursor = 'pointer'
+      this.redoBtn.style.pointerEvents = 'auto';
     }
   }
 }

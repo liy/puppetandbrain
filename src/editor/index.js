@@ -11,6 +11,7 @@ import './graph/BlockFactory'
 import './commands/History'
 import './commands/Commander'
 import './graph/BrainGraph'
+
 import './Editor'
 import './ui/UIController';
 
