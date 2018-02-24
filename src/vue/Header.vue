@@ -19,7 +19,7 @@ export default {
   props: ['title'],
   computed: {
     showHeader() {
-      return this.$route.path != '/editor'
+      return this.$route.path == '/'
     }
   },
 

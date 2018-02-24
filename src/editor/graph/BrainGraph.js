@@ -7,7 +7,7 @@ import ElementController from './elements/ElementController';
 import ConnectHelper from './ConnectHelper';
 import Matrix from '../math/Matrix'
 
-class BrainGraph
+export default class BrainGraph
 {
   constructor() {
     this.container = document.getElementById('graph');
@@ -372,4 +372,4 @@ class BrainGraph
   }
 }
 
-window.BrainGraph = new BrainGraph();
+// window.BrainGraph = new BrainGraph();

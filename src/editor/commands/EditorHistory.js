@@ -19,7 +19,6 @@ class History extends EventEmitter
     super.destroy();
     this.undos = null;
     this.redos = null;
-    document.body.removeChild(this.panel.element);
     document.removeEventListener('keydown', this.keydown);
   }
 

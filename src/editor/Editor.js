@@ -5,7 +5,7 @@ import './ui/ContextMenu';
 import ContextMenu from './ui/ContextMenu';
 
 
-class Editor extends EventEmitter
+export default class Editor extends EventEmitter
 {
   constructor() {
     super();
@@ -72,7 +72,3 @@ class Editor extends EventEmitter
     }
   }
 }
-
-let editor = new Editor();
-editor.init();
-window.Editor = editor;

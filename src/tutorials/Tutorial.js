@@ -19,6 +19,10 @@ export default class Tutorial
     this.eventHandlers = [];
   }
 
+  destroy() {
+    // TODO: remove overlay, banner and cursor
+  }
+
   start() {
     this.next();
   }

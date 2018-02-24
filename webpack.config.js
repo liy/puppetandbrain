@@ -105,9 +105,9 @@ module.exports = {
       name: ['whatwg-fetch', 'vue', 'vue-router', 'rusha'], // Specify the common bundle's name.
       minChunks: Infinity,
     }),
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 5,
-    }),
+    // new webpack.optimize.LimitChunkCountPlugin({
+    //   maxChunks: 5,
+    // }),
     // new OfflinePlugin(),
   ],
   

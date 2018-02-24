@@ -7,11 +7,6 @@
   <toolbox/>
 
   <div class='control-button tooltip-right' id='mode-button' data-title="Open puppet brain" data-title-position="right"></div>
-  <!-- <div id='control-panel'>
-    <div class='control-button' id='bin-button' data-title="Delete puppet"></div>
-    <div class='control-button' id='debug-button' data-title="Play game"></div>
-    <div class='control-button' id='add-actor-button' data-title="Add puppet"></div>
-  </div> -->
   <span id='app-version'></span>
   <div id='menu'>
     <div id='menu-content' style="visibility: hidden;">
@@ -26,17 +21,43 @@
 </template>
 
 <script>
+import './ui/Tooltip.scss'
 import Terminal from './vue/Terminal.vue'; 
 import NodeGraph from './vue/NodeGraph.vue';
 import Theater from './vue/Theater.vue';
 import Toolbox from './vue/Toolbox.vue';
+import 'pixi.js'
+import '@/API'
 
+import html2canvas from 'html2canvas';
+import 'pixi-spine';
+import NodeTemplate from './NodeTemplate';
+
+import LookUp from './LookUp'
+import NodeFactory from './nodes/NodeFactory'
+import ActorFactory from './objects/ActorFactory'
+import BlockFactory from './graph/BlockFactory'
+import EditorHistory from './commands/EditorHistory'
+import Commaner from './commands/Commander'
+import BrainGraph from './graph/BrainGraph'
+
+import './Editor'
+import './ui/UIController';
+
+import './resources/Resource';
+import './Activity';
+
+import ActorSelection from './objects/ActorSelection';
 import NotificationControl from './ui/NotificationControl';
+
+window.ActorSelection = ActorSelection;
+
+
 
 var once = false;
 
 export default {
-  name: 'Editor',
+  name: 'editor',
   components: {
     terminal: Terminal,
     'node-graph': NodeGraph,
@@ -44,19 +65,10 @@ export default {
     toolbox: Toolbox,
   },
   async mounted() {
-    await import('pixi.js')
-    await import('@/API')
-    await import('./index')
+    // await import('./index')
 
-    UIController.stageMode();
-    UIController.addBtn.enabled = true;
-    
-
-    let tutorialName = this.$route.params.tutorialName;
-    if(tutorialName) {
-      const tutorial = (await import(`@/tutorials/${tutorialName}`)).default;
-      tutorial.start();
-    }
+    // UIController.stageMode();
+    // UIController.addBtn.enabled = true;
   },
   beforeDestroy() {
     // clear everything...

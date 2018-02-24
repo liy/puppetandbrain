@@ -4,7 +4,7 @@
     <div class='home-content'>
       <h1>Make your puppets<br/>Create the story<br/>Learn coding</h1>
       <div class='home-action'>
-        <app-button class='major' @click.native="toEditor">Start learning</app-button>
+        <app-button class='major' @click.native="toTutorial">Start learning</app-button>
         <app-button class='primary'>Sign Up</app-button>
       </div>
     </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Footer from '../vueComponents/Footer.vue';
+import Footer from '@/vue/Footer.vue';
 
 export default {
   components: {
@@ -28,8 +28,10 @@ export default {
   },
   methods: {
     toEditor() {
-      console.log('test')
       this.$router.push('editor')
+    },
+    toTutorial() {
+      this.$router.push('tutorials/animate-a-puppet')
     }
   }
 }
