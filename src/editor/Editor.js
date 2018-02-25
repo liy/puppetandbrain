@@ -4,7 +4,6 @@ import Mouse from './access/Mouse';
 import './ui/ContextMenu';
 import ContextMenu from './ui/ContextMenu';
 
-
 export default class Editor extends EventEmitter
 {
   constructor() {

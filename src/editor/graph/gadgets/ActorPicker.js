@@ -6,6 +6,7 @@ import TextField from "./TextField";
 import PipetteIcon from '@/assets/pipette.svg'; 
 import {svgElement} from '@/utils/utils';
 import ActorSelection from '../../objects/ActorSelection';
+import ActivityManager from '../../ActivityManager';
 
 export default class extends Gadget
 {
@@ -73,7 +74,7 @@ export default class extends Gadget
 
   set value(id) {
     this.actorID = id;
-    let actor = LookUp.get(this.actorID);
+    let actor = ActivityManager.current.lookUp.get(this.actorID);
     this.nameField.value = actor ? `${actor.name} ${actor.id}` : '';
   }
 }

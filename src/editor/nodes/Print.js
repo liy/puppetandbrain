@@ -21,8 +21,8 @@ NodeTemplate.Print = {
 
 export default class Print extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     this.debugTrace = document.getElementById('debug-trace');
   }

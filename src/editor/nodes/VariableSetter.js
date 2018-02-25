@@ -23,15 +23,15 @@ NodeTemplate.VariableSetter = {
  */
 export default class VariableSetter extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   init(pod) {
     super.init(pod);
 
     this.variableID = pod.variableID;
-    this.variable = LookUp.get(this.variableID);
+    this.variable = this.lookUp.get(this.variableID);
     this.variable.setters.push(this)
 
     // Note that I uses "input" for input id.

@@ -44,8 +44,8 @@ NodeTemplate.PlaySound = {
 }
 export default class PlaySound extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     this.complete = this.complete.bind(this);
 

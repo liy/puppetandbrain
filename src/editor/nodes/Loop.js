@@ -31,8 +31,8 @@ NodeTemplate.Loop = {
 
 export default class Loop extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     Editor.on('game.prestart', this.prestart, this);
   }

@@ -31,8 +31,8 @@ NodeTemplate.PushItem = {
 
 export default class PushItem extends Task
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   run() {

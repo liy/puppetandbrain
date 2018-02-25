@@ -25,8 +25,8 @@ NodeTemplate.Break = {
  */
 export default class Break extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   init(pod) {

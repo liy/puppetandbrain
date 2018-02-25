@@ -26,8 +26,8 @@ NodeTemplate.Branch = {
 
 export default class Branch extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   run() {

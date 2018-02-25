@@ -81,8 +81,8 @@ NodeTemplate.Compare = {
 
 export default class Compare extends Adaptor
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   equal() {

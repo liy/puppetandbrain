@@ -5,9 +5,10 @@ import EventEmitter from "@/utils/EventEmitter";
 
 export default class Node extends EventEmitter
 {
-  constructor(id) {
+  constructor(id, lookUp) {
     super();
-    this.id = LookUp.addNode(this, id);
+    this.lookUp = lookUp;
+    this.id = this.lookUp.addNode(this, id);
 
     // stores data used by inputs, or potential input data, e.g., node enabled, I think I can
     // either leave it as a authoring time property or make it exposed through input
@@ -25,13 +26,13 @@ export default class Node extends EventEmitter
   destroy() {
     this.inputs.destroy();
     this.outputs.destroy();
-    LookUp.removeNode(this.id);
+    this.lookUp.removeNode(this.id);
     // remove the node from the brain
     this.owner.brain.removeNode(this.id);
   }
 
   init(pod) {
-    this.owner = LookUp.get(pod.ownerID);
+    this.owner = this.lookUp.get(pod.ownerID);
     this.owner.brain.addNode(this);
 
     this._nodeName = pod.name || NodeTemplate[this.className].name;
@@ -93,13 +94,6 @@ export default class Node extends EventEmitter
 
   get brain() {
     return this.owner.brain;
-  }
-
-  // TODO: double check whether this works 
-  copy() {
-    let node = NodeFactory.create(this.className);
-    node.init(this.pod())
-    return node;
   }
 
   export(data={}) {

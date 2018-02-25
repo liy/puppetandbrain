@@ -31,8 +31,8 @@ NodeTemplate.RemoveByIndex = {
 
 export default class RemoveByIndex extends Task
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   run() {

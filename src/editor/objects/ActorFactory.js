@@ -1,5 +1,7 @@
-window.ActorFactory = {
+import * as ns from './'
+
+export default {
   create: function(className, id) {
-    return new [className]();
+    return new ns[className](id);
   }
 }

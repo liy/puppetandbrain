@@ -14,7 +14,7 @@ export default class CloseGraph extends Command
   }
 
   undo() {
-    let brain = LookUp.get(this.brainID);
+    let brain = this.lookUp.get(this.brainID);
     BrainGraph.open(brain);
     // make sure its owner is selected
     brain.owner.select();

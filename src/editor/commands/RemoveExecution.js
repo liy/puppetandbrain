@@ -16,8 +16,8 @@ export default class RemoveExecution extends Command
     // return null does not change state, history will not be recorded
     if(!this.targetID) return null;
 
-    let sourceNode = LookUp.get(this.sourceID);
-    sourceNode.disconnectNext(LookUp.get(this.targetID), this.name);
+    let sourceNode = this.lookUp.get(this.sourceID);
+    sourceNode.disconnectNext(this.lookUp.get(this.targetID), this.name);
     BrainGraph.getBlock(this.targetID).inPin.refreshSymbol();
 
     let sourceBlock = BrainGraph.getBlock(this.sourceID);
@@ -26,7 +26,7 @@ export default class RemoveExecution extends Command
   }
 
   undo() {
-    LookUp.get(this.sourceID).connectNext(LookUp.get(this.targetID), this.name);
+    this.lookUp.get(this.sourceID).connectNext(this.lookUp.get(this.targetID), this.name);
     BrainGraph.refresh();
   }
 

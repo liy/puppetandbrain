@@ -15,11 +15,11 @@ export default class CreateDataLink extends Command
   }
 
   get inputNode() {
-    return LookUp.get(this.inputNodeID)
+    return this.lookUp.get(this.inputNodeID)
   }
 
   get outputNode() {
-    return LookUp.get(this.outputNodeID);
+    return this.lookUp.get(this.outputNodeID);
   }
 
   process() {

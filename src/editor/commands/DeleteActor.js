@@ -11,7 +11,7 @@ export default class DeleteActor extends Command
   }
 
   process() {
-    let actor = LookUp.get(this.actorID);
+    let actor = this.lookUp.get(this.actorID);
     this.pod = actor.pod(true);
 
     actor.deselect()
@@ -30,16 +30,16 @@ export default class DeleteActor extends Command
 
     // create variables
     for(let variablePod of this.pod.brain.variables) {
-      let variable = new Variable(variablePod.id);
+      let variable = new Variable(variablePod.id, this.lookUp);
       variable.init(variablePod);
       // put the variable into its brain
-      let brain = LookUp.get(variablePod.brainID);
+      let brain = this.lookUp.get(variablePod.brainID);
       brain.variables.add(variable);
     }
 
     // create and init nodes
     for(let nodePod of this.pod.brain.nodes) {
-      let node = new NodeFactory.create(nodePod.className, nodePod.id)
+      let node = new NodeFactory.create(nodePod.className, nodePod.id, this.lookUp)
       node.init(nodePod);
     }
 
@@ -47,15 +47,15 @@ export default class DeleteActor extends Command
     for(let nodePod of this.pod.brain.nodes) {
       // data node, has no exectuion
       if (!nodePod.execution) continue;
-      let node = LookUp.get(nodePod.id);
+      let node = this.lookUp.get(nodePod.id);
       for(let execData of nodePod.execution) {
-        if(execData.nodeID) node.connectNext(LookUp.get(execData.nodeID), execData.name)
+        if(execData.nodeID) node.connectNext(this.lookUp.get(execData.nodeID), execData.name)
       }
     }
 
     // connect the inputs with outputs
     for(let pointerPod of this.pod.brain.pointers) {
-      let inputNode = LookUp.get(pointerPod.nodeID);
+      let inputNode = this.lookUp.get(pointerPod.nodeID);
       let pointer = inputNode.inputs.get(pointerPod.name);
       pointer.set(pointerPod)
     }

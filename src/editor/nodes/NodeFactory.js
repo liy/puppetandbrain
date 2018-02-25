@@ -1,7 +1,7 @@
 import * as ns from './'
 
-window.NodeFactory = {
-  create: function(className, id) {
-    return new ns[className](id);
+export default {
+  create: function(className, id, lookUp) {
+    return new ns[className](id, lookUp);
   }
 }

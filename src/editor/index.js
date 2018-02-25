@@ -2,9 +2,7 @@
 // import html2canvas from 'html2canvas';
 // import 'pixi-spine';
 // import './NodeTemplate';
-// // LookUp is a global window variable, save typing!
-// import './LookUp'
-// import './nodes/NodeFactory'
+
 // import './objects/ActorFactory'
 // import './graph/BlockFactory'
 // import './commands/EditorHistory'

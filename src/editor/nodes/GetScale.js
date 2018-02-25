@@ -33,7 +33,7 @@ export default class GetScale extends Node
 
     this.outputs.assignProperty('scale', {
       get: () => {
-        return LookUp.get(this.inputs.value('puppet'))['scale']
+        return this.lookUp.get(this.inputs.value('puppet'))['scale']
       }
     });
   }

@@ -33,24 +33,24 @@ export default class DeleteBlock extends Command
   }
 
   undo() {
-    let node = NodeFactory.create(this.pod.className, this.pod.id);
+    let node = NodeFactory.create(this.pod.className, this.pod.id, this.lookUp);
     node.init(this.pod);
 
     // connect executions
     if(this.pod.execution) {
       for(let exec of this.pod.execution) {
-        if(exec.nodeID) node.connectNext(LookUp.get(exec.nodeID), exec.name)
+        if(exec.nodeID) node.connectNext(this.lookUp.get(exec.nodeID), exec.name)
       }
     }
     if(this.pod.enter) {
       for(let callerPod of this.pod.enter.callers) {
-        if(callerPod.nodeID) node.connectParent(LookUp.get(callerPod.nodeID), callerPod.executionName);
+        if(callerPod.nodeID) node.connectParent(this.lookUp.get(callerPod.nodeID), callerPod.executionName);
       }
     }
 
     // connect inputs directly using pointer pod
     for(let pointerPod of this.pod.inputs) {
-      let inputNode = LookUp.get(pointerPod.nodeID);
+      let inputNode = this.lookUp.get(pointerPod.nodeID);
       let pointer = inputNode.inputs.get(pointerPod.name);
       pointer.set(pointerPod)
     }
@@ -62,7 +62,7 @@ export default class DeleteBlock extends Command
       // Note, link is not a qulified input pod because of resursive issue...
       // Just loop through all the inputs connected to current output, and connect them!
       for(let link of outputPod.links) {
-        let pointer = LookUp.get(link.nodeID).inputs.get(link.name);
+        let pointer = this.lookUp.get(link.nodeID).inputs.get(link.name);
         pointer.connect(output, link.id)
       }
     }

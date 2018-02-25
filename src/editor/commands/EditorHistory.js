@@ -1,34 +1,14 @@
 import EventEmitter from '@/utils/EventEmitter';
 
-class History extends EventEmitter
+class EditorHistory extends EventEmitter
 {
   constructor() {
     super();
 
     this.undos = [];
     this.redos = [];
-    this.keydown = this.keydown.bind(this);
-    document.addEventListener('keydown', this.keydown);
-
-    this.updateButton()
     
     this.enabled = true;
-  }
-
-  destroy() {
-    super.destroy();
-    this.undos = null;
-    this.redos = null;
-    document.removeEventListener('keydown', this.keydown);
-  }
-
-  keydown(e) {
-    if(e.keyCode == '90' && e.ctrlKey) {
-      this.undo();
-    }
-    if(e.keyCode == '89' && e.ctrlKey) {
-      this.redo();
-    }
   }
 
   push(cmd) {
@@ -71,6 +51,8 @@ class History extends EventEmitter
   }
 
   clear() {
+    this.removeAllListeners();
+
     this.undos = [];
     this.redos = [];
 
@@ -82,5 +64,4 @@ class History extends EventEmitter
   }
 }
 
-window.EditorHistory = new History();
-export default EditorHistory; 
+export default new EditorHistory();

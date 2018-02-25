@@ -21,8 +21,8 @@ export default class Action extends Task
    * @param {String} name Action name
    * @memberof Action
    */
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     // Keep track of all the perform nodes are calling this actiions
     // If this action is deleted, all of them will be delete

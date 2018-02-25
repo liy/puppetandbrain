@@ -18,8 +18,8 @@ NodeTemplate.PropertyGetter = {
 // Dynamic property getter. Maybe not useful?
 export default class PropertyGetter extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   init(pod) {
@@ -35,7 +35,7 @@ export default class PropertyGetter extends Node
     // dynamic output
     this.outputs.assignProperty(this.propertyName, {
       get: () => {
-        return LookUp.get(this.inputs.value('puppet'))[this.propertyName]
+        return this.lookUp.get(this.inputs.value('puppet'))[this.propertyName]
       }
       // TODO: note that if puppet change, in theory the type should be changed as well
       // I did not handle that yet...

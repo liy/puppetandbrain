@@ -48,8 +48,8 @@ NodeTemplate.Logic = {
 
 export default class Logic extends Adaptor
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   and() {

@@ -33,7 +33,7 @@ export default class GetPosition extends Node
 
     this.outputs.assignProperty('position', {
       get: () => {
-        return LookUp.get(this.inputs.value('puppet'))['position']
+        return this.lookUp.get(this.inputs.value('puppet'))['position']
       }
     });
   }

@@ -20,8 +20,8 @@ NodeTemplate.Wait = {
 }
 export default class Wait extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     Editor.on('game.stop', this.stop, this)
   }

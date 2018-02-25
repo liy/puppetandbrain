@@ -15,7 +15,7 @@ export default class DeleteVariable extends Command
   }
 
   get variable() {
-    return LookUp.get(this.variableID);
+    return this.lookUp.get(this.variableID);
   }
   
   process() {
@@ -29,7 +29,7 @@ export default class DeleteVariable extends Command
     this.setterPods = [];
 
     // remove the variable
-    let brain = LookUp.get(this.brainID);
+    let brain = this.lookUp.get(this.brainID);
     let {variable, index} = brain.variables.remove(this.variablePod.id);
     this.variableIndex = index;
 
@@ -62,18 +62,18 @@ export default class DeleteVariable extends Command
 
   undo() {
     // put back the variable first
-    let variable = new Variable(this.variablePod.id);
+    let variable = new Variable(this.variablePod.id, this.lookUp);
     variable.init(this.variablePod);
-    LookUp.get(this.brainID).variables.insert(variable, this.variableIndex);
+    this.lookUp.get(this.brainID).variables.insert(variable, this.variableIndex);
 
     // re-create the nodes and blocks first. Getting ready for execution 
     // and variable linking!
     for(let pod of this.getterPods) {
-      let node = NodeFactory.create(pod.className, pod.id);
+      let node = NodeFactory.create(pod.className, pod.id, this.lookUp);
       node.init(pod);
     }
     for(let pod of this.setterPods) {
-      let node = NodeFactory.create(pod.className, pod.id);
+      let node = NodeFactory.create(pod.className, pod.id, this.lookUp);
       node.init(pod);
     }
 
@@ -83,33 +83,33 @@ export default class DeleteVariable extends Command
 
     // connect setter's execution
     for(let pod of this.setterPods) {
-      let node = LookUp.get(pod.id);
+      let node = this.lookUp.get(pod.id);
       for(let exec of pod.execution) {
-        if(exec.id) node.connectNext(LookUp.get(exec.id), exec.name)
+        if(exec.id) node.connectNext(this.lookUp.get(exec.id), exec.name)
       }
       // setter always has enter field
       for(let callerPod of pod.enter.callers) {
-        if(callerPod.nodeID) node.connectParent(LookUp.get(callerPod.nodeID), callerPod.executionName);
+        if(callerPod.nodeID) node.connectParent(this.lookUp.get(callerPod.nodeID), callerPod.executionName);
       }
     }
     
     // connect setter inputs directly using input
     for(let pod of this.setterPods) {
       for(let pointerPod of pod.inputs) {
-        let inputNode = LookUp.get(pointerPod.nodeID);
+        let inputNode = this.lookUp.get(pointerPod.nodeID);
         let pointer = inputNode.inputs.get(pointerPod.name);
         pointer.set(pointerPod)
       }
     }
     // connect setter outputs
     for(let pod of this.setterPods) {
-      let node = LookUp.get(pod.id);
+      let node = this.lookUp.get(pod.id);
       for(let outputPod of pod.outputs) {
         let output = node.outputs.get(outputPod.name);
         // Note, link is not a qulified input pod. Resursive issue...
         // Just loop through all the inputs connected to current output, and connect them!
         for(let link of outputPod.links) {
-          let pointer = LookUp.get(link.nodeID).inputs.get(link.name);
+          let pointer = this.lookUp.get(link.nodeID).inputs.get(link.name);
           pointer.connect(output, link.id)
         }
       }
@@ -117,13 +117,13 @@ export default class DeleteVariable extends Command
 
     // connect getter outputs
     for(let pod of this.getterPods) {
-      let node = LookUp.get(pod.id);
+      let node = this.lookUp.get(pod.id);
       for(let outputPod of pod.outputs) {
         let output = node.outputs.get(outputPod.name);
         // Note, link is not a qulified input pod. Resursive issue...
         // Just loop through all the inputs connected to current output, and connect them!
         for(let link of outputPod.links) {
-          let pointer = LookUp.get(link.nodeID).inputs.get(link.name);
+          let pointer = this.lookUp.get(link.nodeID).inputs.get(link.name);
           pointer.connect(output, link.id)
         }
       }
@@ -134,13 +134,13 @@ export default class DeleteVariable extends Command
       // make sure the node related block needs belong the variable owner brain
       // this is for future proof, if we allow variable access across different brains.
       // otherwise, multiple blocks will be added to current openning brain graph.
-      if(LookUp.get(pod.ownerID).brain.id == this.brainID) {
-        BlockFactory.create(LookUp.get(pod.id));
+      if(this.lookUp.get(pod.ownerID).brain.id == this.brainID) {
+        BlockFactory.create(this.lookUp.get(pod.id));
       }
     }
     for(let pod of this.setterPods) {
-      if(LookUp.get(pod.ownerID).brain.id == this.brainID) {
-        BlockFactory.create(LookUp.get(pod.id));
+      if(this.lookUp.get(pod.ownerID).brain.id == this.brainID) {
+        BlockFactory.create(this.lookUp.get(pod.id));
       }
     }
     

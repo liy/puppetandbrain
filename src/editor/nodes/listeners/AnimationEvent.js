@@ -16,8 +16,8 @@ NodeTemplate.AnimationEvent = {
 
 export default class AnimationEvent extends Listener
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   init(pod) {

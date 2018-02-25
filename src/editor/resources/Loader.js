@@ -1,5 +1,5 @@
 import EventEmitter from "@/utils/EventEmitter";
-import {Resource} from './Resource';
+import Resource from './Resource';
 
 export default class Loader extends EventEmitter
 {

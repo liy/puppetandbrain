@@ -6,8 +6,16 @@
 </template>
 
 <script>
+import BrainGraph from '../graph/BrainGraph'
+
 export default {
-  name: 'node-graph'
+  name: 'node-graph',
+  mounted() {
+    // window.BrainGraph = new BrainGraph();
+  },
+  beforeDestroy() {
+    BrainGraph.destroy();
+  }
 }
 </script>
 

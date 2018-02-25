@@ -11,7 +11,7 @@ export default class extends Command
   }
 
   get node() {
-    return LookUp.get(this.nodeID);
+    return this.lookUp.get(this.nodeID);
   }
 
   process() {

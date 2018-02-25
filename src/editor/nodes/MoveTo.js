@@ -33,8 +33,8 @@ NodeTemplate.MoveTo = {
 
 export default class MoveTo extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     Editor.on('game.stop', this.stop, this)
   }

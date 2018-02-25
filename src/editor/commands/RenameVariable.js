@@ -11,7 +11,7 @@ export default class RenameVariable extends Command
   }
 
   get variables() {
-    return LookUp.get(this.brainID).variables;
+    return this.lookUp.get(this.brainID).variables;
   }
 
   process() {

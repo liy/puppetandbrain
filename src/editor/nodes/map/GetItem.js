@@ -30,8 +30,8 @@ NodeTemplate.GetItem = {
 
 export default class GetItem extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   init(pod) {

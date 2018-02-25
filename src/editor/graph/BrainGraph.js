@@ -78,6 +78,10 @@ export default class BrainGraph
     });
   }
 
+  destroy() {
+
+  }
+
   startPan(e) {
     // touches
     if(e.touches) {
@@ -371,5 +375,3 @@ export default class BrainGraph
     this.svg.setAttribute('height', window.innerHeight)
   }
 }
-
-// window.BrainGraph = new BrainGraph();

@@ -16,8 +16,8 @@ export default class Perform extends Task
    * @param {String} name Function name
    * @memberof Function
    */
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   destroy() {
@@ -57,7 +57,7 @@ export default class Perform extends Task
   }
 
   get action() {
-    return LookUp.get(this.actionID);
+    return this.lookUp.get(this.actionID);
   }
 
   get actionName() {

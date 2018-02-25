@@ -15,7 +15,7 @@ export default class RemoveInputDataLink extends Command
   }
 
   get inputNode() {
-    return LookUp.get(this.inputNodeID)
+    return this.lookUp.get(this.inputNodeID)
   }
 
   process() {

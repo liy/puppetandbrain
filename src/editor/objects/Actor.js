@@ -15,13 +15,15 @@ import ContextMenu from '../ui/ContextMenu';
 
 export default class Actor extends EventEmitter
 {
-  constructor(id) {
+  constructor(id, lookUp) {
     super();
+
+    this.lookUp = lookUp;
 
     this.properties = new PropertyList(this);
 
     // create an entry in the reference look up
-    this.id = LookUp.addActor(this, id);
+    this.id = this.lookUp.addActor(this, id);
 
     this.pointerRelease = this.pointerRelease.bind(this)
     this.mouseDragMove = this.mouseDragMove.bind(this);
@@ -90,7 +92,7 @@ export default class Actor extends EventEmitter
       this.removeComponent(component.name);
       component.destroy();
     }
-    LookUp.removeActor(this.id);
+    this.lookUp.removeActor(this.id);
     document.removeEventListener('touchmove', this.touchDragMove);
     document.removeEventListener('mousemove', this.mouseDragMove);
     document.removeEventListener('mouseup', this.pointerRelease);

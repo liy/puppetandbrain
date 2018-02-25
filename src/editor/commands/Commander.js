@@ -1,6 +1,6 @@
 import * as cmds from './';
 
-window.Commander = {
+export default {
   create: function(className, ...data) {
     let cmd = new cmds[className](...data);
     return cmd;

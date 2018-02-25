@@ -22,8 +22,8 @@ NodeTemplate.Extractor = {
 
 export default class Extractor extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   init(pod) {
@@ -38,7 +38,7 @@ export default class Extractor extends Node
             // note that extractor does not care whether input is a reference
             // or an id... it is better to contains the complexity here without requring
             // other nodes to return certain type...
-            return LookUp.auto(input.value)[outputPod.name]
+            return this.lookUp.auto(input.value)[outputPod.name]
           }
         });
       }
@@ -49,7 +49,7 @@ export default class Extractor extends Node
     this.outputs.on('output.added', name => {
       this.outputs.assignProperty(name, {
         get: () => {
-          return LookUp.auto(input.value)[name]
+          return this.lookUp.auto(input.value)[name]
         }
       }, this.outputs.get(name).descriptor);
     });

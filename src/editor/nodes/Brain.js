@@ -6,20 +6,21 @@ import Variable from '../data/Variable';
 export default class Brain
 {
   constructor(owner, id) {
-    this.id = LookUp.addBrain(this, id)
     this.owner = owner;
+    this.lookUp = this.owner.lookUp;
+    this.id = this.lookUp.addBrain(this, id)
     this.nodes = new ArrayMap();
 
     // stores Action
     this.actions = {};
 
-    this.variables = new VariableList(this);
+    this.variables = new VariableList(this, this.lookUp);
 
     Editor.on('game.prestart', this.prestart, this);
   }
 
   destroy() {
-    LookUp.removeBrain(this.id);
+    this.lookUp.removeBrain(this.id);
     let nodes = this.nodes.getValues().concat();
     for(let node of nodes) {
       node.destroy();

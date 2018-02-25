@@ -8,7 +8,7 @@ export default class CreateVariable extends Command
   }
 
   get variables() {
-    return LookUp.get(this.variablePod.brainID).variables;
+    return this.lookUp.get(this.variablePod.brainID).variables;
   }
 
   process() {

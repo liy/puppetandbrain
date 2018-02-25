@@ -32,8 +32,8 @@ NodeTemplate.Rotate = {
 
 export default class Rotate extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     Editor.on('game.stop', this.stop, this)
   }

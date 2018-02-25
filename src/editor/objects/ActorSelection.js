@@ -6,7 +6,7 @@ import EventEmitter from "@/utils/EventEmitter";
  * 
  * @class Selection
  */
-class ActorSelection extends EventEmitter
+export default class ActorSelection extends EventEmitter
 {
   constructor() {
     super();
@@ -58,5 +58,3 @@ class ActorSelection extends EventEmitter
     }
   }
 }
-
-export default new ActorSelection();

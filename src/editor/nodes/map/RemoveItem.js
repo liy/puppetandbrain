@@ -31,8 +31,8 @@ NodeTemplate.RemoveItem = {
 
 export default class RemoveItem extends Task
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   run() {

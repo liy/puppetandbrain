@@ -1,4 +1,5 @@
 import EventEmitter from '@/utils/EventEmitter';
+import ActivityManager from '../ActivityManager';
 
 // pointer
 export default class Pointer extends EventEmitter
@@ -18,13 +19,15 @@ export default class Pointer extends EventEmitter
     // by default it is a local node memory pointer
     this.target = this.node.memory;
     this.targetName = this.name;
+
+    this.lookUp = node.lookUp;
   }
 
   set(pod) {
     // if the input has an ID, it must be connected to an output, so connect to the output
     if(pod.id) {
       // find the output
-      let output = LookUp.get(pod.output.nodeID).outputs.get(pod.output.name);
+      let output = this.lookUp.get(pod.output.nodeID).outputs.get(pod.output.name);
       this.connect(output, pod.id);
     }
   }
@@ -48,7 +51,7 @@ export default class Pointer extends EventEmitter
     let oldOutput = this.disconnect();
 
     // Only connected input has id
-    this.id = LookUp.addPointer(this, id);
+    this.id = this.lookUp.addPointer(this, id);
     this.output = output;
     this.output.connect(this);
 
@@ -65,7 +68,7 @@ export default class Pointer extends EventEmitter
     let oldOutput = this.output;
     if(this.output) {
       this.output.disconnect(this);
-      LookUp.removePointer(this.id);
+      this.lookUp.removePointer(this.id);
       this.id = null;
       this.output = null;
 

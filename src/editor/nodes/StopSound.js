@@ -23,8 +23,8 @@ NodeTemplate.StopSound = {
 }
 export default class StopSound extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
   
   async run() {

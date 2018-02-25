@@ -34,8 +34,8 @@ NodeTemplate.MakeVector = {
 
 export default class MakeVector extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   init(pod) {

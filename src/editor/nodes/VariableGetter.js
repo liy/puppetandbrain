@@ -19,15 +19,15 @@ NodeTemplate.VariableGetter = {
  */
 export default class VariableGetter extends Node
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   init(pod) {
     super.init(pod);
 
     this.variableID = pod.variableID;
-    this.variable = LookUp.get(this.variableID);
+    this.variable = this.lookUp.get(this.variableID);
     this.variable.getters.push(this)
 
     // Note that I hardcode the output id to be "output",

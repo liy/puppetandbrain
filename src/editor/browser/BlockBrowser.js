@@ -5,6 +5,7 @@ import ArrayMap from "@/utils/ArrayMap";
 import GroupSection from "./GroupSection";
 import DataType from '../data/DataType';
 import BlockBox from './BlockBox';
+import ActivityManager from '../ActivityManager';
 
 // FIXME: clean up needed!!
 export default class BlockBrowser extends Browser
@@ -69,7 +70,7 @@ export default class BlockBrowser extends Browser
     // It is stupid to have a log statement to break the whole search library
 
     // Populate the performs
-    for(const actor of LookUp.getActors()) {
+    for(const actor of ActivityManager.current.lookUp.getActors()) {
       for(let actionName of Object.keys(actor.brain.actions)) {
         let action = actor.brain.actions[actionName];
         templates.push({

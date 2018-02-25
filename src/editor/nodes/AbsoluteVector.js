@@ -29,8 +29,8 @@ NodeTemplate.AbsoluteVector = {
 
 export default class AbsoluteVector extends Node
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   init(pod) {

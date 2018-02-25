@@ -6,13 +6,13 @@ export default class RemoveParentExecution extends Command
     super();
 
     this.sourceNodeID = sourceNodeID;
-    let sourceNode = LookUp.get(this.sourceNodeID );
+    let sourceNode = this.lookUp.get(this.sourceNodeID );
     this.callerPods = sourceNode.getCallers();
   }
 
   process() {
     for(let pod of this.callerPods) {
-      LookUp.get(this.sourceNodeID).disconnectParent(LookUp.get(pod.nodeID), pod.executionName);
+      this.lookUp.get(this.sourceNodeID).disconnectParent(this.lookUp.get(pod.nodeID), pod.executionName);
 
       // refresh the pod's output pins
       let callerBlock = BrainGraph.getBlock(pod.nodeID);
@@ -28,7 +28,7 @@ export default class RemoveParentExecution extends Command
 
   undo() {
     for(let pod of this.callerPods) {
-      LookUp.get(this.sourceNodeID).connectParent(LookUp.get(pod.nodeID), pod.executionName);
+      this.lookUp.get(this.sourceNodeID).connectParent(this.lookUp.get(pod.nodeID), pod.executionName);
     }
     BrainGraph.refresh();
   }

@@ -27,8 +27,8 @@ NodeTemplate.SetPosition = {
 
 export default class SetPosition extends Task
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   init(pod) {

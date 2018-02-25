@@ -15,8 +15,8 @@ NodeTemplate.MouseEvent = {
 
 export default class MouseEvent extends Listener
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     Editor.on('game.prestart', this.prestart, this)
     Editor.on('game.stop', this.stop, this)

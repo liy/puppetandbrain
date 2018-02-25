@@ -9,14 +9,14 @@ export default class CreateExecution extends Command
     this.targetNodeID = targetNodeID;
 
     // Check if source node is isolated
-    let oldTargetNode = LookUp.get(this.sourceNodeID).execution.get(name);
+    let oldTargetNode = this.lookUp.get(this.sourceNodeID).execution.get(name);
     if(oldTargetNode) {
       this.oldTargetID = oldTargetNode.id;
     }
   }
 
   process() {
-    LookUp.get(this.sourceNodeID).connectNext(LookUp.get(this.targetNodeID), this.name);
+    this.lookUp.get(this.sourceNodeID).connectNext(this.lookUp.get(this.targetNodeID), this.name);
     
     // Only need to refresh 4 nodes' execution pins. You could go further only
     // refresh specific out pin.
@@ -29,10 +29,10 @@ export default class CreateExecution extends Command
 
   undo() {
     if(this.oldTargetID) {
-      LookUp.get(this.sourceNodeID).connectNext(LookUp.get(this.oldTargetID), this.name);
+      this.lookUp.get(this.sourceNodeID).connectNext(this.lookUp.get(this.oldTargetID), this.name);
     }
     else {
-      LookUp.get(this.sourceNodeID).disconnectNext(LookUp.get(this.targetNodeID), this.name);
+      this.lookUp.get(this.sourceNodeID).disconnectNext(this.lookUp.get(this.targetNodeID), this.name);
     }
     BrainGraph.refresh()
   }

@@ -19,8 +19,8 @@ NodeTemplate.GameLoop = {
 
 export default class GameLoop extends Listener
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     Editor.on('game.start', this.start, this)
     Editor.on('game.stop', this.stop, this)

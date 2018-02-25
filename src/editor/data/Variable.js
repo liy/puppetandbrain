@@ -3,9 +3,10 @@ import DataType from './DataType';
 
 export default class Variable extends EventEmitter
 {
-  constructor(id) {
+  constructor(id, lookUp) {
     super();
-    this.id = LookUp.addVariable(this, id);
+    this.lookUp = lookUp;
+    this.id = this.lookUp.addVariable(this, id);
 
     // Keep track of getter and setter nodes using this variable. For variable deletion use.
     this.getters = [];
@@ -16,7 +17,7 @@ export default class Variable extends EventEmitter
   }
 
   destroy() {
-    LookUp.removeVariable(this.id);
+    this.lookUp.removeVariable(this.id);
     // clear listener
     this.removeAllListeners();
   }

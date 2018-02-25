@@ -57,8 +57,8 @@ NodeTemplate.VectorArithmetic = {
 
 export default class VectorArithmetic extends Adaptor
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   add() {

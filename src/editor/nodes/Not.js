@@ -27,8 +27,8 @@ NodeTemplate.Not = {
 
 export default class Not extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
     
   }
 

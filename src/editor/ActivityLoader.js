@@ -5,8 +5,8 @@ import { getMimeType } from '@/utils/utils';
 
 export default class ActivityLoader
 {
-  constructor() {
-
+  constructor(lookUp) {
+    this.lookUp = lookUp;
   }
 
   async parse(pod) {
@@ -61,14 +61,14 @@ export default class ActivityLoader
     for(let id of pod.variables) {
       let variablePod = pod.store[id];
       // put the variable into its brain
-      let brain = LookUp.get(variablePod.brainID);
+      let brain = this.lookUp.get(variablePod.brainID);
       brain.variables.create(variablePod);
     }
 
     let performs = [];
     for(let id of pod.nodes) {
       let data = pod.store[id];
-      let node = NodeFactory.create(data.className, id)
+      let node = NodeFactory.create(data.className, id, this.lookUp)
       // delay perform node initialization,
       // since they depend on Action nodes to be initialized first
       if(data.className ==  'Perform') {
@@ -80,25 +80,25 @@ export default class ActivityLoader
 
     // initilaize perform node
     for(let data of performs) {
-      let node = LookUp.get(data.id);
+      let node = this.lookUp.get(data.id);
       node.init(data);
     }
 
     // connect the tasks
     for(let id of pod.nodes) {
-      let node = LookUp.get(id);
+      let node = this.lookUp.get(id);
       // does not have execution, a data node
       if (!node.execution) continue;
       let data = pod.store[id];
       for(let execPod of data.execution) {
-        if(execPod.nodeID) node.connectNext(LookUp.get(execPod.nodeID), execPod.name)
+        if(execPod.nodeID) node.connectNext(this.lookUp.get(execPod.nodeID), execPod.name)
       }
     }
 
     // connect the inputs with outputs
     for(let id of pod.pointers) {
       let pointerPod = pod.store[id];
-      let node = LookUp.get(pointerPod.nodeID);
+      let node = this.lookUp.get(pointerPod.nodeID);
 
       let pointer = node.inputs.get(pointerPod.name);
       pointer.set(pointerPod)

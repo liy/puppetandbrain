@@ -184,49 +184,6 @@ class API
   getUrl(path) {
     return firebase.storage().ref(path).getDownloadURL();
   }
-
-  // async newCreation() {
-  //   let pod = LookUp.pod();
-
-  //   const activityID = firebase.firestore().collection(`users/${CurrentUser.uid}/creations`).doc().id;
-  //   await firebase.firestore().collection(`users/${CurrentUser.uid}/creations`).doc(activityID).set({
-  //     ...pod,
-  //     id: activityID,
-  //     userID: CurrentUser.uid
-  //   });
-
-  //   // Update fileRefs
-  //   let userFiles = [];
-  //   for(let actor of LookUp.getActors()) {
-  //     userFiles = userFiles.concat(actor.getUserFiles());
-  //   }
-  //   let map = userFiles.map(userFile => {
-  //     return {
-  //       [userFile.fileID]: true
-  //     }
-  //   })
-  //   firebase.firestore().doc(`fileRefs/${activityID}`).set(map)
-
-  //   return activityID;
-  // }
-
-  // async updateCreation() {
-  //   let pod = LookUp.pod();
-    
-  //   await firebase.firestore().collection(`users/${CurrentUser.uid}/creations`).doc(pod.activityID).set(pod);
-
-  //   // Update fileRefs
-  //   let userFiles = [];
-  //   for(let actor of LookUp.getActors()) {
-  //     userFiles = userFiles.concat(actor.getUserFiles());
-  //   }
-  //   let map = userFiles.map(userFile => {
-  //     return {
-  //       [userFile.fileID]: true
-  //     }
-  //   })
-  //   firebase.firestore().doc(`fileRefs/${pod.activityID}`).set(map)
-  // }
 }
 
 export default new API();

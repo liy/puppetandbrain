@@ -31,8 +31,8 @@ NodeTemplate.Contains = {
 
 export default class Contains extends Task
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   run() {

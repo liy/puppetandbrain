@@ -21,40 +21,21 @@
 </template>
 
 <script>
+import 'pixi.js'
+import 'pixi-spine';
+
+import '@/API'
+
 import './ui/Tooltip.scss'
+
 import Terminal from './vue/Terminal.vue'; 
 import NodeGraph from './vue/NodeGraph.vue';
 import Theater from './vue/Theater.vue';
 import Toolbox from './vue/Toolbox.vue';
-import 'pixi.js'
-import '@/API'
 
-import html2canvas from 'html2canvas';
-import 'pixi-spine';
-import NodeTemplate from './NodeTemplate';
-
-import LookUp from './LookUp'
-import NodeFactory from './nodes/NodeFactory'
-import ActorFactory from './objects/ActorFactory'
-import BlockFactory from './graph/BlockFactory'
-import EditorHistory from './commands/EditorHistory'
-import Commaner from './commands/Commander'
-import BrainGraph from './graph/BrainGraph'
-
-import './Editor'
-import './ui/UIController';
-
-import './resources/Resource';
-import './Activity';
-
-import ActorSelection from './objects/ActorSelection';
-import NotificationControl from './ui/NotificationControl';
-
-window.ActorSelection = ActorSelection;
+import store from '@/store';
 
 
-
-var once = false;
 
 export default {
   name: 'editor',
@@ -64,13 +45,16 @@ export default {
     theater: Theater,
     toolbox: Toolbox,
   },
+  beforeCreate() {
+    window.NodeTemplate = Object.create(null);
+  },
   async mounted() {
-    // await import('./index')
-
-    // UIController.stageMode();
-    // UIController.addBtn.enabled = true;
+    this.cancelDebugModeWatch = store.watch(() => store.getters.debugMode, 
+    (debugMode, oldMode) => {
+    })
   },
   beforeDestroy() {
+    this.cancelDebugModeWatch();
     // clear everything...
     Activity.clear();
     EditorHistory.destroy();

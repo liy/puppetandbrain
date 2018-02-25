@@ -1,166 +1,151 @@
-// import shortid from 'shortid';
-import Task from './nodes/Task';
-import Delay from './access/Delay';
-
-// var STORE = Object.create(null);
-var STORE = {};
-var ACTORS = [];
-var NODES = [];
-var POINTERS = [];
-var BRAINS = [];
-// brain variable and actor properties
-var VARIABLES = [];
-
-var activityID = null;
-var ownerID = null;
-var creating = false;
-
-var delaySave = new Delay();
-
-function create(entry, id) {
-  // if no id, or id exist, create a new id for the item
-  if(!id || id in STORE) {
-    // naive way, better to use hash(random + timestamp + machine name + etc).
-    while(true) {
-      id = Math.floor(Math.random() * 999)+1;
-      if(!STORE[id]) break;
-    }
-
-    // id = shortid.generate();
+export default class 
+{
+  constructor() {
+    this.store = {};
+    this.actors = [];
+    this.nodes = [];
+    this.pointers = [];
+    this.brains = [];
+    this.variables = [];
   }
-  STORE[id] = entry;
-  return id;
-}
 
+  // private, may be turn it into a static function?
+  create(entry, id) {
+    // if no id, or id exist, create a new id for the item
+    if(!id || id in this.store) {
+      // naive way, better to use hash(random + timestamp + machine name + etc).
+      while(true) {
+        id = Math.floor(Math.random() * 999)+1;
+        if(!this.store[id]) break;
+      }
 
-window.LookUp = {
-  // for debugging...
-  get store() {
-    return STORE;
-  },
-
-  addActor: function(entry, id) {
-    id = create(entry, id)
-    ACTORS.push(id);
+      // id = shortid.generate();
+    }
+    this.store[id] = entry;
     return id;
-  },
+  }
 
-  removeActor: function(id) {
-    let index = ACTORS.indexOf(id);
-    if(index != -1) ACTORS.splice(index, 1);
-    delete STORE[id]
-  },
-
-  addPointer: function(entry, id) {
-    id = create(entry, id)
-    POINTERS.push(id);
+  addActor(entry, id) {
+    id = this.create(entry, id)
+    this.actors.push(id);
     return id;
-  },
+  }
 
-  removePointer: function(id) {
-    let index = POINTERS.indexOf(id);
-    if(index != -1) POINTERS.splice(index, 1);
-    delete STORE[id]
-  },
+  removeActor(id) {
+    let index = this.actors.indexOf(id);
+    if(index != -1) this.actors.splice(index, 1);
+    delete this.store[id]
+  }
 
-  addNode: function(entry, id) {
-    id = create(entry, id)
-    NODES.push(id);
+  addPointer(entry, id) {
+    id = this.create(entry, id)
+    this.pointers.push(id);
     return id;
-  },
+  }
 
-  removeNode: function(id) {
-    let index = NODES.indexOf(id);
-    if(index != -1) NODES.splice(index, 1);
-    delete STORE[id]
-  },
+  removePointer(id) {
+    let index = this.pointers.indexOf(id);
+    if(index != -1) this.pointers.splice(index, 1);
+    delete this.store[id]
+  }
 
-  addBrain: function(entry, id) {
-    id = create(entry, id)
-    BRAINS.push(id);
+  addNode(entry, id) {
+    id = this.create(entry, id)
+    this.nodes.push(id);
     return id;
-  },
+  }
 
-  removeBrain: function(id) {
-    let index = BRAINS.indexOf(id);
-    if(index != -1) BRAINS.splice(index, 1);
-    delete STORE[id]
-  },
+  removeNode(id) {
+    let index = this.nodes.indexOf(id);
+    if(index != -1) this.nodes.splice(index, 1);
+    delete this.store[id]
+  }
 
-  addVariable: function(entry, id) {
-    id = create(entry, id)
-    VARIABLES.push(id);
+  addBrain(entry, id) {
+    id = this.create(entry, id)
+    this.brains.push(id);
     return id;
-  },
+  }
 
-  removeVariable: function(id) {
-    let index = VARIABLES.indexOf(id);
-    if(index != -1) VARIABLES.splice(index, 1);
-    delete STORE[id]
-  },
+  removeBrain(id) {
+    let index = this.brains.indexOf(id);
+    if(index != -1) this.brains.splice(index, 1);
+    delete this.stores[id]
+  }
+
+  addVariable(entry, id) {
+    id = this.create(entry, id)
+    this.variables.push(id);
+    return id;
+  }
+
+  removeVariable(id) {
+    let index = this.variables.indexOf(id);
+    if(index != -1) this.variables.splice(index, 1);
+    delete this.store[id]
+  }
 
   // Audo figure out whether target is an object or an id and return the target object
-  auto: function(target) {
+  auto(target) {
     return (typeof target === 'object') ? target : this.get(target);
-  },
+  }
 
-  get: function(id) {
-    return STORE[id];
-  },
+  get(id) {
+    return this.store[id];
+  }
 
-  getNodes: function() {
-    return NODES.map(id => {
-      return STORE[id];
+  getNodes() {
+    return this.nodes.map(id => {
+      return this.store[id];
     })
-  },
+  }
 
-  getActors: function() {
-    return ACTORS.map(id => {
-      return STORE[id]
+  getActors() {
+    return this.actors.map(id => {
+      return this.store[id]
     })
-  },
+  }
 
-  getDataLinks: function() {
-    return POINTERS.map(id => {
-      return STORE[id]
+  getDataLinks() {
+    return this.pointers.map(id => {
+      return this.store[id]
     })
-  },
+  }
 
-  getTasks: function() {
+  getTasks() {
     return this.getNodes().filter(node => {
-      return node instanceof Task;
+      return node.execution != null;
     })
-  },
+  }
 
-  hasID: function(id) {
-    return id in STORE;
-  },
+  hasID(id) {
+    return id in this.store;
+  }
 
-  clear: function() {
-    STORE = {};
-    ACTORS = [];
-    NODES = [];
-    POINTERS = [];
-    BRAINS = [];
-    VARIABLES = [];
-  },
+  clear() {
+    this.store = {};
+    this.actors = [];
+    this.nodes = [];
+    this.pointers = [];
+    this.brains = [];
+    this.variables = [];
+  }
 
-  pod: function(detail=false) {
+  pod(detail=false) {
     let result = {};
-    result.activityID = activityID
     result.store = {};
-    for(let id in STORE) {
-      result.store[id] = STORE[id].pod(detail);
+    for(let id in this.store) {
+      result.store[id] = this.store[id].pod(detail);
     }
-    result.actors = ACTORS;
-    result.nodes = NODES;
-    result.pointers = POINTERS;
-    result.brains = BRAINS;
-    result.variables = VARIABLES;
+    result.actors = this.actors.concat();
+    result.nodes = this.nodes.concat();
+    result.pointers = this.pointers.concat();
+    result.brains = this.brains.concat();
+    result.variables = this.variables.concat();
     result.stage = Editor.stage.actors.map((actorID, actor) => {
       return actorID;
     });
 
     return result;
-  },
+  }
 }

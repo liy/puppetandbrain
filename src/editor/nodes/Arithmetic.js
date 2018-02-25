@@ -66,8 +66,8 @@ NodeTemplate.Arithmetic = {
 
 export default class Arithmetic extends Adaptor
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   add() {

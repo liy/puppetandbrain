@@ -6,7 +6,7 @@ import EventEmitter from '@/utils/EventEmitter';
 import ElementController from '../graph/elements/ElementController'
 import Menu from './Menu';
 
-class UIController extends EventEmitter
+export default class UIController extends EventEmitter
 {
   constructor() {
     super();
@@ -41,5 +41,3 @@ class UIController extends EventEmitter
     }
   }
 }
-
-window.UIController = new UIController();

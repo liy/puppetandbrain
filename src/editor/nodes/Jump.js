@@ -31,8 +31,8 @@ NodeTemplate.Jump = {
 
 export default class Jump extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     Editor.on('game.stop', this.stop, this)
   }

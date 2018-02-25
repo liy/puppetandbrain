@@ -17,7 +17,7 @@ export default class CreateBlock extends Command
   }
 
   process() {
-    let node = NodeFactory.create(this.pod.className, this.nodeID);
+    let node = NodeFactory.create(this.pod.className, this.nodeID, this.lookUp);
     node.init({
       ...this.pod,
       ownerID: this.ownerID
@@ -37,7 +37,7 @@ export default class CreateBlock extends Command
   }
 
   getCreatedNode() {
-    return LookUp.get(this.nodeID);
+    return this.lookUp.get(this.nodeID);
   }
 
   redo() {

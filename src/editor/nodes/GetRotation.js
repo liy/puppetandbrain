@@ -35,7 +35,7 @@ export default class GetRotation extends Node
     
     this.outputs.assignProperty('rotation', {
       get: () => {
-        return LookUp.get(this.inputs.value('puppet'))['rotation'] * toDegree
+        return this.lookUp.get(this.inputs.value('puppet'))['rotation'] * toDegree
       }
     });
   }

@@ -1,5 +1,6 @@
 import Block from "./Block";
 import OutputPin from "../support/OutputPin";
+import ActivityManager from "../../ActivityManager";
 
 export default class GetterBlock extends Block
 {
@@ -40,7 +41,7 @@ export default class GetterBlock extends Block
 
     this.title.textContent = pod.name;
 
-    let variable = LookUp.get(pod.variableID);
+    let variable = ActivityManager.current.lookUp.get(pod.variableID);
     let pin = new OutputPin(variable.name);
     pin.symbol.colorize(variable.type)
     this.body.addRight(pin);

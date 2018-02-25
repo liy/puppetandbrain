@@ -20,7 +20,7 @@
 import EditorHistory from '@/editor/commands/EditorHistory'
 import HistoryButtonBlob from '@/assets/history-button-blob.svg';
 import UndoButton from '@/assets/undo-button.svg';
-import RedoButton from '@/assets/redo-button.svg';
+import RedoButton from '@/assets/redo-button.svg'
 
 export default {
   name: 'history-control',
@@ -35,6 +35,11 @@ export default {
     EditorHistory.on('history.updated', () => {
       this.$forceUpdate()
     })
+    document.addEventListener('keydown', this.keydown);
+  },
+  beforeDestroy() {
+    EditorHistory.clear();
+    document.removeEventListener('keydown', this.keydown);
   },
   methods: {
     undoClicked() {
@@ -44,11 +49,18 @@ export default {
       EditorHistory.redo();
     },
     canUndo() {
-      console.log(EditorHistory.undos.length != 0)
       return EditorHistory.undos.length != 0;
     },
     canRedo() {
       return EditorHistory.redos.length != 0;
+    },
+    keydown(e) {
+      if(e.keyCode == '90' && e.ctrlKey) {
+        EditorHistory.undo();
+      }
+      if(e.keyCode == '89' && e.ctrlKey) {
+        EditorHistory.redo();
+      }
     }
   }
 }

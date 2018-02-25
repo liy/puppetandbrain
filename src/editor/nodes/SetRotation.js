@@ -27,8 +27,8 @@ NodeTemplate.SetRotation = {
 
 export default class SetRotation extends Task
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
   }
 
   init(pod) {

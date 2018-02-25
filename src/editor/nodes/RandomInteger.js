@@ -32,8 +32,8 @@ NodeTemplate.RandomInteger = {
 
 export default class RandomInteger extends Node
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
   }
 
   init(pod) {

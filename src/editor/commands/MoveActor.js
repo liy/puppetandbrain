@@ -11,7 +11,7 @@ export default class MoveActor extends Command
   }
 
   process() {
-    let actor = LookUp.get(this.actorID);
+    let actor = this.lookUp.get(this.actorID);
     this.newX = actor.x;
     this.newY = actor.y;
 
@@ -24,13 +24,13 @@ export default class MoveActor extends Command
   }
 
   undo() {
-    let actor = LookUp.get(this.actorID);
+    let actor = this.lookUp.get(this.actorID);
     actor.x = this.oldX;
     actor.y = this.oldY;
   }
 
   redo() {
-    let actor = LookUp.get(this.actorID);
+    let actor = this.lookUp.get(this.actorID);
     actor.x = this.newX;
     actor.y = this.newY;
   }

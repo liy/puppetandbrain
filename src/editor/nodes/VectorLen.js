@@ -23,8 +23,8 @@ NodeTemplate.VectorLen = {
 
 export default class VectorLen extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, lookUp) {
+    super(id, lookUp)
     
   }
 

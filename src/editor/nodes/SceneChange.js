@@ -17,8 +17,8 @@ NodeTemplate.SceneChange = {
 
 export default class SceneChange extends Task
 {
-  constructor(id) {
-    super(id);
+  constructor(id, lookUp) {
+    super(id, lookUp);
 
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
   }

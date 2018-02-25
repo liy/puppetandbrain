@@ -3,7 +3,8 @@ import Variable from './data/Variable';
 
 export default class
 {
-  constructor() {
+  constructor(lookUp) {
+    this.lookUp = lookUp;
     this.mapping = {};
   }
 
@@ -28,12 +29,12 @@ export default class
     // Have to try to use the exisiting id, as command calling this process can be
     // undo and redo. Further redo action might have nodes who are referencing this actor.
     // Therefore, we need to try to keep the id the same.
-    let actor = new ObjecClasses[pod.className](pod.id);
+    let actor = new ObjecClasses[pod.className](pod.id, this.lookUp);
     Editor.stage.addActor(actor);
 
     // preload actor and then initialize it
     // note that I do not need to remove brainID from actorPod.
-    // Because LookUp will generate a new ID if brainID exist.
+    // Because lookUp will generate a new ID if brainID exist.
     await actor.preload(pod);
     actor.init(pod);
 
@@ -54,7 +55,7 @@ export default class
     let performs= [];
     for(let id of pod.nodes) {
       let nodePod = pod.store[id];
-      let node = NodeFactory.create(nodePod.className);
+      let node = NodeFactory.create(nodePod.className, this.lookUp);
 
       // change owner, no need to use mapping, since we can import only 1 actor at a time.
       nodePod.ownerID = actor.id;
@@ -136,7 +137,7 @@ export default class
         pointerPod.output.nodeID = outputNode.id;
         
         let input = node.inputs.get(pointerPod.name);
-        let output = LookUp.get(outputNode.id).outputs.get(pointerPod.output.name);
+        let output = this.lookUp.get(outputNode.id).outputs.get(pointerPod.output.name);
         input.connect(output);
       }
     }
