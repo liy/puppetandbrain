@@ -12,7 +12,7 @@ export default class LoaderBucket
   }
 
   add(id, url, contentType, options=null) {
-    if(Resource.has(id)) return;
+    if(this.resources.has(id)) return;
 
     switch(contentType) {
       case ContentType.JSON:

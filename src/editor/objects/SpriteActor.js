@@ -5,7 +5,7 @@ import DataType from '../data/DataType';
 import ImageLoader from '../resources/ImageLoader';
 import { aroundAt, getMimeType } from '@/utils/utils';
 import Vec2 from '../math/Vec2';
-import { LoaderBucket } from '../resources/Resource';
+import LoaderBucket from '../resources/LoaderBucket';
 
 export default class SpriteActor extends Actor
 {
@@ -21,7 +21,7 @@ export default class SpriteActor extends Actor
 
     this.addComponent('placeholder', new PlaceHolderComponent());
     
-    let loader = new LoaderBucket(resources);
+    let loader = new LoaderBucket(this.resources);
     let promises = pod.userFiles.map(async entry => {
       loader.add(entry.path, entry.url, entry.contentType)
     });
@@ -55,7 +55,7 @@ export default class SpriteActor extends Actor
     ImageLoader.fetch(fileData).then(({image, blob, url}) => {
       this.spriteContainer.sprite.texture = PIXI.Texture.from(image);
     }).catch(e => {
-      // In theory the default sprite is already in Resource, you can directly get it without fetch
+      // In theory the default sprite is already in activity.resources, you can directly get it without fetch
       // default sprite
       ImageLoader.fetch({url:require('!file-loader!@/assets/icons/sprite-actor.png')}).then(({image}) => {
         this.spriteContainer.sprite.texture = PIXI.Texture.from(image);

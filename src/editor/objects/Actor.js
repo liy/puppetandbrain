@@ -18,7 +18,6 @@ export default class Actor extends EventEmitter
   constructor(id, activity) {
     super();
     this.activity = activity;
-    this.lookUp = this.activity.lookUp;
 
     this.properties = new PropertyList(this);
 
@@ -103,6 +102,14 @@ export default class Actor extends EventEmitter
     this.brain.destroy();
 
     console.log('destroy', this)
+  }
+
+  get lookUp() {
+    return this.activity.lookUp
+  }
+
+  get resources() {
+    return this.activity.resources;
   }
 
   hitTest(x, y) {
