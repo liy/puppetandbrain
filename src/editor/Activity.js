@@ -1,6 +1,5 @@
 import LookUp from './LookUp';
 import ActivityLoader from "./ActivityLoader";
-import { Resource } from "./resources/Resource";
 import Delay from './access/Delay'
 
 export default class Activity
@@ -10,6 +9,8 @@ export default class Activity
     this.ownerID = null
     this.isNew = false
     this.delaySave = new Delay();
+
+    this.resources = new Map();
 
     this.lookUp = new LookUp();
   }
@@ -24,7 +25,7 @@ export default class Activity
     let pod = await API.getActivity(id);
     this.id = id;
     this.ownerID = pod.userID;
-    var loader = new ActivityLoader(this.lookUp);
+    var loader = new ActivityLoader(this);
     return loader.parse(pod);
   }
 
@@ -127,7 +128,7 @@ export default class Activity
    */
   clear() {
     // TODO: clear resources necessary??
-    Resource.clear();
+    this.resources.clear();
 
     EditorHistory.clear();
     Editor.stage.clear();
@@ -150,10 +151,10 @@ export default class Activity
   }
 
   cleanResource(fileRefs) {
-    let paths = Resource.keys();
+    let paths = this.resources.keys();
     for(let path of paths) {
       if(!(path in fileRefs)) {
-        Resource.delete(path);
+        this.resources.delete(path);
       }
     }
   }

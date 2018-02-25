@@ -3,8 +3,8 @@ import './AudioField.scss'
 import Gadget from './Gadget'
 import FileButton from '../gadgets/FileButton'
 import CircleProgress from '../gadgets/CircleProgress'
-import { Resource } from '../../resources/Resource';
 import SoundLoader from '../../resources/SoundLoader';
+import ActivityManager from '../../ActivityManager';
 
 export default class extends Gadget
 {
@@ -57,7 +57,7 @@ export default class extends Gadget
 
       // Update the resource with audio data so other variable,
       // node, input can read from it.
-      Resource.set(other.path, blob);
+      ActivityManager.current.resources.set(other.path, blob);
       
       // let url = await API.getUrl(result.path);
       this.audio.src = URL.createObjectURL(blob);

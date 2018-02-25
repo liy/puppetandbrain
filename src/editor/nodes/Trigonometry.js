@@ -50,8 +50,8 @@ NodeTemplate.Trigonometry = {
 
 export default class Trigonometry extends Adaptor
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
   }
 
   sin() {

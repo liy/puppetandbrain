@@ -26,8 +26,8 @@ NodeTemplate.KeyboardEvent = {
 
 export default class KeyboardEvent extends Listener
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
 
     this.keydown = this.keydown.bind(this)
     this.keyup = this.keyup.bind(this)

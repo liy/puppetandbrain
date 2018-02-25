@@ -32,8 +32,8 @@ NodeTemplate.Repeat = {
 
 export default class Repeat extends Task
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
   }
 
   run() {

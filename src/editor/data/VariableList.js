@@ -5,9 +5,9 @@ import DataType from "./DataType";
 
 export default class VariableList extends EventEmitter
 {
-  constructor(brain, lookUp) {
+  constructor(brain, activity) {
     super()
-    this.lookUp = lookUp;
+    this.lookUp = activity.lookUp;
     this.brain = brain;
     
     this.variables = new ArrayMap();

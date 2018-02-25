@@ -12,7 +12,6 @@
 // import './Editor'
 // import './ui/UIController';
 
-// import './resources/Resource';
 // import './Activity';
 
 // import ActorSelection from './objects/ActorSelection';

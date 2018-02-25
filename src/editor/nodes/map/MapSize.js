@@ -25,8 +25,8 @@ NodeTemplate.MapSize = {
 
 export default class MapSize extends Node
 {
-  constructor(id, lookUp) {
-    super(id, lookUp)
+  constructor(id, activity) {
+    super(id, activity)
   }
 
   init(pod) {

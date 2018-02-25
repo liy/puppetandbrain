@@ -1,5 +1,6 @@
 import Command from './Command';
 import GraphSelection from '../graph/GraphSelection'
+import ActivityManager from '../ActivityManager';
 
 export default class CreateBlock extends Command
 {
@@ -17,7 +18,7 @@ export default class CreateBlock extends Command
   }
 
   process() {
-    let node = NodeFactory.create(this.pod.className, this.nodeID, this.lookUp);
+    let node = NodeFactory.create(this.pod.className, this.nodeID, ActivityManager.current);
     node.init({
       ...this.pod,
       ownerID: this.ownerID

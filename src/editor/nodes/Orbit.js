@@ -44,8 +44,8 @@ NodeTemplate.Orbit = {
 
 export default class Orbit extends Task
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
 
     Editor.on('game.start', this.start, this);
   }

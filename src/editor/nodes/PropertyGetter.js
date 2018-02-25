@@ -18,8 +18,8 @@ NodeTemplate.PropertyGetter = {
 // Dynamic property getter. Maybe not useful?
 export default class PropertyGetter extends Node
 {
-  constructor(id, lookUp) {
-    super(id, lookUp)
+  constructor(id, activity) {
+    super(id, activity)
   }
 
   init(pod) {

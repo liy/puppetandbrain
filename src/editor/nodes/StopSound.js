@@ -1,6 +1,5 @@
 import {Task, Template as ParentTemplate} from './Task'
 import DataType from "../data/DataType";
-import { Resource } from '../resources/Resource';
 import SoundLoader from '../resources/SoundLoader'
 
 
@@ -23,8 +22,8 @@ NodeTemplate.StopSound = {
 }
 export default class StopSound extends Task
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
   }
   
   async run() {

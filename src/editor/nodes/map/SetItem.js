@@ -36,8 +36,8 @@ NodeTemplate.SetItem = {
 
 export default class SetItem extends Task
 {
-  constructor(id, lookUp) {
-    super(id, lookUp)
+  constructor(id, activity) {
+    super(id, activity)
   }
 
   run() {

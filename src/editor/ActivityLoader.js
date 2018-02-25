@@ -1,12 +1,12 @@
-import Variable from './data/Variable';
-import * as ObjecClasses from './objects';
-import {LoaderBucket} from './resources/Resource';
-import { getMimeType } from '@/utils/utils';
+import LoaderBucket from './resources/LoaderBucket';
+import ActorFactory from './objects/ActorFactory';
 
 export default class ActivityLoader
 {
-  constructor(lookUp) {
-    this.lookUp = lookUp;
+  constructor(activity) {
+    this.activity = activity;
+    this.resources = activity.resources;
+    this.lookUp = activity.lookUp;
   }
 
   async parse(pod) {
@@ -19,7 +19,7 @@ export default class ActivityLoader
   }
 
   async preload(pod) {
-    let loader = new LoaderBucket();
+    let loader = new LoaderBucket(this.resources);
     
     let urlPromises = [];
     for(let id of pod.actors) {
@@ -47,7 +47,7 @@ export default class ActivityLoader
     for(let id of pod.stage) {
       let actorPod = pod.store[id];
 
-      let actor = new ObjecClasses[actorPod.className](actorPod.id);
+      let actor = ActorFactory.create(actorPod.className, actorPod.id, this.activity);
       actor.init(actorPod);
       Editor.stage.addActor(actor);
       promises.push(actor.loaded);
@@ -68,7 +68,7 @@ export default class ActivityLoader
     let performs = [];
     for(let id of pod.nodes) {
       let data = pod.store[id];
-      let node = NodeFactory.create(data.className, id, this.lookUp)
+      let node = NodeFactory.create(data.className, id, this.activity)
       // delay perform node initialization,
       // since they depend on Action nodes to be initialized first
       if(data.className ==  'Perform') {

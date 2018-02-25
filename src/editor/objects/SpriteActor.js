@@ -9,8 +9,8 @@ import { LoaderBucket } from '../resources/Resource';
 
 export default class SpriteActor extends Actor
 {
-  constructor(id) {
-    super(id);
+  constructor(id, activity) {
+    super(id, activity);
   }
 
   async preload(pod) {
@@ -21,7 +21,7 @@ export default class SpriteActor extends Actor
 
     this.addComponent('placeholder', new PlaceHolderComponent());
     
-    let loader = new LoaderBucket();
+    let loader = new LoaderBucket(resources);
     let promises = pod.userFiles.map(async entry => {
       loader.add(entry.path, entry.url, entry.contentType)
     });

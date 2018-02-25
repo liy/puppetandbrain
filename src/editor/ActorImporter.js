@@ -1,10 +1,11 @@
-import * as ObjecClasses from './objects';
 import Variable from './data/Variable';
+import ActorFactory from './objects/ActorFactory';
 
 export default class
 {
-  constructor(lookUp) {
-    this.lookUp = lookUp;
+  constructor(activity) {
+    this.activity = activity;
+    this.lookUp = this.activity.lookUp;
     this.mapping = {};
   }
 
@@ -29,7 +30,7 @@ export default class
     // Have to try to use the exisiting id, as command calling this process can be
     // undo and redo. Further redo action might have nodes who are referencing this actor.
     // Therefore, we need to try to keep the id the same.
-    let actor = new ObjecClasses[pod.className](pod.id, this.lookUp);
+    let actor = ActorFactory.create(pod.className, pod.id, this.activity)
     Editor.stage.addActor(actor);
 
     // preload actor and then initialize it
@@ -55,7 +56,7 @@ export default class
     let performs= [];
     for(let id of pod.nodes) {
       let nodePod = pod.store[id];
-      let node = NodeFactory.create(nodePod.className, this.lookUp);
+      let node = NodeFactory.create(nodePod.className, this.activity);
 
       // change owner, no need to use mapping, since we can import only 1 actor at a time.
       nodePod.ownerID = actor.id;

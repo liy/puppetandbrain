@@ -26,8 +26,8 @@ NodeTemplate.SetScale = {
 
 export default class SetScale extends Task
 {
-  constructor(id, lookUp) {
-    super(id, lookUp)
+  constructor(id, activity) {
+    super(id, activity)
   }
 
   init(pod) {

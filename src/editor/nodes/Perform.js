@@ -16,8 +16,8 @@ export default class Perform extends Task
    * @param {String} name Function name
    * @memberof Function
    */
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
   }
 
   destroy() {

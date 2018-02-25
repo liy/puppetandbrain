@@ -10,13 +10,13 @@ import ImageLoader from '../resources/ImageLoader';
 import Vec2 from '../math/Vec2';
 import Matrix from '../math/Matrix';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
-import { LoaderBucket } from '../resources/Resource';
+import LoaderBucket from '../resources/LoaderBucket';
 import { getMimeType } from '@/utils/utils';
 
 export default class ChoiceBox extends Actor
 {
-  constructor(id) {
-    super(id);
+  constructor(id, activity) {
+    super(id, activity);
     
     this.selectOutline = new filters.OutlineFilter(4, 0xc95ce8)
     this.hoverOutline = new filters.OutlineFilter(3, 0xdbace8)
@@ -30,7 +30,7 @@ export default class ChoiceBox extends Actor
 
     this.addComponent('placeholder', new PlaceHolderComponent());
     
-    let loader = new LoaderBucket();
+    let loader = new LoaderBucket(this.activity.resources);
     let promises = pod.userFiles.map(async entry => {
       loader.add(entry.path, entry.url, entry.contentType)
     });

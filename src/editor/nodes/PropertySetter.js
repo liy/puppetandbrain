@@ -18,8 +18,8 @@ NodeTemplate.PropertySetter = {
 
 export default class PropertySetter extends Task
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
   }
 
   init(pod) {

@@ -4,8 +4,8 @@ import Node from "./Node";
  */
 export default class extends Node
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
   }
 
   init(pod) {

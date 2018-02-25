@@ -1,7 +1,7 @@
 import * as ns from './'
 
 export default {
-  create: function(className, id, lookUp) {
-    return new ns[className](id, lookUp);
+  create: function(className, id, activity) {
+    return new ns[className](id, activity);
   }
 }

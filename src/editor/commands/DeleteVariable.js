@@ -62,18 +62,18 @@ export default class DeleteVariable extends Command
 
   undo() {
     // put back the variable first
-    let variable = new Variable(this.variablePod.id, this.lookUp);
+    let variable = new Variable(this.variablePod.id, ActivityManager.current);
     variable.init(this.variablePod);
     this.lookUp.get(this.brainID).variables.insert(variable, this.variableIndex);
 
     // re-create the nodes and blocks first. Getting ready for execution 
     // and variable linking!
     for(let pod of this.getterPods) {
-      let node = NodeFactory.create(pod.className, pod.id, this.lookUp);
+      let node = NodeFactory.create(pod.className, pod.id, ActivityManager.current);
       node.init(pod);
     }
     for(let pod of this.setterPods) {
-      let node = NodeFactory.create(pod.className, pod.id, this.lookUp);
+      let node = NodeFactory.create(pod.className, pod.id, ActivityManager.current);
       node.init(pod);
     }
 

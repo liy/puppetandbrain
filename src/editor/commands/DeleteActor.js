@@ -1,7 +1,6 @@
 import Command from './Command';
-import * as ObjecClasses from '../objects';
-import Action from '../nodes/Action';
 import Variable from '../data/Variable';
+import ActorFactory from '../objects/ActorFactory';
 
 export default class DeleteActor extends Command
 {
@@ -23,14 +22,13 @@ export default class DeleteActor extends Command
   }
 
   undo() {
-    // let actor = new SpineActor(this.pod.id);
-    let actor = new ObjecClasses[this.pod.className](this.pod.id);
+    let actor = ActorFactory.create(this.pod.className, this.pod.id, ActivityManager.current)
     actor.init(this.pod);
     Editor.stage.addActor(actor)
 
     // create variables
     for(let variablePod of this.pod.brain.variables) {
-      let variable = new Variable(variablePod.id, this.lookUp);
+      let variable = new Variable(variablePod.id, ActivityManager.current);
       variable.init(variablePod);
       // put the variable into its brain
       let brain = this.lookUp.get(variablePod.brainID);
@@ -39,7 +37,7 @@ export default class DeleteActor extends Command
 
     // create and init nodes
     for(let nodePod of this.pod.brain.nodes) {
-      let node = new NodeFactory.create(nodePod.className, nodePod.id, this.lookUp)
+      let node = new NodeFactory.create(nodePod.className, nodePod.id, ActivityManager.current)
       node.init(nodePod);
     }
 

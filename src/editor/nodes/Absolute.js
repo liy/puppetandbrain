@@ -25,8 +25,8 @@ NodeTemplate.Absolute = {
 
 export default class Absolute extends Node
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
   }
 
   init(pod) {

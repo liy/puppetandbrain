@@ -3,9 +3,11 @@ import Resource from './Resource';
 
 export default class Loader extends EventEmitter
 {
-  constructor(id, url, options) {
+  constructor(resources, id, url, options) {
     super();
 
+    this.resources = resources;
+    
     this.id = id;
     this.url = url;
     this.options = options;
@@ -16,7 +18,7 @@ export default class Loader extends EventEmitter
       if(response.ok) {
         // added to the resource
         return this.onSuccess(response).then(data => {
-          Resource.set(this.id, data);
+          this.resources.set(this.id, data);
           return data;
         })
       }

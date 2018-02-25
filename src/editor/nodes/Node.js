@@ -5,9 +5,13 @@ import EventEmitter from "@/utils/EventEmitter";
 
 export default class Node extends EventEmitter
 {
-  constructor(id, lookUp) {
+  constructor(id, activity) {
     super();
-    this.lookUp = lookUp;
+    
+    this.activity = activity;
+    this.lookUp = this.activity.lookUp;
+    this.resources = this.activity.resources;
+
     this.id = this.lookUp.addNode(this, id);
 
     // stores data used by inputs, or potential input data, e.g., node enabled, I think I can

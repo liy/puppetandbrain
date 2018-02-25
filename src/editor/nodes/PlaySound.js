@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task'
 import DataType from "../data/DataType";
-import { Resource } from '../resources/Resource';
 import SoundLoader from '../resources/SoundLoader'
+import ActivityManager from '../ActivityManager';
 
 
 NodeTemplate.PlaySound = {
@@ -44,8 +44,8 @@ NodeTemplate.PlaySound = {
 }
 export default class PlaySound extends Task
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
 
     this.complete = this.complete.bind(this);
 
@@ -92,14 +92,14 @@ export default class PlaySound extends Task
       return;
     }
 
-    let blob = Resource.get(input.path);
+    let blob = ActivityManager.current.resources.get(input.path);
     if(blob) {
       this.audio.src = URL.createObjectURL(blob);
     }
     else {
       // After loading completed, if user disconnect a originally connected pointer.
       // the local memory audio is not availble because it is not preloaded.
-      // therefore we need to await, fetch and put it into the Resource for next time use 
+      // therefore we need to await, fetch and put it into the resources for next time use 
       // 
       // I did a prefetch when input is disconnected 
       this.audio.src = URL.createObjectURL(await SoundLoader.fetch(input));

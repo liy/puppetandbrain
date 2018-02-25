@@ -14,8 +14,8 @@ NodeTemplate.HoverEvent = {
 
 export default class HoverEvent extends Listener
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
 
     Editor.on('game.prestart', this.prestart, this)
     Editor.on('game.stop', this.stop, this)

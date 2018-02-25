@@ -15,10 +15,10 @@ import ContextMenu from '../ui/ContextMenu';
 
 export default class Actor extends EventEmitter
 {
-  constructor(id, lookUp) {
+  constructor(id, activity) {
     super();
-
-    this.lookUp = lookUp;
+    this.activity = activity;
+    this.lookUp = this.activity.lookUp;
 
     this.properties = new PropertyList(this);
 

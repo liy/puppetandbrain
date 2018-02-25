@@ -33,7 +33,7 @@ export default class DeleteBlock extends Command
   }
 
   undo() {
-    let node = NodeFactory.create(this.pod.className, this.pod.id, this.lookUp);
+    let node = NodeFactory.create(this.pod.className, this.pod.id, ActivityManager.current);
     node.init(this.pod);
 
     // connect executions

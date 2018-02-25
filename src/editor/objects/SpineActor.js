@@ -8,8 +8,8 @@ import API from '../../API';
 
 export default class SpineActor extends Actor
 {
-  constructor(id) {
-    super(id);
+  constructor(id, activity) {
+    super(id, activity);
     
   }
 

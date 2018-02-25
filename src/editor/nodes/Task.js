@@ -20,8 +20,8 @@ export const Template = {
 
 export class Task extends Node
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
 
     this.enter = new Enter();
     this.execution = new Execution(this);

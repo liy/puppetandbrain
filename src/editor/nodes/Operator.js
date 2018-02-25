@@ -32,8 +32,8 @@ const OperatorTemplate = {
 
 export class Operator extends Node
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
   }
 
   init(pod) {

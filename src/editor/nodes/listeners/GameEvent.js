@@ -14,8 +14,8 @@ NodeTemplate.GameEvent = {
 
 export default class GameEvent extends Listener
 {
-  constructor(id, lookUp) {
-    super(id, lookUp);
+  constructor(id, activity) {
+    super(id, activity);
 
     Editor.on('game.start', this.start, this)
     Editor.on('game.stop', this.stop, this)

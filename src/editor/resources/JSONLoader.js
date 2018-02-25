@@ -1,11 +1,9 @@
 import Loader from "./Loader";
 
-console.log(Loader)
-
 export default class extends Loader
 {
-  constructor(id, url, options) {
-    super(id, url, options)
+  constructor(resources, id, url, options) {
+    super(resources, id, url, options)
   }
 
   onSuccess(response) {
