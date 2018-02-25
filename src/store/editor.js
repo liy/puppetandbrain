@@ -4,7 +4,8 @@ const state = {
 }
 
 const getters = {
-  debugMode: state => state.debugMode
+  debugMode: state => state.debugMode,
+  editorMode: state => state.editorMode,
 }
 
 const mutations = {
@@ -17,9 +18,9 @@ const mutations = {
     state.debugMode = !state.debugMode;
   },
 
-  updateEditorMode(state, mode) {
-
-  }
+  authStateChange(state, user) {
+    state.user = user;
+  },
 }
 
 export default {

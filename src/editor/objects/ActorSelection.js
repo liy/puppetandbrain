@@ -1,4 +1,5 @@
 import EventEmitter from "@/utils/EventEmitter";
+import SoundEffect from '@/SoundEffect';
 
 // TODO: to be simplified
 /**
@@ -6,25 +7,13 @@ import EventEmitter from "@/utils/EventEmitter";
  * 
  * @class Selection
  */
-export default class ActorSelection extends EventEmitter
+class ActorSelection extends EventEmitter
 {
   constructor() {
     super();
 
     this.selected = [];
     this.enabled = true;
-
-    document.addEventListener('keydown', this.keydown.bind(this));
-  }
-
-  keydown(e) {
-    if(!this.enabled) return;
-
-    switch(e.keyCode) {
-      case 46:
-        this.delete();
-        break;
-    }
   }
 
   add(target) {
@@ -55,6 +44,9 @@ export default class ActorSelection extends EventEmitter
   delete() {
     if(this.selected[0]) {
       EditorHistory.push(Commander.create('DeleteActor', this.selected[0].id).processAndSave());
+      SoundEffect.play('trash');
     }
   }
 }
+
+export default new ActorSelection();

@@ -42,7 +42,6 @@ class API
     })
   }
 
-  
   cloneActivity(pod, files, fileRefs) {
     let batch = firebase.firestore.batch();
 

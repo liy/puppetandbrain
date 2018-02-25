@@ -21,6 +21,7 @@
 </template>
 
 <script>
+
 import 'pixi.js'
 import 'pixi-spine';
 
@@ -35,6 +36,7 @@ import Toolbox from './vue/Toolbox.vue';
 
 import store from '@/store';
 
+import ActivityManager from './ActivityManager'
 
 
 export default {
@@ -46,17 +48,21 @@ export default {
     toolbox: Toolbox,
   },
   beforeCreate() {
-    window.NodeTemplate = Object.create(null);
   },
-  async mounted() {
-    this.cancelDebugModeWatch = store.watch(() => store.getters.debugMode, 
-    (debugMode, oldMode) => {
+  mounted() {
+    // this.cancelDebugModeWatch = store.watch(() => store.getters.debugMode, 
+    // (debugMode, oldMode) => {
+    // })
+
+    // wait until user is signed in
+    getCurrentUser().then(user => {
+      ActivityManager.temp();
     })
   },
   beforeDestroy() {
     this.cancelDebugModeWatch();
     // clear everything...
-    Activity.clear();
+    this.activity.clear();
     EditorHistory.destroy();
     NotificationControl.destroy();
   }

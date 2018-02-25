@@ -2,17 +2,9 @@
 <div id='toolbox'>
   <history-control id='history-control'/>
   <div id='stage-toolbar'>
-    <div class='toolbar-button' id='bin-button' data-title="Delete puppet">
-      <svg width=68 height=68>
-        <use :xlink:href="`#${BinButtonIcon.id}`" :viewBox="BinButtonIcon.viewBox"/>
-      </svg>
-    </div>
+    <delete-button class='toolbar-button'/>
     <debug-button class='toolbar-button'/>
-    <div class='toolbar-button' id='add-actor-button' data-title="Add puppet">
-      <svg width=120 height=120>
-        <use :xlink:href="`#${AddButtonIcon.id}`" :viewBox="AddButtonIcon.viewBox"/>
-      </svg>
-    </div>
+    <add-button class='toolbar-button'/>
   </div>
 </div>
 </template>
@@ -20,21 +12,17 @@
 <script>
 import HistoryControl from './HistoryControl.vue'
 import DebugButton from './DebugButton.vue'
-import AddButtonIcon from '@/assets/add-button-icon.svg';
-import BinButtonIcon from '@/assets/bin-button-icon.svg';
+import AddButton from './AddButton.vue'
+import DeleteButton from './DeleteButton.vue'
 
 export default {
   name: 'toolbox',
   components: {
     'history-control': HistoryControl,
     'debug-button': DebugButton,
-  },
-  data() {
-    return {
-      AddButtonIcon,
-      BinButtonIcon
-    }
-  },
+    'add-button': AddButton,
+    'delete-button': DeleteButton,
+  }
 }
 </script>
 
@@ -64,18 +52,5 @@ export default {
 .toolbar-button {
   position: relative;
   margin-right: 20px;
-}
-
-#add-actor-button {
-  width: 120px;
-  height: 120px;
-}
-
-#bin-button {
-  width: 68px;
-  width: 68px;
-
-  margin-right: 50px;
-  margin-left: 50px;
 }
 </style>
