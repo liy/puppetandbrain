@@ -218,7 +218,7 @@ class AnimatePuppet extends Tutorial
         await this.banner.start();
 
         this.next();
-      }, Editor)
+      }, ActivityManager.current.stage)
     })
   }
 }

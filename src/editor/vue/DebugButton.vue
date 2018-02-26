@@ -1,5 +1,5 @@
 <template>
-<div @click='click' class='toolbar-button' data-title="Play game">
+<div id='debug-button' @click='click' class='toolbar-button' data-title="Play game">
   <svg v-if="!debugMode" width=100 height=100>
     <use :xlink:href="`#${StartButtonIcon.id}`" :viewBox="StartButtonIcon.viewBox"/>
   </svg>
