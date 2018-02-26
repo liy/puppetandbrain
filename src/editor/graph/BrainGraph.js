@@ -161,7 +161,7 @@ export default class BrainGraph
       this.container.style.opacity = 1.0;
     }});
 
-    store.commit('updateEditorMode', 'brian');
+    store.commit('updateStageMode', false);
 
     this.container.dispatchEvent(new CustomEvent('graph.opened', {bubbles:true, detail: this}));
   }
@@ -191,7 +191,7 @@ export default class BrainGraph
       GraphSelection.deselect();
       GraphSelection.disable();
 
-      store.commit('updateEditorMode', 'stage');
+      store.commit('updateStageMode', true);
 
       this.container.dispatchEvent(new CustomEvent('graph.closed', {bubbles:true}));
     }})

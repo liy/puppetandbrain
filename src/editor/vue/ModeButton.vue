@@ -25,16 +25,23 @@ export default {
       enabled: false
     }
   },
+  computed: {
+    ...mapGetters(['stageMode'])
+  },
   mounted() {
     // watch editor mode changes
-    this.cancelWatch = this.$store.watch(() => this.$store.getters.stageMode, this.watcher);
-    this.watcher(this.$store.getters.stageMode);
+    this.watcher(this.stageMode);
   },
   beforeDestroy() {
     this.cancelWatch();
   },
-  computed: {
-    ...mapGetters(['stageMode'])
+  watch: {
+    stageMode: {
+      handler: function(nv, ov) {
+        console.log(nv)
+        this.watcher(nv)
+      }  
+    }
   },
   methods: {
     ...mapMutations(['toggleStageMode']),
@@ -42,7 +49,6 @@ export default {
       if(stageMode) {
         this.tooltip = "Open puppet brain";
 
-        console.log('test?')
         ActorSelection.on('actor.selection.change', this.onSelectChange, this);
         this.onSelectChange(ActorSelection.selected);
       }
@@ -57,7 +63,6 @@ export default {
       this.$store.commit('toggleStageMode')
     },
     onSelectChange(selected) {
-      console.log(selected);
       this.enabled = selected.length != 0;
     }
   }
