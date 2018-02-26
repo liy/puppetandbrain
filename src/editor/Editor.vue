@@ -78,9 +78,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-
+<style lang="scss">
 #app-version {
   position: absolute;
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
