@@ -48,7 +48,7 @@ export default class PlaySound extends Task
 
     this.complete = this.complete.bind(this);
 
-    ActivityManager.stage.on('game.stop', this.stop, this)
+    this.stage.on('game.stop', this.stop, this)
   }
 
   init(pod) {
@@ -71,7 +71,7 @@ export default class PlaySound extends Task
       this.audio.pause();
       this.audio.removeEventListener('ended', this.complete);
     }
-    Editor.off('game.stop', this.stop, this)
+    this.stage.off('game.stop', this.stop, this)
   }
   
   

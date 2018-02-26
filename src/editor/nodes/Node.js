@@ -9,8 +9,6 @@ export default class Node extends EventEmitter
     super();
     
     this.activity = activity;
-    this.lookUp = this.activity.lookUp;
-    this.resources = this.activity.resources;
 
     this.id = this.lookUp.addNode(this, id);
 
@@ -78,6 +76,18 @@ export default class Node extends EventEmitter
 
     this.x = pod.x;
     this.y = pod.y;
+  }
+
+  get stage() {
+    return this.activity.stage;
+  }
+
+  get lookUp() {
+    return this.activity.lookUp;
+  }
+
+  get resources() {
+    return this.activity.resources;
   }
 
   get className() {

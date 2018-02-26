@@ -42,8 +42,8 @@ export default class Actor extends EventEmitter
 
     mixin(this, new Entity());
 
-    ActivityManager.stage.on('game.prestart', this.gamePrestart, this);
-    ActivityManager.stage.on('game.stop', this.gameStop, this);
+    this.stage.on('game.prestart', this.gamePrestart, this);
+    this.stage.on('game.stop', this.gameStop, this);
   }
 
   preload(pod) {
@@ -94,12 +94,16 @@ export default class Actor extends EventEmitter
     document.removeEventListener('mousemove', this.mouseDragMove);
     document.removeEventListener('mouseup', this.pointerRelease);
 
-    Editor.off('game.prestart', this.gamePrestart, this);
-    Editor.off('game.stop', this.gameStop, this);
+    this.stage.off('game.prestart', this.gamePrestart, this);
+    this.stage.off('game.stop', this.gameStop, this);
 
     this.brain.destroy();
 
     console.log('destroy', this)
+  }
+
+  get stage() {
+    return this.activity.stage;
   }
 
   get lookUp() {
@@ -156,7 +160,7 @@ export default class Actor extends EventEmitter
     document.addEventListener('touchend', this.pointerRelease);
 
     // crete move command, when move update it with new position
-    if(!ActivityManager.stage.playing) this.moveCommand = Commander.create('MoveActor', this);
+    if(!this.stage.playing) this.moveCommand = Commander.create('MoveActor', this);
 
     document.addEventListener('mousemove', this.mouseDragMove);
     document.addEventListener('touchmove', this.touchDragMove);
@@ -206,19 +210,19 @@ export default class Actor extends EventEmitter
   }
 
   mouseDragMove(e) {
-    this.position.x = e.clientX + this.offset.x - ActivityManager.stage.offsetX;
-    this.position.y = e.clientY + this.offset.y - ActivityManager.stage.offsetY;
+    this.position.x = e.clientX + this.offset.x - this.stage.offsetX;
+    this.position.y = e.clientY + this.offset.y - this.stage.offsetY;
   }
 
   touchDragMove(e) {
     let x = e.touches[0].clientX;
     let y = e.touches[0].clientY
-    this.position.x = x + this.offset.x - ActivityManager.stage.offsetX;
-    this.position.y = y + this.offset.y - ActivityManager.stage.offsetY;
+    this.position.x = x + this.offset.x - this.stage.offsetX;
+    this.position.y = y + this.offset.y - this.stage.offsetY;
   }
 
   contextMenu(e) {
-    Editor.emit('contextmenu', {actor:this, event:e});
+    this.stage.emit('contextmenu', {actor:this, event:e});
   }
 
   select() {
@@ -302,7 +306,7 @@ export default class Actor extends EventEmitter
 
     // FIXME: find a better way to handle saving
     // if game still playing, override pod with initial state
-    if(ActivityManager.stage.playing) Object.assign(pod, this.initialState);
+    if(this.stage.playing) Object.assign(pod, this.initialState);
 
     if(detail) {
       pod.brain = this.brain.pod(detail);
@@ -346,11 +350,11 @@ export default class Actor extends EventEmitter
   }
 
   get screenX() {
-    return this.x + ActivityManager.stage.offsetX
+    return this.x + this.stage.offsetX
   }
 
   get screenY() {
-    return this.y + ActivityManager.stage.offsetY
+    return this.y + this.stage.offsetY
   }
 
   createFileRefs() {

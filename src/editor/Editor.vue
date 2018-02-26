@@ -47,24 +47,15 @@ export default {
     toolbox: Toolbox,
   },
   mounted() {
-    let canvas = document.getElementById('canvas')
-    let stageElement = document.getElementById('stage')
-    ActivityManager.stage.init(stageElement, canvas);
-
-    // setup everything!
     // wait until user is signed in
     getCurrentUser().then(user => {
-      
-
-      ActivityManager.temp();
+      let activity = ActivityManager.temp();
+      this.$store.commit('staging', activity);
     })
   },
   beforeDestroy() {
-    this.cancelDebugModeWatch();
     // clear everything...
-    this.activity.clear();
-    EditorHistory.destroy();
-    NotificationControl.destroy();
+    ActivityManager.current.clear();
   }
 }
 </script>

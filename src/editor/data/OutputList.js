@@ -17,14 +17,14 @@ export default class OutputList extends EventEmitter
     this.names = this.list.keys;
 
     // when game stops, make all values null
-    ActivityManager.stage.on('game.stop', this.clearValues, this);
+    this.node.stage.on('game.stop', this.clearValues, this);
   }
 
   destroy() {
     this.removeAllListeners();
     // FIXME: how to destroy? what means of destroy a output list?
     // probably because you are destroy the whole node?
-    Editor.off('game.stop', this.clearValues, this);
+    this.node.stage.off('game.stop', this.clearValues, this);
   }
 
   [Symbol.iterator]() {

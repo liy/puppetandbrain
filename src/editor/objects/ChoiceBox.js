@@ -23,7 +23,7 @@ export default class ChoiceBox extends Actor
   }
 
   async preload(pod) {
-    let pos = pod.position || { x: aroundAt(ActivityManager.stage.stageWidth/2), y: aroundAt(ActivityManager.stage.stageHeight/2) };
+    let pos = pod.position || { x: aroundAt(this.stage.stageWidth/2), y: aroundAt(this.stage.stageHeight/2) };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
     this.scale = new Vec2(pod.scale || {x:1,y:1});
@@ -113,7 +113,7 @@ export default class ChoiceBox extends Actor
 
     this.box.graphics.filters = [this.selectOutline]
     // bring it to front
-    ActivityManager.stage.addChild(this.box.container);
+    this.stage.addChild(this.box.container);
   }
 
   deselect() {

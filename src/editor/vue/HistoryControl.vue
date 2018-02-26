@@ -35,7 +35,6 @@ export default {
     window.EditorHistory = new HistoryClass();
   },
   mounted() {
-
     EditorHistory.on('history.updated', () => {
       this.$forceUpdate()
     })
@@ -44,6 +43,7 @@ export default {
   beforeDestroy() {
     EditorHistory.clear();
     document.removeEventListener('keydown', this.keydown);
+    window.EditorHistory = null;
   },
   methods: {
     undoClicked() {

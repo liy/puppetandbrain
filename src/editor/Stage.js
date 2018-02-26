@@ -4,13 +4,12 @@ import EventEmitter from '@/utils/EventEmitter';
 import ContextMenu from './ui/ContextMenu';
 import Mouse from './access/Mouse';
 
-export default class Stage extends EventEmitter
+export default class extends EventEmitter
 {
   constructor() {
     super();
 
     this.actors = new ArrayMap();
-
     this.container = new PIXI.Container();
   }
 
@@ -41,6 +40,10 @@ export default class Stage extends EventEmitter
 
     this.loop = this.loop.bind(this);
     PIXI.ticker.shared.add(this.loop);
+  }
+
+  destroy() {
+    PIXI.ticker.shared.remove(this.loop);
   }
 
   get stageWidth() {

@@ -5,8 +5,9 @@ import ArrayMap from '@/utils/ArrayMap';
 import BlockBrowser from '../browser/BlockBrowser';
 import ElementController from './elements/ElementController';
 import Matrix from '../math/Matrix'
-import store from '@/store';
 import ConnectHelper from './ConnectHelper';
+
+import store from '@/store';
 
 export default class BrainGraph
 {
@@ -146,7 +147,7 @@ export default class BrainGraph
     window.addEventListener('resize', this.resize);
     this.resize();
 
-    ActivityManager.stage.blurEnabled = true;
+    ActivityManager.current.stage.blurEnabled = true;
     GraphSelection.enable();
 
     for(let node of this.brain.getNodes()) {
@@ -160,7 +161,7 @@ export default class BrainGraph
       this.container.style.opacity = 1.0;
     }});
 
-    // UIController.brainMode();
+    store.commit('updateEditorMode', 'brian');
 
     this.container.dispatchEvent(new CustomEvent('graph.opened', {bubbles:true, detail: this}));
   }
@@ -186,23 +187,23 @@ export default class BrainGraph
       
       this.container.style.display = 'none'
   
-      ActivityManager.stage.blurEnabled = false;
+      ActivityManager.current.stage.blurEnabled = false;
       GraphSelection.deselect();
       GraphSelection.disable();
 
-      // UIController.stageMode();
+      store.commit('updateEditorMode', 'stage');
 
       this.container.dispatchEvent(new CustomEvent('graph.closed', {bubbles:true}));
     }})
   }
 
   hide() {
-    ActivityManager.stage.blurEnabled = false;
+    ActivityManager.current.stage.blurEnabled = false;
     this.container.style.display = 'none'
   }
 
   show() {
-    ActivityManager.stage.blurEnabled = true;
+    ActivityManager.current.stage.blurEnabled = true;
     this.container.style.display = 'block'
   }
 

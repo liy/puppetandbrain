@@ -1,15 +1,19 @@
 import LookUp from './LookUp';
 import ActivityLoader from "./ActivityLoader";
 import EventEmitter from '@/utils/EventEmitter'
+import Stage from './Stage';
 
-export default class Activity
+export default class Activity extends EventEmitter
 {
   constructor(id, ownerID) {
+    super();
+
     this.id = id;
     this.ownerID = ownerID
 
     this.resources = new Map();
-    this.lookUp = new LookUp();
+    this.lookUp = new LookUp(this);
+    this.stage = new Stage();
   }
 
   get canSave() {

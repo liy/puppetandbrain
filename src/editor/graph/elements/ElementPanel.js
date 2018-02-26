@@ -91,7 +91,7 @@ export default class
   toggle() {
     this.element.style.transform = this.visible ? `translateX(100%)` : `translateX(0)`;
     this.visible = !this.visible;
-    UIController.controlShifted = this.visible;
+    // UIController.controlShifted = this.visible;
     this.pullIcon.style.transform = `scaleX(${this.visible?-1:1})`;
     if(this.visible) this.content.style.display = 'block'
   }

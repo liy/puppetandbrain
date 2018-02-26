@@ -37,17 +37,17 @@ export default class Flip extends Task
   constructor(id, activity) {
     super(id, activity)
     
-    ActivityManager.stage.on('game.stop', this.stop, this);
+    this.stage.on('game.stop', this.stop, this);
   }
 
   destroy() {
     super.destroy();
-    Editor.off('game.stop', this.stop, this)
-    Editor.off('tick', this.tick, this);
+    this.stage.off('game.stop', this.stop, this)
+    this.stage.off('tick', this.tick, this);
   }
 
   stop() {
-    Editor.off('tick', this.tick, this);
+    this.stage.off('tick', this.tick, this);
   }
 
   flipX({delta, deltaTime:dt}) {
@@ -58,7 +58,7 @@ export default class Flip extends Task
     }
     else {
       this.owner.scale.x = this.targetScaleX;
-      Editor.off('tick', this.flipX, this);
+      this.stage.off('tick', this.flipX, this);
       this.execution.run('completed');
     }
   }
@@ -71,7 +71,7 @@ export default class Flip extends Task
     }
     else {
       this.owner.scale.y = this.targetScaleY;
-      Editor.off('tick', this.flipY, this);
+      this.stage.off('tick', this.flipY, this);
       this.execution.run('completed');
     }
   }
@@ -90,12 +90,12 @@ export default class Flip extends Task
     if(direction =='left' || direction == 'right') {
       if(direction == 'left') this.targetScaleX = -this.targetScaleX;
       this.dx = (this.targetScaleX - this.owner.scale.x)/this.duration; 
-      ActivityManager.stage.on('tick', this.flipX, this);
+      this.stage.on('tick', this.flipX, this);
     }
     else {
       if(direction == 'down') this.targetScaleY = -this.targetScaleY;
       this.dy = (this.targetScaleY - this.owner.scale.y)/this.duration;
-      ActivityManager.stage.on('tick', this.flipY, this);
+      this.stage.on('tick', this.flipY, this);
     }
 
     this.execution.run();

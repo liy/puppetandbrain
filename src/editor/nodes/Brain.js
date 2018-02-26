@@ -16,7 +16,7 @@ export default class Brain
 
     this.variables = new VariableList(this, this.lookUp);
 
-    ActivityManager.stage.on('game.prestart', this.prestart, this);
+    this.owner.stage.on('game.prestart', this.prestart, this);
   }
 
   destroy() {
@@ -28,7 +28,7 @@ export default class Brain
     for(let variable of this.variables) {
       variable.destroy();
     }
-    Editor.off('game.prestart', this.prestart, this);
+    this.owner.stage.off('game.prestart', this.prestart, this);
   }
 
   prestart() {

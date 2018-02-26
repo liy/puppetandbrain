@@ -1,11 +1,13 @@
 const state = {
   debugMode: false,
-  editorMode: 'stage'
+  editorMode: 'stage',
+  activity: null,
 }
 
 const getters = {
   debugMode: state => state.debugMode,
   editorMode: state => state.editorMode,
+  activity: state => state.activity,
 }
 
 const mutations = {
@@ -18,9 +20,13 @@ const mutations = {
     state.debugMode = !state.debugMode;
   },
 
-  authStateChange(state, user) {
-    state.user = user;
+  updateEditorMode(state, mode) {
+    state.editorMode = mode;
   },
+
+  staging(state, activity) {
+    state.activity = activity;
+  }
 }
 
 export default {

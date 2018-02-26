@@ -32,7 +32,7 @@ export default class ContainerComponent extends Component
   }
 
   onStage() {
-    ActivityManager.stage.addChild(this.container);
+    ActivityManager.current.stage.addChild(this.container);
     this.container.on('pointerdown', this.pointerDown, this);
     this.container.on('pointerup', this.pointerUp, this);
     this.container.on('mouseover', this.mouseOver, this);
@@ -41,7 +41,7 @@ export default class ContainerComponent extends Component
   }
 
   offStage() {
-    ActivityManager.stage.removeChild(this.container);
+    ActivityManager.current.stage.removeChild(this.container);
     this.container.off('pointerdown', this.pointerDown, this);
     this.container.off('pointerup', this.pointerUp, this);
     this.container.off('mouseover', this.mouseOver, this);

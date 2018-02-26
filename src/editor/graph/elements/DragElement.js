@@ -108,7 +108,8 @@ export default class
     this.destroy();
 
     // drag over to the delete button, delete variable
-    if(target == UIController.deleteBtn.element) {
+    let deleteBtn = document.getElementById('delete-button')
+    if(target == deleteBtn) {
       let action = true;
       if(this.sourceElement.variable.inUse) {
         action = (await ConfirmModal.open('Variable is in use, do you really want to delete the varaible and its getters and setters?')).action;

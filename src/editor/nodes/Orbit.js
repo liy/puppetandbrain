@@ -47,13 +47,13 @@ export default class Orbit extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    ActivityManager.stage.on('game.start', this.start, this);
+    this.stage.on('game.start', this.start, this);
   }
 
   
   destroy() {
     super.destroy();
-    Editor.off('game.start', this.start, this);
+    this.stage.off('game.start', this.start, this);
   }
 
 

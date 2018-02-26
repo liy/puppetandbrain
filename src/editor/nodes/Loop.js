@@ -34,12 +34,12 @@ export default class Loop extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    ActivityManager.stage.on('game.prestart', this.prestart, this);
+    this.stage.on('game.prestart', this.prestart, this);
   }
 
   destroy() {
+    this.stage.off('game.prestart', this.prestart, this);
     super.destroy();
-    Editor.off('game.prestart', this.prestart, this);
   }
 
   prestart() {

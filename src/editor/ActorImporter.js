@@ -31,7 +31,7 @@ export default class
     // undo and redo. Further redo action might have nodes who are referencing this actor.
     // Therefore, we need to try to keep the id the same.
     let actor = ActorFactory.create(pod.className, pod.id, this.activity)
-    ActivityManager.stage.addActor(actor);
+    this.activity.stage.addActor(actor);
 
     // preload actor and then initialize it
     // note that I do not need to remove brainID from actorPod.

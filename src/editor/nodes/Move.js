@@ -37,17 +37,17 @@ export default class Move extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    ActivityManager.stage.on('game.stop', this.stop, this)
+    this.stage.on('game.stop', this.stop, this)
   }
 
   destroy() {
+    this.stage.off('game.stop', this.stop, this)
+    this.stage.off('tick', this.tick, this);
     super.destroy();
-    Editor.off('game.stop', this.stop, this)
-    Editor.off('tick', this.tick, this);
   }
 
   stop() {
-    Editor.off('tick', this.tick, this);
+    this.stage.off('tick', this.tick, this);
   }
 
   tick({delta, deltaTime:dt}) {
@@ -58,7 +58,7 @@ export default class Move extends Task
     }
     else {
       this.owner.position = this.target;
-      Editor.off('tick', this.tick, this);
+      this.stage.off('tick', this.tick, this);
       this.execution.run('completed');
     }
   }
@@ -74,7 +74,7 @@ export default class Move extends Task
     this.velocity = step.clone().scale(1/this.duration);
     this.target = Vec2.add(this.owner.position, step);
 
-    ActivityManager.stage.on('tick', this.tick, this);
+    this.stage.on('tick', this.tick, this);
     this.execution.run();
   }
 }

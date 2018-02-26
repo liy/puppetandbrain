@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import Stage from '../Stage';
 
 export default {
   name: 'theater',
@@ -28,8 +29,25 @@ export default {
     height: {
       type: [Number, String],
       default: 300
-    }
+    },
   },
+  mounted() {
+    // children is alway mounted before parent component
+    // so just listen to the activity changes, once it is available,
+    // initialize activity's stage with the dom elements
+    let unwatch = this.$store.watch(() => this.$store.getters.activity, activity => {
+      if(activity) {
+        let canvas = document.getElementById('canvas')
+        let stageElement = document.getElementById('stage')
+        activity.stage.init(stageElement, canvas)
+        
+        unwatch();
+      }
+    });
+  },
+  beforeDestroy() {
+    this.stage.destroy();
+  }
 }
 </script>
 

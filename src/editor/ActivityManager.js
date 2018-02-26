@@ -3,19 +3,21 @@ import Delay from './access/Delay'
 import '@/editor/graph/BlockFactory'
 import '@/editor/nodes/NodeFactory'
 import './commands/Commander';
-import Stage from "./Stage";
 
 class ActivityManager {
   constructor() {
     this.current = null;
     this.delaySave = new Delay();
+  }
 
-    this.stage = new Stage();
+  staging(activity, stage) {
+
   }
 
   temp() {
     const id = firebase.firestore().collection('activities').doc().id;
     this.current = new Activity(id, CurrentUser.uid);
+    return this.current;
   }
 
   async save() {

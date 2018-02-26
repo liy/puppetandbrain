@@ -1,6 +1,8 @@
 export default class 
 {
-  constructor() {
+  constructor(activity) {
+    this.activity = activity;
+
     this.store = {};
     this.actors = [];
     this.nodes = [];
@@ -70,7 +72,7 @@ export default class
   removeBrain(id) {
     let index = this.brains.indexOf(id);
     if(index != -1) this.brains.splice(index, 1);
-    delete this.stores[id]
+    delete this.store[id]
   }
 
   addVariable(entry, id) {
@@ -142,7 +144,7 @@ export default class
     result.pointers = this.pointers.concat();
     result.brains = this.brains.concat();
     result.variables = this.variables.concat();
-    result.stage = ActivityManager.stage.actors.map((actorID, actor) => {
+    result.stage = this.activity.stage.actors.map((actorID, actor) => {
       return actorID;
     });
 
