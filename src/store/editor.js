@@ -1,12 +1,12 @@
 const state = {
   debugMode: false,
-  editorMode: 'stage',
+  stageMode: true,
   activity: null,
 }
 
 const getters = {
   debugMode: state => state.debugMode,
-  editorMode: state => state.editorMode,
+  stageMode: state => state.stageMode,
   activity: state => state.activity,
 }
 
@@ -20,8 +20,12 @@ const mutations = {
     state.debugMode = !state.debugMode;
   },
 
-  updateEditorMode(state, mode) {
-    state.editorMode = mode;
+  updateStageMode(state, mode) {
+    state.stageMode = mode;
+  },
+
+  toggleStageMode(state, mode) {
+    state.stageMode = !stage.stageMode;
   },
 
   staging(state, activity) {

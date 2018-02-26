@@ -5,6 +5,7 @@
   <node-graph/>
 
   <toolbox/>
+  <mode-button/>
 
   <div class='control-button tooltip-right' id='mode-button' data-title="Open puppet brain" data-title-position="right"></div>
   <span id='app-version'></span>
@@ -32,8 +33,7 @@ import Terminal from './vue/Terminal.vue';
 import NodeGraph from './vue/NodeGraph.vue';
 import Theater from './vue/Theater.vue';
 import Toolbox from './vue/Toolbox.vue';
-
-import store from '@/store';
+import ModeButton from './vue/ModeButton.vue';
 
 import './ActivityManager'
 
@@ -45,12 +45,30 @@ export default {
     'node-graph': NodeGraph,
     theater: Theater,
     toolbox: Toolbox,
+    'mode-button': ModeButton
   },
   mounted() {
+    // prevent default context menu for the whole site
+    // unless it is from canvas, which pixi needs it to handle right click.
+    document.addEventListener('contextmenu', e => {
+      e.preventDefault();
+    });
+
     // wait until user is signed in
     getCurrentUser().then(user => {
       this.activity = ActivityManager.temp();
       this.$store.commit('staging', this.activity);
+
+      this.$store.subscribe((mutation, state) => {
+        if(mutation.type === 'toggleDebugMode') {
+          if(state.debugMode) {
+            this.activity.stage.start();
+          }
+          else {
+            this.activity.stage.stop();
+          }
+        }
+      });
     })
   },
   beforeDestroy() {

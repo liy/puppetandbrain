@@ -23,8 +23,8 @@ export default {
     document.addEventListener('keydown', this.keydown);
 
     // watch editor mode changes
-    this.cancelWatch = this.$store.watch(() => this.$store.getters.editorMode, editorMode => {
-      if(editorMode == 'stage mode') {
+    this.cancelWatch = this.$store.watch(() => this.$store.getters.stageMode, stageMode => {
+      if(stageMode) {
         GraphSelection.off('block.selection.change', this.onSelectChange, this)
         ActorSelection.on('actor.selection.change', this.onSelectChange, this);
         this.onSelectChange(ActorSelection.selected);
@@ -41,11 +41,11 @@ export default {
     document.removeEventListener('keydown', this.keydown);
   },
   computed: {
-    ...mapGetters(['editorMode'])
+    ...mapGetters(['stageMode'])
   },
   methods: {
-    async clicked() {
-      if(this.editorMode == 'stage') {
+    clicked() {
+      if(this.stageMode) {
         ActorSelection.delete();
       }
       else {

@@ -4,6 +4,8 @@ import EventEmitter from '@/utils/EventEmitter';
 import ContextMenu from './ui/ContextMenu';
 import Mouse from './access/Mouse';
 
+import store from '@/store';
+
 export default class extends EventEmitter
 {
   constructor() {

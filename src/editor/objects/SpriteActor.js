@@ -88,8 +88,8 @@ export default class SpriteActor extends Actor
       let outlineFilters = this.spriteContainer.container.filters;
       this.spriteContainer.container.filters = []
 
-      let texture = Editor.renderer.generateTexture(this.spriteContainer.container);
-      let canvas = Editor.renderer.extract.canvas(texture);
+      let texture = this.stage.renderer.generateTexture(this.spriteContainer.container);
+      let canvas = this.stage.renderer.extract.canvas(texture);
       // reset back to original state
       this.spriteContainer.container.filters = outlineFilters
       resolve(canvas);

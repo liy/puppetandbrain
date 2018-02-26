@@ -185,4 +185,5 @@ class API
   }
 }
 
-export default new API();
+window.API = new API();
+export default window.API;

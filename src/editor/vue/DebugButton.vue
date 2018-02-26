@@ -1,5 +1,5 @@
 <template>
-<div @click='toggleDebugMode' class='toolbar-button' data-title="Play game">
+<div @click='click' class='toolbar-button' data-title="Play game">
   <svg v-if="!debugMode" width=100 height=100>
     <use :xlink:href="`#${StartButtonIcon.id}`" :viewBox="StartButtonIcon.viewBox"/>
   </svg>
@@ -29,6 +29,9 @@ export default {
   },
   methods: {
     ...mapMutations(['toggleDebugMode']),
+    click() {
+      this.$store.commit('toggleDebugMode')
+    }
   }
 }
 </script>

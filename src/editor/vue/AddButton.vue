@@ -19,11 +19,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['editorMode'])
+    ...mapGetters(['stageMode'])
   },
   methods: {
     async clicked() {
-      if(this.editorMode == 'stage') {
+      if(this.stageMode) {
         let browser = new PuppetBrowser();
         browser.open()
       }

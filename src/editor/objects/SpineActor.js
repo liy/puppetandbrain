@@ -64,7 +64,7 @@ export default class SpineActor extends Actor
 
   hitTest(x, y) {
     // TODO: override me 
-    return Editor.renderer.plugins.interaction.hitTest(new PIXI.Point(x, y)) == this.spineComponent.spine;
+    return this.stage.renderer.plugins.interaction.hitTest(new PIXI.Point(x, y)) == this.spineComponent.spine;
   }
 
   gameStop() {
@@ -124,8 +124,8 @@ export default class SpineActor extends Actor
       let outlineFilters = this.spineComponent.container.filters;
       this.spineComponent.container.filters = []
 
-      let texture = Editor.renderer.generateTexture(this.spineComponent.container);
-      let canvas = Editor.renderer.extract.canvas(texture);
+      let texture = this.stage.renderer.generateTexture(this.spineComponent.container);
+      let canvas = this.stage.renderer.extract.canvas(texture);
       canvas.id = 'snapshot-canvas';
       // reset back to original state
       this.spineComponent.container.filters = outlineFilters

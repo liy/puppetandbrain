@@ -184,8 +184,8 @@ export default class ChoiceBox extends Actor
 
     // this texture does not contains any transformation.
     // the image is later transformed manually use actor's transformation
-    let texture = Editor.renderer.generateTexture(this.box.container);
-    let pixiCanvas = Editor.renderer.extract.canvas(texture);
+    let texture = this.stage.renderer.generateTexture(this.box.container);
+    let pixiCanvas = this.stage.renderer.extract.canvas(texture);
 
     this.box.container.filters = outlineFilters
 
@@ -204,7 +204,6 @@ export default class ChoiceBox extends Actor
       canvas.height = domCanvas.height;
       let context = canvas.getContext('2d');
 
-      // Since the pixi
       let m = new Matrix();
       // rotate, scale at pivot 0.5, 0.5
       m.translate(-0.5*this.width, -0.5*this.height);
