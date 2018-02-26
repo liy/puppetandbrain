@@ -44,9 +44,6 @@ export default {
         unwatch();
       }
     });
-  },
-  beforeDestroy() {
-    this.stage.destroy();
   }
 }
 </script>

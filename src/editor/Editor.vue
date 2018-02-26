@@ -49,13 +49,13 @@ export default {
   mounted() {
     // wait until user is signed in
     getCurrentUser().then(user => {
-      let activity = ActivityManager.temp();
-      this.$store.commit('staging', activity);
+      this.activity = ActivityManager.temp();
+      this.$store.commit('staging', this.activity);
     })
   },
   beforeDestroy() {
     // clear everything...
-    ActivityManager.current.clear();
+    this.activity.destroy();
   }
 }
 </script>

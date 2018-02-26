@@ -54,6 +54,11 @@ export default class Activity extends EventEmitter
     }
   }
 
+  destroy() {
+    this.stage.destroy();
+    this.clear();
+  }
+
   clear() {
     // TODO: clear resources necessary??
     this.resources.clear();
