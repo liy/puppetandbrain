@@ -35,7 +35,6 @@ import Toolbox from './vue/Toolbox.vue';
 
 import store from '@/store';
 
-import Stage from './Stage'
 import './ActivityManager'
 
 
@@ -47,14 +46,17 @@ export default {
     theater: Theater,
     toolbox: Toolbox,
   },
-  async mounted() {
+  mounted() {
+    let canvas = document.getElementById('canvas')
+    let stageElement = document.getElementById('stage')
+    ActivityManager.stage.init(stageElement, canvas)
+
     // setup everything!
     // wait until user is signed in
     getCurrentUser().then(user => {
+      
+
       ActivityManager.temp();
-      let canvas = this.$el.querySelector('#canvas')
-      let element = this.$el.querySelector('#stage')
-      ActivityManager.current.stage = new Stage(element, canvas);
     })
   },
   beforeDestroy() {

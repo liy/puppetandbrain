@@ -37,7 +37,7 @@ export default class Move extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    Editor.on('game.stop', this.stop, this)
+    ActivityManager.stage.on('game.stop', this.stop, this)
   }
 
   destroy() {
@@ -74,7 +74,7 @@ export default class Move extends Task
     this.velocity = step.clone().scale(1/this.duration);
     this.target = Vec2.add(this.owner.position, step);
 
-    Editor.on('tick', this.tick, this);
+    ActivityManager.stage.on('tick', this.tick, this);
     this.execution.run();
   }
 }

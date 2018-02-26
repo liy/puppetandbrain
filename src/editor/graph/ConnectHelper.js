@@ -4,15 +4,16 @@ import AutoConnect from './AutoConnect';
 import BlockBrowser from '../browser/BlockBrowser';
 import SoundEffect from '@/SoundEffect';
 import { isMobile } from '@/utils/utils';
+import Commander from '../commands/Commander'
 
-class ConnectHelper
+export default class ConnectHelper
 {
   constructor() {
     this.svg = document.getElementById('graph-svg');
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke-linecap', 'round');
     this.path.classList.add('symbol-indicator')
-    
+
     this._startSymbol = null;
     this._snapSymbol = null;
   }
@@ -121,5 +122,3 @@ class ConnectHelper
     }
   }
 }
-
-export default new ConnectHelper();

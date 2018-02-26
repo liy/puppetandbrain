@@ -1,5 +1,4 @@
 import './DataSymbol.scss';
-import ConnectHelper from '../ConnectHelper';
 import DataColor from '../../data/DataColor';
 import DataType from '../../data/DataType';
 import { isMobile } from '@/utils/utils';

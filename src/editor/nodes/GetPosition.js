@@ -22,8 +22,8 @@ NodeTemplate.GetPosition = {
 
 export default class GetPosition extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, activity) {
+    super(id, activity)
   }
 
   init(pod) {

@@ -11,20 +11,20 @@ export default class DebugButton extends ControlButton
     this.element = document.getElementById('debug-button');
 
     this.enabled = false;
-    Editor.stage.on('stage.actor.added', this.stageStateChange, this);
-    Editor.stage.on('stage.actor.removed', this.stageStateChange, this);
+    ActivityManager.stage.on('stage.actor.added', this.stageStateChange, this);
+    ActivityManager.stage.on('stage.actor.removed', this.stageStateChange, this);
 
     this.stopIcon = svgElement(StopButtonIcon, {width:100, height:100});
     this.startIcon = svgElement(StartButtonIcon, {width:100, height:100});
     this.element.appendChild(this.startIcon);
 
-    Editor.on('game.start', () => {
+    ActivityManager.stage.on('game.start', () => {
       this.element.removeChild(this.element.firstChild);
       this.element.appendChild(this.stopIcon);
       this.element.setAttribute('data-title', 'Stop game')
     })
 
-    Editor.on('game.stop', () => {
+    ActivityManager.stage.on('game.stop', () => {
       this.element.removeChild(this.element.firstChild);
       this.element.appendChild(this.startIcon);
       this.element.setAttribute('data-title', 'Play game')
@@ -38,6 +38,6 @@ export default class DebugButton extends ControlButton
   }
 
   stageStateChange(actor) {
-    this.enabled = !(Editor.stage.numActors == 0);
+    this.enabled = !(ActivityManager.stage.numActors == 0);
   }
 }

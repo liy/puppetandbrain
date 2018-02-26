@@ -36,7 +36,7 @@ export default class MoveTo extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    Editor.on('game.stop', this.stop, this)
+    ActivityManager.stage.on('game.stop', this.stop, this)
   }
 
   destroy() {
@@ -70,7 +70,7 @@ export default class MoveTo extends Task
     this.target = new Vec2(numericVector(this.inputs.value('position')));
     this.velocity = Vec2.sub(this.target, this.owner.position).scale(1/this.duration);
 
-    Editor.on('tick', this.tick, this);
+    ActivityManager.stage.on('tick', this.tick, this);
     this.execution.run();
   }
 }

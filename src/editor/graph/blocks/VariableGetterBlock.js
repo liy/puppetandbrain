@@ -1,6 +1,5 @@
 import Block from "./Block";
 import OutputPin from "../support/OutputPin";
-import ActivityManager from "../../ActivityManager";
 
 export default class GetterBlock extends Block
 {

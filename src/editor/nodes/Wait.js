@@ -23,7 +23,7 @@ export default class Wait extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    Editor.on('game.stop', this.stop, this)
+    ActivityManager.stage.on('game.stop', this.stop, this)
   }
 
   destroy() {

@@ -35,7 +35,7 @@ export default class Rotate extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    Editor.on('game.stop', this.stop, this)
+    ActivityManager.stage.on('game.stop', this.stop, this)
   }
 
   
@@ -71,7 +71,7 @@ export default class Rotate extends Task
     this.rotator = this.inputs.value('degree')*toRadian;
     this.targetRotation = this.owner.rotation + this.rotator;
 
-    Editor.on('tick', this.tick, this);
+    ActivityManager.stage.on('tick', this.tick, this);
     this.execution.run();
   }
 }

@@ -19,8 +19,8 @@ NodeTemplate.GetMousePosition = {
 
 export default class GetMousePosition extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, activity) {
+    super(id, activity)
   }
 
   init(pod) {

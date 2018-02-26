@@ -1,7 +1,6 @@
 import {Task, Template as ParentTemplate} from './Task'
 import DataType from "../data/DataType";
 import SoundLoader from '../resources/SoundLoader'
-import ActivityManager from '../ActivityManager';
 
 
 NodeTemplate.PlaySound = {
@@ -49,7 +48,7 @@ export default class PlaySound extends Task
 
     this.complete = this.complete.bind(this);
 
-    Editor.on('game.stop', this.stop, this)
+    ActivityManager.stage.on('game.stop', this.stop, this)
   }
 
   init(pod) {

@@ -3,7 +3,6 @@ import InputPin from "../support/InputPin";
 import OutputPin from "../support/OutputPin";
 import ExecutionInPin from "../support/ExecutionInPin";
 import ExecutionOutPin from "../support/ExecutionOutPin";
-import ActivityManager from "../../ActivityManager";
 
 export default class SetterBlock extends Block
 {

@@ -1,19 +1,22 @@
 import ArrayMap from '@/utils/ArrayMap'
 import ActorSelection from './objects/ActorSelection';
 import EventEmitter from '@/utils/EventEmitter';
+import ContextMenu from './ui/ContextMenu';
+import Mouse from './access/Mouse';
 
 export default class Stage extends EventEmitter
 {
-  constructor(element, canvas) {
+  constructor() {
     super();
-    this.element = element
-    this.canvas = canvas;
 
     this.actors = new ArrayMap();
 
     this.container = new PIXI.Container();
+  }
 
-    this.backStage = [];
+  init(element, canvas) {
+    this.element = element
+    this.canvas = canvas;
 
     this.renderer = PIXI.autoDetectRenderer({
       autoStart: true,
@@ -23,6 +26,9 @@ export default class Stage extends EventEmitter
       transparent: true,
       antialias: true
     });
+    
+    this.mouse = new Mouse(this.renderer);
+    this.contextMenu = new ContextMenu(this);
     
     // For deselection
     let catcher = new PIXI.Graphics();
@@ -58,12 +64,12 @@ export default class Stage extends EventEmitter
   }
 
   addActor(actor) {
+    actor.onStage(this);
     // call update transform immeditately
     // so it is up to date with the transform even without waiting
     // for the next updateTransform() call
     actor.updateTransform();
     this.actors.set(actor.id, actor);
-    actor.onStage();
 
     this.emit('stage.actor.added', actor);
   }
@@ -113,5 +119,27 @@ export default class Stage extends EventEmitter
 
   get offsetY() {
     return this.element.offsetTop
+  }
+
+  start() {
+    this.playing = true;
+    this.mouse.gamePreStart();
+    this.emit('game.prestart')
+    this.emit('game.start')
+  }
+
+  stop() {
+    this.playing = false;
+    this.emit('game.stop')
+    this.mouse.gameStop();
+  }
+
+  toggle() {
+    if(this.playing) {
+      this.stop();
+    }
+    else {
+      this.start();
+    }
   }
 }

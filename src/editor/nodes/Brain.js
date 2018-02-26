@@ -16,7 +16,7 @@ export default class Brain
 
     this.variables = new VariableList(this, this.lookUp);
 
-    Editor.on('game.prestart', this.prestart, this);
+    ActivityManager.stage.on('game.prestart', this.prestart, this);
   }
 
   destroy() {

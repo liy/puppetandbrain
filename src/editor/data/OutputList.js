@@ -17,7 +17,7 @@ export default class OutputList extends EventEmitter
     this.names = this.list.keys;
 
     // when game stops, make all values null
-    Editor.on('game.stop', this.clearValues, this);
+    ActivityManager.stage.on('game.stop', this.clearValues, this);
   }
 
   destroy() {

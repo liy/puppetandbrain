@@ -6,7 +6,6 @@ import TextField from "./TextField";
 import PipetteIcon from '@/assets/pipette.svg'; 
 import {svgElement} from '@/utils/utils';
 import ActorSelection from '../../objects/ActorSelection';
-import ActivityManager from '../../ActivityManager';
 
 export default class extends Gadget
 {

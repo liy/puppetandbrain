@@ -34,7 +34,7 @@ export default class Jump extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    Editor.on('game.stop', this.stop, this)
+    ActivityManager.stage.on('game.stop', this.stop, this)
   }
 
   destroy() {
@@ -73,7 +73,7 @@ export default class Jump extends Task
     this.time = 0;
     this.startY = this.owner.y;
 
-    Editor.on('tick', this.tick, this);
+    ActivityManager.stage.on('tick', this.tick, this);
     this.execution.run();
   }
 }

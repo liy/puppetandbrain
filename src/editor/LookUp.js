@@ -142,7 +142,7 @@ export default class
     result.pointers = this.pointers.concat();
     result.brains = this.brains.concat();
     result.variables = this.variables.concat();
-    result.stage = Editor.stage.actors.map((actorID, actor) => {
+    result.stage = ActivityManager.stage.actors.map((actorID, actor) => {
       return actorID;
     });
 

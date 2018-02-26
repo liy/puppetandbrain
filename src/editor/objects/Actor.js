@@ -2,16 +2,15 @@ const filters = require('pixi-filters');
 import Entity from './Entity';
 import mixin from '@/utils/mixin';
 import EventEmitter from '@/utils/EventEmitter';
-import TextComponent from '../components/TextComponent';
 import Brain from '../nodes/Brain';
 import ActorSelection from './ActorSelection';
-import Variable from '../data/Variable';
 import Matrix from '../math/Matrix';
 import Vec2 from '../math/Vec2';
 import PropertyList from '../data/PropertyList';
 import { aroundAt } from '@/utils/utils';
 import DataType from '../data/DataType';
 import ContextMenu from '../ui/ContextMenu';
+import Commander from '../commands/Commander'
 
 export default class Actor extends EventEmitter
 {
@@ -36,7 +35,7 @@ export default class Actor extends EventEmitter
 
     // transform for the components
     // also be able to manipulate in the node graph property.
-    this.position = new Vec2(Editor.stage.stageWidth/2, Editor.stage.stageHeight/2);
+    this.position = new Vec2(0, 0);
     // in radian
     this.rotation = 0;
     this.scale = new Vec2(1, 1);
@@ -44,8 +43,8 @@ export default class Actor extends EventEmitter
 
     mixin(this, new Entity());
 
-    Editor.on('game.prestart', this.gamePrestart, this);
-    Editor.on('game.stop', this.gameStop, this);
+    ActivityManager.stage.on('game.prestart', this.gamePrestart, this);
+    ActivityManager.stage.on('game.stop', this.gameStop, this);
   }
 
   preload(pod) {
@@ -74,7 +73,7 @@ export default class Actor extends EventEmitter
 
     this.name = pod.name || 'Puppet';
     
-    let pos = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
+    let pos = pod.position || { x: 0, y: 0 };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
     this.scale = new Vec2(pod.scale || {x:1,y:1});
@@ -117,6 +116,10 @@ export default class Actor extends EventEmitter
     return false;
   }
 
+  onStage(stage) {
+    this.stage = stage;
+  }
+
   gamePrestart() {
     this.initialState = {
       position: this.position.pod(),
@@ -154,7 +157,7 @@ export default class Actor extends EventEmitter
     document.addEventListener('touchend', this.pointerRelease);
 
     // crete move command, when move update it with new position
-    if(!Editor.playing) this.moveCommand = Commander.create('MoveActor', this);
+    if(!ActivityManager.stage.playing) this.moveCommand = Commander.create('MoveActor', this);
 
     document.addEventListener('mousemove', this.mouseDragMove);
     document.addEventListener('touchmove', this.touchDragMove);
@@ -204,15 +207,15 @@ export default class Actor extends EventEmitter
   }
 
   mouseDragMove(e) {
-    this.position.x = e.clientX + this.offset.x - Editor.stage.offsetX;
-    this.position.y = e.clientY + this.offset.y - Editor.stage.offsetY;
+    this.position.x = e.clientX + this.offset.x - ActivityManager.stage.offsetX;
+    this.position.y = e.clientY + this.offset.y - ActivityManager.stage.offsetY;
   }
 
   touchDragMove(e) {
     let x = e.touches[0].clientX;
     let y = e.touches[0].clientY
-    this.position.x = x + this.offset.x - Editor.stage.offsetX;
-    this.position.y = y + this.offset.y - Editor.stage.offsetY;
+    this.position.x = x + this.offset.x - ActivityManager.stage.offsetX;
+    this.position.y = y + this.offset.y - ActivityManager.stage.offsetY;
   }
 
   contextMenu(e) {
@@ -300,7 +303,7 @@ export default class Actor extends EventEmitter
 
     // FIXME: find a better way to handle saving
     // if game still playing, override pod with initial state
-    if(Editor.playing) Object.assign(pod, this.initialState);
+    if(ActivityManager.stage.playing) Object.assign(pod, this.initialState);
 
     if(detail) {
       pod.brain = this.brain.pod(detail);
@@ -344,11 +347,11 @@ export default class Actor extends EventEmitter
   }
 
   get screenX() {
-    return this.x + Editor.stage.offsetX
+    return this.x + ActivityManager.stage.offsetX
   }
 
   get screenY() {
-    return this.y + Editor.stage.offsetY
+    return this.y + ActivityManager.stage.offsetY
   }
 
   createFileRefs() {

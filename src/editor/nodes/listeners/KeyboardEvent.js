@@ -32,8 +32,8 @@ export default class KeyboardEvent extends Listener
     this.keydown = this.keydown.bind(this)
     this.keyup = this.keyup.bind(this)
 
-    Editor.on('game.prestart', this.prestart, this)
-    Editor.on('game.stop', this.stop, this)
+    ActivityManager.stage.on('game.prestart', this.prestart, this)
+    ActivityManager.stage.on('game.stop', this.stop, this)
   }
 
   destroy() {

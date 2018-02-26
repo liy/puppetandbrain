@@ -1,5 +1,4 @@
 import './ExecutionOutSymbol.scss'
-import ConnectHelper from "../ConnectHelper";
 import ExecutionSymbol from "./ExecutionSymbol";
 import {svgElement} from '@/utils/utils';
 import ExecutionOutIcon from '@/assets/execution-out.svg';

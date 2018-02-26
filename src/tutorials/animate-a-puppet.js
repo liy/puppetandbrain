@@ -36,7 +36,7 @@ class AnimatePuppet extends Tutorial
           this.banner.info('Be patient while it is loading...');
           
           this.nextWhen('actor.ready', actor);
-        }, Editor.stage);
+        }, ActivityManager.stage);
       })
     })
 

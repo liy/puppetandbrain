@@ -5,7 +5,6 @@ import ArrayMap from "@/utils/ArrayMap";
 import GroupSection from "./GroupSection";
 import DataType from '../data/DataType';
 import BlockBox from './BlockBox';
-import ActivityManager from '../ActivityManager';
 
 // FIXME: clean up needed!!
 export default class BlockBrowser extends Browser

@@ -16,20 +16,20 @@ export default class LoaderBucket
 
     switch(contentType) {
       case ContentType.JSON:
-        this.loaders.push(new JsonLoader(resources, id, url, options))
+        this.loaders.push(new JsonLoader(this.resources, id, url, options))
         break;
       case ContentType.ATLAS:
-        this.loaders.push(new TextLoader(resources, id, url, options))
+        this.loaders.push(new TextLoader(this.resources, id, url, options))
         break;
       case ContentType.PNG:
       case ContentType.JPG:
-        this.loaders.push(new ImageLoader(resources, id, url, options))
+        this.loaders.push(new ImageLoader(this.resources, id, url, options))
         break;
       case ContentType.OGG:
       case ContentType.MP3:
       case ContentType.WAV:
       case ContentType.FLAC:
-        this.loaders.push(new SoundLoader(resources, id, url, options))
+        this.loaders.push(new SoundLoader(this.resources, id, url, options))
         break;
     }
   }

@@ -22,8 +22,8 @@ NodeTemplate.GetScale = {
 
 export default class GetScale extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, activity) {
+    super(id, activity)
   }
 
   init(pod) {

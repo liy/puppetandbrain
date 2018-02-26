@@ -1,5 +1,6 @@
 import Variable from './data/Variable';
 import ActorFactory from './objects/ActorFactory';
+import NodeFactory from './nodes/NodeFactory';
 
 export default class
 {
@@ -31,7 +32,7 @@ export default class
     // undo and redo. Further redo action might have nodes who are referencing this actor.
     // Therefore, we need to try to keep the id the same.
     let actor = ActorFactory.create(pod.className, pod.id, this.activity)
-    Editor.stage.addActor(actor);
+    ActivityManager.stage.addActor(actor);
 
     // preload actor and then initialize it
     // note that I do not need to remove brainID from actorPod.
@@ -56,7 +57,7 @@ export default class
     let performs= [];
     for(let id of pod.nodes) {
       let nodePod = pod.store[id];
-      let node = NodeFactory.create(nodePod.className, this.activity);
+      let node = NodeFactory.create(nodePod.className, nodePod.id, this.activity);
 
       // change owner, no need to use mapping, since we can import only 1 actor at a time.
       nodePod.ownerID = actor.id;

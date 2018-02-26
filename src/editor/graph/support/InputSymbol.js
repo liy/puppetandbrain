@@ -1,6 +1,5 @@
 import './InputSymbol.scss';
 import DataSymbol from "./DataSymbol";
-import ConnectHelper from "../ConnectHelper";
 import InputIcon from '@/assets/input.svg';
 import {svgElement} from '@/utils/utils';
 import DataColor from "../../data/DataColor";

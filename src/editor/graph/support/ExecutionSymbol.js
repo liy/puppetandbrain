@@ -1,4 +1,3 @@
-import ConnectHelper from '../ConnectHelper';
 import { isMobile } from '@/utils/utils';
 
 export default class ExecutionSymbol

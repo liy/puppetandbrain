@@ -1,9 +1,9 @@
 import Loader from "./Loader";
-import ActivityManager from "../ActivityManager";
 
 export default class ImageLoader extends Loader
 {
-  static async fetch(fileData, resources=ActivityManager.current.resources) {
+  static async fetch(fileData, resources) {
+    resources = resources || ActivityManager.current.resources;
     if(resources.has(fileData.path)) return Promise.resolve(resources.get(fileData.path))
     
     let url = fileData.url || await API.getUrl(fileData.path);

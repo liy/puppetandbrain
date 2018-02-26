@@ -1,5 +1,4 @@
 import EventEmitter from '@/utils/EventEmitter';
-import ActivityManager from '../ActivityManager';
 
 // pointer
 export default class Pointer extends EventEmitter

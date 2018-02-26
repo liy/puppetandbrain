@@ -49,7 +49,7 @@ export default class ActivityLoader
 
       let actor = ActorFactory.create(actorPod.className, actorPod.id, this.activity);
       actor.init(actorPod);
-      Editor.stage.addActor(actor);
+      ActivityManager.stage.addActor(actor);
       promises.push(actor.loaded);
     }
 

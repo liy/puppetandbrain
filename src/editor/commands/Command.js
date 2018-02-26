@@ -1,5 +1,3 @@
-import ActivityManager from "../ActivityManager";
-
 /**
  * It is a good pratice to avoid using reference in undo and redo.
  * As the reference might changes(during modification).
@@ -17,7 +15,7 @@ export default class Command
 
   processAndSave() {
     let command = this.process();
-    if(command) Activity.autoSave();
+    if(command) ActivityManager.autoSave();
     return command;
   }
 

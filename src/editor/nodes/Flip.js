@@ -34,10 +34,10 @@ const LIST = ['left', 'right', 'up', 'down'];
 
 export default class Flip extends Task
 {
-  constructor(id) {
-    super(id)
+  constructor(id, activity) {
+    super(id, activity)
     
-    Editor.on('game.stop', this.stop, this);
+    ActivityManager.stage.on('game.stop', this.stop, this);
   }
 
   destroy() {
@@ -90,12 +90,12 @@ export default class Flip extends Task
     if(direction =='left' || direction == 'right') {
       if(direction == 'left') this.targetScaleX = -this.targetScaleX;
       this.dx = (this.targetScaleX - this.owner.scale.x)/this.duration; 
-      Editor.on('tick', this.flipX, this);
+      ActivityManager.stage.on('tick', this.flipX, this);
     }
     else {
       if(direction == 'down') this.targetScaleY = -this.targetScaleY;
       this.dy = (this.targetScaleY - this.owner.scale.y)/this.duration;
-      Editor.on('tick', this.flipY, this);
+      ActivityManager.stage.on('tick', this.flipY, this);
     }
 
     this.execution.run();

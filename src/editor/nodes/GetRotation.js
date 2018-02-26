@@ -23,8 +23,8 @@ NodeTemplate.GetRotation = {
 
 export default class GetRotation extends Node
 {
-  constructor(id) {
-    super(id)
+  constructor(id, activity) {
+    super(id, activity)
     
   }
 

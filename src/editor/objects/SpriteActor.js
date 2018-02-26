@@ -14,13 +14,14 @@ export default class SpriteActor extends Actor
   }
 
   async preload(pod) {
-    let pos = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
+    let pos = pod.position || { x: aroundAt(ActivityManager.stage.stageWidth/2), y: aroundAt(ActivityManager.stage.stageHeight/2) };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
     this.scale = new Vec2(pod.scale || {x:1,y:1});
 
     this.addComponent('placeholder', new PlaceHolderComponent());
     
+    console.log(this.resources)
     let loader = new LoaderBucket(this.resources);
     let promises = pod.userFiles.map(async entry => {
       loader.add(entry.path, entry.url, entry.contentType)
@@ -73,7 +74,7 @@ export default class SpriteActor extends Actor
 
     this.spriteContainer.container.filters = [this.selectOutline]
     // bring it to front
-    Editor.stage.addChild(this.spriteContainer.container);
+    ActivityManager.stage.addChild(this.spriteContainer.container);
   }
 
   deselect() {

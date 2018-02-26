@@ -47,7 +47,7 @@ export default class Orbit extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    Editor.on('game.start', this.start, this);
+    ActivityManager.stage.on('game.start', this.start, this);
   }
 
   

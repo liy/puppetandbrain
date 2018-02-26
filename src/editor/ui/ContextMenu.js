@@ -9,7 +9,7 @@ import NotificationControl from './NotificationControl';
 
 export default class ContextMenu 
 {
-  constructor(Editor) {
+  constructor(stage) {
     this.element = document.createElement('div');
     this.element.className = 'context-menu';
 
@@ -51,7 +51,7 @@ export default class ContextMenu
     //   }
     // })
 
-    Editor.on('contextmenu', ({actor, event}) => {
+    stage.on('contextmenu', ({actor, event}) => {
       if(actor) {
         this.openActorMenu(event);
       }

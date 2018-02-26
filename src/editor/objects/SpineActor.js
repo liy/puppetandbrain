@@ -14,7 +14,7 @@ export default class SpineActor extends Actor
   }
 
   async preload(pod) {
-    let pos = pod.position || { x: aroundAt(Editor.stage.stageWidth/2), y: aroundAt(Editor.stage.stageHeight/2) };
+    let pos = pod.position || { x: aroundAt(ActivityManager.stage.stageWidth/2), y: aroundAt(ActivityManager.stage.stageHeight/2) };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
     this.scale = new Vec2(pod.scale || {x:1,y:1});
@@ -41,9 +41,10 @@ export default class SpineActor extends Actor
     this.spineID = pod.spineID;
     this.spineScale = pod.spineScale || 1;
 
+
     let spineDir = `${pod.libDir}/${pod.puppetID}`;
     let rawAtlas = this.resources.get(`${spineDir}/${this.spineID}.atlas`);
-    var spineAtlas = new PIXI.spine.core.TextureAtlas(rawAtlas, function(line, callback) {
+    var spineAtlas = new PIXI.spine.core.TextureAtlas(rawAtlas, (line, callback) => {
         // pass the image here.
         callback(PIXI.BaseTexture.from(this.resources.get(`${spineDir}/${line}`).image));
     }); 
@@ -84,7 +85,7 @@ export default class SpineActor extends Actor
 
     this.spineComponent.container.filters = [this.selectOutline]
     // bring it to front
-    Editor.stage.addChild(this.spineComponent.container);
+    ActivityManager.stage.addChild(this.spineComponent.container);
   }
 
   deselect() {

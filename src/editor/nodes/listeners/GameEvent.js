@@ -17,8 +17,8 @@ export default class GameEvent extends Listener
   constructor(id, activity) {
     super(id, activity);
 
-    Editor.on('game.start', this.start, this)
-    Editor.on('game.stop', this.stop, this)
+    ActivityManager.stage.on('game.start', this.start, this)
+    ActivityManager.stage.on('game.stop', this.stop, this)
   }
 
   destroy() {

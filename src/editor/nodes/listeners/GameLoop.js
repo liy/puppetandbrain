@@ -22,8 +22,8 @@ export default class GameLoop extends Listener
   constructor(id, activity) {
     super(id, activity);
 
-    Editor.on('game.start', this.start, this)
-    Editor.on('game.stop', this.stop, this)
+    ActivityManager.stage.on('game.start', this.start, this)
+    ActivityManager.stage.on('game.stop', this.stop, this)
   }
 
   destroy() {
@@ -39,7 +39,7 @@ export default class GameLoop extends Listener
   }
   
   start(e) {
-    Editor.on('tick', this.tick, this);
+    ActivityManager.stage.on('tick', this.tick, this);
   }
 
   tick(delta) {

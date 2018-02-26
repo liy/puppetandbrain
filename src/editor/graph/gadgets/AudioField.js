@@ -4,7 +4,6 @@ import Gadget from './Gadget'
 import FileButton from '../gadgets/FileButton'
 import CircleProgress from '../gadgets/CircleProgress'
 import SoundLoader from '../../resources/SoundLoader';
-import ActivityManager from '../../ActivityManager';
 
 export default class extends Gadget
 {

@@ -72,7 +72,7 @@ export default class ElementComponent extends Component
   mouseDown(e) {
     // note the stage offset applied, since clientX and clientY is in window coordinate.
     // TODO: In theory, scale and rotation also needs to be applied. 
-    this.entity.pointerDown(e.clientX - Editor.stage.offsetX, e.clientY - Editor.stage.offsetY, e);
+    this.entity.pointerDown(e.clientX - ActivityManager.stage.offsetX, e.clientY - ActivityManager.stage.offsetY, e);
 
     if(e.button == 2) {
       this.entity.contextMenu(e);
@@ -93,7 +93,7 @@ export default class ElementComponent extends Component
   }
 
   touchStart(e) {
-    this.entity.pointerDown(e.changedTouches[0].clientX - Editor.stage.offsetX, e.changedTouches[0].clientY - Editor.stage.offsetY, e);
+    this.entity.pointerDown(e.changedTouches[0].clientX - ActivityManager.stage.offsetX, e.changedTouches[0].clientY - ActivityManager.stage.offsetY, e);
   }
 
   touchEnd(e) {

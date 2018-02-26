@@ -1,5 +1,4 @@
 import DataSymbol from "./DataSymbol";
-import ConnectHelper from '../ConnectHelper';
 import OutputIcon from '@/assets/output.svg';
 import {svgElement} from '@/utils/utils';
 import DataColor from "../../data/DataColor";

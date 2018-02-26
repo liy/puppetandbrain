@@ -1,4 +1,5 @@
 import SoundEffect from '@/SoundEffect';
+import Commander from '../commands/Commander'
 
 export default 
 {

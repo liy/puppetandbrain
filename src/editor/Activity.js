@@ -1,5 +1,6 @@
 import LookUp from './LookUp';
 import ActivityLoader from "./ActivityLoader";
+import EventEmitter from '@/utils/EventEmitter'
 
 export default class Activity
 {
@@ -9,9 +10,6 @@ export default class Activity
 
     this.resources = new Map();
     this.lookUp = new LookUp();
-
-    // assigned after theater is mounted
-    this.stage = null;
   }
 
   get canSave() {

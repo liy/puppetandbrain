@@ -3,9 +3,10 @@ import Vec2 from '../math/Vec2'
 
 export default class extends EventEmitter
 {
-  constructor() {
+  constructor(renderer) {
     super();
 
+    this.renderer = renderer;
     this.move = this.move.bind(this);
 
     this.threshold = 300; 
@@ -15,7 +16,7 @@ export default class extends EventEmitter
   }
 
   get position() {
-    var p = Editor.renderer.plugins.interaction.mouse.global;
+    var p = this.renderer.plugins.interaction.mouse.global;
     this._position.x = p.x;
     this._position.y = p.y;
     return this._position;

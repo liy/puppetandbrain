@@ -1,5 +1,4 @@
 import Loader from "./Loader";
-import ActivityManager from "../ActivityManager";
 
 export default class SoundLoader extends Loader
 {
