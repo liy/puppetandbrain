@@ -1,6 +1,6 @@
 import EventEmitter from '@/utils/EventEmitter';
 
-class EditorHistory extends EventEmitter
+export default class EditorHistory extends EventEmitter
 {
   constructor() {
     super();
@@ -63,5 +63,3 @@ class EditorHistory extends EventEmitter
     this.emit('history.updated')
   }
 }
-
-export default new EditorHistory();

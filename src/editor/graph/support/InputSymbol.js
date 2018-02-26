@@ -74,7 +74,7 @@ export default class InputSymbol extends DataSymbol
   mouseUp(e) {
     if(this.canConnect(ConnectHelper.startSymbol)) {
       SoundEffect.play('link');
-      EditorHistory.push(Commander.create('CreateDataLink', this.node.id, this.name, 
+      ActivityManager.history.push(Commander.create('CreateDataLink', this.node.id, this.name, 
         ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name).processAndSave())
     }
     ConnectHelper.stop(e);
@@ -83,7 +83,7 @@ export default class InputSymbol extends DataSymbol
   touchDown(e) {
     if(this.canConnect(ConnectHelper.selectedSymbol)) {
       SoundEffect.play('link');
-      EditorHistory.push(Commander.create('CreateDataLink', this.node.id, this.name, 
+      ActivityManager.history.push(Commander.create('CreateDataLink', this.node.id, this.name, 
         ConnectHelper.selectedSymbol.node.id, ConnectHelper.selectedSymbol.name).processAndSave())
       
       // once a valid connection is made, deselect the sybmosl
@@ -100,7 +100,7 @@ export default class InputSymbol extends DataSymbol
 
   onContextMenu(e) {
     super.onContextMenu(e);
-    EditorHistory.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).processAndSave());
+    ActivityManager.history.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).processAndSave());
   }
 
   drawSelectionIndicator() {

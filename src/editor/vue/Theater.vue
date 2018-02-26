@@ -1,27 +1,39 @@
 <template>
+
 <div id='theater'>
   <div id="stage">
     <div id='stage-grid'></div>
-    <canvas id='canvas'></canvas>
+    <canvas id='canvas' :width="width" :height="height"></canvas>
     <div id='stage-overlayer'></div>
   </div>
 
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768">
+  <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 width height">
     <clipPath id="mask">
-      <circle id="mask-circle" class='' cx="512" cy="384" r="1024">
+      <circle id="mask-circle" class='' cx="width/2" cy="height/2" r="width">
       </circle>
     </clipPath>
-  </svg>
+  </svg> -->
 </div>
 </template>
 
 <script>
+
 export default {
-  name: 'theater'
+  name: 'theater',
+  props: {
+    width: {
+      type: [Number, String],
+      default: 400,
+    },
+    height: {
+      type: [Number, String],
+      default: 300
+    }
+  },
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #theater {
   // disable text selection.(Input will override it)
   user-select: none;

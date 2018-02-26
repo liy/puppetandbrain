@@ -1,7 +1,7 @@
 <template>
 <div>
   <terminal/>
-  <theater/>
+  <theater ref='theater' width=1024 height=768></theater>
   <node-graph/>
 
   <toolbox/>
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-
 import 'pixi.js'
 import 'pixi-spine';
 
@@ -36,7 +35,8 @@ import Toolbox from './vue/Toolbox.vue';
 
 import store from '@/store';
 
-import ActivityManager from './ActivityManager'
+import Stage from './Stage'
+import './ActivityManager'
 
 
 export default {
@@ -47,16 +47,14 @@ export default {
     theater: Theater,
     toolbox: Toolbox,
   },
-  beforeCreate() {
-  },
-  mounted() {
-    // this.cancelDebugModeWatch = store.watch(() => store.getters.debugMode, 
-    // (debugMode, oldMode) => {
-    // })
-
+  async mounted() {
+    // setup everything!
     // wait until user is signed in
     getCurrentUser().then(user => {
       ActivityManager.temp();
+      let canvas = this.$el.querySelector('#canvas')
+      let element = this.$el.querySelector('#stage')
+      ActivityManager.current.stage = new Stage(element, canvas);
     })
   },
   beforeDestroy() {

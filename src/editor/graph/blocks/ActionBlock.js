@@ -61,7 +61,7 @@ export default class ActionBlock extends Block
 
   addPinTrigger(name) {
     // TODO: ask user what type of data is?
-    EditorHistory.push(Commander.create('AddOutput', this.node.id, name, {
+    ActivityManager.history.push(Commander.create('AddOutput', this.node.id, name, {
       type: DataType.GENERIC
     }).process())
   }

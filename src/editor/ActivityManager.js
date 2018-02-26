@@ -1,10 +1,13 @@
 import Activity from "./Activity";
 import Delay from './access/Delay'
+import EditorHistory from './commands/EditorHistory';
 
 class ActivityManager {
   constructor() {
     this.current = null;
     this.delaySave = new Delay();
+
+    this.history = new EditorHistory();
   }
 
   temp() {
@@ -64,4 +67,4 @@ class ActivityManager {
   }
 }
 
-export default new ActivityManager();
+window.ActivityManager = new ActivityManager();

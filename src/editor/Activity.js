@@ -9,6 +9,9 @@ export default class Activity
 
     this.resources = new Map();
     this.lookUp = new LookUp();
+
+    // assigned after theater is mounted
+    this.stage = null;
   }
 
   get canSave() {
@@ -52,9 +55,7 @@ export default class Activity
   clear() {
     // TODO: clear resources necessary??
     this.resources.clear();
-
-    EditorHistory.clear();
-    Editor.stage.clear();
+    this.stage.clear();
     this.lookUp.clear();
   }
 

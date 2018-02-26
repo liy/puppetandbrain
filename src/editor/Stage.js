@@ -4,31 +4,51 @@ import EventEmitter from '@/utils/EventEmitter';
 
 export default class Stage extends EventEmitter
 {
-  constructor() {
+  constructor(element, canvas) {
     super();
-
-    this.element = document.getElementById('stage');
+    this.element = element
+    this.canvas = canvas;
 
     this.actors = new ArrayMap();
 
     this.container = new PIXI.Container();
 
     this.backStage = [];
-  }
 
-  init(width, height) {
-    this.stageWidth = width;
-    this.stageHeight = height;
-
-
+    this.renderer = PIXI.autoDetectRenderer({
+      autoStart: true,
+      width: canvas.width,
+      height: canvas.height,
+      view: canvas,
+      transparent: true,
+      antialias: true
+    });
+    
     // For deselection
     let catcher = new PIXI.Graphics();
     catcher.interactive = true;
     catcher.beginFill(0, 0);
-    catcher.drawRect(0, 0, width, height);
+    catcher.drawRect(0, 0, canvas.width, canvas.height);
     catcher.endFill();
     this.addChild(catcher);
     catcher.on('mousedown', ActorSelection.deselectAll, ActorSelection);
+
+    this.loop = this.loop.bind(this);
+    PIXI.ticker.shared.add(this.loop);
+  }
+
+  get stageWidth() {
+    return this.canvas.width;
+  }
+
+  get stageHeight() {
+    return this.canvas.height;
+  }
+  
+  loop(delta) {
+    this.emit('tick', {delta, deltaTime:delta/60});
+    this.updateTransform();
+    this.renderer.render(this.container);
   }
 
   updateTransform(delta, deltaTime) {
