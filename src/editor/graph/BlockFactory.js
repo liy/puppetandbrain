@@ -1,7 +1,7 @@
 import * as BlockClasses from './blocks';
 import Block from './blocks/Block';
 
-export default {
+window.BlockFactory = {
   create: function(node) {
     let blockClass = BlockClasses[node.className+'Block'];
     let blockClassName = NodeTemplate[node.className].blockClassName;

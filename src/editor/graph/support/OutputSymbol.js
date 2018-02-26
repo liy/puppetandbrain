@@ -33,29 +33,29 @@ export default class OutputSymbol extends DataSymbol
   }
 
   mouseUp(e) {
-    if(this.canConnect(ConnectHelper.startSymbol)) {
+    if(this.canConnect(BrainGraph.connectHelper.startSymbol)) {
       SoundEffect.play('link');
-      ActivityManager.history.push(Commander.create('CreateDataLink', ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name, 
+      EditorHistory.push(Commander.create('CreateDataLink', BrainGraph.connectHelper.startSymbol.node.id, BrainGraph.connectHelper.startSymbol.name, 
         this.node.id, this.name).processAndSave());
     }
-    ConnectHelper.stop(e);
+    BrainGraph.connectHelper.stop(e);
   }
 
   touchDown(e) {
-    if(this.canConnect(ConnectHelper.selectedSymbol)) {
+    if(this.canConnect(BrainGraph.connectHelper.selectedSymbol)) {
       SoundEffect.play('link');
-      ActivityManager.history.push(Commander.create('CreateDataLink', ConnectHelper.selectedSymbol.node.id, ConnectHelper.selectedSymbol.name, 
+      EditorHistory.push(Commander.create('CreateDataLink', BrainGraph.connectHelper.selectedSymbol.node.id, BrainGraph.connectHelper.selectedSymbol.name, 
         this.node.id, this.name).processAndSave());
 
       // once a valid connection is made, deselect the sybmosl
-      ConnectHelper.stop(e)
+      BrainGraph.connectHelper.stop(e)
     }
-    ConnectHelper.startDataSymbol(this);
+    BrainGraph.connectHelper.startDataSymbol(this);
   }
   
   onContextMenu(e) {
     super.onContextMenu(e);
-    ActivityManager.history.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).processAndSave());
+    EditorHistory.push(Commander.create('RemoveOutputDataLink', this.node.id, this.name).processAndSave());
   }
 
   drawConnection() {

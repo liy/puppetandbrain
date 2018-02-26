@@ -1,17 +1,20 @@
 <template>
-<div id='graph'>
+<div ref='container' id='graph'>
   <div id='block-container' style="position:absolute; top:0; z-index:1;"></div>
   <svg id='graph-svg' style="position:absolute; top:0" ></svg>
 </div>
 </template>
 
 <script>
+import BrainGraph from '../graph/BrainGraph'
 
 export default {
   name: 'node-graph',
-  async mounted() {
+  mounted() {
+    window.BrainGraph = new BrainGraph(this.$refs.container);
   },
   beforeDestroy() {
+    BrainGraph.destroy();
   }
 }
 </script>

@@ -1,6 +1,5 @@
 import Variable from './data/Variable';
 import ActorFactory from './objects/ActorFactory';
-import NodeFactory from './nodes/NodeFactory';
 
 export default class
 {

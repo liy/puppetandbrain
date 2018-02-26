@@ -49,7 +49,7 @@ export default {
   mounted() {
     let canvas = document.getElementById('canvas')
     let stageElement = document.getElementById('stage')
-    ActivityManager.stage.init(stageElement, canvas)
+    ActivityManager.stage.init(stageElement, canvas);
 
     // setup everything!
     // wait until user is signed in

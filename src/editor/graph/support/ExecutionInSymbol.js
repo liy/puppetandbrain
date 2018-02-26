@@ -43,32 +43,32 @@ export default class ExecutionInSymbol extends ExecutionSymbol
 
     // Loop through all callers to remove execution, note that process
     // does not refresh, manual refresh has to be made
-    ActivityManager.history.push(Commander.create('RemoveParentExecution', this.node.id).processAndSave());
+    EditorHistory.push(Commander.create('RemoveParentExecution', this.node.id).processAndSave());
     
     // As the link is broken, make sense to deselect the selected symbol
-    ConnectHelper.stop();
+    BrainGraph.connectHelper.stop();
   }
 
   mouseUp(e) {
-    if(this.canConnect(ConnectHelper.startSymbol)) {
+    if(this.canConnect(BrainGraph.connectHelper.startSymbol)) {
       SoundEffect.play('link')      
-      ActivityManager.history.push(Commander.create('CreateExecution', ConnectHelper.startSymbol.node.id, 
-        ConnectHelper.startSymbol.name, this.node.id).processAndSave());
+      EditorHistory.push(Commander.create('CreateExecution', BrainGraph.connectHelper.startSymbol.node.id, 
+        BrainGraph.connectHelper.startSymbol.name, this.node.id).processAndSave());
     }
-    ConnectHelper.stop(e);
+    BrainGraph.connectHelper.stop(e);
   }
   
   touchDown(e) {
-    if(this.canConnect(ConnectHelper.selectedSymbol)) {
+    if(this.canConnect(BrainGraph.connectHelper.selectedSymbol)) {
       SoundEffect.play('link');
-      ActivityManager.history.push(Commander.create('CreateExecution', ConnectHelper.selectedSymbol.node.id, 
-        ConnectHelper.selectedSymbol.name, this.node.id).processAndSave());
+      EditorHistory.push(Commander.create('CreateExecution', BrainGraph.connectHelper.selectedSymbol.node.id, 
+        BrainGraph.connectHelper.selectedSymbol.name, this.node.id).processAndSave());
       
       // once a valid connection is made, deselect the sybmosl
-      ConnectHelper.stop()
+      BrainGraph.connectHelper.stop()
       return;
     }
-    ConnectHelper.startExecutionSymbol(this);
+    BrainGraph.connectHelper.startExecutionSymbol(this);
   }
 
   getConnectedPins() {

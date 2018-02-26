@@ -9,7 +9,6 @@ export default class Node extends EventEmitter
     super();
     
     this.activity = activity;
-    console.log(this.activity)
     this.lookUp = this.activity.lookUp;
     this.resources = this.activity.resources;
 

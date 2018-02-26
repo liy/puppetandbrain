@@ -1,11 +1,8 @@
 import Activity from "./Activity";
 import Delay from './access/Delay'
-import EditorHistory from './commands/EditorHistory';
-import BrainGraph from './graph/BrainGraph'
-import BlockFactory from '@/editor/graph/BlockFactory'
-import NodeFactory from '@/editor/nodes/NodeFactory'
-import ConnectHelper from './graph/ConnectHelper';
-import Commander from './commands/Commander';
+import '@/editor/graph/BlockFactory'
+import '@/editor/nodes/NodeFactory'
+import './commands/Commander';
 import Stage from "./Stage";
 
 class ActivityManager {
@@ -14,16 +11,9 @@ class ActivityManager {
     this.delaySave = new Delay();
 
     this.stage = new Stage();
-    this.history = new EditorHistory();
   }
 
   temp() {
-    window.ConnectHelper = new ConnectHelper();
-    window.BrainGraph = new BrainGraph();
-    window.BlockFactory = BlockFactory;
-    window.NodeFactory = NodeFactory;
-    window.Commander = Commander;
-
     const id = firebase.firestore().collection('activities').doc().id;
     this.current = new Activity(id, CurrentUser.uid);
   }

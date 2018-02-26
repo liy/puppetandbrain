@@ -5,16 +5,17 @@ import ArrayMap from '@/utils/ArrayMap';
 import BlockBrowser from '../browser/BlockBrowser';
 import ElementController from './elements/ElementController';
 import Matrix from '../math/Matrix'
-import BlockFactory from './BlockFactory';
 import store from '@/store';
-import Commander from '../commands/Commander'
+import ConnectHelper from './ConnectHelper';
 
 export default class BrainGraph
 {
-  constructor() {
-    this.container = document.getElementById('graph');
-    this.blockContainer = document.getElementById('block-container');
-    this.svg = document.getElementById('graph-svg');
+  constructor(container) {
+    this.container = container;
+    this.blockContainer = this.container.querySelector('#block-container');
+    this.svg = this.container.querySelector('#graph-svg');
+
+    this.connectHelper = new ConnectHelper(this.svg);
 
     // #MobileDevices specific:
     // Both these two listeners are for mobile devices.
@@ -239,7 +240,7 @@ export default class BrainGraph
     if(e.keyCode == 27) {
       e.preventDefault();
       e.stopImmediatePropagation();
-      ActivityManager.history.push(Commander.create('CloseGraph', this.brain.id).process());
+      EditorHistory.push(Commander.create('CloseGraph', this.brain.id).process());
     }
   }
 
@@ -266,8 +267,8 @@ export default class BrainGraph
     }
 
     // draw connect helper indicator
-    if(ConnectHelper.selectedSymbol) {
-      ConnectHelper.drawIndicator(ConnectHelper.selectedSymbol);
+    if(this.connectHelper.selectedSymbol) {
+      this.connectHelper.drawIndicator(this.connectHelper.selectedSymbol);
     }
   }
 
@@ -300,9 +301,9 @@ export default class BrainGraph
     }
 
     // draw connect helper indicator
-    if(ConnectHelper.selectedSymbol) {
-      ConnectHelper.drawIndicator(ConnectHelper.selectedSymbol);
-      this.svg.appendChild(ConnectHelper.path);
+    if(this.connectHelper.selectedSymbol) {
+      this.connectHelper.drawIndicator(this.connectHelper.selectedSymbol);
+      this.svg.appendChild(this.connectHelper.path);
     }
   }
 
@@ -358,7 +359,7 @@ export default class BrainGraph
       if(blockPod) {
         blockPod.x = blockPod.x || (e.changedTouches ? e.changedTouches[0].clientX : e.clientX);
         blockPod.y = blockPod.y || (e.changedTouches ? e.changedTouches[0].clientY : e.clientY);
-        ActivityManager.history.push(Commander.create('CreateBlock', blockPod, this.brain.owner.id).processAndSave());
+        EditorHistory.push(Commander.create('CreateBlock', blockPod, this.brain.owner.id).processAndSave());
       }
     }
   }

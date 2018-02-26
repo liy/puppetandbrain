@@ -38,23 +38,23 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
   }
 
   mouseUp(e) {
-    if(this.canConnect(ConnectHelper.startSymbol)) {
+    if(this.canConnect(BrainGraph.connectHelper.startSymbol)) {
       SoundEffect.play('link');
-      ActivityManager.history.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.startSymbol.node.id).processAndSave());
+      EditorHistory.push(Commander.create('CreateExecution', this.node.id, this.name, BrainGraph.connectHelper.startSymbol.node.id).processAndSave());
     }
-    ConnectHelper.stop(e);
+    BrainGraph.connectHelper.stop(e);
   }
 
   touchDown(e) {
-    if(this.canConnect(ConnectHelper.selectedSymbol)) {
+    if(this.canConnect(BrainGraph.connectHelper.selectedSymbol)) {
       SoundEffect.play('link')
-      ActivityManager.history.push(Commander.create('CreateExecution', this.node.id, this.name, ConnectHelper.selectedSymbol.node.id).processAndSave());
+      EditorHistory.push(Commander.create('CreateExecution', this.node.id, this.name, BrainGraph.connectHelper.selectedSymbol.node.id).processAndSave());
       
       // once a valid connection is made, deselect the sybmosl
-      ConnectHelper.stop()
+      BrainGraph.connectHelper.stop()
       return;
     }
-    ConnectHelper.startExecutionSymbol(this);
+    BrainGraph.connectHelper.startExecutionSymbol(this);
   }
 
   getConnectedPin() {
@@ -67,10 +67,10 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
 
   onContextMenu(e) {
     super.onContextMenu(e)
-    ActivityManager.history.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
+    EditorHistory.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
     
     // Hold the symbol to break the link
-    ConnectHelper.stop();
+    BrainGraph.connectHelper.stop();
   }
 
   drawConnection() {

@@ -71,25 +71,25 @@ export default class InputSymbol extends DataSymbol
   }
 
   mouseUp(e) {
-    if(this.canConnect(ConnectHelper.startSymbol)) {
+    if(this.canConnect(BrainGraph.connectHelper.startSymbol)) {
       SoundEffect.play('link');
-      ActivityManager.history.push(Commander.create('CreateDataLink', this.node.id, this.name, 
-        ConnectHelper.startSymbol.node.id, ConnectHelper.startSymbol.name).processAndSave())
+      EditorHistory.push(Commander.create('CreateDataLink', this.node.id, this.name, 
+        BrainGraph.connectHelper.startSymbol.node.id, BrainGraph.connectHelper.startSymbol.name).processAndSave())
     }
-    ConnectHelper.stop(e);
+    BrainGraph.connectHelper.stop(e);
   }
 
   touchDown(e) {
-    if(this.canConnect(ConnectHelper.selectedSymbol)) {
+    if(this.canConnect(BrainGraph.connectHelper.selectedSymbol)) {
       SoundEffect.play('link');
-      ActivityManager.history.push(Commander.create('CreateDataLink', this.node.id, this.name, 
-        ConnectHelper.selectedSymbol.node.id, ConnectHelper.selectedSymbol.name).processAndSave())
+      EditorHistory.push(Commander.create('CreateDataLink', this.node.id, this.name, 
+        BrainGraph.connectHelper.selectedSymbol.node.id, BrainGraph.connectHelper.selectedSymbol.name).processAndSave())
       
       // once a valid connection is made, deselect the sybmosl
-      ConnectHelper.stop()
+      BrainGraph.connectHelper.stop()
       return;
     }
-    ConnectHelper.startDataSymbol(this);
+    BrainGraph.connectHelper.startDataSymbol(this);
   }
 
   getOutputPin() {
@@ -99,14 +99,14 @@ export default class InputSymbol extends DataSymbol
 
   onContextMenu(e) {
     super.onContextMenu(e);
-    ActivityManager.history.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).processAndSave());
+    EditorHistory.push(Commander.create('RemoveInputDataLink', this.node.id, this.name).processAndSave());
   }
 
   drawSelectionIndicator() {
     let p = this.position;
 
     console.log(p.x - 100, p.y)
-    this.drawLine(p.x - 100, p.y, ConnectHelper.path);
+    this.drawLine(p.x - 100, p.y, BrainGraph.connectHelper.path);
   }
   
   drawConnection() {

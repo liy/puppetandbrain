@@ -10,7 +10,6 @@ import PropertyList from '../data/PropertyList';
 import { aroundAt } from '@/utils/utils';
 import DataType from '../data/DataType';
 import ContextMenu from '../ui/ContextMenu';
-import Commander from '../commands/Commander'
 
 export default class Actor extends EventEmitter
 {
@@ -176,14 +175,14 @@ export default class Actor extends EventEmitter
     document.removeEventListener('touchend', this.pointerRelease);
 
     // update entity's new position
-    if(this.moveCommand) ActivityManager.history.push(this.moveCommand.processAndSave());
+    if(this.moveCommand) EditorHistory.push(this.moveCommand.processAndSave());
 
     // double click to open brain
     setTimeout(() => {
       this._clicks = 0;
     }, 300)
     if(++this._clicks%2 == 0) {
-      ActivityManager.history.push(Commander.create('OpenGraph', this.brain.id).process());
+      EditorHistory.push(Commander.create('OpenGraph', this.brain.id).process());
     }
 
     this.emit('pointerup', this)
@@ -195,7 +194,7 @@ export default class Actor extends EventEmitter
     document.removeEventListener('mouseup', this.pointerRelease);
     document.removeEventListener('mousemove', this.mouseDragMove);
     // update entity's new position
-    if(this.moveCommand) ActivityManager.history.push(this.moveCommand.processAndSave());
+    if(this.moveCommand) EditorHistory.push(this.moveCommand.processAndSave());
   }
 
   mouseOver(e) {

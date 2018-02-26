@@ -11,7 +11,7 @@ export default class extends ElementControlButton
   }
 
   pointerDown(e) {
-    ActivityManager.history.push(Commander.create('CreateVariable', {
+    EditorHistory.push(Commander.create('CreateVariable', {
       brainID: BrainGraph.brain.id,
       name: null,
       data: {

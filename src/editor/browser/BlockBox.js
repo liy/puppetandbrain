@@ -1,6 +1,5 @@
 import './PuppetBox.scss';
 import GridBox from './GridBox';
-// import BlockFactory from '@/editor/graph/BlockFactory'
 
 export default class extends GridBox
 {

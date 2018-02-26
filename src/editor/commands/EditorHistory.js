@@ -1,6 +1,6 @@
 import EventEmitter from '@/utils/EventEmitter';
 
-export default class EditorHistory extends EventEmitter
+export default class extends EventEmitter
 {
   constructor() {
     super();
@@ -32,7 +32,7 @@ export default class EditorHistory extends EventEmitter
     cmd.undo();
     this.redos.push(cmd);
 
-    Activity.autoSave();
+    ActivityManager.autoSave();
 
     // if(cmd.passThrough) this.undo();
     this.updateButton()
@@ -44,7 +44,7 @@ export default class EditorHistory extends EventEmitter
     cmd.redo();
     this.undos.push(cmd);
 
-    Activity.autoSave();
+    ActivityManager.autoSave();
 
     // if(cmd.passThrough) this.redo();
     this.updateButton()

@@ -17,7 +17,7 @@ export default class BrainButton extends ControlButton
     this.element.addEventListener('mousedown', e => {
       
       if(this.mode == 'stage mode') {
-        ActivityManager.history.push(Commander.create('DeleteActor', ActorSelection.selected[0].id).processAndSave());
+        EditorHistory.push(Commander.create('DeleteActor', ActorSelection.selected[0].id).processAndSave());
         SoundEffect.play('trash');
       }
       else {

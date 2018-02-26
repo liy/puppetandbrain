@@ -1,7 +1,6 @@
 import './PuppetBox.scss';
 import GridBox from './GridBox';
 import { svgElement } from '@/utils/utils';
-import Commander from '../commands/Commander'
 
 import Logo from '@/assets/logo.svg';
 
@@ -35,7 +34,7 @@ export default class extends GridBox
 
       this.emit('browser.close');
 
-      ActivityManager.history.push(await Commander.create('ImportActor', pod).process());
+      EditorHistory.push(await Commander.create('ImportActor', pod).process());
     })
   }
 

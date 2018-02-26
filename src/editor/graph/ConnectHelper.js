@@ -4,12 +4,11 @@ import AutoConnect from './AutoConnect';
 import BlockBrowser from '../browser/BlockBrowser';
 import SoundEffect from '@/SoundEffect';
 import { isMobile } from '@/utils/utils';
-import Commander from '../commands/Commander'
 
-export default class ConnectHelper
+export default class
 {
-  constructor() {
-    this.svg = document.getElementById('graph-svg');
+  constructor(svg) {
+    this.svg = svg
     this.path = document.createElementNS('http://www.w3.org/2000/svg','path');
     this.path.setAttribute('stroke-linecap', 'round');
     this.path.classList.add('symbol-indicator')
@@ -61,7 +60,7 @@ export default class ConnectHelper
       blockPod.x = x;
       blockPod.y = y;
       let command = Commander.create('CreateBlock', blockPod, BrainGraph.brain.owner.id).processAndSave();
-      ActivityManager.history.push(command);
+      EditorHistory.push(command);
       AutoConnect.process(this.startSymbol, command.getCreatedNode());
     }
   }

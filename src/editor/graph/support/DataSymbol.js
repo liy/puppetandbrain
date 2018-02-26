@@ -69,12 +69,12 @@ export default class DataSymbol
         document.removeEventListener('mouseup', up);
 
         if(e.target == BrainGraph.container) {
-          await ConnectHelper.openBrowser(e.clientX, e.clientY);
+          await BrainGraph.connectHelper.openBrowser(e.clientX, e.clientY);
         }
-        ConnectHelper.stop(e);
+        BrainGraph.connectHelper.stop(e);
       }
 
-      ConnectHelper.startDataSymbol(this);
+      BrainGraph.connectHelper.startDataSymbol(this);
       this.drawLineSnap(e.clientX, e.clientY);
       document.addEventListener('mousemove', move);
       document.addEventListener('mouseup', up);
@@ -83,7 +83,7 @@ export default class DataSymbol
 
   touchDown(e) {
     // override this to make connection in touch mode
-    ConnectHelper.startDataSymbol(this);
+    BrainGraph.connectHelper.startDataSymbol(this);
   }
 
   touchUp(e) {
@@ -96,11 +96,11 @@ export default class DataSymbol
   }
 
   mouseOver(e) {
-    ConnectHelper.mouseOver(this);
+    BrainGraph.connectHelper.mouseOver(this);
   }
 
   mouseOut(e) {
-    ConnectHelper.mouseOut();
+    BrainGraph.connectHelper.mouseOut();
   }
 
   onContextMenu(e) {
@@ -109,19 +109,19 @@ export default class DataSymbol
   }
 
   drawConnection() {
-    if(ConnectHelper.selectedSymbol == this) {
-      ConnectHelper.drawIndicator(this)
+    if(BrainGraph.connectHelper.selectedSymbol == this) {
+      BrainGraph.connectHelper.drawIndicator(this)
     }
   }
 
   
   drawLineSnap(x, y) {
     // snap
-    if(this.canConnect(ConnectHelper.snapSymbol)) {
-      x = ConnectHelper.snapSymbol.position.x;
-      y = ConnectHelper.snapSymbol.position.y;
+    if(this.canConnect(BrainGraph.connectHelper.snapSymbol)) {
+      x = BrainGraph.connectHelper.snapSymbol.position.x;
+      y = BrainGraph.connectHelper.snapSymbol.position.y;
     }
-    this.drawLine(x, y, ConnectHelper.path);
+    this.drawLine(x, y, BrainGraph.connectHelper.path);
   } 
 
   drawLine(x, y, path) {
