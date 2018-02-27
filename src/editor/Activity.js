@@ -42,18 +42,6 @@ export default class Activity extends EventEmitter
     return API.clone(pod, files, fileRefs);
   }
 
-  save() {
-    let userFileRefs = Activity.getFileRefs();
-    Activity.cleanResource(userFileRefs);
-
-    if(Activity.isNew) {
-      Activity.create(userFileRefs);
-    }
-    else {
-      Activity.update(userFileRefs);
-    }
-  }
-
   destroy() {
     this.stage.destroy();
     this.clear();
@@ -88,5 +76,12 @@ export default class Activity extends EventEmitter
         this.resources.delete(path);
       }
     }
+  }
+
+  pod() {
+    let pod = this.lookUp.pod();
+    pod.userID = this.ownerID;
+    pod.activityID = this.id;
+    return pod;
   }
 }

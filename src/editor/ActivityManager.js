@@ -26,6 +26,7 @@ class ActivityManager {
     this.current.cleanResource(userFileRefs);
 
     let pod = this.current.pod();
+    console.log(pod)
     await API.saveActivity(pod, userFileRefs);
 
     return this.current;

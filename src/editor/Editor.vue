@@ -34,6 +34,7 @@ import Toolbox from './vue/Toolbox.vue';
 import ModeButton from './vue/ModeButton.vue';
 
 import './ActivityManager'
+import NotificationControl from './ui/NotificationControl';
 
 export default {
   name: 'editor',
@@ -67,10 +68,27 @@ export default {
         }
       });
     })
+
+    document.addEventListener('keydown', this.keydown)
   },
   beforeDestroy() {
     // clear everything...
     this.activity.destroy();
+
+    document.removeEventListener('keydown', this.keydown)
+  },
+  methods: {
+    keydown(e) {
+      if(e.keyCode == 83 && e.ctrlKey) {
+        e.preventDefault();
+
+        NotificationControl.notify('Saving...').delayFadeoutRemove();
+
+        ActivityManager.save().then(() => {
+          console.log('done')
+        })
+      }
+    }
   }
 }
 </script>
