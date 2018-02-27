@@ -10,10 +10,6 @@ class ActivityManager {
     this.delaySave = new Delay();
   }
 
-  staging(activity, stage) {
-
-  }
-
   temp() {
     const id = firebase.firestore().collection('activities').doc().id;
     this.current = new Activity(id, CurrentUser.uid);

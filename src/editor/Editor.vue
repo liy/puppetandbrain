@@ -27,8 +27,6 @@ import 'pixi-spine';
 
 import '@/API'
 
-import './ui/Tooltip.scss'
-
 import Terminal from './vue/Terminal.vue'; 
 import NodeGraph from './vue/NodeGraph.vue';
 import Theater from './vue/Theater.vue';
@@ -36,7 +34,6 @@ import Toolbox from './vue/Toolbox.vue';
 import ModeButton from './vue/ModeButton.vue';
 
 import './ActivityManager'
-
 
 export default {
   name: 'editor',

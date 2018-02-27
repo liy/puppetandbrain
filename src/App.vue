@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import './Tooltip.scss'
+
 import Header from './vue/Header.vue';
 
 export default {
