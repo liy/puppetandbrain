@@ -6,7 +6,7 @@ export default class RemoveParentExecution extends Command
     super();
 
     this.sourceNodeID = sourceNodeID;
-    let sourceNode = this.lookUp.get(this.sourceNodeID );
+    let sourceNode = this.lookUp.get(this.sourceNodeID);
     this.callerPods = sourceNode.getCallers();
   }
 

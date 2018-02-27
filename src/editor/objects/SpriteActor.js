@@ -21,7 +21,6 @@ export default class SpriteActor extends Actor
 
     this.addComponent('placeholder', new PlaceHolderComponent());
     
-    console.log(this.resources)
     let loader = new LoaderBucket(this.resources);
     let promises = pod.userFiles.map(async entry => {
       loader.add(entry.path, entry.url, entry.contentType)
