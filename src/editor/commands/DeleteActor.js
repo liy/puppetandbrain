@@ -15,7 +15,7 @@ export default class DeleteActor extends Command
 
     actor.deselect()
 
-    ActivityManager.current.stage.removeActor(actor);
+    ActivityManager.stage.removeActor(actor);
     actor.destroy();
 
     return this;
@@ -24,7 +24,7 @@ export default class DeleteActor extends Command
   undo() {
     let actor = ActorFactory.create(this.pod.className, this.pod.id, ActivityManager.current)
     actor.init(this.pod);
-    ActivityManager.current.stage.addActor(actor)
+    ActivityManager.stage.addActor(actor)
 
     // create variables
     for(let variablePod of this.pod.brain.variables) {

@@ -1,7 +1,7 @@
 <template>
 
 <div id='theater'>
-  <div ref='stage' id="stage">
+  <div id="stage">
     <div id='stage-grid'></div>
     <canvas id='canvas' :width="width" :height="height"></canvas>
     <div id='stage-overlayer'></div>
@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import StageClass from '../Stage';
-
 export default {
   name: 'theater',
   props: {
@@ -30,9 +28,6 @@ export default {
       type: [Number, String],
       default: 300
     },
-  },
-  mounted() {
-    window.Stage = new StageClass(this.$refs.stage);
   }
 }
 </script>

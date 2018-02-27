@@ -17,7 +17,7 @@ export default class Brain
 
     this.variables = new VariableList(this, this.activity);
 
-    this.owner.stage.on('game.prestart', this.prestart, this);
+    this.activity.on('game.prestart', this.prestart, this);
   }
 
   destroy() {
@@ -29,7 +29,7 @@ export default class Brain
     for(let variable of this.variables) {
       variable.destroy();
     }
-    this.owner.stage.off('game.prestart', this.prestart, this);
+    this.activity.off('game.prestart', this.prestart, this);
   }
 
   prestart() {

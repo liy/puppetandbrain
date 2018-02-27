@@ -148,7 +148,6 @@ export default class Actor extends EventEmitter
   }
 
   pointerDown(x, y, e) {
-    console.log('!!!!')
     this.select();
 
     this.offset = {
@@ -161,7 +160,7 @@ export default class Actor extends EventEmitter
     document.addEventListener('touchend', this.pointerRelease);
 
     // crete move command, when move update it with new position
-    if(!this.stage.playing) this.moveCommand = Commander.create('MoveActor', this);
+    if(!this.activity.playing) this.moveCommand = Commander.create('MoveActor', this);
 
     document.addEventListener('mousemove', this.mouseDragMove);
     document.addEventListener('touchmove', this.touchDragMove);
@@ -211,19 +210,19 @@ export default class Actor extends EventEmitter
   }
 
   mouseDragMove(e) {
-    this.position.x = e.clientX + this.offset.x - this.stage.offsetX;
-    this.position.y = e.clientY + this.offset.y - this.stage.offsetY;
+    this.position.x = e.clientX + this.offset.x - ActivityManager.stage.offsetX;
+    this.position.y = e.clientY + this.offset.y - ActivityManager.stage.offsetY;
   }
 
   touchDragMove(e) {
     let x = e.touches[0].clientX;
     let y = e.touches[0].clientY
-    this.position.x = x + this.offset.x - this.stage.offsetX;
-    this.position.y = y + this.offset.y - this.stage.offsetY;
+    this.position.x = x + this.offset.x - ActivityManager.stage.offsetX;
+    this.position.y = y + this.offset.y - ActivityManager.stage.offsetY;
   }
 
   contextMenu(e) {
-    this.stage.emit('contextmenu', {actor:this, event:e});
+    this.activity.emit('contextmenu', {actor:this, event:e});
   }
 
   select() {

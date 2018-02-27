@@ -1,7 +1,7 @@
 <template>
 <div>
   <terminal/>
-  <theater ref='theater' width=1024 height=768 :activity="activity"></theater>
+  <theater ref='theater' width=1024 height=768></theater>
   <node-graph/>
 
   <toolbox/>
@@ -59,15 +59,7 @@ export default {
     });
 
     // wait until user is signed in
-    await getCurrentUser();
-    this.activity = null;
-    if(this.activityID) {
-      this.activity = await ActivityManager.load(this.activityID);
-    }
-    else {
-      this.activity = await ActivityManager.create();
-    }
-    this.activity.stage.activate();
+    await ActivityManager.setup(this.activityID);
     this.$store.commit('staging', this.activity);
 
     this.$store.subscribe((mutation, state) => {

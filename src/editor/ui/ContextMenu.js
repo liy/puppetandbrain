@@ -9,7 +9,7 @@ import NotificationControl from './NotificationControl';
 
 export default class ContextMenu 
 {
-  constructor(stage) {
+  constructor() {
     this.element = document.createElement('div');
     this.element.className = 'context-menu';
 
@@ -41,43 +41,34 @@ export default class ContextMenu
     this.close = this.close.bind(this)
     document.addEventListener('click', this.close);
 
-    // document.getElementById('canvas').addEventListener('contextmenu', e => {
-    //   const canvas = document.getElementById('canvas');
-    //   const rect = canvas.getBoundingClientRect();
-    //   // FIXIME: handle scale!!
-    //   let actor = ActorSelection.selected[0]
-    //   if(actor && actor.hitTest(e.clientX-rect.left, e.clientY-rect.top)) {
-    //     this.openActorMenu(e);
-    //   }
-    // })
+    ActivityManager.on('contextmenu', this.openActorMenu, this);
 
-    stage.on('contextmenu', ({actor, event}) => {
-      if(actor) {
-        this.openActorMenu(event);
-      }
-    }, this)
-
-    document.getElementById('block-container').addEventListener('contextmenu', e => {
-      if(GraphSelection.selected) {
-        this.openBlockMenu();
-      }
-    })
+    this.openBlockMenu = this.openBlockMenu.bind(this);
+    document.getElementById('block-container').addEventListener('contextmenu', this.openBlockMenu)
   }
 
-  openActorMenu(e) {
+  destroy() {
+    ActivityManager.off('contextmenu', this.openActorMenu, this);
+    document.removeEventListener('click', this.close);
+    document.getElementById('block-container').removeEventListener('contextmenu', this.openBlockMenu)
+  }
+
+  openActorMenu({actor, event}) {
+    if(!actor) return;
+
     this.opened = true;
 
     this.element.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
     // override me, hehe...
-    console.log(ActorSelection.selected);
     this.element.appendChild(this.actorMenuList);
     document.body.appendChild(this.element);
   }
 
-  openBlockMenu() {
+  openBlockMenu(e) {
+    if(!GraphSelection.selected) return;
+
     this.opened = true;
     
-    console.log(GraphSelection.selected);
     document.body.appendChild(this.element);
   }
 

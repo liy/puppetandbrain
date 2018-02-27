@@ -13,22 +13,10 @@ export default class Activity extends EventEmitter
 
     this.resources = new Map();
     this.lookUp = new LookUp(this);
-
-    // used by ActivityLoader
-    // temporarily buffer the actors
-    // remeber to clear it after activity is staged
-    this.actorBuffers = []
   }
 
-  staging() {
-    Stage.stagedActivity = this;
-    for(let actor of this.actorBuffers) {
-      Stage.addActor(actor)
-    }
-  }
-
-  get canSave() {
-    return CurrentUser.uid == this.ownerID;
+  get isOwner() {
+    return ActivityManager.user.uid == this.ownerID;
   }
 
   clone() {

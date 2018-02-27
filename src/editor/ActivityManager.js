@@ -4,52 +4,72 @@ import '@/editor/graph/BlockFactory'
 import '@/editor/nodes/NodeFactory'
 import './commands/Commander';
 import ActivityLoader from "./ActivityLoader";
+import Stage from "./Stage";
+import ContextMenu from "./ui/ContextMenu";
+import EventEmitter from '../utils/EventEmitter';
 
-class ActivityManager {
+class ActivityManager extends EventEmitter
+{
   constructor() {
-    this.current = null;
+    super();
+    
     this.delaySave = new Delay();
+  }
+
+  async setup(activityID) {
+    this.user = await getCurrentUser();
+    let stageElement = document.getElementById('stage');
+    this.stage = new Stage(stageElement);
+
+    if(activityID) {
+      this.load(activityID);
+    }
+    else {
+      this.create();
+    }
   }
 
   create() {
     const id = firebase.firestore().collection('activities').doc().id;
-    this.current = new Activity(id, CurrentUser.uid);
-    return this.current;
+    this.activity = new Activity(id, CurrentUser.uid);
+    return this.activity;
   }
 
   async save() {
     // TODO: make a clone instead
-    if(this.current.ownerID !== CurrentUser.uid) {
+    if(this.activity.ownerID !== CurrentUser.uid) {
       throw new Error('User is not the owner of the activity!')
     }
 
-    let userFileRefs = this.current.getFileRefs();
-    this.current.cleanResource(userFileRefs);
+    let userFileRefs = this.activity.getFileRefs();
+    this.activity.cleanResource(userFileRefs);
 
-    let pod = this.current.pod();
+    let pod = this.activity.pod();
     console.log(pod)
     await API.saveActivity(pod, userFileRefs);
 
-    return this.current;
+    return this.activity;
   }
 
   async load(id) {
     let pod = await API.getActivity(id);
-    this.current = new Activity(pod.activityID, pod.userID);
-    var loader = new ActivityLoader(this.current);
-    await loader.parse(pod);
+    this.activity = new Activity(pod.activityID, pod.userID);
+    var loader = new ActivityLoader(this.activity);
+    let actorBuffer = await loader.start(pod);
 
-    return this.current;
+    for(let actor of actorBuffer) {
+      this.stage.addActor(actor)
+    }
+
+    return this.activity;
   }
 
-  async preload(id) {
-    let pod = await API.getActivity(id);
-    let activity = new Activity(pod.activityID, pod.userID);
-    var loader = new ActivityLoader(activity);
-    await loader.parse(pod);
-
-    return activity;
-  }
+  // async preload(id) {
+  //   let pod = await API.getActivity(id);
+  //   let activity = new Activity(pod.activityID, pod.userID);
+  //   var loader = new ActivityLoader(activity);
+  //   return loader.start(pod);
+  // }
 
   async autoSave() {
     // do not auto save when in dev mode
@@ -62,8 +82,8 @@ class ActivityManager {
       // might be ok?
       let fileRefs = this.getFileRefs();
 
-      if(this.current.canSave()) {
-        let pod = this.current.pod();
+      if(this.activity.isOwner) {
+        let pod = this.activity.pod();
         await API.saveActivity(pod, fileRefs);
       }
     }

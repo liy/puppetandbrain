@@ -9,16 +9,18 @@ export default class ActivityLoader
     this.lookUp = activity.lookUp;
   }
 
-  async parse(pod) {
+  async start(pod) {
     console.log('Loading', pod)
-    await this.preload(pod);
+    await this.loadResources(pod);
 
-    this.createActors(pod);
+    let actorBuffer = this.createActors(pod);
     // create nodes; link execution, input and outputs
     this.fillBrains(pod);
+
+    return Promise.resolve(actorBuffer);
   }
 
-  async preload(pod) {
+  async loadResources(pod) {
     let loader = new LoaderBucket(this.resources);
     
     let urlPromises = [];
@@ -44,16 +46,16 @@ export default class ActivityLoader
   createActors(pod) {
     let promises = [];
 
+    let actorBuffer = [];
     for(let id of pod.stage) {
       let actorPod = pod.store[id];
 
       let actor = ActorFactory.create(actorPod.className, actorPod.id, this.activity);
       actor.init(actorPod);
-      this.activity.actorBuffers.push(actor);
-      promises.push(actor.loaded);
+      actorBuffer.push(actor);
     }
 
-    return Promise.all(promises);
+    return actorBuffer;
   }
 
   fillBrains(pod) {

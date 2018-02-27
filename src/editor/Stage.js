@@ -13,9 +13,6 @@ export default class extends EventEmitter
     this.overlayer = this.element.querySelector('#stage-overlayer');
     this.canvas = this.element.querySelector('#canvas');
 
-    // points to the current staged activity
-    this.stagedActivity = null;
-
     this.actors = new ArrayMap();
     this.container = new PIXI.Container();
 
@@ -46,6 +43,7 @@ export default class extends EventEmitter
 
   destroy() {
     PIXI.ticker.shared.remove(this.loop);
+    this.contextMenu.destroy();
   }
 
   get stageWidth() {
@@ -57,7 +55,7 @@ export default class extends EventEmitter
   }
   
   loop(delta) {
-    this.stagedActivity.emit('tick', {delta, deltaTime:delta/60});
+    ActivityManager.activity.emit('tick', {delta, deltaTime:delta/60});
     this.updateTransform();
     this.renderer.render(this.container);
   }
@@ -130,13 +128,13 @@ export default class extends EventEmitter
   start() {
     this.playing = true;
     this.mouse.gamePreStart();
-    this.stagedActivity.emit('game.prestart')
-    this.stagedActivity.emit('game.start')
+    ActivityManager.activity.emit('game.prestart')
+    ActivityManager.activity.emit('game.start')
   }
 
   stop() {
     this.playing = false;
-    this.stagedActivity.emit('game.stop')
+    ActivityManager.activity.emit('game.stop')
     this.mouse.gameStop();
   }
 
