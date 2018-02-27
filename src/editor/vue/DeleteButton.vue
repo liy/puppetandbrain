@@ -57,7 +57,12 @@ export default {
 
       switch(e.keyCode) {
         case 46:
-          ActorSelection.delete();
+          if(this.stageMode) {
+            ActorSelection.delete();
+          }
+          else {
+            GraphSelection.delete();
+          }
           break;
       }
     },

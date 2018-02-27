@@ -11,7 +11,6 @@ class GraphSelection extends EventEmitter
   constructor() {
     super();
 
-    this.keydown = this.keydown.bind(this);
     this.downOnEmptySpace = this.downOnEmptySpace.bind(this);
   }
 
@@ -27,15 +26,6 @@ class GraphSelection extends EventEmitter
     BrainGraph.container.removeEventListener('mousedown', this.downOnEmptySpace);
 
     ActorSelection.enabled = true;
-  }
-
-  keydown(e) {
-    switch(e.keyCode) {
-      case 46:
-        e.preventDefault();
-        this.delete();
-        break;
-    }
   }
 
   select(selectable) {
