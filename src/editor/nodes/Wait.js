@@ -23,13 +23,13 @@ export default class Wait extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    this.stage.on('game.stop', this.stop, this)
+    this.activity.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
     clearTimeout(this.timeoutID);
-    this.stage.off('game.stop', this.stop, this)
+    this.activity.off('game.stop', this.stop, this)
   }
 
   stop() {

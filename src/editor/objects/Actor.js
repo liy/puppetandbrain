@@ -42,8 +42,8 @@ export default class Actor extends EventEmitter
 
     mixin(this, new Entity());
 
-    this.stage.on('game.prestart', this.gamePrestart, this);
-    this.stage.on('game.stop', this.gameStop, this);
+    this.activity.on('game.prestart', this.gamePrestart, this);
+    this.activity.on('game.stop', this.gameStop, this);
   }
 
   /**
@@ -98,8 +98,8 @@ export default class Actor extends EventEmitter
     document.removeEventListener('mousemove', this.mouseDragMove);
     document.removeEventListener('mouseup', this.pointerRelease);
 
-    this.stage.off('game.prestart', this.gamePrestart, this);
-    this.stage.off('game.stop', this.gameStop, this);
+    this.activity.off('game.prestart', this.gamePrestart, this);
+    this.activity.off('game.stop', this.gameStop, this);
 
     this.brain.destroy();
 

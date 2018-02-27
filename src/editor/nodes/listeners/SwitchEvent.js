@@ -48,8 +48,8 @@ export default class SwitchEvent extends Listener
   constructor(id, activity) {
     super(id, activity);
 
-    this.stage.on('game.prestart', this.prestart, this)
-    this.stage.on('game.stop', this.stop, this)
+    this.activity.on('game.prestart', this.prestart, this)
+    this.activity.on('game.stop', this.stop, this)
 
     this.switch = new Switch(this);
   }
@@ -57,8 +57,8 @@ export default class SwitchEvent extends Listener
   destroy() {
     super.destroy();
 
-    this.stage.off('game.prestart', this.prestart, this)
-    this.stage.off('game.stop', this.stop, this)
+    this.activity.off('game.prestart', this.prestart, this)
+    this.activity.off('game.stop', this.stop, this)
 
     this.switch.off('switch.down', this.switchdown, this)
     this.switch.off('switch.up', this.switchup, this)

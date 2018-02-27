@@ -22,24 +22,24 @@ export default class GameLoop extends Listener
   constructor(id, activity) {
     super(id, activity);
 
-    this.stage.on('game.start', this.start, this)
-    this.stage.on('game.stop', this.stop, this)
+    this.activity.on('game.start', this.start, this)
+    this.activity.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
 
-    this.stage.off('game.start', this.start, this)
-    this.stage.off('game.stop', this.stop, this)
-    this.stage.off('tick', this.tick, this);
+    this.activity.off('game.start', this.start, this)
+    this.activity.off('game.stop', this.stop, this)
+    this.activity.off('tick', this.tick, this);
   }
 
   stop() {
-    this.stage.off('tick', this.tick, this);
+    this.activity.off('tick', this.tick, this);
   }
   
   start(e) {
-    this.stage.on('tick', this.tick, this);
+    this.activity.on('tick', this.tick, this);
   }
 
   tick(delta) {

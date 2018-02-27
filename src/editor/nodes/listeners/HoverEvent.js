@@ -17,15 +17,15 @@ export default class HoverEvent extends Listener
   constructor(id, activity) {
     super(id, activity);
 
-    this.stage.on('game.prestart', this.prestart, this)
-    this.stage.on('game.stop', this.stop, this)
+    this.activity.on('game.prestart', this.prestart, this)
+    this.activity.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
     
-    this.stage.off('game.prestart', this.prestart, this)
-    this.stage.off('game.stop', this.stop, this)
+    this.activity.off('game.prestart', this.prestart, this)
+    this.activity.off('game.stop', this.stop, this)
 
     this.owner.off('pointerover', this.over, this)
     this.owner.off('pointerout', this.out, this)

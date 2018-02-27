@@ -26,8 +26,8 @@ export default class SceneChange extends Task
   init(pod) {
     super.init(pod);
 
-    this.stage.on('game.stop', this.stop, this);
-    this.stage.on('game.start', this.start, this);
+    this.activity.on('game.stop', this.stop, this);
+    this.activity.on('game.start', this.start, this);
     
     this.stageElement = this.stage.element;
     this.maskCircle = document.getElementById('mask-circle');

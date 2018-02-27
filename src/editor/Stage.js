@@ -4,21 +4,20 @@ import EventEmitter from '@/utils/EventEmitter';
 import ContextMenu from './ui/ContextMenu';
 import Mouse from './access/Mouse';
 
-import store from '@/store';
-
 export default class extends EventEmitter
 {
-  constructor() {
+  constructor(stageElement) {
     super();
+
+    this.element = stageElement
+    this.overlayer = this.element.querySelector('#stage-overlayer');
+    this.canvas = this.element.querySelector('#canvas');
+
+    // points to the current staged activity
+    this.stagedActivity = null;
 
     this.actors = new ArrayMap();
     this.container = new PIXI.Container();
-  }
-
-  activate() {
-    this.element = document.getElementById('stage')
-    this.overlayer = this.element.querySelector('#stage-overlayer');
-    this.canvas = document.getElementById('canvas');
 
     this.renderer = PIXI.autoDetectRenderer({
       autoStart: true,
@@ -58,7 +57,7 @@ export default class extends EventEmitter
   }
   
   loop(delta) {
-    this.emit('tick', {delta, deltaTime:delta/60});
+    this.stagedActivity.emit('tick', {delta, deltaTime:delta/60});
     this.updateTransform();
     this.renderer.render(this.container);
   }
@@ -70,7 +69,6 @@ export default class extends EventEmitter
   }
 
   addActor(actor) {
-    console.log('add actor')
     actor.onStage();
     // call update transform immeditately
     // so it is up to date with the transform even without waiting
@@ -132,13 +130,13 @@ export default class extends EventEmitter
   start() {
     this.playing = true;
     this.mouse.gamePreStart();
-    this.emit('game.prestart')
-    this.emit('game.start')
+    this.stagedActivity.emit('game.prestart')
+    this.stagedActivity.emit('game.start')
   }
 
   stop() {
     this.playing = false;
-    this.emit('game.stop')
+    this.stagedActivity.emit('game.stop')
     this.mouse.gameStop();
   }
 

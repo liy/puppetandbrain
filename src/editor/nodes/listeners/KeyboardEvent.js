@@ -32,15 +32,15 @@ export default class KeyboardEvent extends Listener
     this.keydown = this.keydown.bind(this)
     this.keyup = this.keyup.bind(this)
 
-    this.stage.on('game.prestart', this.prestart, this)
-    this.stage.on('game.stop', this.stop, this)
+    this.activity.on('game.prestart', this.prestart, this)
+    this.activity.on('game.stop', this.stop, this)
   }
 
   destroy() {
     super.destroy();
     
-    this.stage.off('game.prestart', this.prestart, this)
-    this.stage.off('game.stop', this.stop, this)
+    this.activity.off('game.prestart', this.prestart, this)
+    this.activity.off('game.stop', this.stop, this)
 
     document.removeEventListener('keydown', this.keydown)
     document.removeEventListener('keyup', this.keyup)

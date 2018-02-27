@@ -13,11 +13,18 @@ export default class Activity extends EventEmitter
 
     this.resources = new Map();
     this.lookUp = new LookUp(this);
-    this.stage = new Stage();
+
+    // used by ActivityLoader
+    // temporarily buffer the actors
+    // remeber to clear it after activity is staged
+    this.actorBuffers = []
   }
 
-  activate() {
-    this.stage.activate();
+  staging() {
+    Stage.stagedActivity = this;
+    for(let actor of this.actorBuffers) {
+      Stage.addActor(actor)
+    }
   }
 
   get canSave() {
@@ -47,14 +54,12 @@ export default class Activity extends EventEmitter
   }
 
   destroy() {
-    this.stage.destroy();
     this.clear();
   }
 
   clear() {
     // TODO: clear resources necessary??
     this.resources.clear();
-    this.stage.clear();
     this.lookUp.clear();
   }
 

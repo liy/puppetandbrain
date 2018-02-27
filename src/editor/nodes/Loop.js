@@ -34,11 +34,11 @@ export default class Loop extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    this.stage.on('game.prestart', this.prestart, this);
+    this.activity.on('game.prestart', this.prestart, this);
   }
 
   destroy() {
-    this.stage.off('game.prestart', this.prestart, this);
+    this.activity.off('game.prestart', this.prestart, this);
     super.destroy();
   }
 

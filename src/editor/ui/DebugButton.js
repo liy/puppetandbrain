@@ -11,20 +11,20 @@ export default class DebugButton extends ControlButton
     this.element = document.getElementById('debug-button');
 
     this.enabled = false;
-    this.stage.on('stage.actor.added', this.stageStateChange, this);
-    this.stage.on('stage.actor.removed', this.stageStateChange, this);
+    this.activity.on('stage.actor.added', this.stageStateChange, this);
+    this.activity.on('stage.actor.removed', this.stageStateChange, this);
 
     this.stopIcon = svgElement(StopButtonIcon, {width:100, height:100});
     this.startIcon = svgElement(StartButtonIcon, {width:100, height:100});
     this.element.appendChild(this.startIcon);
 
-    this.stage.on('game.start', () => {
+    this.activity.on('game.start', () => {
       this.element.removeChild(this.element.firstChild);
       this.element.appendChild(this.stopIcon);
       this.element.setAttribute('data-title', 'Stop game')
     })
 
-    this.stage.on('game.stop', () => {
+    this.activity.on('game.stop', () => {
       this.element.removeChild(this.element.firstChild);
       this.element.appendChild(this.startIcon);
       this.element.setAttribute('data-title', 'Play game')

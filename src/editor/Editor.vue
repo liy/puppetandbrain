@@ -67,7 +67,7 @@ export default {
     else {
       this.activity = await ActivityManager.create();
     }
-    this.activity.stage.init();
+    this.activity.stage.activate();
     this.$store.commit('staging', this.activity);
 
     this.$store.subscribe((mutation, state) => {

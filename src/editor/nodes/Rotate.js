@@ -35,18 +35,18 @@ export default class Rotate extends Task
   constructor(id, activity) {
     super(id, activity);
 
-    this.stage.on('game.stop', this.stop, this)
+    this.activity.on('game.stop', this.stop, this)
   }
 
   
   destroy() {
     super.destroy();
-    this.stage.off('game.stop', this.stop, this)
-    this.stage.off('tick', this.tick, this);
+    this.activity.off('game.stop', this.stop, this)
+    this.activity.off('tick', this.tick, this);
   }
 
   stop() {
-    this.stage.off('tick', this.tick, this);
+    this.activity.off('tick', this.tick, this);
   }
 
   tick({delta, deltaTime:dt}) {
@@ -57,7 +57,7 @@ export default class Rotate extends Task
     }
     else {
       this.owner.rotation = this.targetRotation;
-      this.stage.off('tick', this.tick, this);
+      this.activity.off('tick', this.tick, this);
       this.execution.run('completed');
     }
   }
@@ -71,7 +71,7 @@ export default class Rotate extends Task
     this.rotator = this.inputs.value('degree')*toRadian;
     this.targetRotation = this.owner.rotation + this.rotator;
 
-    this.stage.on('tick', this.tick, this);
+    this.activity.on('tick', this.tick, this);
     this.execution.run();
   }
 }
