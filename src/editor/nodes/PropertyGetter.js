@@ -3,12 +3,8 @@ import DataType from "../data/DataType";
 
 NodeTemplate.PropertyGetter = {
   className: 'PropertyGetter',
-  // inputs: [{
-  //   name: 'puppet',
-  //   descriptor: {
-  //     type: DataType.ACTOR, 
-  //   }
-  // }],
+  // Since it is dynamic, it won't be safe to
+  // ask user supply puppet reference.
   inputs: [],
   outputs: [],
   elementClass: ['property', 'collapsed'],
@@ -35,10 +31,9 @@ export default class PropertyGetter extends Node
     // dynamic output
     this.outputs.assignProperty(this.propertyName, {
       get: () => {
-        return this.lookUp.get(this.inputs.value('puppet'))[this.propertyName]
+        // TODO: directly get value from the actor properties list without go through actor getter?
+        return this.owner[this.propertyName];
       }
-      // TODO: note that if puppet change, in theory the type should be changed as well
-      // I did not handle that yet...
     });
   }
   
