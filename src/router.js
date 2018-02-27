@@ -27,6 +27,18 @@ export default new Router({
       }
     },
     {
+      path: '/editor/:activityID',
+      name: 'Creations',
+      component: Editor,
+      props: true,
+      beforeEnter: (to, from, next) => {
+        // TODO: auto play tutorial if user first time visit
+        
+
+        next();
+      }
+    },
+    {
       path: '/tutorials/:tutorialName',
       name: 'Tutorial',
       component: Tutorial,

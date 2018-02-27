@@ -1,7 +1,7 @@
 <template>
 <div>
   <terminal/>
-  <theater ref='theater' width=1024 height=768></theater>
+  <theater ref='theater' width=1024 height=768 :activity="activity"></theater>
   <node-graph/>
 
   <toolbox/>
@@ -38,6 +38,12 @@ import NotificationControl from './ui/NotificationControl';
 
 export default {
   name: 'editor',
+  props: ['activityID'],
+  data() {
+    return {
+      activity: null
+    }
+  },
   components: {
     terminal: Terminal,
     'node-graph': NodeGraph,
@@ -45,7 +51,7 @@ export default {
     toolbox: Toolbox,
     'mode-button': ModeButton
   },
-  mounted() {
+  async mounted() {
     // prevent default context menu for the whole site
     // unless it is from canvas, which pixi needs it to handle right click.
     document.addEventListener('contextmenu', e => {
@@ -53,25 +59,32 @@ export default {
     });
 
     // wait until user is signed in
-    getCurrentUser().then(user => {
-      this.activity = ActivityManager.temp();
-      this.$store.commit('staging', this.activity);
+    await getCurrentUser();
+    this.activity = null;
+    if(this.activityID) {
+      this.activity = await ActivityManager.load(this.activityID);
+    }
+    else {
+      this.activity = await ActivityManager.create();
+    }
+    this.activity.stage.init();
+    this.$store.commit('staging', this.activity);
 
-      this.$store.subscribe((mutation, state) => {
-        if(mutation.type === 'toggleDebugMode') {
-          if(state.debugMode) {
-            this.activity.stage.start();
-          }
-          else {
-            this.activity.stage.stop();
-          }
+    this.$store.subscribe((mutation, state) => {
+      if(mutation.type === 'toggleDebugMode') {
+        if(state.debugMode) {
+          this.activity.stage.start();
         }
-      });
-    })
+        else {
+          this.activity.stage.stop();
+        }
+      }
+    });
 
     document.addEventListener('keydown', this.keydown)
   },
   beforeDestroy() {
+    console.log('desotry!')
     // clear everything...
     this.activity.destroy();
 
@@ -84,8 +97,8 @@ export default {
 
         NotificationControl.notify('Saving...').delayFadeoutRemove();
 
-        ActivityManager.save().then(() => {
-          console.log('done')
+        ActivityManager.save().then(activity => {
+          this.$router.push(`/editor/${activity.id}`)
         })
       }
     }

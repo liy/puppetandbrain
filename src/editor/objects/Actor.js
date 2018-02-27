@@ -46,6 +46,10 @@ export default class Actor extends EventEmitter
     this.stage.on('game.stop', this.gameStop, this);
   }
 
+  /**
+   * Only used when importing individual actor.
+   * @param {*} pod Actor pod
+   */
   preload(pod) {
 
   }
@@ -119,10 +123,6 @@ export default class Actor extends EventEmitter
     return false;
   }
 
-  onStage(stage) {
-    this.stage = stage;
-  }
-
   gamePrestart() {
     this.initialState = {
       position: this.position.pod(),
@@ -148,6 +148,7 @@ export default class Actor extends EventEmitter
   }
 
   pointerDown(x, y, e) {
+    console.log('!!!!')
     this.select();
 
     this.offset = {

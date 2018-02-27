@@ -3,6 +3,7 @@ import Delay from './access/Delay'
 import '@/editor/graph/BlockFactory'
 import '@/editor/nodes/NodeFactory'
 import './commands/Commander';
+import ActivityLoader from "./ActivityLoader";
 
 class ActivityManager {
   constructor() {
@@ -10,7 +11,7 @@ class ActivityManager {
     this.delaySave = new Delay();
   }
 
-  temp() {
+  create() {
     const id = firebase.firestore().collection('activities').doc().id;
     this.current = new Activity(id, CurrentUser.uid);
     return this.current;

@@ -15,10 +15,10 @@ export default class extends EventEmitter
     this.container = new PIXI.Container();
   }
 
-  init(element, canvas) {
-    this.element = element
+  activate() {
+    this.element = document.getElementById('stage')
     this.overlayer = this.element.querySelector('#stage-overlayer');
-    this.canvas = canvas;
+    this.canvas = document.getElementById('canvas');
 
     this.renderer = PIXI.autoDetectRenderer({
       autoStart: true,
@@ -38,7 +38,7 @@ export default class extends EventEmitter
     catcher.beginFill(0, 0);
     catcher.drawRect(0, 0, canvas.width, canvas.height);
     catcher.endFill();
-    this.addChild(catcher);
+    this.container.addChildAt(catcher, 0);
     catcher.on('mousedown', ActorSelection.deselectAll, ActorSelection);
 
     this.loop = this.loop.bind(this);
@@ -70,7 +70,8 @@ export default class extends EventEmitter
   }
 
   addActor(actor) {
-    actor.onStage(this);
+    console.log('add actor')
+    actor.onStage();
     // call update transform immeditately
     // so it is up to date with the transform even without waiting
     // for the next updateTransform() call
@@ -81,6 +82,7 @@ export default class extends EventEmitter
   }
 
   removeActor(actor) {
+    console.log('remove actor')
     this.actors.remove(actor.id);
     actor.offStage();
 

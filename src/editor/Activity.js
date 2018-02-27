@@ -16,6 +16,10 @@ export default class Activity extends EventEmitter
     this.stage = new Stage();
   }
 
+  activate() {
+    this.stage.activate();
+  }
+
   get canSave() {
     return CurrentUser.uid == this.ownerID;
   }
