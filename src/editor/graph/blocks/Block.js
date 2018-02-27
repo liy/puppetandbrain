@@ -222,6 +222,7 @@ export default class Block extends EventEmitter
     let y = e.clientY;
 
     let deleteBtn = document.getElementById('delete-button')
+    console.log(target, deleteBtn)
     // check if drag to delete button
     if(target == deleteBtn) {
       SoundEffect.play('trash');

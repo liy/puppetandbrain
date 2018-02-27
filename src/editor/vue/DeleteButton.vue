@@ -84,19 +84,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #delete-button {
   width: 68px;
   width: 68px;
 
   margin-right: 50px;
   margin-left: 50px;
-}
-
-#delete-button.disabled {
-  opacity: 0.2;
-  cursor: 'auto';
-  pointer-events: 'none';
 }
 
 </style>

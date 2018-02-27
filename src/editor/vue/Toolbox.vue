@@ -45,6 +45,9 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  // div container should not block events
+  pointer-events: none;
 }
 
 #stage-toolbar {
@@ -64,6 +67,20 @@ export default {
 .toolbar-button {
   position: relative;
   margin-right: 20px;
+
+  cursor: pointer;
+
+  // enable button events
+  pointer-events: auto;
+  svg {
+    pointer-events: none;
+  }
+}
+
+.toolbar-button.disabled {
+  opacity: 0.2;
+  cursor: default;
+  pointer-events: none;
 }
 
 </style>
