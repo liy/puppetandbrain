@@ -7,7 +7,8 @@ export default class VariableList extends EventEmitter
 {
   constructor(brain, activity) {
     super()
-    this.lookUp = activity.lookUp;
+    this.activity = activity;
+    this.lookUp = this.activity.lookUp;
     this.brain = brain;
     
     this.variables = new ArrayMap();
@@ -15,7 +16,7 @@ export default class VariableList extends EventEmitter
 
   create(variablePod) {
     let variable;
-    variable = new Variable(variablePod.id, this.lookUp);
+    variable = new Variable(variablePod.id, this.activity);
     variable.brain = this.brain;
     variable.init(variablePod);
     this.add(variable);

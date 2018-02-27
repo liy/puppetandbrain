@@ -5,8 +5,8 @@ export default class Variable extends EventEmitter
 {
   constructor(id, activity) {
     super();
-    
-    this.lookUp = activity.lookUp;
+    this.activity = activity;
+    this.lookUp = this.activity.lookUp;
     this.id = this.lookUp.addVariable(this, id);
 
     // Keep track of getter and setter nodes using this variable. For variable deletion use.

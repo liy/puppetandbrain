@@ -7,6 +7,7 @@ export default class Brain
 {
   constructor(owner, id) {
     this.owner = owner;
+    this.activity = this.owner.activity;
     this.lookUp = this.owner.lookUp;
     this.id = this.lookUp.addBrain(this, id)
     this.nodes = new ArrayMap();
@@ -14,7 +15,7 @@ export default class Brain
     // stores Action
     this.actions = {};
 
-    this.variables = new VariableList(this, this.lookUp);
+    this.variables = new VariableList(this, this.activity);
 
     this.owner.stage.on('game.prestart', this.prestart, this);
   }
