@@ -107,10 +107,11 @@ export default class
   async drop(target, x, y) {
     this.destroy();
 
-    // drag over to the delete button, delete variable
+    // drag over to the delete button, delete variable. Ignore if it has no variable, not a variable element(a property element, cannot be deleted)
     let deleteBtn = document.getElementById('delete-button')
-    if(target == deleteBtn) {
+    if(target == deleteBtn && this.sourceElement.variable) {
       let action = true;
+
       if(this.sourceElement.variable.inUse) {
         action = (await ConfirmModal.open('Variable is in use, do you really want to delete the varaible and its getters and setters?')).action;
       }
