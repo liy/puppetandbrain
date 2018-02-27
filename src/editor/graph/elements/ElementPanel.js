@@ -13,6 +13,8 @@ import PullIcon from '@/assets/pull-icon.svg';
 import CreateImageButton from './CreateImageButton';
 import CreateBooleanButton from './CreateBooleanButton';
 
+import store from '@/store';
+
 export default class
 {
   constructor() {
@@ -91,9 +93,11 @@ export default class
   toggle() {
     this.element.style.transform = this.visible ? `translateX(100%)` : `translateX(0)`;
     this.visible = !this.visible;
-    // UIController.controlShifted = this.visible;
     this.pullIcon.style.transform = `scaleX(${this.visible?-1:1})`;
     if(this.visible) this.content.style.display = 'block'
+
+    // set the state of the panel so other vue components can react
+    store.commit('setPropertyPanelVisibility', this.visible);
   }
 
   clear() {

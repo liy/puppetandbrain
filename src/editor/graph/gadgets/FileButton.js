@@ -52,7 +52,7 @@ export default class extends Gadget
 
     const path = `uploads/${hash}.${ext}`;
 
-    API.uploadFile(hashTask.data, hash, ext, path, contentType, Activity.id, 
+    API.uploadFile(hashTask.data, hash, ext, path, contentType, ActivityManager.current.id, 
       (snapshot) => {
         let progress = snapshot.bytesTransferred/snapshot.totalBytes;
         this.emit('file.progress', progress)  

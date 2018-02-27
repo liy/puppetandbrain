@@ -3,13 +3,11 @@ import Component from "./Component";
 import Matrix from '../math/Matrix';
 import { isMobile } from '@/utils/utils';
 
-const stageOverlayer = document.getElementById('stage-overlayer')
 
 export default class ElementComponent extends Component
 {
   constructor(width, height) {
     super();
-
 
     this.width = width;
     this.height = height;
@@ -42,10 +40,15 @@ export default class ElementComponent extends Component
     // I know it is strange to have the element here.
     // but it removes flickering issue when created
     this.element.style.opacity = 0;
-    stageOverlayer.appendChild(this.element);
+  }
+
+  get stage() {
+    return this.entity.stage;
   }
 
   onStage() {
+    this.stage.overlayer.appendChild(this.element);
+
     this.element.style.opacity = 1;
     if(isMobile) {
       this.element.addEventListener('touchstart', this.touchStart)
@@ -60,7 +63,7 @@ export default class ElementComponent extends Component
   }
 
   offStage() {
-    stageOverlayer.removeChild(this.element);
+    this.stage.overlayer.removeChild(this.element);
     this.element.removeEventListener('touchstart', this.touchStart)
     this.element.removeEventListener('touchend', this.touchEnd);
     this.element.removeEventListener('mousedown', this.mouseDown)

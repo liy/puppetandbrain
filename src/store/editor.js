@@ -2,12 +2,14 @@ const state = {
   debugMode: false,
   stageMode: true,
   activity: null,
+  propertyPanelVisable: false,
 }
 
 const getters = {
   debugMode: state => state.debugMode,
   stageMode: state => state.stageMode,
   activity: state => state.activity,
+  propertyPanelVisable: state => state.propertyPanelVisable,
 }
 
 const mutations = {
@@ -30,6 +32,16 @@ const mutations = {
 
   staging(state, activity) {
     state.activity = activity;
+  },
+
+  // note used for now
+  togglePropertyPanel() {
+    state.propertyPanelVisable = !state.propertyPanelVisable;
+  },
+
+  setPropertyPanelVisibility(state, visible) {
+    state.propertyPanelVisable = visible;
+    console.log(state.propertyPanelVisable)
   }
 }
 

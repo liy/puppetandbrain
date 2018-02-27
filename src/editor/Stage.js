@@ -17,6 +17,7 @@ export default class extends EventEmitter
 
   init(element, canvas) {
     this.element = element
+    this.overlayer = this.element.querySelector('#stage-overlayer');
     this.canvas = canvas;
 
     this.renderer = PIXI.autoDetectRenderer({
