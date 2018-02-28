@@ -43,14 +43,13 @@ export default class ContextMenu
 
     Hub.on('contextmenu', this.openActorMenu, this);
 
-    this.openBlockMenu = this.openBlockMenu.bind(this);
-    document.getElementById('block-container').addEventListener('contextmenu', this.openBlockMenu)
+    // this.openBlockMenu = this.openBlockMenu.bind(this);
+    // document.getElementById('block-container').addEventListener('contextmenu', this.openBlockMenu)
   }
 
   destroy() {
     Hub.off('contextmenu', this.openActorMenu, this);
     document.removeEventListener('click', this.close);
-    document.getElementById('block-container').removeEventListener('contextmenu', this.openBlockMenu)
   }
 
   openActorMenu({actor, event}) {
@@ -64,13 +63,13 @@ export default class ContextMenu
     document.body.appendChild(this.element);
   }
 
-  openBlockMenu(e) {
-    if(!GraphSelection.selected) return;
+  // openBlockMenu(e) {
+  //   if(!GraphSelection.selected) return;
 
-    this.opened = true;
+  //   this.opened = true;
     
-    document.body.appendChild(this.element);
-  }
+  //   document.body.appendChild(this.element);
+  // }
 
   addItem(list, text, handler) {
     let entry = document.createElement('li');

@@ -43,6 +43,9 @@ export default class Activity extends EventEmitter
 
   destroy() {
     super.destroy();
+    for(let actor of Hub.stage.actors) {
+      actor.destroy();
+    }
     this.clear();
   }
 

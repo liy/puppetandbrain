@@ -58,7 +58,7 @@ export default {
     // wait until user is signed in
     await Hub.setup(this.activityID);
 
-    this.$store.subscribe((mutation, state) => {
+    this.unsubscribe = this.$store.subscribe((mutation, state) => {
       if(mutation.type === 'toggleDebugMode') {
         if(state.debugMode) {
           Hub.stage.start();
@@ -72,10 +72,13 @@ export default {
     document.addEventListener('keydown', this.keydown)
   },
   beforeDestroy() {
+    this.unsubscribe();
+    
     document.removeEventListener('keydown', this.keydown)
     document.removeEventListener('contextmenu', this.preventDefaultContextMene);
     // clear everything...
     Hub.activity.destroy();
+    Hub.stage.destroy();
     Hub.removeAllListeners();
   },
   methods: {
