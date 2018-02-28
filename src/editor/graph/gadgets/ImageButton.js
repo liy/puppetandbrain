@@ -22,7 +22,7 @@ export default class extends FileButton
       let blob = new Blob([byteArray], {type: getMimeType(other.ext)});
       this.image.src = URL.createObjectURL(blob);
 
-      ActivityManager.current.resources.set(other.path, {image:this.image, blob, ...other});
+      ActivityManager.activity.resources.set(other.path, {image:this.image, blob, ...other});
 
       this.emit('gadget.state.change', other)
     })

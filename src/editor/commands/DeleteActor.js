@@ -22,13 +22,13 @@ export default class DeleteActor extends Command
   }
 
   undo() {
-    let actor = ActorFactory.create(this.pod.className, this.pod.id, ActivityManager.current)
+    let actor = ActorFactory.create(this.pod.className, this.pod.id, ActivityManager.activity)
     actor.init(this.pod);
     ActivityManager.stage.addActor(actor)
 
     // create variables
     for(let variablePod of this.pod.brain.variables) {
-      let variable = new Variable(variablePod.id, ActivityManager.current);
+      let variable = new Variable(variablePod.id, ActivityManager.activity);
       variable.init(variablePod);
       // put the variable into its brain
       let brain = this.lookUp.get(variablePod.brainID);
@@ -37,7 +37,7 @@ export default class DeleteActor extends Command
 
     // create and init nodes
     for(let nodePod of this.pod.brain.nodes) {
-      let node = new NodeFactory.create(nodePod.className, nodePod.id, ActivityManager.current)
+      let node = new NodeFactory.create(nodePod.className, nodePod.id, ActivityManager.activity)
       node.init(nodePod);
     }
 

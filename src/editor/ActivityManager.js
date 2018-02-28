@@ -17,21 +17,23 @@ class ActivityManager extends EventEmitter
   }
 
   async setup(activityID) {
-    this.user = await getCurrentUser();
-    let stageElement = document.getElementById('stage');
-    this.stage = new Stage(stageElement);
+    this.currentUser = await getCurrentUser();
+    
+    this.stage = new Stage(document.getElementById('stage'));
 
     if(activityID) {
-      this.load(activityID);
+      await this.load(activityID);
     }
     else {
-      this.create();
+      await this.create();
     }
+
+    this.stage.startRender();
   }
 
   create() {
     const id = firebase.firestore().collection('activities').doc().id;
-    this.activity = new Activity(id, CurrentUser.uid);
+    this.activity = new Activity(id, this.currentUser.uid);
     return this.activity;
   }
 

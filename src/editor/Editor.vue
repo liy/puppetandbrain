@@ -65,10 +65,10 @@ export default {
     this.$store.subscribe((mutation, state) => {
       if(mutation.type === 'toggleDebugMode') {
         if(state.debugMode) {
-          this.activity.stage.start();
+          ActivityManager.stage.start();
         }
         else {
-          this.activity.stage.stop();
+          ActivityManager.stage.stop();
         }
       }
     });
@@ -78,7 +78,7 @@ export default {
   beforeDestroy() {
     console.log('desotry!')
     // clear everything...
-    this.activity.destroy();
+    AcivityManager.activity.destroy();
 
     document.removeEventListener('keydown', this.keydown)
   },

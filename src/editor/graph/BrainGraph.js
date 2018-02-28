@@ -147,7 +147,7 @@ export default class BrainGraph
     window.addEventListener('resize', this.resize);
     this.resize();
 
-    ActivityManager.current.stage.blurEnabled = true;
+    ActivityManager.stage.blurEnabled = true;
     GraphSelection.enable();
 
     for(let node of this.brain.getNodes()) {
@@ -187,7 +187,7 @@ export default class BrainGraph
       
       this.container.style.display = 'none'
   
-      ActivityManager.current.stage.blurEnabled = false;
+      ActivityManager.stage.blurEnabled = false;
       GraphSelection.deselect();
       GraphSelection.disable();
 
@@ -198,12 +198,12 @@ export default class BrainGraph
   }
 
   hide() {
-    ActivityManager.current.stage.blurEnabled = false;
+    ActivityManager.stage.blurEnabled = false;
     this.container.style.display = 'none'
   }
 
   show() {
-    ActivityManager.current.stage.blurEnabled = true;
+    ActivityManager.stage.blurEnabled = true;
     this.container.style.display = 'block'
   }
 

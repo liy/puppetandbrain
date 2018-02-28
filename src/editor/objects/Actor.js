@@ -106,10 +106,6 @@ export default class Actor extends EventEmitter
     console.log('destroy', this)
   }
 
-  get stage() {
-    return this.activity.stage;
-  }
-
   get lookUp() {
     return this.activity.lookUp
   }
@@ -306,7 +302,7 @@ export default class Actor extends EventEmitter
 
     // FIXME: find a better way to handle saving
     // if game still playing, override pod with initial state
-    if(this.stage.playing) Object.assign(pod, this.initialState);
+    if(ActivityManager.stage.playing) Object.assign(pod, this.initialState);
 
     if(detail) {
       pod.brain = this.brain.pod(detail);
@@ -350,11 +346,11 @@ export default class Actor extends EventEmitter
   }
 
   get screenX() {
-    return this.x + this.stage.offsetX
+    return this.x + ActivityManager.stage.offsetX
   }
 
   get screenY() {
-    return this.y + this.stage.offsetY
+    return this.y + ActivityManager.stage.offsetY
   }
 
   createFileRefs() {

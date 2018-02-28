@@ -24,8 +24,8 @@ export default class extends Vec2Field
       document.body.style.cursor = 'crosshair';
       let picked = e => {
         this.value = {
-          x: e.clientX - ActivityManager.current.stage.offsetX,
-          y: e.clientY - ActivityManager.current.stage.offsetY
+          x: e.clientX - ActivityManager.stage.offsetX,
+          y: e.clientY - ActivityManager.stage.offsetY
         }
         this.emit('gadget.state.change', this.value);
 
@@ -36,8 +36,8 @@ export default class extends Vec2Field
 
       let picking = e => {
         this.value = {
-          x: e.clientX - ActivityManager.current.stage.offsetX,
-          y: e.clientY - ActivityManager.current.stage.offsetY
+          x: e.clientX - ActivityManager.stage.offsetX,
+          y: e.clientY - ActivityManager.stage.offsetY
         }
         this.emit('gadget.state.change', this.value);
       }

@@ -73,7 +73,7 @@ export default class extends Gadget
 
   set value(id) {
     this.actorID = id;
-    let actor = ActivityManager.current.lookUp.get(this.actorID);
+    let actor = ActivityManager.activity.lookUp.get(this.actorID);
     this.nameField.value = actor ? `${actor.name} ${actor.id}` : '';
   }
 }

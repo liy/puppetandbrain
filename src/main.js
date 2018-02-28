@@ -42,7 +42,6 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
 // ensure sign in sign out update CurrentUser variable
 let unsubscribe = firebase.auth().onAuthStateChanged(user => {
-  unsubscribe();
   window.CurrentUser = user;
 })          
 

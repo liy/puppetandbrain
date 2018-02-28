@@ -38,7 +38,6 @@ export default class extends EventEmitter
     catcher.on('mousedown', ActorSelection.deselectAll, ActorSelection);
 
     this.loop = this.loop.bind(this);
-    PIXI.ticker.shared.add(this.loop);
   }
 
   destroy() {
@@ -46,12 +45,12 @@ export default class extends EventEmitter
     this.contextMenu.destroy();
   }
 
-  get stageWidth() {
-    return this.canvas.width;
+  startRender() {
+    PIXI.ticker.shared.add(this.loop);
   }
 
-  get stageHeight() {
-    return this.canvas.height;
+  pauseRender() {
+    PIXI.ticker.shared.remove(this.loop);
   }
   
   loop(delta) {
@@ -145,5 +144,13 @@ export default class extends EventEmitter
     else {
       this.start();
     }
+  }
+
+  get stageWidth() {
+    return this.canvas.width;
+  }
+
+  get stageHeight() {
+    return this.canvas.height;
   }
 }

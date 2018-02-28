@@ -91,7 +91,7 @@ export default class PlaySound extends Task
       return;
     }
 
-    let blob = ActivityManager.current.resources.get(input.path);
+    let blob = ActivityManager.activity.resources.get(input.path);
     if(blob) {
       this.audio.src = URL.createObjectURL(blob);
     }

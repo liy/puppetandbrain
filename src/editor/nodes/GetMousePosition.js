@@ -30,7 +30,7 @@ export default class GetMousePosition extends Node
       get: () => {
         // There is no need to clone it. As all the vector based arithmetic
         // will not change the operand.
-        return this.stage.mouse.position;
+        return ActivityManager.stage.mouse.position;
       }
     });
   }

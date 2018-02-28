@@ -29,7 +29,7 @@ export default class SceneChange extends Task
     this.activity.on('game.stop', this.stop, this);
     this.activity.on('game.start', this.start, this);
     
-    this.stageElement = this.stage.element;
+    this.stageElement = ActivityManager.stage.element;
     this.maskCircle = document.getElementById('mask-circle');
     
     

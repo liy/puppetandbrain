@@ -17,7 +17,7 @@ export default class CreateBlock extends Command
   }
 
   process() {
-    let node = NodeFactory.create(this.pod.className, this.nodeID, ActivityManager.current);
+    let node = NodeFactory.create(this.pod.className, this.nodeID, ActivityManager.activity);
     node.init({
       ...this.pod,
       ownerID: this.ownerID

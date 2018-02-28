@@ -10,7 +10,7 @@ export default class Command
   }
 
   get lookUp() {
-    return ActivityManager.current.lookUp;
+    return ActivityManager.activity.lookUp;
   }
 
   processAndSave() {

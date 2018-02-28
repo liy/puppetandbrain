@@ -62,7 +62,7 @@ export default class SetterBlock extends Block
       }
     }
 
-    let variable = ActivityManager.current.lookUp.get(pod.variableID);
+    let variable = ActivityManager.activity.lookUp.get(pod.variableID);
 
     pin = new InputPin(variable.name);
     pin.symbol.colorize(variable.descriptor.type)

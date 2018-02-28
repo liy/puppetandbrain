@@ -38,6 +38,6 @@ export default class DebugButton extends ControlButton
   }
 
   stageStateChange(actor) {
-    this.enabled = !(this.stage.numActors == 0);
+    this.enabled = !(ActivityManager.stage.numActors == 0);
   }
 }

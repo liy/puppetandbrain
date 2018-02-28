@@ -33,7 +33,7 @@ export default class ContainerComponent extends Component
 
   onStage() {
     console.log('on stage', this.container.interactive)
-    ActivityManager.current.stage.addChild(this.container);
+    ActivityManager.stage.addChild(this.container);
     this.container.on('pointerdown', this.pointerDown, this);
     this.container.on('pointerup', this.pointerUp, this);
     this.container.on('mouseover', this.mouseOver, this);
@@ -43,7 +43,7 @@ export default class ContainerComponent extends Component
 
   offStage() {
     console.log('off stage')
-    ActivityManager.current.stage.removeChild(this.container);
+    ActivityManager.stage.removeChild(this.container);
     this.container.off('pointerdown', this.pointerDown, this);
     this.container.off('pointerup', this.pointerUp, this);
     this.container.off('mouseover', this.mouseOver, this);
