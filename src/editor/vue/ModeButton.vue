@@ -83,6 +83,8 @@ export default {
   position: absolute;
   top: 20px;
   left: 20px;
+  
+  cursor: pointer;
 }
 #mode-button.disabled {
   opacity: 0.2;
