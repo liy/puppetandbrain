@@ -32,7 +32,6 @@ export default class ContainerComponent extends Component
   }
 
   onStage() {
-    console.log('on stage', this.container.interactive)
     ActivityManager.stage.addChild(this.container);
     this.container.on('pointerdown', this.pointerDown, this);
     this.container.on('pointerup', this.pointerUp, this);
@@ -42,7 +41,6 @@ export default class ContainerComponent extends Component
   }
 
   offStage() {
-    console.log('off stage')
     ActivityManager.stage.removeChild(this.container);
     this.container.off('pointerdown', this.pointerDown, this);
     this.container.off('pointerup', this.pointerUp, this);
@@ -51,7 +49,6 @@ export default class ContainerComponent extends Component
   }
 
   pointerDown(e) {
-    console.log('down!!')
     let p = e.data.getLocalPosition(this.container.parent)
     this.entity.pointerDown(p.x, p.y, e);
   }

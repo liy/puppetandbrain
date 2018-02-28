@@ -54,9 +54,7 @@ export default {
   async mounted() {
     // prevent default context menu for the whole site
     // unless it is from canvas, which pixi needs it to handle right click.
-    document.addEventListener('contextmenu', e => {
-      e.preventDefault();
-    });
+    document.addEventListener('contextmenu', this.preventDefaultContextMene);
 
     // wait until user is signed in
     await ActivityManager.setup(this.activityID);
@@ -76,11 +74,10 @@ export default {
     document.addEventListener('keydown', this.keydown)
   },
   beforeDestroy() {
-    console.log('desotry!')
-    // clear everything...
-    AcivityManager.activity.destroy();
-
     document.removeEventListener('keydown', this.keydown)
+    document.removeEventListener('contextmenu', this.preventDefaultContextMene);
+    // clear everything...
+    ActivityManager.activity.destroy();
   },
   methods: {
     keydown(e) {
@@ -93,6 +90,9 @@ export default {
           this.$router.push(`/editor/${activity.id}`)
         })
       }
+    },
+    preventDefaultContextMene(e) {
+      e.preventDefault();
     }
   }
 }
