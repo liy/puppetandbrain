@@ -53,7 +53,7 @@ class GraphSelection extends EventEmitter
 
   async delete() {
     if(this.selected instanceof Block) {
-      EditorHistory.push(Commander.create('DeleteBlock', this.selected.id).processAndSave());
+      ActivityManager.history.push(Commander.create('DeleteBlock', this.selected.id).processAndSave());
       SoundEffect.play('trash');
     }
     else {
@@ -63,7 +63,7 @@ class GraphSelection extends EventEmitter
       }
       
       if(action) {
-        EditorHistory.push(Commander.create('DeleteVariable', this.selected.variable.id, BrainGraph.brain.id).processAndSave())
+        ActivityManager.history.push(Commander.create('DeleteVariable', this.selected.variable.id, BrainGraph.brain.id).processAndSave())
         SoundEffect.play('trash');
       }
     }

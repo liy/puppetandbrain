@@ -16,7 +16,7 @@ export default class ContextMenu
     this.actorMenuList = document.createElement('ul');
     this.addItem(this.actorMenuList, 'Clone', async () => {
       let command = await Commander.create('ImportActor', ActorSelection.selected[0].export()).process();
-      EditorHistory.push(command);
+      ActivityManager.history.push(command);
       let actor = command.getActor();
       actor.x = aroundAt(actor.x);
       actor.y = aroundAt(actor.y);

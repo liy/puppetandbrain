@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import HistoryClass from '../commands/EditorHistory'
 import HistoryButtonBlob from '@/assets/history-button-blob.svg';
 import UndoButton from '@/assets/undo-button.svg';
 import RedoButton from '@/assets/redo-button.svg'
@@ -31,39 +30,35 @@ export default {
       RedoButton
     }
   },
-  beforeCreate() {
-    window.EditorHistory = new HistoryClass();
-  },
   mounted() {
-    EditorHistory.on('history.updated', () => {
+    ActivityManager.history.on('history.updated', () => {
       this.$forceUpdate()
     })
     document.addEventListener('keydown', this.keydown);
   },
   beforeDestroy() {
-    EditorHistory.clear();
+    ActivityManager.history.clear();
     document.removeEventListener('keydown', this.keydown);
-    window.EditorHistory = null;
   },
   methods: {
     undoClicked() {
-      EditorHistory.undo();
+      ActivityManager.history.undo();
     },
     redoClicked() {
-      EditorHistory.redo();
+      ActivityManager.history.redo();
     },
     canUndo() {
-      return EditorHistory.undos.length != 0;
+      return ActivityManager.history.undos.length != 0;
     },
     canRedo() {
-      return EditorHistory.redos.length != 0;
+      return ActivityManager.history.redos.length != 0;
     },
     keydown(e) {
       if(e.keyCode == '90' && e.ctrlKey) {
-        EditorHistory.undo();
+        ActivityManager.history.undo();
       }
       if(e.keyCode == '89' && e.ctrlKey) {
-        EditorHistory.redo();
+        ActivityManager.history.redo();
       }
     }
   }

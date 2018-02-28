@@ -43,7 +43,7 @@ export default class ExecutionInSymbol extends ExecutionSymbol
 
     // Loop through all callers to remove execution, note that process
     // does not refresh, manual refresh has to be made
-    EditorHistory.push(Commander.create('RemoveParentExecution', this.node.id).processAndSave());
+    ActivityManager.history.push(Commander.create('RemoveParentExecution', this.node.id).processAndSave());
     
     // As the link is broken, make sense to deselect the selected symbol
     BrainGraph.connectHelper.stop();
@@ -52,7 +52,7 @@ export default class ExecutionInSymbol extends ExecutionSymbol
   mouseUp(e) {
     if(this.canConnect(BrainGraph.connectHelper.startSymbol)) {
       SoundEffect.play('link')      
-      EditorHistory.push(Commander.create('CreateExecution', BrainGraph.connectHelper.startSymbol.node.id, 
+      ActivityManager.history.push(Commander.create('CreateExecution', BrainGraph.connectHelper.startSymbol.node.id, 
         BrainGraph.connectHelper.startSymbol.name, this.node.id).processAndSave());
     }
     BrainGraph.connectHelper.stop(e);
@@ -61,7 +61,7 @@ export default class ExecutionInSymbol extends ExecutionSymbol
   touchDown(e) {
     if(this.canConnect(BrainGraph.connectHelper.selectedSymbol)) {
       SoundEffect.play('link');
-      EditorHistory.push(Commander.create('CreateExecution', BrainGraph.connectHelper.selectedSymbol.node.id, 
+      ActivityManager.history.push(Commander.create('CreateExecution', BrainGraph.connectHelper.selectedSymbol.node.id, 
         BrainGraph.connectHelper.selectedSymbol.name, this.node.id).processAndSave());
       
       // once a valid connection is made, deselect the sybmosl

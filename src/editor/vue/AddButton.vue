@@ -32,7 +32,7 @@ export default {
       else {
         let browser = new BlockBrowser();
         let pod = await browser.open();
-        if(pod) EditorHistory.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
+        if(pod) ActivityManager.history.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
       }
     }
   }

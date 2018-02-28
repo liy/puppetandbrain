@@ -63,10 +63,10 @@ export default {
 
       if(this.stageMode) {
         let brain = ActorSelection.selected[0].brain;
-        EditorHistory.push(Commander.create('OpenGraph', brain.id).process());
+        ActivityManager.history.push(Commander.create('OpenGraph', brain.id).process());
       }
       else {
-        EditorHistory.push(Commander.create('CloseGraph', BrainGraph.brain.id).process());
+        ActivityManager.history.push(Commander.create('CloseGraph', BrainGraph.brain.id).process());
       }
     },
     onSelectChange(selected) {

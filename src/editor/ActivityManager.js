@@ -1,3 +1,4 @@
+import EditorHistory from './commands/EditorHistory'
 import Activity from "./Activity";
 import Delay from './access/Delay'
 import '@/editor/graph/BlockFactory'
@@ -13,6 +14,7 @@ class ActivityManager extends EventEmitter
   constructor() {
     super();
     
+    this.history = new EditorHistory();
     this.delaySave = new Delay();
   }
 
