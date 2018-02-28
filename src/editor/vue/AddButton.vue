@@ -11,6 +11,7 @@ import {mapGetters} from 'vuex'
 import AddButtonIcon from '@/assets/add-button-icon.svg';
 import PuppetBrowser from '../browser/PuppetBrowser'
 import BlockBrowser from '../browser/BlockBrowser'
+import SoundEffect from '@/SoundEffect';
 
 export default {
   data() {
@@ -23,6 +24,7 @@ export default {
   },
   methods: {
     async clicked() {
+      SoundEffect.play('click');
       if(this.stageMode) {
         let browser = new PuppetBrowser();
         browser.open()

@@ -22,12 +22,14 @@ export default {
     return {
       BrainButtonIcon,
       StageButtonIcon,
-      tooltip: 'Open puppet brain',
       enabled: false
     }
   },
   computed: {
-    ...mapGetters(['stageMode'])
+    ...mapGetters(['stageMode']),
+    tooltip() {
+      return this.stageMode ? 'Open puppet brain' : 'Back to stage'
+    }
   },
   mounted() {
     // watch editor mode changes
@@ -47,14 +49,10 @@ export default {
     ...mapMutations(['toggleStageMode']),
     watcher(stageMode) {
       if(stageMode) {
-        this.tooltip = "Open puppet brain";
-
         ActorSelection.on('actor.selection.change', this.onSelectChange, this);
         this.onSelectChange(ActorSelection.selected);
       }
       else {
-        this.tooltip = "Back to stage";
-    
         ActorSelection.off('actor.selection.change', this.onSelectChange, this);
         this.enabled = true;
       }
