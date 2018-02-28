@@ -16,7 +16,7 @@ export default class Activity extends EventEmitter
   }
 
   get isOwner() {
-    return Hub.user.uid == this.ownerID;
+    return Hub.currentUser.uid == this.ownerID;
   }
 
   clone() {
