@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <app-header title='test'/>
     <main>
       <router-view></router-view>
     </main>
@@ -19,16 +18,6 @@ export default {
     return {
       appVersion: APP_VERSION
     }
-  },
-  components: {
-    'app-header': Header
-  },
-  computed: {
-    showHeader() {
-      return this.$route.path != '/editor'
-    }
-  },
-  mounted() {
   }
 }
 </script>
@@ -39,7 +28,8 @@ body {
 
   margin:0; 
   // background-color: #eeeeee;
-  background-color: #f5f5f5;
+  // background-color: #f5f5f5;
+  background-color: #b574ed;
   
   // remove mobile selection hightlight
   -webkit-tap-highlight-color: rgba(0,0,0,0);

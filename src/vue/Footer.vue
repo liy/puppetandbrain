@@ -15,13 +15,15 @@
 
 <style lang="scss" scoped>
 footer {
-  background-color: #3b3e4d;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   color: white;
+
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 
 span {
