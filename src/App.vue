@@ -27,12 +27,18 @@ body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   margin:0; 
-  // background-color: #eeeeee;
-  // background-color: #f5f5f5;
-  background-color: #b574ed;
   
   // remove mobile selection hightlight
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+
+  background-color: #b574ed;
+  // background-color: #f5f5f5;
+  transition: background-color ease 0.3s;
+}
+
+.editor-body {
+  background-color: #f5f5f5;
 }
 
 #app-version {

@@ -1,6 +1,5 @@
 <template>
   <footer>
-    <span>Puppet & Brain</span>
     <ul>
       <li>About</li>
       <li>Help</li>
@@ -15,11 +14,11 @@
 
 <style lang="scss" scoped>
 footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
 
-  color: white;
+  color: #d191ff;
 
   position: absolute;
   width: 100%;
@@ -31,6 +30,8 @@ span {
 }
 
 ul {
+  float: right;
+  
   list-style: none;
   padding: 0;
   

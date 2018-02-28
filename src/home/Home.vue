@@ -86,6 +86,8 @@ export default {
   align-items: center;
 
   color: white;
+
+  transform: translateY(-60px)
 }
 
 .home-content {
@@ -97,10 +99,12 @@ export default {
 }
 
 h1 {
+  font-family: "jaf-domus-titling-web",sans-serif;
+  font-size: 40px;
   margin: 0;
   float: left;
 
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 h4 {

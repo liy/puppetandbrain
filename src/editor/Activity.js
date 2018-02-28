@@ -42,6 +42,7 @@ export default class Activity extends EventEmitter
   }
 
   destroy() {
+    super.destroy();
     this.clear();
   }
 

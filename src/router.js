@@ -14,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
+      beforeEnter: (to, from, next) => {
+        document.body.className = ''
+
+        next();
+      }
     },
     {
       path: '/editor',
@@ -21,7 +26,7 @@ export default new Router({
       component: Editor,
       beforeEnter: (to, from, next) => {
         // TODO: auto play tutorial if user first time visit
-        
+        document.body.classList.add('editor-body')
 
         next();
       }
@@ -33,6 +38,7 @@ export default new Router({
       props: true,
       beforeEnter: (to, from, next) => {
         // TODO: auto play tutorial if user first time visit
+        document.body.classList.add('editor-body')
         
 
         next();
@@ -42,6 +48,13 @@ export default new Router({
       path: '/tutorials/:tutorialName',
       name: 'Tutorial',
       component: Tutorial,
+      beforeEnter: (to, from, next) => {
+        // TODO: auto play tutorial if user first time visit
+        document.body.classList.add('editor-body')
+        
+
+        next();
+      }
     }
   ]
 })
