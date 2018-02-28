@@ -8,7 +8,6 @@
   <mode-button/>
 
   <div class='control-button tooltip-right' id='mode-button' data-title="Open puppet brain" data-title-position="right"></div>
-  <span id='app-version'></span>
   <div id='menu'>
     <div id='menu-content' style="visibility: hidden;">
       <div class='menu-arrow'></div>
@@ -99,17 +98,6 @@ export default {
 </script>
 
 <style lang="scss">
-#app-version {
-  position: absolute;
-  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 10px;
-  color: rgb(175, 175, 175);
-  bottom: 3px;
-  left: 3px;
-  
-  user-select: none;
-  pointer-events: none;
-}
 
 .blur {
   filter: blur(3px);
