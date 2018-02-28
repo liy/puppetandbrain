@@ -16,7 +16,7 @@ export default class ContextMenu
     this.actorMenuList = document.createElement('ul');
     this.addItem(this.actorMenuList, 'Clone', async () => {
       let command = await Commander.create('ImportActor', ActorSelection.selected[0].export()).process();
-      ActivityManager.history.push(command);
+      Hub.history.push(command);
       let actor = command.getActor();
       actor.x = aroundAt(actor.x);
       actor.y = aroundAt(actor.y);
@@ -41,14 +41,14 @@ export default class ContextMenu
     this.close = this.close.bind(this)
     document.addEventListener('click', this.close);
 
-    ActivityManager.on('contextmenu', this.openActorMenu, this);
+    Hub.on('contextmenu', this.openActorMenu, this);
 
     this.openBlockMenu = this.openBlockMenu.bind(this);
     document.getElementById('block-container').addEventListener('contextmenu', this.openBlockMenu)
   }
 
   destroy() {
-    ActivityManager.off('contextmenu', this.openActorMenu, this);
+    Hub.off('contextmenu', this.openActorMenu, this);
     document.removeEventListener('click', this.close);
     document.getElementById('block-container').removeEventListener('contextmenu', this.openBlockMenu)
   }

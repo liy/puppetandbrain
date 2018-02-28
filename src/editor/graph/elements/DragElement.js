@@ -117,7 +117,7 @@ export default class
       }
 
       if(action) {
-        ActivityManager.history.push(Commander.create('DeleteVariable', this.sourceElement.variable.id, BrainGraph.brain.id).processAndSave())
+        Hub.history.push(Commander.create('DeleteVariable', this.sourceElement.variable.id, BrainGraph.brain.id).processAndSave())
         SoundEffect.play('trash');
       }
       
@@ -170,7 +170,7 @@ export default class
       pod.x = x - 60;
       pod.y = y - 60;
 
-      ActivityManager.history.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
+      Hub.history.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
     }
   }
 

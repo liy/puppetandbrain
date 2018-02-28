@@ -23,7 +23,7 @@ export default class ChoiceBox extends Actor
   }
 
   async preload(pod) {
-    let pos = pod.position || { x: aroundAt(ActivityManager.stage.stageWidth/2), y: aroundAt(ActivityManager.stage.stageHeight/2) };
+    let pos = pod.position || { x: aroundAt(Hub.stage.stageWidth/2), y: aroundAt(Hub.stage.stageHeight/2) };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
     this.scale = new Vec2(pod.scale || {x:1,y:1});
@@ -113,7 +113,7 @@ export default class ChoiceBox extends Actor
 
     this.box.graphics.filters = [this.selectOutline]
     // bring it to front
-    ActivityManager.stage.addChild(this.box.container);
+    Hub.stage.addChild(this.box.container);
   }
 
   deselect() {
@@ -184,8 +184,8 @@ export default class ChoiceBox extends Actor
 
     // this texture does not contains any transformation.
     // the image is later transformed manually use actor's transformation
-    let texture = ActivityManager.stage.renderer.generateTexture(this.box.container);
-    let pixiCanvas = ActivityManager.stage.renderer.extract.canvas(texture);
+    let texture = Hub.stage.renderer.generateTexture(this.box.container);
+    let pixiCanvas = Hub.stage.renderer.extract.canvas(texture);
 
     this.box.container.filters = outlineFilters
 

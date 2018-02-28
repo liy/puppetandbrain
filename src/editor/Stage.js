@@ -54,7 +54,7 @@ export default class extends EventEmitter
   }
   
   loop(delta) {
-    ActivityManager.activity.emit('tick', {delta, deltaTime:delta/60});
+    Hub.activity.emit('tick', {delta, deltaTime:delta/60});
     this.updateTransform();
     this.renderer.render(this.container);
   }
@@ -127,13 +127,13 @@ export default class extends EventEmitter
   start() {
     this.playing = true;
     this.mouse.gamePreStart();
-    ActivityManager.activity.emit('game.prestart')
-    ActivityManager.activity.emit('game.start')
+    Hub.activity.emit('game.prestart')
+    Hub.activity.emit('game.start')
   }
 
   stop() {
     this.playing = false;
-    ActivityManager.activity.emit('game.stop')
+    Hub.activity.emit('game.stop')
     this.mouse.gameStop();
   }
 

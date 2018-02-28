@@ -56,7 +56,7 @@ export default class extends Gadget
 
       // Update the resource with audio data so other variable,
       // node, input can read from it.
-      ActivityManager.activity.resources.set(other.path, blob);
+      Hub.activity.resources.set(other.path, blob);
       
       // let url = await API.getUrl(result.path);
       this.audio.src = URL.createObjectURL(blob);

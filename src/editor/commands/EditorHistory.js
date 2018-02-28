@@ -32,7 +32,7 @@ export default class extends EventEmitter
     cmd.undo();
     this.redos.push(cmd);
 
-    ActivityManager.autoSave();
+    Hub.autoSave();
 
     // if(cmd.passThrough) this.undo();
     this.updateButton()
@@ -44,7 +44,7 @@ export default class extends EventEmitter
     cmd.redo();
     this.undos.push(cmd);
 
-    ActivityManager.autoSave();
+    Hub.autoSave();
 
     // if(cmd.passThrough) this.redo();
     this.updateButton()

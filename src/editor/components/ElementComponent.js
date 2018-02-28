@@ -47,7 +47,7 @@ export default class ElementComponent extends Component
   }
 
   onStage() {
-    ActivityManager.stage.overlayer.appendChild(this.element);
+    Hub.stage.overlayer.appendChild(this.element);
 
     this.element.style.opacity = 1;
     if(isMobile) {
@@ -63,7 +63,7 @@ export default class ElementComponent extends Component
   }
 
   offStage() {
-    ActivityManager.stage.overlayer.removeChild(this.element);
+    Hub.stage.overlayer.removeChild(this.element);
     this.element.removeEventListener('touchstart', this.touchStart)
     this.element.removeEventListener('touchend', this.touchEnd);
     this.element.removeEventListener('mousedown', this.mouseDown)
@@ -75,7 +75,7 @@ export default class ElementComponent extends Component
   mouseDown(e) {
     // note the stage offset applied, since clientX and clientY is in window coordinate.
     // TODO: In theory, scale and rotation also needs to be applied. 
-    this.entity.pointerDown(e.clientX - ActivityManager.stage.offsetX, e.clientY - ActivityManager.stage.offsetY, e);
+    this.entity.pointerDown(e.clientX - Hub.stage.offsetX, e.clientY - Hub.stage.offsetY, e);
 
     if(e.button == 2) {
       this.entity.onContextMenu(e);
@@ -95,7 +95,7 @@ export default class ElementComponent extends Component
   }
 
   touchStart(e) {
-    this.entity.pointerDown(e.changedTouches[0].clientX - ActivityManager.stage.offsetX, e.changedTouches[0].clientY - ActivityManager.stage.offsetY, e);
+    this.entity.pointerDown(e.changedTouches[0].clientX - Hub.stage.offsetX, e.changedTouches[0].clientY - Hub.stage.offsetY, e);
   }
 
   touchEnd(e) {

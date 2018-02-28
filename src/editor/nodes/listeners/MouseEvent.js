@@ -27,18 +27,18 @@ export default class MouseEvent extends Listener
     
     this.activity.off('game.prestart', this.prestart, this)
     this.activity.off('game.stop', this.stop, this)
-    ActivityManager.stage.mouse.off('mouse.move', this.move, this);
-    ActivityManager.stage.mouse.off('mouse.stop', this.moveStop, this);
+    Hub.stage.mouse.off('mouse.move', this.move, this);
+    Hub.stage.mouse.off('mouse.stop', this.moveStop, this);
   }
 
   prestart() {
-    ActivityManager.stage.mouse.on('mouse.move', this.move, this);
-    ActivityManager.stage.mouse.on('mouse.stop', this.moveStop, this);
+    Hub.stage.mouse.on('mouse.move', this.move, this);
+    Hub.stage.mouse.on('mouse.stop', this.moveStop, this);
   }
 
   stop() {
-    ActivityManager.stage.mouse.off('mouse.move', this.move, this);
-    ActivityManager.stage.mouse.off('mouse.stop', this.moveStop, this);
+    Hub.stage.mouse.off('mouse.move', this.move, this);
+    Hub.stage.mouse.off('mouse.stop', this.moveStop, this);
   }
 
   move(e) {

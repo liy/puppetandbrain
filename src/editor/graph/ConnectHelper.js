@@ -60,7 +60,7 @@ export default class
       blockPod.x = x;
       blockPod.y = y;
       let command = Commander.create('CreateBlock', blockPod, BrainGraph.brain.owner.id).processAndSave();
-      ActivityManager.history.push(command);
+      Hub.history.push(command);
       AutoConnect.process(this.startSymbol, command.getCreatedNode());
     }
   }

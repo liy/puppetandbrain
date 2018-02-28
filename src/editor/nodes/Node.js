@@ -79,7 +79,7 @@ export default class Node extends EventEmitter
   }
 
   get stage() {
-    return ActivityManager.stage;
+    return Hub.stage;
   }
 
   get lookUp() {

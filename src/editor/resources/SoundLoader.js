@@ -2,7 +2,7 @@ import Loader from "./Loader";
 
 export default class SoundLoader extends Loader
 {
-  static async fetch(fileData, resources=ActivityManager.activity.resources) {
+  static async fetch(fileData, resources=Hub.activity.resources) {
     if(resources.has(fileData.path)) return Promise.resolve(resources.get(fileData.path))
 
     let url = fileData.url || await API.getUrl(fileData.path);

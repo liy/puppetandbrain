@@ -33,7 +33,7 @@ import Theater from './vue/Theater.vue';
 import Toolbox from './vue/Toolbox.vue';
 import ModeButton from './vue/ModeButton.vue';
 
-import './ActivityManager'
+import './Hub'
 import NotificationControl from './ui/NotificationControl';
 
 export default {
@@ -57,15 +57,15 @@ export default {
     document.addEventListener('contextmenu', this.preventDefaultContextMene);
 
     // wait until user is signed in
-    await ActivityManager.setup(this.activityID);
+    await Hub.setup(this.activityID);
 
     this.$store.subscribe((mutation, state) => {
       if(mutation.type === 'toggleDebugMode') {
         if(state.debugMode) {
-          ActivityManager.stage.start();
+          Hub.stage.start();
         }
         else {
-          ActivityManager.stage.stop();
+          Hub.stage.stop();
         }
       }
     });
@@ -76,8 +76,8 @@ export default {
     document.removeEventListener('keydown', this.keydown)
     document.removeEventListener('contextmenu', this.preventDefaultContextMene);
     // clear everything...
-    ActivityManager.activity.destroy();
-    ActivityManager.removeAllListeners();
+    Hub.activity.destroy();
+    Hub.removeAllListeners();
   },
   methods: {
     keydown(e) {
@@ -86,7 +86,7 @@ export default {
 
         NotificationControl.notify('Saving...').delayFadeoutRemove();
 
-        ActivityManager.save().then(activity => {
+        Hub.save().then(activity => {
           this.$router.push(`/editor/${activity.id}`)
         })
       }

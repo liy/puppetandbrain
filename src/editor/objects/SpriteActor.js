@@ -14,7 +14,7 @@ export default class SpriteActor extends Actor
   }
 
   async preload(pod) {
-    let pos = pod.position || { x: aroundAt(ActivityManager.stage.stageWidth/2), y: aroundAt(ActivityManager.stage.stageHeight/2) };
+    let pos = pod.position || { x: aroundAt(Hub.stage.stageWidth/2), y: aroundAt(Hub.stage.stageHeight/2) };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
     this.scale = new Vec2(pod.scale || {x:1,y:1});
@@ -73,7 +73,7 @@ export default class SpriteActor extends Actor
 
     this.spriteContainer.container.filters = [this.selectOutline]
     // bring it to front
-    ActivityManager.stage.addChild(this.spriteContainer.container);
+    Hub.stage.addChild(this.spriteContainer.container);
   }
 
   deselect() {
@@ -87,8 +87,8 @@ export default class SpriteActor extends Actor
       let outlineFilters = this.spriteContainer.container.filters;
       this.spriteContainer.container.filters = []
 
-      let texture = ActivityManager.stage.renderer.generateTexture(this.spriteContainer.container);
-      let canvas = ActivityManager.stage.renderer.extract.canvas(texture);
+      let texture = Hub.stage.renderer.generateTexture(this.spriteContainer.container);
+      let canvas = Hub.stage.renderer.extract.canvas(texture);
       // reset back to original state
       this.spriteContainer.container.filters = outlineFilters
       resolve(canvas);

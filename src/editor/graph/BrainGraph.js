@@ -147,7 +147,7 @@ export default class BrainGraph
     window.addEventListener('resize', this.resize);
     this.resize();
 
-    ActivityManager.stage.blurEnabled = true;
+    Hub.stage.blurEnabled = true;
     GraphSelection.enable();
 
     for(let node of this.brain.getNodes()) {
@@ -187,7 +187,7 @@ export default class BrainGraph
       
       this.container.style.display = 'none'
   
-      ActivityManager.stage.blurEnabled = false;
+      Hub.stage.blurEnabled = false;
       GraphSelection.deselect();
       GraphSelection.disable();
 
@@ -198,12 +198,12 @@ export default class BrainGraph
   }
 
   hide() {
-    ActivityManager.stage.blurEnabled = false;
+    Hub.stage.blurEnabled = false;
     this.container.style.display = 'none'
   }
 
   show() {
-    ActivityManager.stage.blurEnabled = true;
+    Hub.stage.blurEnabled = true;
     this.container.style.display = 'block'
   }
 
@@ -241,7 +241,7 @@ export default class BrainGraph
     if(e.keyCode == 27) {
       e.preventDefault();
       e.stopImmediatePropagation();
-      ActivityManager.history.push(Commander.create('CloseGraph', this.brain.id).process());
+      Hub.history.push(Commander.create('CloseGraph', this.brain.id).process());
     }
   }
 
@@ -360,7 +360,7 @@ export default class BrainGraph
       if(blockPod) {
         blockPod.x = blockPod.x || (e.changedTouches ? e.changedTouches[0].clientX : e.clientX);
         blockPod.y = blockPod.y || (e.changedTouches ? e.changedTouches[0].clientY : e.clientY);
-        ActivityManager.history.push(Commander.create('CreateBlock', blockPod, this.brain.owner.id).processAndSave());
+        Hub.history.push(Commander.create('CreateBlock', blockPod, this.brain.owner.id).processAndSave());
       }
     }
   }

@@ -40,7 +40,7 @@ export default class GetterBlock extends Block
 
     this.title.textContent = pod.name;
 
-    let variable = ActivityManager.activity.lookUp.get(pod.variableID);
+    let variable = Hub.activity.lookUp.get(pod.variableID);
     let pin = new OutputPin(variable.name);
     pin.symbol.colorize(variable.type)
     this.body.addRight(pin);

@@ -13,7 +13,7 @@ export default class ImportActor extends Command
     // as process will be called again in redo,
     // we should try to keep actor id the same, just in case
     // there are other nodes in futher redo process, who are referencing this actor
-    let importActor = new ActorImporter(ActivityManager.activity);
+    let importActor = new ActorImporter(Hub.activity);
     return importActor.start(this.actorPod).then(actor => {
       this.actor = actor;
       this.actorPod.id = actor.id;

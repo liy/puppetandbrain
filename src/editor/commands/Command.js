@@ -10,12 +10,12 @@ export default class Command
   }
 
   get lookUp() {
-    return ActivityManager.activity.lookUp;
+    return Hub.activity.lookUp;
   }
 
   processAndSave() {
     let command = this.process();
-    if(command) ActivityManager.autoSave();
+    if(command) Hub.autoSave();
     return command;
   }
 

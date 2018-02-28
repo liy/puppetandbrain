@@ -225,12 +225,12 @@ export default class Block extends EventEmitter
     // check if drag to delete button
     if(target == deleteBtn) {
       SoundEffect.play('trash');
-      ActivityManager.history.push(Commander.create('DeleteBlock', this.id, this.moveCommand.oldX, this.moveCommand.oldY).processAndSave());
+      Hub.history.push(Commander.create('DeleteBlock', this.id, this.moveCommand.oldX, this.moveCommand.oldY).processAndSave());
       return;
     }
 
     // process and push to history
-    ActivityManager.history.push(this.moveCommand.processAndSave());
+    Hub.history.push(this.moveCommand.processAndSave());
   }
 
   touchDragStop(e) {
@@ -249,15 +249,15 @@ export default class Block extends EventEmitter
     let deleteBtn = document.getElementById('delete-button')
     if(target == deleteBtn) {
       SoundEffect.play('trash');
-      ActivityManager.history.push(Commander.create('DeleteBlock', this.id, this.moveCommand.oldX, this.moveCommand.oldY).processAndSave());
+      Hub.history.push(Commander.create('DeleteBlock', this.id, this.moveCommand.oldX, this.moveCommand.oldY).processAndSave());
       return;
     }
 
     // Note that touchDragStop and dragStop might both be called when user tap the block
     // but the movecommand.processAndSave will return null anyway, as there is no position change
-    // so, it is safe to call ActivityManager.history.push() twice here.
+    // so, it is safe to call Hub.history.push() twice here.
     // process and push to history
-    ActivityManager.history.push(this.moveCommand.processAndSave());
+    Hub.history.push(this.moveCommand.processAndSave());
   }
 
   dragMove(e) {

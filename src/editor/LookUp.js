@@ -144,7 +144,7 @@ export default class
     result.pointers = this.pointers.concat();
     result.brains = this.brains.concat();
     result.variables = this.variables.concat();
-    result.stage = ActivityManager.stage.actors.map((actorID, actor) => {
+    result.stage = Hub.stage.actors.map((actorID, actor) => {
       return actorID;
     });
 

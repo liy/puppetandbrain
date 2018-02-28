@@ -32,7 +32,7 @@ export default class
     // Therefore, we need to try to keep the id the same.
     let actor = ActorFactory.create(pod.className, pod.id, this.activity)
     // There must be a global stage variable available
-    ActivityManager.stage.addActor(actor);
+    Hub.stage.addActor(actor);
 
     // preload actor and then initialize it
     // note that I do not need to remove brainID from actorPod.

@@ -14,7 +14,7 @@ export default class SpineActor extends Actor
   }
 
   async preload(pod) {
-    let pos = pod.position || { x: aroundAt(ActivityManager.stage.stageWidth/2), y: aroundAt(ActivityManager.stage.stageHeight/2) };
+    let pos = pod.position || { x: aroundAt(Hub.stage.stageWidth/2), y: aroundAt(Hub.stage.stageHeight/2) };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
     this.scale = new Vec2(pod.scale || {x:1,y:1});
@@ -64,7 +64,7 @@ export default class SpineActor extends Actor
 
   hitTest(x, y) {
     // TODO: override me 
-    return ActivityManager.stage.renderer.plugins.interaction.hitTest(new PIXI.Point(x, y)) == this.spineComponent.spine;
+    return Hub.stage.renderer.plugins.interaction.hitTest(new PIXI.Point(x, y)) == this.spineComponent.spine;
   }
 
   gameStop() {
@@ -85,7 +85,7 @@ export default class SpineActor extends Actor
 
     this.spineComponent.container.filters = [this.selectOutline]
     // bring it to front
-    ActivityManager.stage.addChild(this.spineComponent.container);
+    Hub.stage.addChild(this.spineComponent.container);
   }
 
   deselect() {
@@ -124,8 +124,8 @@ export default class SpineActor extends Actor
       let outlineFilters = this.spineComponent.container.filters;
       this.spineComponent.container.filters = []
 
-      let texture = ActivityManager.stage.renderer.generateTexture(this.spineComponent.container);
-      let canvas = ActivityManager.stage.renderer.extract.canvas(texture);
+      let texture = Hub.stage.renderer.generateTexture(this.spineComponent.container);
+      let canvas = Hub.stage.renderer.extract.canvas(texture);
       canvas.id = 'snapshot-canvas';
       // reset back to original state
       this.spineComponent.container.filters = outlineFilters

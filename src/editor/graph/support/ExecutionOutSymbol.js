@@ -40,7 +40,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
   mouseUp(e) {
     if(this.canConnect(BrainGraph.connectHelper.startSymbol)) {
       SoundEffect.play('link');
-      ActivityManager.history.push(Commander.create('CreateExecution', this.node.id, this.name, BrainGraph.connectHelper.startSymbol.node.id).processAndSave());
+      Hub.history.push(Commander.create('CreateExecution', this.node.id, this.name, BrainGraph.connectHelper.startSymbol.node.id).processAndSave());
     }
     BrainGraph.connectHelper.stop(e);
   }
@@ -48,7 +48,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
   touchDown(e) {
     if(this.canConnect(BrainGraph.connectHelper.selectedSymbol)) {
       SoundEffect.play('link')
-      ActivityManager.history.push(Commander.create('CreateExecution', this.node.id, this.name, BrainGraph.connectHelper.selectedSymbol.node.id).processAndSave());
+      Hub.history.push(Commander.create('CreateExecution', this.node.id, this.name, BrainGraph.connectHelper.selectedSymbol.node.id).processAndSave());
       
       // once a valid connection is made, deselect the sybmosl
       BrainGraph.connectHelper.stop()
@@ -67,7 +67,7 @@ export default class ExecutionOutSymbol extends ExecutionSymbol
 
   onContextMenu(e) {
     super.onContextMenu(e)
-    ActivityManager.history.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
+    Hub.history.push(Commander.create('RemoveExecution', this.node, this.name).processAndSave());
     
     // Hold the symbol to break the link
     BrainGraph.connectHelper.stop();

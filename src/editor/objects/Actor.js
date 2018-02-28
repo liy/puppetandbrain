@@ -175,14 +175,14 @@ export default class Actor extends EventEmitter
     document.removeEventListener('touchend', this.pointerRelease);
 
     // update entity's new position
-    if(this.moveCommand) ActivityManager.history.push(this.moveCommand.processAndSave());
+    if(this.moveCommand) Hub.history.push(this.moveCommand.processAndSave());
 
     // double click to open brain
     setTimeout(() => {
       this._clicks = 0;
     }, 300)
     if(++this._clicks%2 == 0) {
-      ActivityManager.history.push(Commander.create('OpenGraph', this.brain.id).process());
+      Hub.history.push(Commander.create('OpenGraph', this.brain.id).process());
     }
 
     this.emit('pointerup', this)
@@ -194,7 +194,7 @@ export default class Actor extends EventEmitter
     document.removeEventListener('mouseup', this.pointerRelease);
     document.removeEventListener('mousemove', this.mouseDragMove);
     // update entity's new position
-    if(this.moveCommand) ActivityManager.history.push(this.moveCommand.processAndSave());
+    if(this.moveCommand) Hub.history.push(this.moveCommand.processAndSave());
   }
 
   mouseOver(e) {
@@ -206,19 +206,19 @@ export default class Actor extends EventEmitter
   }
 
   mouseDragMove(e) {
-    this.position.x = e.clientX + this.offset.x - ActivityManager.stage.offsetX;
-    this.position.y = e.clientY + this.offset.y - ActivityManager.stage.offsetY;
+    this.position.x = e.clientX + this.offset.x - Hub.stage.offsetX;
+    this.position.y = e.clientY + this.offset.y - Hub.stage.offsetY;
   }
 
   touchDragMove(e) {
     let x = e.touches[0].clientX;
     let y = e.touches[0].clientY
-    this.position.x = x + this.offset.x - ActivityManager.stage.offsetX;
-    this.position.y = y + this.offset.y - ActivityManager.stage.offsetY;
+    this.position.x = x + this.offset.x - Hub.stage.offsetX;
+    this.position.y = y + this.offset.y - Hub.stage.offsetY;
   }
 
   onContextMenu(e) {
-    ActivityManager.emit('contextmenu', {actor:this, event:e});
+    Hub.emit('contextmenu', {actor:this, event:e});
   }
 
   select() {
@@ -302,7 +302,7 @@ export default class Actor extends EventEmitter
 
     // FIXME: find a better way to handle saving
     // if game still playing, override pod with initial state
-    if(ActivityManager.stage.playing) Object.assign(pod, this.initialState);
+    if(Hub.stage.playing) Object.assign(pod, this.initialState);
 
     if(detail) {
       pod.brain = this.brain.pod(detail);
@@ -346,11 +346,11 @@ export default class Actor extends EventEmitter
   }
 
   get screenX() {
-    return this.x + ActivityManager.stage.offsetX
+    return this.x + Hub.stage.offsetX
   }
 
   get screenY() {
-    return this.y + ActivityManager.stage.offsetY
+    return this.y + Hub.stage.offsetY
   }
 
   createFileRefs() {

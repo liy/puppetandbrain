@@ -9,7 +9,7 @@ import Stage from "./Stage";
 import ContextMenu from "./ui/ContextMenu";
 import EventEmitter from '../utils/EventEmitter';
 
-class ActivityManager extends EventEmitter
+class Hub extends EventEmitter
 {
   constructor() {
     super();
@@ -94,4 +94,4 @@ class ActivityManager extends EventEmitter
   }
 }
 
-window.ActivityManager = new ActivityManager();
+window.Hub = new Hub();

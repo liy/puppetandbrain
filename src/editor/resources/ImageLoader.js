@@ -3,7 +3,7 @@ import Loader from "./Loader";
 export default class ImageLoader extends Loader
 {
   static async fetch(fileData, resources) {
-    resources = resources || ActivityManager.activity.resources;
+    resources = resources || Hub.activity.resources;
     if(resources.has(fileData.path)) return Promise.resolve(resources.get(fileData.path))
     
     let url = fileData.url || await API.getUrl(fileData.path);

@@ -69,7 +69,7 @@ export default class BlockBrowser extends Browser
     // It is stupid to have a log statement to break the whole search library
 
     // Populate the performs
-    for(const actor of ActivityManager.activity.lookUp.getActors()) {
+    for(const actor of Hub.activity.lookUp.getActors()) {
       for(let actionName of Object.keys(actor.brain.actions)) {
         let action = actor.brain.actions[actionName];
         templates.push({
