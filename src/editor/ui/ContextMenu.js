@@ -58,7 +58,7 @@ export default class ContextMenu
 
     this.opened = true;
 
-    this.element.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+    this.element.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`
     // override me, hehe...
     this.element.appendChild(this.actorMenuList);
     document.body.appendChild(this.element);

@@ -217,8 +217,8 @@ export default class Actor extends EventEmitter
     this.position.y = y + this.offset.y - ActivityManager.stage.offsetY;
   }
 
-  contextMenu(e) {
-    this.activity.emit('contextmenu', {actor:this, event:e});
+  onContextMenu(e) {
+    ActivityManager.emit('contextmenu', {actor:this, event:e});
   }
 
   select() {

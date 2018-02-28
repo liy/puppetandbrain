@@ -10,6 +10,8 @@ class AnimatePuppet extends Tutorial
   }
 
   init() {
+    super.init();
+    
     this.addStep(async () => {
       this.banner.push('🤖 Howdy!')
                  .push('You fancy a fat bouncy cat 🐱?')
@@ -223,6 +225,5 @@ class AnimatePuppet extends Tutorial
   }
 }
 
-const tutoril = new AnimatePuppet();
-tutoril.init();
-export default tutoril;
+const tutorial = new AnimatePuppet();
+export default tutorial;

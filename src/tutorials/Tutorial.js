@@ -5,7 +5,9 @@ import TutorialOverlay from './TutorialOverlay'
 
 export default class Tutorial 
 {
-  constructor() {
+  constructor() {}
+
+  init() {
     this.steps = [];
     this.stepIndex = -1;
 
@@ -21,6 +23,9 @@ export default class Tutorial
 
   destroy() {
     // TODO: remove overlay, banner and cursor
+    this.banner.destroy();
+    this.overlay.destroy();
+    this.cursor.destroy();
   }
 
   start() {

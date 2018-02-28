@@ -78,12 +78,11 @@ export default class ElementComponent extends Component
     this.entity.pointerDown(e.clientX - ActivityManager.stage.offsetX, e.clientY - ActivityManager.stage.offsetY, e);
 
     if(e.button == 2) {
-      this.entity.contextMenu(e);
+      this.entity.onContextMenu(e);
     }
   }
 
   mouseUp(e) {
-    console.log('mouse up')
     this.entity.pointerUp(e);
   }
 

@@ -15,6 +15,7 @@ export default {
     let tutorialName = this.$route.params.tutorialName;
     if(tutorialName) {
       this.tutorial = (await import(`@/tutorials/${tutorialName}`)).default;
+      this.tutorial.init();
       this.tutorial.start();
     }
   },

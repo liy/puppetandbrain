@@ -25,6 +25,10 @@ export default class Cursor
     this.direction('top');
   }
 
+  destroy() {
+    document.body.removeChild(this.element);
+  }
+
   updateTransform() {
     this.element.style.transform = `translate(${this.x}px, ${this.y}px) rotate(${this.rotation}deg) scale(${this.scaleX}, ${this.scaleY})`
   }

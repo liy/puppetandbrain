@@ -58,7 +58,6 @@ export default {
 
     // wait until user is signed in
     await ActivityManager.setup(this.activityID);
-    this.$store.commit('staging', this.activity);
 
     this.$store.subscribe((mutation, state) => {
       if(mutation.type === 'toggleDebugMode') {
@@ -78,6 +77,7 @@ export default {
     document.removeEventListener('contextmenu', this.preventDefaultContextMene);
     // clear everything...
     ActivityManager.activity.destroy();
+    ActivityManager.removeAllListeners();
   },
   methods: {
     keydown(e) {

@@ -8,6 +8,10 @@ export default class
     document.body.appendChild(this.element);
   }
 
+  destroy() {
+    document.body.removeChild(this.element);
+  }
+
   show() {
     this.element.style.display = 'block';
   }

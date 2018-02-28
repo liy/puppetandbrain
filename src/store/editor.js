@@ -1,7 +1,6 @@
 const state = {
   debugMode: false,
   stageMode: true,
-  activity: null,
   propertyPanelVisable: false,
 }
 
@@ -28,10 +27,6 @@ const mutations = {
 
   toggleStageMode(state, mode) {
     state.stageMode = !stage.stageMode;
-  },
-
-  staging(state, activity) {
-    state.activity = activity;
   },
 
   // note used for now

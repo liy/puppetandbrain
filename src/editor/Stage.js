@@ -26,7 +26,7 @@ export default class extends EventEmitter
     });
     
     this.mouse = new Mouse(this.renderer);
-    this.contextMenu = new ContextMenu(this);
+    this.contextMenu = new ContextMenu();
     
     // For deselection
     let catcher = new PIXI.Graphics();

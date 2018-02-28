@@ -66,7 +66,7 @@ export default class ContainerComponent extends Component
   }
 
   rightClick(e) {
-    this.entity.contextMenu(e.data.originalEvent);
+    this.entity.onContextMenu(e.data.originalEvent);
   }
 
   defaultFilter() {
