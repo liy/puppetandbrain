@@ -41,6 +41,31 @@
 
     cursor: pointer;
   }
+
+  // generic element value field, for property element and variable element input field.
+  .element-value-field {
+    height: 24px;
+    line-height: 24px;
+    border-radius: 12px;
+  }
+
+  // generic element name field, for property element and variable element input field.
+  .element-name-field {
+    height: 24px;
+    line-height: 24px;
+    border-radius: 0;
+    background: none;
+
+    padding-left: 0;
+    padding-right: 0;
+
+    margin-right: 5px;
+
+    span {
+      text-align: left;
+      font-size: 18px;
+    }
+  }
 }
 
 .base-element:first-child {
@@ -51,27 +76,3 @@
   border: 3px solid #fcee21;
 }
 
-// generic element value field, for property element and variable element input field.
-.element-value-field {
-  height: 24px;
-  line-height: 24px;
-  border-radius: 12px;
-}
-
-// generic element name field, for property element and variable element input field.
-.element-name-field {
-  height: 24px;
-  line-height: 24px;
-  border-radius: 0;
-  background: none;
-
-  padding-left: 0;
-  padding-right: 0;
-
-  margin-right: 5px;
-
-  span {
-    text-align: left;
-    font-size: 18px;
-  }
-}
