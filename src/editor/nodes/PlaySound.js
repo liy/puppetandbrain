@@ -66,6 +66,9 @@ export default class PlaySound extends Task
   }
 
   destroy() {
+    // make sure "input.disconnected" does not fire during destroy process
+    this.inputs.get('audio').removeAllListeners();
+    
     super.destroy();
     if(this.audio) {
       this.audio.pause();
