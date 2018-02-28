@@ -2,6 +2,7 @@ const state = {
   debugMode: false,
   stageMode: true,
   propertyPanelVisable: false,
+  tutorialMode: false,
 }
 
 const getters = {
@@ -9,6 +10,7 @@ const getters = {
   stageMode: state => state.stageMode,
   activity: state => state.activity,
   propertyPanelVisable: state => state.propertyPanelVisable,
+  tutorialMode: state => state.tutorialMode,
 }
 
 const mutations = {
@@ -37,6 +39,10 @@ const mutations = {
   setPropertyPanelVisibility(state, visible) {
     state.propertyPanelVisable = visible;
     console.log(state.propertyPanelVisable)
+  },
+
+  updateTutorialMode(state, mode) {
+    state.tutorialMode = mode;
   }
 }
 

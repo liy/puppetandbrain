@@ -9,6 +9,8 @@ import Stage from "./Stage";
 import ContextMenu from "./ui/ContextMenu";
 import EventEmitter from '../utils/EventEmitter';
 
+import store from '@/store';
+
 class Hub extends EventEmitter
 {
   constructor() {
@@ -77,10 +79,10 @@ class Hub extends EventEmitter
 
   async autoSave() {
     // do not auto save when in dev mode
-    if(process.env.NODE_ENV !== 'dev') {  
+    if(process.env.NODE_ENV !== 'dev' && !store.tutorialMode) {  
       // delay save, just in case user has lots of actions...
       this.delaySave.cancel();
-      await delaySave.wait(5000);
+      await this.delaySave.wait(5000);
 
       // auto save does not clean resource
       // might be ok?

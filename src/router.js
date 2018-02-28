@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './home/Home.vue'
+import store from '@/store';
 
 const Tutorial = () => import('./tutorials/Tutorial.vue');
 const Editor = () => import('./editor/Editor.vue');
@@ -16,7 +17,7 @@ export default new Router({
       component: Home,
       beforeEnter: (to, from, next) => {
         document.body.className = ''
-
+        
         next();
       }
     },
@@ -27,7 +28,8 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         // TODO: auto play tutorial if user first time visit
         document.body.classList.add('editor-body')
-
+        // not tutorial
+        store.tutorialMode = false;
         next();
       }
     },
@@ -39,8 +41,8 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         // TODO: auto play tutorial if user first time visit
         document.body.classList.add('editor-body')
-        
-
+        // not tutorial
+        store.tutorialMode = false;
         next();
       }
     },
@@ -51,8 +53,7 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         // TODO: auto play tutorial if user first time visit
         document.body.classList.add('editor-body')
-        
-
+        store.tutorialMode = true;
         next();
       }
     }
