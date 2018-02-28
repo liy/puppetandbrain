@@ -1,5 +1,5 @@
 <template>
-<div class='toolbar-button' id='add-actor-button' data-title="Add puppet" @click="clicked">
+<div class='toolbar-button' id='add-button' :data-title="tooltip" @click="clicked">
   <svg width=120 height=120>
     <use :xlink:href="`#${AddButtonIcon.id}`" :viewBox="AddButtonIcon.viewBox"/>
   </svg>
@@ -20,7 +20,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['stageMode'])
+    ...mapGetters(['stageMode']),
+    tooltip() {
+      return this.stageMode ? 'Add puppet' : 'Add block'
+    }
   },
   methods: {
     async clicked() {
@@ -40,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#add-actor-button {
+#add-button {
   width: 120px;
   height: 120px;
 }
