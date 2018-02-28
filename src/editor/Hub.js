@@ -86,7 +86,7 @@ class Hub extends EventEmitter
 
       // auto save does not clean resource
       // might be ok?
-      let fileRefs = this.getFileRefs();
+      let fileRefs = this.activity.getFileRefs();
 
       if(this.activity.isOwner) {
         let pod = this.activity.pod();
