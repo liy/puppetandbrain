@@ -11,7 +11,7 @@ import EventEmitter from '../utils/EventEmitter';
 
 import store from '@/store';
 
-class Hub extends EventEmitter
+class HubClass extends EventEmitter
 {
   constructor() {
     super();
@@ -43,7 +43,7 @@ class Hub extends EventEmitter
 
   async save() {
     // TODO: make a clone instead
-    if(this.activity.ownerID !== CurrentUser.uid) {
+    if(this.activity.ownerID !== this.currentUser.uid) {
       throw new Error('User is not the owner of the activity!')
     }
 
@@ -96,4 +96,10 @@ class Hub extends EventEmitter
   }
 }
 
-window.Hub = new Hub();
+window.Hub = new HubClass();
+
+// TODO: make a authentication class?
+// ensure sign in sign out update CurrentUser variable
+firebase.auth().onAuthStateChanged(user => {
+  Hub.currentUser = user;
+})          

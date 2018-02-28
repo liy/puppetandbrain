@@ -36,7 +36,7 @@ export default class Activity extends EventEmitter
     }
 
     let pod = this.lookUp.pod();
-    pod.userID = CurrentUser.uid;
+    pod.userID = Hub.currentUser.uid;
     pod.activityID = id;
     return API.clone(pod, files, fileRefs);
   }

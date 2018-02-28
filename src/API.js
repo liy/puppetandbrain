@@ -110,7 +110,7 @@ class API
   async listMyPuppets() {
     let pods = [];
     try {
-      let collections = await firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).get();
+      let collections = await firebase.firestore().collection(`users/${Hub.currentUser.uid}/myPuppets`).get();
       collections.forEach(doc => {
         pods.push(doc.data());
       });
@@ -124,12 +124,12 @@ class API
 
   async createMyPuppet(actor, name) {
     // generate entry in firestore
-    const myPuppetID = firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).doc().id
-    firebase.firestore().collection(`users/${CurrentUser.uid}/myPuppets`).doc(myPuppetID).set({
+    const myPuppetID = firebase.firestore().collection(`users/${Hub.currentUser.uid}/myPuppets`).doc().id
+    firebase.firestore().collection(`users/${Hub.currentUser.uid}/myPuppets`).doc(myPuppetID).set({
       ...actor.export(),
       name,
       myPuppetID,
-      userID: CurrentUser.uid,
+      userID: Hub.currentUser.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
@@ -160,13 +160,13 @@ class API
     const canvas = await actor.snapshot();
     canvas.toBlob(blob => {
       // upload file using the id
-      firebase.storage().ref().child(`users/${CurrentUser.uid}/snapshots/${myPuppetID}-puppet-snapshot.png`).put(blob);
+      firebase.storage().ref().child(`users/${Hub.currentUser.uid}/snapshots/${myPuppetID}-puppet-snapshot.png`).put(blob);
     });
 
     return myPuppetID;
   }
 
-  deleteMyPuppet(myPuppetID, userID=CurrentUser.uid) {
+  deleteMyPuppet(myPuppetID, userID=Hub.currentUser.uid) {
     let batch = firebase.firestore().batch();
 
     let ref1 = firebase.firestore().doc(`users/${userID}/myPuppets/${myPuppetID}`);

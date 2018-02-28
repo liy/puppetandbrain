@@ -38,18 +38,12 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       var errorCode = error.code;
       var errorMessage = error.message;
       console.error(errorCode, errorMessage)
-  });
-
-// ensure sign in sign out update CurrentUser variable
-let unsubscribe = firebase.auth().onAuthStateChanged(user => {
-  window.CurrentUser = user;
-})          
+  });  
 
 // used when you want to ensure user data is available
 window.getCurrentUser = function() {
   return new Promise(resolve => {
     let unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      window.CurrentUser = user;
       unsubscribe();
       resolve(user);
     })
