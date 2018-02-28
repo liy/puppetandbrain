@@ -11,6 +11,8 @@ module.exports = {
   // entry: ['whatwg-fetch', path.join(__dirname, 'src', 'main.js')],
   entry: {
     'whatwg-fetch': 'whatwg-fetch',
+    'vue': 'vue',
+    'vue-router': 'vue-router',
     rusha: 'rusha',
     app: path.join(__dirname, 'src', 'main.js')
   },
@@ -25,6 +27,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
+      'vue$': 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, 'src'),
       'pixi.js': path.resolve(__dirname, 'node_modules/pixi.js/dist/pixi.min.js'),
       'rusha': path.resolve(__dirname, 'node_modules/rusha/dist/rusha.min.js'),
@@ -33,6 +36,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
       {
         test: /\.js?$/,
         loader: 'babel-loader',
@@ -111,12 +118,12 @@ module.exports = {
     }),
     new SpriteLoaderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['whatwg-fetch', 'rusha'], // Specify the common bundle's name.
+      name: ['whatwg-fetch', 'vue', 'vue-router', 'rusha'], // Specify the common bundle's name.
       minChunks: Infinity,
     }),
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 5,
-    }),
+    // new webpack.optimize.LimitChunkCountPlugin({
+    //   maxChunks: 5,
+    // }),
     // new OfflinePlugin(),
   ],
   
