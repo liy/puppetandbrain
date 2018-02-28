@@ -22,7 +22,7 @@ class AnimatePuppet extends Tutorial
 
     this.addStep(() => {
       this.banner.info("Click the <b>Add puppet</b> to add a puppet, obviously!", true);
-      this.cursor.moveTo('add-actor-button', 'left')
+      this.cursor.moveTo('add-button', 'left')
       this.nextWhen('browser.opened')
     });
 
@@ -67,7 +67,7 @@ class AnimatePuppet extends Tutorial
       await this.banner.start();
       this.banner.info('Click the add button to add a <b>Block</b>', true);
 
-      this.cursor.moveTo('add-actor-button', 'left');
+      this.cursor.moveTo('add-button', 'left');
 
       this.nextWhen('browser.opened')
     });
@@ -99,7 +99,7 @@ class AnimatePuppet extends Tutorial
           await this.banner.start();
 
           this.banner.info('Click the add button to find an <b>Animation</b> block.', true);
-          this.cursor.moveTo('add-actor-button', 'left');
+          this.cursor.moveTo('add-button', 'left');
 
           this.when('browser.opened', this.redo);
         }
