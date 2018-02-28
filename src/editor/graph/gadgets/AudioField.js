@@ -7,19 +7,19 @@ import SoundLoader from '../../resources/SoundLoader';
 
 export default class extends Gadget
 {
-  constructor({fileName, path, contentType, ext, hash}) {
+  constructor(fileData) {
     super();
     this.element.classList.add('audio-field');
 
-    this.button = new FileButton('audio/*', fileName);
+    this.button = new FileButton('audio/*', fileData.fileName);
     this.element.appendChild(this.button.element);
 
     this.circleProgress = new CircleProgress();
     this.element.appendChild(this.circleProgress.element);
 
     this.audio = new Audio();
-    if(path) {
-      SoundLoader.fetch(path).then(blob => {
+    if(fileData.path) {
+      SoundLoader.fetch(fileData).then(blob => {
         this.audio.src = URL.createObjectURL(blob);
         this.circleProgress.enabled = true;
       });
