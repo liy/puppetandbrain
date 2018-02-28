@@ -21,23 +21,9 @@ export default {
   },
   mounted() {
     document.addEventListener('keydown', this.keydown);
-
-    // watch editor mode changes
-    this.cancelWatch = this.$store.watch(() => this.$store.getters.stageMode, stageMode => {
-      if(stageMode) {
-        GraphSelection.off('block.selection.change', this.onSelectChange, this)
-        ActorSelection.on('actor.selection.change', this.onSelectChange, this);
-        this.onSelectChange(ActorSelection.selected);
-      }
-      else {
-        ActorSelection.off('actor.selection.change', this.onSelectChange, this);
-        GraphSelection.on('block.selection.change', this.onSelectChange, this);
-        this.onSelectChange(GraphSelection.selected);
-      }
-    })
+    this.onStageModeChange();
   },
   beforeDestroy() {
-    this.cancelWatch();
     document.removeEventListener('keydown', this.keydown);
   },
   computed: {
@@ -79,6 +65,23 @@ export default {
       else {
         this.enabled = false;
       }
+    },
+    onStageModeChange() {
+      if(this.stageMode) {
+        GraphSelection.off('block.selection.change', this.onSelectChange, this)
+        ActorSelection.on('actor.selection.change', this.onSelectChange, this);
+        this.onSelectChange(ActorSelection.selected);
+      }
+      else {
+        ActorSelection.off('actor.selection.change', this.onSelectChange, this);
+        GraphSelection.on('block.selection.change', this.onSelectChange, this);
+        this.onSelectChange(GraphSelection.selected);
+      }
+    }
+  },
+  watch: {
+    stageMode: () => {
+      this.onStageModeChange();
     }
   }
 }
