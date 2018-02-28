@@ -1,5 +1,5 @@
 <template>
-<div class='home-container'>
+<div id='home-container'>
   <div class='home-splash'>
     <div class='home-content'>
       <h4>PUPPET & BRAIN</h4>
@@ -18,7 +18,10 @@
       
       <img src="../assets/cat.png"/>
       <div>
-        <div class="block listener"><div class="title">Game Event</div><div class="container"><div class="base"><div class="body" style="background-image: url(&quot;/ddc3a9ee35d96ae2255dc0bb1fb0d835.svg&quot;); background-repeat: no-repeat; background-position: center center;"><div class="content"><div class="left"></div><div class="right"><div class="execution-pin"><span class="label">start</span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">       
+        <div class="block listener"><div class="title">Game Event</div><div class="container"><div class="base">
+          <div class="body" style="background-image: url(&quot;/ddc3a9ee35d96ae2255dc0bb1fb0d835.svg&quot;); background-repeat: no-repeat; background-position: center center;">
+          <div class="content"><div class="left"></div><div class="right"><div class="execution-pin"><span class="label">start</span><div class="execution-symbol">
+          <svg ref="outPin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">
         <use xlink:href="#execution-out" id="execution-out" viewBox="0 0 42.6 22"></use>  
         </svg></div></div><div class="execution-pin"><span class="label">stop</span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">       
         <use xlink:href="#execution-out" id="execution-out" viewBox="0 0 42.6 22"></use>  
@@ -26,7 +29,8 @@
 
         <div class="block" style="transform: translate(240px, 0);"><div class="title">Animation</div><div class="container"><div class="base"><div class="body" style="background-image: url(&quot;/ddc3a9ee35d96ae2255dc0bb1fb0d835.svg&quot;); background-repeat: no-repeat; background-position: center center;"><div class="content"><div class="left"><div class="execution-pin"><span class="label"></span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined" style="--fill:#D0E400;">       
         <use xlink:href="#execution-in" id="execution-in" viewBox="0 0 42.6 22"></use>  
-        </svg></div></div><div class="data-pin"><span class="label clickable">name</span><div class="data-head"><div class="data-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none; --fill:none; --stroke:#b5ffeb;">       
+        </svg></div></div><div class="data-pin"><span class="label clickable">name</span><div class="data-head"><div class="data-symbol">
+          <svg ref="inPin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none; --fill:none; --stroke:#b5ffeb;">       
         <use xlink:href="#input" id="input" viewBox="0 0 34 38"></use>  
         </svg></div><div class="gadget drop-down" style="display: none;"><select><option value="idle">idle</option><option value="run">run</option><option value="walk">walk</option></select></div></div></div></div><div class="right"><div class="execution-pin"><span class="label"></span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">       
         <use xlink:href="#execution-out" id="execution-out" viewBox="0 0 42.6 22"></use>  
@@ -34,6 +38,9 @@
       </div>
     </div>
   </div>
+  <svg id="line-svg" ref='lineSvg'>
+    <path :d="d" stroke="#d0e400" stroke-width="3"/>
+  </svg>
   <app-footer/>
 </div>
 </template>
@@ -47,23 +54,60 @@ import '@/assets/input.svg';
 import Footer from '@/vue/Footer.vue';
 
 export default {
+  data() {
+    return {
+      outPinPostion: {x:0,y:0},
+      inPinPosition: {x:0,y:0}
+    }
+  },
+  computed: {
+    d() {
+      return `M${this.outPinPostion.x},${this.outPinPostion.y} H${this.inPinPosition.x}`
+    }
+  },
   components: {
     'app-footer': Footer
   },
   methods: {
     toEditor() {
+      document.getElementById('home-container').style.display = 'none';
       this.$router.push('editor')
     },
     toTutorial() {
+      document.getElementById('home-container').style.display = 'none';
       this.$router.push('tutorials/animate-a-puppet')
+    },
+    updateLine() {
+      let offset = this.$refs.lineSvg.getBoundingClientRect();
+
+      let rect = this.$refs.outPin.getBoundingClientRect();
+      this.outPinPostion = {
+        x: (rect.left + rect.right)/2  + 6.7,
+        y: (rect.top + rect.bottom)/2
+      }
+
+      rect = this.$refs.inPin.getBoundingClientRect();
+      this.inPinPosition = {
+        x: (rect.left + rect.right)/2 - 1,
+        y: (rect.top + rect.bottom)/2
+      }
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.updateLine()
+    }, 500);
+    window.addEventListener('resize', this.updateLine);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.updateLine);
   }
 }
 </script>
 
 <style lang="scss" scoped>
 
-.home-container {
+#home-container {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -123,8 +167,21 @@ h4 {
     margin-bottom: 50px;
     transform: translateY(-40px);
   }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
 }
 
+#line-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+}
 
 
 
