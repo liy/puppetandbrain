@@ -47,6 +47,14 @@ export default class Modal
     });
   }
 
+  set primaryText(text) {
+    this.primaryBtn.textContent = text;
+  }
+
+  set secondaryText(text) {
+    this.secondaryBtn.textContent = text;
+  }
+
   open() {
     this.element.style.display = 'flex'
     document.body.appendChild(this.element);

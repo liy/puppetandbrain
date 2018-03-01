@@ -10,7 +10,7 @@ export default class ConfirmModal extends Modal
   constructor(content, title='Are you Sure?') {
     super();
 
-    this.title.textContent = 'Are you Sure?';
+    this.title.textContent = title;
     this.content.textContent = content;
   }
 }

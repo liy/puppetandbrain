@@ -84,7 +84,7 @@ export default class Tutorial
     else {
       this.overlay.hide();
       // not first visit anymore
-      localStorage.setItem('firstVisit', false);
+      localStorage.setItem('visited', true);
       // TODO: ask user what to do next
     }
   }
