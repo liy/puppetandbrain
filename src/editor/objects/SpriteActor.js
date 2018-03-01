@@ -49,6 +49,8 @@ export default class SpriteActor extends Actor
         iconID: "🖼️"
       }
     });
+
+    this.emit('actor.ready', this);
   }
 
   set image(fileData) {

@@ -98,6 +98,8 @@ export default class ChoiceBox extends Actor
         iconID: "🖼️"
       }
     });
+
+    this.emit('actor.ready', this);
   }
 
   onInput(text) {

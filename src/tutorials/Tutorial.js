@@ -83,6 +83,9 @@ export default class Tutorial
     }
     else {
       this.overlay.hide();
+      // not first visit anymore
+      localStorage.setItem('firstVisit', false);
+      // TODO: ask user what to do next
     }
   }
 

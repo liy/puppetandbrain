@@ -38,7 +38,6 @@ const mutations = {
 
   setPropertyPanelVisibility(state, visible) {
     state.propertyPanelVisable = visible;
-    console.log(state.propertyPanelVisable)
   },
 
   updateTutorialMode(state, mode) {
@@ -46,8 +45,11 @@ const mutations = {
   }
 }
 
+const actions = {};
+
 export default {
   state,
   getters,
-  mutations
+  mutations,
+  actions,
 }

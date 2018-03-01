@@ -6,7 +6,7 @@
       <h1>Make your puppets<br/>Create the story<br/>Learn coding</h1>
       <div class='home-action'>
         <app-button class='major' @click.native="toTutorial">Start learning</app-button>
-        <app-button class='primary'>Sign Up</app-button>
+        <!-- <app-button class='primary'>Sign Up</app-button> -->
       </div>
     </div>
 
