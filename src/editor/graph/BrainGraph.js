@@ -355,8 +355,7 @@ export default class BrainGraph
       e.stopPropagation();
       e.preventDefault();
       
-      var browser = new BlockBrowser();
-      let blockPod = await browser.open();
+      let blockPod = await Hub.openBlockBrowser();
       if(blockPod) {
         blockPod.x = blockPod.x || (e.changedTouches ? e.changedTouches[0].clientX : e.clientX);
         blockPod.y = blockPod.y || (e.changedTouches ? e.changedTouches[0].clientY : e.clientY);

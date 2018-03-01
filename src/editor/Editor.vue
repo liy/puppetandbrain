@@ -51,12 +51,14 @@ export default {
     'mode-button': ModeButton
   },
   async mounted() {
+    this.$store.commit('resetEditorState');
+
     // prevent default context menu for the whole site
     // unless it is from canvas, which pixi needs it to handle right click.
     document.addEventListener('contextmenu', this.preventDefaultContextMene);
 
     // wait until user is signed in
-    await Hub.setup(this.activityID);
+    await Hub.install(this.activityID);
 
     this.unsubscribe = this.$store.subscribe((mutation, state) => {
       if(mutation.type === 'toggleDebugMode') {
@@ -76,10 +78,8 @@ export default {
     
     document.removeEventListener('keydown', this.keydown)
     document.removeEventListener('contextmenu', this.preventDefaultContextMene);
-    // clear everything...
-    Hub.activity.destroy();
-    Hub.stage.destroy();
-    Hub.removeAllListeners();
+    
+    Hub.uninstall();
   },
   methods: {
     keydown(e) {

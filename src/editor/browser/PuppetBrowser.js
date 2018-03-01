@@ -27,8 +27,6 @@ export default class extends Browser
     }
 
     this.contentSection.placeholder = 'Loading, Please wait...☕'
-
-    this.closed = false;
   }
 
   process() {
@@ -64,10 +62,6 @@ export default class extends Browser
     box.on('puppet.deleted', this.puppetedDeleted, this);
   }
 
-  close(data) {
-    super.close(data);
-    this.closed = true;
-  }
 
   puppetedDeleted(box) {
     let index = this.boxes.indexOf(box);

@@ -2,24 +2,30 @@ import './Modal.scss';
 
 export default class Modal
 {
+  openedModal=null
+
+  static close() {
+    if(Modal.openedModal) Modal.openedModal.close()
+  }
+
   constructor() {
     this.element = document.createElement('div');
-    this.element.id = 'modal';
+    this.element.id = 'modal-wrapper';
 
-    this.container = document.createElement('div');
-    this.container.className = 'modal-container';
-    this.element.appendChild(this.container);
+    this.modal = document.createElement('div');
+    this.modal.className = 'modal';
+    this.element.appendChild(this.modal);
 
     this.title = document.createElement('h2');
-    this.container.appendChild(this.title);
+    this.modal.appendChild(this.title);
 
     this.content = document.createElement('div');
     this.content.className = 'modal-content'
-    this.container.appendChild(this.content);
+    this.modal.appendChild(this.content);
 
     this.action = document.createElement('div');
     this.action.className = 'modal-action'
-    this.container.appendChild(this.action);
+    this.modal.appendChild(this.action);
 
     this.primaryBtn = document.createElement('button');
     this.primaryBtn.className = 'primary'
@@ -29,7 +35,7 @@ export default class Modal
     this.secondaryBtn.textContent = 'Cancel'
     this.action.appendChild(this.secondaryBtn)
 
-    this.container.addEventListener('click', e => {
+    this.modal.addEventListener('click', e => {
       e.stopPropagation();
     })
 
@@ -59,13 +65,17 @@ export default class Modal
     this.element.style.display = 'flex'
     document.body.appendChild(this.element);
     this.focus();
+    // For destroy the modal
+    Modal.openedModal = this;
     return this.process();
   }
 
   close() {
     this.element.style.display = 'none';
-
     document.body.removeChild(this.element);
+    console.log('close!')
+    // For destroy the modal
+    Modal.openedModal = null;
   }
 
   get data() {

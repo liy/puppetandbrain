@@ -29,12 +29,10 @@ export default {
     async clicked() {
       SoundEffect.play('click');
       if(this.stageMode) {
-        let browser = new PuppetBrowser();
-        browser.open()
+        Hub.openPuppetBrowser();
       }
       else {
-        let browser = new BlockBrowser();
-        let pod = await browser.open();
+        let pod = await Hub.openBlockBrowser();
         if(pod) Hub.history.push(Commander.create('CreateBlock', pod, BrainGraph.brain.owner.id).processAndSave());
       }
     }

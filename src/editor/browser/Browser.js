@@ -12,6 +12,8 @@ export default class Browser extends EventEmitter
   constructor() {
     super();
 
+    this.closed = true;
+
     this.element = document.createElement('div');
     this.element.className = 'browser'
 
@@ -62,6 +64,7 @@ export default class Browser extends EventEmitter
   }
 
   open() {
+    this.closed = false;
     this.element.style.opacity = 0;
     this.tween = TweenLite.to(this.element.style, 0.15, {opacity: 1.0, ease:Quad.easeIn, onComplete: () => {
       this.element.style.opacity = 1.0;
@@ -83,6 +86,10 @@ export default class Browser extends EventEmitter
   }
 
   close(data) {
+    if(this.closed) return;
+    
+    this.closed = true;
+
     this.searchField.input.removeEventListener('input', this.onSearch);
     this.element.removeEventListener('keydown', this.keydown);
     // TODO: not sure why I can't tween opacity directly. Have to manually set it.

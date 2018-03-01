@@ -26,6 +26,7 @@ export default class Cursor
   }
 
   destroy() {
+    this.cancelFollow();
     document.body.removeChild(this.element);
   }
 

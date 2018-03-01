@@ -54,8 +54,7 @@ export default class
    * @param {Event} e Touch or Mouse event.
    */
   async openBrowser(x, y) {
-    var browser = new BlockBrowser();
-    let blockPod = await browser.open();
+    let blockPod = await Hub.openBlockBrowser();
     if(blockPod) {
       blockPod.x = x;
       blockPod.y = y;

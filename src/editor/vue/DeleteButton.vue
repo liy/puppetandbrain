@@ -80,7 +80,7 @@ export default {
     }
   },
   watch: {
-    stageMode: () => {
+    stageMode: function() {
       this.onStageModeChange();
     }
   }

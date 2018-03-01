@@ -1,4 +1,4 @@
-#modal {
+#modal-wrapper {
   position: absolute;
   top: 0;
   right: 0;
@@ -15,7 +15,7 @@
   align-items: center;
 
 
-  .modal-container {
+  .modal {
     padding: 20px;
 
     min-width: 250px;

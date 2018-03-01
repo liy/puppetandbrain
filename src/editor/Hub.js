@@ -10,17 +10,21 @@ import ContextMenu from "./ui/ContextMenu";
 import EventEmitter from '../utils/EventEmitter';
 
 import store from '@/store';
+import BlockBrowser from './browser/BlockBrowser';
+import PuppetBrowser from './browser/PuppetBrowser';
+import Modal from './ui/Modal';
 
 class HubClass extends EventEmitter
 {
   constructor() {
     super();
     
+    this.openedModal = null;
     this.history = new EditorHistory();
     this.delaySave = new Delay();
   }
 
-  async setup(activityID) {
+  async install(activityID) {
     this.currentUser = await getCurrentUser();
     
     this.stage = new Stage(document.getElementById('stage'));
@@ -33,6 +37,16 @@ class HubClass extends EventEmitter
     }
 
     this.stage.startRender();
+  }
+
+  uninstall() {
+    // close any opened browser if any
+    this.closeBrowser();
+    this.activity.destroy();
+    this.stage.destroy();
+    this.removeAllListeners();
+    // close any modal
+    Modal.close();
   }
 
   create() {
@@ -93,6 +107,20 @@ class HubClass extends EventEmitter
         await API.saveActivity(pod, fileRefs);
       }
     }
+  }
+
+  openBlockBrowser() {
+    this.browser = new BlockBrowser();
+    return this.browser.open();
+  }
+
+  openPuppetBrowser() {
+    this.browser = new PuppetBrowser();
+    return this.browser.open();
+  }
+
+  closeBrowser() {
+    if(this.browser) this.browser.close();
   }
 }
 

@@ -42,6 +42,12 @@ const mutations = {
 
   updateTutorialMode(state, mode) {
     state.tutorialMode = mode;
+  },
+
+  resetEditorState() {
+    state.debugMode = false
+    state.stageMode = true
+    state.propertyPanelVisable = false
   }
 }
 
