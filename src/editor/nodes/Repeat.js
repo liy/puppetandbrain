@@ -40,8 +40,8 @@ export default class Repeat extends Task
     super.run()
     for(let i=0; i<this.inputs.value('count'); ++i) {
       this.outputs.assignValue('index', this.index);
-      this.execution.run('body')
+      this.execution.run('repeat')
     }
-    this.execution.run('completed')
+    this.execution.run('exit')
   }
 }

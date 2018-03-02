@@ -51,10 +51,10 @@ export default class Loop extends Task
 
     this.outputs.assignValue('count', ++this.count);
     if(this.inputs.value('condition')) {
-      this.execution.run('body')
+      this.execution.run('loop')
     }
     else {
-      this.execution.run('completed')
+      this.execution.run('exit')
     }
   }
 }
