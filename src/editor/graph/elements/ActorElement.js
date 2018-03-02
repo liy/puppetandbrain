@@ -1,6 +1,6 @@
 import VariableElement from './VariableElement';
-import ActorIcon from '@/assets/actor.svg';
-import { svgElement } from '@/utils/utils';
+// import ActorIcon from '@/assets/actor.svg';
+// import { svgElement } from '@/utils/utils';
 import DataType from '../../data/DataType';
 import ActorPicker from '../gadgets/ActorPicker';
 

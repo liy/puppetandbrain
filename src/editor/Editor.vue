@@ -103,52 +103,6 @@ export default {
   filter: blur(3px);
 }
 
-#undo-button {
-  position: absolute;
-  user-select: none;
-  cursor: pointer;
-  z-index: 2;
-  bottom: 20px;
-  left: 20px;
-  width: 100px;
-  height: 100px;
-
-  background-repeat: no-repeat;
-  background-position: center; 
-}
-
-#redo-button {
-  position: absolute;
-  user-select: none;
-  cursor: pointer;
-  z-index: 2;
-  bottom: 20px;
-  left: 120px;
-  width: 100px;
-  height: 100px;
-
-
-  background-image: url('../assets/redo-arrow.svg');
-  background-repeat: no-repeat;
-  background-position: center; 
-}
-
-#at {
-  position: absolute;
-  user-select: none;
-  pointer-events: none;
-  // cursor: pointer;
-  z-index: 1;
-  top: 10px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-
-  background-image: url('../assets/at.svg');
-  background-repeat: no-repeat;
-  background-position: center; 
-}
-
 // disable drag DOM element selection!!! 
 span {
   user-select: none;

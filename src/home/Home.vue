@@ -1,40 +1,39 @@
 <template>
-<div id='home-container'>
-  <div class='home-splash'>
-    <div class='home-content'>
-      <h4>PUPPET & BRAIN</h4>
-      <h1>Make your puppets<br/>Create the story<br/>Learn coding</h1>
-      <div class='home-action'>
-        <app-button class='major' @click.native="toEditor">Start learning</app-button>
-        <!-- <app-button class='primary'>Sign Up</app-button> -->
+<div id='home'>
+  <div class='home-content'>
+    <div class='text-container'>
+      <div class='wrapper'>
+        <h4>PUPPET & BRAIN</h4>
+        <h1>Make your puppets<br/>Create the story<br/>Learn coding</h1>
+        <div class='home-action'>
+          <app-button class='major' @click.native="toEditor">Start learning</app-button>
+          <!-- <app-button class='primary'>Sign Up</app-button> -->
+        </div>
       </div>
     </div>
 
     <div class='example-container'>
-      <!-- <video width="320" height="240">
-        <source src="@/assets/cat.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-      </video> -->
-      
-      <img src="../assets/cat.gif"/>
-      <div>
-        <div class="block listener"><div class="title">Game Event</div><div class="container"><div class="base">
-          <div class="body" style="background-image: url(&quot;/ddc3a9ee35d96ae2255dc0bb1fb0d835.svg&quot;); background-repeat: no-repeat; background-position: center center;">
-          <div class="content"><div class="left"></div><div class="right"><div class="execution-pin"><span class="label">start</span><div class="execution-symbol">
-          <svg ref="outPin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">
-        <use xlink:href="#execution-out" id="execution-out" viewBox="0 0 42.6 22"></use>  
-        </svg></div></div><div class="execution-pin"><span class="label">stop</span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">       
-        <use xlink:href="#execution-out" id="execution-out" viewBox="0 0 42.6 22"></use>  
-        </svg></div></div></div></div></div></div></div></div>
+      <div class='wrapper'>
+        <img src="../assets/cat.gif"/>
+        <div>
+          <div class="block listener"><div class="title">Game Event</div><div class="container"><div class="base">
+            <div class="body" style="background-image: url(&quot;/ddc3a9ee35d96ae2255dc0bb1fb0d835.svg&quot;); background-repeat: no-repeat; background-position: center center;">
+            <div class="content"><div class="left"></div><div class="right"><div class="execution-pin"><span class="label">start</span><div class="execution-symbol">
+            <svg ref="outPin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">
+          <use xlink:href="#execution-out" id="execution-out" viewBox="0 0 42.6 22"></use>  
+          </svg></div></div><div class="execution-pin"><span class="label">stop</span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">       
+          <use xlink:href="#execution-out" id="execution-out" viewBox="0 0 42.6 22"></use>  
+          </svg></div></div></div></div></div></div></div></div>
 
-        <div class="block" style="transform: translate(240px, 0);"><div class="title">Animation</div><div class="container"><div class="base"><div class="body" style="background-image: url(&quot;/ddc3a9ee35d96ae2255dc0bb1fb0d835.svg&quot;); background-repeat: no-repeat; background-position: center center;"><div class="content"><div class="left"><div class="execution-pin"><span class="label"></span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined" style="--fill:#D0E400;">       
-        <use xlink:href="#execution-in" id="execution-in" viewBox="0 0 42.6 22"></use>  
-        </svg></div></div><div class="data-pin"><span class="label clickable">name</span><div class="data-head"><div class="data-symbol">
-          <svg ref="inPin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none; --fill:none; --stroke:#b5ffeb;">       
-        <use xlink:href="#input" id="input" viewBox="0 0 34 38"></use>  
-        </svg></div><div class="gadget drop-down" style="display: none;"><select><option value="idle">idle</option><option value="run">run</option><option value="walk">walk</option></select></div></div></div></div><div class="right"><div class="execution-pin"><span class="label"></span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">       
-        <use xlink:href="#execution-out" id="execution-out" viewBox="0 0 42.6 22"></use>  
-        </svg></div></div></div></div></div></div></div></div>
+          <div class="block" style="transform: translate(240px, 0);"><div class="title">Animation</div><div class="container"><div class="base"><div class="body" style="background-image: url(&quot;/ddc3a9ee35d96ae2255dc0bb1fb0d835.svg&quot;); background-repeat: no-repeat; background-position: center center;"><div class="content"><div class="left"><div class="execution-pin"><span class="label"></span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined" style="--fill:#D0E400;">       
+          <use xlink:href="#execution-in" id="execution-in" viewBox="0 0 42.6 22"></use>  
+          </svg></div></div><div class="data-pin"><span class="label clickable">name</span><div class="data-head"><div class="data-symbol">
+            <svg ref="inPin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none; --fill:none; --stroke:#b5ffeb;">       
+          <use xlink:href="#input" id="input" viewBox="0 0 34 38"></use>  
+          </svg></div><div class="gadget drop-down" style="display: none;"><select><option value="idle">idle</option><option value="run">run</option><option value="walk">walk</option></select></div></div></div></div><div class="right"><div class="execution-pin"><span class="label"></span><div class="execution-symbol"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">       
+          <use xlink:href="#execution-out" id="execution-out" viewBox="0 0 42.6 22"></use>  
+          </svg></div></div></div></div></div></div></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -108,7 +107,7 @@ export default {
 
 <style lang="scss" scoped>
 
-#home-container {
+#home {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -118,13 +117,10 @@ export default {
   align-items: center;
 }
 
-.home-splash {
-  // position: relative;
-  // left: -150px;
+.home-content {
   border-radius: 10px 10px 0 0;
 
   width: 100%;
-  min-height: 400px;
 
   display: flex;
   justify-content: center;
@@ -135,44 +131,44 @@ export default {
   transform: translateY(-60px)
 }
 
-.home-content {
-  margin-right: 200px;
+.text-container {
+  width: 50%;
+  min-height: 400px;
 
-  .primary {
-    margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-family: "jaf-domus-titling-web",sans-serif;
+    font-size: 40px;
+    margin: 0;
+
+    margin-bottom: 60px;
+  }
+
+  h4 {
+    font-size: 30px;
+    color: #d191ff;
+
+    margin-bottom: 30px;
   }
 }
 
-h1 {
-  font-family: "jaf-domus-titling-web",sans-serif;
-  font-size: 40px;
-  margin: 0;
-  float: left;
 
-  margin-bottom: 60px;
-}
-
-h4 {
-  font-size: 30px;
-  color: #d191ff;
-
-  margin-bottom: 30px;
-}
 
 .example-container {
-  width: 400px;
-  
-  video,img {
-    display: block;
-    margin: auto;
-    margin-bottom: 50px;
-    transform: translateY(-40px);
-  }
+  width: 50%;
 
-  svg {
-    width: 100%;
-    height: 100%;
-    position: absolute;
+  .wrapper {
+    width: 350px;
+    height: 300px;
+
+    img {
+      display:block;
+      margin: auto;
+      margin-bottom: 20px;
+    }
   }
 }
 
@@ -185,8 +181,24 @@ h4 {
 }
 
 
+@media screen and (max-width: 600px) {
+  .home-content {
+    flex-direction: column;
+  }
 
+  .text-container {
+    width: 100%;
+  }
+  .example-container {
+    width: 100%;
 
+    .wrapper {
+      width: 400px;
+      margin: auto;
+      margin-top: 40px;
+    }
+  }
+}
 
 
 .block {
