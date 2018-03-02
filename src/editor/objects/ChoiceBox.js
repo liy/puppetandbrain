@@ -37,8 +37,8 @@ export default class ChoiceBox extends Actor
     });
     
     // default sprite...
-    let url = require('!file-loader!@/assets/icons/choice-box-icon.svg');
-    promises.push(loader.add(url, url, getMimeType('svg')));
+    let url = require('!file-loader!@/assets/icons/sprite-actor.png');
+    promises.push(loader.add(url, url, getMimeType('png')));
 
     await loader.start();
     this.removeComponent('placeholder');
@@ -161,7 +161,7 @@ export default class ChoiceBox extends Actor
     ImageLoader.fetch(fileData).then(({image, blob, url}) => {
       this.content.imageUrl = image.src;
     }).catch(e => {
-      this.content.imageUrl = require('!file-loader!@/assets/icons/choice-box-icon.svg');
+      this.content.imageUrl = require('!file-loader!@/assets/icons/sprite-actor.png');
     })
   }
 
