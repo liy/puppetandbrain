@@ -1,4 +1,5 @@
 <template>
+<transition name='home'>
 <div id='home'>
   <div class='home-content'>
     <div class='text-container'>
@@ -44,6 +45,7 @@
   </svg>
   <app-footer/>
 </div>
+</transition>
 </template>
 
 <script>
@@ -117,6 +119,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  transition: opacity ease 0.3s;
 }
 
 .home-content {
@@ -202,6 +206,14 @@ export default {
       margin-top: 40px;
     }
   }
+}
+
+.home-leave-active {
+  opacity: 0;
+}
+
+.home-enter {
+  opacity: 0;
 }
 
 

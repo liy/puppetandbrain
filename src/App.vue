@@ -31,14 +31,20 @@ body {
   // remove mobile selection hightlight
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 
-
-  background-color: #b574ed;
-  // background-color: #f5f5f5;
   transition: background-color ease 0.3s;
 }
 
-.editor-body {
+body.home {
+  background-color: #b574ed;
+}
+body.about {
+  background-color: #2196F3;
+}
+body.editor {
   background-color: #f5f5f5;
+}
+body.contact {
+  background-color: #ff8585;
 }
 
 #modal-container {

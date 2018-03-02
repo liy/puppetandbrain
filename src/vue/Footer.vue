@@ -1,6 +1,7 @@
 <template>
   <footer>
     <ul>
+      <li><router-link v-bind:to="'/contact'">Contact</router-link></li>
       <li><router-link v-bind:to="'/about'">About</router-link></li>
     </ul>
   </footer>
@@ -40,6 +41,11 @@ li {
   a {
     color: #d191ff;
     text-decoration: none;
+    transition: color ease 0.3s;
+  }
+
+  a:hover {
+    color: #f4e6ff;
   }
 }
 </style>
