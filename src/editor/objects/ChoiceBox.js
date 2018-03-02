@@ -12,6 +12,7 @@ import Matrix from '../math/Matrix';
 import PlaceHolderComponent from '../components/PlaceHolderComponent';
 import LoaderBucket from '../resources/LoaderBucket';
 import { getMimeType } from '@/utils/utils';
+import { aroundAt } from '@/utils/utils';
 
 export default class ChoiceBox extends Actor
 {
@@ -23,8 +24,8 @@ export default class ChoiceBox extends Actor
   }
 
   async preload(pod) {
-    let pos = pod.position || { x: aroundAt(Hub.stage.stageWidth/2), y: aroundAt(Hub.stage.stageHeight/2) };
-    this.position = new Vec2(pos);
+    pod.position = { x: aroundAt(Hub.stage.stageWidth/2), y: aroundAt(Hub.stage.stageHeight/2) };
+    this.position = new Vec2(pod.position);
     this.rotation = pod.rotation || 0;
     this.scale = new Vec2(pod.scale || {x:1,y:1});
 

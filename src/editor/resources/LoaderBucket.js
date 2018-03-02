@@ -23,6 +23,7 @@ export default class LoaderBucket
         break;
       case ContentType.PNG:
       case ContentType.JPG:
+      case ContentType.GIF:
         this.loaders.push(new ImageLoader(this.resources, id, url, options))
         break;
       case ContentType.OGG:

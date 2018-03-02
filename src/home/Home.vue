@@ -94,13 +94,14 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.updateLine()
-    }, 500);
-    window.addEventListener('resize', this.updateLine);
+    const connect = () => {
+      this.updateLine();
+      this.rafHandle = requestAnimationFrame(connect);
+    }
+    this.rafHandle = requestAnimationFrame(connect)
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.updateLine);
+    cancelAnimationFrame(this.rafHandle)
   }
 }
 </script>

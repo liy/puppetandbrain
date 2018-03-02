@@ -36,6 +36,7 @@ export const ContentType = {
   MP3: 'audio/mpeg',
   WAV: 'audio/wav',
   FLAC: 'audio/flac',
+  GIF: 'image/gif',
 }
 
 
@@ -49,7 +50,8 @@ const MIME = {
   'mp3': 'audio/mpeg',
   'wav': 'audio/wav',
   'flac': 'audio/flac',
-  'svg': 'image/svg+xml'
+  'svg': 'image/svg+xml',
+  'gif': 'image/gif'
 }
 export function getMimeType(ext) {
   return MIME[ext];

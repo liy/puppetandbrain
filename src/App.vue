@@ -53,7 +53,7 @@ body {
   position: absolute;
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10px;
-  color: rgb(175, 175, 175);
+  color: #d191ff;
   bottom: 3px;
   left: 3px;
   
