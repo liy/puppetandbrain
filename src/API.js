@@ -43,7 +43,7 @@ class API
   }
 
   cloneActivity(pod, files, fileRefs) {
-    let batch = firebase.firestore.batch();
+    let batch = firebase.firestore().batch();
 
     // loop through all file entry, this will tell cronjob that
     // such file is used by this newly cloned activity
@@ -63,6 +63,7 @@ class API
 
     return batch.commit().then(() => {
       console.info('Successfully cloned activity')
+      return pod;
     }).catch(error => {
       console.error('Error clone activity: ', error);
       throw(error);

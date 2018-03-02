@@ -19,6 +19,13 @@ export default class Activity extends EventEmitter
     return Hub.currentUser.uid == this.ownerID;
   }
 
+  /**
+   * This extract all the necessary information for cloning the activity.
+   * Send it to API
+   * 
+   * @returns 
+   * @memberof Activity
+   */
   clone() {
     // TODO: fix me !!!! not tested yet
     let id = firebase.firestore().collection('activities').doc().id;
@@ -38,7 +45,7 @@ export default class Activity extends EventEmitter
     let pod = this.lookUp.pod();
     pod.userID = Hub.currentUser.uid;
     pod.activityID = id;
-    return API.clone(pod, files, fileRefs);
+    return API.cloneActivity(pod, files, fileRefs);
   }
 
   destroy() {

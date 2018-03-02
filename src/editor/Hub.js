@@ -29,7 +29,8 @@ class HubClass extends EventEmitter
     this.history = new EditorHistory();
   }
 
-  async install(activityID) {
+  async install(activityID, router) {
+    this.router = router;
     this.currentUser = await getCurrentUser();
 
     this.stage = new Stage(document.getElementById('stage'));
@@ -72,17 +73,33 @@ class HubClass extends EventEmitter
     return this.activity;
   }
 
+  /**
+   * Once activity pod and related files refs are updated, no need to load. Just point the 
+   * local activity instance to the newly cloned activity by changing the user and activity id.
+   * 
+   * @returns 
+   * @memberof HubClass
+   */
+  async clone() {
+    let pod = await this.activity.clone();
+    // once the clone of activity has uploaded to the server,
+    // no need to reload, simply update current activity to use the new activity
+    // and it owner to be current user
+    this.activity.ownerID = this.currentUser.uid;
+    this.activity.id = pod.activityID;
+    return this.activity;
+  }
+
   async save() {
     // TODO: make a clone instead
     if(this.activity.ownerID !== this.currentUser.uid) {
-      throw new Error('User is not the owner of the activity!')
+      return Promise.reject('Not an owner, clone first');
     }
 
     let userFileRefs = this.activity.getFileRefs();
     this.activity.cleanResource(userFileRefs);
 
     let pod = this.activity.pod();
-    console.log(pod)
     await API.saveActivity(pod, userFileRefs);
 
     return this.activity;
@@ -109,6 +126,11 @@ class HubClass extends EventEmitter
   // }
 
   async autoSave() {
+    // no need to auto save if it is not the owner
+    if(this.activity.ownerID !== this.currentUser.uid) {  
+      return;
+    }
+
     // do not auto save when in dev mode
     if(process.env.NODE_ENV !== 'dev' && !store.tutorialMode) {  
       // delay save, just in case user has lots of actions...

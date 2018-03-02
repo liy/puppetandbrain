@@ -83,11 +83,18 @@ export default {
       if(e.keyCode == 83 && e.ctrlKey) {
         e.preventDefault();
 
-        NotificationControl.notify('Saving...').delayFadeoutRemove();
-
-        Hub.save().then(activity => {
-          this.$router.push(`/editor/${activity.id}`)
-        })
+        if(Hub.activity.isOwner) {
+          NotificationControl.notify('Saving...').delayFadeoutRemove();
+          Hub.save().then(activity => {
+            this.$router.push(`/editor/${activity.id}`)
+          })
+        }
+        else {
+          NotificationControl.notify('Clone...').delayFadeoutRemove();
+          Hub.clone().then(activity => {
+            this.$router.push(`/editor/${activity.id}`)
+          })
+        }
       }
     },
     preventDefaultContextMene(e) {
