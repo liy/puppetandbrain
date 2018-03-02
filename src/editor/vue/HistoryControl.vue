@@ -3,12 +3,12 @@
   <svg id='blob' width=164 height=98>
     <use :xlink:href="`#${HistoryButtonBlob.id}`" :viewBox="HistoryButtonBlob.viewBox"/>
   </svg>
-  <div id='undo' class='history-button' :class="{disabled: !canUndo()}" data-title='Undo' @click="undoClicked">
+  <div id='undo' class='history-button' :class="{disabled: !canUndo}" data-title='Undo' @click="undoClicked">
     <svg  width=78 height=78 >
       <use :xlink:href="`#${UndoButton.id}`" :viewBox="UndoButton.viewBox"/>
     </svg>
   </div>
-  <div id='redo' class='history-button' :class="{disabled: !canRedo()}" data-title='Redo' @click="redoClicked">
+  <div id='redo' class='history-button' :class="{disabled: !canRedo}" data-title='Redo' @click="redoClicked">
     <svg width=55 height=55>
       <use :xlink:href="`#${RedoButton.id}`" :viewBox="RedoButton.viewBox"/>
     </svg>
@@ -27,17 +27,17 @@ export default {
     return {
       HistoryButtonBlob,
       UndoButton,
-      RedoButton
+      RedoButton,
+      canUndo: false,
+      canRedo: false,
     }
   },
   mounted() {
-    Hub.history.on('history.updated', () => {
-      this.$forceUpdate()
-    })
+    Hub.history.on('history.updated', this.onHistoryUpdated)
     document.addEventListener('keydown', this.keydown);
   },
   beforeDestroy() {
-    Hub.history.clear();
+    Hub.history.off('history.updated', this.onHistoryUpdated)
     document.removeEventListener('keydown', this.keydown);
   },
   methods: {
@@ -47,11 +47,9 @@ export default {
     redoClicked() {
       Hub.history.redo();
     },
-    canUndo() {
-      return Hub.history.undos.length != 0;
-    },
-    canRedo() {
-      return Hub.history.redos.length != 0;
+    onHistoryUpdated() {
+      this.canUndo = Hub.history.undos.length != 0;
+      this.canRedo = Hub.history.redos.length != 0;
     },
     keydown(e) {
       if(e.keyCode == '90' && e.ctrlKey) {

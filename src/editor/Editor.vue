@@ -7,7 +7,6 @@
   <toolbox/>
   <mode-button/>
 
-  <div class='control-button tooltip-right' id='mode-button' data-title="Open puppet brain" data-title-position="right"></div>
   <div id='menu'>
     <div id='menu-content' style="visibility: hidden;">
       <div class='menu-arrow'></div>
@@ -55,7 +54,7 @@ export default {
     // unless it is from canvas, which pixi needs it to handle right click.
     document.addEventListener('contextmenu', this.preventDefaultContextMene);
 
-    // wait until user is signed in
+    // wait until everything is setup, ie, user is signed in
     await Hub.install(this.activityID);
 
     this.unsubscribe = this.$store.subscribe((mutation, state) => {

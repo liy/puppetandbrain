@@ -21,9 +21,12 @@ class HubClass extends EventEmitter
   constructor() {
     super();
     
-    this.openedModal = null;
-    this.history = new EditorHistory();
     this.delaySave = new Delay();
+
+    // history will be first accessed in HistoryControl.vue component
+    // which requires the reference even before hub is installed... 
+    // might need to find a better way to solve this
+    this.history = new EditorHistory();
   }
 
   async install(activityID) {
@@ -39,10 +42,11 @@ class HubClass extends EventEmitter
     }
 
     this.stage.startRender();
+    console.log('install')
   }
 
   uninstall() {
-    Hub.history.destroy();
+    Hub.history.clear();
     
     // deselect anything
     ActorSelection.deselectAll();
@@ -50,6 +54,7 @@ class HubClass extends EventEmitter
 
     // close any opened browser if any
     this.closeBrowser();
+    // TODO: save activity before destroy?
     this.activity.destroy();
     this.stage.destroy();
     this.removeAllListeners();
@@ -58,6 +63,7 @@ class HubClass extends EventEmitter
     Modal.close();
 
     store.commit('resetEditorState');
+    console.log('uninstall')
   }
 
   create() {

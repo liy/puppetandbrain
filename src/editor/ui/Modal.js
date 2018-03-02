@@ -73,7 +73,6 @@ export default class Modal
   close() {
     this.element.style.display = 'none';
     document.body.removeChild(this.element);
-    console.log('close!')
     // For destroy the modal
     Modal.openedModal = null;
   }
