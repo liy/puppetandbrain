@@ -1,24 +1,16 @@
 <template>
   <footer>
     <ul>
-      <li>About</li>
-      <li>Help</li>
-      <li>Privacy Policy</li>
+      <li><router-link v-bind:to="'/about'">About</router-link></li>
     </ul>
   </footer>
 </template>
 
 <script>
-  
 </script>
 
 <style lang="scss" scoped>
 footer {
-  // display: flex;
-  // justify-content: space-between;
-  // align-items: center;
-
-  color: #d191ff;
 
   position: absolute;
   width: 100%;
@@ -44,5 +36,10 @@ ul {
 
 li {
   margin-left: 20px;
+
+  a {
+    color: #d191ff;
+    text-decoration: none;
+  }
 }
 </style>

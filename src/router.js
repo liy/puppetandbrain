@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './home/Home.vue'
+import About from './about/About.vue'
 import store from '@/store';
 import ConfirmModal from './editor/ui/ConfirmModal';
 
@@ -68,6 +69,11 @@ export default new Router({
         store.tutorialMode = true;
         next();
       }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
     }
   ]
 })

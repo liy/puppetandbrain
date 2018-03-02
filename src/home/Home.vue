@@ -4,7 +4,9 @@
     <div class='text-container'>
       <div class='wrapper'>
         <h4>PUPPET & BRAIN</h4>
-        <h1>Make your puppets<br/>Create the story<br/>Learn coding</h1>
+        <h1>Make your puppets</h1>
+        <h1>Create the story</h1>
+        <h1>Learn coding</h1>
         <div class='home-action'>
           <app-button class='major' @click.native="toEditor">Start learning</app-button>
           <!-- <app-button class='primary'>Sign Up</app-button> -->
@@ -69,11 +71,11 @@ export default {
   },
   methods: {
     toEditor() {
-      document.getElementById('home-container').style.display = 'none';
+      document.getElementById('home').style.display = 'none';
       this.$router.push('editor')
     },
     toTutorial() {
-      document.getElementById('home-container').style.display = 'none';
+      document.getElementById('home').style.display = 'none';
       this.$router.push('tutorials/animate-a-puppet')
     },
     updateLine() {
@@ -143,8 +145,6 @@ export default {
     font-family: "jaf-domus-titling-web",sans-serif;
     font-size: 40px;
     margin: 0;
-
-    margin-bottom: 60px;
   }
 
   h4 {
@@ -152,6 +152,10 @@ export default {
     color: #d191ff;
 
     margin-bottom: 30px;
+  }
+  
+  .home-action {
+    margin-top: 50px;
   }
 }
 
