@@ -43,6 +43,7 @@ export default class extends EventEmitter
   destroy() {
     PIXI.ticker.shared.remove(this.loop);
     this.contextMenu.destroy();
+    this.renderer.destroy();
   }
 
   startRender() {

@@ -51,8 +51,6 @@ export default {
     'mode-button': ModeButton
   },
   async mounted() {
-    this.$store.commit('resetEditorState');
-
     // prevent default context menu for the whole site
     // unless it is from canvas, which pixi needs it to handle right click.
     document.addEventListener('contextmenu', this.preventDefaultContextMene);

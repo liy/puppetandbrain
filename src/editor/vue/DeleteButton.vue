@@ -81,6 +81,7 @@ export default {
   },
   watch: {
     stageMode: function() {
+      console.log('delete buton stage mod!!')
       this.onStageModeChange();
     }
   }

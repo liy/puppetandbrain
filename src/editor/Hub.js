@@ -13,6 +13,8 @@ import store from '@/store';
 import BlockBrowser from './browser/BlockBrowser';
 import PuppetBrowser from './browser/PuppetBrowser';
 import Modal from './ui/Modal';
+import ActorSelection from './objects/ActorSelection';
+import GraphSelection from './graph/GraphSelection';
 
 class HubClass extends EventEmitter
 {
@@ -26,7 +28,7 @@ class HubClass extends EventEmitter
 
   async install(activityID) {
     this.currentUser = await getCurrentUser();
-    
+
     this.stage = new Stage(document.getElementById('stage'));
 
     if(activityID) {
@@ -40,13 +42,22 @@ class HubClass extends EventEmitter
   }
 
   uninstall() {
+    Hub.history.destroy();
+    
+    // deselect anything
+    ActorSelection.deselectAll();
+    GraphSelection.deselect();
+
     // close any opened browser if any
     this.closeBrowser();
     this.activity.destroy();
     this.stage.destroy();
     this.removeAllListeners();
+
     // close any modal
     Modal.close();
+
+    store.commit('resetEditorState');
   }
 
   create() {

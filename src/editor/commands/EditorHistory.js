@@ -10,6 +10,10 @@ export default class extends EventEmitter
     
     this.enabled = true;
   }
+  destroy() {
+    super.destroy();
+    this.clear();
+  }
 
   push(cmd) {
     if(cmd) {
@@ -51,8 +55,6 @@ export default class extends EventEmitter
   }
 
   clear() {
-    this.removeAllListeners();
-
     this.undos = [];
     this.redos = [];
 
