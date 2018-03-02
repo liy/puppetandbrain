@@ -16,7 +16,7 @@
       Your browser does not support the video tag.
       </video> -->
       
-      <img src="../assets/cat.png"/>
+      <img src="../assets/cat.gif"/>
       <div>
         <div class="block listener"><div class="title">Game Event</div><div class="container"><div class="base">
           <div class="body" style="background-image: url(&quot;/ddc3a9ee35d96ae2255dc0bb1fb0d835.svg&quot;); background-repeat: no-repeat; background-position: center center;">
