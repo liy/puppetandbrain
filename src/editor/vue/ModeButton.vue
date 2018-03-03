@@ -1,9 +1,9 @@
 <template>
 <div @click='clicked' class='control-button tooltip-right' :class="{disabled: !this.enabled}" :data-title="tooltip" id='mode-button' data-title-position="right">
-  <svg v-if="stageMode" width=100 height=100>
+  <svg v-if="stageMode">
     <use :xlink:href="`#${BrainButtonIcon.id}`" :viewBox="BrainButtonIcon.viewBox"/>
   </svg>
-  <svg v-else width=100 height=100>
+  <svg v-else>
     <use :xlink:href="`#${StageButtonIcon.id}`" :viewBox="StageButtonIcon.viewBox"/>
   </svg>
 </div>
@@ -78,6 +78,10 @@ export default {
 
 <style lang="scss">
 #mode-button {
+  svg {
+    width: 100px;
+    height: 100px;
+  }
   position: absolute;
   top: 20px;
   left: 20px;
@@ -88,5 +92,14 @@ export default {
   opacity: 0.2;
   cursor: auto;
   pointer-events: none;
+}
+
+@media screen and (max-width: 600px) {
+  #mode-button {
+    svg {
+      width: 80px;
+      height: 80px;
+    }
+  }
 }
 </style>

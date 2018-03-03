@@ -37,7 +37,8 @@ export default {
   .content {
     padding: 0;
 
-    width: 40%;
+    width: 60%;
+    max-width: 450px;
     list-style: none;
   }
 
