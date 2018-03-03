@@ -82,3 +82,9 @@ export function numericVector(data) {
   data.y = Number(data.y);
   return data;
 }
+
+export function sharePopup(url, w=550, h=260) {
+  const x = (window.innerWidth-w)/2
+  const y = (window.innerHeight-h)/2
+  window.open(url, 'popup', `width=${w},height=${h},left=${x},top=${y}`);
+}

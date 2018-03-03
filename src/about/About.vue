@@ -1,14 +1,15 @@
 <template>
 <transition name='about'>
 <div class='about'>
-    <ul>
-      <li><router-link v-bind:to="'/'" class="back">x</router-link></li>
-      <li><p><b>Puppet & Brain</b> is a simple node based programming service teaching kids programming concepts. It can also be used for creating simple story activity and game.</p><li>
-      <li>
-        <p>Hand crafted and designed by <b>Liy</b>.
-        <br/>Art and animation by <b>Liy</b>.</p>
-      </li>
-    </ul>
+    <div class='content'>
+      <a class="back" @click="$router.go(-1)">x</a></li>
+
+      <p><b>Puppet & Brain</b> is a simple node based programming service teaching kids programming concepts. It can also be used for creating simple story activity and game.</p>
+
+      <p>Puppet & Brain is still under active development at the moment. If you found a bug. I would be very much appreciated if you could <router-link class='contact' to='/contact' tag='a'>contact me</router-link>.</p>
+      
+      <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation by <b>Liy</b>.</p>
+    </div>
 </div>
 </transition>
 </template>
@@ -31,31 +32,50 @@ export default {
 
   color: white;
   
+  transition: opacity ease 0.3s;
   
-  ul {
+  .content {
     padding: 0;
 
     width: 40%;
     list-style: none;
   }
 
+  .contact {
+    color: white;
+    
+    transition: color ease 0.3s;
+  }
+
+  .contact:hover {
+    color: #ff8585;
+  }
+
+  a.back {
+    color: #40a6f7;
+  }
+
   .back {
-    text-align: center;
     text-decoration: none;
     font-family: arial, sans-serif;
     font-size: 60px;
-    color: #40a6f7;
     margin-bottom: 60px;
 
     transition: color ease 0.3s;
+
+    user-select: none;
+    cursor: pointer;
   }
   
   .back:hover {
     color:white;
   }
 
-  // opacity: 1;
-  transition: opacity ease 0.3s;
+  .who {
+    color: #95d0ff;
+    font-size: 14px;
+    margin-top: 40px;
+  }
 }
 
 .about-leave-active {

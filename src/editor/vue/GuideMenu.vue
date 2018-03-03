@@ -10,6 +10,8 @@
     <ul>
       <router-link to='/' tag='li'><a>Home</a></router-link>
       <router-link to='/tutorials/animate-a-puppet' tag='li'><a>Tutorials</a></router-link>
+      <router-link to='/contact' tag='li'><a>Contact</a></router-link>
+      <router-link to='/about' tag='li'><a>About</a></router-link>
       <li><span @click="twitter">Share</span></li>
     </ul>
   </div>
@@ -18,6 +20,7 @@
 
 <script>
 import MenuIcon from '@/assets/menu-icon.svg';
+import {sharePopup} from '@/utils/utils';
 
 export default {
   name: 'guide-menu',
@@ -45,16 +48,16 @@ export default {
       }
     },
     twitter(e) {
-      let url = `https://puppetandbrain.com/editor/${Hub.activity.id}`
-      let text = encodeURI(`Have look at my puppet: ${url}`);
+      let link = `https://puppetandbrain.com/editor/${Hub.activity.id}`
+      let text = encodeURI(`Have look at my puppet: ${link}`);
       let hashTag = 'puppetandbrain';
-      let content = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashTag}`
-      window.open(content, '_black');
-      
+      let url = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashTag}`
+      sharePopup(url);
+
       // Make sure it is saved
-      Hub.save().then(activity => {
-        this.$router.push(`/editor/${activity.id}`)
-      })
+      // Hub.save().then(activity => {
+      //   this.$router.push(`/editor/${activity.id}`)
+      // })
     }
   }
 }
@@ -71,24 +74,32 @@ export default {
   transition: transform ease 0.3s;
 
   ul {
+    font-size: 16px;
+
     list-style-type: none;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: 0;
   }
 
   li {
-    line-height: 28px;
-    height: 28px;
+    line-height: 38px;
+    height: 38px;
     cursor: pointer;
   }
 
   a, a:visited, span {
-    color: white;
+    color: #ded6ff;
     text-decoration: none;
     display: block;
+
+    transition: color ease 0.3s;
+  }
+  
+  a:hover, a:hover, span:hover {
+    color: white;
   }
 
   svg {

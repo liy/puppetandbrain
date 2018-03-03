@@ -2,7 +2,7 @@
 <transition name='contact'>
 <div class='contact'>
   <ul>
-    <li><router-link v-bind:to="'/'" class="back">x</router-link></li>
+    <li><a class="back" @click="$router.go(-1)">x</a></li>
     <li><b><a class='email' href="mailto:puppetandbrain@gmail.com">EMAIL</a></b></li>
     <li><b><a class='twitter' href="https://twitter.com/puppetandbrain">TWITTER</a></b></li>
     <li><b><a class='github' href="https://github.com/liy">GITHUB</a></b></li>
@@ -57,6 +57,9 @@ export default {
   .back {
     font-family: arial, sans-serif;
     font-size: 60px;
+
+    user-select: none;
+    cursor: pointer;
   }
 
   .back:hover {

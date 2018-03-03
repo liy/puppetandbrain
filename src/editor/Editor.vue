@@ -39,7 +39,7 @@ export default {
     theater: Theater,
     toolbox: Toolbox,
     'mode-button': ModeButton,
-    'guide-menu': GuideMenu
+    'guide-menu': GuideMenu,
   },
   async mounted() {
     // prevent default context menu for the whole site
