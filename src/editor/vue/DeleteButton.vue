@@ -1,6 +1,6 @@
 <template>
 <div class='toolbar-button' :class="{disabled: !this.enabled}" id='delete-button' data-title="Delete puppet" @click="clicked">
-  <svg width=68 height=68>
+  <svg>
     <use :xlink:href="`#${BinButtonIcon.id}`" :viewBox="BinButtonIcon.viewBox"/>
   </svg>
 </div>
@@ -89,11 +89,24 @@ export default {
 
 <style lang="scss">
 #delete-button {
-  width: 68px;
-  width: 68px;
+  svg {
+    width: 68px;
+    height: 68px;
+  }
 
   margin-right: 50px;
   margin-left: 50px;
 }
 
+@media screen and (max-width: 600px) {
+  #delete-button {
+    svg {
+      width: 50px;
+      height: 50px;
+    }
+
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
 </style>

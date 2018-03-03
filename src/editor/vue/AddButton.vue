@@ -1,6 +1,6 @@
 <template>
 <div class='toolbar-button' id='add-button' :data-title="tooltip" @click="clicked">
-  <svg width=120 height=120>
+  <svg >
     <use :xlink:href="`#${AddButtonIcon.id}`" :viewBox="AddButtonIcon.viewBox"/>
   </svg>
 </div>
@@ -42,7 +42,18 @@ export default {
 
 <style lang="scss" scoped>
 #add-button {
-  width: 120px;
-  height: 120px;
+  svg {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #add-button {
+    svg {
+      width: 80px;
+      height: 80px;
+    }
+  }
 }
 </style>

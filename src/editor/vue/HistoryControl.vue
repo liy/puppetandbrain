@@ -95,4 +95,10 @@ export default {
   pointer-events: none;
 }
 
+@media screen and (max-width: 600px) {
+  #history-control {
+    transform: scale(0.8);
+    margin-left: 10px;
+  }
+}
 </style>

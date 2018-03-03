@@ -1,9 +1,9 @@
 <template>
 <div id='debug-button' @click='click' class='toolbar-button' :data-title="tooltip">
-  <svg v-if="!debugMode" width=100 height=100>
+  <svg v-if="!debugMode">
     <use :xlink:href="`#${StartButtonIcon.id}`" :viewBox="StartButtonIcon.viewBox"/>
   </svg>
-  <svg v-else width=100 height=100>
+  <svg v-else>
     <use :xlink:href="`#${StopButtonIcon.id}`" :viewBox="StopButtonIcon.viewBox"/>
   </svg>
 </div>
@@ -40,3 +40,21 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+#debug-button {
+  svg {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #debug-button {
+    svg {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+</style>
