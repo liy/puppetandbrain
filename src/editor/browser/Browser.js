@@ -3,6 +3,7 @@ import SearchField from './SearchField';
 import BrowserHeader from "./BrowserHeader";
 import ContentSection from "./ContentSection";
 import EventEmitter from '@/utils/EventEmitter';
+import {isMobile} from '@/utils/utils';
 require('./Browser.scss')
 
 export default class Browser extends EventEmitter
@@ -71,7 +72,9 @@ export default class Browser extends EventEmitter
     }});
     
     document.body.appendChild(this.element);
-    this.searchField.focus();
+    if(!isMobile) {
+      this.searchField.focus();
+    }
 
     this.element.dispatchEvent(new CustomEvent('browser.opened', {detail:this, bubbles:true}));
 
