@@ -1,0 +1,128 @@
+<template>
+<div id='guide-menu' @click="toggle()">
+  <div ref="button" id="menu-icon">
+    <svg width=48 height=48>
+      <use :xlink:href="`#${MenuIcon.id}`" :viewBox="MenuIcon.viewBox"/>
+    </svg>
+  </div>
+  <div id='menu-content' v-if='show'>
+    <div class='menu-arrow'></div>
+    <ul>
+      <router-link to='/' tag='li'><a>Home</a></router-link>
+      <router-link to='/tutorials/animate-a-puppet' tag='li'><a>Tutorials</a></router-link>
+      <li><span @click="twitter">Share</span></li>
+    </ul>
+  </div>
+</div>
+</template>
+
+<script>
+import MenuIcon from '@/assets/menu-icon.svg';
+
+export default {
+  name: 'guide-menu',
+  data() {
+    return {
+      MenuIcon,
+      show: false,
+    }
+  },
+  mounted() {
+    document.addEventListener('click', this.close);
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.close);
+  },
+  methods: {
+    toggle() {
+      this.show = !this.show;
+      console.log('toggle', this.show)
+    },
+    close(e) {
+      console.log(e.target != this.$refs.button)
+      if(e.target != this.$refs.button) {
+        this.show = false;
+      }
+    },
+    twitter(e) {
+      let url = `https://puppetandbrain.com/editor/${Hub.activity.id}`
+      let text = encodeURI(`Have look at my puppet: ${url}`);
+      let hashTag = 'puppetandbrain';
+      let content = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashTag}`
+      window.open(content, '_black');
+      
+      // Make sure it is saved
+      Hub.save().then(activity => {
+        this.$router.push(`/editor/${activity.id}`)
+      })
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+#guide-menu {
+  position: absolute;
+  right: 20px;
+  top: 30px;
+
+  z-index: 9;
+
+  transition: transform ease 0.3s;
+
+  ul {
+    list-style-type: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0;
+  }
+
+  li {
+    line-height: 28px;
+    height: 28px;
+    cursor: pointer;
+  }
+
+  a, a:visited, span {
+    color: white;
+    text-decoration: none;
+    display: block;
+  }
+
+  svg {
+    pointer-events: none;
+  }
+}
+
+#menu-content {
+  position: relative;
+
+  min-width: 150px;
+  background-color: #746b9c;
+  border-radius: 10px;
+
+  min-height: 30px;
+
+  margin-top: 60px;
+
+  .menu-arrow {
+    position: absolute;
+    top: -5px;
+    right: 18px;
+    background-color: #746b9c;
+    width: 13px;
+    height: 13px;
+    transform: rotate(45deg);
+  }
+}
+
+#menu-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  cursor: pointer;
+}
+</style>

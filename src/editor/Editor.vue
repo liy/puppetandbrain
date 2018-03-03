@@ -3,19 +3,9 @@
   <terminal/>
   <theater ref='theater' width=1024 height=768></theater>
   <node-graph/>
-
   <toolbox/>
   <mode-button/>
-
-  <div id='menu'>
-    <div id='menu-content' style="visibility: hidden;">
-      <div class='menu-arrow'></div>
-      <ul>
-        <router-link to='/' tag='li'><a>Home</a></router-link>
-        <router-link to='/tutorials/animate-a-puppet' tag='li'><a>Tutorials</a></router-link>
-      </ul>
-    </div>
-  </div>
+  <guide-menu/>
 </div>
 </template>
 
@@ -30,6 +20,7 @@ import NodeGraph from './vue/NodeGraph.vue';
 import Theater from './vue/Theater.vue';
 import Toolbox from './vue/Toolbox.vue';
 import ModeButton from './vue/ModeButton.vue';
+import GuideMenu from './vue/GuideMenu.vue';
 
 import './Hub'
 import NotificationControl from './ui/NotificationControl';
@@ -47,7 +38,8 @@ export default {
     'node-graph': NodeGraph,
     theater: Theater,
     toolbox: Toolbox,
-    'mode-button': ModeButton
+    'mode-button': ModeButton,
+    'guide-menu': GuideMenu
   },
   async mounted() {
     // prevent default context menu for the whole site
