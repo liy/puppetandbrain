@@ -13,6 +13,9 @@ export default class extends EventEmitter
 
   push(cmd) {
     if(cmd) {
+      // action modified the activity
+      Hub.dirty();
+
       this.undos.push(cmd)
       this.redos = [];
 

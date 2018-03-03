@@ -41,7 +41,6 @@ export default {
       this.show = !this.show;
     },
     close(e) {
-      console.log(e.target != this.$refs.button)
       if(e.target != this.$refs.button) {
         this.show = false;
       }

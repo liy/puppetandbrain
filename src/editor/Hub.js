@@ -15,11 +15,15 @@ import PuppetBrowser from './browser/PuppetBrowser';
 import Modal from './ui/Modal';
 import ActorSelection from './objects/ActorSelection';
 import GraphSelection from './graph/GraphSelection';
+import NotificationControl from './ui/NotificationControl';
 
 class HubClass extends EventEmitter
 {
   constructor() {
     super();
+
+    // no changes
+    this._saved = true;
     
     this.delaySave = new Delay();
 
@@ -29,21 +33,13 @@ class HubClass extends EventEmitter
     this.history = new EditorHistory();
   }
 
-  async install(activityID, router) {
+  async install(router) {
     this.router = router;
     this.currentUser = await getCurrentUser();
 
     this.stage = new Stage(document.getElementById('stage'));
-
-    if(activityID) {
-      await this.load(activityID);
-    }
-    else {
-      await this.create();
-    }
-
     this.stage.startRender();
-    console.log('install')
+    console.log('installed')
   }
 
   uninstall() {
@@ -60,11 +56,39 @@ class HubClass extends EventEmitter
     this.stage.destroy();
     this.removeAllListeners();
 
+    // nothing to save anymore
+    this._saved = true;
+
     // close any modal
     Modal.close();
 
     store.commit('resetEditorState');
-    console.log('uninstall')
+    console.log('uninstalled')
+  }
+
+  // change between /editr to /editr/xxxx simply
+  // only difference between clear and uninstall is that in clear, stage does not destroy 
+  clear() {
+    Hub.history.clear();
+    
+    // deselect anything
+    ActorSelection.deselectAll();
+    GraphSelection.deselect();
+    
+    // close any opened browser if any
+    this.closeBrowser();
+    // TODO: save activity before destroy?
+    this.activity.destroy();
+    this.stage.clear();
+    this.removeAllListeners();
+
+    // nothing to save anymore
+    this._saved = true;
+
+    // close any modal
+    Modal.close();
+    store.commit('resetEditorState');
+    console.log('clear')
   }
 
   create() {
@@ -102,20 +126,33 @@ class HubClass extends EventEmitter
     let pod = this.activity.pod();
     await API.saveActivity(pod, userFileRefs);
 
+    this._saved = true;
+
     return this.activity;
   }
 
   async load(id) {
+
     let pod = await API.getActivity(id);
     this.activity = new Activity(pod.activityID, pod.userID);
-    var loader = new ActivityLoader(this.activity);
-    let actorBuffer = await loader.start(pod);
+    this.activityLoader = new ActivityLoader(this.activity);
+    try {
+      let actorBuffer = await this.activityLoader.start(pod);
 
-    for(let actor of actorBuffer) {
-      this.stage.addActor(actor)
+      // ignore loaded actors
+      for(let actor of actorBuffer) {
+        this.stage.addActor(actor)
+      }
+    }
+    catch(cancelled) {
+      console.log(cancelled);
     }
 
     return this.activity;
+  }
+
+  cancelLoading() {
+    if(this.activityLoader) this.activityLoader.cancel('Loading canceled');
   }
 
   // async preload(id) {
@@ -160,6 +197,15 @@ class HubClass extends EventEmitter
 
   closeBrowser() {
     if(this.browser) this.browser.close();
+  }
+
+  // mark save dirty
+  dirty() {
+    this._saved = false;
+  }
+
+  get saved() {
+    return this._saved;
   }
 }
 

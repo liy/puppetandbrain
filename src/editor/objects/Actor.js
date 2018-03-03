@@ -103,7 +103,7 @@ export default class Actor extends EventEmitter
 
     this.brain.destroy();
 
-    console.log('destroy', this)
+    // console.log('destroy', this)
   }
 
   get lookUp() {

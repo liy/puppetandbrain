@@ -24,6 +24,7 @@ import GuideMenu from './vue/GuideMenu.vue';
 
 import './Hub'
 import NotificationControl from './ui/NotificationControl';
+import ConfirmModal from './ui/ConfirmModal';
 
 export default {
   name: 'editor',
@@ -41,34 +42,89 @@ export default {
     'mode-button': ModeButton,
     'guide-menu': GuideMenu,
   },
-  async mounted() {
-    // prevent default context menu for the whole site
-    // unless it is from canvas, which pixi needs it to handle right click.
-    document.addEventListener('contextmenu', this.preventDefaultContextMene);
+  mounted() {
+    this.installed = new Promise(async resolve => {
+      // prevent default context menu for the whole site
+      // unless it is from canvas, which pixi needs it to handle right click.
+      document.addEventListener('contextmenu', this.preventDefaultContextMene);
 
-    // wait until everything is setup, ie, user is signed in
-    await Hub.install(this.activityID);
+      // wait until everything is setup, ie, user is signed in
+      await Hub.install(this.$router);
 
-    this.unsubscribe = this.$store.subscribe((mutation, state) => {
-      if(mutation.type === 'toggleDebugMode') {
-        if(state.debugMode) {
-          Hub.stage.start();
+      this.unsubscribe = this.$store.subscribe((mutation, state) => {
+        if(mutation.type === 'toggleDebugMode') {
+          if(state.debugMode) {
+            Hub.stage.start();
+          }
+          else {
+            Hub.stage.stop();
+          }
         }
-        else {
-          Hub.stage.stop();
-        }
-      }
-    });
+      });
 
-    document.addEventListener('keydown', this.keydown)
+      document.addEventListener('keydown', this.keydown)
+
+      resolve();
+    })
   },
   beforeDestroy() {
     this.unsubscribe();
+
+    // this.cancelBeforeEach();
+    // this.cancelAfterEach();
     
     document.removeEventListener('keydown', this.keydown)
     document.removeEventListener('contextmenu', this.preventDefaultContextMene);
     
     Hub.uninstall();
+  },
+  async beforeRouteLeave(to, from, next) {  
+    // Save and clone action does not triggers clear process
+    if(to.params.activityID == Hub.activity.id) {
+      next();
+    }
+    else {
+      // check whether there is unsaved change
+      if(!Hub.saved) {
+        const {action} = await ConfirmModal.open('Do you really want to leave? you have unsaved changes!', 'Unsaved changes')
+        // user choose abort navigation
+        if(!action) {
+          next(false);
+          return;
+        }
+      }
+
+      // normal route process
+      // navigate to a new activity
+      // firstly, cancel loading if any.
+      Hub.cancelLoading();
+      // clear current activity data
+      Hub.clear();
+      // then go to next activity
+      next();
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    // after hub is installed correctly
+    next(async vm => {
+      // wait until hub is installed correctly
+      await vm.installed;
+
+      const activityID = to.params.activityID;
+      // navigate to a specific activity
+      if(activityID) {
+        // clone and save does not need to reload the activity
+        if(!Hub.activity || activityID != Hub.activity.id) {
+          const chip = NotificationControl.notify('Loading...')
+          await Hub.load(activityID);
+          chip.fadeOut();
+        }
+      }
+      // no activityID provide, create a temp activity
+      else {
+        await Hub.create();
+      }
+    })
   },
   methods: {
     keydown(e) {

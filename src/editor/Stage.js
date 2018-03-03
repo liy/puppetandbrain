@@ -44,6 +44,7 @@ export default class extends EventEmitter
     PIXI.ticker.shared.remove(this.loop);
     this.contextMenu.destroy();
     this.renderer.destroy();
+    this.clear();
   }
 
   startRender() {
@@ -55,7 +56,7 @@ export default class extends EventEmitter
   }
   
   loop(delta) {
-    Hub.activity.emit('tick', {delta, deltaTime:delta/60});
+    if(this.playing) Hub.activity.emit('tick', {delta, deltaTime:delta/60});
     this.updateTransform();
     this.renderer.render(this.container);
   }
@@ -78,7 +79,7 @@ export default class extends EventEmitter
   }
 
   removeActor(actor) {
-    console.log('remove actor')
+    // console.log('remove actor')
     this.actors.remove(actor.id);
     actor.offStage();
 

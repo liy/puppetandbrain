@@ -36,20 +36,20 @@ export default new Router({
         next();
         
         // first time visit?
-        if(!localStorage.getItem('visited')) {
-          let modal = new ConfirmModal('How about a simple tutorial.', 'First time vist?')
-          modal.primaryText = 'Yes, please';
-          modal.secondaryText = 'Nah...';
-          let {action} = await modal.open();
-          if(action) {
-            next('/tutorials/animate-a-puppet');
-          }
-        }
+        // if(!localStorage.getItem('visited')) {
+        //   let modal = new ConfirmModal('How about a simple tutorial.', 'First time vist?')
+        //   modal.primaryText = 'Yes, please';
+        //   modal.secondaryText = 'Nah...';
+        //   let {action} = await modal.open();
+        //   if(action) {
+        //     next('/tutorials/animate-a-puppet');
+        //   }
+        // }
       },
     },
     {
       path: '/editor/:activityID',
-      name: 'Creations',
+      name: 'Creation',
       component: Editor,
       props: true,
       beforeEnter: (to, from, next) => {

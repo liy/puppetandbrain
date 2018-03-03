@@ -9,15 +9,20 @@ export default class ActivityLoader
     this.lookUp = activity.lookUp;
   }
 
-  async start(pod) {
+  start(pod) {
     console.log('Loading', pod)
-    await this.loadResources(pod);
+    return new Promise(async (resolve, reject) => {
+      // call this to cancel the promise
+      this.cancel = reject;
+      
+      await this.loadResources(pod);
 
-    let actorBuffer = this.createActors(pod);
-    // create nodes; link execution, input and outputs
-    this.fillBrains(pod);
+      let actorBuffer = this.createActors(pod);
+      // create nodes; link execution, input and outputs
+      this.fillBrains(pod);
 
-    return Promise.resolve(actorBuffer);
+      resolve(actorBuffer)
+    })
   }
 
   async loadResources(pod) {
