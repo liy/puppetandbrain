@@ -54,9 +54,9 @@ export default {
       sharePopup(url);
 
       // Make sure it is saved
-      // Hub.save().then(activity => {
-      //   this.$router.push(`/editor/${activity.id}`)
-      // })
+      Hub.save().then(activity => {
+        this.$router.push(`/editor/${activity.id}`)
+      })
     }
   }
 }
