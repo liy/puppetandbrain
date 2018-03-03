@@ -12,6 +12,8 @@ module.exports = {
   // entry: ['whatwg-fetch', path.join(__dirname, 'src', 'main.js')],
   entry: {
     'whatwg-fetch': 'whatwg-fetch',
+    'vue': 'vue',
+    'vue-router': 'vue-router',
     rusha: 'rusha',
     app: path.join(__dirname, 'src', 'main.js')
   },
@@ -26,11 +28,19 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      'vue$': 'vue/dist/vue.min.js',
+      '@': path.resolve(__dirname, 'src'),
+      'pixi.js': path.resolve(__dirname, 'node_modules/pixi.js/dist/pixi.min.js'),
+      'rusha': path.resolve(__dirname, 'node_modules/rusha/dist/rusha.min.js'),
+      'html2canvas': path.resolve(__dirname, 'node_modules/html2canvas/dist/html2canvas.min.js'),
     }
   },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
       {
         test: /\.js?$/,
         loader: 'babel-loader',
@@ -41,7 +51,7 @@ module.exports = {
       // copy the required assets to dist folder
       // use require() to get the actuall url
       {
-        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt)$/,
+        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt|mp4|gif)$/,
         use: [
           {
             loader: 'file-loader',
@@ -95,6 +105,7 @@ module.exports = {
       }
     }),
     new webpack.DefinePlugin({
+      DOMAIN: JSON.stringify('http://localhost:8081'),
       APP_VERSION: JSON.stringify(require("./package.json").version),
       'process.env.NODE_ENV': JSON.stringify('staging'),
       // staging

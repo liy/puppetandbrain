@@ -88,6 +88,7 @@ module.exports = {
       template: './src/index.html'
     }),
     new webpack.DefinePlugin({
+      DOMAIN: JSON.stringify('http://localhost:8081'),
       APP_VERSION: JSON.stringify(require("./package.json").version),
       'process.env.NODE_ENV': JSON.stringify('dev'),
       // staging

@@ -47,7 +47,8 @@ export default {
       }
     },
     twitter(e) {
-      let link = `https://puppetandbrain.com/editor/${Hub.activity.id}`
+      // domain defined in webpack
+      let link = `${DOMAIN}/editor/${Hub.activity.id}`
       let text = encodeURI(`Have look at my puppet: ${link}`);
       let hashTag = 'puppetandbrain';
       let url = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashTag}`

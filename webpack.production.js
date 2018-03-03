@@ -104,6 +104,7 @@ module.exports = {
       }
     }),
     new webpack.DefinePlugin({
+      DOMAIN: JSON.stringify('http://puppetandbrain.com'),
       APP_VERSION: JSON.stringify(require("./package.json").version),
       'process.env.NODE_ENV': JSON.stringify('production'),
       // production
