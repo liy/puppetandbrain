@@ -39,7 +39,6 @@ export default {
   methods: {
     toggle() {
       this.show = !this.show;
-      console.log('toggle', this.show)
     },
     close(e) {
       console.log(e.target != this.$refs.button)

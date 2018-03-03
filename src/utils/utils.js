@@ -84,7 +84,8 @@ export function numericVector(data) {
 }
 
 export function sharePopup(url, w=550, h=260) {
-  const x = (window.innerWidth-w)/2
-  const y = (window.innerHeight-h)/2
-  window.open(url, 'popup', `width=${w},height=${h},left=${x},top=${y}`);
+  // window.screenX, window.screenY handles multiple monitor setup...
+  const x = window.screenX + (window.innerWidth-w)/2
+  const y = window.screenY + (window.innerHeight-h)/2
+  window.open(url, 'popup', `width=${w},height=${h},left=${x}px,top=${y}px`);
 }
