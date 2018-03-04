@@ -3,6 +3,7 @@ import Gadget from './Gadget'
 import { svgElement, getMimeType } from '@/utils/utils';
 import CloudIcon from '@/assets/cloud-icon.svg';
 import FileHashTask from '@/utils/FileHashTask'
+import AlertModal from '../../ui/AlertModal';
 
 export default class extends Gadget
 {
@@ -35,11 +36,12 @@ export default class extends Gadget
     if(e.target.files.length == 0) return;
     let file = e.target.files[0];
 
-    // TODO: change the default alert with custom modal
-    // if(file.size > 1024*1024*8) {
-    //   window.alert('Cannot upload file larger than 8MB')
-    //   return;
-    // }
+    
+    if(file.size > 1024*1024*MAX_FILE_SIZE) {
+      // window.alert('Cannot upload file larger than 5MB')
+      AlertModal.open(`Cannot upload file larger than ${MAX_FILE_SIZE}MB`, 'File too big');
+      return;
+    }
 
     this.fileNameSpan.textContent = 'Uploading...';
     this.emit('file.begin');

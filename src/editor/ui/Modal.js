@@ -61,6 +61,10 @@ export default class Modal
     this.secondaryBtn.textContent = text;
   }
 
+  set secondaryVisiable(flag) {
+    this.secondaryBtn.style.display = flag ? 'inline-block' : 'none';
+  }
+
   open() {
     this.element.style.display = 'flex'
     document.body.appendChild(this.element);

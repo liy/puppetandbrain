@@ -91,6 +91,8 @@ module.exports = {
       }
     }),
     new webpack.DefinePlugin({
+      // max upload file size in MB
+      MAX_FILE_SIZE: 10,
       DOMAIN: JSON.stringify('http://localhost:8081'),
       APP_VERSION: JSON.stringify(require("./package.json").version),
       'process.env.NODE_ENV': JSON.stringify('dev'),
