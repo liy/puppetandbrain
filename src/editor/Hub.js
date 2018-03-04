@@ -92,9 +92,30 @@ class HubClass extends EventEmitter
   }
 
   create() {
-    const id = firebase.firestore().collection('activities').doc().id;
-    this.activity = new Activity(id, this.currentUser.uid);
+    this.activity = new Activity();
     return this.activity;
+  }
+
+  async load(id) {
+    this.activity = new Activity();
+    this.activityLoader = new ActivityLoader(this.activity);
+    try {
+      const actorBuffer = await this.activityLoader.start(id);
+
+      // ignore loaded actors
+      for(let actor of actorBuffer) {
+        this.stage.addActor(actor)
+      }
+    }
+    catch(cancelled) {
+      console.log(cancelled);
+    }
+
+    return this.activity;
+  }
+
+  cancelLoading() {
+    if(this.activityLoader) this.activityLoader.cancel('Loading canceled');
   }
 
   /**
@@ -129,30 +150,6 @@ class HubClass extends EventEmitter
     this._saved = true;
 
     return this.activity;
-  }
-
-  async load(id) {
-
-    let pod = await API.getActivity(id);
-    this.activity = new Activity(pod.activityID, pod.userID);
-    this.activityLoader = new ActivityLoader(this.activity);
-    try {
-      let actorBuffer = await this.activityLoader.start(pod);
-
-      // ignore loaded actors
-      for(let actor of actorBuffer) {
-        this.stage.addActor(actor)
-      }
-    }
-    catch(cancelled) {
-      console.log(cancelled);
-    }
-
-    return this.activity;
-  }
-
-  cancelLoading() {
-    if(this.activityLoader) this.activityLoader.cancel('Loading canceled');
   }
 
   // async preload(id) {

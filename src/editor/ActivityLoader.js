@@ -9,12 +9,15 @@ export default class ActivityLoader
     this.lookUp = activity.lookUp;
   }
 
-  start(pod) {
-    console.log('Loading', pod)
+  start(id) {
+    console.log('Loading', id)
     return new Promise(async (resolve, reject) => {
       // call this to cancel the promise
       this.cancel = reject;
       
+      const pod = await API.getActivity(id);
+      console.log('pod', pod)
+
       await this.loadResources(pod);
 
       let actorBuffer = this.createActors(pod);

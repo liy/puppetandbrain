@@ -43,6 +43,10 @@ export default {
     'guide-menu': GuideMenu,
   },
   mounted() {
+    // beforeRouteLeave will wait until Hub is installed to start process
+    // unlike mounted which only call once(I do not update Editor component)
+    // beforeRouteLeave will be triggered mulitple times when route changes
+    // inbetween /editor and /editoir/xxxx
     this.installed = new Promise(async resolve => {
       // prevent default context menu for the whole site
       // unless it is from canvas, which pixi needs it to handle right click.
@@ -69,9 +73,6 @@ export default {
   },
   beforeDestroy() {
     this.unsubscribe();
-
-    // this.cancelBeforeEach();
-    // this.cancelAfterEach();
     
     document.removeEventListener('keydown', this.keydown)
     document.removeEventListener('contextmenu', this.preventDefaultContextMene);

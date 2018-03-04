@@ -5,11 +5,11 @@ import Stage from './Stage';
 
 export default class Activity extends EventEmitter
 {
-  constructor(id, ownerID) {
+  constructor() {
     super();
 
-    this.id = id;
-    this.ownerID = ownerID
+    this.id = firebase.firestore().collection('activities').doc().id;
+    this.ownerID = Hub.currentUser.uid
 
     this.resources = new Map();
     this.lookUp = new LookUp(this);
@@ -17,6 +17,10 @@ export default class Activity extends EventEmitter
 
   get isOwner() {
     return Hub.currentUser.uid == this.ownerID;
+  }
+
+  load() {
+    
   }
 
   /**
