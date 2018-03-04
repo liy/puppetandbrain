@@ -185,6 +185,9 @@ class HubClass extends EventEmitter
         let pod = this.activity.pod();
         await API.saveActivity(pod, fileRefs);
       }
+
+      // mark saved
+      this._saved = true;
     }
   }
 
