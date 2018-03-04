@@ -175,17 +175,15 @@ export default {
   filter: blur(3px);
 }
 
-#editor {  
-  // disable drag DOM element selection!!! 
-  span {
-    user-select: none;
-  }
-  svg {
-    user-select: none;
-  }
-  div {
-    user-select: none;
-  }
+// disable drag DOM element selection!!! 
+span {
+  user-select: none;
+}
+svg {
+  user-select: none;
+}
+div {
+  user-select: none;
 }
 
 // #MobileDevices specific:

@@ -7,6 +7,8 @@ import router from './router'
 import 'whatwg-fetch';
 import store from './store';
 
+import './utils/polyfill';
+
 // storing all the node templates
 window.NodeTemplate = Object.create(null);
 

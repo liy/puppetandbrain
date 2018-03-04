@@ -32,7 +32,7 @@ export default class AdaptorBlock extends Block
     this.header.appendChild(icon);
 
     this.list = document.createElement('ol');
-    this.selector.append(this.list);
+    this.selector.appendChild(this.list);
   }
 
   init(node) {
