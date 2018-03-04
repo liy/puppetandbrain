@@ -1,3 +1,7 @@
+// for mobile app
+require("./assets/favicon-192.png")
+require('./manifest.json')
+
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
