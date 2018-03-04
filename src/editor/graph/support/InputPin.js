@@ -141,7 +141,9 @@ export default class extends DataPin
   }
 
   inputTypeChanged(type) {
-    this.symbol.refresh(type);
+    this.symbol.colorize(type);
+    // also need to update the conneciton line colors
+    this.symbol.refresh();
   }
 
   labelClicked() {
