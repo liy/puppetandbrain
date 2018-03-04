@@ -91,7 +91,7 @@ export Flip from './Flip'
 export Move from './Move'
 export Rotate from './Rotate'
 
-// export SceneChange from './SceneChange'
+export SceneChange from './SceneChange'
 
 
 

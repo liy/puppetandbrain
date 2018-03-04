@@ -16,6 +16,7 @@ import Modal from './ui/Modal';
 import ActorSelection from './objects/ActorSelection';
 import GraphSelection from './graph/GraphSelection';
 import NotificationControl from './ui/NotificationControl';
+import SceneManager from './SceneManager';
 
 class HubClass extends EventEmitter
 {
@@ -26,6 +27,8 @@ class HubClass extends EventEmitter
     this._saved = true;
     
     this.delaySave = new Delay();
+
+    this.sceneManager = new SceneManager()
 
     // history will be first accessed in HistoryControl.vue component
     // which requires the reference even before hub is installed... 

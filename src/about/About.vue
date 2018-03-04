@@ -6,7 +6,7 @@
 
       <p><b>Puppet & Brain</b> is a simple node based programming service teaching kids programming concepts. It can also be used for creating simple story activity and game.</p>
 
-      <p>Puppet & Brain is still under active development at the moment. If you found a bug. I would be very much appreciated if you could <router-link class='contact' to='/contact' tag='a'>contact me</router-link>.</p>
+      <p>Puppet & Brain is still under active development at the moment. If you found a bug or have any suggestions. I would be very much appreciated if you could <router-link class='contact' to='/contact' tag='a'>contact me</router-link>.</p>
       
       <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation by <b>Liy</b>.</p>
     </div>

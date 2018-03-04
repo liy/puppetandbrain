@@ -79,33 +79,22 @@ export default {
     
     Hub.uninstall();
   },
-  async beforeRouteLeave(to, from, next) {  
-    // Save and clone action does not triggers clear process
-    if(to.params.activityID == Hub.activity.id) {
-      next();
-    }
-    else {
-      // check whether there is unsaved change
-      if(!Hub.saved) {
-        const {action} = await ConfirmModal.open('Do you really want to leave? you have unsaved changes!', 'Unsaved changes')
-        // user choose abort navigation
-        if(!action) {
-          next(false);
-          return;
-        }
-      }
+  async beforeRouteUpdate(to, from, next) {
+    await this.clearHub(to, from, next);
 
-      // normal route process
-      // navigate to a new activity
-      // firstly, cancel loading if any.
-      Hub.cancelLoading();
-      // clear current activity data
-      Hub.clear();
-      // then go to next activity
-      next();
-    }
+    // // wait until hub is installed correctly
+    // await this.installed;
+
+    const activityID = to.params.activityID;
+    const chip = NotificationControl.notify('Loading...')
+    await Hub.load(activityID);
+    chip.fadeOut();
+  },
+  async beforeRouteLeave(to, from, next) {  
+    this.clearHub(to, from, next)
   },
   beforeRouteEnter(to, from, next) {
+    console.log('before enter')
     // after hub is installed correctly
     next(async vm => {
       // wait until hub is installed correctly
@@ -128,6 +117,33 @@ export default {
     })
   },
   methods: {
+    async clearHub(to, from, next) {
+      console.log('before leave')
+      // Save and clone action does not triggers clear process
+      if(to.params.activityID == Hub.activity.id) {
+        next();
+      }
+      else {
+        // check whether there is unsaved change
+        if(!Hub.saved) {
+          const {action} = await ConfirmModal.open('Do you really want to leave? you have unsaved changes!', 'Unsaved changes')
+          // user choose abort navigation
+          if(!action) {
+            next(false);
+            return;
+          }
+        }
+
+        // normal route process
+        // navigate to a new activity
+        // firstly, cancel loading if any.
+        Hub.cancelLoading();
+        // clear current activity data
+        Hub.clear();
+        // then go to next activity
+        next();
+      }
+    },
     keydown(e) {
       if(e.keyCode == 83 && e.ctrlKey) {
         e.preventDefault();
