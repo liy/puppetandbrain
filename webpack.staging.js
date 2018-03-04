@@ -86,7 +86,10 @@ module.exports = {
       title: 'game',
       filename: 'index.html',
       inject: 'body',
-      template: './src/index.html'
+      template: './src/index.html',
+      env: {
+        target: 'staging'
+      }
     }),
     new UglifyJSPlugin({
       // do not minify rusha, which is web worker.

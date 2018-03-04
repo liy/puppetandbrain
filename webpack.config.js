@@ -85,7 +85,10 @@ module.exports = {
       title: 'game',
       filename: 'index.html',
       inject: 'body',
-      template: './src/index.html'
+      template: './src/index.html',
+      env: {
+        target: 'dev'
+      }
     }),
     new webpack.DefinePlugin({
       DOMAIN: JSON.stringify('http://localhost:8081'),
