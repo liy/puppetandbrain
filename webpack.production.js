@@ -108,7 +108,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       MAX_FILE_SIZE: 10,
-      DOMAIN: JSON.stringify('http://puppetandbrain.com'),
+      DOMAIN: JSON.stringify('https://puppetandbrain.com'),
       APP_VERSION: JSON.stringify(require("./package.json").version),
       'process.env.NODE_ENV': JSON.stringify('production'),
       // production

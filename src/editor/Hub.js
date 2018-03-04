@@ -188,6 +188,8 @@ class HubClass extends EventEmitter
 
       // mark saved
       this._saved = true;
+
+      this.router.push(`/editor/${this.activity.id}`)
     }
   }
 
