@@ -53,9 +53,12 @@ export default class extends EventEmitter
     this.updateButton()
   }
 
+  destroy() {
+    super.destroy();
+    this.clear();
+  }
+
   clear() {
-    this.removeAllListeners();
-    
     this.undos = [];
     this.redos = [];
 
@@ -63,6 +66,7 @@ export default class extends EventEmitter
   }
 
   updateButton() {
+    console.log('updateButton')
     this.emit('history.updated')
   }
 }

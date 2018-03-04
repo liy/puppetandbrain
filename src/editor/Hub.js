@@ -43,7 +43,7 @@ class HubClass extends EventEmitter
   }
 
   uninstall() {
-    Hub.history.clear();
+    Hub.history.destroy();
     
     // deselect anything
     ActorSelection.deselectAll();
