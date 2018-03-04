@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="editor">
   <terminal/>
   <theater ref='theater' width=1024 height=768></theater>
   <node-graph/>
@@ -175,15 +175,17 @@ export default {
   filter: blur(3px);
 }
 
-// disable drag DOM element selection!!! 
-span {
-  user-select: none;
-}
-svg {
-  user-select: none;
-}
-div {
-  user-select: none;
+#editor {  
+  // disable drag DOM element selection!!! 
+  span {
+    user-select: none;
+  }
+  svg {
+    user-select: none;
+  }
+  div {
+    user-select: none;
+  }
 }
 
 // #MobileDevices specific:

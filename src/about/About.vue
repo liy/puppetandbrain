@@ -2,11 +2,15 @@
 <transition name='about'>
 <div class='about'>
     <div class='content'>
-      <a class="back" @click="$router.go(-1)">x</a></li>
+      <a class="back" @click="$router.go(-1)">x</a>
 
       <p><b>Puppet & Brain</b> is a simple node based programming service teaching kids programming concepts. It can also be used for creating simple story activity and game.</p>
 
-      <p>Puppet & Brain is still under active development at the moment. If you found a bug or have any suggestions. I would be very much appreciated if you could <router-link class='contact' to='/contact' tag='a'>contact me</router-link>.</p>
+      <p class='tiny'>Actually, it is a naive Unreal Engine Blueprint clone works in the browser.</p>
+
+      <p>I worked in a special needs company for quite a while before I started this project. Currently banging my head against the keyboard to fix the bugs.</p>
+
+      <p>If you found any bugs or have any suggestions. I would be very much appreciated if you could <router-link class='contact' to='/contact' tag='a'>contact me</router-link>.</p>
       
       <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation by <b>Liy</b>.</p>
     </div>
@@ -33,6 +37,11 @@ export default {
   color: white;
   
   transition: opacity ease 0.3s;
+
+  .tiny {
+    font-size: 0.3em;
+    color: #95d0ff;
+  }
   
   .content {
     padding: 0;

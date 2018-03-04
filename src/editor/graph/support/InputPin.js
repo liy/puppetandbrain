@@ -67,7 +67,7 @@ export default class extends DataPin
             this.setGadget(new AudioField(data||{}));
             break;
           case DataType.IMAGE:
-            this.setGadget(new ImageButton(data));
+            this.setGadget(new ImageButton(data||{}));
             break;
           default:
             this.setGadget(new TextField(data));

@@ -10,7 +10,7 @@ export default class extends PropertyElement
     super(actor, property.propertyName, property.descriptor);
 
 
-    this.gadget = new ImageButton(property.data)
+    this.gadget = new ImageButton(property.data||{})
     this.content.appendChild(this.gadget.element);
 
     this.gadget.on('gadget.state.change', ({byteArray, ...other}) => {
