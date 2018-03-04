@@ -3,6 +3,7 @@ const state = {
   stageMode: true,
   propertyPanelVisable: false,
   tutorialMode: false,
+  browserVisible: false,
 }
 
 const getters = {
@@ -11,6 +12,7 @@ const getters = {
   activity: state => state.activity,
   propertyPanelVisable: state => state.propertyPanelVisable,
   tutorialMode: state => state.tutorialMode,
+  browserVisible: state => state.browserVisible,
 }
 
 const mutations = {
@@ -48,7 +50,11 @@ const mutations = {
     state.debugMode = false
     state.stageMode = true
     state.propertyPanelVisable = false
-  }
+  },
+
+  updateBrowserVisible(state, visible) {
+    state.browserVisible = visible;
+  },
 }
 
 const actions = {};

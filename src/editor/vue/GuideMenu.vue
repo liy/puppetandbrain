@@ -1,5 +1,5 @@
 <template>
-<div id='guide-menu' @click="toggle()">
+<div id='guide-menu' @click="toggle()" :class="{shifted: propertyPanelVisable && !stageMode && !browserVisible}">
   <div ref="button" id="menu-icon">
     <svg width=48 height=48>
       <use :xlink:href="`#${MenuIcon.id}`" :viewBox="MenuIcon.viewBox"/>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import MenuIcon from '@/assets/menu-icon.svg';
 import {sharePopup} from '@/utils/utils';
 
@@ -29,6 +30,11 @@ export default {
       MenuIcon,
       show: false,
     }
+  },
+  computed: {
+    ...mapGetters(['propertyPanelVisable']),
+    ...mapGetters(['stageMode']),
+    ...mapGetters(['browserVisible']),
   },
   mounted() {
     document.addEventListener('click', this.close);
@@ -134,5 +140,9 @@ export default {
   right: 0;
 
   cursor: pointer;
+}
+
+#guide-menu.shifted {
+  transform: translateX(-300px)
 }
 </style>

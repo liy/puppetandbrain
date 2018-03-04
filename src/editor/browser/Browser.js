@@ -1,10 +1,13 @@
+require('./Browser.scss')
+
 import FilterSection from './FilterSection';
 import SearchField from './SearchField';
 import BrowserHeader from "./BrowserHeader";
 import ContentSection from "./ContentSection";
 import EventEmitter from '@/utils/EventEmitter';
 import {isMobile} from '@/utils/utils';
-require('./Browser.scss')
+
+import store from '@/store';
 
 export default class Browser extends EventEmitter
 {
@@ -77,6 +80,7 @@ export default class Browser extends EventEmitter
     }
 
     this.element.dispatchEvent(new CustomEvent('browser.opened', {detail:this, bubbles:true}));
+    store.commit('updateBrowserVisible', true);    
 
     return new Promise(resolve => {
       this.resolve = resolve;
@@ -111,6 +115,7 @@ export default class Browser extends EventEmitter
       // dispatch bubble event before it is removed from the stage... 
       this.element.dispatchEvent(new CustomEvent('browser.closed', {detail:this, bubbles:true}));
       document.body.removeChild(this.element);
+      store.commit('updateBrowserVisible', false);
     }})
 
 
