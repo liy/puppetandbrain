@@ -77,8 +77,8 @@ export default class Cursor
     this.pointerSvg.style.display = 'none';
 
     let rect = target.getBoundingClientRect();
-    this.x = rect.x+rect.width/2;
-    this.y = rect.y+rect.height/2;
+    this.x = rect.left+rect.width/2;
+    this.y = rect.top+rect.height/2;
     this.updateTransform();
   }
 
@@ -91,7 +91,8 @@ export default class Cursor
 
     // move to the target
     let rect = target.getBoundingClientRect();
-    this.moveToLocation(rect.x+rect.width/2, rect.y+rect.height/2, dir).then(() => {
+    console.log(rect.left+rect.width/2, rect.top+rect.height/2, dir)
+    this.moveToLocation(rect.left+rect.width/2, rect.top+rect.height/2, dir).then(() => {
       this.currentTarget.classList.add('data-title-show')
       if(typeof this.currentTarget.focus == 'function') this.currentTarget.focus();
     })
@@ -114,8 +115,8 @@ export default class Cursor
 
     this.direction(dir);
     let rect = target.getBoundingClientRect();
-    this.x = rect.x+rect.width/2;
-    this.y = rect.y+rect.height/2;
+    this.x = rect.left+rect.width/2;
+    this.y = rect.top+rect.height/2;
     this.updateTransform();
   }
 

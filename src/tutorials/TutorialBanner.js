@@ -79,10 +79,10 @@ export default class
 
   start() {
     return new Promise(resolve => {
+      this.resolve = resolve;
+
       this.fadeIn();
       this.next();
-
-      this.resolve = resolve;
     });
   }
 

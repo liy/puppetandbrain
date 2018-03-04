@@ -9,8 +9,12 @@ export default {
   play: async function(name) {
     let audio = this[name];
     audio.currentTime = 0;
-    audio.play().catch(err => {
-      console.warn('Element removed causing sound effect gets unloaded?')
-    })
+    let promise = audio.play();
+    // In Edge Audio.play returns nothing...
+    if(promise) {
+      promise.catch(err => {
+        console.warn('Element removed causing sound effect gets unloaded?')
+      })
+    }
   }
 }
