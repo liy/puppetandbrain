@@ -24,6 +24,9 @@ export default class ActivityLoader
       // create nodes; link execution, input and outputs
       this.fillBrains(pod);
 
+      this.activity.id = id;
+      this.activity.ownerID = pod.userID;
+
       resolve(actorBuffer)
     })
   }
