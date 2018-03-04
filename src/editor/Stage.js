@@ -106,11 +106,11 @@ export default class extends EventEmitter
   set blurEnabled(v) {
     if(v) {
       this.container.filters = [new PIXI.filters.BlurFilter(2, 1)];
-      document.getElementById('stage-overlayer').classList.add('blur');
+      this.overlayer.classList.add('blur');
     }
     else {
       this.container.filters = [];
-      document.getElementById('stage-overlayer').classList.remove('blur');
+      this.overlayer.classList.remove('blur');
     }
   }
 

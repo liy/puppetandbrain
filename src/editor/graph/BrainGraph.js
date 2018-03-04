@@ -16,6 +16,8 @@ export default class BrainGraph
     this.blockContainer = this.container.querySelector('#block-container');
     this.svg = this.container.querySelector('#graph-svg');
 
+    this.blocks = new ArrayMap();
+
     this.connectHelper = new ConnectHelper(this.svg);
 
     // #MobileDevices specific:
@@ -83,7 +85,19 @@ export default class BrainGraph
   }
 
   destroy() {
+    this.container.removeEventListener('contextmenu', this.onRightClick);
+    this.container.removeEventListener('mousedown', this.pointerdown);
+    document.removeEventListener('keydown', this.keydown);
+    window.removeEventListener('resize', this.resize);
+    
+    while(this.svg.lastChild) {
+      this.svg.removeChild(this.svg.lastChild)
+    }
+    for(let block of this.blocks.getValues()) {
+      block.destroy();
+    }
 
+    ElementController.close();
   }
 
   startPan(e) {
@@ -129,7 +143,7 @@ export default class BrainGraph
 
   open(brain) {
     this.brain = brain;
-    this.blocks = new ArrayMap();
+    this.blocks.clear();
 
     // extract all variables of the brain
     ElementController.open(brain);

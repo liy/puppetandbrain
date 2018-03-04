@@ -41,15 +41,19 @@ class ElementController
       this.addVariable(variable, false);
     }
 
-    
     this.brain.variables.on('variable.added', this.addVariable, this)
     this.brain.variables.on('variable.removed', this.remove, this)
+    this.opened = true;
   }
 
   close() {
-    this.brain.variables.off('variable.added', this.addVariable, this)
-    this.brain.variables.off('variable.removed', this.remove, this)
-    this.panel.clear();
+    if(this.opened) {
+      this.brain.variables.off('variable.added', this.addVariable, this)
+      this.brain.variables.off('variable.removed', this.remove, this)
+      this.panel.clear();
+
+      this.opened = false;
+    }
   }
 
   addVariable(variable, autoSelect=true) {

@@ -75,13 +75,16 @@ class HubClass extends EventEmitter
     ActorSelection.deselectAll();
     GraphSelection.deselect();
     
+    // close the brain graph if opened
+    BrainGraph.close();
+
+    
     // close any opened browser if any
     this.closeBrowser();
     // TODO: save activity before destroy?
     this.activity.destroy();
     this.stage.clear();
     this.removeAllListeners();
-
     // nothing to save anymore
     this._saved = true;
 
