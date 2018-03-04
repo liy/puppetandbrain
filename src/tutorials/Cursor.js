@@ -91,7 +91,6 @@ export default class Cursor
 
     // move to the target
     let rect = target.getBoundingClientRect();
-    console.log(rect.left+rect.width/2, rect.top+rect.height/2, dir)
     this.moveToLocation(rect.left+rect.width/2, rect.top+rect.height/2, dir).then(() => {
       this.currentTarget.classList.add('data-title-show')
       if(typeof this.currentTarget.focus == 'function') this.currentTarget.focus();
