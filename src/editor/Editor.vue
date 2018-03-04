@@ -79,17 +79,16 @@ export default {
     
     Hub.uninstall();
   },
+  // when route activity ID parameter changes
   async beforeRouteUpdate(to, from, next) {
-    console.log('update', to.params.activityID)
-    // await this.clearHub(to, from, next);
+    await this.clearHub(to, from, next);
 
-    // // // wait until hub is installed correctly
-    // // await this.installed;
+    // Hub should already be installed, no need to wait
 
-    // const activityID = to.params.activityID;
-    // const chip = NotificationControl.notify('Loading...')
-    // await Hub.load(activityID);
-    // chip.fadeOut();
+    const activityID = to.params.activityID;
+    const chip = NotificationControl.notify('Loading...')
+    await Hub.load(activityID);
+    chip.fadeOut();
   },
   async beforeRouteLeave(to, from, next) {  
     this.clearHub(to, from, next)

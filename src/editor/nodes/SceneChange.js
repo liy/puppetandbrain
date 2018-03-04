@@ -102,8 +102,6 @@ export default class SceneChange extends Task
   init(pod) {
     super.init(pod);
 
-
-    this.activity.on('game.stop', this.stop, this);
     this.activity.on('game.start', this.start, this);
   }
 
@@ -111,14 +109,8 @@ export default class SceneChange extends Task
     Hub.sceneManager.start();
   }
 
-  stop() {
-    Hub.sceneManager.reset();
-  }
-
   run() {
     super.run();
-
-    // Hub.router.push(`/editor/${this.inputs.value('creation id')}`);
 
     Hub.sceneManager.to(this.inputs.value('creation id'));
   }

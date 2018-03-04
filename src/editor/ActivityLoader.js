@@ -10,11 +10,11 @@ export default class ActivityLoader
   }
 
   start(id) {
-    console.log('Loading', id)
     return new Promise(async (resolve, reject) => {
       // call this to cancel the promise
       this.cancel = reject;
       
+      console.log('Loading', id)
       const pod = await API.getActivity(id);
       console.log('pod', pod)
 
