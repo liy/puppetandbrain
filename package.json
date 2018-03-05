@@ -12,10 +12,6 @@
     "analyzer": "./node_modules/.bin/webpack --config webpack.analyzer.js"
   },
   "author": "Zhengyi Li <liy8272@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://bitbucket.org/team-puppets/editor"
-  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -42,7 +38,6 @@
   },
   "dependencies": {
     "fuse.js": "^3.2.0",
-    "grapnel": "^0.6.4",
     "howler": "^2.0.8",
     "html2canvas": "^1.0.0-alpha.9",
     "pixi-filters": "^2.5.1",
