@@ -227,7 +227,7 @@ class AnimatePuppet extends Tutorial
 
         this.cursor.fadeOut();
         
-        this.banner.push('See, your puppet is alive!')
+        this.banner.push('See, your puppet is now alive!')
           .push("Congratulations! A lollipop 🍭 for you.")
         await this.banner.start();
 

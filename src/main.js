@@ -1,3 +1,6 @@
+// for version checking
+require('../package.json')
+
 // for mobile app
 require("./assets/favicon-192.png")
 require('./manifest.json')
