@@ -49,7 +49,7 @@ export default {
     // inbetween /editor and /editoir/xxxx
     
     // wait until everything is setup, ie, user is signed in
-    this.installed = await Hub.install(this.$router);
+    await Hub.install(this.$router);
 
     this.unsubscribe = this.$store.subscribe((mutation, state) => {
       if(mutation.type === 'toggleDebugMode') {
@@ -94,7 +94,7 @@ export default {
     // after hub is installed correctly
     next(async vm => {
       // wait until hub is installed correctly
-      await vm.installed;
+      await Hub.installed;
 
       const activityID = to.params.activityID;
       // navigate to a specific activity
