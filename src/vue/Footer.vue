@@ -12,14 +12,10 @@
 
 <style lang="scss" scoped>
 footer {
-
+  font-size: 18px;
   position: absolute;
   width: 100%;
   bottom: 0;
-}
-
-span {
-  margin-left: 20px;
 }
 
 ul {
@@ -37,6 +33,10 @@ ul {
 
 li {
   margin-left: 20px;
+
+  background-color: #ab5fee;
+  padding: 5px 10px;
+  border-radius: 4px;
 
   a {
     color: #d191ff;

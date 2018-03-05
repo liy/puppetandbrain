@@ -18,7 +18,7 @@
     <div class='example-container'>
       <div class='wrapper'>
         <img src="../assets/cat.gif"/>
-        <div>
+        <div class='blocks-wrapper'>
           <div class="block listener"><div class="title">Game Event</div><div class="container"><div class="base">
             <div class="body" style="background-image: url(&quot;/ddc3a9ee35d96ae2255dc0bb1fb0d835.svg&quot;); background-repeat: no-repeat; background-position: center center;">
             <div class="content"><div class="left"></div><div class="right"><div class="execution-pin"><span class="label">start</span><div class="execution-symbol">
@@ -203,7 +203,11 @@ export default {
     .wrapper {
       width: 400px;
       margin: auto;
-      margin-top: 40px;
+      margin-top: 10px;
+    }
+
+    .blocks-wrapper {
+      margin-left: 20px;
     }
   }
 }

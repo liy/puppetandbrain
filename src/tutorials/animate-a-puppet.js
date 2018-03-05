@@ -107,7 +107,7 @@ class AnimatePuppet extends Tutorial
     })
 
     this.addStep(async () => {
-      this.banner.push("Now you have an <b>Animation</b> block in the puppe's brain.", true)
+      this.banner.push("Now you have an <b>Animation</b> block in the puppet's brain.", true)
         .push("The other green one is <b>Game Event</b> block.", true)
         .push("Let's connect them together see what will happen.")
       await this.banner.start();
@@ -143,6 +143,7 @@ class AnimatePuppet extends Tutorial
 
         this.when('mouseup', () => {
           const enter = this.getEnter(animationBlock);
+          // redo this step if user fail to connect
           if(!enter.isConnected) {
             this.redo();
           }
