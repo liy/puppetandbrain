@@ -42,34 +42,30 @@ export default {
     'mode-button': ModeButton,
     'guide-menu': GuideMenu,
   },
-  mounted() {
+  async mounted() {
     // beforeRouteLeave will wait until Hub is installed to start process
     // unlike mounted which only call once(I do not update Editor component)
     // beforeRouteLeave will be triggered mulitple times when route changes
     // inbetween /editor and /editoir/xxxx
-    this.installed = new Promise(async resolve => {
-      // prevent default context menu for the whole site
-      // unless it is from canvas, which pixi needs it to handle right click.
-      document.addEventListener('contextmenu', this.preventDefaultContextMene);
+    
+    // wait until everything is setup, ie, user is signed in
+    this.installed = await Hub.install(this.$router);
 
-      // wait until everything is setup, ie, user is signed in
-      await Hub.install(this.$router);
-
-      this.unsubscribe = this.$store.subscribe((mutation, state) => {
-        if(mutation.type === 'toggleDebugMode') {
-          if(state.debugMode) {
-            Hub.stage.start();
-          }
-          else {
-            Hub.stage.stop();
-          }
+    this.unsubscribe = this.$store.subscribe((mutation, state) => {
+      if(mutation.type === 'toggleDebugMode') {
+        if(state.debugMode) {
+          Hub.stage.start();
         }
-      });
+        else {
+          Hub.stage.stop();
+        }
+      }
+    });
 
-      document.addEventListener('keydown', this.keydown)
-
-      resolve();
-    })
+    // prevent default context menu for the whole site
+    // unless it is from canvas, which pixi needs it to handle right click.
+    document.addEventListener('contextmenu', this.preventDefaultContextMene);
+    document.addEventListener('keydown', this.keydown)
   },
   beforeDestroy() {
     this.unsubscribe();

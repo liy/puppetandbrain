@@ -36,13 +36,21 @@ class HubClass extends EventEmitter
     this.history = new EditorHistory();
   }
 
-  async install(router) {
+  install(router) {
     this.router = router;
-    this.currentUser = await getCurrentUser();
 
-    this.stage = new Stage(document.getElementById('stage'));
-    this.stage.startRender();
-    console.log('installed')
+    // other things can wait until hub is installed
+    this.installed = new Promise(async resolve => {
+      this.currentUser = await getCurrentUser();
+
+      this.stage = new Stage(document.getElementById('stage'));
+      this.stage.startRender();
+
+      console.log('installed')
+      resolve();
+    })
+
+    return this.installed;
   }
 
   uninstall() {
