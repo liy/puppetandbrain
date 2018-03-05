@@ -111,11 +111,15 @@ class AnimatePuppet extends Tutorial
         .push("The other green one is <b>Game Event</b> block.", true)
         .push("Let's connect them together see what will happen.")
       await this.banner.start();
+      this.next();
+    })
+
+    this.addStep(async () => {
       if(isMobile) {
         this.banner.info('Tap the <b>start</b> pin of <b>Game Event</b>...', true);
       }
       else {
-        this.banner.info('Drag the <b>start</b> pin of <b>Game Event</b>...', true);
+        this.banner.info('Drag the <b>start</b> pin of <b>Game Event</b> and connect to the <b>Animation</b> left pin', true);
       }
 
       const gameStartBlock = this.getBlock('Game Event');
@@ -136,6 +140,13 @@ class AnimatePuppet extends Tutorial
           const target = this.getInPin(animationBlock);
           this.cursor.moveTo(target, 'right');
         }, outPin);
+
+        this.when('mouseup', () => {
+          const enter = this.getEnter(animationBlock);
+          if(!enter.isConnected) {
+            this.redo();
+          }
+        }, BrainGraph.container)
       }
 
       // handles user quick connect

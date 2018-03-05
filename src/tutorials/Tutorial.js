@@ -121,6 +121,9 @@ export default class Tutorial
     return document.evaluate(`//div[text() = '${blockName}']/..`, document.body).iterateNext()
   }
   
+  getEnter(block) {
+    return block.node.enter;
+  }
 
   getInPin(block) {
     return block.inPin.symbol.element;
