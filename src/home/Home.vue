@@ -204,7 +204,7 @@ export default {
     .wrapper {
       width: 400px;
       margin: auto;
-      margin-top: 10px;
+      margin-top: 40px;
     }
 
     .blocks-wrapper {
