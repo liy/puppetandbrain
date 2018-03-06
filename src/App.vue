@@ -35,7 +35,7 @@ body {
 }
 
 body.home {
-  background-color: #b574ed;
+  background-color: #505f97;
 }
 body.about {
   background-color: #2196F3;
@@ -59,7 +59,7 @@ body.contact {
   position: absolute;
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10px;
-  color: #d191ff;
+  color: #6c80af;
   bottom: 3px;
   left: 3px;
   

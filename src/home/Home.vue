@@ -153,7 +153,7 @@ export default {
 
   h4 {
     font-size: 30px;
-    color: #d191ff;
+    color: #6c80af;
 
     margin-bottom: 30px;
   }
@@ -196,6 +196,7 @@ export default {
 
   .text-container {
     width: 100%;
+    text-align: center;
   }
   .example-container {
     width: 100%;

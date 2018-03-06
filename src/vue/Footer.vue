@@ -34,12 +34,12 @@ ul {
 li {
   margin-left: 20px;
 
-  background-color: #ab5fee;
+  background-color: #475586;
   padding: 5px 10px;
   border-radius: 4px;
 
   a {
-    color: #d191ff;
+    color: #6f7dad;
     text-decoration: none;
     transition: color ease 0.3s;
   }
