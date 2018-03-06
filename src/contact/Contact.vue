@@ -5,6 +5,7 @@
     <li><a class="back" @click="$router.go(-1)">x</a></li>
     <li><b><a class='email' href="mailto:puppetandbrain@gmail.com">EMAIL</a></b></li>
     <li><b><a class='twitter' href="https://twitter.com/puppetandbrain">TWITTER</a></b></li>
+    <li><b><a class='discord' href="https://discord.gg/RH8RnxA">DISCORD</a></b></li>
     <li><b><a class='github' href="https://github.com/liy">GITHUB</a></b></li>
   </ul>
 </div>
@@ -72,6 +73,10 @@ export default {
 
   .twitter:hover {
     color: #ffeb3b;
+  }
+
+  .discord:hover {
+    color: #2dbd34;
   }
 
   .github:hover {
