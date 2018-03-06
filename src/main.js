@@ -1,6 +1,9 @@
 // for version checking
 require('../package.json')
 
+// for SEO
+require('../robots.txt')
+
 // for mobile app
 require("./assets/favicon-192.png")
 require('./manifest.json')
