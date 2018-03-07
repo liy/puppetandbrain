@@ -69,6 +69,7 @@ export default class SpineActor extends Actor
         }
       }
     }
+    console.log('test', this.spineAnimPresets)
 
     this.emit('actor.ready', this);
   }
