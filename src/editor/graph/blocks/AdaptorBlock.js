@@ -54,6 +54,9 @@ export default class AdaptorBlock extends Block
     this.selector.addEventListener('msTransitionEnd', this.onTransitionEnd)
 
     this.header.addEventListener('click', this.toggle);
+
+    // update initial input name if operation has a inputNames map field 
+    this.updateInputName(this.selectedItem.operation);
   }
 
   destroy() {
@@ -93,11 +96,25 @@ export default class AdaptorBlock extends Block
     this.selectedItem = e.currentTarget;
     e.currentTarget.classList.add('selected');
 
-    this.headerName.textContent = this.selectedItem.operation.name;
+    const operation = this.selectedItem.operation;
+    this.headerName.textContent = operation.name;
+        
+    // some adaptor changes input name when different operation is
+    // selected
+    this.updateInputName(operation);
 
+    // set node to use the selected operation
+    this.node.operationName = operation.operationName;
     this.toggle();
-    
-    this.node.operationName = this.selectedItem.operation.operationName;
+  }
+
+  updateInputName(operation) {
+    // change input name if inputName field is avaialble
+    if(operation.inputNames) {
+      for(const [inputName, label] of Object.entries(operation.inputNames)) {
+        this.inputPins.get(inputName).label.textContent = label;
+      }
+    }
   }
 
   toggle() {

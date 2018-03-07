@@ -14,6 +14,8 @@
 
 export Arithmetic from './Arithmetic';
 export Trigonometry from './Trigonometry';
+export InverseTrigonometry from './InverseTrigonometry';
+export Atan2 from './Atan2';
 export VectorArithmetic from './VectorArithmetic';
 export VectorLen from './VectorLen';
 export AbsoluteVector from './AbsoluteVector';
