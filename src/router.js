@@ -37,7 +37,7 @@ export default new Router({
         
         // first time visit?
         if(!localStorage.getItem('visited')) {
-          let modal = new ConfirmModal('How about a simple tutorial.', 'First time vist?')
+          let modal = new ConfirmModal('How about a simple tutorial.', 'First time visit?')
           modal.primaryText = 'Yes, please';
           modal.secondaryText = 'Nah...';
           let {action} = await modal.open();
