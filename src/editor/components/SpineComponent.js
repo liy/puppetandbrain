@@ -5,20 +5,13 @@ export default class SpineComponent extends ContainerComponent
   constructor(spineData) {
     super()
 
-    // buffer the animation info
-    this.aniBuffer = null;
-
     this.spine = new PIXI.spine.Spine(spineData);
     this.spine.interactive = true;
     this.container.addChild(this.spine);
-
-    if(this.aniBuffer){
-      this.spine.state.setAnimation(this.aniBuffer.track, this.aniBuffer.name, this.aniBuffer.loop);
-    }
   }
 
-  setToSetupPose() {
-    this.spine.state.tracks = [];
+  stopAnimations() {
+    this.spine.state.clearTracks();
     this.spine.skeleton.setToSetupPose();
   }
 
@@ -26,14 +19,8 @@ export default class SpineComponent extends ContainerComponent
     return this.spine.state;
   }
 
-  setAnimation(name, loop=true, track=0) {
-    this.aniBuffer = {
-      name, loop, track
-    };
-
-    if(this.spine) {
-      this.spine.state.setAnimation(this.aniBuffer.track, this.aniBuffer.name, this.aniBuffer.loop)
-    }
+  playAnimation(name, track=0, loop=true) {
+    this.spine.state.setAnimation(track, name, loop)
   }
 
   getAnimations() {

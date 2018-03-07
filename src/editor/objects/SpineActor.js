@@ -41,7 +41,6 @@ export default class SpineActor extends Actor
     this.spineID = pod.spineID;
     this.spineScale = pod.spineScale || 1;
 
-
     let spineDir = `${pod.libDir}/${pod.puppetID}`;
     let rawAtlas = this.resources.get(`${spineDir}/${this.spineID}.atlas`);
     var spineAtlas = new PIXI.spine.core.TextureAtlas(rawAtlas, (line, callback) => {
@@ -59,6 +58,18 @@ export default class SpineActor extends Actor
     this.spineComponent = new SpineComponent(spineData);
     this.addComponent('animation', this.spineComponent);
 
+    // setup spine animation presets
+    this.spineAnimPresets = pod.spineAnimPresets;
+    if(!this.spineAnimPresets) {
+      this.spineAnimPresets = {};
+      let anims = this.spineComponent.getAnimations();
+      for(let anim of anims) {
+        this.spineAnimPresets[anim.name] = {
+          [anim.name]: 0
+        }
+      }
+    }
+
     this.emit('actor.ready', this);
   }
 
@@ -69,15 +80,26 @@ export default class SpineActor extends Actor
 
   gameStop() {
     super.gameStop();
-    this.spineComponent.setToSetupPose();
+    this.spineComponent.stopAnimations();
   }
 
-  setAnimation(name, loop=true, track=0) {
-    this.spineComponent.setAnimation(name, loop, track);
+  playAnimation(name, track=0, loop=true) {
+    this.spineComponent.playAnimation(name, track, loop);
+  }
+  
+  playAnimPreset(presetName) {
+    let preset = this.spineAnimPresets[presetName];
+    for(const [animName, track] of Object.entries(preset)) {
+      this.playAnimation(animName, track);
+    }
   }
 
-  getAnimations() {
-    return this.spineComponent.getAnimations();
+  getAnimPresetNames() {
+    return Object.keys(this.spineAnimPresets);
+  }
+
+  getAnimPreset() {
+    return this.spineAnimPresets;
   }
   
   select() {
@@ -115,6 +137,7 @@ export default class SpineActor extends Actor
     let pod = super.pod(detail);
     pod.spineID = this.spineID;
     pod.spineScale = this.spineScale;
+    pod.spineAnimPresets = this.spineAnimPresets;
     return pod;
   }
 

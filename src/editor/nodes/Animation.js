@@ -30,7 +30,7 @@ export default class Animation extends Task
     super.init(pod);
 
     try {
-      this.list = this.owner.getAnimations().map(animation => animation.name);
+      this.list = this.owner.getAnimPresetNames();
     }
     catch(err) {
       console.warn('This is not a spine actor, no animations')
@@ -42,7 +42,7 @@ export default class Animation extends Task
     super.run()
 
     try {
-      this.owner.setAnimation(this.inputs.value('name'));
+      this.owner.playAnimPreset(this.inputs.value('name'));
     }
     catch(err) {
       console.warn('This is not a spine actor, cannot play animtion')
