@@ -75,7 +75,8 @@ export default {
     
     Hub.uninstall();
   },
-  // when route activity ID parameter changes
+  // when user navigate under /editor/, 
+  // route activity ID parameter changes
   async beforeRouteUpdate(to, from, next) {
     await this.clearHub(to, from, next);
 
@@ -83,12 +84,16 @@ export default {
 
     const activityID = to.params.activityID;
     const chip = NotificationControl.notify('Loading...')
+
     await Hub.load(activityID);
+    this.autoPlay();
+
     chip.fadeOut();
   },
   async beforeRouteLeave(to, from, next) {  
     this.clearHub(to, from, next)
   },
+  // navigated from external site
   beforeRouteEnter(to, from, next) {
     console.log('before enter')
     // after hub is installed correctly
@@ -102,7 +107,10 @@ export default {
         // clone and save does not need to reload the activity
         if(!Hub.activity || activityID != Hub.activity.id) {
           const chip = NotificationControl.notify('Loading...')
+
           await Hub.load(activityID);
+          vm.autoPlay();
+
           chip.fadeOut();
         }
       }
@@ -113,6 +121,13 @@ export default {
     })
   },
   methods: {
+    autoPlay() {
+      // auto play if user is not the owner of the activity
+      if(!Hub.activity.isOwner) {
+        this.$store.commit('updateDebugMode', true);
+        Hub.stage.start();
+      }
+    },
     async clearHub(to, from, next) {
       console.log('before leave')
       // Save and clone action does not triggers clear process
