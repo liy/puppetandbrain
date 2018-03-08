@@ -77,7 +77,7 @@ export default class VariableSetter extends Task
     if(this.variable.type == DataType.AUDIO || this.variable.type == DataType.IMAGE) {
       let data = this.memory['input']
       // make sure the data is a file data
-      if(data.hash) {
+      if(data && data.hash) {
         return [data]
       }
     }
