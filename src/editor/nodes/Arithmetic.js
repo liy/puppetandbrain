@@ -66,6 +66,7 @@ NodeTemplate.Arithmetic = {
     'substract', 'minus',  '-', 
     'multiply', 'times', '*', 
     'divide', 'division', '/', 
+    'modulo', 'remainder', '%', 
     'power', '^']
 }
 
