@@ -49,6 +49,11 @@ NodeTemplate.Arithmetic = {
       operationName: 'divide'
     },
     {
+      description: '% Remainder',
+      name: '%',
+      operationName: 'remainder'
+    },
+    {
       description: '^ Power',
       name: '^',
       operationName: 'power'
@@ -84,6 +89,10 @@ export default class Arithmetic extends Adaptor
 
   divide() {
     return Number(this.inputs.value('A')) / Number(this.inputs.value('B'));
+  }
+
+  remainder() {
+    return Number(this.inputs.value('A')) % Number(this.inputs.value('B'));
   }
 
   power() {

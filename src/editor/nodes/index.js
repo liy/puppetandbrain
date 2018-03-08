@@ -1,17 +1,3 @@
-// Cannot use export * from './Operator'
-// for some reason, have to mannually export individual one for index
-// import * as Operators from './Operator'
-// // operator nodes
-// export const Operator = Operators.Operator;
-// export const Addition = Operators.Addition;
-// export const Divide = Operators.Divide;
-// export const Multiply = Operators.Multiply;
-// export const Equal = Operators.Equal;
-// export const LessEqual = Operators.LessEqual;
-// export const LessThan = Operators.LessThan;
-// export const RandomNumber = Operators.RandomNumber;
-// export const RandomInteger = Operators.RandomInteger;
-
 export Arithmetic from './Arithmetic';
 export Trigonometry from './Trigonometry';
 export InverseTrigonometry from './InverseTrigonometry';
