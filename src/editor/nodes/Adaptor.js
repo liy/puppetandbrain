@@ -27,7 +27,7 @@ export default class extends Node
 
     // make it more robust, if we ever changed operation name,
     // it won't break all the users' creations
-    this.operation = this.operation || {};
+    this.operation = this.operation || NodeTemplate[this.className].operations[0];
 
     // change input type
     let types = this.operation.inputType;
