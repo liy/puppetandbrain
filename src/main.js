@@ -56,8 +56,10 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 window.getCurrentUser = function() {
   return new Promise(resolve => {
     let unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      unsubscribe();
-      resolve(user);
+      if(user) {
+        unsubscribe();
+        resolve(user);
+      }
     })
   })
 }
