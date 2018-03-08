@@ -25,6 +25,10 @@ export default class extends Node
       return operation.operationName == operationName;
     });
 
+    // make it more robust, if we ever changed operation name,
+    // it won't break all the users' creations
+    if(!this.operation) return;
+
     // change input type
     let types = this.operation.inputType;
     if(!types) {

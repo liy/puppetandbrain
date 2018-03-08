@@ -183,7 +183,7 @@ class HubClass extends EventEmitter
     if(process.env.NODE_ENV !== 'dev' && !store.tutorialMode) {  
       // delay save, just in case user has lots of actions...
       this.delaySave.cancel();
-      await this.delaySave.wait(5000);
+      await this.delaySave.wait(3000);
 
       // auto save does not clean resource
       // might be ok?
