@@ -48,6 +48,8 @@ export default class AdaptorBlock extends Block
     for(let operation of operations) {
       this.addSelection(operation)
     }
+    // Make it more robust, if no selected item set, set it the first item in list
+    this.selectedItem = this.selectedItem || this.list.firstChild;
 
     this.selector.addEventListener('transitionend', this.onTransitionEnd)
     this.selector.addEventListener('webkitTransitionEnd', this.onTransitionEnd)
