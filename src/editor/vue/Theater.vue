@@ -7,12 +7,12 @@
     <div id='stage-overlayer'></div>
   </div>
 
-  <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 width height">
+  <svg id="mask-container" xmlns="http://www.w3.org/2000/svg" :viewBox="viewBox">
     <clipPath id="mask">
-      <circle id="mask-circle" class='' cx="width/2" cy="height/2" r="width">
+      <circle id="mask-circle" :cx="cx" :cy="cy" :r="r">
       </circle>
     </clipPath>
-  </svg> -->
+  </svg>
 </div>
 </template>
 
@@ -28,12 +28,27 @@ export default {
       type: [Number, String],
       default: 300
     },
+  },
+  computed: {
+    viewBox() {
+      return `0 0 ${this.width} ${this.height}`
+    },
+    cx() {
+      return this.width/2
+    }, 
+    cy() {
+      return this.height/2
+    },
+    r() {
+      return this.width;
+    }
   }
 }
 </script>
 
 <style lang="scss">
 #theater {
+  position: relative;
   // disable text selection.(Input will override it)
   user-select: none;
 
@@ -82,5 +97,57 @@ export default {
     // only children of the overlay can accept mouse event
     pointer-events: all;
   }
+}
+
+#mask-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height:100%;
+
+  pointer-events: none;
+}
+
+
+@keyframes circle-close {
+  to {
+    transform: scale(0);
+  }
+  from {
+    transform: scale(1);
+  }
+}
+
+@keyframes circle-open {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.circle-mask-close {
+  animation-duration: 1.0s;
+  animation-fill-mode: forwards;
+  animation-name: circle-close;
+  animation-timing-function: cubic-bezier();
+  transform-origin: center center;
+}
+
+.circle-mask-open {
+  animation-duration: 1.0s;
+  animation-name: circle-open;
+  transform-origin: center center;
+}
+
+#stage.masking {
+  -webkit-clip-path: url(#mask);
+  clip-path: url(#mask);
+  
+  // disable events on stage while mask is in transition mode
+  pointer-events: none;
 }
 </style>

@@ -18,11 +18,29 @@ export default class SceneManager
     let saving = Hub.save();
     // lock everything
     Hub.lock();
-    // wait until save completed
-    await saving;
+    // wait until save completed, also wait for curtain is fully closed
+    await Promise.all([saving, Hub.stage.curtainClose()]);
 
     Hub.clear(false);
-    await Hub.load(id)
+    // const {error, activity} = await Hub.load(id)
+    // if(error) {
+    //   chip.fadeOut();
+    //   NotificationControl.notify('Activity loading error').delayFadeoutRemove();
+    //   await this.reset();
+    //   Hub.stage.curtainOpen();
+    //   return;
+    // }
+    try {
+      await Hub.load(id)
+    }
+    catch(error) {
+      console.warn(error)
+      chip.fadeOut();
+      NotificationControl.notify('Activity loading error').delayFadeoutRemove();
+      await this.reset();
+      Hub.stage.curtainOpen();
+      return;
+    }
 
     // once game stops go back to original activity
     Hub.activity.on('game.stop', this.reset, this);
@@ -34,11 +52,16 @@ export default class SceneManager
     // unlock mode and debug button
     Hub.unlock(['modeLock', 'debugLock']);
 
+    // TODO: reveal
+    Hub.stage.curtainOpen();
+
     chip.fadeOut();
   }
 
+
+
   async reset() {
-    const chip = NotificationControl.notify(`Loading activity`);
+    const chip = NotificationControl.notify(`Loading orinal activity`);
 
     // lock everything
     Hub.lock();

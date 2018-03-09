@@ -12,10 +12,20 @@ export default class ActivityLoader
   start(id) {
     return new Promise(async (resolve, reject) => {
       // call this to cancel the promise
-      this.cancel = reject;
+      this.cancel = function() {
+        reject('loading cancelled')
+      };
       
       console.log('Loading', id)
-      const pod = await API.getActivity(id);
+      // because I used a Promise wrapper(for ignoring cancelled loading purpose)
+      // I have to manually reject the error to bubble up the error
+      try {
+        var pod = await API.getActivity(id);
+      }
+      catch(error) {
+        reject(error)
+        return;
+      }
       console.log('pod', pod)
 
       await this.loadResources(pod);

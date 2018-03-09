@@ -106,23 +106,17 @@ class HubClass extends EventEmitter
   async load(id) {
     this.activity = new Activity();
     this.activityLoader = new ActivityLoader(this.activity);
-    try {
-      const actorBuffer = await this.activityLoader.start(id);
 
-      // ignore loaded actors
-      for(let actor of actorBuffer) {
-        this.stage.addActor(actor)
-      }
-    }
-    catch(cancelled) {
-      console.log(cancelled);
+    const actorBuffer = await this.activityLoader.start(id);
+    for(let actor of actorBuffer) {
+      this.stage.addActor(actor)
     }
 
     return this.activity;
   }
 
   cancelLoading() {
-    if(this.activityLoader) this.activityLoader.cancel('Loading canceled');
+    if(this.activityLoader) this.activityLoader.cancel();
   }
 
   /**

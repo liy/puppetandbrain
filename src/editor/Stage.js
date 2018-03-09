@@ -12,6 +12,7 @@ export default class extends EventEmitter
     this.element = stageElement
     this.overlayer = this.element.querySelector('#stage-overlayer');
     this.canvas = this.element.querySelector('#canvas');
+    this.maskCircle = document.getElementById('mask-circle');
 
     this.actors = new ArrayMap();
     this.container = new PIXI.Container();
@@ -38,6 +39,31 @@ export default class extends EventEmitter
     catcher.on('mousedown', ActorSelection.deselectAll, ActorSelection);
 
     this.loop = this.loop.bind(this);
+  }
+
+  curtainOpen() {
+    this.maskCircle.classList.remove('circle-mask-close');
+    this.maskCircle.classList.add('circle-mask-open');
+
+    const finished = () => {
+      this.element.classList.remove('masking');
+    }
+    
+    this.maskCircle.addEventListener('animationend', finished, {once: true})
+    this.maskCircle.addEventListener('webkitAnimationEnd', finished, {once: true})
+    this.maskCircle.addEventListener('MSAnimationEnd', finished, {once: true})
+  }
+
+  curtainClose() {
+    return new Promise(resolve => {
+      this.element.classList.add('masking')
+      this.maskCircle.classList.add('circle-mask-close');
+      this.maskCircle.classList.remove('circle-mask-open');
+
+      this.maskCircle.addEventListener('animationend', resolve, {once: true})
+      this.maskCircle.addEventListener('webkitAnimationEnd', resolve, {once: true})
+      this.maskCircle.addEventListener('MSAnimationEnd', resolve, {once: true})
+    })
   }
 
   destroy() {

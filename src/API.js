@@ -72,6 +72,16 @@ class API
 
   async getActivity(id) {
     return (await firebase.firestore().collection('activities').doc(id).get()).data();
+
+
+    // return firebase.firestore().collection('activities').doc(id).get()
+    //   .then(snapshot => {
+    //     return snapshot.data();
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //     return null;
+    //   })
   }
 
   async saveActivity(pod, fileRefs) {
