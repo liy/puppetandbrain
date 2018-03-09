@@ -4,6 +4,13 @@ const state = {
   propertyPanelVisable: false,
   tutorialMode: false,
   browserVisible: false,
+
+  historyLock: true,
+  saveLock: true,
+  modeLock: true,
+  debugLock: true,
+  addLock: true,
+  deleteLock: true,
 }
 
 const getters = {
@@ -13,23 +20,30 @@ const getters = {
   propertyPanelVisable: state => state.propertyPanelVisable,
   tutorialMode: state => state.tutorialMode,
   browserVisible: state => state.browserVisible,
+  
+  historyLock: state => state.historyLock,
+  saveLock: state => state.saveLock,
+  modeLock: state => state.modeLock,
+  debugLock: state => state.debugLock,
+  addLock: state => state.addLock,
+  deleteLock: state => state.deleteLock,
 }
 
 const mutations = {
   // change modes:
-  updateDebugMode(state, mode) {
-    state.debugMode = mode;
+  updateDebugMode(state, bool) {
+    state.debugMode = bool;
   },
 
   toggleDebugMode() {
     state.debugMode = !state.debugMode;
   },
 
-  updateStageMode(state, mode) {
-    state.stageMode = mode;
+  updateStageMode(state, bool) {
+    state.stageMode = bool;
   },
 
-  toggleStageMode(state, mode) {
+  toggleStageMode(state) {
     state.stageMode = !stage.stageMode;
   },
 
@@ -55,6 +69,10 @@ const mutations = {
   updateBrowserVisible(state, visible) {
     state.browserVisible = visible;
   },
+
+  lock(state, data) {
+    state[data.target] = data.locked;
+  }
 }
 
 const actions = {};

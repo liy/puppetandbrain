@@ -31,7 +31,7 @@ export default new Router({
       async beforeEnter(to, from, next) {
         document.body.className = 'editor'
         // not tutorial
-        store.tutorialMode = false;
+        store.commit('updateTutorialMode', false);
 
         next();
         
@@ -57,7 +57,7 @@ export default new Router({
         // TODO: auto play tutorial if user first time visit
         document.body.className = 'editor'
         // not tutorial
-        store.tutorialMode = false;
+        store.commit('updateTutorialMode', false);
         next();
       }
     },
@@ -68,7 +68,7 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         // TODO: auto play tutorial if user first time visit
         document.body.className = 'editor'
-        store.tutorialMode = true;
+        store.commit('updateTutorialMode', true);
         next();
       }
     },

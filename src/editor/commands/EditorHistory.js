@@ -7,14 +7,13 @@ export default class extends EventEmitter
 
     this.undos = [];
     this.redos = [];
-    
-    this.enabled = true;
   }
 
   push(cmd) {
-    if(cmd) {
+    if(cmd && !Hub.historyLock) {
+      
       // action modified the activity
-      Hub.dirty();
+      Hub.activity.dirty = true;
 
       this.undos.push(cmd)
       this.redos = [];
@@ -24,12 +23,16 @@ export default class extends EventEmitter
       if(this.undos.length > 200) {
         this.undos.shift();
       }
+
       this.updateButton()
     }
   }
 
   undo() {
-    if(this.undos.length == 0 || !this.enabled) return;
+    if(!this.canUndo) return;
+
+    // action modified the activity
+    Hub.activity.dirty = true;
 
     let cmd = this.undos.pop();
     cmd.undo();
@@ -42,7 +45,11 @@ export default class extends EventEmitter
   }
 
   redo() {
-    if(this.redos.length == 0  || !this.enabled) return;
+    if(!this.canRedo) return;
+    
+    // action modified the activity
+    Hub.activity.dirty = true;
+
     let cmd = this.redos.pop();
     cmd.redo();
     this.undos.push(cmd);
@@ -65,8 +72,15 @@ export default class extends EventEmitter
     this.updateButton()
   }
 
+  get canUndo() {
+    return this.undos.length != 0 && !Hub.historyLock
+  }
+
+  get canRedo() {
+    return this.redos.length != 0 && !Hub.historyLock
+  }
+
   updateButton() {
-    console.log('updateButton')
     this.emit('history.updated')
   }
 }

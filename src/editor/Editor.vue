@@ -85,8 +85,10 @@ export default {
     const activityID = to.params.activityID;
     const chip = NotificationControl.notify('Loading...')
 
+    Hub.lock();
     await Hub.load(activityID);
     this.autoPlay();
+    Hub.unlock();
 
     chip.fadeOut();
   },
@@ -108,8 +110,10 @@ export default {
         if(!Hub.activity || activityID != Hub.activity.id) {
           const chip = NotificationControl.notify('Loading...')
 
+          Hub.lock();
           await Hub.load(activityID);
           vm.autoPlay();
+          Hub.unlock();
 
           chip.fadeOut();
         }
@@ -129,14 +133,13 @@ export default {
       }
     },
     async clearHub(to, from, next) {
-      console.log('before leave')
       // Save and clone action does not triggers clear process
       if(to.params.activityID == Hub.activity.id) {
         next();
       }
       else {
         // check whether there is unsaved change
-        if(!Hub.saved) {
+        if(Hub.activity.dirty) {
           const {action} = await ConfirmModal.open('Do you really want to leave? you have unsaved changes!', 'Unsaved changes')
           // user choose abort navigation
           if(!action) {
@@ -158,6 +161,8 @@ export default {
     keydown(e) {
       if(e.keyCode == 83 && e.ctrlKey) {
         e.preventDefault();
+
+        if(Hub.locked) return;
 
         if(Hub.activity.isOwner) {
           NotificationControl.notify('Saving...').delayFadeoutRemove();

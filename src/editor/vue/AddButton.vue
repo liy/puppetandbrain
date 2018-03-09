@@ -1,5 +1,5 @@
 <template>
-<div class='toolbar-button' id='add-button' :data-title="tooltip" @click="clicked">
+<div class='toolbar-button' :class="{disabled: this.addLock}" id='add-button' :data-title="tooltip" @click="clicked">
   <svg >
     <use :xlink:href="`#${AddButtonIcon.id}`" :viewBox="AddButtonIcon.viewBox"/>
   </svg>
@@ -20,7 +20,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['stageMode']),
+    ...mapGetters(['stageMode', 'addLock']),
     tooltip() {
       return this.stageMode ? 'Add puppet' : 'Add block'
     }

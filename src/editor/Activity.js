@@ -13,14 +13,23 @@ export default class Activity extends EventEmitter
 
     this.resources = new Map();
     this.lookUp = new LookUp(this);
+
+    this.dirty = false;
   }
 
   get isOwner() {
     return Hub.currentUser.uid == this.ownerID;
   }
 
-  load() {
+  save(clearResource) {
+    if(!this.isOwner || !this.dirty) return;
+
+    let userFileRefs = this.getFileRefs();
+    if(clearResource) this.cleanResource(userFileRefs);
     
+    return API.saveActivity(this.pod(), userFileRefs).then(() => {
+      this.dirty = false;
+    })
   }
 
   /**

@@ -3,12 +3,12 @@
   <svg id='blob' width=164 height=98>
     <use :xlink:href="`#${HistoryButtonBlob.id}`" :viewBox="HistoryButtonBlob.viewBox"/>
   </svg>
-  <div id='undo' class='history-button' :class="{disabled: !canUndo}" data-title='Undo' @click="undoClicked">
+  <div id='undo' class='history-button' :class="{disabled: !canUndo || this.historyLock}" data-title='Undo' @click="undoClicked">
     <svg  width=78 height=78 >
       <use :xlink:href="`#${UndoButton.id}`" :viewBox="UndoButton.viewBox"/>
     </svg>
   </div>
-  <div id='redo' class='history-button' :class="{disabled: !canRedo}" data-title='Redo' @click="redoClicked">
+  <div id='redo' class='history-button' :class="{disabled: !canRedo || this.historyLock}" data-title='Redo' @click="redoClicked">
     <svg width=55 height=55>
       <use :xlink:href="`#${RedoButton.id}`" :viewBox="RedoButton.viewBox"/>
     </svg>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import HistoryButtonBlob from '@/assets/history-button-blob.svg';
 import UndoButton from '@/assets/undo-button.svg';
 import RedoButton from '@/assets/redo-button.svg'
@@ -28,9 +29,12 @@ export default {
       HistoryButtonBlob,
       UndoButton,
       RedoButton,
-      canUndo: false,
-      canRedo: false,
+      canUndo: Hub.history.canUndo,
+      canRedo: Hub.history.canRedo,
     }
+  },
+  computed: {
+    ...mapGetters(['historyLock']),
   },
   mounted() {
     Hub.history.on('history.updated', this.onHistoryUpdated)
@@ -48,8 +52,8 @@ export default {
       Hub.history.redo();
     },
     onHistoryUpdated() {
-      this.canUndo = Hub.history.undos.length != 0;
-      this.canRedo = Hub.history.redos.length != 0;
+      this.canUndo = Hub.history.canUndo;
+      this.canRedo = Hub.history.canRedo;
     },
     keydown(e) {
       if(e.keyCode == '90' && e.ctrlKey) {

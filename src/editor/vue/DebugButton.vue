@@ -1,5 +1,5 @@
 <template>
-<div id='debug-button' @click='click' class='toolbar-button' :data-title="tooltip">
+<div id='debug-button' @click='click' class='toolbar-button' :class="{disabled: this.debugLock}" :data-title="tooltip">
   <svg v-if="!debugMode">
     <use :xlink:href="`#${StartButtonIcon.id}`" :viewBox="StartButtonIcon.viewBox"/>
   </svg>
@@ -23,12 +23,10 @@ export default {
       StopButtonIcon
     }
   },
-  mounted() {
-  },
   computed: {
-    ...mapGetters(['debugMode']),
+    ...mapGetters(['debugMode', 'debugLock']),
     tooltip() {
-      return this.debugMode ? 'Stop game' : 'Play game'
+      return this.debugMode  ? 'Stop game' : 'Play game'
     }
   },
   methods: {

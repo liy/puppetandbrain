@@ -1,5 +1,5 @@
 <template>
-<div class='toolbar-button' :class="{disabled: !this.enabled}" id='delete-button' data-title="Delete puppet" @click="clicked">
+<div class='toolbar-button' :class="{disabled: !this.enabled || this.deleteLock}" id='delete-button' data-title="Delete puppet" @click="clicked">
   <svg>
     <use :xlink:href="`#${BinButtonIcon.id}`" :viewBox="BinButtonIcon.viewBox"/>
   </svg>
@@ -27,7 +27,7 @@ export default {
     document.removeEventListener('keydown', this.keydown);
   },
   computed: {
-    ...mapGetters(['stageMode'])
+    ...mapGetters(['stageMode', 'deleteLock'])
   },
   methods: {
     clicked() {

@@ -23,8 +23,7 @@ class HubClass extends EventEmitter
   constructor() {
     super();
 
-    // no changes
-    this._saved = true;
+    this.store = store;
     
     this.delaySave = new Delay();
 
@@ -67,9 +66,6 @@ class HubClass extends EventEmitter
     this.stage.destroy();
     this.removeAllListeners();
 
-    // nothing to save anymore
-    this._saved = true;
-
     // close any modal
     Modal.close();
 
@@ -79,8 +75,8 @@ class HubClass extends EventEmitter
 
   // change between /editr to /editr/xxxx simply
   // only difference between clear and uninstall is that in clear, stage does not destroy 
-  clear() {
-    Hub.history.clear();
+  clear(clearHistory=true) {
+    if(clearHistory) Hub.history.clear();
     
     // deselect anything
     ActorSelection.deselectAll();
@@ -89,15 +85,12 @@ class HubClass extends EventEmitter
     // close the brain graph if opened
     BrainGraph.close();
 
-    
     // close any opened browser if any
     this.closeBrowser();
     // TODO: save activity before destroy?
     this.activity.destroy();
     this.stage.clear();
     this.removeAllListeners();
-    // nothing to save anymore
-    this._saved = true;
 
     // close any modal
     Modal.close();
@@ -150,52 +143,29 @@ class HubClass extends EventEmitter
   }
 
   async save() {
-    // TODO: make a clone instead
-    if(this.activity.ownerID !== this.currentUser.uid) {
-      return Promise.reject('Not an owner, clone first');
-    }
-
-    let userFileRefs = this.activity.getFileRefs();
-    this.activity.cleanResource(userFileRefs);
-
-    let pod = this.activity.pod();
-    await API.saveActivity(pod, userFileRefs);
-
-    this._saved = true;
-
+    if(this.saveLock) return this.activity;
+    
+    await this.activity.save();
     return this.activity;
   }
 
-  // async preload(id) {
-  //   let pod = await API.getActivity(id);
-  //   let activity = new Activity(pod.activityID, pod.userID);
-  //   var loader = new ActivityLoader(activity);
-  //   return loader.start(pod);
-  // }
-
   async autoSave() {
+    if(this.saveLock) return;
+
     // no need to auto save if it is not the owner
-    if(this.activity.ownerID !== this.currentUser.uid) {  
+    if(!this.activity.isOwner) {  
       return;
     }
 
     // do not auto save when in dev mode
-    if(process.env.NODE_ENV !== 'dev' && !store.tutorialMode) {  
+    if(process.env.NODE_ENV !== 'dev' && !store.state.tutorialMode) {  
       // delay save, just in case user has lots of actions...
       this.delaySave.cancel();
       await this.delaySave.wait(3000);
 
       // auto save does not clean resource
       // might be ok?
-      let fileRefs = this.activity.getFileRefs();
-
-      if(this.activity.isOwner) {
-        let pod = this.activity.pod();
-        await API.saveActivity(pod, fileRefs);
-      }
-
-      // mark saved
-      this._saved = true;
+      this.activity.save(false);
 
       this.router.push(`/editor/${this.activity.id}`)
     }
@@ -215,13 +185,38 @@ class HubClass extends EventEmitter
     if(this.browser) this.browser.close();
   }
 
-  // mark save dirty
-  dirty() {
-    this._saved = false;
+  disableSaveAndHistory() {
+    console.warn('disableSaveAndHistory')
   }
 
-  get saved() {
-    return this._saved;
+  enableSaveAndHistory() {
+    console.warn('enableSaveAndHistory')
+  }
+
+  lock(targets=['saveLock', 'historyLock', 'modeLock', 'deleteLock', 'debugLock', 'addLock']) {
+    for(let target of targets) {
+      store.commit('lock', {
+        target,
+        locked: true,
+      });
+    }
+  }
+
+  unlock(targets=['saveLock', 'historyLock', 'modeLock', 'deleteLock', 'debugLock', 'addLock']) {
+    for(let target of targets) {
+      store.commit('lock', {
+        target,
+        locked: false,
+      });
+    }
+  }
+
+  get historyLock() {
+    return store.state.historyLock
+  }
+
+  get saveLock() {
+    return store.state.saveLock
   }
 }
 
