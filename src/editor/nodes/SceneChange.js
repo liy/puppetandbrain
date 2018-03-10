@@ -112,6 +112,14 @@ export default class SceneChange extends Task
   run() {
     super.run();
 
-    Hub.sceneManager.to(this.inputs.value('creation id'));
+    const creationID = this.inputs.value('creation id');
+    Hub.sceneManager.to(creationID).catch(error => {
+      Hub.runtimeError({
+        actorID: this.owner.id,
+        nodeID: this.id,
+        inputID: 'creation id',
+        message: `creation id is not valid: ${creationID}`,
+      })
+    });
   }
 }

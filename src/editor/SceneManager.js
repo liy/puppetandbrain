@@ -22,24 +22,14 @@ export default class SceneManager
     await Promise.all([saving, Hub.stage.curtainClose()]);
 
     Hub.clear(false);
-    // const {error, activity} = await Hub.load(id)
-    // if(error) {
-    //   chip.fadeOut();
-    //   NotificationControl.notify('Activity loading error').delayFadeoutRemove();
-    //   await this.reset();
-    //   Hub.stage.curtainOpen();
-    //   return;
-    // }
     try {
       await Hub.load(id)
     }
     catch(error) {
-      console.warn(error)
       chip.fadeOut();
-      NotificationControl.notify('Activity loading error').delayFadeoutRemove();
       await this.reset();
       Hub.stage.curtainOpen();
-      return;
+      throw(error);
     }
 
     // once game stops go back to original activity
@@ -55,13 +45,13 @@ export default class SceneManager
     // TODO: reveal
     Hub.stage.curtainOpen();
 
-    chip.fadeOut();
+    chip.delayFadeoutRemove();
   }
 
 
 
   async reset() {
-    const chip = NotificationControl.notify(`Loading orinal activity`);
+    const chip = NotificationControl.notify(`Loading original activity`);
 
     // lock everything
     Hub.lock();
@@ -75,6 +65,6 @@ export default class SceneManager
     // unlock everything
     Hub.unlock();
 
-    chip.fadeOut();
+    chip.delayFadeoutRemove();
   }
 }

@@ -100,6 +100,7 @@ class HubClass extends EventEmitter
 
   create() {
     this.activity = new Activity();
+    this.unlock();
     return this.activity;
   }
 
@@ -202,6 +203,21 @@ class HubClass extends EventEmitter
         target,
         locked: false,
       });
+    }
+  }
+
+  runtimeError(error) {
+    NotificationControl.notify(error.message).delayFadeoutRemove();
+    const actor = Hub.activity.lookUp.get(error.actorID);
+    if(actor) {
+      BrainGraph.open(actor.brain);
+      const block = GraphSelection.selectByID(error.nodeID);
+
+      const inputPin = block.inputPins.get(error.inputID)
+      if(inputPin) {
+        inputPin.expand()
+        inputPin.gadget.focus()
+      }
     }
   }
 

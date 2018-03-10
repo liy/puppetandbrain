@@ -157,6 +157,21 @@ export default class extends DataPin
     this.symbol.drawConnection();
   }
 
+  expand() {
+    // only be able toggle the gadget if input is NOT connected
+    // or has no gadget
+    if(this.input.isConnected || !this.gadget) return;
+    this.gadgetVisible = true;
+    // update the link path
+    this.symbol.drawConnection();
+  }
+
+  collapse() {
+    this.gadgetVisible = false;
+    // update the link path
+    this.symbol.drawConnection();
+  }
+
   set gadgetVisible(flag) {
     this.gadget.visible = flag;
   }

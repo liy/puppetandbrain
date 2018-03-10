@@ -38,6 +38,12 @@ class GraphSelection extends EventEmitter
 
     this.emit('block.selection.change', this.selected);
   }
+
+  selectByID(id) {
+    const block = BrainGraph.getBlock(id);
+    this.select(block);
+    return block
+  }
   
   downOnEmptySpace(e) {
     if(e.target == BrainGraph.container || e.target == ElementController.panel.element) this.deselect();
