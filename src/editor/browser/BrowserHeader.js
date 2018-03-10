@@ -19,9 +19,5 @@ export default class
     this.searchField = new SearchField();
     this.searchField.className = 'search-field'
     this.element.appendChild(this.searchField.element);
-
-    this.menuButton = svgElement(MenuButton, {width:48, height:48, className: 'header-button'});
-    this.menuButton.style.visibility = 'hidden';
-    this.element.appendChild(this.menuButton);
   }
 }
