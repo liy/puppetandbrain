@@ -56,7 +56,7 @@ body.contact {
 }
 
 #app-version {
-  position: absolute;
+  position: fixed;
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10px;
   color: #6c80af;

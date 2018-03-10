@@ -2,7 +2,7 @@
 <transition name='about'>
 <div class='about'>
     <div class='content'>
-      <a class="back" @click="$router.go(-1)">x</a>
+      <div class="back"><a  @click="$router.go(-1)">x</a></div>
 
       <p><b>Puppet & Brain</b> is a simple node based programming service teaching kids programming concepts. It can also be used for creating simple story activity and game.</p>
       <p>It also support certain special needs functionallities, e.g., switch access.</p>
@@ -33,10 +33,6 @@ export default {
   width: 100%;
   height: 100%;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   color: white;
   
   transition: opacity ease 0.3s;
@@ -52,6 +48,8 @@ export default {
     width: 60%;
     max-width: 450px;
     list-style: none;
+
+    margin: 20px auto;
   }
 
   .contact {
@@ -72,7 +70,7 @@ export default {
     text-decoration: none;
     font-family: arial, sans-serif;
     font-size: 60px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 
     transition: color ease 0.3s;
 

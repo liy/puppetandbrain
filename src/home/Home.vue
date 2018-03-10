@@ -1,6 +1,6 @@
 <template>
 <transition name='home'>
-<div id='home'>
+<div id='home' ref='home'>
   <div class='home-content'>
     <div class='text-container'>
       <div class='wrapper'>
@@ -40,7 +40,7 @@
       </div>
     </div>
   </div>
-  <svg id="line-svg" ref='lineSvg'>
+  <svg id="line-svg">
     <path :d="d" stroke="#d0e400" stroke-width="3"/>
   </svg>
   <app-footer/>
@@ -81,18 +81,18 @@ export default {
       this.$router.push('tutorials/animate-a-puppet')
     },
     updateLine() {
-      let offset = this.$refs.lineSvg.getBoundingClientRect();
-
+      let offset = this.$refs.home.getBoundingClientRect();
+      
       let rect = this.$refs.outPin.getBoundingClientRect();
       this.outPinPostion = {
-        x: (rect.left + rect.right)/2  + 6.7,
-        y: (rect.top + rect.bottom)/2
+        x: (rect.left + rect.right)/2 + 6.7,
+        y: (rect.top + rect.bottom)/2 - offset.top
       }
 
       rect = this.$refs.inPin.getBoundingClientRect();
       this.inPinPosition = {
         x: (rect.left + rect.right)/2 - 1,
-        y: (rect.top + rect.bottom)/2
+        y: (rect.top + rect.bottom)/2 - offset.top
       }
     }
   },
@@ -112,7 +112,7 @@ export default {
 <style lang="scss" scoped>
 
 #home {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
 
@@ -182,12 +182,21 @@ export default {
 
 #line-svg {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 
   pointer-events: none;
 }
 
+@media screen and (max-height:750px){
+  #home {
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
 
 @media screen and (max-width: 600px) {
   .home-content {

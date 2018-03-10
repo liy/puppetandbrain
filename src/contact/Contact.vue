@@ -25,15 +25,11 @@ export default {
 
 <style lang="scss" scoped>
 .contact {
+  position: absolute;
   font-family: "jaf-domus-titling-web",sans-serif;
 
-  position: absolute;
   width: 100%;
   height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   color: white;
 
@@ -43,6 +39,8 @@ export default {
 
     width: 40%;
     list-style: none;
+
+    margin: 20px auto;
   }
 
   a {
