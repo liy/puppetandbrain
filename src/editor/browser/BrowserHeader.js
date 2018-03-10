@@ -19,5 +19,8 @@ export default class
     this.searchField = new SearchField();
     this.searchField.className = 'search-field'
     this.element.appendChild(this.searchField.element);
+
+    // dummy
+    this.element.appendChild(document.createElement('div'));
   }
 }
