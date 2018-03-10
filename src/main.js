@@ -4,9 +4,17 @@ require('../package.json')
 // for SEO
 require('../robots.txt')
 
-// for mobile app
 require("./assets/favicon-192.png")
+
+// for android app
 require('./manifest.json')
+require('./assets/icons/android-1x.png')
+require('./assets/icons/android-2x.png')
+require('./assets/icons/android-3x.png')
+require('./assets/icons/android-4x.png')
+
+// for ios app
+require('./assets/icons/ios-192.png')
 
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
