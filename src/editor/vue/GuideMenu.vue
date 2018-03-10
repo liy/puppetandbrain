@@ -72,7 +72,7 @@ export default {
 #guide-menu {
   position: absolute;
   right: 20px;
-  top: 30px;
+  top: 35px;
 
   z-index: 9;
 

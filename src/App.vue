@@ -66,4 +66,5 @@ body.contact {
   user-select: none;
   pointer-events: none;
 }
+
 </style>

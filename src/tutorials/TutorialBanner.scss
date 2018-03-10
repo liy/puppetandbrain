@@ -4,7 +4,7 @@
   left: 0;
 
   width: 100%;
-  height: 140px;
+  height: 120px;
 
   // centre banner
   display: flex;
@@ -15,9 +15,7 @@
 }
 
 #tutorial-banner {
-  // min-width: 200px;
-
-  height: 44px;
+  min-height: 44px;
   line-height: 44px;
 
   font-size: 18px;
@@ -29,13 +27,16 @@
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 26px;
-  
+
   // centre svg
   display: flex;
   justify-content: center;
   align-items: center;
 
   svg {
+    min-width: 42px;
+    min-height: 32px;
+
     display: inherit;
     margin-left: 20px;
   }
@@ -59,4 +60,14 @@
   }
 
   cursor: default;
+}
+
+@media screen and (max-width: 600px) {
+  #tutorial-banner {
+    font-size: 16px;
+    max-width: 40%;
+    line-height: 24px;
+    // padding-top: 5px;
+    // padding-bottom: 5px;
+  }
 }
