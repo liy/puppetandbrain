@@ -13,7 +13,8 @@ export default class Activity extends EventEmitter
     this.resources = new Map();
     this.lookUp = new LookUp(this);
 
-    this.dirty = false;
+    // always dirty when created, so user can save a blank activity if they want to
+    this.dirty = true;
   }
 
   get isOwner() {
