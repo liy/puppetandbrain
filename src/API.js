@@ -133,6 +133,15 @@ class API
     return pods;
   }
 
+  getPuppet(puppetID) {
+    return firebase.firestore().doc(`puppets/${puppetID}`).get().then(snapshot => {
+      return snapshot.data();
+    }).catch(error => {
+      console.log(`Puppet ${puppetID} not found`);
+      throw error;
+    })
+  }
+
   async createMyPuppet(actor, name) {
     // generate entry in firestore
     const myPuppetID = firebase.firestore().collection(`users/${Hub.currentUser.uid}/myPuppets`).doc().id

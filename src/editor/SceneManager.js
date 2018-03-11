@@ -11,8 +11,10 @@ export default class SceneManager
     if(this.originalID==null) this.originalID = Hub.activity.id;
   }
 
-  async to(id) {
+  async to(execution, id) {
     const chip = NotificationControl.notify(`Loading activity`);
+
+    execution.run('before');
 
     // force to save the activity before you go to another activity
     let saving = Hub.save();
@@ -31,6 +33,8 @@ export default class SceneManager
       Hub.stage.curtainOpen();
       throw(error);
     }
+
+    execution.run('after');
 
     // once game stops go back to original activity
     Hub.activity.on('game.stop', this.reset, this);

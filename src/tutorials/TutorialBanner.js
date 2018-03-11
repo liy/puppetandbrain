@@ -15,6 +15,7 @@ export default class
 
     this.banner = document.createElement('div');
     this.banner.id = 'tutorial-banner';
+    this.banner.style.opacity = 0;
     this.element.appendChild(this.banner);
 
     this.bannerText = document.createElement('span');

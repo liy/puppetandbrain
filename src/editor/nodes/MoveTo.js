@@ -52,7 +52,7 @@ export default class MoveTo extends Task
   tick({delta, deltaTime:dt}) {
     this.time += dt;
 
-    if(this.time <= this.duration) {
+    if(this.time < this.duration) {
       this.owner.position.add(Vec2.scale(this.velocity, dt));
     }
     else {

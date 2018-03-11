@@ -29,11 +29,11 @@ class AnimatePuppet extends Tutorial
     this.addStep(() => {
       this.banner.info('It might take a while, be patient...');
 
-      this.when('browser.content.ready', e => {
+      this.once('browser.content.ready', e => {
         this.banner.info('Now, I recommend the yellow fat cat');
         this.cursor.moveTo(this.browserPuppet('Bouncy Cat'));
 
-        this.when('stage.actor.added', actor => {
+        this.once('stage.actor.added', actor => {
           this.cursor.fadeOut();
           this.banner.info('Be patient while it is loading...');
           
@@ -83,7 +83,7 @@ class AnimatePuppet extends Tutorial
       
       this.cursor.follow(this.browserBlock('Animation'), 'bottom');
 
-      this.when('graph.block.added', async e => {
+      this.once('graph.block.added', async e => {
         // You have to manually cancel the follow here
         this.cursor.cancelFollow();
 
@@ -101,7 +101,7 @@ class AnimatePuppet extends Tutorial
           this.banner.info('Click the add button to find an <b>Animation</b> block.', true);
           this.cursor.moveTo('add-button', 'left');
 
-          this.when('browser.opened', this.redo);
+          this.once('browser.opened', this.redo);
         }
       });
     })
@@ -128,20 +128,20 @@ class AnimatePuppet extends Tutorial
 
       const animationBlock = this.getBlock('Animation');
       if(isMobile) {
-        this.when('touchstart', () => {
+        this.once('touchstart', () => {
           this.banner.info("And tap the left white pin of the <b>Animaton</b> block to form the connection.", true);
           const target = this.getInPin(animationBlock);
           this.cursor.moveTo(target, 'right');
         }, outPin);
       }
       else {
-        this.when('mousedown', () => {
+        this.once('mousedown', () => {
           this.banner.info("And connect to the <b>Animaton</b>'s left white pin.", true);
           const target = this.getInPin(animationBlock);
           this.cursor.moveTo(target, 'right');
         }, outPin);
 
-        this.when('mouseup', () => {
+        this.once('mouseup', () => {
           const enter = this.getEnter(animationBlock);
           // redo this step if user fail to connect
           if(!enter.isConnected) {
@@ -151,7 +151,7 @@ class AnimatePuppet extends Tutorial
       }
 
       // handles user quick connect
-      this.when('browser.opened', async e => {
+      this.once('browser.opened', async e => {
         this.cursor.fadeOut();
 
         this.banner.push("Oops... you just performed a shortcut to add block.")
@@ -161,10 +161,10 @@ class AnimatePuppet extends Tutorial
         this.banner.info('Click the close button and try again...')
         this.cursor.moveTo('close-browser-button', 'right');
 
-        this.when('browser.closed', this.redo);
+        this.once('browser.closed', this.redo);
       })
 
-      this.when('execution.connected', data => {
+      this.once('execution.connected', data => {
         if(data.source.node == gameStartBlock.node && data.targetNode == animationBlock.node) {
           this.next();
         }
@@ -185,14 +185,14 @@ class AnimatePuppet extends Tutorial
       
       this.banner.info('Click the name label to see what animations are available.')
       // This is not once event... not a big deal, once the label is removed, the event should be gb.
-      this.when('mouseup', e => {
+      this.once('mouseup', e => {
         // make sure the gadget is visible
         if(pin.gadget.visible) {
           this.banner.info('Pick an animation you like.');
         }
       }, pin.label)
 
-      this.when('touchend', e => {
+      this.once('touchend', e => {
         // make sure the gadget is visible
         if(pin.gadget.visible) {
           this.banner.info('Pick an animation you like.');
@@ -222,7 +222,7 @@ class AnimatePuppet extends Tutorial
       this.banner.info('Click the magic play button.');
       this.cursor.moveTo('debug-button', 'left');
 
-      this.when('game.start', async e => {
+      this.once('game.start', async e => {
         window.localStorage.setItem('animate-a-puppet', true);
 
         this.cursor.fadeOut();

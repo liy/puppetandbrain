@@ -36,7 +36,7 @@ export default class Tutorial
     this.steps.push(step);
   }
 
-  when(type, callback, target=document) {
+  once(type, callback, target=document) {
     let handler = callback.bind(this);
     if(typeof target.addEventListener === 'function') {
       this.eventHandlers.push({
@@ -56,8 +56,34 @@ export default class Tutorial
     }
   }
 
+  when(type, callback, target=document) {
+    let handler = callback.bind(this);
+    if(typeof target.addEventListener === 'function') {
+      this.eventHandlers.push({
+        target,
+        type,
+        handler
+      });
+      target.addEventListener(type, handler)
+    }
+    else {
+      this.eventHandlers.push({
+        target,
+        type,
+        handler
+      })
+      target.on(type, handler);
+    }
+  }
+
   nextWhen(type, target=document) {
-    this.when(type, this.next, target);
+    this.once(type, this.next, target);
+  }
+
+  waitUntil(type, target=document) {
+    return new Promise(resolve => {
+      this.once(type, resolve, target);
+    })
   }
 
   clearEventHandlers() {

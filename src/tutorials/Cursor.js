@@ -34,6 +34,15 @@ export default class Cursor
     this.element.style.transform = `translate(${this.x}px, ${this.y}px) rotate(${this.rotation}deg) scale(${this.scaleX}, ${this.scaleY})`
   }
 
+  moveToBlock(block, dir) {
+    let rect = block.element.getBoundingClientRect();
+    this.moveToLocation(block.x + rect.width/2, block.y+rect.height/2, dir);
+  }
+
+  moveToActor(actor, dir) {
+    this.moveToLocation(actor.screenX, actor.screenY, dir);
+  }
+
   moveToLocation(x, y, dir='top') {
 
     return new Promise(resolve => {

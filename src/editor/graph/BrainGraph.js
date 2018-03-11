@@ -6,12 +6,14 @@ import BlockBrowser from '../browser/BlockBrowser';
 import ElementController from './elements/ElementController';
 import Matrix from '../math/Matrix'
 import ConnectHelper from './ConnectHelper';
+import EventEmitter from '@/utils/EventEmitter';
 
 import store from '@/store';
 
-export default class BrainGraph
+export default class BrainGraph extends EventEmitter
 {
   constructor(container) {
+    super();
     this.container = container;
     this.blockContainer = this.container.querySelector('#block-container');
     this.svg = this.container.querySelector('#graph-svg');
@@ -85,6 +87,7 @@ export default class BrainGraph
   }
 
   destroy() {
+    super.destroy();
     this.container.removeEventListener('contextmenu', this.onRightClick);
     this.container.removeEventListener('mousedown', this.pointerdown);
     document.removeEventListener('keydown', this.keydown);
@@ -362,6 +365,8 @@ export default class BrainGraph
     block.destroy();
     // destroy the node and remove from the brain
     block.node.destroy();
+
+    this.emit('block.deleted', block);
   }
 
   async onRightClick(e) {
