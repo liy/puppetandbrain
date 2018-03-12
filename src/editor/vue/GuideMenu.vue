@@ -1,6 +1,6 @@
 <template>
 <div id='guide-menu' @click="toggle()" :class="{shifted: propertyPanelVisable && !stageMode && !browserVisible}">
-  <div ref="button" id="menu-icon">
+  <div ref="button" id="guide-menu-icon">
     <svg width=48 height=48>
       <use :xlink:href="`#${MenuIcon.id}`" :viewBox="MenuIcon.viewBox"/>
     </svg>
@@ -134,7 +134,7 @@ export default {
   }
 }
 
-#menu-icon {
+#guide-menu-icon {
   position: absolute;
   top: 0;
   right: 0;

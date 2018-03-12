@@ -15,6 +15,7 @@
 }
 
 #tutorial-banner {
+  position: relative;
   min-height: 44px;
   line-height: 44px;
 
@@ -45,6 +46,10 @@
 
   opacity: 1;
   transition: opacity ease 0.3s;
+
+  // for shifting
+  top: 0;
+  transition: top ease 0.3s;
 
   pointer-events: auto;
   

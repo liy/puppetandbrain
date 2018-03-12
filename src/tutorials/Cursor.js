@@ -92,8 +92,8 @@ export default class Cursor
   }
 
   moveTo(target, dir='top') {
-    if(typeof target == 'string') target = document.getElementById(target);
-
+    if(typeof target === 'string') target = document.getElementById(target);
+    
     // show and hide tooltip if any
     if(this.currentTarget) this.currentTarget.classList.remove('data-title-show');
     this.currentTarget = target;
@@ -165,7 +165,13 @@ export default class Cursor
 
   follow(target, dir='top') {
     const followLoop = () => {
-      this.goto(target, dir)
+      if(typeof target === 'function') {
+        this.goto(target(), dir)
+      }
+      else {
+        this.goto(target, dir)
+      }
+      
       this.followID = requestAnimationFrame(followLoop);
     }
     this.followID = requestAnimationFrame(followLoop)

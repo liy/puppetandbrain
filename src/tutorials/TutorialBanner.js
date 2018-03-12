@@ -12,7 +12,6 @@ export default class
     this.element.className = 'tutorial-banner-container'
     document.body.appendChild(this.element);
 
-
     this.banner = document.createElement('div');
     this.banner.id = 'tutorial-banner';
     this.banner.style.opacity = 0;
@@ -34,34 +33,42 @@ export default class
     this.next = this.next.bind(this);
 
     this.banner.addEventListener('mousedown', this.onClick);
+
+    this.onBrowserClose = this.onBrowserClose.bind(this)
+    this.onBrowserOpen = this.onBrowserOpen.bind(this)
+    document.addEventListener('browser.opened', this.onBrowserOpen)
+    document.addEventListener('browser.closed', this.onBrowserClose)
   }
 
   destroy() {
     this.element.parentElement.removeChild(this.element);
+    document.removeEventListener('browser.opened', this.onBrowserOpen)
+    document.removeEventListener('browser.closed', this.onBrowserClose)
   }
 
-  info(text, isHtml=false) {
+  onBrowserOpen(e) {
+    // offset the banner when browser is opened
+    this.shiftDown = true;
+  }
+
+  onBrowserClose(e) {
+    // reset the position
+    this.shiftDown = false;
+  }
+
+  info(text) {
     this.overlay.hide();
 
     this.fadeIn();
     this.infoMode = true;
-    if(isHtml) {
-      this.html = text;
-    }
-    else {
-      this.text = text;
-    }
+    this.html = text;
   }
 
-  push(text, isHtml=false) {
+  push(text, func=null) {
     this.steps.push(() => {
       this.infoMode = false;
-      if(isHtml) {
-        this.html = text;
-      }
-      else {
-        this.text = text;
-      }
+      this.html = text;
+      if(func) func();
     })
     return this;
   }
@@ -114,6 +121,16 @@ export default class
 
   set html(html) {
     this.bannerText.innerHTML = html;
+  }
+
+  set shiftDown(value) {
+    if(value) {
+      const rect = this.banner.getBoundingClientRect();
+      this.banner.style.top = `${40 + rect.height/2}px`
+    }
+    else {
+      this.banner.style.top = 0
+    }
   }
 
   set infoMode(flag) {

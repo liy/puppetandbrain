@@ -335,6 +335,10 @@ export default class Block extends EventEmitter
     return true;
   }
 
+  get titleText() {
+    return this.title.textContent;
+  }
+
   addInputPin(pin) {
     this.inputPins.set(pin.name, pin);
     this.body.addLeft(pin)

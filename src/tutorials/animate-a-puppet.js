@@ -21,7 +21,7 @@ class AnimatePuppet extends Tutorial
     })
 
     this.addStep(() => {
-      this.banner.info("Click the <b>Add puppet</b> to add a puppet, obviously!", true);
+      this.banner.info("Click the <b>Add puppet</b> to add a puppet, obviously!");
       this.cursor.moveTo('add-button', 'left')
       this.nextWhen('browser.opened')
     });
@@ -51,7 +51,7 @@ class AnimatePuppet extends Tutorial
     this.addStep(async () => {
       this.cursor.indicate('mode-button');
       this.banner.push('Notice that the purple button on the left is enabled?')
-                 .push('It is the <b>Open brain<b> button.', true)
+                 .push('It is the <b>Open brain<b> button.')
                  .push("Yes, open the puppet's brain!")
       await this.banner.start();
       this.banner.info('Click it to open its brain.');
@@ -63,9 +63,9 @@ class AnimatePuppet extends Tutorial
 
     this.addStep(async () => {
       this.banner.push('Now you are in the brain of a puppet, nicely done!')
-                 .push('You can mess around with its brain by adding <b>Block</b>s.', true)
+                 .push('You can mess around with its brain by adding <b>Block</b>s.')
       await this.banner.start();
-      this.banner.info('Click the add button to add a <b>Block</b>', true);
+      this.banner.info('Click the add button to add a <b>Block</b>');
 
       this.cursor.moveTo('add-button', 'left');
 
@@ -73,13 +73,13 @@ class AnimatePuppet extends Tutorial
     });
 
     this.addStep(async () => {
-      this.banner.push('What is a <b>Block</b> you might be wondering.', true)
+      this.banner.push('What is a <b>Block</b> you might be wondering.')
                  .push("It basically helps to define the behaviour of a puppet.")
                  .push("Just like your brain cells which helps you think.")
-                 .push("Let's find one called <b>Animation</b>.", true)
+                 .push("Let's find one called <b>Animation</b>.")
       await this.banner.start();
 
-      this.banner.info('You might need to scroll down to find the <b>Animation</b> block.', true);
+      this.banner.info('You might need to scroll down to find the <b>Animation</b> block.');
       
       this.cursor.follow(this.browserBlock('Animation'), 'bottom');
 
@@ -94,11 +94,11 @@ class AnimatePuppet extends Tutorial
         else {
           this.cursor.fadeOut();
 
-          this.banner.push('Are you sure this is the <b>Animation</b> block?', true)
+          this.banner.push('Are you sure this is the <b>Animation</b> block?')
                      .push("Let's try it again.");
           await this.banner.start();
 
-          this.banner.info('Click the add button to find an <b>Animation</b> block.', true);
+          this.banner.info('Click the add button to find an <b>Animation</b> block.');
           this.cursor.moveTo('add-button', 'left');
 
           this.once('browser.opened', this.redo);
@@ -107,8 +107,8 @@ class AnimatePuppet extends Tutorial
     })
 
     this.addStep(async () => {
-      this.banner.push("Now you have an <b>Animation</b> block in the puppet's brain.", true)
-        .push("The other green one is <b>Game Event</b> block.", true)
+      this.banner.push("Now you have an <b>Animation</b> block in the puppet's brain.")
+        .push("The other green one is <b>Game Event</b> block.")
         .push("Let's connect them together see what will happen.")
       await this.banner.start();
       this.next();
@@ -116,28 +116,28 @@ class AnimatePuppet extends Tutorial
 
     this.addStep(async () => {
       if(isMobile) {
-        this.banner.info('Tap the <b>start</b> pin of <b>Game Event</b>...', true);
+        this.banner.info('Tap the <b>start</b> pin of <b>Game Event</b>...');
       }
       else {
-        this.banner.info('Drag the <b>start</b> pin of <b>Game Event</b> and connect to the <b>Animation</b> left pin', true);
+        this.banner.info('Drag the <b>start</b> pin of <b>Game Event</b> and connect to the <b>Animation</b> left pin');
       }
 
       const gameStartBlock = this.getBlock('Game Event');
-      const outPin = this.getOutPin(gameStartBlock, 'start');
+      const outPin = this.getOutPinElement(gameStartBlock, 'start');
       this.cursor.moveTo(outPin, 'right');
 
       const animationBlock = this.getBlock('Animation');
       if(isMobile) {
         this.once('touchstart', () => {
-          this.banner.info("And tap the left white pin of the <b>Animaton</b> block to form the connection.", true);
-          const target = this.getInPin(animationBlock);
+          this.banner.info("And tap the left white pin of the <b>Animaton</b> block to form the connection.");
+          const target = this.getInPinElement(animationBlock);
           this.cursor.moveTo(target, 'right');
         }, outPin);
       }
       else {
         this.once('mousedown', () => {
-          this.banner.info("And connect to the <b>Animaton</b>'s left white pin.", true);
-          const target = this.getInPin(animationBlock);
+          this.banner.info("And connect to the <b>Animaton</b>'s left white pin.");
+          const target = this.getInPinElement(animationBlock);
           this.cursor.moveTo(target, 'right');
         }, outPin);
 
