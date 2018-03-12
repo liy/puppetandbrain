@@ -7,6 +7,7 @@ import store from '@/store';
 import ConfirmModal from './editor/ui/ConfirmModal';
 
 const Tutorial = () => import('./tutorials/Tutorial.vue');
+const TutorialList = () => import('./tutorials/TutorialList.vue')
 const Editor = () => import('./editor/Editor.vue');
 
 Vue.use(Router)
@@ -58,6 +59,15 @@ export default new Router({
         document.body.className = 'editor'
         // not tutorial
         store.commit('updateTutorialMode', false);
+        next();
+      }
+    },
+    {
+      path: '/tutorials',
+      name: 'TutorialList',
+      component: TutorialList,
+      async beforeEnter(to, from, next) {
+        document.body.className = 'tutorial-list'
         next();
       }
     },

@@ -46,6 +46,9 @@ body.editor {
 body.contact {
   background-color: #ff8585;
 }
+body.tutorial-list {
+  background-color: #8460a5;
+}
 
 #modal-container {
   position: absolute;

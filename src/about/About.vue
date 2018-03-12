@@ -71,6 +71,10 @@ export default {
     font-family: arial, sans-serif;
     font-size: 60px;
     margin-bottom: 20px;
+    
+    color:#6cbdff;
+
+    text-align: center;
 
     transition: color ease 0.3s;
 
