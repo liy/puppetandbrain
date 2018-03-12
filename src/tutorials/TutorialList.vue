@@ -8,7 +8,7 @@
       <li><b><router-link v-bind:to="'/tutorials/animate-a-puppet'">Animate a puppet</router-link></b></li>
       <li><b><router-link v-bind:to="'/tutorials/user-interaction'">User interaction</router-link></b></li>
     </ol>
-    <div class='no-tutorial'><router-link v-bind:to="'/editor'">I don't need tutorials!</router-link></div>
+    <div class='no-tutorial'><router-link v-bind:to="'/editor'">No tutorials! I'm a professional programmer</router-link></div>
   </div>
 </div>
 </transition>
@@ -80,8 +80,13 @@ export default {
   }
 
   .no-tutorial a {
-    font-size: 1.6em;
-    text-decoration: underline;
+    font-size: 0.9em;
+    color: #9c72c4;
+    // text-decoration: underline;
+  }
+
+  .no-tutorial a:hover {
+    color:#ead5fd;
   }
   
   transition: opacity ease 0.3s;
