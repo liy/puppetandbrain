@@ -29,6 +29,17 @@
     overflow-x: hidden;
   }
 
+  // prevent user hit enter to create new line
+  span br {
+    display: none;
+  }
+
+  // prevent user hit enter to create new line
+  span * {
+    display: inline;
+    white-space: nowrap;
+  }
+
   // place holder
   span:empty:before {
     content: attr(placeholder);

@@ -9,6 +9,8 @@ export default class extends Gadget
     super()
     this.element.classList.add('text-field');
 
+    this.maxChars = 20;
+
     this.input = document.createElement('span');
     this.input.className = 'data-text'
     this.input.contentEditable = true;
@@ -18,6 +20,20 @@ export default class extends Gadget
 
     this.onInput = this.onInput.bind(this);
     this.input.addEventListener('input', this.onInput);
+
+    this.input.addEventListener('keydown', e => {
+      if(e.keyCode === 13) {
+        e.preventDefault();
+      }
+
+      this.beforeEditText = this.input.textContent;
+    })
+
+    this.input.addEventListener('paste', e => {
+      // prevent formated paste
+      e.preventDefault();
+      this.value = event.clipboardData.getData('text/plain');
+    })
 
     this.input.addEventListener('mousedown', e => {
       e.stopPropagation();
@@ -34,12 +50,16 @@ export default class extends Gadget
   }
   
   onInput(e) {
-    // this removes any br, div...
-    this.input.textContent = this.input.textContent;
+    // max char limit
+    if(this.value.length > this.maxChars) {
+      this.input.textContent = this.beforeEditText;
+    }
     this.emit('gadget.state.change', this.input.textContent)
   }
 
   set value(v) {
+    // when manual setting, also limit the text
+    if(v) v = v.substr(0, this.maxChars)
     this.input.textContent = v;
   }
 
