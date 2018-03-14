@@ -3,22 +3,22 @@ import {Task, Template as ParentTemplate} from '../Task'
 
 NodeTemplate.scope('CanvasActor', {
   ...ParentTemplate,
-  className: 'DrawSquare',
-  name: 'Draw Square',
+  className: 'ClearDraw',
+  name: 'Clear Draw',
   inputs: [{
-    name: 'size',
+    name: 'radius',
     descriptor: {
       type: DataType.DOUBLE,
     }
   }],
   memory: {
-    size: 10
+    radius: 10
   },
   category: 'Draw',
-  keywords: ['draw', 'square']
+  keywords: ['draw', 'circle']
 })
 
-export default class DrawSquare extends Task
+export default class ClearDraw extends Task
 {
   constructor(id, activity) {
     super(id, activity)
@@ -31,7 +31,7 @@ export default class DrawSquare extends Task
   run() {
     super.run();
 
-    this.owner.drawSquare(this.inputs.value('size'))
+    this.owner.clearDraw();
 
     this.execution.run();
   }

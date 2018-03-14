@@ -3,22 +3,23 @@ import {Task, Template as ParentTemplate} from '../Task'
 
 NodeTemplate.scope('CanvasActor', {
   ...ParentTemplate,
-  className: 'DrawSquare',
-  name: 'Draw Square',
+  className: 'LineTo',
+  name: 'Line To',
   inputs: [{
-    name: 'size',
+    name: 'position',
     descriptor: {
-      type: DataType.DOUBLE,
+      type: DataType.VEC2,
+      gadgetClassName: 'PositionField',
     }
   }],
   memory: {
-    size: 10
+    radius: 10
   },
   category: 'Draw',
-  keywords: ['draw', 'square']
+  keywords: ['draw', 'line']
 })
 
-export default class DrawSquare extends Task
+export default class LineTo extends Task
 {
   constructor(id, activity) {
     super(id, activity)
@@ -31,7 +32,7 @@ export default class DrawSquare extends Task
   run() {
     super.run();
 
-    this.owner.drawSquare(this.inputs.value('size'))
+    this.owner.lineTo(this.inputs.value('position'))
 
     this.execution.run();
   }

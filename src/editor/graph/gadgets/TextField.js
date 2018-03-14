@@ -9,7 +9,7 @@ export default class extends Gadget
     super()
     this.element.classList.add('text-field');
 
-    this.maxChars = 20;
+    this.maxChars = 30;
 
     this.input = document.createElement('span');
     this.input.className = 'data-text'

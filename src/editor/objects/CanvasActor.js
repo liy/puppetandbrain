@@ -4,6 +4,8 @@ import Vec2 from "../math/Vec2";
 import ActorSelection from "./ActorSelection";
 
 
+// TODO: use canvas2D for drawing. PIXI.js graphics drawCircle is extremly slow.
+//
 // Special actor exist by default in the stage for drawing graphics
 // which cannot be dragged
 export default class CanvasActor extends Actor
@@ -14,7 +16,6 @@ export default class CanvasActor extends Actor
     this.pen = {x:0, y:0};
 
     this.container = this.addComponent('container', new ContainerComponent()).container;
-    this.container.interactiveChildren = true;
 
     this.dragEnabled = false;
   }
@@ -24,8 +25,8 @@ export default class CanvasActor extends Actor
 
     this.name = 'Canvas'
 
-    this.width = pod.width || 1024-4;
-    this.height = pod.height || 768-4;
+    this.width = pod.width || 1024;
+    this.height = pod.height || 768;
 
     const pos = pod.position || {
       x: (Hub.stage.stageWidth-this.width)/2,
@@ -42,10 +43,18 @@ export default class CanvasActor extends Actor
     this.catcher.on('mousedown', ActorSelection.deselectAll, ActorSelection);
 
     this.graphics = new PIXI.Graphics();
-    this.graphics.interactive = false;
     this.container.addChild(this.graphics);
 
-    this.clear();
+    this.lineStyle = {
+      width:2,
+      color: 0xFF9900,
+      alpha: 1
+    }
+
+    this.fillStyle = {
+      color: 0xFFFFFF,
+      alpha: 1
+    }
   }
 
   select() {
@@ -56,25 +65,38 @@ export default class CanvasActor extends Actor
     // no right click
   }
 
-  clear() {
+  gameStop() {
+    this.clearDraw();
+  }
+
+  clearDraw() {
     this.graphics.clear();
   }
   
   penTo(position) {
-    console.log(this.pen)
     this.pen = position;
     this.graphics.moveTo(this.pen.x, this.pen.y)
   }
 
-  fillStyle(color, alpha) {
-    this.graphics.beginFill(color, alpha)
-  }
-
   drawCircle(radius) {
+    this.graphics.beginFill(this.fillStyle.color, this.fillStyle.alpha)
+    this.graphics.lineStyle(this.lineStyle.width, this.lineStyle.color, this.lineStyle.alpha)
     this.graphics.drawCircle(this.pen.x, this.pen.y, radius);
   }
 
   drawSquare(size) {
+    this.graphics.beginFill(this.fillStyle.color, this.fillStyle.alpha)
+    this.graphics.lineStyle(this.lineStyle.width, this.lineStyle.color, this.lineStyle.alpha)
     this.graphics.drawRect(this.pen.x, this.pen.y, size, size);
+  }
+
+  lineTo(position) {
+    // console.log(position.x, position.y)
+    // console.log(this.fillStyle)
+    // console.log(this.lineStyle)
+    // this.graphics.beginFill(this.fillStyle.color, this.fillStyle.alpha)
+    this.graphics.lineStyle(this.lineStyle.width, this.lineStyle.color, this.lineStyle.alpha)
+    this.graphics.lineTo(position.x, position.y)
+    // this.penTo(position)
   }
 }

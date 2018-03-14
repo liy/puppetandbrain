@@ -16,8 +16,13 @@ export Not from './Not';
 
 // draw
 export FillStyle from './draw/FillStyle'
+export StrokeStyle from './draw/StrokeStyle'
 export PenPosition from './draw/PenPosition'
-export DrawCircle from './draw/DrawCircle' 
+export DrawCircle from './draw/DrawCircle'
+export DrawSquare from './draw/DrawSquare'
+export ClearDraw from './draw/ClearDraw'
+// does not play well with draw shapes
+// export LineTo from './draw/LineTo'
 
 // array
 export ArrayLen from './array/ArrayLen';

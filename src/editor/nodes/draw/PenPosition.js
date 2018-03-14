@@ -4,7 +4,7 @@ import {Task, Template as ParentTemplate} from '../Task'
 NodeTemplate.scope('CanvasActor', {
   ...ParentTemplate,
   className: 'PenPosition',
-  name: 'PenPosition',
+  name: 'Pen Position',
   inputs: [{
     name: 'position',
     descriptor: {

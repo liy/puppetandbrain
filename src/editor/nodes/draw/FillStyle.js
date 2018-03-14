@@ -39,24 +39,22 @@ export default class FillStyle extends Task
   run() {
     super.run();
 
-    console.log(this.inputs.value('color'))
-
-    this.owner.fillStyle(this.inputs.value('color'), this.inputs.value('opacity'))
+    this.owner.fillStyle.color = this.inputs.value('color')
+    this.owner.fillStyle.alpha =  this.inputs.value('opacity')
 
     this.execution.run();
   }
 
   getGadgetConstructorData(inputName) {
     if(inputName === 'opacity') {
-      const descriptor = FillStyleTemplate.inputs.find(input => {
+      const input = FillStyleTemplate.inputs.find(input => {
         return input.name === 'opacity'
       })
       return {
-        ...descriptor,
+        ...input.descriptor,
         value: this.memory.opacity,
       }
     }
-    console.log(inputName, super.getGadgetConstructorData(inputName))
     return super.getGadgetConstructorData(inputName)
   }
 }
