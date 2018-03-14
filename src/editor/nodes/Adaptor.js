@@ -21,20 +21,20 @@ export default class extends Node
   }
 
   set operationName(operationName) {
-    this.operation = NodeTemplate[this.className].operations.find(operation => {
+    this.operation = NodeTemplate.get(this.className).operations.find(operation => {
       return operation.operationName == operationName;
     });
 
     // make it more robust, if we ever changed operation name,
     // it won't break all the users' creations
-    this.operation = this.operation || NodeTemplate[this.className].operations[0];
+    this.operation = this.operation || NodeTemplate.get(this.className).operations[0];
 
     // change input type
     let types = this.operation.inputType;
     if(!types) {
       types = {};
       // default template types
-      for(let input of NodeTemplate[this.className].inputs) {
+      for(let input of NodeTemplate.get(this.className).inputs) {
         types[input.name] = input.descriptor.type;
       }
     }

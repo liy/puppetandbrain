@@ -1,7 +1,7 @@
 import Node from '../Node';
 import DataType from '../../data/DataType';
 
-NodeTemplate.GetItem = {
+NodeTemplate.set({
   className: 'GetItem',
   name: 'Get Item',
   inputs: [{
@@ -26,7 +26,7 @@ NodeTemplate.GetItem = {
   },
   elementClass: ['map', 'center-output'],
   category: 'Map'
-}
+})
 
 export default class GetItem extends Node
 {

@@ -1,7 +1,7 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
 import EventEmitter from "@/utils/EventEmitter";
 
-NodeTemplate.MouseEvent = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'MouseEvent',
   name: 'Mouse Event',
@@ -11,7 +11,7 @@ NodeTemplate.MouseEvent = {
     name: 'stop'
   }],
   keywords: [...ParentTemplate.keywords, 'mouse', 'cursor']
-}
+})
 
 export default class MouseEvent extends Listener
 {

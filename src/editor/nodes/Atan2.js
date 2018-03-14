@@ -2,7 +2,7 @@ import Node from "./Node";
 import DataType from "../data/DataType";
 import {toDegree} from '@/utils/utils'
 
-NodeTemplate.Atan2 = {
+NodeTemplate.set({
   className: 'Atan2',
   name: 'Atan2',
   inputs: [{
@@ -28,7 +28,7 @@ NodeTemplate.Atan2 = {
   },
   elementClass: ['arithmetic', 'collapsed'],
   category: 'Math',
-}
+})
 
 export default class Atan2 extends Node
 {

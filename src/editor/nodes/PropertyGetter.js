@@ -1,7 +1,7 @@
 import Node from "./Node";
 import DataType from "../data/DataType";
 
-NodeTemplate.PropertyGetter = {
+NodeTemplate.set({
   className: 'PropertyGetter',
   // Since it is dynamic, it won't be safe to
   // ask user supply puppet reference.
@@ -9,7 +9,7 @@ NodeTemplate.PropertyGetter = {
   outputs: [],
   elementClass: ['property', 'collapsed'],
   category: 'Property'
-}
+})
 
 // Dynamic property getter. Maybe not useful?
 export default class PropertyGetter extends Node

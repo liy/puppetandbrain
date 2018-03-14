@@ -1,6 +1,6 @@
 import ContainerComponent from "./ContainerComponent";
 
-export default class SpriteComponet extends ContainerComponent
+export default class GraphicsComponent extends ContainerComponent
 {
   constructor() {
     super();

@@ -1,6 +1,6 @@
 import {Task, Template as ParentTemplate} from './Task'
 
-NodeTemplate.Action = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Action',
   name: 'Action',
@@ -9,7 +9,7 @@ NodeTemplate.Action = {
   },
   elementClass: ['action'],
   category: 'Action',
-}
+})
 
 /**
  * User defined action

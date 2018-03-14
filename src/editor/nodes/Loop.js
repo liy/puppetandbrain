@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.Loop = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Loop',
   name: 'Loop',
@@ -27,7 +27,7 @@ NodeTemplate.Loop = {
   },
   elementClass: ['flow-control'],
   category: 'Flow Control',
-}
+})
 
 export default class Loop extends Task
 {

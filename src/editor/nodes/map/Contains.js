@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from '../Task';
 import DataType from '../../data/DataType';
 
-NodeTemplate.Contains = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Contains',
   name: 'Contains',
@@ -27,7 +27,7 @@ NodeTemplate.Contains = {
   },
   elementClass: ['map'],
   category: 'Map'
-}
+})
 
 export default class Contains extends Task
 {

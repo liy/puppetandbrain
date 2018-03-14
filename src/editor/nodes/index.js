@@ -14,6 +14,11 @@ export Compare from './Compare';
 export Logic from './Logic';
 export Not from './Not';
 
+// draw
+export FillStyle from './draw/FillStyle'
+export PenPosition from './draw/PenPosition'
+export DrawCircle from './draw/DrawCircle' 
+
 // array
 export ArrayLen from './array/ArrayLen';
 export GetByIndex from './array/GetByIndex';

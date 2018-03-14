@@ -1,7 +1,7 @@
 import Node from "./Node";
 import DataType from "../data/DataType";
 
-NodeTemplate.Break = {
+NodeTemplate.set({
   className: 'Break',
   name: 'Break',
   enter: {
@@ -12,7 +12,7 @@ NodeTemplate.Break = {
   outputs: [],
   elementClass: ['utility', 'center-input'],
   category: 'Utilities'
-}
+})
 
 // FIXME: rename to extract????
 // FIXME: add outputs when input is collected? auto outputs?

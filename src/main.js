@@ -28,7 +28,7 @@ import store from './store';
 import './utils/polyfill';
 
 // storing all the node templates
-window.NodeTemplate = Object.create(null);
+import './editor/NodeTemplate';
 
 import Button from './vue/Button.vue';
 

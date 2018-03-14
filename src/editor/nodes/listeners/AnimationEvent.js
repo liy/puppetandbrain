@@ -1,7 +1,7 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
 import DataType from "../../data/DataType";
 
-NodeTemplate.AnimationEvent = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'AnimationEvent',
   name: 'Animation Event',
@@ -12,7 +12,7 @@ NodeTemplate.AnimationEvent = {
     }
   }],
   keyboards: [ParentTemplate.keywords, 'animation'],
-}
+})
 
 export default class AnimationEvent extends Listener
 {

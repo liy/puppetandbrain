@@ -3,7 +3,7 @@ import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 import Vec2 from '../math/Vec2';
 
-NodeTemplate.Orbit = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Orbit',
   name: 'Orbit',
@@ -40,7 +40,7 @@ NodeTemplate.Orbit = {
   },
   category: 'Transformation',
   keywords: ['rotate about', 'rotate']
-}
+})
 
 export default class Orbit extends Task
 {

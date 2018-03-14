@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from '../Task';
 import DataType from '../../data/DataType';
 
-NodeTemplate.SetItem = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'SetItem',
   name: 'Set Item',
@@ -32,7 +32,7 @@ NodeTemplate.SetItem = {
   },
   elementClass: ['map'],
   category: 'Map'
-}
+})
 
 export default class SetItem extends Task
 {

@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from "./Task";
 import DataType from "../data/DataType";
 
-NodeTemplate.Jump = {
+NodeTemplate.set({
   ...ParentTemplate,
   name: 'Jump',
   className: 'Jump',
@@ -27,7 +27,7 @@ NodeTemplate.Jump = {
   },
   category: 'Animation',
   keywords: ['jump']
-}
+})
 
 export default class Jump extends Task
 {

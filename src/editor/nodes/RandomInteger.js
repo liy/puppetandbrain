@@ -1,7 +1,7 @@
 import Node from "./Node";
 import DataType from "../data/DataType";
 
-NodeTemplate.RandomInteger = {
+NodeTemplate.set({
   className: 'RandomInteger',
   name: 'Random Integer',
   inputs: [{
@@ -28,7 +28,7 @@ NodeTemplate.RandomInteger = {
   elementClass: ['arithmetic'],
   category: 'Math',
   keywords: ['random']
-}
+})
 
 export default class RandomInteger extends Node
 {

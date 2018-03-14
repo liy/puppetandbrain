@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from '../Task';
 import DataType from '../../data/DataType';
 
-NodeTemplate.PushItem = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'PushItem',
   name: 'Add Item',
@@ -27,7 +27,7 @@ NodeTemplate.PushItem = {
   },
   elementClass: ['array'],
   category: 'List'
-}
+})
 
 export default class PushItem extends Task
 {

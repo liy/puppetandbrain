@@ -1,6 +1,6 @@
 import Node from "./Node";
 
-NodeTemplate.VariableGetter = {
+NodeTemplate.set({
   className: 'VariableGetter',
   name: 'Getter',
   enter: {
@@ -12,7 +12,7 @@ NodeTemplate.VariableGetter = {
   outputs: [],
   elementClass: ['property', 'collapsed'],
   category: 'Property'
-}
+})
 
 /**
  * Variable(brain property) getter

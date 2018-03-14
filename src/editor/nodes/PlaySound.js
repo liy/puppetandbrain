@@ -2,8 +2,7 @@ import {Task, Template as ParentTemplate} from './Task'
 import DataType from "../data/DataType";
 import SoundLoader from '../resources/SoundLoader'
 
-
-NodeTemplate.PlaySound = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'PlaySound',
   name: 'Play Sound',
@@ -40,7 +39,8 @@ NodeTemplate.PlaySound = {
   },
   category: 'Audio',
   elementClass: ['audio']
-}
+})
+
 export default class PlaySound extends Task
 {
   constructor(id, activity) {

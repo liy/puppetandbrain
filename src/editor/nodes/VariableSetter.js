@@ -1,7 +1,7 @@
 import {Task} from "./Task";
 import DataType from "../data/DataType";
 
-NodeTemplate.VariableSetter = {
+NodeTemplate.set({
   className: 'VariableSetter',
   name: 'Setter',
   enter: {
@@ -15,7 +15,7 @@ NodeTemplate.VariableSetter = {
   outputs: [],
   elementClass: ['property', 'setter'],
   category: 'Property'
-}
+})
 
 /**
  * Variable Setter!!!!!!!!! Not other setter, variable, the variable used by brain, you added into

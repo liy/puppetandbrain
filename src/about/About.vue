@@ -4,7 +4,7 @@
     <div class='content'>
       <div class="back"><a  @click="$router.go(-1)">x</a></div>
 
-      <p><b>Puppet & Brain</b> is a simple node based programming service teaching kids programming concepts. It can also be used for creating simple story activity and game.</p>
+      <p><b>Puppet & Brain</b> is a simple node based visual scripting service teaching kids programming concepts. It can also be used for creating simple story activity and game.</p>
       <p>It also support certain special needs functionallities, e.g., switch access.</p>
 
       <p class='tiny'>Actually, you can say that it is a naive Unreal Engine Blueprint clone works in the browser.</p>

@@ -1,7 +1,7 @@
 import Node from '../Node';
 import DataType from '../../data/DataType';
 
-NodeTemplate.ArrayLen = {
+NodeTemplate.set({
   className: 'ArrayLen',
   name: 'List Size',
   inputs: [{
@@ -21,7 +21,7 @@ NodeTemplate.ArrayLen = {
   },
   elementClass: ['array', 'collapsed'],
   category: 'List'
-}
+})
 
 export default class ArrayLen extends Node
 {

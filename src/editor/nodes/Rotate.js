@@ -2,7 +2,7 @@ import {toRadian} from '@/utils/utils';
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.Rotate = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Rotate',
   name: 'Rotate',
@@ -28,7 +28,7 @@ NodeTemplate.Rotate = {
   },
   category: 'Animation',
   keywords: ['rotate', 'rotation', 'clockwise', 'anti-clockwise', 'anticlockwise']
-}
+})
 
 export default class Rotate extends Task
 {

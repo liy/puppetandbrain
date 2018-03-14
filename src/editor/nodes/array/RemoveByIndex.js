@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from '../Task';
 import DataType from '../../data/DataType';
 
-NodeTemplate.RemoveByIndex = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'RemoveByIndex',
   name: 'Remove Item',
@@ -27,7 +27,7 @@ NodeTemplate.RemoveByIndex = {
   },
   elementClass: ['array'],
   category: 'List'
-}
+})
 
 export default class RemoveByIndex extends Task
 {

@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.Flip = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Flip',
   name: 'Flip',
@@ -28,7 +28,7 @@ NodeTemplate.Flip = {
   }],
   category: 'Animation',
   keywords: ['left', 'right', 'up', 'down', 'top', 'bottom']
-}
+})
 
 const LIST = ['left', 'right', 'up', 'down'];
 

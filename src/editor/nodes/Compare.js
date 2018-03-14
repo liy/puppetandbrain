@@ -1,7 +1,7 @@
 import Adaptor from "./Adaptor";
 import DataType from "../data/DataType";
 
-NodeTemplate.Compare = {
+NodeTemplate.set({
   className: 'Compare',
   blockClassName: 'AdaptorBlock',
   name: '=',
@@ -77,7 +77,7 @@ NodeTemplate.Compare = {
     '>',
     '>='
   ]
-}
+})
 
 export default class Compare extends Adaptor
 {

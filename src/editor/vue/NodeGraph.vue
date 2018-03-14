@@ -1,5 +1,8 @@
 <template>
 <div ref='container' id='graph'>
+  <div class='graph-name-container'>
+    <div class='graph-name'></div>
+  </div>
   <div id='block-container' style="position:absolute; top:0; z-index:1;"></div>
   <svg id='graph-svg' style="position:absolute; top:0" ></svg>
 </div>
@@ -7,7 +10,6 @@
 
 <script>
 import BrainGraphClass from '../graph/BrainGraph'
-
 export default {
   name: 'node-graph',
   mounted() {
@@ -51,6 +53,32 @@ export default {
 
 #graph-svg {
   pointer-events: none;
+}
+
+.graph-name-container {
+  position: relative;
+  z-index: 6;
+  
+  height: 120px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: none;
+}
+
+.graph-name {
+  text-align: center;
+  color: white;
+  min-width: 40px;
+
+  font-size: 16px;
+
+  border-radius: 20px;
+  background-color: #77849a;
+
+  padding: 5px 20px;
 }
 
 // For testing purpose only do not add width and height for block-container!!!

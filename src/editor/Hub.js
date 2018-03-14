@@ -17,6 +17,7 @@ import ActorSelection from './objects/ActorSelection';
 import GraphSelection from './graph/GraphSelection';
 import NotificationControl from './ui/NotificationControl';
 import SceneManager from './SceneManager';
+import CanvasActor from './objects/CanvasActor';
 
 class HubClass extends EventEmitter
 {
@@ -101,6 +102,14 @@ class HubClass extends EventEmitter
   create() {
     this.activity = new Activity();
     this.unlock();
+
+    // setup default draw canvas for user to draw on
+    var canvasActor = new CanvasActor(undefined, this.activity);
+    canvasActor.init();
+    this.stage.addActor(canvasActor)
+
+    let t = NodeTemplate.getTemplates(canvasActor);
+
     return this.activity;
   }
 

@@ -2,7 +2,7 @@ import Node from "./Node";
 import {toDegree} from '@/utils/utils'
 import DataType from '../data/DataType';
 
-NodeTemplate.VectorLen = {
+NodeTemplate.set({
   className: 'VectorLen',
   name: 'Vector Length',
   inputs: [{
@@ -19,7 +19,7 @@ NodeTemplate.VectorLen = {
   }],
   elementClass: ['arithmetic', 'collapsed'],
   category: 'Math'
-}
+})
 
 export default class VectorLen extends Node
 {

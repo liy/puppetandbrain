@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.Print = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Print',
   name: 'Print',
@@ -17,7 +17,7 @@ NodeTemplate.Print = {
   category: 'Utilities',
   elementClass: ['utility'],
   keywords: ['trace']
-}
+})
 
 export default class Print extends Task
 {

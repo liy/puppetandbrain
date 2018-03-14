@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.Wait = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Wait',
   name: 'Wait',
@@ -17,7 +17,8 @@ NodeTemplate.Wait = {
   elementClass: ['flow-control'],
   category: 'Flow Control',
   iconPath: require('!file-loader!@/assets/icons/clock.svg')
-}
+})
+
 export default class Wait extends Task
 {
   constructor(id, activity) {

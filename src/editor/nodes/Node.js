@@ -37,16 +37,21 @@ export default class Node extends EventEmitter
     this.owner = this.lookUp.get(pod.ownerID);
     this.owner.brain.addNode(this);
 
-    this._nodeName = pod.name || NodeTemplate[this.className].name;
+    this._nodeName = pod.name || NodeTemplate.get(this.className).name;
 
     //icon
-    this.iconPath = NodeTemplate[this.className].iconPath;
+    this.iconPath = NodeTemplate.get(this.className).iconPath;
 
     // You need to do a deep copy of the pod. Since pod can be a template
     // template will be shared cross same type of nodes.
     // Simple Object.assign only copy first level property.
     // A deep copy is required!
-    if(pod.memory) this.memory = JSON.parse(JSON.stringify(pod.memory));
+    // Also, use template's memory as default. Since we might update
+    // certain nodes' template and its default value
+    if(pod.memory) this.memory = {
+      ...NodeTemplate.get(this.className).memory,
+      ...JSON.parse(JSON.stringify(pod.memory))
+    };
 
     // Since there are "Action" node which has dynamic ouputs
     // I cannot make input and ouput connections in initialization process
@@ -103,7 +108,7 @@ export default class Node extends EventEmitter
   }
 
   get elementClass() {
-    return NodeTemplate[this.className].elementClass
+    return NodeTemplate.get(this.className).elementClass
   }
 
   get brain() {

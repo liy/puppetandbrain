@@ -2,7 +2,7 @@ import Adaptor from "./Adaptor";
 import DataType from "../data/DataType";
 import {toDegree} from '@/utils/utils'
 
-NodeTemplate.InverseTrigonometry = {
+NodeTemplate.set({
   className: 'InverseTrigonometry',
   name: 'Arc Tangent',
   operationName: 'atan',
@@ -56,7 +56,7 @@ NodeTemplate.InverseTrigonometry = {
     'acos', 'arc cosin',
     'atan', 'arc tangent'
   ]
-}
+})
 
 export default class InverseTrigonometry extends Adaptor
 {

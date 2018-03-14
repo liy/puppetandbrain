@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.SetPosition = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'SetPosition',
   name: 'Set Position',
@@ -23,7 +23,7 @@ NodeTemplate.SetPosition = {
   },
   elementClass: ['property'],
   category: 'Transformation'
-}
+})
 
 export default class SetPosition extends Task
 {

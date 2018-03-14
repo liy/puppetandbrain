@@ -131,7 +131,7 @@ export default class
       // create variable or property getter
       if(this.sourceElement.variable) {
         pod = {
-          ...NodeTemplate.VariableGetter,
+          ...NodeTemplate.get('VariableGetter'),
           name: `${this.sourceElement.variable.name}`,
           ownerID: BrainGraph.brain.owner.id,
           variableID: this.sourceElement.variable.id,
@@ -142,17 +142,17 @@ export default class
         let descriptor = this.sourceElement.descriptor;
         switch(propertyName) {
           case 'position':
-            pod = NodeTemplate.GetPosition
+            pod = NodeTemplate.get('GetPosition')
             break;
           case 'scale':
-            pod = NodeTemplate.GetScale
+            pod = NodeTemplate.get('GetScale')
             break;
           case 'rotation':
-            pod = NodeTemplate.GetRotation
+            pod = NodeTemplate.get('GetRotation')
             break;
           default:
             pod = {
-              ...NodeTemplate.PropertyGetter,
+              ...NodeTemplate.get('PropertyGetter'),
               name: `${this.sourceElement.name}`,
               ownerID: BrainGraph.brain.owner.id,
               propertyName: propertyName,

@@ -2,6 +2,7 @@
 <div id="editor">
   <terminal/>
   <theater ref='theater' width=1024 height=768></theater>
+  <!-- <actor-list/> -->
   <node-graph/>
   <toolbox/>
   <mode-button/>
@@ -21,6 +22,7 @@ import Theater from './vue/Theater.vue';
 import Toolbox from './vue/Toolbox.vue';
 import ModeButton from './vue/ModeButton.vue';
 import GuideMenu from './vue/GuideMenu.vue';
+import ActorList from './vue/ActorList.vue';
 
 import './Hub'
 import NotificationControl from './ui/NotificationControl';
@@ -41,6 +43,7 @@ export default {
     toolbox: Toolbox,
     'mode-button': ModeButton,
     'guide-menu': GuideMenu,
+    'actor-list': ActorList,
   },
   async mounted() {
     // beforeRouteLeave will wait until Hub is installed to start process

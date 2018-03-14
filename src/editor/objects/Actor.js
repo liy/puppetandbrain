@@ -26,6 +26,8 @@ export default class Actor extends EventEmitter
     this.mouseDragMove = this.mouseDragMove.bind(this);
     this.touchDragMove = this.touchDragMove.bind(this)
 
+    this.dragEnabled = true;
+
     this.selected = false;
     this._clicks = 0;
 
@@ -158,8 +160,10 @@ export default class Actor extends EventEmitter
     // crete move command, when move update it with new position
     if(!this.activity.playing) this.moveCommand = Commander.create('MoveActor', this);
 
-    document.addEventListener('mousemove', this.mouseDragMove);
-    document.addEventListener('touchmove', this.touchDragMove);
+    if(this.dragEnabled) {
+      document.addEventListener('mousemove', this.mouseDragMove);
+      document.addEventListener('touchmove', this.touchDragMove);
+    }
 
     this.emit('pointerdown', this)
     
@@ -206,11 +210,15 @@ export default class Actor extends EventEmitter
   }
 
   mouseDragMove(e) {
+    if(!this.dragEnabled) return;
+
     this.position.x = e.clientX + this.offset.x - Hub.stage.offsetX;
     this.position.y = e.clientY + this.offset.y - Hub.stage.offsetY;
   }
 
   touchDragMove(e) {
+    if(!this.dragEnabled) return;
+    
     let x = e.touches[0].clientX;
     let y = e.touches[0].clientY
     this.position.x = x + this.offset.x - Hub.stage.offsetX;

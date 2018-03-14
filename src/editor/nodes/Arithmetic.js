@@ -1,7 +1,7 @@
 import Adaptor from "./Adaptor";
 import DataType from "../data/DataType";
 
-NodeTemplate.Arithmetic = {
+NodeTemplate.set({
   className: 'Arithmetic',
   blockClassName: 'AdaptorBlock',
   name: '+',
@@ -68,7 +68,7 @@ NodeTemplate.Arithmetic = {
     'divide', 'division', '/', 
     'modulo', 'modulus', 'remainder', '%', 
     'power', '^']
-}
+})
 
 export default class Arithmetic extends Adaptor
 {

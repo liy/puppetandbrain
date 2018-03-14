@@ -21,6 +21,7 @@ import GraphSelection from "../GraphSelection";
 import ImagePropertyElement from "./ImagePropertyElement";
 import ImageElement from "./ImageElement";
 import BooleanElement from "./BooleanElement";
+import CanvasActor from "../../objects/CanvasActor";
 
 class ElementController
 {
@@ -101,17 +102,20 @@ class ElementController
   addProperties() {
     let actor = this.brain.owner;
 
-    let positionElement = new PositionPropertyElement(actor);
-    this.panel.append(positionElement.element);
-    this.elements.set('posiiton', positionElement);
+    if(!(actor instanceof CanvasActor)) {
+      let positionElement = new PositionPropertyElement(actor);
+      this.panel.append(positionElement.element);
+      this.elements.set('posiiton', positionElement);
 
-    let sizeElement = new SizePropertyElement(actor);
-    this.panel.append(sizeElement.element);
-    this.elements.set('size', sizeElement);
+      let sizeElement = new SizePropertyElement(actor);
+      this.panel.append(sizeElement.element);
+      this.elements.set('size', sizeElement);
 
-    let rotationElement = new RotationPropertyElement(actor);
-    this.panel.append(rotationElement.element);
-    this.elements.set('rotation', rotationElement);
+      let rotationElement = new RotationPropertyElement(actor);
+      this.panel.append(rotationElement.element);
+      this.elements.set('rotation', rotationElement);
+    }
+    
 
     // extra properties if any
     for(let property of actor.properties) {

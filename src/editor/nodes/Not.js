@@ -2,7 +2,7 @@ import Node from "./Node";
 import {toDegree} from '@/utils/utils'
 import DataType from '../data/DataType';
 
-NodeTemplate.Not = {
+NodeTemplate.set({
   className: 'Not',
   name: 'Not',
   inputs: [{
@@ -23,7 +23,7 @@ NodeTemplate.Not = {
   elementClass: ['logic', 'collapsed'],
   category: 'Logic',
   keywords: ['logic','!','not']
-}
+})
 
 export default class Not extends Node
 {

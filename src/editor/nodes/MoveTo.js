@@ -3,7 +3,7 @@ import DataType from '../data/DataType';
 import Vec2 from '../math/Vec2';
 import { numericVector } from '@/utils/utils';
 
-NodeTemplate.MoveTo = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'MoveTo',
   name: 'Move To',
@@ -29,7 +29,7 @@ NodeTemplate.MoveTo = {
     duration: 1
   },
   category: 'Animation',
-}
+})
 
 export default class MoveTo extends Task
 {

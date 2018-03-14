@@ -1,7 +1,7 @@
 import Node from "./Node";
 import DataType from "../data/DataType";
 
-NodeTemplate.Extractor = {
+NodeTemplate.set({
   className: 'Extractor',
   name: 'Extractor',
   enter: {
@@ -18,7 +18,7 @@ NodeTemplate.Extractor = {
   elementClass: ['utility', 'center-input'],
   category: 'Utilities',
   keywords: ['break']
-}
+})
 
 export default class Extractor extends Node
 {

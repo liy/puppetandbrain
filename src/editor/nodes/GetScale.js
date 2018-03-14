@@ -1,7 +1,7 @@
 import Node from "./Node";
 import DataType from '../data/DataType';
 
-NodeTemplate.GetScale = {
+NodeTemplate.set({
   className: 'GetScale',
   name: 'Scale',
   inputs: [{
@@ -18,7 +18,7 @@ NodeTemplate.GetScale = {
   }],
   elementClass: ['property', 'collapsed'],
   category: 'Property'
-}
+})
 
 export default class GetScale extends Node
 {

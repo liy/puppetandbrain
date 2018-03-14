@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.SetScale = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'SetScale',
   name: 'Set Scale',
@@ -22,7 +22,7 @@ NodeTemplate.SetScale = {
   },
   elementClass: ['property'],
   category: 'Transformation'
-}
+})
 
 export default class SetScale extends Task
 {

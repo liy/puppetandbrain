@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task'
 import DataType from '../data/DataType';
 
-NodeTemplate.Branch = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Branch',
   name: 'Branch',
@@ -22,7 +22,7 @@ NodeTemplate.Branch = {
   elementClass: ['flow-control'],
   category: 'Flow Control',
   keywords: ['if else']
-}
+})
 
 export default class Branch extends Task
 {

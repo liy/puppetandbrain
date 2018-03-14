@@ -1,6 +1,6 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
 
-NodeTemplate.ClickEvent = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'ClickEvent',
   // I know it is not release and up, but click make sense to non-programmer
@@ -11,7 +11,7 @@ NodeTemplate.ClickEvent = {
     name: 'up'
   }],
   keywords: [...ParentTemplate.keywords, 'mouse down', 'mouse up']
-}
+})
 
 export default class ClickEvent extends Listener
 {

@@ -2,7 +2,7 @@ import Adaptor from "./Adaptor";
 import DataType from "../data/DataType";
 import {toRadian} from '@/utils/utils'
 
-NodeTemplate.Trigonometry = {
+NodeTemplate.set({
   className: 'Trigonometry',
   name: 'Sine',
   blockClassName: 'AdaptorBlock',
@@ -46,7 +46,7 @@ NodeTemplate.Trigonometry = {
     'cos', 'cosin',
     'tangent', 'tan' 
   ]
-}
+})
 
 export default class Trigonometry extends Adaptor
 {

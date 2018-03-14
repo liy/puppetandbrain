@@ -1,7 +1,7 @@
 import Node from '../Node';
 import DataType from '../../data/DataType';
 
-NodeTemplate.MapSize = {
+NodeTemplate.set({
   className: 'MapSize',
   name: 'Map Size',
   inputs: [{
@@ -21,7 +21,7 @@ NodeTemplate.MapSize = {
   },
   elementClass: ['map', 'collapsed'],
   category: 'Map'
-}
+})
 
 export default class MapSize extends Node
 {

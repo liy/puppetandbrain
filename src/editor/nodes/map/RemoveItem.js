@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from '../Task';
 import DataType from '../../data/DataType';
 
-NodeTemplate.RemoveItem = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'RemoveItem',
   name: 'Remove Item',
@@ -27,7 +27,7 @@ NodeTemplate.RemoveItem = {
   },
   elementClass: ['map'],
   category: 'Map'
-}
+})
 
 export default class RemoveItem extends Task
 {

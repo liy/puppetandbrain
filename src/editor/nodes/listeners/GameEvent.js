@@ -1,16 +1,16 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
 
-NodeTemplate.GameEvent = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'GameEvent',
+  name: 'Game Event',
   execution: [{
     name: 'start'
   }, {
     name: 'stop'
   }],
-  name: 'Game Event',
   keywords: ['game start', 'game stop']
-}
+})
 
 export default class GameEvent extends Listener
 {

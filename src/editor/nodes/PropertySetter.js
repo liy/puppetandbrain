@@ -1,7 +1,7 @@
 import {Task} from "./Task";
 import DataType from '../data/DataType';
 
-NodeTemplate.PropertySetter = {
+NodeTemplate.set({
   className: 'PropertySetter',
   enter: {
     name: 'default',
@@ -14,7 +14,7 @@ NodeTemplate.PropertySetter = {
   outputs: [],
   elementClass: ['property', 'setter'],
   category: 'Property'
-}
+})
 
 export default class PropertySetter extends Task
 {

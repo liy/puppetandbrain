@@ -1,13 +1,13 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.Perform = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Perform',
   elementClass: ['perform'],
   category: 'Action',
   keywords: ['call', 'message', 'function', 'method']
-}
+})
 
 export default class Perform extends Task
 {

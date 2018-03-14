@@ -2,7 +2,7 @@ import Node from "./Node";
 import DataType from "../data/DataType";
 import Vec2 from "../math/Vec2";
 
-NodeTemplate.MakeVector = {
+NodeTemplate.set({
   className: 'MakeVector',
   name: 'Make Vector',
   outputName: 'vector',
@@ -30,7 +30,7 @@ NodeTemplate.MakeVector = {
   elementClass: ['utility', 'center-output'],
   category: 'Utilities',
   keywords: ['vector', 'transformation']
-}
+})
 
 export default class MakeVector extends Node
 {

@@ -1,7 +1,7 @@
 import { Task, Template as ParentTemplate } from "./Task";
 import DataType from "../data/DataType";
 
-NodeTemplate.SceneChange = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'SceneChange',
   name: 'Scene Change',
@@ -18,7 +18,7 @@ NodeTemplate.SceneChange = {
   }],
   elementClass: ['utility'],
   category: 'Utilities'
-}
+})
 
 export default class SceneChange extends Task
 {

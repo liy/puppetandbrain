@@ -44,7 +44,7 @@ export default class AdaptorBlock extends Block
 
     this.headerName.textContent = this.node.operation.name;
 
-    let operations = NodeTemplate[node.className].operations;
+    let operations = NodeTemplate.get(node.className).operations;
     for(let operation of operations) {
       this.addSelection(operation)
     }

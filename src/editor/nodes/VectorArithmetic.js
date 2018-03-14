@@ -3,7 +3,7 @@ import DataType from '../data/DataType';
 import Vec2 from '../math/Vec2';
 import { numericVector } from '@/utils/utils';
 
-NodeTemplate.VectorArithmetic = {
+NodeTemplate.set({
   className: 'VectorArithmetic',
   blockClassName: 'AdaptorBlock',
   name: 'Vector Add',
@@ -53,7 +53,7 @@ NodeTemplate.VectorArithmetic = {
     'vector add', 'vector addition', '+' , 
     'vector substract', '-'
   ]
-}
+})
 
 export default class VectorArithmetic extends Adaptor
 {

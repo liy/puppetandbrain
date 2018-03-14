@@ -2,7 +2,7 @@ import Node from "./Node";
 import {toDegree} from '@/utils/utils'
 import DataType from '../data/DataType';
 
-NodeTemplate.GetRotation = {
+NodeTemplate.set({
   className: 'GetRotation',
   name: 'Rotation',
   inputs: [{
@@ -19,7 +19,7 @@ NodeTemplate.GetRotation = {
   }],
   elementClass: ['property', 'collapsed'],
   category: 'Property'
-}
+})
 
 export default class GetRotation extends Node
 {

@@ -1,7 +1,7 @@
 import Node from "./Node";
 import DataType from '../data/DataType';
 
-NodeTemplate.GetPosition = {
+NodeTemplate.set({
   className: 'GetPosition',
   name: 'Position',
   inputs: [{
@@ -18,7 +18,7 @@ NodeTemplate.GetPosition = {
   }],
   elementClass: ['property', 'collapsed'],
   category: 'Property'
-}
+})
 
 export default class GetPosition extends Node
 {

@@ -1,7 +1,7 @@
 import Node from '../Node';
 import DataType from '../../data/DataType';
 
-NodeTemplate.GetByIndex = {
+NodeTemplate.set({
   className: 'GetByIndex',
   name: 'Get Item',
   inputs: [{
@@ -26,7 +26,7 @@ NodeTemplate.GetByIndex = {
   },
   elementClass: ['array', 'center-output'],
   category: 'List'
-}
+})
 
 export default class GetByIndex extends Node
 {

@@ -4,7 +4,7 @@ import Block from './blocks/Block';
 window.BlockFactory = {
   create: function(node) {
     let blockClass = BlockClasses[node.className+'Block'];
-    let blockClassName = NodeTemplate[node.className].blockClassName;
+    let blockClassName = NodeTemplate.get(node.className).blockClassName;
     if(blockClassName) {
       blockClass = BlockClasses[blockClassName];
     }
@@ -23,7 +23,7 @@ window.BlockFactory = {
 
   createTemplateBlock: function(template) {
     let blockClass = BlockClasses[template.className+'Block'];
-    let blockClassName = NodeTemplate[template.className].blockClassName;
+    let blockClassName = NodeTemplate.get(template.className).blockClassName;
     if(blockClassName) {
       blockClass = BlockClasses[blockClassName];
     }

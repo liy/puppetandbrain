@@ -1,7 +1,7 @@
 import Adaptor from "./Adaptor";
 import DataType from "../data/DataType";
 
-NodeTemplate.Logic = {
+NodeTemplate.set({
   className: 'Logic',
   blockClassName: 'AdaptorBlock',
   name: 'And',
@@ -44,7 +44,7 @@ NodeTemplate.Logic = {
   keywords: ['logic', 
     '||', '&&', 'and', 'or',
   ]
-}
+})
 
 export default class Logic extends Adaptor
 {

@@ -1,7 +1,7 @@
 import {Listener, Template as ParentTemplate} from "./Listener";
 import DataType from "../../data/DataType";
 
-NodeTemplate.GameLoop = {
+NodeTemplate.set({
   ...ParentTemplate,
   name: 'Game Loop',
   className: 'GameLoop',
@@ -15,7 +15,7 @@ NodeTemplate.GameLoop = {
     }
   }],
   keywords: ['tick']
-}
+})
 
 export default class GameLoop extends Listener
 {

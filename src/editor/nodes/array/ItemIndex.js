@@ -1,7 +1,7 @@
 import Node from '../Node';
 import DataType from '../../data/DataType';
 
-NodeTemplate.ItemIndex = {
+NodeTemplate.set({
   className: 'ItemIndex',
   name: 'Item Index',
   inputs: [{
@@ -26,7 +26,7 @@ NodeTemplate.ItemIndex = {
   },
   elementClass: ['array', 'center-output'],
   category: 'List'
-}
+})
 
 export default class ItemIndex extends Node
 {

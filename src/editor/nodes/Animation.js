@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task'
 import DataType from '../data/DataType';
 
-NodeTemplate.Animation = {
+NodeTemplate.scope('SpineActor', {
   ...ParentTemplate,
   className: 'Animation',
   name: 'Animation',
@@ -18,7 +18,7 @@ NodeTemplate.Animation = {
   },
   category: 'Animation',
   keywords: [...ParentTemplate.keywords, 'animate']
-}
+})
 
 export default class Animation extends Task
 {

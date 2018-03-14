@@ -1,5 +1,4 @@
 import ArrayMap from '@/utils/ArrayMap'
-import ActorSelection from './objects/ActorSelection';
 import EventEmitter from '@/utils/EventEmitter';
 import ContextMenu from './ui/ContextMenu';
 import Mouse from './access/Mouse';
@@ -28,15 +27,6 @@ export default class extends EventEmitter
     
     this.mouse = new Mouse(this.renderer);
     this.contextMenu = new ContextMenu();
-    
-    // For deselection
-    let catcher = new PIXI.Graphics();
-    catcher.interactive = true;
-    catcher.beginFill(0, 0);
-    catcher.drawRect(0, 0, canvas.width, canvas.height);
-    catcher.endFill();
-    this.container.addChildAt(catcher, 0);
-    catcher.on('mousedown', ActorSelection.deselectAll, ActorSelection);
 
     this.loop = this.loop.bind(this);
   }

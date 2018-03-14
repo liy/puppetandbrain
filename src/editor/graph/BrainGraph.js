@@ -17,6 +17,7 @@ export default class BrainGraph extends EventEmitter
     this.container = container;
     this.blockContainer = this.container.querySelector('#block-container');
     this.svg = this.container.querySelector('#graph-svg');
+    this.graphName = this.container.querySelector('.graph-name');
 
     this.blocks = new ArrayMap();
 
@@ -147,6 +148,8 @@ export default class BrainGraph extends EventEmitter
   open(brain) {
     this.brain = brain;
     this.blocks.clear();
+
+    this.graphName.textContent = `${this.brain.owner.name} - brain`;
 
     // extract all variables of the brain
     ElementController.open(brain);

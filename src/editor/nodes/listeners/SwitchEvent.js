@@ -2,7 +2,7 @@ import Switch from '../../access/Switch';
 import {Listener, Template as ParentTemplate} from "./Listener";
 import DataType from "../../data/DataType";
 
-NodeTemplate.SwitchEvent = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'SwitchEvent',
   name: 'Switch Event',
@@ -41,7 +41,7 @@ NodeTemplate.SwitchEvent = {
     'pre-acceptance': 0
   },
   keywords: [...ParentTemplate.keywords, 'switch access', 'accessibility']
-}
+})
 
 export default class SwitchEvent extends Listener
 {

@@ -8,7 +8,7 @@ export default class Brain
   constructor(owner, id) {
     this.owner = owner;
     this.activity = this.owner.activity;
-    this.lookUp = this.owner.lookUp;
+    this.lookUp = this.activity.lookUp;
     this.id = this.lookUp.addBrain(this, id)
     this.nodes = new ArrayMap();
 

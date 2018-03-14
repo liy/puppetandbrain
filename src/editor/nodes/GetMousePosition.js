@@ -2,7 +2,7 @@ import Node from "./Node";
 import {toDegree} from '@/utils/utils'
 import DataType from '../data/DataType';
 
-NodeTemplate.GetMousePosition = {
+NodeTemplate.set({
   className: 'GetMousePosition',
   name: 'Mouse Position',
   inputs:[],
@@ -15,7 +15,7 @@ NodeTemplate.GetMousePosition = {
   elementClass: ['utility', 'collapsed'],
   category: 'Utilities',
   keywords: ['mouse', 'position']
-}
+})
 
 export default class GetMousePosition extends Node
 {

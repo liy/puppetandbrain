@@ -35,7 +35,7 @@ export class Task extends Node
 
     // out
     if(pod.execution) {
-      for(let execution of NodeTemplate[this.className].execution) {
+      for(let execution of NodeTemplate.get(this.className).execution) {
         this.execution.set(execution.name)
       }
     }

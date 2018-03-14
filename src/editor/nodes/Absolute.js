@@ -1,7 +1,7 @@
 import Node from "./Node";
 import DataType from "../data/DataType";
 
-NodeTemplate.Absolute = {
+NodeTemplate.set({
   className: 'Absolute',
   name: 'Absolute',
   inputs: [{
@@ -21,7 +21,7 @@ NodeTemplate.Absolute = {
   },
   elementClass: ['arithmetic', 'collapsed'],
   category: 'Math',
-}
+})
 
 export default class Absolute extends Node
 {

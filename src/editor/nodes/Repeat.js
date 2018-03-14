@@ -1,7 +1,7 @@
 import {Task, Template as ParentTemplate} from './Task';
 import DataType from '../data/DataType';
 
-NodeTemplate.Repeat = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'Repeat',
   name: 'Repeat',
@@ -28,7 +28,7 @@ NodeTemplate.Repeat = {
   elementClass: ['flow-control'],
   category: 'Flow Control',
   keywords: ['loop', 'repeat']
-}
+})
 
 export default class Repeat extends Task
 {

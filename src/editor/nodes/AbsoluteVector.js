@@ -2,7 +2,7 @@ import Node from "./Node";
 import DataType from "../data/DataType";
 import Vec2 from "../math/Vec2";
 
-NodeTemplate.AbsoluteVector = {
+NodeTemplate.set({
   className: 'AbsoluteVector',
   name: 'Absolute Vector',
   inputs: [{
@@ -25,7 +25,7 @@ NodeTemplate.AbsoluteVector = {
   },
   elementClass: ['arithmetic', 'collapsed'],
   category: 'Math',
-}
+})
 
 export default class AbsoluteVector extends Node
 {
