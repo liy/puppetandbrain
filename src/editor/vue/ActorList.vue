@@ -107,7 +107,7 @@ export default {
         }
       }
       
-      tapHold.wait(500).then(() => {
+      tapHold.wait(400).then(() => {
         const actor = Hub.activity.lookUp.get(e.target.dataset.actor)
         actor.openBrain();
       })
