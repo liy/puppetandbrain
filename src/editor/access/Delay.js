@@ -4,14 +4,14 @@ export default class Delay
     this.timeoutID = 0;
   }
 
-  wait(time) {
+  wait(miniSeconds) {
     this.isWaiting = true;
     return new Promise((resolve, reject) => {
       clearTimeout(this.timeoutID);
       this.timeoutID = setTimeout(() => {
         this.isWaiting = false;
         resolve();
-      }, time)
+      }, miniSeconds)
     })
   }
 

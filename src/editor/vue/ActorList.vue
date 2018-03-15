@@ -1,7 +1,7 @@
 <template>
 <ul class='actor-list' ref="list">
   <li v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled" :data-title="actor.name" data-title-position="right"
-    @touchstart="touchDragStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
+    @touchstart="touchStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
     <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled" class="actor-list-entry"></actor-list-entry>
   </li>
 </ul>
@@ -11,6 +11,9 @@
 import {mapGetters} from 'vuex'
 import ActorListEntry from './ActorListEntry.vue';
 import {isMobile} from '@/utils/utils';
+import Delay from '../access/Delay';
+
+const tapHoldDelay = new Delay()
 
 export default {
   name: 'actor-list',
@@ -56,22 +59,20 @@ export default {
     dbClick(actor) {
       actor.openBrain();
     },
-    tap(actor) {
-      this.select(actor);
-      actor.openBrain();
-      this.tapTarget = null;
-    },
     dragStart(e) {
       this.dragTarget = e.target;
       this.dragTarget.classList.add('dragging')
 
       this.select(Hub.activity.lookUp.get(this.dragTarget.dataset.actor))
     },
-    touchDragStart(e) {
+    touchStart(e) {
       // stop dragging the screen
       e.preventDefault();
       
-      this.tapTarget = e.target;
+      tapHoldDelay.wait(500).then(() => {
+        const actor = Hub.activity.lookUp.get(e.target.dataset.actor)
+        actor.openBrain();
+      })
 
       if(e.target.getAttribute('draggable') == 'true') {
         this.dragStart(e)
@@ -90,7 +91,7 @@ export default {
       this.sort();
     },
     touchMove(e) {
-      this.tapTarget = null;
+      tapHoldDelay.cancel();
 
       if(!this.dragTarget) return;
 
@@ -112,13 +113,9 @@ export default {
       this.dragTarget.classList.remove('dragging')
       this.dragTarget = null;
       this.dropTarget = null;
-      this.tapTarget = null;
     },
     touchDragEnd(e) {
-      console.log(this.tapTarget)
-      if(this.tapTarget) {
-        this.tap(Hub.activity.lookUp.get(this.tapTarget.dataset.actor))
-      }
+      tapHoldDelay.cancel();
 
       if(!this.dragTarget) return;
 
