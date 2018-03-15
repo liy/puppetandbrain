@@ -20,9 +20,6 @@ export default class extends EventEmitter
 
     if(isMobile)
     {
-      const rect = this.stage.canvas.getBoundingClientRect();
-      this.offset = {x: rect.left, y: rect.top}
-
       // Update mouse position for GetMousePosition block query purpose
       document.addEventListener('pointerdown', this.updatePosition);
       document.addEventListener('pointermove', this.updatePosition);
@@ -69,12 +66,11 @@ export default class extends EventEmitter
   }
 
   updatePosition(e) {
-    let x = e.clientX;
-    let y = e.clientY;
+    const rect = this.stage.canvas.getBoundingClientRect();
 
     // override position
-    this._position.x = x - this.offset.x;
-    this._position.y = y - this.offset.y;
+    this._position.x = e.clientX - rect.left;
+    this._position.y = e.clientY - rect.top;
   }
 
   move(e) {
