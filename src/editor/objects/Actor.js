@@ -115,7 +115,7 @@ export default class Actor extends EventEmitter
   }
 
   openBrain() {
-    BrainGraph.open(this.brain);
+    Hub.history.push(Commander.create('OpenGraph', this.brain.id).process());
   }
 
   get lookUp() {
@@ -195,8 +195,8 @@ export default class Actor extends EventEmitter
     setTimeout(() => {
       this._clicks = 0;
     }, 300)
-    if(++this._clicks%2 == 0) {
-      Hub.history.push(Commander.create('OpenGraph', this.brain.id).process());
+    if(++this._clicks%2 == 0 && !Hub.stage.playing) {
+      this.openBrain();
     }
 
     this.emit('pointerup', this)
