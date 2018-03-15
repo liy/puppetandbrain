@@ -10,7 +10,7 @@ NodeTemplate.set({
   }, {
     name: 'stop'
   }],
-  keywords: [...ParentTemplate.keywords, 'mouse', 'cursor']
+  keywords: [...ParentTemplate.keywords, 'mouse', 'cursor', 'move', 'stop']
 })
 
 export default class MouseEvent extends Listener
