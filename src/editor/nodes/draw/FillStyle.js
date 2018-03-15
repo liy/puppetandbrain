@@ -21,7 +21,7 @@ const FillStyleTemplate = {
     }
   }],
   memory: {
-    color: 0xFF0000,
+    color: 0xFFFFFF,
     opacity: 1
   },
   category: 'Draw',

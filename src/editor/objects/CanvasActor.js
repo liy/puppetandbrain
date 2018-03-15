@@ -50,14 +50,16 @@ export default class CanvasActor extends Actor
 
     this.lineStyle = {
       width:2,
-      color: 0xFF9900,
+      color: 0x000000,
       alpha: 1
     }
+    this.defaultLineStyle = {...this.lineStyle}
 
     this.fillStyle = {
       color: 0xFFFFFF,
       alpha: 1
     }
+    this.defaultFillStyle = {...this.fillStyle}
   }
 
   select() {
@@ -70,6 +72,8 @@ export default class CanvasActor extends Actor
 
   gameStop() {
     this.clearDraw();
+    this.lineStyle = {...this.defaultLineStyle}
+    this.fillStyle = {...this.defaultFillStyle}
   }
 
   clearDraw() {
@@ -94,12 +98,7 @@ export default class CanvasActor extends Actor
   }
 
   lineTo(position) {
-    // console.log(position.x, position.y)
-    // console.log(this.fillStyle)
-    // console.log(this.lineStyle)
-    // this.graphics.beginFill(this.fillStyle.color, this.fillStyle.alpha)
     this.graphics.lineStyle(this.lineStyle.width, this.lineStyle.color, this.lineStyle.alpha)
     this.graphics.lineTo(position.x, position.y)
-    // this.penTo(position)
   }
 }
