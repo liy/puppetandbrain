@@ -13,7 +13,7 @@ import ActorListEntry from './ActorListEntry.vue';
 import {isMobile} from '@/utils/utils';
 import Delay from '../access/Delay';
 
-const tapHoldDelay = new Delay()
+const tapHold = new Delay()
 
 export default {
   name: 'actor-list',
@@ -69,7 +69,7 @@ export default {
       // stop dragging the screen
       e.preventDefault();
       
-      tapHoldDelay.wait(500).then(() => {
+      tapHold.wait(500).then(() => {
         const actor = Hub.activity.lookUp.get(e.target.dataset.actor)
         actor.openBrain();
       })
@@ -91,7 +91,7 @@ export default {
       this.sort();
     },
     touchMove(e) {
-      tapHoldDelay.cancel();
+      tapHold.cancel();
 
       if(!this.dragTarget) return;
 
@@ -115,7 +115,7 @@ export default {
       this.dropTarget = null;
     },
     touchDragEnd(e) {
-      tapHoldDelay.cancel();
+      tapHold.cancel();
 
       if(!this.dragTarget) return;
 

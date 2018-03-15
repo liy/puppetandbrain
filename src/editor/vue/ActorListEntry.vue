@@ -56,7 +56,7 @@ export default {
   border-radius: 24px;
   
   background-size: 70%;
-  background-color: #f3e9ff;
+  background-color: #e7d3ff;
   background-repeat: no-repeat; 
   background-position: center center;
 
@@ -70,7 +70,7 @@ export default {
 }
 
 .actor-list-entry-icon.sortDisabled {
-  background-color: #ececec;
+  background-color: #ded9e4;
 }
 
 .actor-list-entry-icon.selected {
