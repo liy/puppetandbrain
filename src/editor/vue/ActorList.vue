@@ -164,7 +164,7 @@ ul {
   width: 56px;
   min-height: 56px;
   // background-color: rgba(226, 223, 242, 0.8);
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(253, 253, 253, 0.8);
   border-radius: 28px;
 
   user-select: none;
