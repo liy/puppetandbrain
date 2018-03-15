@@ -1,14 +1,17 @@
 <template>
-<div class='actor-list-entry-icon' :class="{sortDisabled: !sortEnabled}" :style="{backgroundImage: `url(${url})`}"></div>
+<div class='actor-list-entry-icon' :class="{sortDisabled: !sortEnabled, selected: selected}" :style="{backgroundImage: `url(${url})`}"></div>
 </template>
 
 <script>
+import ActorSelection from '../objects/ActorSelection'
+
 export default {
   name: 'actor-list-entry',
   props: ['actorID', 'sortEnabled'],
   data() {
     return {
-      url: null
+      url: null,
+      selected: false
     }
   },
   computed: {
@@ -16,11 +19,20 @@ export default {
       return Hub.activity.lookUp.get(this.actorID)
     }
   },
+  mounted() {
+    ActorSelection.on('actor.selection.change', this.onSelectionChange, this);
+  },
+  beforeDestroy() {
+    ActorSelection.off('actor.selection.change', this.onSelectionChange, this);
+  },
   created() {
     console.log(this.sortEnabled)
     this.setUrl();
   },
   methods: {
+    onSelectionChange(actors) {
+      this.selected = actors[0] && (actors[0].id == this.actorID)
+    },
     setUrl() {
       if(this.actor.puppetID) {
         API.getUrl(`${this.actor.libDir}/${this.actor.puppetID}/snapshot.png`).then(url => {
@@ -53,5 +65,8 @@ export default {
 
 .actor-list-entry-icon.sortDisabled {
   background-color: #ececec;
+}
+.actor-list-entry-icon.selected {
+  background-color: #ae8dd6;
 }
 </style>
