@@ -25,7 +25,7 @@ export default class extends EventEmitter
       antialias: true
     });
     
-    this.mouse = new Mouse(this.renderer);
+    this.mouse = new Mouse(this.renderer, this);
     this.contextMenu = new ContextMenu();
 
     this.loop = this.loop.bind(this);
