@@ -1,7 +1,7 @@
 <template>
 <div class='list-container' @touchstart="preventRefresh">
   <ul class='actor-list' ref="list">
-    <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled"
+    <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled" :data-title="actor.name" data-title-position="right"
       @touchstart="touchStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
       <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled"></actor-list-entry>
     </li>
@@ -151,6 +151,7 @@ export default {
   top: 160px;
   left: 40px;
 
+  overflow-x: visible;
   overflow-y: scroll;
   border-radius: 28px;
 
@@ -187,13 +188,17 @@ export default {
   padding: 0;
   list-style: none;
 
-  width: 56px;
+  // FIXME: in order to use css tooltip
+  // I have to make the width larger than normal... a hack
+  // maybe remove css tooltip for actor list.
+  width: 200px;
   min-height: 56px;
   // background-color: rgba(226, 223, 242, 0.8);
 
   user-select: none;
 
   .actor-list-entry {
+    position: relative;
     // if actor list entry has size change animation
     // this size setting is useful to keep container outer size fixed
     width: 48px;
