@@ -30,7 +30,7 @@ export default class
     // Have to try to use the exisiting id, as command calling this process can be
     // undo and redo. Further redo action might have nodes who are referencing this actor.
     // Therefore, we need to try to keep the id the same.
-    let actor = ActorFactory.create(pod.className, pod.id, this.activity)
+    let actor = ActorFactory.create(pod.className, pod.id, this.activity, pod)
     // There must be a global stage variable available
     Hub.stage.addActor(actor);
 

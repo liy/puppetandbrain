@@ -8,9 +8,8 @@ import API from '../../API';
 
 export default class SpineActor extends Actor
 {
-  constructor(id, activity) {
-    super(id, activity);
-    
+  constructor(id, activity, pod) {
+    super(id, activity, pod);
   }
 
   async preload(pod) {
@@ -73,6 +72,10 @@ export default class SpineActor extends Actor
     this.emit('actor.ready', this);
   }
 
+  sortDepth() {
+    Hub.stage.addChild(this.spineComponent.container);
+  }
+
   hitTest(x, y) {
     // TODO: override me 
     return Hub.stage.renderer.plugins.interaction.hitTest(new PIXI.Point(x, y)) == this.spineComponent.spine;
@@ -106,8 +109,6 @@ export default class SpineActor extends Actor
     super.select();
 
     this.spineComponent.container.filters = [this.selectOutline]
-    // bring it to front
-    Hub.stage.addChild(this.spineComponent.container);
   }
 
   deselect() {

@@ -11,13 +11,16 @@ import ActorSelection from "./ActorSelection";
 export default class CanvasActor extends Actor
 {
   constructor(id, activity) {
-    super(id, activity)
+    super(id, activity, {name: 'canvas'})
 
     this.pen = {x:0, y:0};
 
     this.container = this.addComponent('container', new ContainerComponent()).container;
 
     this.dragEnabled = false;
+    // Only CanvasActor cannot be sorted, it will always be the 
+    // lowest layer
+    this.sortEnabled = false;
   }
 
   init(pod={}) {

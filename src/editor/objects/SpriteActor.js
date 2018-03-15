@@ -9,8 +9,8 @@ import LoaderBucket from '../resources/LoaderBucket';
 
 export default class SpriteActor extends Actor
 {
-  constructor(id, activity) {
-    super(id, activity);
+  constructor(id, activity, pod) {
+    super(id, activity, pod);
   }
 
   async preload(pod) {
@@ -70,12 +70,15 @@ export default class SpriteActor extends Actor
     return this.properties.get('image').data
   }
 
+  sortDepth() {
+    // bring it to front
+    Hub.stage.addChild(this.spriteContainer.container);
+  }
+
   select() {
     super.select();
 
     this.spriteContainer.container.filters = [this.selectOutline]
-    // bring it to front
-    Hub.stage.addChild(this.spriteContainer.container);
   }
 
   deselect() {

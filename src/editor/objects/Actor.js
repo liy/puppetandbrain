@@ -13,9 +13,29 @@ import ContextMenu from '../ui/ContextMenu';
 
 export default class Actor extends EventEmitter
 {
-  constructor(id, activity) {
+  constructor(id, activity, {name, puppetID, libDir, libFiles, myPuppetID}) {
     super();
     this.activity = activity;
+
+    this.name = name;
+    Object.defineProperties(this, {
+      "puppetID": {
+        value: puppetID || null,
+        writable: false
+      },
+      "libDir": {
+        value: libDir || "library/puppets",
+        writable: false
+      },
+      "libFiles": {
+        value: libFiles || [],
+        writable: false
+      },
+      "myPuppetID": {
+        value: myPuppetID || null,
+        writable: false
+      },
+    });
 
     this.properties = new PropertyList(this);
 
@@ -27,6 +47,9 @@ export default class Actor extends EventEmitter
     this.touchDragMove = this.touchDragMove.bind(this)
 
     this.dragEnabled = true;
+    // Only CanvasActor cannot be sorted, it will always be the 
+    // lowest layer
+    this.sortEnabled = true;
 
     this.selected = false;
     this._clicks = 0;
@@ -57,27 +80,6 @@ export default class Actor extends EventEmitter
   }
 
   init(pod={}) {
-    Object.defineProperties(this, {
-      "puppetID": {
-        value: pod.puppetID || null,
-        writable: false
-      },
-      "libDir": {
-        value: pod.libDir || "library/puppets",
-        writable: false
-      },
-      "libFiles": {
-        value: pod.libFiles || [],
-        writable: false
-      },
-      "myPuppetID": {
-        value: pod.myPuppetID || null,
-        writable: false
-      },
-    });
-
-    this.name = pod.name || 'Puppet';
-    
     let pos = pod.position || { x: aroundAt(Hub.stage.stageWidth/2), y: aroundAt(Hub.stage.stageHeight/2) };
     this.position = new Vec2(pos);
     this.rotation = pod.rotation || 0;
@@ -106,6 +108,14 @@ export default class Actor extends EventEmitter
     this.brain.destroy();
 
     // console.log('destroy', this)
+  }
+
+  sortDepth() {
+    // override me
+  }
+
+  openBrain() {
+    BrainGraph.open(this.brain);
   }
 
   get lookUp() {

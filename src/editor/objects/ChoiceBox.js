@@ -16,8 +16,8 @@ import { aroundAt } from '@/utils/utils';
 
 export default class ChoiceBox extends Actor
 {
-  constructor(id, activity) {
-    super(id, activity);
+  constructor(id, activity, pod) {
+    super(id, activity, pod);
     
     this.selectOutline = new filters.OutlineFilter(4, 0xc95ce8)
     this.hoverOutline = new filters.OutlineFilter(3, 0xdbace8)
@@ -115,6 +115,9 @@ export default class ChoiceBox extends Actor
     super.select();
 
     this.box.graphics.filters = [this.selectOutline]
+  }
+
+  sortDepth() {
     // bring it to front
     Hub.stage.addChild(this.box.container);
   }

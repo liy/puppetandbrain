@@ -71,7 +71,7 @@ export default class ActivityLoader
     for(let id of pod.stage) {
       let actorPod = pod.store[id];
 
-      let actor = ActorFactory.create(actorPod.className, actorPod.id, this.activity);
+      let actor = ActorFactory.create(actorPod.className, actorPod.id, this.activity, actorPod);
       actor.init(actorPod);
       actorBuffer.push(actor);
     }

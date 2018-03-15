@@ -2,7 +2,7 @@
 <div id="editor">
   <terminal/>
   <theater ref='theater' width=1024 height=768></theater>
-  <!-- <actor-list/> -->
+  <actor-list/>
   <node-graph/>
   <toolbox/>
   <mode-button/>

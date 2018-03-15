@@ -94,6 +94,14 @@ export default class extends EventEmitter
     this.emit('stage.actor.added', actor);
   }
 
+  sort(actors) {
+    this.actors.clear();
+    for(const actor of actors) {
+      this.actors.set(actor.id, actor)
+      actor.sortDepth();
+    }
+  }
+
   removeActor(actor) {
     // console.log('remove actor')
     this.actors.remove(actor.id);

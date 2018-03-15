@@ -5,6 +5,8 @@ const state = {
   tutorialMode: false,
   browserVisible: false,
 
+  actors: [],
+
   historyLock: true,
   saveLock: true,
   modeLock: true,
@@ -20,6 +22,8 @@ const getters = {
   propertyPanelVisable: state => state.propertyPanelVisable,
   tutorialMode: state => state.tutorialMode,
   browserVisible: state => state.browserVisible,
+
+  actors: state => state.actors,
   
   historyLock: state => state.historyLock,
   saveLock: state => state.saveLock,
@@ -72,7 +76,11 @@ const mutations = {
 
   lock(state, data) {
     state[data.target] = data.locked;
-  }
+  },
+
+  setActors(state, actors) {
+    state.actors = actors;
+  },
 }
 
 const actions = {};

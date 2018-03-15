@@ -46,6 +46,14 @@ class HubClass extends EventEmitter
       this.stage = new Stage(document.getElementById('stage'));
       this.stage.startRender();
 
+      this.stage.on('stage.actor.added', () => {
+        store.commit('setActors', this.stage.actors.getValues())
+      });
+
+      this.stage.on('stage.actor.removed', () => {
+        store.commit('setActors', this.stage.actors.getValues())
+      });
+
       console.log('installed')
       resolve();
     })
@@ -107,8 +115,6 @@ class HubClass extends EventEmitter
     var canvasActor = new CanvasActor(undefined, this.activity);
     canvasActor.init();
     this.stage.addActor(canvasActor)
-
-    let t = NodeTemplate.getTemplates(canvasActor);
 
     return this.activity;
   }
