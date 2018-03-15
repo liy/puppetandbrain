@@ -1,7 +1,7 @@
 <template>
 <div id="side-bar">
   <ul ref="list">
-    <li v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="select(actor)" :key="actor.id" :draggable="actor.sortEnabled" 
+    <li v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled" :data-title="actor.name" data-title-position="right"
       @touchstart="touchDragStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
       <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled" class="actor-list-entry"></actor-list-entry>
     </li>
@@ -12,6 +12,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import ActorListEntry from './ActorListEntry.vue';
+import {isMobile} from '@/utils/utils';
 
 export default {
   name: 'actor-list',
@@ -51,19 +52,30 @@ export default {
     select(actor) {
       actor.select();
     },
+    click(actor) {
+      this.select(actor);
+    },
     dbClick(actor) {
-      console.log(actor)
       actor.openBrain();
+    },
+    tap(actor) {
+      this.select(actor);
+      actor.openBrain();
+      this.tapTarget = null;
     },
     dragStart(e) {
       this.dragTarget = e.target;
       this.dragTarget.classList.add('dragging')
+
+      this.select(Hub.activity.lookUp.get(this.dragTarget.dataset.actor))
     },
     touchDragStart(e) {
       // stop dragging the screen
       e.preventDefault();
+      
+      this.tapTarget = e.target;
+
       if(e.target.getAttribute('draggable') == 'true') {
-        this.select(Hub.activity.lookUp.get(e.target.dataset.actor))
         this.dragStart(e)
       }
     },
@@ -80,6 +92,8 @@ export default {
       this.sort();
     },
     touchMove(e) {
+      this.tapTarget = null;
+
       if(!this.dragTarget) return;
 
       let x = e.changedTouches[0].clientX;
@@ -100,10 +114,16 @@ export default {
       this.dragTarget.classList.remove('dragging')
       this.dragTarget = null;
       this.dropTarget = null;
+      this.tapTarget = null;
     },
     touchDragEnd(e) {
+      console.log(this.tapTarget)
+      if(this.tapTarget) {
+        this.tap(Hub.activity.lookUp.get(this.tapTarget.dataset.actor))
+      }
+
       if(!this.dragTarget) return;
-      
+
       this.dragEnd(e);
     }
   }
@@ -141,12 +161,14 @@ ul {
 
   user-select: none;
 
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // flex-direction: column;
-
   li {
+    position: relative;
+    
+    // if actor list entry has size change animation
+    // this size setting is useful to keep container outer size fixed
+    width: 48px;
+    height: 48px;
+    
     margin-top: 4px;
     margin-left: 4px;
     cursor: pointer;
@@ -155,5 +177,13 @@ ul {
   li:last-child {
     margin-bottom: 4px;
   }
+
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
+
+ul:empty {
+  opacity: 0;
+}
+
 </style>

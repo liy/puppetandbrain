@@ -60,13 +60,22 @@ export default {
   background-repeat: no-repeat; 
   background-position: center center;
 
+  opacity: 0.9;
+
   pointer-events: none;
+
+  transform: scale(0.9);
+  // transition: opacity, background-color ease 0.3s;
+  transition: all ease 0.2s;
 }
 
 .actor-list-entry-icon.sortDisabled {
   background-color: #ececec;
 }
+
 .actor-list-entry-icon.selected {
   background-color: #ae8dd6;
+  opacity: 1;
+  transform: scale(1);
 }
 </style>
