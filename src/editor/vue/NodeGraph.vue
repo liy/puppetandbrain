@@ -1,7 +1,7 @@
 <template>
 <div ref='container' id='graph'>
   <div class='graph-name-container'>
-    <div class='graph-name'></div>
+    <div class='graph-name' :class="{hidden: hidden}"></div>
   </div>
   <div id='block-container' style="position:absolute; top:0; z-index:1;"></div>
   <svg id='graph-svg' style="position:absolute; top:0" ></svg>
@@ -10,8 +10,17 @@
 
 <script>
 import BrainGraphClass from '../graph/BrainGraph'
+import {mapGetters} from 'vuex'
+import {isMobile} from '@/utils/utils'
+
 export default {
   name: 'node-graph',
+  computed: {
+    ...mapGetters(['propertyPanelVisable']),
+    hidden() {
+      return isMobile && this.propertyPanelVisable
+    }
+  },
   mounted() {
     window.BrainGraph = new BrainGraphClass(this.$refs.container);
   },
@@ -79,6 +88,13 @@ export default {
   background-color: #77849a;
 
   padding: 5px 20px;
+
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.graph-name.hidden {
+  opacity: 0;
 }
 
 // For testing purpose only do not add width and height for block-container!!!

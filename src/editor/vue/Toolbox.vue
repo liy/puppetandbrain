@@ -27,8 +27,7 @@ export default {
     'delete-button': DeleteButton,
   },
   computed: {
-    ...mapGetters(['propertyPanelVisable']),
-    ...mapGetters(['stageMode'])
+    ...mapGetters(['propertyPanelVisable', 'stageMode']),
   }
 }
 </script>
