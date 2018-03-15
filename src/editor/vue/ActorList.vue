@@ -1,10 +1,9 @@
 <template>
-<!-- <div class='list-container' @wheel.prevent="scroll"> -->
-<div class='list-container'>
+<div class='list-container' @touchstart="preventRefresh">
   <ul class='actor-list' ref="list">
-    <li v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled"
+    <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled"
       @touchstart="touchStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
-      <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled" class="actor-list-entry"></actor-list-entry>
+      <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled"></actor-list-entry>
     </li>
   </ul>
 </div>
@@ -16,6 +15,7 @@ import ActorListEntry from './ActorListEntry.vue';
 import {isMobile} from '@/utils/utils';
 import Delay from '../access/Delay';
 import ActorSelection from '../objects/ActorSelection';
+import ClipPathTest from '@/assets/clip-path-test.svg';
 
 const tapHold = new Delay()
 
@@ -26,6 +26,7 @@ export default {
   },
   data() { 
     return {
+      ClipPathTest,
       dragTarget: null,
       dropTarget: null,
     }
@@ -44,6 +45,10 @@ export default {
     }
   },
   methods: {
+    preventRefresh(e) {
+      e.stopPropagation();
+      
+    },
     getSnapshotUrl(actor) {
       return API.getUrl(`${actor.libDir}/${actor.puppetID}/snapshot.png`)
     },
@@ -146,24 +151,29 @@ export default {
   top: 160px;
   left: 40px;
 
-  --total-num: 3;
-  height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
-  overflow-x: hidden;
   overflow-y: scroll;
+  border-radius: 28px;
 
-  background-color: aqua;
-  // clip-path: inset(0 0 round 28px 28px);
+  --total-num: 10;
+  height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
 }
 
 .actor-list {
-
   transition: all 0.3s ease;
 }
 
 @media screen and (max-width: 600px) {
-  .actor-list {
-    top: 120px;
+  .list-container {
+    top: 110px;
     left: 30px;
+  }
+}
+
+@media screen and (max-height: 400px) {
+  .list-container {
+    top: 130px;
+    --total-num: 3;
+    height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
   }
 }
 
@@ -171,7 +181,7 @@ export default {
   opacity: 0.5;
 }
 
-ul {
+.actor-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -179,15 +189,10 @@ ul {
   width: 56px;
   min-height: 56px;
   // background-color: rgba(226, 223, 242, 0.8);
-  // background-color: rgba(253, 253, 253, 0.8);
-  border-radius: 28px;
 
   user-select: none;
 
-  li {
-
-    // background-color: aqua;
-    
+  .actor-list-entry {
     // if actor list entry has size change animation
     // this size setting is useful to keep container outer size fixed
     width: 48px;
@@ -198,7 +203,7 @@ ul {
     cursor: pointer;
   }
 
-  li:last-child {
+  .actor-list-entry:last-child {
     margin-bottom: 4px;
   }
 
@@ -206,7 +211,7 @@ ul {
   transition: opacity 0.3s ease;
 }
 
-ul:empty {
+.actor-list:empty {
   opacity: 0;
 }
 

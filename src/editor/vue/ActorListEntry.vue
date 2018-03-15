@@ -65,7 +65,7 @@ export default {
   pointer-events: none;
 
   transform: scale(0.9);
-  // transition: opacity, background-color ease 0.3s;
+  transition: opacity, background-color ease 0.3s;
   transition: all ease 0.2s;
 }
 
