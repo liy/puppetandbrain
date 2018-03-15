@@ -1,12 +1,10 @@
 <template>
-<div id="side-bar">
-  <ul ref="list">
-    <li v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled" :data-title="actor.name" data-title-position="right"
-      @touchstart="touchDragStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
-      <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled" class="actor-list-entry"></actor-list-entry>
-    </li>
-  </ul>
-</div>
+<ul class='actor-list' ref="list">
+  <li v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled" :data-title="actor.name" data-title-position="right"
+    @touchstart="touchDragStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
+    <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled" class="actor-list-entry"></actor-list-entry>
+  </li>
+</ul>
 </template>
 
 <script>
@@ -131,17 +129,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#side-bar {
-  position: absolute;
-  width: 120px;
-  height: 100%;
-  top: 0;
-  left: 0;
+// #side-bar {
+//   position: absolute;
+//   width: 120px;
+//   height: 100%;
+//   top: 0;
+//   left: 0;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+// }
+
+.actor-list {
+  position: absolute;
+  top: 160px;
+  left: 40px;
+}
+
+@media screen and (max-width: 600px) {
+  .actor-list {
+    top: 120px;
+    left: 30px;
+  }
 }
 
 .dragging {
