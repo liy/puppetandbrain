@@ -50,6 +50,12 @@ export default {
   pointer-events: none;
 }
 
+@media screen and (max-width: 600px), screen and (max-height: 400px) {
+  #toolbox {
+    height: 100px;
+  }
+}
+
 #stage-toolbar {
   display: flex;
   flex-direction: row;

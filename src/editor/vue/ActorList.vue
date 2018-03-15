@@ -10,12 +10,9 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
 import ActorListEntry from './ActorListEntry.vue';
-import {isMobile} from '@/utils/utils';
 import Delay from '../access/Delay';
 import ActorSelection from '../objects/ActorSelection';
-import ClipPathTest from '@/assets/clip-path-test.svg';
 
 const tapHold = new Delay()
 
@@ -26,9 +23,9 @@ export default {
   },
   data() { 
     return {
-      ClipPathTest,
       dragTarget: null,
       dropTarget: null,
+      collapsed: true,
     }
   },
   computed: {
@@ -42,6 +39,9 @@ export default {
     },
     selectedActor() {
       return ActorSelection.selected[0]
+    },
+    offset() {
+      return this.collapsed ? 5 : 48;
     }
   },
   methods: {
@@ -171,7 +171,8 @@ export default {
 
 @media screen and (max-height: 400px) {
   .list-container {
-    top: 130px;
+    top: 110px;
+    left: 30px;
     --total-num: 3;
     height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
   }
@@ -206,7 +207,7 @@ export default {
   .actor-list-entry:last-child {
     margin-bottom: 4px;
   }
-
+  
   opacity: 1;
   transition: opacity 0.3s ease;
 }
@@ -214,5 +215,6 @@ export default {
 .actor-list:empty {
   opacity: 0;
 }
+
 
 </style>
