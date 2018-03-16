@@ -7,7 +7,7 @@ export default class Activity extends EventEmitter
   constructor() {
     super();
 
-    this.id = firebase.firestore().collection('activities').doc().id;
+    this.id = API.generateActivityID();
     this.ownerID = Hub.currentUser.uid
 
     this.resources = new Map();
@@ -41,7 +41,7 @@ export default class Activity extends EventEmitter
    */
   clone() {
     // TODO: fix me !!!! not tested yet
-    let id = firebase.firestore().collection('activities').doc().id;
+    const id = API.generateActivityID();
 
     // generate files and fileRefs together
     let files = {};

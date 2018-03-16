@@ -26,7 +26,6 @@ export default {
     ActorSelection.off('actor.selection.change', this.onSelectionChange, this);
   },
   created() {
-    console.log(this.sortEnabled)
     this.setUrl();
   },
   methods: {
@@ -43,7 +42,6 @@ export default {
       else {
         this.url = require('!file-loader!@/assets/icons/canvas.svg')
       }
-      console.log(this.url)
     }
   }
 }

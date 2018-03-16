@@ -1,3 +1,8 @@
+if(process.env.NODE_ENV !== 'dev') {  
+  require('offline-plugin/runtime').install();
+}
+
+
 // for version checking
 require('../package.json')
 
@@ -15,6 +20,11 @@ require('./assets/icons/android-4x.png')
 
 // for ios app
 require('./assets/icons/ios-192.png')
+
+// firebase
+import firebase from 'firebase/app'
+window.firebase = firebase;
+import 'firebase/auth'
 
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.

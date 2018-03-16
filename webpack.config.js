@@ -1,8 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-// const OfflinePlugin = require('offline-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
     // this make sure all the assets to be accessed from root, ie bundle.js be injected by HtmlWebpackPlugin
     // as "/bundle.js". This is necessary in SPA.
     publicPath: '/',
-    filename: '[name].js',
+    filename: '[name].[hash:5].js',
     // Where to put the final 'compiled' file
     path: path.join(__dirname, 'dist'),
   },
@@ -75,6 +76,13 @@ module.exports = {
     ]
   },
 
+  optimization: {
+    // split the vendors 
+    splitChunks: {
+      chunks: 'all'
+    },
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
       title: 'game',
@@ -84,6 +92,9 @@ module.exports = {
       env: {
         target: 'dev'
       }
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'async'
     }),
     new webpack.DefinePlugin({
       // max upload file size in MB
@@ -102,7 +113,13 @@ module.exports = {
       })
     }),
     new SpriteLoaderPlugin(),
-    // new OfflinePlugin(),
+    // new OfflinePlugin({
+    //   autoUpdate: true,
+    //   externals: [
+    //     'https://use.typekit.net/mob0ykg.css',
+    //     'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js'
+    //   ],
+    // }),
   ],
   
   // Export full source map for debugging, maps to original source

@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
@@ -112,6 +113,9 @@ module.exports = {
         target: 'production'
       }
     }),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'async'
+    }),
     new webpack.DefinePlugin({
       MAX_FILE_SIZE: 10,
       DOMAIN: JSON.stringify('https://puppetandbrain.com'),
@@ -128,7 +132,13 @@ module.exports = {
       })
     }),
     new SpriteLoaderPlugin(),
-    // new OfflinePlugin(),
+    new OfflinePlugin({
+      autoUpdate: true,
+      externals: [
+        'https://use.typekit.net/mob0ykg.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js'
+      ],
+    }),
   ],
   
   // Export full source map for debugging, maps to original source

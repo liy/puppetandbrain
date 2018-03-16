@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
@@ -99,7 +100,11 @@ module.exports = {
           }
         }
       }),
-    ]
+    ],
+    // split the vendors 
+    splitChunks: {
+      chunks: 'all'
+    },
   },
 
   plugins: [
@@ -113,8 +118,9 @@ module.exports = {
         target: 'staging'
       }
     }),
-
-
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'async'
+    }),
     new webpack.DefinePlugin({
       MAX_FILE_SIZE: 10,
       DOMAIN: JSON.stringify('https://staging.puppetandbrain.com'),
@@ -125,13 +131,19 @@ module.exports = {
         apiKey: "AIzaSyC760Njk0wan_MlFKoiHYawfSYy0CaeLUA",
         authDomain: "puppet-brain-staging.firebaseapp.com",
         databaseURL: "https://puppet-brain-staging.firebaseio.com",
-        projectId: "puppet-brain-staging",
+      projectId: "puppet-brain-staging",
         storageBucket: "puppet-brain-staging.appspot.com",
         messagingSenderId: "868975802956"
       })
     }),
     new SpriteLoaderPlugin(),
-    // new OfflinePlugin(),
+    new OfflinePlugin({
+      autoUpdate: true,
+      externals: [
+        'https://use.typekit.net/mob0ykg.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js'
+      ],
+    }),
   ],
   
   // Export full source map for debugging, maps to original source

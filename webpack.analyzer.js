@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
@@ -10,7 +11,7 @@ const OfflinePlugin = require('offline-plugin');
 module.exports = {
   mode: 'production',
   entry: {
-    app: path.join(__dirname, 'src', 'main.js'),
+    app: path.join(__dirname, 'src', 'main.js')
   },
   output: {
     // this make sure all the assets to be accessed from root, ie bundle.js be injected by HtmlWebpackPlugin
@@ -101,7 +102,11 @@ module.exports = {
           }
         }
       }),
-    ]
+    ],
+    // split the vendors 
+    splitChunks: {
+      chunks: 'all'
+    },
   },
 
   plugins: [
@@ -127,7 +132,13 @@ module.exports = {
       })
     }),
     new SpriteLoaderPlugin(),
-    // new OfflinePlugin(),
+    new OfflinePlugin({
+      autoUpdate: true,
+      externals: [
+        'https://use.typekit.net/mob0ykg.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js'
+      ],
+    }),
     new BundleAnalyzerPlugin()
   ],
   

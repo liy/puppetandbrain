@@ -1,9 +1,12 @@
+import 'firebase/firestore'
+import 'firebase/storage'
+
 class API 
 {
   constructor() {
+
   }
   
-
   async uploadFile(data, hash, ext, path, contentType, referenceByID, onProgress=null, onError=null) {
     // check whether file storage already contains the hash
     // by fetch the file doc using the hash
@@ -40,6 +43,10 @@ class API
           resolve();
         })
     })
+  }
+
+  generateActivityID() {
+    return firebase.firestore().collection('activities').doc().id;
   }
 
   cloneActivity(pod, files, fileRefs) {
