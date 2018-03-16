@@ -142,7 +142,9 @@ export default {
       }
       else {
         // check whether there is unsaved change
-        if(Hub.activity.dirty) {
+        // because the activity is dirty by default. We have to filter out the case of a brand new activity without
+        // any modification. Simply check redo and undo of the history
+        if(Hub.activity.dirty && (Hub.history.undos.length!=0 || Hub.history.redos.length!=0)) {
           const {action} = await ConfirmModal.open('Do you really want to leave? you have unsaved changes!', 'Unsaved changes')
           // user choose abort navigation
           if(!action) {
