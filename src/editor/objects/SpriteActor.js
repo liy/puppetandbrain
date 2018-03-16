@@ -57,11 +57,13 @@ export default class SpriteActor extends Actor
     ImageLoader.fetch(fileData).then(({image, blob, url}) => {
       this.spriteContainer.sprite.texture = PIXI.Texture.from(image);
     }).catch(e => {
-      // In theory the default sprite is already in activity.resources, you can directly get it without fetch
-      // default sprite
-      ImageLoader.fetch({url:require('!file-loader!@/assets/icons/sprite-actor.png')}).then(({image}) => {
-        this.spriteContainer.sprite.texture = PIXI.Texture.from(image);
-      })
+      // Default image must be directly set to the texture. Not relies on an async call.
+      // Otherwise, if the game started and PropertySetter set the image, a racing
+      // condition would arised, you will get unexpected behaviours, ie, the default
+      // image might override the later PropertySetter image.
+      var image = new Image();
+      image.src = require('!file-loader!@/assets/icons/sprite-actor.png');
+      this.spriteContainer.sprite.texture = PIXI.Texture.from(image);
     })
   }
 
