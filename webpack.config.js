@@ -6,13 +6,8 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 
 module.exports = {
-  // entry: ['whatwg-fetch', path.join(__dirname, 'src', 'main.js')],
+  mode: 'development',
   entry: {
-    'whatwg-fetch': 'whatwg-fetch',
-    'vue': 'vue',
-    'vue-router': 'vue-router',
-    rusha: 'rusha',
-    // editor: path.resolve(__dirname, 'src/editor/index.js'),
     app: path.join(__dirname, 'src', 'main.js'),
   },
   output: {
@@ -50,7 +45,7 @@ module.exports = {
       // copy the required assets to dist folder
       // use require() to get the actuall url
       {
-        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt|mp4|gif)$/,
+        test: /\.(|png|jpg|mp3|ogg|atlas|txt|mp4|gif)$/,
         use: [
           {
             loader: 'file-loader',
@@ -107,13 +102,6 @@ module.exports = {
       })
     }),
     new SpriteLoaderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['whatwg-fetch', 'vue', 'vue-router', 'rusha'], // Specify the common bundle's name.
-      minChunks: Infinity,
-    }),
-    // new webpack.optimize.LimitChunkCountPlugin({
-    //   maxChunks: 5,
-    // }),
     // new OfflinePlugin(),
   ],
   

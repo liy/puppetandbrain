@@ -7,7 +7,7 @@ require('../robots.txt')
 require("./assets/favicon-192.png")
 
 // for android app
-require('./manifest.json')
+import './manifest.json'
 require('./assets/icons/android-1x.png')
 require('./assets/icons/android-2x.png')
 require('./assets/icons/android-3x.png')

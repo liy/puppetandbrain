@@ -6,22 +6,19 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const OfflinePlugin = require('offline-plugin');
- 
 
 module.exports = {
-  // entry: ['whatwg-fetch', path.join(__dirname, 'src', 'main.js')],
+  mode: 'production',
   entry: {
-    'whatwg-fetch': 'whatwg-fetch',
-    'vue': 'vue',
-    'vue-router': 'vue-router',
-    rusha: 'rusha',
-    app: path.join(__dirname, 'src', 'main.js')
+    app: path.join(__dirname, 'src', 'main.js'),
   },
   output: {
     // this make sure all the assets to be accessed from root, ie bundle.js be injected by HtmlWebpackPlugin
     // as "/bundle.js". This is necessary in SPA.
     publicPath: '/',
-    filename: '[name].js',
+    
+    filename: '[name]-[hash:5].js',
+    
     // Where to put the final 'compiled' file
     path: path.join(__dirname, 'dist'),
   },
@@ -51,7 +48,7 @@ module.exports = {
       // copy the required assets to dist folder
       // use require() to get the actuall url
       {
-        test: /\.(|png|jpg|json|mp3|ogg|atlas|txt|mp4|gif)$/,
+        test: /\.(|png|jpg|mp3|ogg|atlas|txt|mp4|gif)$/,
         use: [
           {
             loader: 'file-loader',
@@ -81,6 +78,32 @@ module.exports = {
     ]
   },
 
+  // webpack 4....
+  // they just keep coming up new syntax without proper documentation...
+  // https://github.com/webpack-contrib/uglifyjs-webpack-plugin/issues/234
+  optimization: {
+    minimizer: [
+      new UglifyJSPlugin({
+        // do not minify rusha, which is web worker.
+        // it cause problem when it is uglified.
+        exclude: [/rusha/],
+        uglifyOptions: {
+          output: {
+            comments: false
+          },
+          sourceMap: false,
+          mangle: {
+            keep_fnames: true,
+          },
+          // remove console
+          compress: {
+            drop_console: true
+          }
+        }
+      }),
+    ]
+  },
+
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
@@ -88,21 +111,6 @@ module.exports = {
       filename: 'index.html',
       inject: 'body',
       template: './src/index.html'
-    }),
-    new UglifyJSPlugin({
-      // do not minify rusha, which is web worker.
-      // it cause problem when it is uglified.
-      exclude: [/rusha/],
-      uglifyOptions: {
-        sourceMap: false,
-        mangle: {
-          keep_fnames: true,
-        },
-        // remove console
-        compress: {
-          drop_console: true
-        }
-      }
     }),
     new webpack.DefinePlugin({
       DOMAIN: JSON.stringify('http://localhost:8081'),
@@ -119,10 +127,6 @@ module.exports = {
       })
     }),
     new SpriteLoaderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['whatwg-fetch', 'rusha'], // Specify the common bundle's name.
-      minChunks: Infinity,
-    }),
     // new OfflinePlugin(),
     new BundleAnalyzerPlugin()
   ],
