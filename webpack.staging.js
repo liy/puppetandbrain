@@ -6,7 +6,6 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const OfflinePlugin = require('offline-plugin');
- 
 
 module.exports = {
   mode: 'production',
