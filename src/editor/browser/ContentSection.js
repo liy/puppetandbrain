@@ -19,6 +19,17 @@ export default class ContentSection
     this.scroll.appendChild(this.content);
 
     this.groups = new Map();
+
+    var touchStartY = 0;
+    this.scroll.addEventListener('touchstart', e => {
+      touchStartY = e.touches[0].clientY
+    })
+
+    this.scroll.addEventListener('touchmove', e => {
+      if(window.pageYOffset==0 && e.touches[0].clientY-touchStartY > 0 && this.scroll.scrollTop == 0) {
+        e.preventDefault();
+      }
+    })
   }
 
   set placeholder(placeholder) {

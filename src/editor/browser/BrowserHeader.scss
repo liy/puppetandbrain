@@ -11,6 +11,8 @@
   align-items: center;
   justify-content: space-between;
 
+  pointer-events: none;
+
   .header-button {
     margin-left: 20px;
 
@@ -18,5 +20,7 @@
     min-height: 48px;
 
     cursor: pointer;
+
+    pointer-events: auto;
   }
 }
