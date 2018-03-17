@@ -27,6 +27,13 @@
 
     <title>Puppet and Brain</title>
 
+    <!-- default background color reduce flickering white loading -->
+    <style>
+      body {
+        background-color: #505f97;
+      }
+    </style>
+
     <!-- only production site has google analytics -->
     <% if (htmlWebpackPlugin.options.env.target === 'production') { %>
       <!-- Global site tag (gtag.js) - Google Analytics -->
