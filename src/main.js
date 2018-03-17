@@ -16,6 +16,7 @@ require('./assets/icons/android-1x.png')
 require('./assets/icons/android-2x.png')
 require('./assets/icons/android-3x.png')
 require('./assets/icons/android-4x.png')
+require('./assets/icons/android-512.png')
 
 // for ios app
 require('./assets/icons/ios-192.png')

@@ -118,6 +118,7 @@ module.exports = {
   },
 
   plugins: [
+    new ExtractTextPlugin("style.css"),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'game',
