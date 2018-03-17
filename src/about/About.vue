@@ -78,7 +78,10 @@ export default {
 
     transition: color ease 0.3s;
 
+    -moz-user-select: none;
+    -webkit-user-select: none;
     user-select: none;
+    
     cursor: pointer;
   }
   

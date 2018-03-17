@@ -196,14 +196,10 @@ export default {
   filter: blur(3px);
 }
 
-// disable drag DOM element selection!!! 
-span {
-  user-select: none;
-}
+// disable svg selection 
 svg {
-  user-select: none;
-}
-div {
+  -moz-user-select: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 

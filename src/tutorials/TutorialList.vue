@@ -71,7 +71,10 @@ export default {
     font-family: arial, sans-serif;
     font-size: 60px;
 
+    -moz-user-select: none;
+    -webkit-user-select: none;
     user-select: none;
+
     cursor: pointer;
   }
 

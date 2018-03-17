@@ -49,8 +49,6 @@ export default {
 <style lang="scss">
 #theater {
   position: relative;
-  // disable text selection.(Input will override it)
-  user-select: none;
 
   width: 100%;
   height: 100vh;
@@ -74,7 +72,6 @@ export default {
   top: 0;
   left: 0;
   z-index: -1;
-  user-select: none;
   pointer-events: none;
   overflow: hidden;
 }
@@ -87,12 +84,17 @@ export default {
   left: 0;
   overflow: hidden;
   
-  // Prevent user drag select div elements
-  user-select: none;
   // overlay must not block mouse event, so PIXI.js canvas can still receive the event
   pointer-events: none;
+  
+  // Prevent user drag select div elements
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
   * {
     // only allow select text in children
+    -moz-user-select: text;
+    -webkit-user-select: text;
     user-select: text;
     // only children of the overlay can accept mouse event
     pointer-events: all;

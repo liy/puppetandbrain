@@ -15,7 +15,10 @@
   .label {
     line-height: 38px;
     
+    -moz-user-select: none;
+    -webkit-user-select: none;
     user-select: none;
+    
     overflow-x: hidden;
     // do not wrap!!!
     // Otherwise when dragging block to the edge of the window

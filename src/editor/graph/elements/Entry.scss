@@ -19,7 +19,10 @@
       width: 24px;
       height: 24px;
 
+      -moz-user-select: none;
+      -webkit-user-select: none;
       user-select: none;
+
       pointer-events: none;
 
       overflow-x: hidden;

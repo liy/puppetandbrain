@@ -232,7 +232,10 @@ export default {
 
 
 .block {
+  -moz-user-select: none;
+  -webkit-user-select: none;
   user-select: none;
+  
   position: absolute;
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -397,7 +400,10 @@ export default {
   .label {
       line-height: 38px;
       
+      -moz-user-select: none;
+      -webkit-user-select: none;
       user-select: none;
+
       overflow-x: hidden;
       // do not wrap!!!
       // Otherwise when dragging block to the edge of the window

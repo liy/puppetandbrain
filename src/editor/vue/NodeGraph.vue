@@ -75,6 +75,9 @@ export default {
   align-items: center;
 
   pointer-events: none;
+  
+  -moz-user-select: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 

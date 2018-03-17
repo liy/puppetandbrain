@@ -147,9 +147,6 @@ export default {
 
       if(!this.dragTarget) return;
 
-      
-      // this.selectActor(Hub.activity.lookUp.get(this.dragTarget.dataset.actor))
-
       this.dragEnd(e);
     }
   }
@@ -202,6 +199,8 @@ export default {
   min-height: 56px;
   // background-color: rgba(226, 223, 242, 0.8);
 
+  -moz-user-select: none;
+  -webkit-user-select: none;
   user-select: none;
 
   .actor-list-entry {

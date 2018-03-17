@@ -33,6 +33,8 @@
     // when block reaches the max width, overflow text will be hidden
     overflow-x: hidden;
     
+    -moz-user-select: none;
+    -webkit-user-select: none;
     user-select: none;
   }
 

@@ -66,7 +66,10 @@ body.tutorial-list {
   bottom: 3px;
   left: 3px;
   
+  -moz-user-select: none;
+  -webkit-user-select: none;
   user-select: none;
+  
   pointer-events: none;
 }
 

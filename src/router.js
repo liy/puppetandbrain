@@ -29,23 +29,12 @@ export default new Router({
       path: '/editor',
       name: 'Editor',
       component: Editor,
-      async beforeEnter(to, from, next) {
+      beforeEnter(to, from, next) {
         document.body.className = 'editor'
         // not tutorial
         store.commit('updateTutorialMode', false);
 
         next();
-        
-        // first time visit?
-        if(!localStorage.getItem('visited')) {
-          let modal = new ConfirmModal('How about a simple tutorial.', 'First time visit?')
-          modal.primaryText = 'Yes, please';
-          modal.secondaryText = 'Nah...';
-          let {action} = await modal.open();
-          if(action) {
-            next('/tutorials/animate-a-puppet');
-          }
-        }
       },
     },
     {

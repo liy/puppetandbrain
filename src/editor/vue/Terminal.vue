@@ -14,7 +14,11 @@ export default {
   position: absolute;
   top: 10px;
   left: 10px;
+  
+  -moz-user-select: none;
+  -webkit-user-select: none;
   user-select: none;
+
   pointer-events: none;
   color: rgb(255, 109, 236);
   width: 300px;
