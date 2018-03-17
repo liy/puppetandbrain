@@ -100,7 +100,6 @@ export default {
   },
   // navigated from external site
   beforeRouteEnter(to, from, next) {
-    console.log('before enter')
     // after hub is installed correctly
     next(async vm => {
       // wait until hub is installed correctly

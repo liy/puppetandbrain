@@ -23,6 +23,12 @@
     justify-content: flex-end;
     align-items: center;
 
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
     .header-name {
       width: 100%;
       text-align: center;

@@ -5,6 +5,7 @@
     <div class='text-container'>
       <div class='wrapper'>
         <h4>PUPPET & BRAIN</h4>
+        <p class="requirement">Work best with Chrome, Safari and Firefox</p>
         <h1>Make your puppets</h1>
         <h1>Create the story</h1>
         <h1>Learn coding</h1>
@@ -159,7 +160,7 @@ export default {
   }
   
   .home-action {
-    margin-top: 50px;
+    margin-top: 40px;
   }
 }
 
@@ -188,6 +189,12 @@ export default {
   height: 100%;
 
   pointer-events: none;
+}
+
+.requirement {
+  font-size: 13px;
+  color: #6c80af;
+  margin: 0;
 }
 
 @media screen and (max-height:750px){
