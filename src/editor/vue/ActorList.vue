@@ -181,7 +181,7 @@ export default {
   }
 }
 
-@media screen and (max-height: 400px) {
+@media screen and (max-height: 500px) {
   .list-container {
     top: 110px;
     left: 30px;

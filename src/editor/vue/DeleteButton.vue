@@ -98,7 +98,7 @@ export default {
   margin-left: 50px;
 }
 
-@media screen and (max-width: 600px), screen and (max-height: 400px) {
+@media screen and (max-width: 600px), screen and (max-height: 500px) {
   #delete-button {
     svg {
       width: 50px;

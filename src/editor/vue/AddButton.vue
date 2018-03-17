@@ -48,7 +48,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 600px), screen and (max-height: 400px) {
+@media screen and (max-width: 600px), screen and (max-height: 500px) {
   #add-button {
     svg {
       width: 80px;

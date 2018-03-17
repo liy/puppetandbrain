@@ -94,7 +94,7 @@ export default {
   pointer-events: none;
 }
 
-@media screen and (max-width: 600px), screen and (max-height: 400px) {
+@media screen and (max-width: 600px), screen and (max-height: 500px) {
   #mode-button {
     svg {
       width: 80px;
