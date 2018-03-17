@@ -1,5 +1,5 @@
 <template>
-<div @click='clicked' class='control-button tooltip-right' :class="{disabled: !this.enabled || this.modeLock}" :data-title="tooltip" id='mode-button' data-title-position="right">
+<div @touchmove.prevent @click='clicked' class='control-button tooltip-right' :class="{disabled: !this.enabled || this.modeLock}" :data-title="tooltip" id='mode-button' data-title-position="right">
   <svg v-if="stageMode">
     <use :xlink:href="`#${BrainButtonIcon.id}`" :viewBox="BrainButtonIcon.viewBox"/>
   </svg>

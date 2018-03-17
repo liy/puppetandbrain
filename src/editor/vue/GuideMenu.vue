@@ -1,5 +1,5 @@
 <template>
-<div id='guide-menu' @click="toggle()" :class="{shifted: propertyPanelVisable && !stageMode && !browserVisible}">
+<div id='guide-menu' @click="toggle()" @touchmove.prevent :class="{shifted: propertyPanelVisable && !stageMode && !browserVisible}">
   <div ref="button" id="guide-menu-icon">
     <svg width=48 height=48>
       <use :xlink:href="`#${MenuIcon.id}`" :viewBox="MenuIcon.viewBox"/>

@@ -1,5 +1,6 @@
 <template>
-<div id='toolbox'>
+<div id='toolbox' @touchmove.prevent>
+  <!-- prevent pull to refresh on all the content of toolbox -->
   <history-control id='history-control'/>
   <div id='stage-toolbar' :class="{shifted: propertyPanelVisable && !stageMode}">
     <delete-button class='toolbar-button'/>

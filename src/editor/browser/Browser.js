@@ -38,6 +38,9 @@ export default class Browser extends EventEmitter
       this.close();
     })
 
+    // stop pull to refresh on mobile
+    this.header.closeButton.addEventListener('touchmove', e => e.preventDefault());
+
     this.onScroll = this.onScroll.bind(this);
     this.contentSection.scroll.addEventListener('scroll', this.onScroll, false);
 
