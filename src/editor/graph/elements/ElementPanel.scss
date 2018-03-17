@@ -15,6 +15,10 @@
   // TODO: this hides the border when collapsed, maybe use exact pixel value?
   transform: translateX(100%);
   transition: transform ease 0.3s;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 #element-panel-content {
