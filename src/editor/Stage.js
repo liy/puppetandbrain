@@ -16,6 +16,11 @@ export default class extends EventEmitter
     this.actors = new ArrayMap();
     this.container = new PIXI.Container();
 
+    // mouse has to be created before renderer. 
+    // The reasons is that, I want to allow user to query the updated mouse(touch) position.
+    // This requires manual update of the mouse position before all the pixi.js's interactive events.
+    this.mouse = new Mouse(this);
+
     this.renderer = PIXI.autoDetectRenderer({
       autoStart: true,
       width: canvas.width,
@@ -24,8 +29,9 @@ export default class extends EventEmitter
       transparent: true,
       antialias: true
     });
+
+    this.mouse.registerRenderer(this.renderer);
     
-    this.mouse = new Mouse(this.renderer, this);
     this.contextMenu = new ContextMenu();
 
     this.loop = this.loop.bind(this);

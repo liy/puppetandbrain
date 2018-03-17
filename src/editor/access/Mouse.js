@@ -4,25 +4,22 @@ import {isMobile} from "@/utils/utils";
 
 export default class extends EventEmitter
 {
-  constructor(renderer, stage) {
+  constructor(stage) {
     super();
-
-    this.renderer = renderer;
     this.stage = stage;
 
     this.move = this.move.bind(this);
-    this.updatePosition = this.updatePosition.bind(this)
+    this.updateTouchPosition = this.updateTouchPosition.bind(this)
 
     this.threshold = 300; 
     this.thresholdID = 0;
 
     this._position = new Vec2();
-
-    if(isMobile)
-    {
+    
+    if(isMobile) {
       // Update mouse position for GetMousePosition block query purpose
-      document.addEventListener('pointerdown', this.updatePosition);
-      document.addEventListener('pointermove', this.updatePosition);
+      this.stage.canvas.addEventListener('touchstart', this.updateTouchPosition);
+      this.stage.canvas.addEventListener('touchmove', this.updateTouchPosition);
 
       Object.defineProperty(this, 'position', {
         get() {
@@ -30,7 +27,12 @@ export default class extends EventEmitter
         }
       });
     }
-    else {
+  }
+
+  registerRenderer(renderer) {
+    this.renderer = renderer;
+
+    if(!isMobile) {
       Object.defineProperty(this, 'position', {
         get() {
           var p = this.renderer.plugins.interaction.mouse.global;
@@ -45,8 +47,8 @@ export default class extends EventEmitter
   destroy() {
     super.destroy();
 
-    document.removeEventListener('pointerdown', this.updatePosition);
-    document.removeEventListener('pointermove', this.updatePosition);
+    this.stage.canvas.removeEventListener('touchstart', this.updateTouchPosition);
+    this.stage.canvas.removeEventListener('touchmove', this.updateTouchPosition);
 
     clearTimeout(this.thresholdID);
     document.removeEventListener('mousemove', this.move);
@@ -65,12 +67,12 @@ export default class extends EventEmitter
     document.removeEventListener('touchmove', this.move);
   }
 
-  updatePosition(e) {
+  updateTouchPosition(e) {
     const rect = this.stage.canvas.getBoundingClientRect();
 
     // override position
-    this._position.x = e.clientX - rect.left;
-    this._position.y = e.clientY - rect.top;
+    this._position.x = e.touches[0].clientX - rect.left;
+    this._position.y = e.touches[0].clientY - rect.top;
   }
 
   move(e) {
