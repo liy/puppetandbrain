@@ -2,7 +2,6 @@ if(process.env.NODE_ENV !== 'dev') {
   require('offline-plugin/runtime').install();
 }
 
-
 // for version checking
 require('../package.json')
 
@@ -12,7 +11,7 @@ require('../robots.txt')
 require("./assets/favicon-192.png")
 
 // for android app
-import './manifest.json'
+require('./manifest.json')
 require('./assets/icons/android-1x.png')
 require('./assets/icons/android-2x.png')
 require('./assets/icons/android-3x.png')
