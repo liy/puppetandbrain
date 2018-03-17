@@ -34,7 +34,7 @@ export default class extends GridBox
 
       this.emit('browser.close');
 
-      Hub.history.push(await Commander.create('ImportActor', pod).process());
+      Hub.history.push(await Commander.create('ImportActor', pod).processAndSave());
     })
   }
 
