@@ -1,13 +1,11 @@
 <template>
-<div class="list-wrapper" @touchstart="preventPullToRefreshTouchStart" @touchmove="preventPullToRefreshTouchMove">
-  <div ref="listConatiner"  class='list-container'>
-    <ul class='actor-list' ref="list">
-      <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled"
-        @touchstart="touchStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
-        <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled"></actor-list-entry>
-      </li>
-    </ul>
-  </div>
+<div ref="listConatiner" class='list-container' @touchstart="preventPullToRefreshTouchStart" @touchmove="preventPullToRefreshTouchMove">
+  <ul class='actor-list' ref="list">
+    <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled"
+      @touchstart="touchStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
+      <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled"></actor-list-entry>
+    </li>
+  </ul>
 </div>
 </template>
 
@@ -28,8 +26,7 @@ export default {
       dragTarget: null,
       dropTarget: null,
       collapsed: true,
-      pageYOffset: false,
-      startTouchY: 0,
+      touchStartY: 0,
     }
   },
   computed: {
@@ -50,13 +47,16 @@ export default {
   },
   methods: {
     preventPullToRefreshTouchStart(e) {
-      this.pageYOffset = window.pageYOffset;
-      this.startTouchY = e.touches[0].clientY;
-      console.log(this.pageYOffset)
+      this.touchStartY = e.touches[0].clientY;
     },
     preventPullToRefreshTouchMove(e) {
-      console.log(this.$refs.listConatiner.scrollTop)
-      if(this.pageYOffset == 0 && (e.touches[0].clientY-this.startTouchY) > 0 && this.$refs.listConatiner.scrollTop==0 ) {
+      // Prevent further scroll when:
+      // window.pageYOffset is at top, 0
+      // trying to pull the page down
+      // and the list container is at the top position
+      if(window.pageYOffset == 0 && 
+         (e.touches[0].clientY-this.touchStartY) > 0 && 
+         this.$refs.listConatiner.scrollTop==0 ) {
         e.preventDefault();
       }
     },
@@ -157,24 +157,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list-wrapper {  
-  position: absolute;
-  top: 110px;
-    left: 30px;
-
-  width: 48px;
-  --total-num: 3;
-  height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
-
-  touch-action: none;
-}
-
 .list-container {
-  // position: absolute;
-  // top: 160px;
-  // left: 40px;
-  // top: 0;
-  // left: 0;
+  position: absolute;
+  top: 160px;
+  left: 40px;
 
   overflow-x: visible;
   overflow-y: scroll;
@@ -190,15 +176,15 @@ export default {
 
 @media screen and (max-width: 600px) {
   .list-container {
-    // top: 110px;
-    // left: 30px;
+    top: 110px;
+    left: 30px;
   }
 }
 
 @media screen and (max-height: 400px) {
   .list-container {
-    // top: 110px;
-    // left: 30px;
+    top: 110px;
+    left: 30px;
     --total-num: 3;
     height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
   }
