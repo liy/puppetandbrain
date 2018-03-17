@@ -76,6 +76,12 @@ export default {
   overflow: hidden;
 }
 
+canvas {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 #stage-overlayer {
   position: absolute;
   width: 100%;
