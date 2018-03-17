@@ -1,7 +1,7 @@
 <template>
 <div ref="listConatiner" class='list-container' @touchstart="preventPullToRefreshTouchStart" @touchmove="preventPullToRefreshTouchMove">
   <ul class='actor-list' ref="list">
-    <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled"
+    <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled" :title="actor.name"
       @touchstart="touchStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
       <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled"></actor-list-entry>
     </li>

@@ -4,7 +4,7 @@
   <div class='home-content'>
     <div class='text-container'>
       <div class='wrapper'>
-        <h4>PUPPET & BRAIN</h4>
+        <h4>PUPPET & BRAIN<span class='beta'>beta</span></h4>
         <p class="requirement">Work best with Chrome, Safari and Firefox</p>
         <h1>Make your puppets</h1>
         <h1>Create the story</h1>
@@ -191,9 +191,14 @@ export default {
   pointer-events: none;
 }
 
+.beta {
+  font-size: 12px;
+  margin-left: 10px;
+}
+
 .requirement {
   font-size: 13px;
-  color: #6c80af;
+  color: #9dadd1;
   margin: 0;
 }
 
