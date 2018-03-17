@@ -75,6 +75,7 @@ export default {
   align-items: center;
 
   pointer-events: none;
+  user-select: none;
 }
 
 .graph-name {

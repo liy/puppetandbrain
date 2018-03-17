@@ -1,7 +1,7 @@
 <template>
-<div class='list-container' @touchstart="preventRefresh">
+<div class='list-container'>
   <ul class='actor-list' ref="list">
-    <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled" :data-title="actor.name" data-title-position="right"
+    <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled"
       @touchstart="touchStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
       <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled"></actor-list-entry>
     </li>
@@ -45,10 +45,6 @@ export default {
     }
   },
   methods: {
-    preventRefresh(e) {
-      e.stopPropagation();
-      
-    },
     getSnapshotUrl(actor) {
       return API.getUrl(`${actor.libDir}/${actor.puppetID}/snapshot.png`)
     },
@@ -188,10 +184,6 @@ export default {
   padding: 0;
   list-style: none;
 
-  // FIXME: in order to use css tooltip
-  // I have to make the width larger than normal... a hack
-  // maybe remove css tooltip for actor list.
-  width: 200px;
   min-height: 56px;
   // background-color: rgba(226, 223, 242, 0.8);
 
