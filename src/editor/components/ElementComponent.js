@@ -73,6 +73,8 @@ export default class ElementComponent extends Component
   }
 
   mouseDown(e) {
+    e.preventDefault();
+    
     // note the stage offset applied, since clientX and clientY is in window coordinate.
     // TODO: In theory, scale and rotation also needs to be applied. 
     this.entity.pointerDown(e.clientX - Hub.stage.offsetX, e.clientY - Hub.stage.offsetY, e);
@@ -95,6 +97,8 @@ export default class ElementComponent extends Component
   }
 
   touchStart(e) {
+    e.preventDefault();
+    
     this.entity.pointerDown(e.changedTouches[0].clientX - Hub.stage.offsetX, e.changedTouches[0].clientY - Hub.stage.offsetY, e);
   }
 
