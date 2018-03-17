@@ -159,7 +159,7 @@ class HubClass extends EventEmitter
     return this.activity;
   }
 
-  async autoSave() {
+  async autoSave(delay=2000) {
     if(this.saveLock) return;
 
     // no need to auto save if it is not the owner
@@ -171,7 +171,7 @@ class HubClass extends EventEmitter
     if(process.env.NODE_ENV !== 'dev' && !store.state.tutorialMode) {  
       // delay save, just in case user has lots of actions...
       this.delaySave.cancel();
-      await this.delaySave.wait(3000);
+      await this.delaySave.wait(delay);
 
       // auto save does not clean resource
       // might be ok?

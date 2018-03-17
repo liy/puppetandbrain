@@ -29,9 +29,6 @@ export default class extends GridBox
     this.element.appendChild(this.title);
 
     this.element.addEventListener('click', async e => {
-      // let importActor = new ImportActor();
-      // importActor.start(pod);
-
       this.emit('browser.close');
 
       Hub.history.push(await Commander.create('ImportActor', pod).processAndSave());

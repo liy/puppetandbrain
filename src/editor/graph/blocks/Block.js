@@ -230,7 +230,7 @@ export default class Block extends EventEmitter
     }
 
     // process and push to history
-    Hub.history.push(this.moveCommand.processAndSave());
+    Hub.history.push(this.moveCommand.processAndSave(5000));
   }
 
   touchDragStop(e) {

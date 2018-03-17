@@ -13,9 +13,9 @@ export default class Command
     return Hub.activity.lookUp;
   }
 
-  processAndSave() {
+  processAndSave(autoSaveDelay) {
     let command = this.process();
-    if(command) Hub.autoSave();
+    if(command) Hub.autoSave(autoSaveDelay);
     return command;
   }
 
