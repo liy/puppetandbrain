@@ -88,6 +88,17 @@ export default class
     this.element.addEventListener('wheel', e => {
       e.stopPropagation();
     })
+
+    // prevent pull to refresh on element panel
+    var touchStartY = 0;
+    this.element.addEventListener('touchstart', e => {
+      touchStartY = e.touches[0].clientY
+    })
+    this.element.addEventListener('touchmove', e => {
+      if(window.pageYOffset==0 && e.touches[0].clientY-touchStartY > 0 && this.content.scrollTop == 0) {
+        e.preventDefault();
+      }
+    })
   }
 
   toggle() {

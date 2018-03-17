@@ -27,8 +27,11 @@ export default class BrainGraph extends EventEmitter
     // Both these two listeners are for mobile devices.
     // They prevent scrolling the container while panning the graph.
     this.container.addEventListener('touchmove', e => {
-      // stop mobile drag to refresh action
-      e.preventDefault();
+      // any actions in element panel should not be prevented
+      if(!ElementController.panel.element.contains(e.target)) {
+        // stop mobile drag to refresh action
+        e.preventDefault();
+      }
     })
     this.blockContainer.addEventListener('touchmove', e => {
       // stop block container scrolling while it is panning
