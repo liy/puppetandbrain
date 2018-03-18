@@ -91,7 +91,7 @@ export default class ActivityLoader
     let performs = [];
     for(let id of pod.nodes) {
       let data = pod.store[id];
-      let node = NodeFactory.create(data.className, id, this.activity)
+      let node = NodeFactory.shell(data.className, id, this.activity)
       // delay perform node initialization,
       // since they depend on Action nodes to be initialized first
       if(data.className ==  'Perform') {

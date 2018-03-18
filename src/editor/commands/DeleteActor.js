@@ -37,7 +37,7 @@ export default class DeleteActor extends Command
 
     // create and init nodes
     for(let nodePod of this.pod.brain.nodes) {
-      let node = new NodeFactory.create(nodePod.className, nodePod.id, Hub.activity)
+      let node = new NodeFactory.shell(nodePod.className, nodePod.id, Hub.activity)
       node.init(nodePod);
     }
 

@@ -9,6 +9,10 @@ window.NodeTemplate = {
     return this.all[nodeClassName];
   },
 
+  clone(nodeClassName) {
+    return JSON.parse(JSON.stringify(this.get(nodeClassName)));
+  },
+
   set(template) {
     this.genericTemplates[template.className] = template;
     this.all[template.className] = template;

@@ -69,11 +69,11 @@ export default class DeleteVariable extends Command
     // re-create the nodes and blocks first. Getting ready for execution 
     // and variable linking!
     for(let pod of this.getterPods) {
-      let node = NodeFactory.create(pod.className, pod.id, Hub.activity);
+      let node = NodeFactory.shell(pod.className, pod.id, Hub.activity);
       node.init(pod);
     }
     for(let pod of this.setterPods) {
-      let node = NodeFactory.create(pod.className, pod.id, Hub.activity);
+      let node = NodeFactory.shell(pod.className, pod.id, Hub.activity);
       node.init(pod);
     }
 

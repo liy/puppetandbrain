@@ -57,7 +57,7 @@ export default class
     let performs= [];
     for(let id of pod.nodes) {
       let nodePod = pod.store[id];
-      let node = NodeFactory.create(nodePod.className, nodePod.id, this.activity);
+      let node = NodeFactory.shell(nodePod.className, nodePod.id, this.activity);
 
       // change owner, no need to use mapping, since we can import only 1 actor at a time.
       nodePod.ownerID = actor.id;
