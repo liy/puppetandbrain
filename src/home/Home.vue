@@ -10,7 +10,7 @@
         <h1>Create the story</h1>
         <h1>Learn coding</h1>
         <div class='home-action'>
-          <app-button class='major' @click.native="toTutorial">Start learning</app-button>
+          <app-button class='major' @click.native="toTutorial">Start playing</app-button>
           <!-- <app-button class='primary'>Sign Up</app-button> -->
         </div>
       </div>
