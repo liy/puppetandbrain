@@ -22,7 +22,7 @@ export DrawCircle from './draw/DrawCircle'
 export DrawSquare from './draw/DrawSquare'
 export ClearDraw from './draw/ClearDraw'
 // does not play well with draw shapes
-// export LineTo from './draw/LineTo'
+export LineTo from './draw/LineTo'
 
 // array
 export ArrayLen from './array/ArrayLen';

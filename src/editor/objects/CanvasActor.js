@@ -69,6 +69,11 @@ export default class CanvasActor extends Actor
   onContextMenu(e) {
     // no right click
   }
+  
+  gamePrestart() {
+    // I need to call this method before I call lineTo.
+    this.graphics.moveTo(Hub.stage.mouse.position.x, Hub.stage.mouse.position.y)
+  }
 
   gameStop() {
     this.clearDraw();
