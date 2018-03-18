@@ -13,7 +13,7 @@
 
       <p>If you found any bugs, or have any questions and suggestions. I would be very much appreciated if you could <router-link class='contact' to='/contact' tag='a'>contact me</router-link>.</p>
       
-      <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation by <b>Liy</b>.<br/>Marketing by <b>Ting</b></p>
+      <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation: <b>Liy</b>.<br/>Partnership Development and Marketing: <b>Ting</b></p>
       
       <p class='refs'>Hand cusor, music note, color picker and bin icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
     </div>
