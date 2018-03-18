@@ -62,6 +62,10 @@ export default {
 
 #graph-svg {
   pointer-events: none;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .graph-name-container {
@@ -99,6 +103,13 @@ export default {
 
 .graph-name.hidden {
   opacity: 0;
+}
+
+#block-container {
+  // have to make the whole
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 // For testing purpose only do not add width and height for block-container!!!
