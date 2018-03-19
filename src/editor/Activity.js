@@ -35,14 +35,9 @@ export default class Activity extends EventEmitter
   /**
    * This extract all the necessary information for cloning the activity.
    * Send it to API
-   * 
-   * @returns 
-   * @memberof Activity
+   * @param {String} newID the new activity for the cloned activity. If not supplied, brand new id will be generated
    */
-  clone() {
-    // TODO: fix me !!!! not tested yet
-    const id = API.generateActivityID();
-
+  clone(newID=API.generateActivityID()) {
     // generate files and fileRefs together
     let files = {};
     let fileRefs = {}
@@ -50,14 +45,14 @@ export default class Activity extends EventEmitter
       let userFiles = actor.getUserFiles()
       for(let fileData of userFiles) {
         // elminate the dupicate user files
-        files[`${fileData.hash}.${fileData.ext}`] = {[id]: true}
+        files[`${fileData.hash}.${fileData.ext}`] = {[newID]: true}
         fileRefs[fileData.path] = true;
       }
     }
 
     let pod = this.lookUp.pod();
     pod.userID = Hub.currentUser.uid;
-    pod.activityID = id;
+    pod.activityID = newID;
     return API.cloneActivity(pod, files, fileRefs);
   }
 

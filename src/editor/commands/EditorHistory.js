@@ -80,6 +80,10 @@ export default class extends EventEmitter
     return this.redos.length != 0 && !Hub.historyLock
   }
 
+  get hasEdits() {
+    return this.undos.length != 0 || this.redos.length != 0;
+  }
+
   updateButton() {
     this.emit('history.updated')
   }

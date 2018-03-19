@@ -144,14 +144,39 @@ class HubClass extends EventEmitter
    * @returns 
    * @memberof HubClass
    */
-  async clone() {
-    let pod = await this.activity.clone();
+  async clone(newID) {
+    let pod = await this.activity.clone(newID);
     // once the clone of activity has uploaded to the server,
     // no need to reload, simply update current activity to use the new activity
     // and it owner to be current user
     this.activity.ownerID = this.currentUser.uid;
-    this.activity.id = pod.activityID;
+    const activityID = this.activity.id = pod.activityID;
+    // clear current activity
+    this.clear();
+    this.router.push(`/editor/${activityID}`)
+
     return this.activity;
+  }
+
+  share() {
+    // if user is owner then you can directly save the activity before share
+    if(this.activity.isOwner) {
+      this.save().then(activity => {
+        this.router.push(`/editor/${activity.id}`)
+      })
+      return this.activity.id;
+    }
+    // if user is not owner, but has no edits, this means they purely want to pass
+    // on the original activity to other people, 
+    else if(!this.history.hasEdits) {
+      return this.activity.id;
+    }
+    // the user is remixing the original activity
+    else {
+      const activityID = API.generateActivityID();
+      this.clone(activityID)
+      return activityID;
+    }
   }
 
   async save() {

@@ -176,12 +176,7 @@ export default {
         }
         else {
           NotificationControl.notify('Clone...').delayFadeoutRemove();
-          Hub.clone().then(activity => {
-            const activityID = activity.id;
-            // clear current activity
-            Hub.clear();
-            this.$router.push(`/editor/${activityID}`)
-          })
+          Hub.clone();
         }
       }
     },

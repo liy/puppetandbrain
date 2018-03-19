@@ -52,18 +52,17 @@ export default {
         this.show = false;
       }
     },
-    twitter(e) {
+    async twitter(e) {
+      // Make sure it is saved
+      const activityID = Hub.share();
+
       // domain defined in webpack
-      let link = `${DOMAIN}/editor/${Hub.activity.id}`
+      let link = `${DOMAIN}/editor/${activityID}`
       let text = encodeURI(`Have look at my puppet: ${link}`);
       let hashTag = 'puppetandbrain';
       let url = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashTag}`
       sharePopup(url);
 
-      // Make sure it is saved
-      Hub.save().then(activity => {
-        this.$router.push(`/editor/${activity.id}`)
-      })
     }
   }
 }
