@@ -3,22 +3,13 @@ import {Task, Template as ParentTemplate} from '../Task'
 
 NodeTemplate.scope('CanvasActor', {
   ...ParentTemplate,
-  className: 'ClearDraw',
-  name: 'Clear Draw',
-  inputs: [{
-    name: 'radius',
-    descriptor: {
-      type: DataType.DOUBLE,
-    }
-  }],
-  memory: {
-    radius: 10
-  },
+  className: 'ClearCanvas',
+  name: 'Clear Canvas',
   category: 'Draw',
-  keywords: ['draw', 'circle']
+  keywords: ['draw', 'clear']
 })
 
-export default class ClearDraw extends Task
+export default class ClearCanvas extends Task
 {
   constructor(id, activity) {
     super(id, activity)
