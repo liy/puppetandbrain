@@ -236,8 +236,6 @@ export default class Block extends EventEmitter
   touchDragStop(e) {
     // Note I did not call preventDefault here, as it interfere with side gadget touch events
     // It stops mouseup firing, and this event is required for the gadget
-
-    console.log('touch drag stop')
     document.removeEventListener('touchend', this.touchDragStop);
     document.removeEventListener('touchmove', this.touchDragMove);
 

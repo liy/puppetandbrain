@@ -7,6 +7,7 @@
     <ol>
       <li><b><router-link v-bind:to="'/tutorials/animate-a-puppet'">Animate a puppet</router-link></b></li>
       <li><b><router-link v-bind:to="'/tutorials/user-interaction'">User interaction</router-link></b></li>
+      <li><b><router-link v-bind:to="'/tutorials/painter-tutorial'">Simple Painter</router-link></b></li>
     </ol>
     <div class='no-tutorial'><router-link v-bind:to="'/editor'">No tutorials! I'm a professional programmer</router-link></div>
   </div>

@@ -75,9 +75,9 @@ export default class
 
   onClick(e) {
     if(this.infoMode) {
-      if(++this._clicks%3 == 0) {
-        this.text = "Stop clicking me, click the button!!😤";
-      }
+      // if(++this._clicks%3 == 0) {
+      //   this.text = "Stop clicking me, click the button!!😤";
+      // }
     }
     else {
       SoundEffect.play('banner-click');

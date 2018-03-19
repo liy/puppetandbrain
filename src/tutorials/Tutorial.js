@@ -81,6 +81,12 @@ export default class Tutorial
     this.once(type, this.next, target);
   }
 
+  delayNext(miniseconds=5000) {
+    setTimeout(() => {
+      this.next()
+    }, miniseconds);
+  }
+
   waitUntil(type, target=document) {
     return new Promise(resolve => {
       this.once(type, resolve, target);
@@ -113,6 +119,11 @@ export default class Tutorial
 
       this.cursor.moveTo('guide-menu-icon');
       this.banner.info('You can navigate back to tutorials page using menu');
+
+      setTimeout(() => {
+        this.cursor.clear();
+        this.banner.fadeOut();
+      }, 5000)
 
       // not first visit anymore
       localStorage.setItem('visited', true);
@@ -245,15 +256,31 @@ export default class Tutorial
       this.banner.info(`Drag the <b>${outputName}</b> pin of <b>${blockA.titleText}</b> and connect to the <b>${blockB.titleText}</b> input pin <b>${inputName}</b>`, true);
     }
 
-    this.cursor.moveTo(outputPinSymbol.element, 'right');
     
     if(isMobile) {
+      var targetElement = outputPinSymbol.element;
+      var direction = 'right'
+      this.cursor.moveTo(targetElement, direction);
+      
       this.once('touchstart', () => {
+        targetElement = inputPinSymbol.element;
+        direction = 'bottom'
+
         this.banner.info(`And tap input <b>${inputName}</b> of <b>${blockB.titleText}</b> block to form the connection.`, true);
-        this.cursor.moveTo(inputPinSymbol.element, 'right');
+        this.cursor.moveTo(targetElement, direction);
       }, outputPinSymbol.element);
+
+      // make sure the pointer is points to the correct element
+      this.when('touchend', e => {
+        // redo this step if user fail to connect
+        if(!inputPin.input.isConnected && e.target != targetElement) {
+          this.cursor.moveTo(targetElement, direction);
+        }
+      }, BrainGraph.container)
     }
     else {
+      this.cursor.moveTo(outputPinSymbol.element, 'right');
+
       this.once('mousedown', () => {
         this.banner.info(`And connect to the input <b>${inputName}</b> of <b>${blockB.titleText}</b> block.`, true);
         this.cursor.moveTo(inputPinSymbol.element, 'bottom');
@@ -284,5 +311,87 @@ export default class Tutorial
     this.once('input.connected', data => {
       this.next();
     }, inputPin.input)
+  }
+
+  connectExecution(blockA, blockB, outNameA='default') {
+    blockA = (typeof blockA === 'string') ? this.getBlock(blockA) : blockA
+    blockB = (typeof blockB === 'string') ? this.getBlock(blockB) : blockB
+
+    const outPin = blockA.outPins.get(outNameA);
+    const inPin = blockB.inPin;
+    const outPinSymbol = outPin.symbol;
+    const inPinSymbol = inPin.symbol;
+
+    if(isMobile) {
+      this.banner.info(`Tap the <b>${outNameA}</b> pin of <b>${blockA.titleText}</b>...`, true);
+    }
+    else {
+      this.banner.info(`Drag the <b>${outNameA}</b> pin of <b>${blockA.titleText}</b> and connect to the <b>${blockB.titleText}</b>`, true);
+    }
+
+    this.cursor.moveTo(outPinSymbol.element, 'right');
+    
+    if(isMobile) {
+      var targetElement = outPinSymbol.element;
+      var targetBlock = blockA
+      var direction = 'right'
+      
+      this.once('touchstart', () => {
+        targetElement = inPinSymbol.element;
+        targetBlock = blockB
+        direction = 'bottom'
+
+        this.banner.info(`And tap left pin of <b>${blockB.titleText}</b> block to form the connection.`, true);
+        this.cursor.moveTo(inPinSymbol.element, direction);
+      }, outPinSymbol.element);
+
+      // make sure the pointer is points to the correct element
+      this.when('touchend', e => {
+        // redo this step if user fail to connect
+        if(!this.getEnter(targetBlock).isConnected && e.target != targetElement) {
+          this.cursor.moveTo(targetElement, direction);
+        }
+      }, BrainGraph.container)
+    }
+    else {
+      this.once('mousedown', () => {
+        this.banner.info(`And connect to the left pin of <b>${blockB.titleText}</b> block.`, true);
+        this.cursor.moveTo(inPinSymbol.element, 'bottom');
+      }, outPinSymbol.element);
+
+      this.once('mouseup', () => {
+        // redo if fail to make the execution connection
+        if(!this.getEnter(blockB).isConnected) {
+          this.redo();
+        }
+      }, BrainGraph.container)
+    }
+
+    // handles user quick connect
+    this.once('browser.opened', async e => {
+      this.cursor.fadeOut();
+
+      this.banner.push("Oops... you just performed a shortcut to add block.")
+        .push('This is an advance feature in later tutorial.')
+      await this.banner.start();
+
+      this.banner.info('Click the close button and try again...')
+      this.cursor.moveTo('close-browser-button', 'right');
+
+      this.once('browser.closed', this.redo);
+    })
+
+    this.once('execution.connected', async (data) => {
+      if(data.source.node == blockA.node && data.targetNode == blockB.node) {
+        this.next();
+      }
+      else {
+        this.banner.push("You have connected the wrong pins, try it again");
+        await this.banner.start();
+        // Undo last history
+        Hub.history.undo();
+        this.redo();
+      }
+    }, blockA.node)
   }
 }

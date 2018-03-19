@@ -3,6 +3,8 @@ import ActorSelection from '@/editor/objects/ActorSelection';
 import TutorialBanner from './TutorialBanner';
 import { isMobile } from '@/utils/utils';
 
+import store from '@/store'
+
 class PainterTutorial extends Tutorial
 {
   constructor() {
@@ -56,8 +58,9 @@ class PainterTutorial extends Tutorial
       this.next();
     })
 
+    var gameLoopBlock = null;
     this.addStep(async () => {
-      const gameLoopBlock = this.getBlock('Game Loop');
+      gameLoopBlock = this.getBlock('Game Loop');
       this.cursor.indicate(this.getOutPinElement(gameLoopBlock, 'tick'))
 
       this.banner.push("See the white pin called <b>tick</b>?")
@@ -71,7 +74,9 @@ class PainterTutorial extends Tutorial
 
     this.addStep(this.findBlockStep('Line To'))
 
-    this.addStep(async (lineToBlock) => {
+    var lineToBlock = null
+    this.addStep(async (block) => {
+      lineToBlock = block
       this.banner.push("<b>Line To</b> block will help you to draw a line.")
         .push('More preciecly, draw a line to a specific location')
       await this.banner.start();
@@ -83,7 +88,7 @@ class PainterTutorial extends Tutorial
         .push('We can plug them into the <b>position</b> input pin,')
         .push('and it will draw line towards our mouse or finger location')
         .push('This is the core idea of any painter program!')
-        .push("<b>Mouse Position</b> block comes to rescue!")
+        .push("Now, <b>Mouse Position</b> block comes to rescue!")
       await this.banner.start();
 
       this.next();
@@ -91,9 +96,64 @@ class PainterTutorial extends Tutorial
 
     this.addStep(this.findBlockStep('Mouse Position'))
 
-    this.addStep(async (mousePositionBlock) => {
-      this.banner.push("Co")
+    var mousePositionBlock = null;
+    this.addStep(async (block) => {
+      mousePositionBlock = block
+      this.banner.push("Let's plug the mouse position to the position input of the <b>Line To</b> block")
+      await this.banner.start();
+      this.next();
     })
+
+    this.addStep(() => {
+      this.connectData(mousePositionBlock, 'position', lineToBlock, 'position')
+    })
+
+    this.addStep(async (block) => {
+      mousePositionBlock = block
+      this.banner.push("Great! Let's connect <b>Game Loop</b> and <b>Line To</b> together as well.")
+      await this.banner.start();
+
+      this.next();
+    })
+
+    this.addStep(() => {
+      this.connectExecution(gameLoopBlock, lineToBlock, 'tick')
+    });
+
+      this.addStep(async () => {
+        this.banner.push("Let's get back to stage to see what will happen")
+        await this.banner.start();
+
+        // brain
+        BrainGraph.close();
+
+        // start game
+        Hub.stage.start();
+        // update ui
+        store.commit('updateDebugMode', true);
+
+        this.next();
+      })
+
+      this.addStep(async () => {
+        if(isMobile) {
+          this.banner.info('Try finger down on the screen to draw lines');
+        }
+        else {
+          this.banner.info('Try move the mouse on the canvas to draw lines');
+        }
+
+        this.delayNext()
+      })
+
+      this.addStep(async () => {
+        this.banner.push("Well done! You have created a simple painter!")
+          .push("You can challenge your self by adding <b>Stroke Style</b> block to change line width and color")
+          .push("I'll let you play around now...")
+        await this.banner.start();
+
+        this.next();
+      })
   }
 }
 
