@@ -371,6 +371,10 @@ export default class Actor extends EventEmitter
     return this.y + Hub.stage.offsetY
   }
 
+  get className() {
+    return this.__proto__.constructor.name;
+  }
+
   createFileRefs() {
     let refs = {};
     for(let node of this.brain.nodes) {

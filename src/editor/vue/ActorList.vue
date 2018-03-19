@@ -1,6 +1,6 @@
 <template>
 <div ref="listConatiner" class='list-container' @touchstart="preventPullToRefreshTouchStart" @touchmove="preventPullToRefreshTouchMove">
-  <ul class='actor-list' ref="list">
+  <ul id='actor-list' ref="list">
     <li class="actor-list-entry" v-for="actor in actors.concat().reverse()" :data-actor="actor.id" @click="click(actor)" :key="actor.id" :draggable="actor.sortEnabled" :title="actor.name"
       @touchstart="touchStart" @dragstart="dragStart" @touchmove="touchMove" @dragover="dragOver" @touchend="touchDragEnd" @dragend ="dragEnd" @dblclick="dbClick(actor)">
       <actor-list-entry :actorID="actor.id" :sortEnabled="actor.sortEnabled"></actor-list-entry>
@@ -167,10 +167,6 @@ export default {
   height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
 }
 
-.actor-list {
-  transition: all 0.3s ease;
-}
-
 @media screen and (max-width: 600px) {
   .list-container {
     top: 110px;
@@ -191,7 +187,7 @@ export default {
   opacity: 0.5;
 }
 
-.actor-list {
+#actor-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -220,7 +216,7 @@ export default {
   }
   
   opacity: 1;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .actor-list:empty {

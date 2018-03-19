@@ -1,5 +1,5 @@
 <template>
-<div class='actor-list-entry-icon' :class="{sortDisabled: !sortEnabled, selected: selected}" :style="{backgroundImage: `url(${url})`}"></div>
+<div class='actor-list-entry-icon' :class="{sortDisabled: !sortEnabled, selected: selected, 'canvas-actor':this.isCanvasActor}" :style="{backgroundImage: `url(${url})`}"></div>
 </template>
 
 <script>
@@ -17,6 +17,9 @@ export default {
   computed: {
     actor() {
       return Hub.activity.lookUp.get(this.actorID)
+    },
+    isCanvasActor() {
+      return this.actor.className == 'CanvasActor'
     }
   },
   mounted() {

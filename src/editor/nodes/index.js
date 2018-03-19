@@ -20,7 +20,7 @@ export StrokeStyle from './draw/StrokeStyle'
 export PenPosition from './draw/PenPosition'
 export DrawCircle from './draw/DrawCircle'
 export DrawSquare from './draw/DrawSquare'
-export ClearDraw from './draw/ClearDraw'
+export ClearCanvas from './draw/ClearCanvas'
 // does not play well with draw shapes
 export LineTo from './draw/LineTo'
 

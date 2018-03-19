@@ -159,6 +159,11 @@ export default class Tutorial
     return null;
   }
   
+  getCanvasActorButton() {
+    const actorList = document.getElementById('actor-list')
+    return actorList.querySelector('.canvas-actor')
+  }
+  
   getEnter(block) {
     return block.node.enter;
   }
