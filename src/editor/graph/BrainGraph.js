@@ -50,8 +50,6 @@ export default class BrainGraph extends EventEmitter
     ElementController.init();
     this.container.appendChild(ElementController.panel.element);
 
-    this.dbClicks = 0;
-
     this.lastTouchX = 0;
     this.lastTouchY = 0;
 
@@ -164,7 +162,6 @@ export default class BrainGraph extends EventEmitter
 
     this.container.style.display = 'block'
 
-    this.container.addEventListener('contextmenu', this.onRightClick);
     this.container.addEventListener('mousedown', this.pointerdown);
     document.addEventListener('keydown', this.keydown);
     window.addEventListener('resize', this.resize);
@@ -187,6 +184,9 @@ export default class BrainGraph extends EventEmitter
     store.commit('updateStageMode', false);
 
     this.container.dispatchEvent(new CustomEvent('graph.opened', {bubbles:true, detail: this}));
+
+    
+    this.container.addEventListener('contextmenu', this.onRightClick);
   }
 
   close() {
