@@ -6,6 +6,8 @@ export default class
     this.element = document.createElement('div');
     this.element.id = 'tutorial-overlay'; 
     document.body.appendChild(this.element);
+
+    this.element.addEventListener('touchstart', e => e.preventDefault());
   }
 
   destroy() {

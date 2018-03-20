@@ -38,6 +38,12 @@ export default class
     this.next = this.next.bind(this);
 
     this.banner.addEventListener('mousedown', this.onClick);
+    this.banner.addEventListener('touchstart', e => {
+      // stop pull to refresh in chrome browser
+      e.preventDefault();
+
+      this.onClick(e);
+    })
 
     this.onBrowserClose = this.onBrowserClose.bind(this)
     this.onBrowserOpen = this.onBrowserOpen.bind(this)
