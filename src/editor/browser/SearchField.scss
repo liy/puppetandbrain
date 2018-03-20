@@ -1,6 +1,12 @@
 .search-field {
+  position: relative;
+  // right side has no icon, I manully offset it
+  left: -48px;
+
   min-width: 300px;
   width: 25vw;
+  max-width: 55%;
+
   height: 32px;
   line-height: 32px;
 
@@ -31,7 +37,14 @@
   }
 
   input::placeholder {
-    color: #e6e6e6;
+    color: #eef357;
     font-weight: 300;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search-field {
+    min-width: 55%;
+    left: -34px;
   }
 }
