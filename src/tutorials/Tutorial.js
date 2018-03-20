@@ -174,22 +174,12 @@ export default class Tutorial
 
   indicateBrowserPuppet(puppetName) {
     let element = this.browserPuppet(puppetName);
-    if(isMobile) {
-      element.classList.add('mobile-tutorial-indicator')
-    }
-    else {
-      element.classList.add('tutorial-indicator')
-    }
+    element.classList.add('tutorial-indicator')
   }
 
   indicateBrowserBlock(blockName) {
     let element = this.browserBlock(blockName);
-    if(isMobile) {
-      element.parentNode.classList.add('mobile-tutorial-indicator')
-    }
-    else {
-      element.parentNode.classList.add('tutorial-indicator')
-    }
+    element.parentNode.classList.add('tutorial-indicator')
   }
 
   indicateBlock(blockName) {

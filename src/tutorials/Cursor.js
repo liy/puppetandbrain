@@ -9,6 +9,11 @@ export default class Cursor
     this.element.id = 'tutorial-cursor'
     document.body.appendChild(this.element);
 
+    this.onOpacityTransitionEnd = this.onOpacityTransitionEnd.bind(this)
+    this.element.addEventListener('transitionend', this.onOpacityTransitionEnd)
+    this.element.addEventListener('webkitTransitionEnd', this.onOpacityTransitionEnd)
+    this.element.addEventListener('msTransitionEnd', this.onOpacityTransitionEnd)
+
     this.rippleSvg = new DOMParser().parseFromString(rippleStr, "image/svg+xml").rootElement;
     this.element.appendChild(this.rippleSvg)
     this.pointerSvg = new DOMParser().parseFromString(pointerStr, "image/svg+xml").rootElement;
@@ -28,6 +33,18 @@ export default class Cursor
   destroy() {
     this.cancelFollow();
     document.body.removeChild(this.element);
+    
+    this.element.removeEventListener('transitionend', this.onOpacityTransitionEnd)
+    this.element.removeEventListener('webkitTransitionEnd', this.onOpacityTransitionEnd)
+    this.element.removeEventListener('msTransitionEnd', this.onOpacityTransitionEnd)
+  }
+
+  onOpacityTransitionEnd(e) {
+    // animate svg has really bad performance on mobile while element is scrolling...
+    // It is better to completely stop it rendering(display:none)
+    if(this.element.style.opacity == 0) {
+      this.hide()
+    }
   }
 
   updateTransform() {
@@ -143,11 +160,26 @@ export default class Cursor
   }
 
   fadeIn() {
+    // make sure it is shown
+    this.show();
     this.element.style.opacity = 1;
   }
 
   fadeOut() {
     this.element.style.opacity = 0;
+  }
+
+  show() {
+    // just make make sure it does not trigger redraw.
+    // may be browser is clever enough to know the display is already in block state
+    // no longer need to redraw?
+    if(this.element.style.display == 'none') {
+      this.element.style.display = 'block';
+    }
+  }
+
+  hide() {
+    this.element.style.display = 'none';
   }
 
   direction(dir) {
