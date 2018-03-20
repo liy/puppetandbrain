@@ -14,7 +14,7 @@ export default class ContainerComponent extends Component
     
     this.paperOutlineTickness = 8;
     this.paperOutline = new filters.OutlineFilter(this.paperOutlineTickness, 0xFFFFFF)
-    this.paper = true;
+    this.paper = false;
   }
 
   set paper(p) {
