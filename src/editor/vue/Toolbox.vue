@@ -1,5 +1,5 @@
 <template>
-<div id='toolbox' @touchmove.prevent>
+<div id='toolbox' @touchmove.prevent :class="{hidden: hidden}">
   <!-- prevent pull to refresh on all the content of toolbox -->
   <history-control id='history-control'/>
   <div id='stage-toolbar' :class="{shifted: propertyPanelVisable && !stageMode}">
@@ -29,6 +29,9 @@ export default {
   },
   computed: {
     ...mapGetters(['propertyPanelVisable', 'stageMode']),
+    hidden() {
+      return !this.stageMode && this.propertyPanelVisable
+    }
   }
 }
 </script>
@@ -48,11 +51,29 @@ export default {
 
   // div container should not block events
   pointer-events: none;
+
+  transition: opacity 0.3s ease;
 }
+
+
 
 @media screen and (max-width: 600px), screen and (max-height: 500px) {
   #toolbox {
     height: 100px;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  #toolbox.hidden {
+    opacity: 0;
+
+      // disable button events
+    .toolbar-button {
+      pointer-events: none;
+      svg {
+        pointer-events: none;
+      }
+    }
   }
 }
 
@@ -88,5 +109,6 @@ export default {
   cursor: default;
   pointer-events: none;
 }
+
 
 </style>

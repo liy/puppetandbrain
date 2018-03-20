@@ -11,14 +11,13 @@
 <script>
 import BrainGraphClass from '../graph/BrainGraph'
 import {mapGetters} from 'vuex'
-import {isMobile} from '@/utils/utils'
 
 export default {
   name: 'node-graph',
   computed: {
     ...mapGetters(['propertyPanelVisable']),
     hidden() {
-      return isMobile && this.propertyPanelVisable
+      return this.propertyPanelVisable
     }
   },
   mounted() {
@@ -101,8 +100,10 @@ export default {
   transition: opacity 0.3s ease;
 }
 
-.graph-name.hidden {
-  opacity: 0;
+@media screen and (max-width: 890px) {
+  .graph-name.hidden {
+    opacity: 0;
+  }
 }
 
 #block-container {
@@ -112,11 +113,4 @@ export default {
   user-select: none;
 }
 
-// For testing purpose only do not add width and height for block-container!!!
-// #block-container {
-//   position: absolute;
-//   width: 1px;
-//   height: 1px;
-//   background-color:rgb(255, 0, 0);
-// }
 </style>
