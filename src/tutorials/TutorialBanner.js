@@ -52,8 +52,10 @@ export default class
   }
 
   onBrowserOpen(e) {
-    // offset the banner when browser is opened
-    this.shiftDown = true;
+    if(!e.target.classList.contains('puppet-browser')) {
+      // offset the banner when browser is opened
+      this.shiftDown = true;
+    }
   }
 
   onBrowserClose(e) {
