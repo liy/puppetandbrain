@@ -91,7 +91,7 @@ export default new Router({
     },
     {
       path: '/que-ans',
-      name: 'QueAns',
+      name: 'que-ans',
       component: QueAns,
       beforeEnter: (to, from, next) => {
         document.body.className = 'que-ans'
