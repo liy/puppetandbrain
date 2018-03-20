@@ -100,7 +100,7 @@ export default {
     cursor: pointer;
   }
 
-  .back:hover, .back:active {
+  .back:hover {
     color:white;
   }
 
