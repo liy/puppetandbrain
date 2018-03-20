@@ -3,8 +3,6 @@ import ActorSelection from '@/editor/objects/ActorSelection';
 import TutorialBanner from './TutorialBanner';
 import { isMobile } from '@/utils/utils';
 
-import store from '@/store'
-
 class PainterTutorial extends Tutorial
 {
   constructor() {
@@ -124,13 +122,8 @@ class PainterTutorial extends Tutorial
         this.banner.push("Let's get back to stage to see what will happen")
         await this.banner.start();
 
-        // brain
-        BrainGraph.close();
-
-        // start game
-        Hub.stage.start();
-        // update ui
-        store.commit('updateDebugMode', true);
+        this.backToStage();
+        this.startGame();
 
         this.next();
       })
@@ -148,7 +141,7 @@ class PainterTutorial extends Tutorial
 
       this.addStep(async () => {
         this.banner.push("Well done! You have created a simple painter!")
-          .push("You can challenge your self by adding <b>Stroke Style</b> block to change line width and color")
+          .push("You can challenge yourself by adding <b>Stroke Style</b> block to change line width and color")
           .push("I'll let you play around now...")
         await this.banner.start();
 

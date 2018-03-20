@@ -67,5 +67,7 @@ export default class BlockBrowser extends Browser
       this.add(box, template.category);
       box.on('browser.close', this.close, this);
     }
+
+    this.element.dispatchEvent(new CustomEvent('browser.content.ready', {detail:this, bubbles:true}));
   }
 }

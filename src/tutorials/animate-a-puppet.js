@@ -31,7 +31,7 @@ class AnimatePuppet extends Tutorial
 
       this.once('browser.content.ready', e => {
         this.banner.info('Now, I recommend the yellow fat cat');
-        this.cursor.moveTo(this.browserPuppet('Bouncy Cat'));
+        this.indicateBrowserPuppet('Bouncy Cat');
 
         this.once('stage.actor.added', actor => {
           this.cursor.fadeOut();
@@ -81,11 +81,9 @@ class AnimatePuppet extends Tutorial
 
       this.banner.info('You might need to scroll down to find the <b>Animation</b> block.');
       
-      this.cursor.follow(this.browserBlock('Animation'), 'bottom');
+      this.indicateBrowserBlock('Animation');
 
       this.once('graph.block.added', async e => {
-        // You have to manually cancel the follow here
-        this.cursor.cancelFollow();
 
         if(e.detail.block.node.nodeName == 'Animation' ) {
           this.next();

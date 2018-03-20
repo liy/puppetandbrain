@@ -4,6 +4,8 @@ import TutorialBanner from './TutorialBanner'
 import TutorialOverlay from './TutorialOverlay'
 import { isMobile } from '@/utils/utils';
 
+import store from '@/store'
+
 export default class Tutorial 
 {
   constructor() {}
@@ -169,6 +171,21 @@ export default class Tutorial
     }
     return null;
   }
+
+  indicateBrowserPuppet(puppetName) {
+    let element = this.browserPuppet(puppetName);
+    element.classList.add('tutorial-indicator')
+  }
+
+  indicateBrowserBlock(blockName) {
+    let element = this.browserBlock(blockName);
+    element.parentNode.classList.add('tutorial-indicator')
+  }
+
+  indicateBlock(blockName) {
+    const block = this.getBlock(blockName);
+    this.cursor.indicate(block.element);
+  }
   
   getCanvasActorButton() {
     const actorList = document.getElementById('actor-list')
@@ -210,18 +227,19 @@ export default class Tutorial
 
   findBlockStep(name) {
     return async () => {
-      this.banner.info(`Find <b>${name}</b> block.`, true)
+      this.banner.info(`Find <b>${name}</b> block.`)
       this.cursor.moveTo('add-button', 'left');
       
+      // hide cursor once browser open
       this.once('browser.opened', () => {
-        this.cursor.follow(() => {
-          return this.browserBlock(name);
-        }, 'bottom');
+        this.cursor.fadeOut();
+      })
+      // but wait when content is ready to indicate block
+      this.once('browser.content.ready', () => {
+        this.indicateBrowserBlock(name);
       });
 
       this.once('graph.block.added', async e => {
-        this.cursor.cancelFollow();
-
         if(e.detail.block.titleText == name) {
           // pass the click block to next step
           this.next(e.detail.block);
@@ -230,8 +248,8 @@ export default class Tutorial
         else {
           this.cursor.fadeOut();
 
-          this.banner.push(`This is not <b>${name}</b> block.`, true)
-                    .push("Let's try it again.");
+          this.banner.push(`This is not <b>${name}</b> block.`)
+              .push("Let's try it again.");
           await this.banner.start();
 
           this.redo()
@@ -250,10 +268,10 @@ export default class Tutorial
     const inputPinSymbol = inputPin.symbol;
 
     if(isMobile) {
-      this.banner.info(`Tap the <b>${outputName}</b> pin of <b>${blockA.titleText}</b>...`, true);
+      this.banner.info(`Tap the <b>${outputName}</b> pin of <b>${blockA.titleText}</b>...`);
     }
     else {
-      this.banner.info(`Drag the <b>${outputName}</b> pin of <b>${blockA.titleText}</b> and connect to the <b>${blockB.titleText}</b> input pin <b>${inputName}</b>`, true);
+      this.banner.info(`Drag the <b>${outputName}</b> pin of <b>${blockA.titleText}</b> and connect to the <b>${blockB.titleText}</b> input pin <b>${inputName}</b>`);
     }
 
     
@@ -266,7 +284,7 @@ export default class Tutorial
         targetElement = inputPinSymbol.element;
         direction = 'bottom'
 
-        this.banner.info(`And tap input <b>${inputName}</b> of <b>${blockB.titleText}</b> block to form the connection.`, true);
+        this.banner.info(`And tap input <b>${inputName}</b> of <b>${blockB.titleText}</b> block to form the connection.`);
         this.cursor.moveTo(targetElement, direction);
       }, outputPinSymbol.element);
 
@@ -282,7 +300,7 @@ export default class Tutorial
       this.cursor.moveTo(outputPinSymbol.element, 'right');
 
       this.once('mousedown', () => {
-        this.banner.info(`And connect to the input <b>${inputName}</b> of <b>${blockB.titleText}</b> block.`, true);
+        this.banner.info(`And connect to the input <b>${inputName}</b> of <b>${blockB.titleText}</b> block.`);
         this.cursor.moveTo(inputPinSymbol.element, 'bottom');
       }, outputPinSymbol.element);
 
@@ -323,10 +341,10 @@ export default class Tutorial
     const inPinSymbol = inPin.symbol;
 
     if(isMobile) {
-      this.banner.info(`Tap the <b>${outNameA}</b> pin of <b>${blockA.titleText}</b>...`, true);
+      this.banner.info(`Tap the <b>${outNameA}</b> pin of <b>${blockA.titleText}</b>...`);
     }
     else {
-      this.banner.info(`Drag the <b>${outNameA}</b> pin of <b>${blockA.titleText}</b> and connect to the <b>${blockB.titleText}</b>`, true);
+      this.banner.info(`Drag the <b>${outNameA}</b> pin of <b>${blockA.titleText}</b> and connect to the <b>${blockB.titleText}</b>`);
     }
 
     this.cursor.moveTo(outPinSymbol.element, 'right');
@@ -341,7 +359,7 @@ export default class Tutorial
         targetBlock = blockB
         direction = 'bottom'
 
-        this.banner.info(`And tap left pin of <b>${blockB.titleText}</b> block to form the connection.`, true);
+        this.banner.info(`And tap left pin of <b>${blockB.titleText}</b> block to form the connection.`);
         this.cursor.moveTo(inPinSymbol.element, direction);
       }, outPinSymbol.element);
 
@@ -355,7 +373,7 @@ export default class Tutorial
     }
     else {
       this.once('mousedown', () => {
-        this.banner.info(`And connect to the left pin of <b>${blockB.titleText}</b> block.`, true);
+        this.banner.info(`And connect to the left pin of <b>${blockB.titleText}</b> block.`);
         this.cursor.moveTo(inPinSymbol.element, 'bottom');
       }, outPinSymbol.element);
 
@@ -393,5 +411,22 @@ export default class Tutorial
         this.redo();
       }
     }, blockA.node)
+  }
+
+  backToStage() {
+    // brain
+    BrainGraph.close();
+  }
+
+  startGame() {
+    // start game
+    Hub.stage.start();
+    // update ui
+    store.commit('updateDebugMode', true);
+  }
+
+  stopGame() {
+    Hub.stage.stop();
+    store.commit('updateDebugMode', false);
   }
 }
