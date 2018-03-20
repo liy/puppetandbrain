@@ -164,7 +164,7 @@ export default {
   border-radius: 28px;
 
   --total-num: 10;
-  height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
+  max-height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
 }
 
 @media screen and (max-width: 600px) {
