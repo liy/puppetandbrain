@@ -3,6 +3,7 @@
     <ul>
       <li><router-link v-bind:to="'/contact'">Contact</router-link></li>
       <li><router-link v-bind:to="'/about'">About</router-link></li>
+      <li><router-link v-bind:to="'QueAns'">Q&A</router-link></li>
     </ul>
   </footer>
 </template>

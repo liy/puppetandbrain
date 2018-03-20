@@ -49,6 +49,9 @@ body.contact {
 body.tutorial-list {
   background-color: #8460a5;
 }
+body.que-ans {
+  background-color: #ebebeb;
+}
 
 #modal-container {
   position: absolute;

@@ -12,7 +12,6 @@
   border-radius: 13px;
   border: 3px solid #ffee00;
   
-
   animation: indicationAnimation 1s infinite;
   -webkit-animation: indicationAnimation 1s infinite; 
 
@@ -31,4 +30,10 @@
 {
   0%   {border-color: #ffee00;}
   100% {border-color: #ffee0060;}
+}
+
+// mobile should not have animation, it make scroll jerky
+.grid-box.mobile-tutorial-indicator {
+  border-radius: 13px;
+  border: 3px solid #ffee00;
 }

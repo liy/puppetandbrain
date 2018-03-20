@@ -3,8 +3,8 @@ import Router from 'vue-router'
 import Home from './home/Home.vue'
 import About from './about/About.vue'
 import Contact from './contact/Contact.vue'
+import QueAns from './q&a/QueAns.vue'
 import store from '@/store';
-import ConfirmModal from './editor/ui/ConfirmModal';
 
 const Tutorial = () => import('./tutorials/Tutorial.vue');
 const TutorialList = () => import('./tutorials/TutorialList.vue')
@@ -86,6 +86,15 @@ export default new Router({
       component: Contact,
       beforeEnter: (to, from, next) => {
         document.body.className = 'contact'
+        next();
+      }
+    },
+    {
+      path: '/que-ans',
+      name: 'QueAns',
+      component: QueAns,
+      beforeEnter: (to, from, next) => {
+        document.body.className = 'que-ans'
         next();
       }
     }

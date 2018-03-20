@@ -112,61 +112,10 @@ class AnimatePuppet extends Tutorial
       this.next();
     })
 
-    this.addStep(async () => {
-      if(isMobile) {
-        this.banner.info('Tap the <b>start</b> pin of <b>Game Event</b>...');
-      }
-      else {
-        this.banner.info('Drag the <b>start</b> pin of <b>Game Event</b> and connect to the <b>Animation</b> left pin');
-      }
-
-      const gameStartBlock = this.getBlock('Game Event');
-      const outPin = this.getOutPinElement(gameStartBlock, 'start');
-      this.cursor.moveTo(outPin, 'right');
-
+    this.addStep(() => {
+      const gameEventBlock = this.getBlock('Game Event');
       const animationBlock = this.getBlock('Animation');
-      if(isMobile) {
-        this.once('touchstart', () => {
-          this.banner.info("And tap the left white pin of the <b>Animaton</b> block to form the connection.");
-          const target = this.getInPinElement(animationBlock);
-          this.cursor.moveTo(target, 'right');
-        }, outPin);
-      }
-      else {
-        this.once('mousedown', () => {
-          this.banner.info("And connect to the <b>Animaton</b>'s left white pin.");
-          const target = this.getInPinElement(animationBlock);
-          this.cursor.moveTo(target, 'right');
-        }, outPin);
-
-        this.once('mouseup', () => {
-          const enter = this.getEnter(animationBlock);
-          // redo this step if user fail to connect
-          if(!enter.isConnected) {
-            this.redo();
-          }
-        }, BrainGraph.container)
-      }
-
-      // handles user quick connect
-      this.once('browser.opened', async e => {
-        this.cursor.fadeOut();
-
-        this.banner.push("Oops... you just performed a shortcut to add block.")
-          .push('This is an advance feature in later tutorial.')
-        await this.banner.start();
-
-        this.banner.info('Click the close button and try again...')
-        this.cursor.moveTo('close-browser-button', 'right');
-
-        this.once('browser.closed', this.redo);
-      })
-
-      this.once('execution.connected', data => {
-        if(data.source.node == gameStartBlock.node && data.targetNode == animationBlock.node) {
-          this.next();
-        }
-      }, gameStartBlock.node)
+      this.connectExecution(gameEventBlock, animationBlock, 'start');
     })
 
     this.addStep(async () => {
