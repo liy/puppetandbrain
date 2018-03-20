@@ -23,6 +23,8 @@ button {
   color: white;
 
   cursor: pointer;
+
+  transition: background-color 0.3s ease;
 }
 
 button:hover, button:focus {
@@ -42,7 +44,7 @@ button.major {
 }
 
 button.major:hover, button.major:focus {
-  background-color: #f3480a;
+  background-color: #ec3f00;
 }
 
 button.info {

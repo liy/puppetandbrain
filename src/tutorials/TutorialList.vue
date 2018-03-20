@@ -3,13 +3,13 @@
 <div class='tutorial-list'>
   <div class='list-container'>
     <div><a class="back" @click="$router.go(-1)">x</a></div>
-    <div class='description'>Tutorial selections</div>
+    <div class='description'>Select the tutorials below</div>
     <ol>
-      <li><b><router-link v-bind:to="'/tutorials/animate-a-puppet'">Animate a puppet</router-link></b></li>
-      <li><b><router-link v-bind:to="'/tutorials/user-interaction'">User interaction</router-link></b></li>
-      <li><b><router-link v-bind:to="'/tutorials/painter-tutorial'">Simple Painter</router-link></b></li>
+      <li><router-link tag="span" v-bind:to="'/tutorials/animate-a-puppet'">Animation</router-link></li>
+      <li><router-link tag="span" v-bind:to="'/tutorials/user-interaction'">User Interaction</router-link></li>
+      <li><router-link tag="span" v-bind:to="'/tutorials/painter-tutorial'">Simple Painter</router-link></li>
     </ol>
-    <div class='no-tutorial'><router-link v-bind:to="'/editor'">No tutorials! I'm a professional programmer</router-link></div>
+    <div class='no-tutorial'><router-link v-bind:to="'/editor'">No tutorials! I'm a professional game developer</router-link></div>
   </div>
 </div>
 </transition>
@@ -29,7 +29,10 @@ export default {
 <style lang="scss" scoped>
 .tutorial-list {
   position: absolute;
-  font-family: "jaf-domus-titling-web",sans-serif;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
 
   width: 100%;
   height: 100%;
@@ -42,7 +45,8 @@ export default {
   }
 
   .description {
-    font-size: 14px;
+    margin: 30px 0;
+    font-size: 1em;
     color: #c199e5;
   }
 
@@ -52,23 +56,40 @@ export default {
 
     list-style: none;
     text-align: center;
+
+    margin: 30px 0;
+  }
+
+  li {
+    margin-top: 20px;
+  }
+
+  span {
+    color: #f4e8ff;
+    background-color: #ac85d1;
+    border-radius: 40px;
+    line-height: 59px;
+    height: 59px;
+    display: inline-block;
+    width: 300px;
+
+    cursor: pointer;
+
+    transition: background-color ease 0.3s;
+  }
+
+  span:hover {
+    background-color: #9c6dc7;
   }
 
   a {
-    color: #ac85d1;
+    color: #ead5fd;
     text-decoration: none;
-    font-size: 40px;
-
-    line-height: 2em;
-
     transition: color ease 0.3s;
-  }
-  
-  a:hover {
-    color:#ead5fd;
   }
 
   .back {
+    color: #c199e5;
     font-family: arial, sans-serif;
     font-size: 60px;
 
@@ -79,14 +100,14 @@ export default {
     cursor: pointer;
   }
 
-  .back:hover {
+  .back:hover, .back:active {
     color:white;
   }
 
   .no-tutorial a {
     font-size: 0.9em;
     color: #9c72c4;
-    // text-decoration: underline;
+    margin-top: 10px;
   }
 
   .no-tutorial a:hover {
@@ -102,6 +123,44 @@ export default {
 
 .tutorial-list-enter {
   opacity: 0;
+}
+
+// iPhone X
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px)  { 
+  span {
+    background-color: #ac85d1;
+    border-radius: 40px;
+    line-height: 59px;
+    height: 59px;
+    display: inline-block;
+    width: 60%;
+
+    a {
+      padding: 10px 30px;
+      margin: 0;
+    }
+  }
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) { 
+
 }
 
 </style>

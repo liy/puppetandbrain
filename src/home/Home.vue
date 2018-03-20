@@ -6,11 +6,12 @@
       <div class='wrapper'>
         <h4>PUPPET & BRAIN<span class='beta'>beta</span></h4>
         <p class="requirement">Work best with Chrome, Safari and Firefox</p>
-        <h1>Make your puppets</h1>
-        <h1>Create the story</h1>
-        <h1>Learn coding</h1>
+        <div>
+          <h1>Choose your puppet</h1>
+          <h1>Program its brain</h1>
+        </div>
         <div class='home-action'>
-          <app-button class='major' @click.native="toTutorial">Start playing</app-button>
+          <app-button class='major start-button' @click.native="toTutorial">Start playing</app-button>
           <!-- <app-button class='primary'>Sign Up</app-button> -->
         </div>
       </div>
@@ -124,6 +125,13 @@ export default {
   transition: opacity ease 0.3s;
 }
 
+.start-button {
+  font-size: 1.1em;
+  height: 48px;
+  line-height: 48px;
+  border-radius: 24px;
+}
+
 .home-content {
   border-radius: 10px 10px 0 0;
 
@@ -147,13 +155,18 @@ export default {
   align-items: center;
 
   h1 {
-    font-family: "jaf-domus-titling-web",sans-serif;
-    font-size: 40px;
-    margin: 0;
+    font-family: "jaf-domus", Arial, Helvetica, sans-serif;
+    font-size: 2.0em;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  h1:first-child {
+    margin-top: 25px;
   }
 
   h4 {
-    font-size: 30px;
+    font-size: 1.6em;
     color: #6c80af;
 
     margin-bottom: 30px;
