@@ -14,10 +14,10 @@ export default class Tutorial
 
     // overlay
     this.overlay = new TutorialOverlay();
-    // banner text
-    this.banner = new TutorialBanner(this.overlay);
     // cusor pointer
     this.cursor = new Cursor();
+    // banner text
+    this.banner = new TutorialBanner(this.overlay, this.cursor);
 
     this.eventHandlers = [];
   }

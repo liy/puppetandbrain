@@ -69,6 +69,20 @@ export default class Cursor
     })
   }
 
+  gotoLocation(x, y, dir='top', ripple=false) {
+    this.direction(dir);
+
+    // always reset to show pointer
+    this.pointerSvg.style.display = 'block';
+    this.rippleSvg.style.display = ripple ? 'block' : 'none';
+    
+    this.x = x;
+    this.y = y;
+    this.updateTransform();
+
+    this.fadeIn();
+  }
+
   indicate(target) {
     this.fadeIn();
     

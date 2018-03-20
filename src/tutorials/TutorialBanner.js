@@ -1,6 +1,6 @@
 import './TutorialBanner.scss';
 import { svgElement } from '@/utils/utils';
-import HandIcon from '@/assets/hand-pointer.svg';
+import NextIcon from '@/assets/pull-icon.svg';
 import SoundEffect from '@/SoundEffect';
 
 export default class 
@@ -17,12 +17,17 @@ export default class
     this.banner.style.opacity = 0;
     this.element.appendChild(this.banner);
 
-    this.bannerText = document.createElement('span');
-    this.bannerText.className = 'banner-span'
-    this.banner.appendChild(this.bannerText);
+    this.content = document.createElement('div');
+    this.content.className = "banner-content";
+    this.banner.appendChild(this.content);
 
-    this.handIcon = svgElement(HandIcon, {width:42, height:32});
-    this.banner.appendChild(this.handIcon);
+    this.bannerText = document.createElement('span');
+    this.bannerText.className = 'banner-text'
+    this.content.appendChild(this.bannerText);
+
+    this.nextIcon = svgElement(NextIcon, {width:13, height:20});
+    this.nextIcon.style.transform = 'scaleX(-1)'
+    this.content.appendChild(this.nextIcon);
 
     this.infoMode = true;
 
