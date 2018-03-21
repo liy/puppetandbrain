@@ -60,6 +60,9 @@ export default {
 @media screen and (max-width: 600px), screen and (max-height: 500px) {
   #toolbox {
     height: 100px;
+    .toolbar-button {
+      margin-right: 10px;
+    }
   }
 }
 

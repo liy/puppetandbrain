@@ -156,7 +156,7 @@ export default {
 <style lang="scss" scoped>
 .list-container {
   position: absolute;
-  top: 160px;
+  top: 130px;
   left: 40px;
 
   overflow-x: visible;
@@ -169,15 +169,15 @@ export default {
 
 @media screen and (max-width: 600px) {
   .list-container {
-    top: 110px;
-    left: 30px;
+    top: 100px;
+    left: 12px;
   }
 }
 
 @media screen and (max-height: 500px) {
   .list-container {
-    top: 110px;
-    left: 30px;
+    top: 100px;
+    left: 12px;
     --total-num: 3;
     height: calc(var(--total-num)*48px + var(--total-num)*4px + 4px);
   }

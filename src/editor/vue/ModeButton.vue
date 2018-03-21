@@ -96,9 +96,11 @@ export default {
 
 @media screen and (max-width: 600px), screen and (max-height: 500px) {
   #mode-button {
+    left: 10px;
+    top: 28px;
     svg {
-      width: 80px;
-      height: 80px;
+      width: 64px;
+      height: 64px;
     }
   }
 }

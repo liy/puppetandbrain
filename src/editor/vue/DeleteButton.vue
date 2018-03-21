@@ -106,7 +106,7 @@ export default {
     }
 
     margin-right: 20px;
-    margin-left: 20px;
+    margin-left: 0;
   }
 }
 </style>
