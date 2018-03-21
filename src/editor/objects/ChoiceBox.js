@@ -99,6 +99,22 @@ export default class ChoiceBox extends Actor
         iconID: "🖼️"
       }
     });
+    this.properties.add({
+      data: pod.properties.fontSize || 18,
+      propertyName: 'fontSize',
+      descriptor: {
+        friendlyName: 'font size',
+        type: DataType.INTEGER,
+        data: {
+          value: 18,
+          min: 1,
+          max: 60,
+          decimalPlaces: 0,
+        },
+        gadgetClassName: 'RangeField',
+        iconID: IconStore.GENERIC
+      }
+    });
 
     this.emit('actor.ready', this);
   }
@@ -179,6 +195,22 @@ export default class ChoiceBox extends Actor
 
   get text() {
     return this.properties.get('text').data;
+  }
+
+  set fontSize(size) {
+    this.content.fontSize = size;
+  }
+
+  get fontSize() {
+    return this.content.fontSize;
+  }
+
+  set fontSize(size) {
+    this.content.fontSize = size;
+  }
+
+  get fontSize() {
+    return this.content.fontSize;
   }
 
   async snapshot() {

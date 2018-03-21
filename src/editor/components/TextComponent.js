@@ -64,4 +64,29 @@ export default class TextComponent extends ElementComponent
   get text() {
     return this.textElement.textContent;
   }
+
+  set textColor(c) {
+    this._textColor = c;
+    this.textElement.style.color = `#${c.toString(16)}`
+  }
+
+  get textColor() {
+    return this._textColor;
+  }
+
+  set font(f) {
+    this.textElement.style.font = f;
+  }
+
+  get font() {
+    return this.textElement.style.font;
+  }
+
+  set fontSize(size) {
+    this.textElement.style.fontSize = `${size}px`;
+  }
+
+  get fontSize() {
+    return parseInt(this.textElement.style.fontSize.replace('px'));
+  }
 }

@@ -16,13 +16,8 @@ export default class TextWidget extends Actor
 
   init(pod={}) {
     super.init(pod);
-
-    this.width = pod.width || 200;
-    this.height = pod.height || 200;
-    this.padding = pod.padding || 0;
-
-    let boxWidth = this.width-this.padding*2;
-    let boxHeight = this.height-this.padding*2;
+    
+    this.position = new Vec2(aroundAt(Hub.stage.stageWidth/2), aroundAt(Hub.stage.stageHeight/2));
 
     this.content = this.addComponent('content', new TextComponent(''));
     this.content.on('input', this.onInput, this);
@@ -44,9 +39,24 @@ export default class TextWidget extends Actor
       propertyName: 'textColor',
       descriptor: {
         friendlyName: 'text color',
-        gadgetClassName: 'ColorButton',
         type: DataType.COLOR,
         iconID: IconStore.COLOR
+      }
+    });
+    this.properties.add({
+      data: pod.properties.fontSize || 18,
+      propertyName: 'fontSize',
+      descriptor: {
+        friendlyName: 'font size',
+        type: DataType.INTEGER,
+        data: {
+          value: pod.properties.fontSize || 18,
+          min: 1,
+          max: 60,
+          decimalPlaces: 0,
+        },
+        gadgetClassName: 'RangeField',
+        iconID: IconStore.GENERIC
       }
     });
 
@@ -93,20 +103,15 @@ export default class TextWidget extends Actor
     return this.properties.get('text').data;
   }
 
+  set fontSize(size) {
+    this.content.fontSize = size;
+  }
+
+  get fontSize() {
+    return this.content.fontSize;
+  }
+
   async snapshot() {
-    let fileData = this.properties.get('image').data;
-
-    // do not show filters in snapshot
-    let outlineFilters = this.box.container.filters;
-    this.box.container.filters = []
-
-    // this texture does not contains any transformation.
-    // the image is later transformed manually use actor's transformation
-    let texture = Hub.stage.renderer.generateTexture(this.box.container);
-    let pixiCanvas = Hub.stage.renderer.extract.canvas(texture);
-
-    this.box.container.filters = outlineFilters
-
     return html2canvas(this.content.element, {
       backgroundColor: null,
       // width: 200/this.scale.x,
@@ -115,31 +120,6 @@ export default class TextWidget extends Actor
       // As all the authoring time data will be uploaded to the server,
       // there will be no issue to access cors image.
       allowTaint: true,
-    }).then(domCanvas => {
-
-      let canvas = document.createElement('canvas')
-      canvas.width = domCanvas.width;
-      canvas.height = domCanvas.height;
-      let context = canvas.getContext('2d');
-
-      let m = new Matrix();
-      // rotate, scale at pivot 0.5, 0.5
-      m.translate(-0.5*this.width, -0.5*this.height);
-      // Note this does not consider the box component transformation...
-      // only actor transformation.
-      m.rotate(this.rotation);
-      m.scale(this.scale.x, this.scale.y);
-      // translate back to the centre of the domCanvas
-      m.translate(canvas.width/2, canvas.height/2);
-      // transform the context ready for draw the canvas
-      context.transform(m.a, m.b, m.c, m.d, m.tx, m.ty);
-      context.drawImage(pixiCanvas, 0, 0)
-
-      // draw dom canvas, which is above pixi canvas
-      context.setTransform(1, 0, 0, 1, 0, 0);
-      context.drawImage(domCanvas, 0, 0)
-
-      return canvas;
     })
   }
 } 
