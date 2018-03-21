@@ -45,7 +45,7 @@ export default class MakeVector extends Node
 
     this.outputs.assignProperty(this.outputName, {
       get: () => {
-        return new Vec2(this.inputs.value('x'), this.inputs.value('y'));
+        return new Vec2(Number(this.inputs.value('x')), Number(this.inputs.value('y')));
       }
     });
   }
