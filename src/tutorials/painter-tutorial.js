@@ -63,8 +63,9 @@ class PainterTutorial extends Tutorial
 
       this.banner.push("See the white pin called <b>tick</b>?")
         .push("Every heart beat will trigger the <b>tick</b> pin")
-        .push("We can connect <b>tick</b> with other block to make cool stuff")
-        .push("In this case, a painter, and we need another block called <b>Line To</b>")
+        .push("We are going to connect it with another block,")
+        .push("Which can draw things onto the screen.")
+        .push("In this case, we need a block called <b>Line To</b>")
       await this.banner.start();
 
       this.next();
@@ -118,35 +119,52 @@ class PainterTutorial extends Tutorial
       this.connectExecution(gameLoopBlock, lineToBlock, 'tick')
     });
 
-      this.addStep(async () => {
-        this.banner.push("Let's get back to stage to see what will happen")
-        await this.banner.start();
+    
 
-        this.backToStage();
-        this.startGame();
+    this.addStep(async () => {
+      this.banner.push("By connecting <b>Game Loop tick</b> to <b>Line To</b>")
+      if(isMobile) {
+        this.banner.push("It basically means keep drawing lines to the current finger position")
+          .push("Which means it will draw lines follow your finger trails")
+      }
+      else {
+        this.banner.push("It basically means keep drawing lines to the current mouse position")
+          .push("Which means it will draw lines follow your mouse trails")
+      }
+      await this.banner.start();
 
-        this.next();
-      })
+      this.next();
+    })
 
-      this.addStep(async () => {
-        if(isMobile) {
-          this.banner.info('Try finger down on the screen to draw lines');
-        }
-        else {
-          this.banner.info('Try move the mouse on the canvas to draw lines');
-        }
+    this.addStep(async () => {
+      this.banner.push("Let's get back to stage to try your first painter program!")
+      await this.banner.start();
 
-        this.delayNext()
-      })
+      this.backToStage();
+      this.startGame();
 
-      this.addStep(async () => {
-        this.banner.push("Well done! You have created a simple painter!")
-          .push("You can challenge yourself by adding <b>Stroke Style</b> block to change line width and color")
-          .push("I'll let you play around now...")
-        await this.banner.start();
+      this.next();
+    })
 
-        this.next();
-      })
+    this.addStep(async () => {
+      if(isMobile) {
+        this.banner.info('Try finger down on the screen to draw lines');
+      }
+      else {
+        this.banner.info('Try move the mouse on the canvas to draw lines');
+      }
+
+      this.delayNext()
+    })
+
+    this.addStep(async () => {
+      this.banner.push("Well done! You have created a simple painter!")
+        .push("You can challenge yourself by adding <b>Stroke Style</b> block to change line width and color")
+        .push("I'll let you play around now...")
+      await this.banner.start();
+
+      this.next();
+    })
   }
 }
 

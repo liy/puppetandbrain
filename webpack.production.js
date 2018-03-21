@@ -148,6 +148,7 @@ module.exports = {
     }),
     new SpriteLoaderPlugin(),
     new OfflinePlugin({
+      // default auto update the resource in interval of 1 hour
       autoUpdate: true,
       externals: [
         'https://use.typekit.net/mob0ykg.css',
