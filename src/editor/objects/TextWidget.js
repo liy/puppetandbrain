@@ -16,8 +16,6 @@ export default class TextWidget extends Actor
 
   init(pod={}) {
     super.init(pod);
-    
-    this.position = new Vec2(aroundAt(Hub.stage.stageWidth/2), aroundAt(Hub.stage.stageHeight/2));
 
     this.content = this.addComponent('content', new TextComponent(''));
     this.content.on('input', this.onInput, this);

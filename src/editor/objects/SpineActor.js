@@ -13,10 +13,7 @@ export default class SpineActor extends Actor
   }
 
   async preload(pod) {
-    let pos = pod.position || { x: aroundAt(Hub.stage.stageWidth/2), y: aroundAt(Hub.stage.stageHeight/2) };
-    this.position = new Vec2(pos);
-    this.rotation = pod.rotation || 0;
-    this.scale = new Vec2(pod.scale || {x:1,y:1});
+    super.preload(pod)
 
     this.addComponent('placeholder', new PlaceHolderComponent(pod.dimension));
     
