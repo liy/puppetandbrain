@@ -17,13 +17,28 @@ export default class TextComponent extends ElementComponent
 
     this.onInput = this.onInput.bind(this);
     this.textElement.addEventListener('input', this.onInput);
+
+    this.inputMode = false;
+    
+    // TODO: Should I allow text drag select???
+    this.textElement.addEventListener('mousedown', e => {
+      if(this.inputMode) {
+        e.stopPropagation();
+      }
+    })
+
+    this.textElement.addEventListener('mouseup', e => {
+      this.inputMode = true;
+      this.textElement.focus();
+    })
+
+    this.textElement.addEventListener('blur', e => {
+      this.inputMode = false;
+    })
   }
 
   onInput(e) {
-    if(this.textElement.textContent == '') {
-      // this removes any br, div... so the placeholder can correctly show up
-      this.textElement.textContent = this.textElement.textContent;
-    }
+    this.emit('input', this.textElement.textContent);
   }
 
   set contentEditable(v) {
@@ -40,5 +55,13 @@ export default class TextComponent extends ElementComponent
 
   get placeholder() {
     return this.textElement.getAttribute('placeholder');
+  }
+  
+  set text(text) {
+    this.textElement.textContent = text || '';
+  }
+
+  get text() {
+    return this.textElement.textContent;
   }
 }

@@ -39,7 +39,8 @@ export default class SceneChange extends Task
   run() {
     super.run();
 
-    const creationID = this.inputs.value('creation id');
+    let creationID = this.inputs.value('creation id');
+    console.log(creationID)
     Hub.sceneManager.to(this.execution, creationID).catch(error => {
       Hub.runtimeError({
         actorID: this.owner.id,

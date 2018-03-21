@@ -32,7 +32,7 @@ export default class extends Gadget
     this.input.addEventListener('paste', e => {
       // prevent formated paste
       e.preventDefault();
-      this.value = event.clipboardData.getData('text/plain');
+      this.value = e.clipboardData.getData('text/plain');
     })
 
     this.input.addEventListener('mousedown', e => {
