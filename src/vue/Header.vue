@@ -58,7 +58,6 @@ nav {
       margin-right: 10px;
     }
   }
-
 }
 
 nav span {
