@@ -48,7 +48,7 @@ class PainterTutorial extends Tutorial
         .push('which you have seen in the previous tutorials.')
         .push('And you are right, it is a <b>event</b> type block')
         .push('More importantly, it is the <b>heart beats</b>💓 of the game!')
-        .push('Because it is a event block, it is also trying to tell you something...')
+        .push('Because it is an event block, it is also trying to tell you something...')
         .push("It tells you when the heart beat is happened.")
         .push("Actually, the heart beats so fast!")
         .push("Usually around ⏲️<b>60 times per second</b>!")
