@@ -1,12 +1,12 @@
 <template>
 <nav v-if="showHeader">
-  <router-link to="editor">
-    <svg width=32 height=32>
-      <use :xlink:href="`#${icon.id}`" :viewBox="icon.viewBox" style="--fill:#f2f2f2"/>
-    </svg>
-    <span>{{title}}</span>
-  </router-link>
-  <app-button>Sign In</app-button>
+  <div class="content">
+    <span>PUPPET & BRAIN</span>
+    <router-link to="editor">
+      <span>{{title}}</span>
+    </router-link>
+    <app-button>Sign In</app-button>
+  </div>
 </nav>
 </template>
 
@@ -39,16 +39,26 @@ nav {
   background-color: #FFF;
   color: #35495E;
 
-  display: flex;
-  align-items: center;
-
   box-shadow: 0 0 3px rgba(0,0,0,.2);
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    height: 56px;
+    line-height: 56px;
+
+    margin: auto;
+    max-width: 60rem;
+  }
 
   a {
     text-decoration: none;
     
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 
     color: #f2f2f2;
 

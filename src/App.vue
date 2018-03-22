@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <main>
+      <app-header></app-header>
       <router-view></router-view>
     </main>
     <span id='app-version'>{{appVersion}}</span>
@@ -14,6 +15,9 @@ import Header from './vue/Header.vue';
 
 export default {
   name: 'app',
+  components: {
+    'app-header': Header
+  },
   data() {
     return {
       appVersion: APP_VERSION
@@ -35,7 +39,7 @@ body {
 }
 
 body.home {
-  background-color: #505f97;
+  background-color: #E6E6E6;
 }
 body.about {
   background-color: #2196F3;
