@@ -3,7 +3,7 @@
 <div id='home' ref='home'>
   <div class='container'>
     <div class="splash">
-      <div class="splash-content">
+      <div class="splash-content" :style="{backgroundImage: splashImageUrl}">
         <img :src="require('@/assets/banner-placeholder.png')"/>
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
@@ -93,6 +93,7 @@ export default {
       numCreations: 0,
       CreateAndShareIcon,
       SpecialNeedsIcon,
+      splashImageUrl: `url(${require('!file-loader!@/assets/icons/splashbg.svg')})`
     }
   },
   components: {
@@ -139,13 +140,22 @@ export default {
 
       padding: 60px 0;
 
+      // images
+      background-repeat: no-repeat;
+      background-position: -40% 0%;
+      background-size: cover;
+
       img {
+        position: relative;
+        z-index: 1;
         width: 55%;
         // remove the white space below img
         display: inline-block;
       }
 
       .splash-text {
+        position: relative;
+        z-index: 1;
         color: white;
         width: 40%;
         float: right;
