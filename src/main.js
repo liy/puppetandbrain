@@ -46,15 +46,6 @@ Vue.config.productionTip = false
 
 Vue.component('app-button', Button);
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: { App }
-})
-
 // Sign in anoumously first
 firebase.initializeApp(FIREBASE_CONFIG);
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -81,3 +72,13 @@ window.getCurrentUser = function() {
     })
   })
 }
+
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  store,
+  template: '<App/>',
+  components: { App }
+})

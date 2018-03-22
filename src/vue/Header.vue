@@ -1,11 +1,11 @@
 <template>
 <nav v-if="showHeader">
   <div class="content">
-    <span>PUPPET & BRAIN</span>
+    <span class="logo">PUPPET & BRAIN</span>
     <router-link to="editor">
       <span>{{title}}</span>
     </router-link>
-    <app-button>Sign In</app-button>
+    <!-- <app-button>Sign In</app-button> -->
   </div>
 </nav>
 </template>
@@ -33,6 +33,10 @@ export default {
 
 <style lang="scss">
 nav {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+
   margin: 0;
   height: 56px;
   padding: 0 16px 0 24px;
@@ -79,4 +83,10 @@ nav span {
   font-weight: 400;
   box-sizing: border-box;
 }
+
+.logo {
+  font-size: 16px;
+  font-weight: 600;
+}
+
 </style>
