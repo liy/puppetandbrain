@@ -2,9 +2,9 @@
 
 <div id='theater'>
   <div id="stage">
-    <div id='stage-grid'></div>
+    <div id='stage-underlayer' :style="{width, height, backgroundColor}"></div>
     <canvas id='canvas' :width="width" :height="height"></canvas>
-    <div id='stage-overlayer'></div>
+    <div id='stage-overlayer' :style="{width, height}"></div>
   </div>
 
   <svg id="mask-container" xmlns="http://www.w3.org/2000/svg" :viewBox="viewBox">
@@ -28,6 +28,10 @@ export default {
       type: [Number, String],
       default: 300
     },
+    backgroundColor: {
+      type: [Number, String],
+      default: '#f0f0f0'
+    }
   },
   computed: {
     viewBox() {
@@ -60,12 +64,9 @@ export default {
 
 #stage {
   position: relative;
-  border-radius: 10px;
-  // background-color: #F7F7F7;
-  background-color: #f0f0f0;
 }
 
-#stage-grid {
+#stage-underlayer {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -74,6 +75,7 @@ export default {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
+  border-radius: 10px;
 }
 
 canvas {

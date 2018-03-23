@@ -182,7 +182,7 @@ class HubClass extends EventEmitter
   async save() {
     if(this.saveLock) return this.activity;
     
-    await this.activity.save();
+    await this.activity.save(true, true);
     return this.activity;
   }
 
@@ -202,7 +202,7 @@ class HubClass extends EventEmitter
 
       // auto save does not clean resource
       // might be ok?
-      this.activity.save(false);
+      this.activity.save(false, false);
 
       this.router.push(`/editor/${this.activity.id}`)
     }

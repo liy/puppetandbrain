@@ -91,7 +91,7 @@ class API
     //   })
   }
 
-  async saveActivity(pod, fileRefs) {
+  async saveActivity(pod, fileRefs, snapshot) {
     // ensure both file reference and activity save in atomical manner
     let batch = firebase.firestore().batch();
     let activityRef = firebase.firestore().collection('activities').doc(pod.activityID);
@@ -100,6 +100,13 @@ class API
     if(Object.keys(fileRefs).length != 0) {
       let fileRefsRef = firebase.firestore().collection('activityFileRefs').doc(pod.activityID);
       batch.set(fileRefsRef, fileRefs)
+    }
+
+    if(snapshot) {
+      snapshot.toBlob(blob => {
+        // upload file using activity id
+        firebase.storage().ref().child(`activities/snapshots/${pod.activityID}-activity-snapshot.jpg`).put(blob);
+      }, 'image/jpeg', 0.8);
     }
 
     return batch.commit().then(() => {
@@ -209,6 +216,15 @@ class API
 
   getUrl(path) {
     return firebase.storage().ref(path).getDownloadURL();
+  }
+
+  async recentActivities() {
+    const collections = await firebase.firestore().collection('activities').orderBy("createdAt").limit(20).get();
+    const activities = [];
+    collections.forEach(doc => {
+      activities.push(doc.data());
+    })
+    return activities;
   }
 }
 

@@ -1,6 +1,7 @@
 import LookUp from './LookUp';
 import EventEmitter from '@/utils/EventEmitter'
 import Stage from './Stage';
+import html2canvas from 'html2canvas';
 
 export default class Activity extends EventEmitter
 {
@@ -21,13 +22,18 @@ export default class Activity extends EventEmitter
     return Hub.currentUser.uid == this.ownerID;
   }
 
-  save(clearResource) {
+  async save(clearResource=false, updateSnapshot=false) {
     if(!this.isOwner || !this.dirty) return;
 
     let userFileRefs = this.getFileRefs();
     if(clearResource) this.cleanResource(userFileRefs);
+
+    let snapshot = null;
+    if(updateSnapshot) {
+      snapshot = await this.snapshot();
+    }
     
-    return API.saveActivity(this.pod(), userFileRefs).then(() => {
+    return API.saveActivity(this.pod(), userFileRefs, snapshot).then(() => {
       this.dirty = false;
     })
   }
@@ -91,6 +97,42 @@ export default class Activity extends EventEmitter
         this.resources.delete(path);
       }
     }
+  }
+
+  async snapshot() {
+    let texture = Hub.stage.renderer.generateTexture(Hub.stage.container);
+    let pixiCanvas = Hub.stage.renderer.extract.canvas(texture);
+
+    const underLayer = document.getElementById('stage-underlayer');
+    // draw both over and under layer of the stage
+    // TODO: maybe just need a background color?
+    // first generate the dom overlay
+    const promises = [html2canvas(underLayer, {
+      backgroundColor: underLayer.style.backgroundColor,
+      allowTaint: true,
+    }), html2canvas(document.getElementById('stage-overlayer'), {
+      backgroundColor: null,
+      allowTaint: true,
+    })];
+
+    return Promise.all(promises).then(([underLayerCanvas, overlayCanvas]) => {
+      const scale = 0.5;
+      let canvas = document.createElement('canvas')
+      canvas.width = Hub.stage.stageWidth*scale;
+      canvas.height = Hub.stage.stageHeight*scale;
+
+      // scale down the context so we can draw to correct size
+      let context = canvas.getContext('2d');
+      context.scale(scale, scale);
+
+      context.drawImage(underLayerCanvas, 0, 0)
+      // draw the pixi content
+      context.drawImage(pixiCanvas, 0, 0)
+      // draw dom canvas, which is above pixi canvas
+      context.drawImage(overlayCanvas, 0, 0);
+
+      return canvas;
+    })
   }
 
   pod() {
