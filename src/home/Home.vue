@@ -1,11 +1,12 @@
 <template>
 <transition name='home'>
 <div id='home' ref='home'>
-  <div class='container'>
+  <div class='home-container'>
     <div class="splash">
       <img class="splash-bg" :src="require('!file-loader!@/assets/icons/splashbg.svg')"/>
       <div class="splash-content">
-        <img :src="require('@/assets/banner-placeholder.png')"/>
+        <!-- <img :src="require('@/assets/banner-placeholder.png')"/> -->
+        <img :src="require('!file-loader!@/assets/icons/splash-video.svg')"/>
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
           <p>Yet another creative platform for children to learn game programming, but with node based visual scripting flavour!</p>
@@ -13,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="content">
+    <div class="home-content">
       <div class="white-section tutorial-section">
         <div class="tutorial-section-wrapper">
           <div>
@@ -99,6 +100,8 @@ import Footer from '@/vue/Footer.vue';
 import 'firebase/firestore'
 import CreateAndShareIcon from '@/assets/icons/createandshare.svg'
 import SpecialNeedsIcon from '@/assets/icons/specialneeds.svg'
+import SplashVideoIcon from '@/assets/icons/splash-video.svg'
+
 
 export default {
   data() {
@@ -106,6 +109,7 @@ export default {
       numCreations: 0,
       CreateAndShareIcon,
       SpecialNeedsIcon,
+      SplashVideoIcon,
       // splashImageUrl: `url(${require('!file-loader!@/assets/icons/splashbg.svg')})`
     }
   },
@@ -120,7 +124,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #home {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
@@ -132,7 +136,7 @@ export default {
     background-color: #333333;
   }
 
-  .container {
+  .home-container {
     width: 100%;
     background-color: #E6E6E6;
   }
@@ -172,6 +176,8 @@ export default {
         width: 55%;
         // remove the white space below img
         display: inline-block;
+
+        user-select: none;
       }
 
       .splash-text {
@@ -195,7 +201,7 @@ export default {
     }
   }
 
-  .content {
+  .home-content {
     background-color: #FAFAFA;
     margin: auto;
 

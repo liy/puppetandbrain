@@ -1,22 +1,22 @@
 <template>
 <nav v-if="showHeader">
-  <div class="content">
+  <div class="nav-content">
     <span class="logo" data-version="α">PUPPET & BRAIN</span>
     <div class="nav-bar">
       <div class="nav-list">
-        <router-link :to="'/tutorials/animate-a-puppet'" tag="div">
-          <div class="nav-link">
-            <svg><use :xlink:href="`#${TutorialIcon.id}`" :viewBox="TutorialIcon.viewBox"/></svg>
-            <span>Tutorials</span>
-          </div>
+        <router-link class="nav-link" :to="'/tutorials/animate-a-puppet'" tag="div">
+          <svg><use :xlink:href="`#${TutorialIcon.id}`" :viewBox="TutorialIcon.viewBox"/></svg>
+          <span>Tutorials</span>
         </router-link>
-        <div class="nav-link">
+        <router-link class="nav-link" :to="'/help'" tag="div">
           <svg><use :xlink:href="`#${HelpIcon.id}`" :viewBox="HelpIcon.viewBox"/></svg>
           <span>Help</span>
-        </div>
+        </router-link>
       </div>
       <div class="nav-list">
-        <app-button class='major tutorial-button'>Create</app-button>
+        <router-link :to="'/editor'">
+          <app-button class='major tutorial-button'>Create</app-button>
+        </router-link>
       </div>
     </div>
   </div>
@@ -48,7 +48,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+
+<style lang="scss" scoped>
 nav {
   font-size: 16px;
 
@@ -64,7 +65,7 @@ nav {
 
   box-shadow: 0 0 3px rgba(0,0,0,.2);
 
-  .content {
+  .nav-content {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -112,6 +113,8 @@ nav {
     justify-content: flex-start;
     // vertical centre fields in the content
     align-items: center;
+
+    cursor: pointer;
 
     border-radius: 16px;
 
