@@ -10,7 +10,7 @@
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
           <p>Yet another creative platform for children to learn game programming, but with node based visual scripting flavour!</p>
-          <!-- <app-button class='major start-button'>Explore</app-button> -->
+          <app-button class='start-button'>Explore</app-button>
         </div>
       </div>
     </div>
@@ -145,6 +145,8 @@ export default {
 #home {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
+
+  transition: opacity ease 0.3s;
 
   padding-top: 56px;
   
@@ -393,4 +395,14 @@ export default {
     }
   }
 }
+
+
+.home-leave-active {
+  opacity: 0;
+}
+
+.home-enter {
+  opacity: 0;
+}
+
 </style>
