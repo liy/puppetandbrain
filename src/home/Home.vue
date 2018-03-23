@@ -21,7 +21,7 @@
         <div class="tutorial-section-wrapper">
           <div>
             <h1>Don't know programming?</h1>
-            <p>No worries! You don't need programming experience at all, and there are list of interactive step by step tutorials to help you getting started!</p>
+            <p>No worries! You don't need programming experience at all, and there is a list of tutorials to help you get started!</p>
             <router-link :to="{name: 'TutorialList'}">
               <app-button class='primary tutorial-button'>Start Tutorials</app-button>
             </router-link>
@@ -33,7 +33,7 @@
         <div class="banner-wrapper">
           <div class="banner-text">
             <h1>Challenges for children</h1>
-            <p>Puppet & Brain supply fortnight challenge to inspire and help children to develop creative skill. There are abundant game assets and animations help you to realise your imagnations.</p>
+            <p>Puppet & Brain provides challenges to inspire children and to test their skills.</p>
             <dl><app-button class="info" disabled=true>Comming soon</app-button></dl>
           </div>
           <img :src="require('!file-loader!@/assets/icons/challenge.svg')"/>
@@ -42,7 +42,7 @@
       <div class="white-section">
         <div>
           <h1>Create and share</h1>
-          <p>Save and reuse your own puppets. Share your creations to your friends and family</p>
+          <p>There are abundant game assets and animations to help you to unleash your creativity. Save and reuse your own puppets. Share your creations to your friends and family.</p>
           <div class="status-info">
             <div class="status-wrapper">
               <span class="home-status-counter">{{numPuppets}}</span>
@@ -62,7 +62,7 @@
         <div class="banner-wrapper">
           <div class="banner-text">
             <h1>Curriculum for teachers and parents</h1>
-            <p>Ready to use curriculum activities allow teachers and parents engage with children in many diffrent subjects other than programming. Feel free to modify the activities to suit your own needs.</p>
+            <p>Ready to use curriculum activities allow teachers and parents to engage with children in many different subjects other than programming. Feel free to modify the activities to suit your own needs.</p>
             <dl><app-button class="info" disabled=true>Comming soon</app-button></dl>
           </div>
           <img :src="require('!file-loader!@/assets/icons/curriculum.svg')"/>
@@ -71,7 +71,7 @@
       <div class="white-section">
         <div>
           <h1>Special needs in mind</h1>
-          <p>Puppet & Brain curriculum activities support variety of switch access devices and methods so everybody can learn.</p>
+          <p>Puppet & Brain curriculum activities support a variety of switch access devices and methods so everybody can learn.</p>
         </div>
         <svg>
           <use :xlink:href="`#${SpecialNeedsIcon.id}`" :viewBox="SpecialNeedsIcon.viewBox"/>
@@ -93,7 +93,7 @@
             <div class="sub-section">
               <div class="banner-text">
                 <h1>Reasonging your program</h1>
-                <p>A intuitively execuiton and data flow visualization helps you reasoning the program and reinforce your logic thinking.</p>
+                <p>An intuitively execuiton and data flow visualization helps you reasoning the program and reinforce your logic thinking.</p>
               </div>
               <img :src="require('@/assets/icons/reasoning.png')"/>
             </div>
