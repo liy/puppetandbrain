@@ -100,6 +100,7 @@ export default class Activity extends EventEmitter
   }
 
   async snapshot() {
+    // http://www.html5gamedevs.com/topic/23467-how-to-get-the-screen-buffer-as-an-image/
     // The texture needs to have the correct stage size, otherwise pixi will try
     // to use bounds of the contaienr as the texture size, which is not good
     const texture = PIXI.RenderTexture.create(Hub.stage.stageWidth, Hub.stage.stageHeight);
