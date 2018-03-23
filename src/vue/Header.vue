@@ -1,17 +1,32 @@
 <template>
 <nav v-if="showHeader">
   <div class="content">
-    <span class="logo">PUPPET & BRAIN</span>
-    <router-link to="editor">
-      <span>{{title}}</span>
-    </router-link>
-    <!-- <app-button>Sign In</app-button> -->
+    <span class="logo" data-version="α">PUPPET & BRAIN</span>
+    <div class="nav-bar">
+      <div class="nav-list">
+        <router-link :to="'/tutorials/animate-a-puppet'" tag="div">
+          <div class="nav-link">
+            <svg><use :xlink:href="`#${TutorialIcon.id}`" :viewBox="TutorialIcon.viewBox"/></svg>
+            <span>Tutorials</span>
+          </div>
+        </router-link>
+        <div class="nav-link">
+          <svg><use :xlink:href="`#${HelpIcon.id}`" :viewBox="HelpIcon.viewBox"/></svg>
+          <span>Help</span>
+        </div>
+      </div>
+      <div class="nav-list">
+        <app-button class='major tutorial-button'>Create</app-button>
+      </div>
+    </div>
   </div>
 </nav>
 </template>
 
 <script>
 import LogoIcon from '../assets/icons/logo.svg';
+import TutorialIcon from '../assets/icons/tutorial-icon.svg';
+import HelpIcon from '../assets/icons/help-icon.svg';
 
 export default {
   name: 'app-header',
@@ -25,7 +40,9 @@ export default {
 
   data() {
     return {
-      icon: LogoIcon
+      icon: LogoIcon,
+      TutorialIcon,
+      HelpIcon,
     }
   }
 }
@@ -33,6 +50,8 @@ export default {
 
 <style lang="scss">
 nav {
+  font-size: 16px;
+
   position: fixed;
   z-index: 2;
   width: 100%;
@@ -55,21 +74,60 @@ nav {
     line-height: 56px;
 
     margin: auto;
-    max-width: 60rem;
+    max-width: 75rem;
+  }
+
+  .nav-bar {
+    font-size: 0.9em;
+    // width: 100%;
+    flex-grow: 1;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // vertical centre fields in the content
+    align-items: center;
   }
 
   a {
     text-decoration: none;
-    
-    // display: flex;
-    // align-items: center;
 
-    color: #f2f2f2;
+    color: #ffffff;
+    font-weight: 400;
 
     margin-right: 30px;
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    // vertical centre fields in the content
+    align-items: center;
+  }
+
+  .nav-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    // vertical centre fields in the content
+    align-items: center;
+
+    border-radius: 16px;
+
+    min-height: 32px;
+    margin-right: 40px;
+
+    span {
+      // color: white;
+      color:rgb(96, 115, 134);
+      font-size: 1.1em;
+    }
 
     svg {
-      margin-right: 10px;
+      width: 22px;
+      height: 22px;
+      margin-right: 8px;
     }
   }
 }
@@ -85,8 +143,17 @@ nav span {
 }
 
 .logo {
-  font-size: 16px;
+  font-size: 1.1em;
   font-weight: 600;
+  line-height: 20px;
+  margin-right: 40px;
+}
+
+.logo::after {
+  content: attr(data-version);
+  color:rgb(212, 212, 212);
+  margin-left: 5px;
+  font-size: 0.8em;
 }
 
 </style>

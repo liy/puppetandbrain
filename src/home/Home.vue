@@ -3,7 +3,8 @@
 <div id='home' ref='home'>
   <div class='container'>
     <div class="splash">
-      <div class="splash-content" :style="{backgroundImage: splashImageUrl}">
+      <img class="splash-bg" :src="require('!file-loader!@/assets/icons/splashbg.svg')"/>
+      <div class="splash-content">
         <img :src="require('@/assets/banner-placeholder.png')"/>
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
@@ -13,13 +14,24 @@
       </div>
     </div>
     <div class="content">
+      <div class="white-section tutorial-section">
+        <div class="tutorial-section-wrapper">
+          <div>
+            <h1>Don't know programming?</h1>
+            <p>No worries! You don't need programming experience at all, and there are list of interactive step by step tutorials to help you getting started!</p>
+            <app-button class='primary tutorial-button'>Start Tutorials</app-button>
+          </div>
+          <img :src="require('!file-loader!@/assets/icons/earth.png')"/>
+        </div>
+      </div>
       <div class="banner challenge-section">
         <div class="banner-wrapper">
           <div class="banner-text">
-            <h1>Fortight challenges</h1>
-            <p>Puppet & Brain supply fortnight challenge helps children to develop creative skill. There are abundant game assets and animations help you to realise your imagnations.</p>
+            <h1>Challenges for children</h1>
+            <p>Puppet & Brain supply fortnight challenge to inspire and help children to develop creative skill. There are abundant game assets and animations help you to realise your imagnations.</p>
+            <dl><app-button class="info">Comming soon</app-button></dl>
           </div>
-          <img/>
+          <img :src="require('!file-loader!@/assets/icons/challenge.svg')"/>
         </div>
       </div>
       <div class="white-section">
@@ -37,8 +49,9 @@
           <div class="banner-text">
             <h1>Curriculum for teachers and parents</h1>
             <p>Ready to use curriculum activities allow teachers and parents engage with children in many diffrent subjects other than programming. Feel free to modify the activities to suit your own needs.</p>
+            <dl><app-button class="info">Comming soon</app-button></dl>
           </div>
-          <img/>
+          <img :src="require('!file-loader!@/assets/icons/curriculum.svg')"/>
         </div>
       </div>
       <div class="white-section">
@@ -51,7 +64,7 @@
         </svg>
       </div>
       <div class="banner guru-section">
-        <div class="banner-wrapper">
+        <div class="guru-banner-wrapper">
           <h3>Are you a code guru?</h3>
 
           <div class="guru-content">
@@ -93,7 +106,7 @@ export default {
       numCreations: 0,
       CreateAndShareIcon,
       SpecialNeedsIcon,
-      splashImageUrl: `url(${require('!file-loader!@/assets/icons/splashbg.svg')})`
+      // splashImageUrl: `url(${require('!file-loader!@/assets/icons/splashbg.svg')})`
     }
   },
   components: {
@@ -132,6 +145,19 @@ export default {
     background-color: #167DA8;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 
+    .splash-bg {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90rem;
+      height: 100%;
+
+      // bg images
+      background-repeat: no-repeat;
+      background-position: -40% 0%;
+      background-size: cover;
+    }
+
     .splash-content {
       position: relative;
       padding: 10px;
@@ -139,11 +165,6 @@ export default {
       max-width: 75rem;
 
       padding: 60px 0;
-
-      // images
-      background-repeat: no-repeat;
-      background-position: -40% 0%;
-      background-size: cover;
 
       img {
         position: relative;
@@ -177,7 +198,6 @@ export default {
   .content {
     background-color: #FAFAFA;
     margin: auto;
-    padding-top: 20px;
 
     max-width: 75rem;
 
@@ -203,8 +223,13 @@ export default {
 
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 
+
     .banner-wrapper {
       margin: 60px 80px;
+
+      display:flex;
+      justify-content: space-between;
+      flex-direction: row;
     }
 
     .banner-text {
@@ -225,7 +250,9 @@ export default {
   .white-section {
     position: relative;
     text-align: center;
-    padding: 40px 20px;
+    padding: 80px 20px;
+
+    overflow: hidden;
 
     .info {
       margin-top: 20px;
@@ -239,26 +266,55 @@ export default {
     svg {
       position: absolute;
       top: 50%;
-      z-index: 0;
       
       transform-origin: 0 0;
       transform: scale(2) translate(-50%, -50%);
     }
   }
 
+  .tutorial-section {
+    text-align: left;
+    padding: 60px 20px;
+    p {
+      text-align: left;
+      margin: 20px 0 20px 0;
+      width: 70%;
+    }
+    .tutorial-section-wrapper {
+      margin: 0 60px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      img {
+        width: 160px;
+        height: 160px;
+      }
+    }
+  }
+
   .challenge-section {
     background-color: #F2881E;
     border-radius: 10px;
+
+    opacity: 0.3;
   }
 
   .curriculum-section {
     background-color: #CCBD19;
     border-radius: 10px;
+
+    opacity: 0.3;
   }
 
   .guru-section {
     background-color: #4B3FA5;
     border-radius: 10px;
+
+    .guru-banner-wrapper {
+      margin: 60px 80px;
+    }
 
     .banner-text {
       width: 100%;
