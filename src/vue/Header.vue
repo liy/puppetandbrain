@@ -125,12 +125,19 @@ nav {
       // color: white;
       color:rgb(96, 115, 134);
       font-size: 1.1em;
+      transition: color 0.3s ease;
     }
 
     svg {
       width: 22px;
       height: 22px;
       margin-right: 8px;
+    }
+  }
+
+  .nav-link:hover {
+    span {
+      color:rgb(7, 157, 221);
     }
   }
 }

@@ -10,7 +10,7 @@
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
           <p>Yet another creative platform for children to learn game programming, but with node based visual scripting flavour!</p>
-          <app-button class='major start-button'>Explore</app-button>
+          <!-- <app-button class='major start-button'>Explore</app-button> -->
         </div>
       </div>
     </div>
@@ -39,7 +39,16 @@
         <div>
           <h1>Create and share</h1>
           <p>Save and reuse your own puppets. Share your creations to your friends and family</p>
-          <div class="info"><span>{{numCreations}} creations</span></div>
+          <div class="status-info">
+            <div class="status-wrapper">
+              <span class="home-status-counter">{{numPuppets}}</span>
+              <div class="status-label">Puppets</div>
+            </div>
+            <div class="status-wrapper">
+              <span class="home-status-counter">{{numCreations}}</span>
+              <div class="status-label">Creations</div>
+            </div>
+          </div>
         </div>
         <svg>
           <use :xlink:href="`#${CreateAndShareIcon.id}`" :viewBox="CreateAndShareIcon.viewBox"/>
@@ -107,6 +116,7 @@ export default {
   data() {
     return {
       numCreations: 0,
+      numPuppets: 0,
       CreateAndShareIcon,
       SpecialNeedsIcon,
       SplashVideoIcon,
@@ -117,9 +127,16 @@ export default {
     'app-footer': Footer
   },
   mounted() {
-    firebase.firestore().collection('info').doc('activities').onSnapshot(snapshot => {
+    this.clearActiviyOnSnapshot = firebase.firestore().collection('info').doc('activities').onSnapshot(snapshot => {
       this.numCreations = snapshot.data().total;
     })
+    this.clearPuppetOnSnapshot = firebase.firestore().collection('info').doc('puppets').onSnapshot(snapshot => {
+      this.numPuppets = snapshot.data().total;
+    })
+  },
+  beforeDestroy() {
+    this.clearActiviyOnSnapshot();
+    this.clearPuppetOnSnapshot();
   }
 }
 </script>
@@ -210,6 +227,8 @@ export default {
     display: flex;
     flex-direction: column;
 
+    padding-bottom: 80px;
+
     p {
       line-height: 1.7em;
     }
@@ -259,10 +278,6 @@ export default {
     padding: 80px 20px;
 
     overflow: hidden;
-
-    .info {
-      margin-top: 20px;
-    }
     
     p {
       margin: 20px auto 0 auto;
@@ -300,18 +315,45 @@ export default {
     }
   }
 
+  
+
+  .status-info {
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .status-wrapper {
+    margin: 10px;
+  }
+
+  .home-status-counter {
+    font-family: "jaf-domus", Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
+    font-weight: 600;
+  }
+
+  .status-label {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: rgb(145, 145, 145);
+  }
+
+
   .challenge-section {
     background-color: #F2881E;
     border-radius: 10px;
 
-    opacity: 0.3;
+    opacity: 0.6;
   }
 
   .curriculum-section {
     background-color: #CCBD19;
     border-radius: 10px;
 
-    opacity: 0.3;
+    opacity: 0.6;
   }
 
   .guru-section {
