@@ -100,8 +100,11 @@ export default class Activity extends EventEmitter
   }
 
   async snapshot() {
-    let texture = Hub.stage.renderer.generateTexture(Hub.stage.container);
-    let pixiCanvas = Hub.stage.renderer.extract.canvas(texture);
+    // The texture needs to have the correct stage size, otherwise pixi will try
+    // to use bounds of the contaienr as the texture size, which is not good
+    const texture = PIXI.RenderTexture.create(Hub.stage.stageWidth, Hub.stage.stageHeight);
+    Hub.stage.renderer.render(Hub.stage.container, texture);
+    const pixiCanvas = Hub.stage.renderer.extract.canvas(texture);
 
     const underLayer = document.getElementById('stage-underlayer');
     // draw both over and under layer of the stage
