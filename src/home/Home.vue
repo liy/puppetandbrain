@@ -131,10 +131,10 @@ export default {
     'app-footer': Footer
   },
   mounted() {
-    this.clearActiviyOnSnapshot = firebase.firestore().collection('info').doc('activities').onSnapshot(snapshot => {
+    this.clearActiviyOnSnapshot = firebase.firestore().collection('status').doc('activities').onSnapshot(snapshot => {
       this.numCreations = snapshot.data().total;
     })
-    this.clearPuppetOnSnapshot = firebase.firestore().collection('info').doc('puppets').onSnapshot(snapshot => {
+    this.clearPuppetOnSnapshot = firebase.firestore().collection('status').doc('puppets').onSnapshot(snapshot => {
       this.numPuppets = snapshot.data().total;
     })
   },
