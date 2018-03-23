@@ -10,7 +10,7 @@
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
           <p>Yet another creative platform for children to learn game programming, but with node based visual scripting flavour!</p>
-          <app-button class='major start-button'>Start playing</app-button>
+          <app-button class='major start-button'>Explore</app-button>
         </div>
       </div>
     </div>
