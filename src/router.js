@@ -44,8 +44,6 @@ export default new Router({
       component: Editor,
       props: true,
       beforeEnter: (to, from, next) => {
-        console.log('route before enter')
-        // TODO: auto play tutorial if user first time visit
         document.body.className = 'editor'
         // not tutorial
         store.commit('updateTutorialMode', false);
@@ -66,7 +64,6 @@ export default new Router({
       name: 'Tutorial',
       component: Tutorial,
       beforeEnter: (to, from, next) => {
-        // TODO: auto play tutorial if user first time visit
         document.body.className = 'editor'
         store.commit('updateTutorialMode', true);
         next();
@@ -77,7 +74,6 @@ export default new Router({
       name: 'Creations',
       component: CreationList,
       beforeEnter: (to, from, next) => {
-        // TODO: auto play tutorial if user first time visit
         document.body.className = 'creations'
         next();
       }

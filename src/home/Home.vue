@@ -22,7 +22,9 @@
           <div>
             <h1>Don't know programming?</h1>
             <p>No worries! You don't need programming experience at all, and there are list of interactive step by step tutorials to help you getting started!</p>
-            <app-button class='primary tutorial-button'>Start Tutorials</app-button>
+            <router-link :to="{name: 'TutorialList'}">
+              <app-button class='primary tutorial-button'>Start Tutorials</app-button>
+            </router-link>
           </div>
           <img :src="require('!file-loader!@/assets/icons/earth.png')"/>
         </div>

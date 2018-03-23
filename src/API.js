@@ -95,6 +95,14 @@ class API
     // ensure both file reference and activity save in atomical manner
     let batch = firebase.firestore().batch();
     let activityRef = firebase.firestore().collection('activities').doc(pod.activityID);
+    const doc = await activityRef.get()
+    
+    // Note, any security or import funtionalities which can be exploited by user must be updated on the serverside
+    // ie, createAt field which is used by sorting recent activites, if I put this data in the activity pod,
+    // potentially, user could override createdAt, and keep his activity always on top... Even, if I use update() method it 
+    // does not solve the problem, they still can mannually call set() on client side to override createdAt.
+    // I have a dedicated metadata collections to store this kind of server generated information, and it is 
+    // read only by authenticated user. So no one can temper with it.
     batch.set(activityRef, pod);
 
     if(Object.keys(fileRefs).length != 0) {
@@ -219,12 +227,18 @@ class API
   }
 
   async recentActivities() {
-    const collections = await firebase.firestore().collection('activities').orderBy("createdAt").limit(20).get();
-    const activities = [];
+    const collections = await firebase.firestore().collection('activityMetadata').orderBy("createdAt").limit(20).get();
+    const promises = [];
     collections.forEach(doc => {
-      activities.push(doc.data());
+      const metadata = doc.data()
+      promises.push(this.getUrl(`activities/snapshots/${metadata.activityID}-activity-snapshot.jpg`).then(url => {
+        return {
+          ...metadata,
+          url,
+        }
+      }));
     })
-    return activities;
+    return Promise.all(promises);
   }
 }
 

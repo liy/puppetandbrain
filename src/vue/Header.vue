@@ -1,7 +1,7 @@
 <template>
 <nav v-if="showHeader">
   <div class="nav-content">
-    <span class="logo" data-version="α">PUPPET & BRAIN</span>
+    <router-link to="/" tag="span" data-version="α" class="logo">PUPPET & BRAIN</router-link>
     <div class="nav-bar">
       <div class="nav-list">
         <router-link class="nav-link" :to="'/tutorials'" tag="div">
@@ -34,7 +34,7 @@ export default {
   props: ['title'],
   computed: {
     showHeader() {
-      return this.$route.path == '/'
+      return this.$route.path == '/' || this.$route.path == '/creations'
     }
   },
 
@@ -159,6 +159,8 @@ nav span {
   font-weight: 600;
   line-height: 20px;
   margin-right: 40px;
+
+  cursor: pointer;
 }
 
 .logo::after {
