@@ -35,7 +35,7 @@ footer {
   justify-content: space-between;
   align-items: center;
 
-  background-color: #36373c;
+  background-color: #33263a;
 }
 
 .logo {
@@ -43,7 +43,7 @@ footer {
   font-size: 1.2em;
   font-weight: 600;
   line-height: 20px;
-  color: #51525a;
+  color: #4f3f57;
 }
 
 ul {
@@ -64,7 +64,7 @@ li {
   border-radius: 4px;
 
   a {
-    color: #b9b9b9;
+    color: #66566e;
     text-decoration: none;
     transition: color ease 0.3s;
   }

@@ -10,7 +10,9 @@
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
           <p>Yet another creative platform for children to learn game programming, but with node based visual scripting flavour!</p>
-          <app-button class='start-button'>Explore</app-button>
+          <router-link :to="{name: 'Creations'}">
+            <app-button class='black'>Explore</app-button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -30,7 +32,7 @@
           <div class="banner-text">
             <h1>Challenges for children</h1>
             <p>Puppet & Brain supply fortnight challenge to inspire and help children to develop creative skill. There are abundant game assets and animations help you to realise your imagnations.</p>
-            <dl><app-button class="info">Comming soon</app-button></dl>
+            <dl><app-button class="info" disabled=true>Comming soon</app-button></dl>
           </div>
           <img :src="require('!file-loader!@/assets/icons/challenge.svg')"/>
         </div>
@@ -59,7 +61,7 @@
           <div class="banner-text">
             <h1>Curriculum for teachers and parents</h1>
             <p>Ready to use curriculum activities allow teachers and parents engage with children in many diffrent subjects other than programming. Feel free to modify the activities to suit your own needs.</p>
-            <dl><app-button class="info">Comming soon</app-button></dl>
+            <dl><app-button class="info" disabled=true>Comming soon</app-button></dl>
           </div>
           <img :src="require('!file-loader!@/assets/icons/curriculum.svg')"/>
         </div>

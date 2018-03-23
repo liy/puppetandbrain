@@ -9,6 +9,7 @@ import store from '@/store';
 const Tutorial = () => import('./tutorials/Tutorial.vue');
 const TutorialList = () => import('./tutorials/TutorialList.vue')
 const Editor = () => import('./editor/Editor.vue');
+const CreationList = () => import('./creations/CreationList.vue');
 
 Vue.use(Router)
 
@@ -68,6 +69,16 @@ export default new Router({
         // TODO: auto play tutorial if user first time visit
         document.body.className = 'editor'
         store.commit('updateTutorialMode', true);
+        next();
+      }
+    },
+    {
+      path: '/creations',
+      name: 'Creations',
+      component: CreationList,
+      beforeEnter: (to, from, next) => {
+        // TODO: auto play tutorial if user first time visit
+        document.body.className = 'creations'
         next();
       }
     },

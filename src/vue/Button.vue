@@ -1,10 +1,11 @@
 <template>
-<button><slot>Button</slot></button>
+<button :class="{disabled: disabled}"><slot>Button</slot></button>
 </template>
 
 <script>
 export default {
-  name: 'app-button'
+  name: 'app-button',
+  props: ['disabled']
 }
 </script>
 
@@ -55,4 +56,16 @@ button.info:hover, button.info:focus {
   background-color: #69a7e8;
 }
 
+button.black {
+  background-color: #333333;
+}
+
+button.black:hover, button.info:focus {
+  background-color: #292929;
+}
+
+button.disabled {
+  cursor: auto;
+  pointer-events: none;
+}
 </style>

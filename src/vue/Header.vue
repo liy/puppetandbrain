@@ -4,7 +4,7 @@
     <span class="logo" data-version="α">PUPPET & BRAIN</span>
     <div class="nav-bar">
       <div class="nav-list">
-        <router-link class="nav-link" :to="'/tutorials/animate-a-puppet'" tag="div">
+        <router-link class="nav-link" :to="'/tutorials'" tag="div">
           <svg><use :xlink:href="`#${TutorialIcon.id}`" :viewBox="TutorialIcon.viewBox"/></svg>
           <span>Tutorials</span>
         </router-link>
