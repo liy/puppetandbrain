@@ -9,7 +9,7 @@
         <img :src="require('!file-loader!@/assets/icons/splash-video.svg')"/>
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
-          <p>Yet another creative platform for children to learn game programming, but with node based visual scripting flavour!</p>
+          <p>Yet another creative platform for children to learn coding, but with node based visual scripting and game programming flavour!</p>
           <router-link :to="{name: 'Creations'}">
             <app-button class='black'>Explore</app-button>
           </router-link>
@@ -33,7 +33,7 @@
         <div class="banner-wrapper">
           <div class="banner-text">
             <h1>Challenges for children</h1>
-            <p>Puppet & Brain provides challenges to inspire children and to test their skills.</p>
+            <p>Puppet & Brain provides frequent challenges to inspire children and to test their skills.</p>
             <dl><app-button class="info" disabled=true>Comming soon</app-button></dl>
           </div>
           <img :src="require('!file-loader!@/assets/icons/challenge.svg')"/>
