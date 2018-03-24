@@ -2,7 +2,7 @@
 <transition name='contact'>
 <div class='contact'>
   <ul>
-    <li><a class="back" @click="$router.go(-1)">x</a></li>
+    <li><a class="back" @click="$router.push({name: 'Home'})">x</a></li>
     <li><b><a class='email' href="mailto:puppetandbrain@gmail.com">EMAIL</a></b></li>
     <li><b><a class='twitter' href="https://twitter.com/puppetandbrain">TWITTER</a></b></li>
     <li><b><a class='discord' href="https://discord.gg/RH8RnxA">DISCORD</a></b></li>

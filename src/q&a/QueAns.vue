@@ -10,15 +10,15 @@
       </li>
       <li>
         <p class='q'>Why do you give brain to a puppet?</p>
-        <p class='a'>In order to controll it. Puppeteer use wooden bar and lines to control marionette. Game programmers use code and blocks to control it. But no one force you to give puppet a brain, it's dead anyway.</p>
+        <p class='a'>In order to control it. Puppeteer use wooden bar and lines to control marionette. Game programmers use code and blocks to control it.</p>
       </li>
       <li>
         <p class='q'>Can I have my own puppets?</p>
-        <p class='a'>At the moment no, you cannot create puppet by upload game assets files.</p>
+        <p class='a'>We now provide animated puppets; but you can also upload images of your choice as puppets to create your game.</p>
       </li>
       <li>
         <p class='q'>Can I share my created puppets?</p>
-        <p class='a'>No you cannot share puppet by its own. But you can share the game you created and other people can then save your puppet into their own library.</p>
+        <p class='a'>You cannot directly share puppet by its own. But you can share the game you created and other people can then save your puppet into their own library.</p>
       </li>
     </ul>
   </div>
