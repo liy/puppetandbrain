@@ -2,18 +2,16 @@
 <transition name='about'>
 <div class='about'>
     <div class='content'>
-      <div class="back"><a  @click="$router.go(-1)">x</a></div>
+      <div class="back"><a  @click="$router.push({name: 'Home'})">x</a></div>
 
-      <p><b>Puppet & Brain</b> is a simple node based visual scripting service teaching kids programming concepts. It can also be used for creating simple story activity and game.</p>
-      <p>It also support certain special needs functionallities, e.g., switch access.</p>
+      <p>Puppet & Brain is a creative platform for children to learn coding. We especially focus on developing their creativities and logic thinking that are essential for their future.</p>
 
-      <p class='tiny'>Actually, you can say that it is a naive Unreal Engine Blueprint clone works in the browser.</p>
-
-      <p>I worked in a special needs company for quite a while before I started this project. Currently banging my head against the keyboard to fix the bugs.</p>
-
-      <p>If you found any bugs, or have any questions and suggestions. I would be very much appreciated if you could <router-link class='contact' to='/contact' tag='a'>contact me</router-link>.</p>
+      <p>The core programming experience Puppet & Brain provides is an intutive node based visual scripting language. By learning the materials and taking on challanges at different levels, children age from 6-18 can learn fundamental programming concepts and basic game programming. There is a library of hand crafted animations and widgets for children to create and share their own animated stories, activites and games.</p>
       
-      <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation: <b>Liy</b>.<br/>Partnership Development and Marketing: <b>Ting</b></p>
+      <p>Created by educators, parents and award wining special needs software developers, Puppet & Brain provides the teachers and parents a range of creative curriculums, which helps to engage children in learning different subjects. Certain curriculums also support switch access, so that children with special needs can also benifit from this platform.</p>
+
+      <p>Our vision is building a community where children, teachers and parents can all learn programming and share their creations and experiences.</p>
+      <!-- <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation: <b>Liy</b>.<br/>Partnership Development and Marketing: <b>Ting</b></p> -->
       
       <p class='refs'>Hand cusor, music note, color picker and bin icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
     </div>

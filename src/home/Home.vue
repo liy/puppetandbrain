@@ -33,7 +33,7 @@
         <div class="banner-wrapper">
           <div class="banner-text">
             <h1>Challenges for children</h1>
-            <p>Puppet & Brain provides frequent challenges to inspire children and to test their skills.</p>
+            <p>Puppet & Brain provides regular challenges to inspire children and to test their skills.</p>
             <dl><app-button class="info" disabled=true>Comming soon</app-button></dl>
           </div>
           <img :src="require('!file-loader!@/assets/icons/challenge.svg')"/>
