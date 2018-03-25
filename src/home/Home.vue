@@ -6,7 +6,10 @@
       <img class="splash-bg" :src="require('!file-loader!@/assets/icons/splashbg.svg')"/>
       <div class="splash-content">
         <!-- <img :src="require('@/assets/banner-placeholder.png')"/> -->
-        <img :src="require('!file-loader!@/assets/icons/splash-video.svg')"/>
+        <!-- <img :src="require('!file-loader!@/assets/icons/splash-video.svg')"/> -->
+        <iframe width="560" height="315"
+src="https://www.youtube.com/embed/PkQhfl4-L0Q?&autoplay=0" frameborder="0" 
+allowfullscreen></iframe>
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
           <p>Yet another creative platform for children to learn coding, but with node based visual scripting and game programming flavour!</p>
