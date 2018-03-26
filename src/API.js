@@ -231,12 +231,16 @@ class API
     const promises = [];
     collections.forEach(doc => {
       const metadata = doc.data()
-      promises.push(this.getUrl(`activities/snapshots/${metadata.activityID}-activity-snapshot.jpg`).then(url => {
-        return {
-          ...metadata,
-          url,
-        }
-      }));
+      promises.push(
+          this.getUrl(`activities/snapshots/${metadata.activityID}-activity-snapshot.jpg`).then(url => {
+          return {
+            ...metadata,
+            url,
+          }
+        }).catch(e => {
+          return null;
+        })
+      );
     })
     return Promise.all(promises);
   }

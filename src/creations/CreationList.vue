@@ -19,7 +19,9 @@ export default {
     }
   },
   async beforeMount() {
-    this.creations = await API.recentActivities();
+    this.creations = (await API.recentActivities()).filter(v => {
+      return v != null;
+    });
   }
 }
 </script>

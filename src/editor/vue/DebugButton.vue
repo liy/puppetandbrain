@@ -23,6 +23,12 @@ export default {
       StopButtonIcon
     }
   },
+  mounted() {
+    document.addEventListener('keydown', this.onKeydown);
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.onKeydown)
+  },
   computed: {
     ...mapGetters(['debugMode', 'debugLock']),
     tooltip() {
@@ -34,6 +40,12 @@ export default {
     click() {
       SoundEffect.play('click');
       this.$store.commit('toggleDebugMode')
+    },
+    onKeydown(e) {
+      if(e.keyCode == 117) {
+        SoundEffect.play('click');
+        this.$store.commit('toggleDebugMode')
+      }
     }
   }
 }
