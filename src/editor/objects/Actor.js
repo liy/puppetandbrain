@@ -76,7 +76,8 @@ export default class Actor extends EventEmitter
    * @param {*} pod Actor pod
    */
   preload(pod) {
-    const position = { x: aroundAt(Hub.stage.stageWidth/2), y: aroundAt(Hub.stage.stageHeight/2) };
+    // update the pod position so the init will also use the default centre position
+    const position = pod.position = { x: aroundAt(Hub.stage.stageWidth/2), y: aroundAt(Hub.stage.stageHeight/2) };
     this.position = new Vec2(position);
     this.rotation = pod.rotation || 0;
     this.scale = new Vec2(pod.scale || {x:1,y:1});
