@@ -22,7 +22,7 @@ export default class DeleteActor extends Command
   }
 
   undo() {
-    let actor = ActorFactory.create(this.pod.className, this.pod.id, Hub.activity)
+    let actor = ActorFactory.create(this.pod.className, this.pod.id, Hub.activity, this.pod)
     actor.init(this.pod);
     Hub.stage.addActor(actor)
 
