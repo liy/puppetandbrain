@@ -202,7 +202,7 @@ class HubClass extends EventEmitter
 
       // auto save does not clean resource
       // might be ok?
-      this.activity.save(false, false);
+      this.activity.save(false, true);
 
       this.router.push(`/editor/${this.activity.id}`)
     }
