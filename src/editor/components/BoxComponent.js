@@ -87,4 +87,12 @@ export default class BoxComponent extends ElementComponent
   get text() {
     return this.textElement.textContent;
   }
+
+  set fontSize(size) {
+    this.textElement.style.fontSize = `${size}px`;
+  }
+
+  get fontSize() {
+    return parseInt(this.textElement.style.fontSize.replace('px'));
+  }
 }
