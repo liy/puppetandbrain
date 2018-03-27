@@ -23,6 +23,12 @@ NodeTemplate.set({
   category: 'Math',
 })
 
+/**
+ * test
+ * 
+ * @param {any} pod Object
+ * @memberof Absolute
+ */
 export default class Absolute extends Node
 {
   constructor(id, activity) {

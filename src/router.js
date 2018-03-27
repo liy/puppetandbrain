@@ -10,6 +10,7 @@ const Tutorial = () => import('./tutorials/Tutorial.vue');
 const TutorialList = () => import('./tutorials/TutorialList.vue')
 const Editor = () => import('./editor/Editor.vue');
 const CreationList = () => import('./creations/CreationList.vue');
+const Help = () => import('./help/Help.vue');
 
 Vue.use(Router)
 
@@ -102,6 +103,15 @@ export default new Router({
       component: QueAns,
       beforeEnter: (to, from, next) => {
         document.body.className = 'que-ans'
+        next();
+      }
+    },
+    {
+      path: '/help',
+      name: 'help',
+      component: Help,
+      beforeEnter: (to, from, next) => {
+        document.body.className = 'help'
         next();
       }
     }

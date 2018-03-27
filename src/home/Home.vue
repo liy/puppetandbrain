@@ -11,7 +11,7 @@
           <img :src="require('!file-loader!@/assets/icons/characters-blue-dirt-purple.png')"/>
         </div> -->
         <iframe width="560" height="315"
-src="https://www.youtube.com/embed/w8txIja3VoA?&autoplay=0" frameborder="0"></iframe>
+src="https://www.youtube.com/embed/VcjGIO5dDa0?&autoplay=0" frameborder="0"></iframe>
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
           <p>Yet another creative platform for children to learn coding, but with node based visual scripting and game programming flavour!</p>
