@@ -21,9 +21,9 @@ export default class extends Browser
     // TODO: put it into css
     this.contentSection.colorPalette = {
       'My Puppets': 0x4e84bf,
-      'Puppets': 0x976bb8,
+      'Animations': 0x976bb8,
       'Widgets': 0x6d9409,
-      'Sprite': 0xa02d6b,
+      'Images': 0xa02d6b,
     }
 
     this.contentSection.placeholder = 'Loading, Please wait...☕'

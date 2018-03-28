@@ -17,6 +17,7 @@ export default class GroupSection
   }
 
   set color(c) {
+    c = c || 0x717171;
     this.element.style.backgroundColor = `#${c.toString(16)}`;
   }
 
