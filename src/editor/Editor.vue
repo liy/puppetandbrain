@@ -6,6 +6,7 @@
   <node-graph/>
   <toolbox/>
   <mode-button/>
+  <block-context-menu/>
   <guide-menu/>
 </div>
 </template>
@@ -23,6 +24,7 @@ import Toolbox from './vue/Toolbox.vue';
 import ModeButton from './vue/ModeButton.vue';
 import GuideMenu from './vue/GuideMenu.vue';
 import ActorList from './vue/ActorList.vue';
+import BlockContextMenu from './vue/BlockContextMenu.vue';
 
 import './Hub'
 import NotificationControl from './ui/NotificationControl';
@@ -44,6 +46,7 @@ export default {
     'mode-button': ModeButton,
     'guide-menu': GuideMenu,
     'actor-list': ActorList,
+    'block-context-menu': BlockContextMenu,
   },
   async mounted() {
     // beforeRouteLeave will wait until Hub is installed to start process

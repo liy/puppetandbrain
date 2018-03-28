@@ -4,6 +4,7 @@ const state = {
   propertyPanelVisable: false,
   tutorialMode: false,
   browserVisible: false,
+  blockContextMenuVisible: false,
 
   actors: [],
 
@@ -31,6 +32,8 @@ const getters = {
   debugLock: state => state.debugLock,
   addLock: state => state.addLock,
   deleteLock: state => state.deleteLock,
+
+  blockContextMenuVisible: state => state.blockContextMenuVisible,
 }
 
 const mutations = {
@@ -81,6 +84,10 @@ const mutations = {
   setActors(state, actors) {
     state.actors = actors;
   },
+
+  updateBlockContextMenuVisible(state, visible) {
+    state.blockContextMenuVisible = visible;
+  }
 }
 
 const actions = {};

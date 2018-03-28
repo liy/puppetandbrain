@@ -56,6 +56,9 @@ body.tutorial-list {
 body.que-ans {
   background-color: #ebebeb;
 }
+body.help {
+  background-color: #ffffff;
+}
 
 #modal-container {
   position: absolute;

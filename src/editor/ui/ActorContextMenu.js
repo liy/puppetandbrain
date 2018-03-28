@@ -1,4 +1,4 @@
-import './ContextMenu.scss';
+import './ActorContextMenu.scss';
 import { aroundAt } from '@/utils/utils';
 import ActorSelection from '../objects/ActorSelection';
 import GraphSelection from '../graph/GraphSelection'
@@ -7,11 +7,11 @@ import Command from '../commands/Command';
 import InputModal from './InputModal';
 import NotificationControl from './NotificationControl';
 
-export default class ContextMenu 
+export default class ActorContextMenu
 {
   constructor() {
     this.element = document.createElement('div');
-    this.element.className = 'context-menu';
+    this.element.className = 'actor-context-menu';
 
     this.actorMenuList = document.createElement('ul');
     this.addItem(this.actorMenuList, 'Clone', async () => {
@@ -41,14 +41,14 @@ export default class ContextMenu
     this.close = this.close.bind(this)
     document.addEventListener('click', this.close);
 
-    Hub.on('contextmenu', this.openActorMenu, this);
+    Hub.on('actor.contextmenu', this.openActorMenu, this);
 
     // this.openBlockMenu = this.openBlockMenu.bind(this);
     // document.getElementById('block-container').addEventListener('contextmenu', this.openBlockMenu)
   }
 
   destroy() {
-    Hub.off('contextmenu', this.openActorMenu, this);
+    Hub.off('actor.contextmenu', this.openActorMenu, this);
     document.removeEventListener('click', this.close);
   }
 

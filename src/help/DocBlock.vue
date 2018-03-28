@@ -1,7 +1,7 @@
 <template>
 <div class="doc-box">
-<div class="block doc-block" :class="pod.elementClass">
-  <div class="title">{{pod.name}}</div>
+<div class="block doc-block" :class="template.elementClass">
+  <div class="title">{{template.name}}</div>
   <div class="container">
     <div class="base">
       <div class="body" style="background-repeat: no-repeat; background-position: center center;" :style="`background-image: url(${this.backgroundImageUrl});`">
@@ -10,8 +10,8 @@
           <div class="left">
 
             <!-- enter execution -->
-            <div class="execution-pin" v-if="pod.enter && pod.enter.enabled">
-              <span class="label">{{pod.enter.name == 'default' ? '' : pod.enter.name}}</span>
+            <div class="execution-pin" v-if="template.enter && template.enter.enabled">
+              <span class="label">{{template.enter.name == 'default' ? '' : template.enter.name}}</span>
               <div class="execution-symbol">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">
                   <use xlink:href="#execution-in" id="execution-in" viewBox="0 0 42.6 22"></use>  
@@ -20,7 +20,7 @@
             </div>
 
             <!-- input -->
-            <div class="data-pin" v-for="input in pod.inputs" :key="input.name">
+            <div class="data-pin" v-for="input in template.inputs" :key="input.name">
               <span class="label">{{input.name}}</span>
               <div class="data-head">
                 <div class="data-symbol">
@@ -36,7 +36,7 @@
           <div class="right">
             
             <!-- execution out -->
-            <div class="execution-pin" v-for="exec in pod.execution" :key="exec.name">
+            <div class="execution-pin" v-for="exec in template.execution" :key="exec.name">
               <span class="label">{{exec.name=='default' ? '' : exec.name}}</span>
               <div class="execution-symbol">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="43" height="22" class="undefined">
@@ -46,7 +46,7 @@
             </div>
 
             <!-- output -->
-            <div class="data-pin" v-for="output in pod.outputs" :key="output.name">
+            <div class="data-pin" v-for="output in template.outputs" :key="output.name">
               <span class="label">{{output.name}}</span>
               <div class="data-head">
                 <div class="data-symbol">
@@ -81,24 +81,30 @@ import OutputIcon from '@/assets/output.svg';
 
 export default {
   name: 'doc-block',
-  props: ['pod'],
+  props: ['template'],
   data() {
     return {
-      backgroundImageUrl: this.pod.iconPath || require('!file-loader!@/assets/icons/dots.svg')
+      backgroundImageUrl: this.template.iconPath || require('!file-loader!@/assets/icons/dots.svg')
     }
   },
   mounted() {
-    // console.log(this.pod)
+    // console.log(this.template)
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .doc-box {
-  height: 200px;
+  // centre whetever inside...
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .doc-block {
-  // position: relative;
-  padding: 100px;
+  position: relative;
+  display: inline-block;
+
+  margin: 20px 30px 20px 30px;
+
 }
 </style>

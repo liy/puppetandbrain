@@ -94,6 +94,14 @@ export default class Block extends EventEmitter
     BrainGraph.addBlock(this);
 
     this.node.on('execution.run', this.executionVisualization, this)
+
+
+    this.onBlockContextMenu = this.onBlockContextMenu.bind(this);
+    this.body.element.addEventListener('contextmenu', this.onBlockContextMenu)
+  }
+
+  onBlockContextMenu(e) {
+    Hub.emit('block.contextmenu', this.node);
   }
 
   executionVisualization(data) {
@@ -394,5 +402,9 @@ export default class Block extends EventEmitter
       pin.symbol.colorize(outputPod.descriptor.type)
       this.body.addRight(pin);
     }
+    
+    this.body.element.addEventListener('contextmenu', e => {
+      Hub.emit('block.template.contextmenu', pod);
+    })
   }
 }

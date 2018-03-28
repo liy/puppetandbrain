@@ -36,6 +36,7 @@ export default class BlockBody
     this.body.style.backgroundPosition = 'center';
   }
 
+
   set iconPath(path) {
     if(path) this.body.style.backgroundImage = `url("${path}")`
   }

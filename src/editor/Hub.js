@@ -6,7 +6,6 @@ import '@/editor/nodes/NodeFactory'
 import './commands/Commander';
 import ActivityLoader from "./ActivityLoader";
 import Stage from "./Stage";
-import ContextMenu from "./ui/ContextMenu";
 import EventEmitter from '../utils/EventEmitter';
 
 import store from '@/store';

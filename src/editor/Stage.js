@@ -1,6 +1,6 @@
 import ArrayMap from '@/utils/ArrayMap'
 import EventEmitter from '@/utils/EventEmitter';
-import ContextMenu from './ui/ContextMenu';
+import ActorContextMenu from './ui/ActorContextMenu';
 import Mouse from './access/Mouse';
 
 export default class extends EventEmitter
@@ -32,7 +32,7 @@ export default class extends EventEmitter
 
     this.mouse.registerRenderer(this.renderer);
     
-    this.contextMenu = new ContextMenu();
+    this.contextMenu = new ActorContextMenu();
 
     this.loop = this.loop.bind(this);
   }
