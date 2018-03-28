@@ -22,7 +22,7 @@ export default class extends PropertyElement
     let data = this.actor[this.propertyName];
     this.gadget = null;
     if(property.descriptor.gadgetClassName) {
-      this.gadget = new gadgetClasses[property.descriptor.gadgetClassName](property.descriptor.data);
+      this.gadget = new gadgetClasses[property.descriptor.gadgetClassName]({...property.descriptor.data, value:actor[property.propertyName]});
     }
     else {
       switch(property.descriptor.type) {
