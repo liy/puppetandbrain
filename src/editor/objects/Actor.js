@@ -9,7 +9,6 @@ import Vec2 from '../math/Vec2';
 import PropertyList from '../data/PropertyList';
 import { aroundAt } from '@/utils/utils';
 import DataType from '../data/DataType';
-import ContextMenu from '../ui/ContextMenu';
 
 export default class Actor extends EventEmitter
 {
@@ -180,10 +179,6 @@ export default class Actor extends EventEmitter
     }
 
     this.emit('pointerdown', this)
-    
-    if(e.which === '3') {
-      ContextMenu.openActorMenu();
-    }
   }
 
   pointerUp(e) {
@@ -240,7 +235,7 @@ export default class Actor extends EventEmitter
   }
 
   onContextMenu(e) {
-    Hub.emit('contextmenu', {actor:this, event:e});
+    Hub.emit('actor.contextmenu', {actor:this, event:e});
   }
 
   select() {
