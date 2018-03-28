@@ -10,8 +10,8 @@
         <!-- <div class="splash-logo">
           <img :src="require('!file-loader!@/assets/icons/characters-blue-dirt-purple.png')"/>
         </div> -->
-        <iframe width="560" height="315"
-src="https://www.youtube.com/embed/VcjGIO5dDa0?&autoplay=0" frameborder="0"></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/VcjGIO5dDa0?&autoplay=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <!-- <iframe src="https://player.vimeo.com/video/262184427" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
         <div class="splash-text">
           <h1>Choose your puppet<br/>Program its brain<br/>Share your creations</h1>
           <p>Yet another creative platform for children to learn coding, but with node based visual scripting and game programming flavour!</p>
