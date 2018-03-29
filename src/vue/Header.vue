@@ -8,10 +8,10 @@
           <svg><use :xlink:href="`#${TutorialIcon.id}`" :viewBox="TutorialIcon.viewBox"/></svg>
           <span>Tutorials</span>
         </router-link>
-        <!-- <router-link class="nav-link" :to="'/help'" tag="div">
+        <router-link class="nav-link" :to="'/help'" tag="div">
           <svg><use :xlink:href="`#${HelpIcon.id}`" :viewBox="HelpIcon.viewBox"/></svg>
           <span>Help</span>
-        </router-link> -->
+        </router-link>
       </div>
       <div class="nav-list">
         <router-link :to="'/editor'">

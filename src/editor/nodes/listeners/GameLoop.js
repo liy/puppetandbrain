@@ -44,8 +44,7 @@ export default class GameLoop extends Listener
 
   tick(delta) {
     super.run();
-    // console.log(delta)
-    this.outputs.assignValue('delta', delta);
+    this.outputs.assignValue('delta', delta.deltaTime);
     this.execution.run('tick');
   }
 }

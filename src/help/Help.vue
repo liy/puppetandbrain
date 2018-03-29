@@ -1,5 +1,8 @@
 <template>
 <div class="help-container">
+  <div>
+    <h2>Click the block to view its usage description.</h2>
+  </div>
   <div v-for="(value, key) in groups" :key="key" class="help-group-section" :class="key.toLowerCase()">
     <span class="help-group-name">{{key}}</span>
     <div class="help-group-grid">
@@ -61,6 +64,12 @@ export default {
   padding: 80px 0;
 
   margin: 0 auto;
+
+  h2 {
+    margin-bottom: 40px;
+    text-align: center;
+    color: #3b3e4d;
+  }
 }
 
 .help-group-section {

@@ -1,5 +1,5 @@
 <template>
-<div v-if="blockDocTemplate" class="block-doc">
+<div v-if="help && blockDocTemplate" class="block-doc">
   <div @click="close" class="doc-underlay"/>
   <div class="doc-card">
     <div @click="close" class="close-button">x</div>
@@ -44,17 +44,28 @@
 <script>
 import {mapGetters} from 'vuex'
 import Block from '@/help/Block.vue'
-import help from './help'
+import API from '@/API';
 
 export default {
   components: {
-    'vue-block': Block 
+    'vue-block': Block,
+  },
+  data() {
+    return {
+      help: null
+    }
   },
   computed: {
     ...mapGetters(['blockDocTemplate']),
     doc() {
-      return help[this.blockDocTemplate.className] || null
+      console.log(this.help)
+      return this.help[this.blockDocTemplate.name] || null
     }
+  },
+  beforeCreate() {
+    API.getDocumentation().then(data => {
+      this.help = data;
+    })
   },
   methods: {
     close() {
@@ -122,7 +133,7 @@ export default {
   }
 
   .block-doc-container {
-    padding: 40px;
+    padding: 20px 80px 20px 0px;
   }
 
   .metadata-section {

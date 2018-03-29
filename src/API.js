@@ -244,6 +244,12 @@ class API
     })
     return Promise.all(promises);
   }
+
+  getDocumentation() {
+    return firebase.firestore().doc('application/documentation').get().then(snapshot => {
+      return snapshot.data();
+    })
+  }
 }
 
 window.API = new API();
