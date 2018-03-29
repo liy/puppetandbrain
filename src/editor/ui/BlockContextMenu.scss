@@ -1,0 +1,32 @@
+.block-context-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  min-width: 150px;
+  background-color: #746b9c;
+  border-radius: 0 10px 10px 10px;
+
+  color: rgb(231, 231, 231);
+
+  z-index: 11;
+
+  ul {
+    list-style-type: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0;
+  }
+
+  li {
+    line-height: 28px;
+    height: 28px;
+    cursor: pointer;
+  }
+
+  li:hover {
+    color: white;
+  }
+}

@@ -85,7 +85,6 @@ export default class ActorContextMenu
     if(this.opened) {
       this.opened = false;
       if(this.element.contains(this.actorMenuList)) this.element.removeChild(this.actorMenuList);
-      if(this.element.contains(this.blockMenuList)) this.element.removeChild(this.blockMenuList);
       document.body.removeChild(this.element);
     }
   }

@@ -269,6 +269,10 @@ class HubClass extends EventEmitter
   get saveLock() {
     return store.state.saveLock
   }
+
+  openBlockDoc(template) {
+    store.commit('openBlockDoc', template);
+  }
 }
 
 window.Hub = new HubClass();

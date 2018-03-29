@@ -95,13 +95,12 @@ export default class Block extends EventEmitter
 
     this.node.on('execution.run', this.executionVisualization, this)
 
-
     this.onBlockContextMenu = this.onBlockContextMenu.bind(this);
     this.body.element.addEventListener('contextmenu', this.onBlockContextMenu)
   }
 
   onBlockContextMenu(e) {
-    Hub.emit('block.contextmenu', this.node);
+    Hub.emit('block.contextmenu', NodeTemplate.get(this.node.className));
   }
 
   executionVisualization(data) {
@@ -141,6 +140,8 @@ export default class Block extends EventEmitter
     for(let pin of this.inputPins) {
       pin.destroy();
     }
+
+    this.body.element.removeEventListener('contextmenu', this.onBlockContextMenu)
 
     this.body.element.removeEventListener('mousedown', this.dragStart);
     document.removeEventListener('mouseup', this.dragStop);
@@ -404,7 +405,7 @@ export default class Block extends EventEmitter
     }
     
     this.body.element.addEventListener('contextmenu', e => {
-      Hub.emit('block.template.contextmenu', pod);
+      Hub.emit('block.contextmenu', pod);
     })
   }
 }

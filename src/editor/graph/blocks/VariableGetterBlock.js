@@ -44,5 +44,10 @@ export default class GetterBlock extends Block
     let pin = new OutputPin(variable.name);
     pin.symbol.colorize(variable.type)
     this.body.addRight(pin);
+
+    
+    this.body.element.addEventListener('contextmenu', e => {
+      Hub.emit('block.contextmenu', pod);
+    })
   }
 }

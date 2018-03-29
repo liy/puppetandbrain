@@ -1,6 +1,6 @@
 <template>
-<div class="doc-box">
-<div class="block doc-block" :class="template.elementClass">
+<div class="vue-block-box">
+<div class="block vue-block" :class="template.elementClass">
   <div class="title">{{template.name}}</div>
   <div class="container">
     <div class="base">
@@ -80,7 +80,7 @@ import InputIcon from '@/assets/input.svg';
 import OutputIcon from '@/assets/output.svg';
 
 export default {
-  name: 'doc-block',
+  name: 'vue-block',
   props: ['template'],
   data() {
     return {
@@ -94,13 +94,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.doc-box {
+.vue-block-box {
   // centre whetever inside...
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.doc-block {
+.vue-block {
   position: relative;
   display: inline-block;
 

@@ -1,6 +1,7 @@
 import ArrayMap from '@/utils/ArrayMap'
 import EventEmitter from '@/utils/EventEmitter';
 import ActorContextMenu from './ui/ActorContextMenu';
+import BlockContextMenu from './ui/BlockContextMenu';
 import Mouse from './access/Mouse';
 
 export default class extends EventEmitter
@@ -32,7 +33,8 @@ export default class extends EventEmitter
 
     this.mouse.registerRenderer(this.renderer);
     
-    this.contextMenu = new ActorContextMenu();
+    this.actorContextMenu = new ActorContextMenu();
+    this.blockContextMenu = new BlockContextMenu();
 
     this.loop = this.loop.bind(this);
   }
@@ -64,7 +66,7 @@ export default class extends EventEmitter
 
   destroy() {
     PIXI.ticker.shared.remove(this.loop);
-    this.contextMenu.destroy();
+    this.actorContextMenu.destroy();
     this.renderer.destroy();
     this.clear();
   }

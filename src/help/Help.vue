@@ -2,7 +2,7 @@
 <div class="help-container">
   <div v-for="(value, key) in groups" :key="key" class="group" :class="key.toLowerCase()">
     <!-- test -->
-    <doc-block v-for="template in value" :template="template" :key="template.className"/>
+    <vue-block v-for="template in value" :template="template" :key="template.className"/>
   </div>
 </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
 import * as NodeClasses from '../editor/nodes';
 import '../editor/NodeTemplate';
-import DocBlock from './DocBlock.vue'
+import Block from './Block.vue'
 
 const groups = {};
 const templates = [];
@@ -33,7 +33,7 @@ console.log(groups)
 
 export default {
   components: {
-    'doc-block': DocBlock 
+    'vue-block': Block 
   },
   data() {
     return {
