@@ -9,12 +9,12 @@ NodeTemplate.set({
   name: 'Vector Add',
   operationName: 'add',
   inputs: [{
-    name: 'vector A',
+    name: 'A',
     descriptor: {
       type: DataType.VEC2,
     }
   }, {
-    name: 'vector B',
+    name: 'B',
     descriptor: {
       type: DataType.VEC2,
     }
@@ -26,11 +26,11 @@ NodeTemplate.set({
     }
   }],
   memory: {
-    'vector A': {
+    'A': {
       x: 0,
       y: 0,
     },
-    'vector B': {
+    'B': {
       x: 0,
       y: 0
     }
@@ -62,10 +62,10 @@ export default class VectorArithmetic extends Adaptor
   }
 
   add() {
-    return Vec2.add(numericVector(this.inputs.value('vector A')), numericVector(this.inputs.value('vector B')));
+    return Vec2.add(numericVector(this.inputs.value('A')), numericVector(this.inputs.value('B')));
   }
 
   sub() {
-    return Vec2.sub(numericVector(this.inputs.value('vector A')), numericVector(this.inputs.value('vector B')));
+    return Vec2.sub(numericVector(this.inputs.value('A')), numericVector(this.inputs.value('B')));
   }
 }
