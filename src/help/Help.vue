@@ -4,6 +4,7 @@
     <!-- test -->
     <vue-block v-for="template in value" :template="template" :key="template.className"/>
   </div>
+  <block-doc/>
 </div>
 </template>
 
@@ -11,6 +12,7 @@
 import * as NodeClasses from '../editor/nodes';
 import '../editor/NodeTemplate';
 import Block from './Block.vue'
+import BlockDoc from './BlockDoc.vue'
 
 const groups = {};
 const templates = [];
@@ -29,11 +31,11 @@ for(let template of templates) {
   groups[template.category] = groups[template.category] || [];
   groups[template.category].push(template);;
 }
-console.log(groups)
 
 export default {
   components: {
-    'vue-block': Block 
+    'vue-block': Block,
+    'block-doc': BlockDoc,
   },
   data() {
     return {

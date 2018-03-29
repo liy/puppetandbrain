@@ -24,7 +24,7 @@ import Toolbox from './vue/Toolbox.vue';
 import ModeButton from './vue/ModeButton.vue';
 import GuideMenu from './vue/GuideMenu.vue';
 import ActorList from './vue/ActorList.vue';
-import BlockDoc from './vue/BlockDoc.vue';
+import BlockDoc from '@/help/BlockDoc.vue';
 
 import './Hub'
 import NotificationControl from './ui/NotificationControl';

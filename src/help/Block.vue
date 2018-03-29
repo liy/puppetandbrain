@@ -105,6 +105,5 @@ export default {
   display: inline-block;
 
   margin: 20px 30px 20px 30px;
-
 }
 </style>
