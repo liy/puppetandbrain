@@ -1,7 +1,7 @@
 <template>
 <div class="help-container">
   <div>
-    <h2>Click the block to view its usage description.</h2>
+    <h2>Click the block to view its detail help description.</h2>
   </div>
   <div v-for="(value, key) in groups" :key="key" class="help-group-section" :class="key.toLowerCase()">
     <span class="help-group-name">{{key}}</span>

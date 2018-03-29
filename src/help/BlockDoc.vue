@@ -32,6 +32,15 @@
             <div class="description">{{output.d}}</div>
           </div>
         </div>
+
+        <!-- operations -->
+        <div class="metadata-section operation" v-if="doc.ops && doc.ops.length!=0">
+          <h5>operations</h5>
+          <div class="metadata-field" v-for="operation in doc.ops" :key="operation.name">
+            <div class="name">{{operation.n}}</div>
+            <div class="description">{{operation.d}}</div>
+          </div>
+        </div>
       </div>
     </div>
       <!-- description -->
@@ -58,8 +67,8 @@ export default {
   computed: {
     ...mapGetters(['blockDocTemplate']),
     doc() {
-      console.log(this.help)
-      return this.help[this.blockDocTemplate.name] || null
+      // use either name or class name(useful in adpator type node)
+      return (this.help[this.blockDocTemplate.name] || this.help[this.blockDocTemplate.className]) || null
     }
   },
   beforeCreate() {

@@ -33,7 +33,7 @@ NodeTemplate.set({
   outputs: [{
     name: 'switch id',
     descriptor: {
-      type: DataType.DOUBLE
+      type: DataType.INTEGER
     }
   }],
   memory: {

@@ -1,7 +1,17 @@
 <template>
 <div class="vue-block-box">
 <div class="block vue-block" :class="template.elementClass">
-  <div class="title">{{template.name}}</div>
+  <div v-if="!template.operations || template.operations.length == 0" class="title">{{template.name}}</div>
+  <div v-else class="adaptor-selector">
+    <div class="adaptor-selector-header">
+      <div class="header-name">{{template.operations[0].description}}</div>
+      <div class="adaptor-selector-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="10" height="8" class="undefined">       
+          <use xlink:href="#adaptor-selector-arrow" id="adaptor-selector-arrow" viewBox="0 0 10 8"></use>  
+        </svg>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="base">
       <div class="body" style="background-repeat: no-repeat; background-position: center center;" :style="`background-image: url(${this.backgroundImageUrl});`">
@@ -78,6 +88,7 @@ import ExecutionInIcon from '@/assets/execution-in.svg';
 import ExecutionOutIcon from '@/assets/execution-out.svg';
 import InputIcon from '@/assets/input.svg';
 import OutputIcon from '@/assets/output.svg';
+import SelectorIcon from '@/assets/adaptor-selector-arrow.svg'
 
 export default {
   name: 'vue-block',
