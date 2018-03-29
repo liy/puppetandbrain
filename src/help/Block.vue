@@ -102,8 +102,8 @@ export default {
 }
 .vue-block {
   position: relative;
-  display: inline-block;
+  z-index: 0;
 
-  margin: 20px 30px 20px 30px;
+  cursor: pointer;
 }
 </style>

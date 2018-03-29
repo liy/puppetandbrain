@@ -34,7 +34,7 @@ export default {
   props: ['title'],
   computed: {
     showHeader() {
-      return this.$route.path == '/' || this.$route.path == '/creations'
+      return this.$route.path == '/' || this.$route.path == '/creations' || this.$route.path == '/help'
     }
   },
 

@@ -57,7 +57,7 @@ body.que-ans {
   background-color: #ebebeb;
 }
 body.help {
-  background-color: #ffffff;
+  background-color: #ebebeb;
 }
 
 #modal-container {

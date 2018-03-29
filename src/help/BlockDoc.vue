@@ -1,7 +1,9 @@
 <template>
-<div v-if="blockDocTemplate" @click="close" class="block-doc">
+<div v-if="blockDocTemplate" class="block-doc">
+  <div @click="close" class="doc-underlay"/>
   <div class="doc-card">
-    <div class="block-doc-info">
+    <div @click="close" class="close-button">x</div>
+    <div v-if="doc" class="block-doc-info">
       <div class="block-doc-container">
         <vue-block :template="blockDocTemplate"/>
       </div>
@@ -33,7 +35,8 @@
       </div>
     </div>
       <!-- description -->
-    <p class="doc-description">{{doc.d}}</p>
+    <p v-if="doc" class="doc-description">{{doc.d}}</p>
+    <p v-else>Sorry, this block documentation is not available. I'm still working on it...</p>
   </div>
 </div>
 </template>
@@ -50,7 +53,7 @@ export default {
   computed: {
     ...mapGetters(['blockDocTemplate']),
     doc() {
-      return help[this.blockDocTemplate.className] || {}
+      return help[this.blockDocTemplate.className] || null
     }
   },
   methods: {
@@ -62,15 +65,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.block-doc {
+.doc-underlay {
   position: absolute;
+  width: 100%;
+  height: 100%;
+
+  z-index: -1;
+
+  background-color: #fffffff2;
+}
+
+.block-doc {
+  position: fixed;
   top: 0;
   left: 0;
 
   width: 100%;
   height: 100%;
-
-  background-color: #fffffff2;
 
   display: flex;
   justify-content: center;
@@ -81,6 +92,7 @@ export default {
 }
 
 .doc-card {
+  position: relative;
   width: 60%;
   background: #2c2b33;
   border-radius: 15px;
@@ -90,6 +102,18 @@ export default {
 
   // margin: 50px auto;
   padding: 50px;
+
+  .close-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    min-width: 32px;
+    min-height: 32px;
+    text-align: center;
+    line-height: 32px;
+
+    cursor: pointer;
+  }
 
   .block-doc-info {
     display: flex;
@@ -126,7 +150,7 @@ export default {
 
   .name {
     font-weight: 600;
-    width: 20%;
+    min-width: 150px;
   }
 
   .description {

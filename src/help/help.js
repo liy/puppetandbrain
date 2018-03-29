@@ -8,6 +8,7 @@ export default {
     o: [],
     d: "You can also add custom outputs by click the + pin. Connect this block to other blocks to create a custom action. A Perform block will then be presented in the block browser. You can then connect the Perform block to trigger this custom action."
   },
+
   Animation: {
     e: [{
       n: "default",
@@ -20,6 +21,69 @@ export default {
     }],
     o: [],
     d: "This block only show up in puppet with animations. You can pick an animation to play an animation of the puppet."
+  },
+
+  Flip: {
+    e: [{
+      n: "default",
+      d: "Immeditately execute connected block"
+    }, {
+      n: "completed",
+      d: "Execute connected block until flip animation completes"
+    }],
+    i: [{
+      n: "direction",
+      t: "text",
+      d: "Flip to the specified direction"
+    }, {
+      n: "duration",
+      t: "double",
+      d: "The time duration of the flip animation, in seconds."
+    }],
+    o: [],
+    d: "Flip a puppet to a specified direction. One thing you can do is have two Flip blocks with different directions, and connect the second Flip's completed pin back to the left enter pin of the first block. Then the puppet will keep flipping back and forth forever."
+  },
+
+  Jump: {
+    e: [{
+      n: "default",
+      d: "Immeditately execute connected block"
+    }, {
+      n: "completed",
+      d: "Execute connected block until jump animation completes"
+    }],
+    i: [{
+      n: "height",
+      t: "double",
+      d: "Jump height, in pixels"
+    }, {
+      n: "duration",
+      t: "double",
+      d: "The time duration of the jump animation, in seconds."
+    }],
+    o: [],
+    d: "Make a puppet jump. You can connect the completed pin back to the enter pin to make puppet jumping forever."
+  },
+
+  Move: {
+    e: [{
+      n: "default",
+      d: "Immeditately execute connected block"
+    }, {
+      n: "completed",
+      d: "Execute connected block until move animation completes"
+    }],
+    i: [{
+      n: "step",
+      t: "vector",
+      d: "Step relative to current puppet position in both x and y directins, in pixels"
+    }, {
+      n: "duration",
+      t: "double",
+      d: "The time duration of the move animation, in seconds."
+    }],
+    o: [],
+    d: "Make a puppet move relative to current puppet position. You can connect the completed pin back to the enter pin to make puppet moving forever."
   },
 
   Loop: {
