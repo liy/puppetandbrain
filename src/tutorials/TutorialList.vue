@@ -2,7 +2,7 @@
 <transition name='tutorial-list'>
 <div class='tutorial-list'>
   <div class='list-container'>
-    <div><a class="back" @click="$router.go(-1)">x</a></div>
+    <div><a class="back" @click="$router.push({name: 'Home'})">x</a></div>
     <div class='description'>Select the tutorials below</div>
     <ol>
       <li><router-link tag="span" v-bind:to="'/tutorials/animate-a-puppet'">Animation</router-link></li>
