@@ -1,4 +1,5 @@
 <template>
+<transition name='blockDoc'>
 <div v-if="help && blockDocTemplate" class="block-doc">
   <div @click="close" class="doc-underlay"/>
   <div class="doc-card">
@@ -50,6 +51,7 @@
     <p v-if="!doc">Sorry, this block documentation is not available. I'm still working on it...</p>
   </div>
 </div>
+</transition>
 </template>
 
 <script>
@@ -111,6 +113,8 @@ export default {
   flex-direction: column;
 
   z-index: 11;
+  
+  transition: opacity ease 0.3s;
 }
 
 .doc-card {
@@ -245,5 +249,14 @@ export default {
       margin: 20px;
     }
   }
+}
+
+
+.blockDoc-leave-active {
+  opacity: 0;
+}
+
+.blockDoc-enter {
+  opacity: 0;
 }
 </style>

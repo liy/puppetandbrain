@@ -9,7 +9,7 @@
       <vue-block v-for="template in value" :template="template" :key="template.className" @click.native="openBlockDoc(template)"/>
     </div>
   </div>
-  <!-- <block-doc/> -->
+  <block-doc/>
 
   <div class="help-group-section">
     <span class="help-group-name">Execution Pins</span>
@@ -65,7 +65,7 @@
 import * as NodeClasses from '../editor/nodes';
 import '../editor/NodeTemplate';
 import Block from './Block.vue'
-// import BlockDoc from './BlockDoc.vue'
+import BlockDoc from './BlockDoc.vue'
 
 import ExecutionInIcon from '@/assets/execution-in.svg';
 import ExecutionOutIcon from '@/assets/execution-out.svg';
@@ -94,7 +94,7 @@ export default {
   name: "help",
   components: {
     'vue-block': Block,
-    // 'block-doc': BlockDoc,
+    'block-doc': BlockDoc,
   },
   data() {
     return {
@@ -172,12 +172,14 @@ export default {
     ($baseB + ($b - $baseB)*$a), 
     ($baseA + (1 - $baseA)*$a));
 
-  svg {
-    margin-top: 3px;
-  }
-
   margin-right: 10px;
 }
+
+  
+.data-symbol {
+  height: 38px;
+}
+
 
 .input-pin {
   border-radius: 19px 0 0 19px;

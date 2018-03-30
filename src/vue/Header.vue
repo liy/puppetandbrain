@@ -17,7 +17,7 @@
       </div>
       <div class="nav-list">
         <router-link :to="'/editor'">
-          <app-button class='major tutorial-button'>Create</app-button>
+          <app-button class='major tutorial-button'>New Creation</app-button>
         </router-link>
       </div>
     </div>
