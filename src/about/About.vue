@@ -11,7 +11,7 @@
       <p>Created by educators, parents and award wining special needs software developers, Puppet & Brain provides the teachers and parents a range of creative curriculums, which helps to engage children in learning different subjects. Certain curriculums also support switch access, so that children with special needs can also benifit from this platform.</p>
 
       <p>Our vision is building a community where children, teachers and parents can all learn programming and share their creations and experiences.</p>
-      <!-- <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation: <b>Liy</b>.<br/>Partnership Development and Marketing: <b>Ting</b></p> -->
+      <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation: <b>Liy</b>.<br/>Partnership Development and Marketing: <b>Ting</b></p>
       
       <p class='refs'>Music made by <a href="https://www.bensound.com" title="Bendsound">Benjamin Tissot</a> from <a href="https://www.bensound.com" title="Bensound">www.bensound.com</a> is licensed by <a href="https://creativecommons.org/licenses/by-nd/3.0/legalcode" title="Creative Commons 3.0" target="_blank">Creative Commons 3.0</a></p>
       <p class='refs'>Hand cusor, music note, color picker and bin icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>

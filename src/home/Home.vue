@@ -443,6 +443,10 @@ export default {
       }
     }
 
+    .home-content {
+      padding-bottom: 0;
+    }
+
     .banner {
       .banner-wrapper {
         img {

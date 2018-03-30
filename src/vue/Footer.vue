@@ -39,7 +39,7 @@ footer {
 }
 
 .logo {
-  margin: 0 60px;
+  margin-right: 60px;
   font-size: 1.2em;
   font-weight: 600;
   line-height: 20px;
@@ -79,6 +79,14 @@ li {
 @media screen and (max-width: 950px) {
   li {
     margin-left: 0;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .footer-wrapper {
+    justify-content: center;
   }
 }
 </style>
