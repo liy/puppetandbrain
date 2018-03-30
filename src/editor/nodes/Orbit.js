@@ -75,10 +75,11 @@ export default class Orbit extends Task
     const radius = Number(this.inputs.value('radius'));
 
     this.rotation += Number(this.inputs.value('degree'))*toRadian;
-    this.owner.x = point.x + Math.cos(this.rotation)*radius;
-    this.owner.y = point.y + Math.sin(this.rotation)*radius;
+    const np = new Vec2(point.x + Math.cos(this.rotation)*radius, point.y + Math.sin(this.rotation)*radius)
+    this.owner.x = np.x;
+    this.owner.y = np.y;
     
-    this.outputs.assignValue('position', this.owner.position);
+    this.outputs.assignValue('position', np);
 
     this.execution.run();
   }
