@@ -216,4 +216,10 @@ body {
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
 }
+
+// hide scroll bar
+::-webkit-scrollbar {
+  display: none;
+}
+
 </style>
