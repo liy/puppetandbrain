@@ -9,49 +9,54 @@
       <vue-block v-for="template in value" :template="template" :key="template.className" @click.native="openBlockDoc(template)"/>
     </div>
   </div>
-  <block-doc/>
+  <!-- <block-doc/> -->
+
   <div class="help-group-section">
     <span class="help-group-name">Execution Pins</span>
-    <div class="help-icon-container">
-      <div class="execution-pin-doc-icon"><svg><use :xlink:href="`#${ExecutionInIcon.id}`" :viewBox="ExecutionInIcon.viewBox"/></svg><span class="pin-doc-icon-label">Execution enter pin</span></div>
-      <div class="execution-pin-doc-icon"><svg><use :xlink:href="`#${ExecutionOutIcon.id}`" :viewBox="ExecutionOutIcon.viewBox"/></svg><span class="pin-doc-icon-label">Execution out(leave) pin</span></div>
+    <div class="pin-section-content">
+      <div class="help-icon-container">
+        <div class="execution-pin-doc-icon"><svg><use :xlink:href="`#${ExecutionInIcon.id}`" :viewBox="ExecutionInIcon.viewBox"/></svg><span class="pin-doc-icon-label">Execution enter pin</span></div>
+        <div class="execution-pin-doc-icon"><svg><use :xlink:href="`#${ExecutionOutIcon.id}`" :viewBox="ExecutionOutIcon.viewBox"/></svg><span class="pin-doc-icon-label">Execution out(leave) pin</span></div>
+      </div>
+      <p>Execution pin represents the execution flow. You can connect an execution out pin to another execution enter pin to form an execution flow.</p>
+      <p class="help-tip">Tip: execution enter pin can be connected to multiple execution out pins. This allow the block to be shared among other blocks.</p>
     </div>
-    <p>Execution pin represents the execution flow. You can connect an execution out pin to another execution enter pin to form an execution flow.</p>
-    <p class="help-tip">Tip: execution enter pin can be connected to multiple execution out pins. This allow the block to be shared among other blocks.</p>
   </div>
 
   <div class="help-group-section">
     <span class="help-group-name">Data Pins</span>
-    <div class="help-icon-container">
-      
-      <div class="data-pin-doc-icon">
-        <div class="data-pin output-pin">
-          <div class="data-head">
-            <div class="data-symbol">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none; --fill:#98c6de;">
-                <use xlink:href="#output" id="output" viewBox="0 0 34 38"></use>
-              </svg>
+    <div class="pin-section-content">
+      <div class="help-icon-container">
+        
+        <div class="data-pin-doc-icon">
+          <div class="data-pin output-pin">
+            <div class="data-head">
+              <div class="data-symbol">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none; --fill:#98c6de;">
+                  <use xlink:href="#output" id="output" viewBox="0 0 34 38"></use>
+                </svg>
+              </div>
             </div>
           </div>
+          <span class="pin-doc-icon-label">Ouput pin</span>
         </div>
-        <span class="pin-doc-icon-label">Ouput pin</span>
-      </div>
-      
-      <div class="data-pin-doc-icon">
-        <div class="data-pin input-pin">
-          <div class="data-head">
-            <div class="data-symbol">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none;">
-                <use xlink:href="#input" id="input" viewBox="0 0 34 38"></use>
-              </svg>
+        
+        <div class="data-pin-doc-icon">
+          <div class="data-pin input-pin">
+            <div class="data-head">
+              <div class="data-symbol">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none;">
+                  <use xlink:href="#input" id="input" viewBox="0 0 34 38"></use>
+                </svg>
+              </div>
             </div>
           </div>
+          <span class="pin-doc-icon-label">Input pin</span>
         </div>
-        <span class="pin-doc-icon-label">Input pin</span>
       </div>
+      <p>Data pin represents the data flow. Connect ouput pin to input pin to pass the data to another block.</p>
+      <p class="help-tip">Tip: one output pin can connect to multiple input pins, which means the output supply the data to multiple inputs.</p>
     </div>
-    <p>Data pin represents the data flow. Connect ouput pin to input pin to pass the data to another block.</p>
-    <p class="help-tip">Tip: one output pin can connect to multiple input pins, which means the output supply the data to multiple inputs.</p>
   </div>
 </div>
 </template>
@@ -60,7 +65,7 @@
 import * as NodeClasses from '../editor/nodes';
 import '../editor/NodeTemplate';
 import Block from './Block.vue'
-import BlockDoc from './BlockDoc.vue'
+// import BlockDoc from './BlockDoc.vue'
 
 import ExecutionInIcon from '@/assets/execution-in.svg';
 import ExecutionOutIcon from '@/assets/execution-out.svg';
@@ -89,7 +94,7 @@ export default {
   name: "help",
   components: {
     'vue-block': Block,
-    'block-doc': BlockDoc,
+    // 'block-doc': BlockDoc,
   },
   data() {
     return {
@@ -204,10 +209,6 @@ export default {
   padding-right: 15px;
   padding-bottom: 30px;
 
-  p {
-    color: white;
-  }
-
   .help-tip {
     font-size: 0.8em;
     color:rgb(173, 173, 173);
@@ -230,6 +231,16 @@ export default {
   font-size: 12px;
   color: rgb(196, 196, 196);
   line-height: 50px;
+}
+
+.pin-section-content {
+  margin-left: 40px;
+  margin-right: 40px;
+
+  p {
+    color: white;
+    margin-top: 40px;
+  }
 }
 
 @media screen and (max-width: 600px) {
