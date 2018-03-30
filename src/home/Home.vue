@@ -414,13 +414,80 @@ export default {
   }
 }
 
-
 .home-leave-active {
   opacity: 0;
 }
 
 .home-enter {
   opacity: 0;
+}
+
+@media screen and (max-width: 950px) {
+  #home {
+    .splash {
+      .splash-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        iframe {
+          width: 100%;
+        }
+
+        .splash-text {
+          margin-top: 40px;
+          width: 80%;
+          float: none;
+        }
+      }
+    }
+
+    .banner {
+      .banner-wrapper {
+        img {
+          display: none;
+        }
+
+        .banner-text {
+          width: 90%;
+        }
+      }
+    }
+
+    .white-section {
+      padding: 40px 20px;
+
+      overflow: hidden;
+      
+      p {
+        margin: 20px auto 20px auto;
+        width: 100%;
+      }
+    }
+
+    .tutorial-section-wrapper {
+      img {
+        display: none;
+      }
+    }
+
+    .guru-section {
+      .guru-banner-wrapper {
+        margin: 60px 60px;
+      }
+    }
+
+    .guru-content {
+      display: block;
+      
+
+      .sub-section {
+        margin-top: 40px;
+        width: 100%;
+      }
+    }
+  }
 }
 
 </style>

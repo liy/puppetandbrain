@@ -44,6 +44,8 @@ footer {
   font-weight: 600;
   line-height: 20px;
   color: #4f3f57;
+  white-space: nowrap;
+
 }
 
 ul {
@@ -71,6 +73,12 @@ li {
 
   a:hover {
     color: #FFFFFF;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  li {
+    margin-left: 0;
   }
 }
 </style>
