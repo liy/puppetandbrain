@@ -406,6 +406,12 @@ export default {
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+      
+
+    h1 {
+      color: #b6ce79;
+    }
+
 
     img {
       margin-top: 20px;
@@ -484,7 +490,6 @@ export default {
 
     .guru-content {
       display: block;
-      
 
       .sub-section {
         margin-top: 40px;

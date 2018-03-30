@@ -174,12 +174,10 @@ export default {
 
   margin-right: 10px;
 }
-
   
 .data-symbol {
   height: 38px;
 }
-
 
 .input-pin {
   border-radius: 19px 0 0 19px;
