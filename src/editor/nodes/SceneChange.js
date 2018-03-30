@@ -11,11 +11,7 @@ NodeTemplate.set({
       type: DataType.STRING,
     }
   }],
-  execution: [{
-    name: 'before'
-  },{
-    name: 'after'
-  }],
+  execution: [],
   elementClass: ['utility'],
   category: 'Utilities'
 })
@@ -40,7 +36,6 @@ export default class SceneChange extends Task
     super.run();
 
     let creationID = this.inputs.value('creation id');
-    console.log(creationID)
     Hub.sceneManager.to(this.execution, creationID).catch(error => {
       Hub.runtimeError({
         actorID: this.owner.id,

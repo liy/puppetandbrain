@@ -45,7 +45,9 @@
     </div>
       <!-- description -->
     <p v-if="doc" class="doc-description">{{doc.d}}</p>
-    <p v-else>Sorry, this block documentation is not available. I'm still working on it...</p>
+    <!-- tips -->
+    <p v-if="doc && doc.tip" class="doc-tip">{{doc.tip}}</p>
+    <p v-if="!doc">Sorry, this block documentation is not available. I'm still working on it...</p>
   </div>
 </div>
 </template>
@@ -184,6 +186,17 @@ export default {
     display: inline-block;
     margin-top: 40px;
     
+    font-size: 0.9em;
+  }
+
+  .doc-tip {
+    font-size: 0.8em;
+    color:rgb(173, 173, 173);
+  }
+
+  .doc-tip:before {
+    content: "Tips: ";
+    font-weight: bold;
     font-size: 0.9em;
   }
 }

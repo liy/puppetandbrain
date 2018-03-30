@@ -117,4 +117,12 @@ export default {
 
   cursor: pointer;
 }
+
+// hack to make the svg centre
+.data-pin {
+  svg {
+    margin-top: 3px;
+  }
+}
+
 </style>
