@@ -34,7 +34,7 @@
               <span class="label">{{input.name}}</span>
               <div class="data-head">
                 <div class="data-symbol">
-                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none; --stroke:#b5a3ff;">
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="34" height="38" class="data-svg" style="pointer-events: none;">
                     <use xlink:href="#input" id="input" viewBox="0 0 34 38"></use>
                   </svg>
                 </div>
