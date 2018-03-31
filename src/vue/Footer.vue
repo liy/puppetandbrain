@@ -5,6 +5,8 @@
         <li><router-link :to="'/contact'">Contact</router-link></li>
         <li><router-link :to="'/about'">About</router-link></li>
         <li><router-link :to="{name:'que-ans'}">Q&A</router-link></li>
+        <!-- <li><a href="https://www.patreon.com/bePatron?u=8507773" target="_blank"><img width="150" :src="require('@/assets/icons/become_a_patron_button.png')"/></a></li> -->
+        <li><a href="https://www.patreon.com/puppetandbrain" target="_blank"><img width="150" :src="require('@/assets/icons/become_a_patron_button.png')"/></a></li>
       </ul>
       <span class="logo" data-version="α">PUPPET & BRAIN</span>
     </div>
