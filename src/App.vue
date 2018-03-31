@@ -46,6 +46,8 @@ body.about {
 }
 body.editor {
   background-color: #f5f5f5;
+  // do not show scrollbar on body, even some element such as tutorial hand cusor poke out of the screen
+  overflow: hidden;
 }
 body.contact {
   background-color: #ff8585;
