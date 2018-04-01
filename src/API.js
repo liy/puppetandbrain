@@ -227,7 +227,7 @@ class API
   }
 
   async recentActivities() {
-    const collections = await firebase.firestore().collection('activityMetadata').orderBy("createdAt").limit(20).get();
+    const collections = await firebase.firestore().collection('activityMetadata').orderBy("createdAt", "desc").limit(20).get();
     const promises = [];
     collections.forEach(doc => {
       const metadata = doc.data()
