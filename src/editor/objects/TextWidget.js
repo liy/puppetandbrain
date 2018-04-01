@@ -62,7 +62,6 @@ export default class TextWidget extends Actor
   }
 
   onInput(text) {
-    console.log(text)
     this.properties.get('text').data = text;
   }
 

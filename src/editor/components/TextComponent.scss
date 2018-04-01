@@ -5,6 +5,9 @@
 
   user-select: all;
 
+  // allow \r\n new line char
+  white-space: pre;
+  
   // cursor: pointer;
 }
 

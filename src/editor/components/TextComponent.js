@@ -19,6 +19,12 @@ export default class TextComponent extends ElementComponent
     this.textElement.addEventListener('input', this.onInput);
 
     this.inputMode = false;
+
+    this.textElement.addEventListener('paste', e => {
+      // prevent formated paste
+      e.preventDefault();
+      this.text = e.clipboardData.getData('text/plain');
+    })
     
     // TODO: Should I allow text drag select???
     this.textElement.addEventListener('mousedown', e => {
@@ -38,7 +44,7 @@ export default class TextComponent extends ElementComponent
   }
 
   onInput(e) {
-    this.emit('input', this.textElement.textContent);
+    this.emit('input', this.text);
   }
 
   set contentEditable(v) {
@@ -62,7 +68,11 @@ export default class TextComponent extends ElementComponent
   }
 
   get text() {
-    return this.textElement.textContent;
+    // <div> will result a newline
+    let t = this.textElement.innerHTML.replace(/<div>/g, '\r\n');
+    // simply remove </div>  
+    t = t.replace(/<\/div>/g, '')
+    return t;
   }
 
   set textColor(c) {
