@@ -57,7 +57,7 @@ class API
     let fileNames = Object.keys(files)
     for(let fileName of fileNames) {
       let ref = firebase.firestore().collection('files').doc(fileName);
-      batch.commit(ref, files[fileName])
+      batch.set(ref, files[fileName])
     }
 
     // file refs, this will tell crontjob that this activity is using this
