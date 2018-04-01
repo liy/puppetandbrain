@@ -30,7 +30,6 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
       'pixi.js': path.resolve(__dirname, 'node_modules/pixi.js/dist/pixi.min.js'),
       'rusha': path.resolve(__dirname, 'node_modules/rusha/dist/rusha.min.js'),
-      'html2canvas': path.resolve(__dirname, 'node_modules/html2canvas/dist/html2canvas.min.js'),
     }
   },
   module: {

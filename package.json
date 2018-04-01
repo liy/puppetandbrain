@@ -43,7 +43,7 @@
     "firebase": "^4.11.0",
     "fuse.js": "^3.2.0",
     "howler": "^2.0.8",
-    "html2canvas": "^1.0.0-alpha.9",
+    "html2canvas": "^1.0.0-alpha.11",
     "pixi-filters": "^2.5.1",
     "pixi-spine": "^1.5.11",
     "pixi.js": "^4.7.0",
