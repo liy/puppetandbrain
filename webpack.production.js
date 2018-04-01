@@ -27,7 +27,8 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
       'pixi.js': path.resolve(__dirname, 'node_modules/pixi.js/dist/pixi.min.js'),
       'rusha': path.resolve(__dirname, 'node_modules/rusha/dist/rusha.min.js'),
-      'html2canvas': path.resolve(__dirname, 'node_modules/html2canvas/dist/html2canvas.min.js'),
+      // I have removed html2canvas resolve to html2canvas.min.js here, it just won't work(on production and staging server results capturing a blank canvas) when you resolve to .min.js and have UglifyJSPlugin at the same time
+      // I have no idea what is going on. But I guess it is someting releated the uglifier. Because it works locally which does not have uglifing process enabled.
     }
   },
   module: {
@@ -95,7 +96,9 @@ module.exports = {
       new UglifyJSPlugin({
         // do not minify rusha, which is web worker.
         // it cause problem when it is uglified.
-        exclude: [/rusha/],
+        //
+        // also html2canvas won't work for certain reasons
+        exclude: [/rusha/, /html2canvas/],
         uglifyOptions: {
           output: {
             comments: false
