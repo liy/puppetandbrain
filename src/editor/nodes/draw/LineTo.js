@@ -32,7 +32,7 @@ export default class LineTo extends Task
   run() {
     super.run();
 
-    this.owner.lineTo(this.inputs.value('position'))
+    Hub.canvasActor.lineTo(this.inputs.value('position'))
 
     this.execution.run();
   }
