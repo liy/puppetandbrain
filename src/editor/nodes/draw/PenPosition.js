@@ -1,7 +1,7 @@
 import DataType from "../../data/DataType";
 import {Task, Template as ParentTemplate} from '../Task'
 
-NodeTemplate.scope('CanvasActor', {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'PenPosition',
   name: 'Pen Position',
@@ -32,7 +32,7 @@ export default class PenPosition extends Task
   run() {
     super.run();
 
-    this.owner.penTo(this.inputs.value('position'))
+    Hub.canvasActor.penTo(this.inputs.value('position'))
 
     this.execution.run();
   }

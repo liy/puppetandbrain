@@ -1,7 +1,7 @@
 import DataType from "../../data/DataType";
 import {Task, Template as ParentTemplate} from '../Task'
 
-NodeTemplate.scope('CanvasActor', {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'LineTo',
   name: 'Line To',

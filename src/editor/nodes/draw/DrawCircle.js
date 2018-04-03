@@ -1,7 +1,7 @@
 import DataType from "../../data/DataType";
 import {Task, Template as ParentTemplate} from '../Task'
 
-NodeTemplate.scope('CanvasActor', {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'DrawCircle',
   name: 'Draw Circle',
@@ -31,7 +31,7 @@ export default class DrawCircle extends Task
   run() {
     super.run();
 
-    this.owner.drawCircle(this.inputs.value('radius'))
+    Hub.canvasActor.drawCircle(this.inputs.value('radius'))
 
     this.execution.run();
   }

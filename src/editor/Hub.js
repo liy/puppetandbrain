@@ -111,11 +111,11 @@ class HubClass extends EventEmitter
     this.unlock();
 
     // setup default draw canvas for user to draw on
-    const canvasActor = new CanvasActor(undefined, this.activity);
-    canvasActor.init();
-    this.stage.addActor(canvasActor)
+    this.canvasActor = new CanvasActor(undefined, this.activity);
+    this.canvasActor.init();
+    this.stage.addActor(this.canvasActor)
     // create default game loop node and added to actor
-    NodeFactory.create('GameLoop', canvasActor, this.activity);
+    NodeFactory.create('GameLoop', this.canvasActor, this.activity);
 
     return this.activity;
   }
@@ -126,6 +126,10 @@ class HubClass extends EventEmitter
 
     const actorBuffer = await this.activityLoader.start(id);
     for(let actor of actorBuffer) {
+      if(actor instanceof CanvasActor) {
+        this.canvasActor = actor;
+      }
+      
       this.stage.addActor(actor)
     }
 

@@ -3,7 +3,7 @@ import ActorSelection from '@/editor/objects/ActorSelection';
 import TutorialBanner from './TutorialBanner';
 import { isMobile } from '@/utils/utils';
 
-class PainterTutorial extends Tutorial
+class LineDrawTutorial extends Tutorial
 {
   constructor() {
     super();
@@ -16,7 +16,7 @@ class PainterTutorial extends Tutorial
     
     this.addStep(async () => {
       this.banner.push("Hello again!")
-        .push("Let's make a painter program together!")
+        .push("Let's make line drawing using blocks together!")
       await this.banner.start();
 
       this.next();
@@ -158,9 +158,11 @@ class PainterTutorial extends Tutorial
     })
 
     this.addStep(async () => {
-      this.banner.push("Well done! You have created a simple painter!")
+      this.banner.push("Well done! You now know how to make line draw using blocks!")
         .push("You can challenge yourself by adding <b>Stroke Style</b> block to change line width and color")
-        .push("I'll let you play around now...")
+        .push("You can also apply this technique in your game to draw trails after your puppets")
+        .push("Simply replace the Mouse Position with your puppet's position.")
+        .push("Have fun!")
       await this.banner.start();
 
       this.next();
@@ -168,5 +170,5 @@ class PainterTutorial extends Tutorial
   }
 }
 
-const tutorial = new PainterTutorial();
+const tutorial = new LineDrawTutorial();
 export default tutorial;

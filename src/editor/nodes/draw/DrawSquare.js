@@ -1,7 +1,7 @@
 import DataType from "../../data/DataType";
 import {Task, Template as ParentTemplate} from '../Task'
 
-NodeTemplate.scope('CanvasActor', {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'DrawSquare',
   name: 'Draw Square',
@@ -31,7 +31,7 @@ export default class DrawSquare extends Task
   run() {
     super.run();
 
-    this.owner.drawSquare(this.inputs.value('size'))
+    Hub.canvasActor.drawSquare(this.inputs.value('size'))
 
     this.execution.run();
   }

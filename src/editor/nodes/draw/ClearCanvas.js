@@ -1,7 +1,7 @@
 import DataType from "../../data/DataType";
 import {Task, Template as ParentTemplate} from '../Task'
 
-NodeTemplate.scope('CanvasActor', {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'ClearCanvas',
   name: 'Clear Canvas',
@@ -22,7 +22,7 @@ export default class ClearCanvas extends Task
   run() {
     super.run();
 
-    this.owner.clearDraw();
+    Hub.canvasActor.clearDraw();
 
     this.execution.run();
   }

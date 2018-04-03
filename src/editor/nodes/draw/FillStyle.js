@@ -1,7 +1,7 @@
 import DataType from "../../data/DataType";
 import {Task, Template as ParentTemplate} from '../Task'
 
-const FillStyleTemplate = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'FillStyle',
   name: 'Fill Style',
@@ -26,9 +26,7 @@ const FillStyleTemplate = {
   },
   category: 'Draw',
   keywords: ['fill color', 'fill']
-}
-
-NodeTemplate.scope('CanvasActor', FillStyleTemplate)
+})
 
 export default class FillStyle extends Task
 {
@@ -39,15 +37,15 @@ export default class FillStyle extends Task
   run() {
     super.run();
 
-    this.owner.fillStyle.color = this.inputs.value('color')
-    this.owner.fillStyle.alpha =  this.inputs.value('opacity')
+    Hub.canvasActor.fillStyle.color = this.inputs.value('color')
+    Hub.canvasActor.fillStyle.alpha =  this.inputs.value('opacity')
 
     this.execution.run();
   }
 
   getGadgetConstructorData(inputName) {
     if(inputName === 'opacity') {
-      const input = FillStyleTemplate.inputs.find(input => {
+      const input = NodeTemplate.get("FillStyle").inputs.find(input => {
         return input.name === 'opacity'
       })
       return {

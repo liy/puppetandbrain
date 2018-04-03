@@ -7,7 +7,7 @@
     <ol>
       <li><router-link tag="span" v-bind:to="'/tutorials/animate-a-puppet'">Animation</router-link></li>
       <li><router-link tag="span" v-bind:to="'/tutorials/user-interaction'">User Interaction</router-link></li>
-      <li><router-link tag="span" v-bind:to="'/tutorials/painter-tutorial'">Simple Painter</router-link></li>
+      <li><router-link tag="span" v-bind:to="'/tutorials/line-draw-tutorial'">Line Drawing</router-link></li>
     </ol>
     <div class='no-tutorial'><router-link v-bind:to="'/editor'">No tutorials! I'm a professional game developer</router-link></div>
   </div>

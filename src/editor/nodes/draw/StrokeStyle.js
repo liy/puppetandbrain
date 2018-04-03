@@ -1,7 +1,7 @@
 import DataType from "../../data/DataType";
 import {Task, Template as ParentTemplate} from '../Task'
 
-const StrokeStyleTemplate = {
+NodeTemplate.set({
   ...ParentTemplate,
   className: 'StrokeStyle',
   name: 'Stroke Style',
@@ -36,9 +36,7 @@ const StrokeStyleTemplate = {
   },
   category: 'Draw',
   keywords: ['fill color', 'fill']
-}
-
-NodeTemplate.scope('CanvasActor', StrokeStyleTemplate)
+})
 
 export default class StrokeStyle extends Task
 {
@@ -49,16 +47,16 @@ export default class StrokeStyle extends Task
   run() {
     super.run();
 
-    this.owner.lineStyle.width = this.inputs.value('width')
-    this.owner.lineStyle.color = this.inputs.value('color')
-    this.owner.lineStyle.alpha =  this.inputs.value('opacity')
+    Hub.canvasActor.lineStyle.width = this.inputs.value('width')
+    Hub.canvasActor.lineStyle.color = this.inputs.value('color')
+    Hub.canvasActor.lineStyle.alpha =  this.inputs.value('opacity')
 
     this.execution.run();
   }
 
   getGadgetConstructorData(inputName) {
     if(inputName === 'opacity' || inputName === 'width') {
-      const input = StrokeStyleTemplate.inputs.find(input => {
+      const input = NodeTemplate.get('StrokeStyle').inputs.find(input => {
         return input.name === inputName
       })
 
