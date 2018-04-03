@@ -76,7 +76,7 @@ export default {
 
       // domain defined in webpack
       let link = `${DOMAIN}/editor/${activityID}`
-      let text = encodeURI(`Have look at my puppet: ${link}`);
+      let text = encodeURI(`I created a pupet! ${link}`);
       let hashTag = 'puppetandbrain';
       let url = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashTag}`
       sharePopup(url);

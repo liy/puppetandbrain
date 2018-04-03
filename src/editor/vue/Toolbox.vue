@@ -1,8 +1,11 @@
 <template>
 <div id='toolbox' @touchmove.prevent :class="{hidden: hidden}">
   <!-- prevent pull to refresh on all the content of toolbox -->
-  <history-control id='history-control'/>
-  <div id='stage-toolbar' :class="{shifted: propertyPanelVisable && !stageMode}">
+  <div class="toolbox-group">
+    <history-control id='history-control'/>
+    <share-button />
+  </div>
+  <div class='toolbox-group stage-toolbar' :class="{shifted: propertyPanelVisable && !stageMode}">
     <delete-button class='toolbar-button'/>
     <debug-button class='toolbar-button'/>
     <add-button class='toolbar-button'/>
@@ -16,6 +19,7 @@ import HistoryControl from './HistoryControl.vue'
 import DebugButton from './DebugButton.vue'
 import AddButton from './AddButton.vue'
 import DeleteButton from './DeleteButton.vue'
+import ShareButton from './ShareButton.vue'
 
 import store from '@/store';
 
@@ -26,6 +30,7 @@ export default {
     'debug-button': DebugButton,
     'add-button': AddButton,
     'delete-button': DeleteButton,
+    'share-button': ShareButton
   },
   computed: {
     ...mapGetters(['propertyPanelVisable', 'stageMode']),
@@ -80,17 +85,19 @@ export default {
   }
 }
 
-#stage-toolbar {
+.toolbox-group {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
 
+.stage-toolbar {
   transform: translateX(0);
   transition: all ease 0.3s;
 }
 
-#stage-toolbar.shifted {
+.stage-toolbar.shifted {
   transform: translateX(-300px)
 }
 

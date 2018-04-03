@@ -21,6 +21,9 @@ require('./assets/icons/android-512.png')
 // for ios app
 require('./assets/icons/ios-192.png')
 
+// for default twitter card image
+require('./assets/twitter-image.jpg')
+
 // firebase
 import firebase from 'firebase/app'
 window.firebase = firebase;
