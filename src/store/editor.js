@@ -4,6 +4,8 @@ const state = {
   propertyPanelVisable: false,
   tutorialMode: false,
   browserVisible: false,
+  shareMenuVisible: false,
+
   blockDocTemplate: null,
 
   actors: [],
@@ -23,6 +25,7 @@ const getters = {
   propertyPanelVisable: state => state.propertyPanelVisable,
   tutorialMode: state => state.tutorialMode,
   browserVisible: state => state.browserVisible,
+  shareMenuVisible: state => state.shareMenuVisible,
 
   actors: state => state.actors,
   
@@ -75,6 +78,10 @@ const mutations = {
 
   updateBrowserVisible(state, visible) {
     state.browserVisible = visible;
+  },
+
+  updateShareMenuVisible(state, visible) {
+    state.shareMenuVisible = visible;
   },
 
   lock(state, data) {

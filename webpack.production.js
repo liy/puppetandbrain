@@ -147,7 +147,8 @@ module.exports = {
         projectId: "puppet-brain",
         storageBucket: "puppet-brain.appspot.com",
         messagingSenderId: "392290034997"
-      })
+      }),
+      FACEBOOK_APP_ID: '1971060603211861'
     }),
     new SpriteLoaderPlugin(),
     new OfflinePlugin({

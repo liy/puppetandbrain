@@ -18,15 +18,7 @@ export default {
   },
   methods: {
     clicked() {
-      // Make sure it is saved
-      const activityID = Hub.share();
-
-      // domain defined in webpack
-      let link = `${DOMAIN}/editor/${activityID}`
-      let text = encodeURI(`I created a puppet! ${link}`);
-      let hashTag = 'puppetandbrain';
-      let url = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashTag}`
-      sharePopup(url);
+      this.$store.commit('updateShareMenuVisible', true);
     },
   }
 }

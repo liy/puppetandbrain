@@ -120,7 +120,8 @@ module.exports = {
         projectId: "puppet-brain-staging",
         storageBucket: "puppet-brain-staging.appspot.com",
         messagingSenderId: "868975802956"
-      })
+      }),
+      FACEBOOK_APP_ID: '1971060603211861'
     }),
     new SpriteLoaderPlugin(),
     // new OfflinePlugin({

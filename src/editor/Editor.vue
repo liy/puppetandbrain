@@ -8,6 +8,7 @@
   <mode-button/>
   <block-doc/>
   <guide-menu/>
+  <share-menu/>
 </div>
 </template>
 
@@ -25,6 +26,7 @@ import ModeButton from './vue/ModeButton.vue';
 import GuideMenu from './vue/GuideMenu.vue';
 import ActorList from './vue/ActorList.vue';
 import BlockDoc from '@/help/BlockDoc.vue';
+import ShareMenu from './vue/ShareMenu.vue';
 
 import './Hub'
 import NotificationControl from './ui/NotificationControl';
@@ -47,6 +49,7 @@ export default {
     'guide-menu': GuideMenu,
     'actor-list': ActorList,
     'block-doc': BlockDoc,
+    'share-menu': ShareMenu,
   },
   async mounted() {
     // beforeRouteLeave will wait until Hub is installed to start process
