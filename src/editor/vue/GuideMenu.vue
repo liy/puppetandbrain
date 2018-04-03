@@ -9,7 +9,7 @@
     <div class='menu-arrow'></div>
     <ul>
       <router-link to='/' tag='li'><a>Home</a></router-link>
-      <router-link to='/editor' tag='li'><a>New Creation</a></router-link>
+      <li @click.prevent="newCreation"><a>New Creation</a></li>
       <router-link to='/tutorials' tag='li'><a>Tutorials</a></router-link>
       <router-link to='/help' tag='li'><a>Help</a></router-link>
       <router-link to='/contact' tag='li'><a>Contact</a></router-link>
@@ -24,6 +24,7 @@
 import {mapGetters} from 'vuex'
 import MenuIcon from '@/assets/menu-icon.svg';
 import {sharePopup} from '@/utils/utils';
+import ConfirmModal from '../ui/ConfirmModal';
 
 export default {
   name: 'guide-menu',
@@ -45,6 +46,22 @@ export default {
     document.removeEventListener('click', this.close);
   },
   methods: {
+    async newCreation(e) {
+      e.preventDefault();
+
+      // check whether there is unsaved change
+      // because the activity is dirty by default. We have to filter out the case of a brand new activity without
+      // any modification. Simply check redo and undo of the history
+      if(Hub.activity.dirty && (Hub.history.undos.length!=0 || Hub.history.redos.length!=0)) {
+        const {action} = await ConfirmModal.open('Do you really want to leave? you have unsaved changes!', 'Unsaved changes')
+        // user choose abort navigation
+        if(!action) {
+          return;
+        }
+      }
+      Hub.clear();
+      Hub.create();
+    },
     toggle() {
       this.show = !this.show;
     },
