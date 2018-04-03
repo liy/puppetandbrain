@@ -1,6 +1,9 @@
+User-agent: Twitterbot
+allow: /editor
+
 User-agent: *
 Disallow: /editor
 Disallow: /contact
 
-User-agent: Twitterbot
-allow: /editor
+User-agent: Facebot
+Allow: /editor

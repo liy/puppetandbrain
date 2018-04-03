@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <meta name="description" content="Make your own puppet and story with visual scripting.">
+    <meta name="description" content="Learn to create your own puppets and games with visual scripting.">
 
     <!-- stop reszing -->
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=0">
@@ -28,14 +28,28 @@
     <!-- twitter card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@puppetandbrain">
-    <!-- <meta name="twitter:title" content="Puppet and Brain"> -->
-    <meta name="twitter:description" content="Make your own puppets and story with game visual scripting.">
+    <meta name="twitter:title" content="Puppet and Brain">
+    <meta name="twitter:description" content="Learn to create your own puppets and games with visual scripting.">
     <!-- Needs serverside rendering to make twitter:image dynamic -->
     <% if (htmlWebpackPlugin.options.env.target === 'production') { %>
-    <meta name="twitter:image" content="https://puppetandbrain.com/twitter-image.jpg">
+    <meta name="twitter:image" content="https://puppetandbrain.com/site-image.jpg">
+    
+    <!-- open graph markup -->
+    <meta property="og:url" content="https://puppetandbrain.com" />
+    <meta property="og:image" content="https://puppetandbrain.com/site-image.jpg" />
+
     <% } else { %>
-    <meta name="twitter:image" content="https://staging.puppetandbrain.com/twitter-image.jpg">
+    <meta name="twitter:image" content="https://staging.puppetandbrain.com/site-image.jpg">
+
+    <!-- open graph markup -->
+    <meta property="og:url" content="https://staging.puppetandbrain.com" />
+    <meta property="og:image" content="https://staging.puppetandbrain.com/site-image.jpg" />
+
     <% } %>
+
+    <!-- open graph markup continues -->
+    <meta property="og:title" content="Puppet and Brain" />
+    <meta property="og:description" content="Learn to create your own puppets and games with visual scripting.">
 
     <title>Puppet and Brain</title>
 

@@ -21,8 +21,9 @@ require('./assets/icons/android-512.png')
 // for ios app
 require('./assets/icons/ios-192.png')
 
-// for default twitter card image
-require('./assets/twitter-image.jpg')
+// default meta data image for twitter card image and other open graph share services, i.e., facebook share
+// serverside rendering needs to be implemented for in order to supply dynmaic snapshot image for each activity
+require('./assets/site-image.jpg')
 
 // firebase
 import firebase from 'firebase/app'
