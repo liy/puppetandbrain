@@ -21,6 +21,10 @@
   padding-top: 40px;
   padding-bottom: 52px;
   height: calc(100vh - 40px - 52px);
+
+  // Change this to hide the scrollbar
+  // https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll
+  padding-right: 17px;
   overflow-y: scroll;
 }
 
