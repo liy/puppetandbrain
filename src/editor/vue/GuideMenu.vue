@@ -14,7 +14,6 @@
       <router-link to='/help' tag='li'><a>Help</a></router-link>
       <router-link to='/contact' tag='li'><a>Contact</a></router-link>
       <router-link to='/about' tag='li'><a>About</a></router-link>
-      <li><span @click="twitter">Share</span></li>
     </ul>
   </div>
 </div>
@@ -59,8 +58,17 @@ export default {
           return;
         }
       }
-      Hub.clear();
-      Hub.create();
+      
+      // if user current has no saved activity, simply clear stage and recreate
+      // a new activity, no need to route and trigger route hook
+      if(Hub.router.path = '/editor') {
+        Hub.clear();
+        Hub.create();
+      }
+      else {
+        // trigger route hooks, stage will be auto cleared and new activity will be created
+        Hub.router.push(`/editor`)
+      }
     },
     toggle() {
       this.show = !this.show;
@@ -69,18 +77,6 @@ export default {
       if(e.target != this.$refs.button) {
         this.show = false;
       }
-    },
-    async twitter(e) {
-      // Make sure it is saved
-      const activityID = Hub.share();
-
-      // domain defined in webpack
-      let link = `${DOMAIN}/editor/${activityID}`
-      let text = encodeURI(`I created a pupet! ${link}`);
-      let hashTag = 'puppetandbrain';
-      let url = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashTag}`
-      sharePopup(url);
-
     }
   }
 }
