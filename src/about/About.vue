@@ -4,7 +4,7 @@
     <div class='content'>
       <div class="back"><a  @click="$router.push({name: 'Home'})">x</a></div>
 
-      <p>Puppet & Brain is a creative platform for children to learn coding. We especially focus on developing their creativities and logic thinking that are essential for their future.</p>
+      <p>Puppet & Brain is a creative platform for children to learn game programming. We especially focus on developing their creativities and logic thinking that are essential for their future.</p>
 
       <p>The core programming experience Puppet & Brain provides is an intutive node based visual scripting language. By learning the materials and taking on challanges at different levels, children age from 6-12 can learn fundamental programming concepts and basic game programming. There is a library of hand crafted animations and widgets for children to create and share their own animated stories, activites and games.</p>
       
