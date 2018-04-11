@@ -22,16 +22,24 @@
       </div>
     </div>
     <div class="home-content">
+      <div class="banner what-to-learn-section">
+        <div class="banner-wrapper">
+          <div class="banner-text">
+            <h1>Learn to create games</h1>
+            <p>You will learn lots of game programming concepts, and the node based visual scripting which is used in all major game engines.</p>
+          </div>
+          <img :src="require('!file-loader!@/assets/icons/earth.png')"/>
+        </div>
+      </div>
       <div class="white-section tutorial-section">
         <div class="tutorial-section-wrapper">
           <div>
-            <h1>Don't know programming?</h1>
-            <p>No worries! You don't need programming experience at all, and there is a list of tutorials to help you get started!</p>
+            <h1>I don't know programming</h1>
+            <p>No worries! Node based visual scripting is so intuitive that you don't need programming experience at all, and there is a list of tutorials to help you get started!</p>
             <router-link :to="{name: 'TutorialList'}">
               <app-button class='primary tutorial-button'>Start Tutorials</app-button>
             </router-link>
           </div>
-          <img :src="require('!file-loader!@/assets/icons/earth.png')"/>
         </div>
       </div>
       <div class="banner challenge-section">
@@ -267,6 +275,7 @@ export default {
     z-index: 1;
 
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 
 
     .banner-wrapper {
@@ -313,9 +322,25 @@ export default {
     }
   }
 
+  .what-to-learn-section {
+    position: relative;
+    margin-top: 30px;
+    font-size: 0.9em;
+    background-color:#436675;
+    color: white;
+
+    img {
+      position: absolute;
+      height: 280px;
+      bottom: -140px;
+      right: 100px;
+    }
+  }
+
   .tutorial-section {
     text-align: left;
-    padding: 60px 20px;
+    padding: 80px 20px;
+    padding-top: 60px;
     p {
       text-align: left;
       margin: 20px 0 20px 0;
@@ -329,7 +354,6 @@ export default {
       justify-content: space-between;
 
       img {
-        width: 160px;
         height: 160px;
       }
     }
@@ -364,21 +388,18 @@ export default {
 
   .challenge-section {
     background-color: #F2881E;
-    border-radius: 10px;
 
     opacity: 0.6;
   }
 
   .curriculum-section {
     background-color: #CCBD19;
-    border-radius: 10px;
 
     opacity: 0.6;
   }
 
   .guru-section {
     background-color: #4B3FA5;
-    border-radius: 10px;
 
     .guru-banner-wrapper {
       margin: 60px 80px;

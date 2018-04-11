@@ -6,8 +6,8 @@
   "plugins": ["transform-runtime", "transform-export-extensions"],
   "comments": false,
   "env": {
-    "test": {
-      "presets": ["env", "stage-0"]
+    "targets": {
+      "browsers": ["last 2 versions", "safari >= 7"]
     }
   }
 }
