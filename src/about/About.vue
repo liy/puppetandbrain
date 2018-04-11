@@ -4,14 +4,18 @@
     <div class='content'>
       <div class="back"><a  @click="$router.push({name: 'Home'})">x</a></div>
 
-      <p>Puppet & Brain is a creative platform for children to learn game programming. We especially focus on developing their creativities and logic thinking that are essential for their future.</p>
+      <p>Puppet & Brain is a creative platform for children to learn game programming which helps to develop their creativities and logic thinking.</p>
 
-      <p>The core programming experience Puppet & Brain provides is an intutive node based visual scripting language. By learning the materials and taking on challanges at different levels, children age from 6-12 can learn fundamental programming concepts and basic game programming. There is a library of hand crafted animations and widgets for children to create and share their own animated stories, activites and games.</p>
+      <p>The core programming experience Puppet & Brain provides is an intuitive node based visual scripting language which is used in major game engines and graphics applications. By learning through tutorials, taking on challenges at different levels, children from age of 6 to 15 are able to learn fundamental programming concepts and can produce simple games, activities and stories of their own. Through creation of their own games,  children can improve their ability of logic thinking, problem solving, collaborating with friends, and enhance creativity. They will be able to apply the experience and knowledges to the real world programming and game creation.</p>
+
+      <p>Puppet & Brain provides a library of animated puppets. Children can program the brain of the puppets using node based visual scripting language.. It also allows children to upload  images and pictures  to make their own puppets and activities.</p>
       
-      <p>Created by educators, parents and award wining special needs software developers, Puppet & Brain provides the teachers and parents a range of creative curriculums, which helps to engage children in learning different subjects. Certain curriculums also support switch access, so that children with special needs can also benifit from this platform.</p>
+      <p>Puppet & Brain is a safe, fun and inspiring place for children to create and share their creations.</p>
 
-      <p>Our vision is building a community where children, teachers and parents can all learn about game programming and share their creations and experiences.</p>
+      <p>We are adding more animated puppets and improving the website.  If you have suggestions or would like to contribute, please get in touch.</p>
+
       <p class='who'>Design and hand crafted by <b>Liy</b>.<br/>Art and animation: <b>Liy</b>.<br/>Partnership Development and Marketing: <b>Ting</b></p>
+      <p><a href="https://www.patreon.com/puppetandbrain" target="_blank"><img width="150" :src="require('@/assets/icons/become_a_patron_button.png')"/></a></p>
       
       <p class='refs'>Music made by <a href="https://www.bensound.com" title="Bendsound">Benjamin Tissot</a> from <a href="https://www.bensound.com" title="Bensound">www.bensound.com</a> is licensed by <a href="https://creativecommons.org/licenses/by-nd/3.0/legalcode" title="Creative Commons 3.0" target="_blank">Creative Commons 3.0</a></p>
       <p class='refs'>Hand cusor, music note, color picker and bin icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>

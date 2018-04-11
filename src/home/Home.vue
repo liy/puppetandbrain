@@ -26,7 +26,7 @@
         <div class="banner-wrapper">
           <div class="banner-text">
             <h1>Learn to create games</h1>
-            <p>You will learn lots of game programming concepts, and the node based visual scripting which is used in all major game engines.</p>
+            <p>You will learn and apply programming concepts through game creation process. Gain understanding of the popular node based visual scripting used in major game engines.</p>
           </div>
           <img :src="require('!file-loader!@/assets/icons/earth.png')"/>
         </div>
