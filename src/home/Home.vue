@@ -106,7 +106,7 @@
             <div class="sub-section">
               <div class="banner-text">
                 <h1>Reasonging your program</h1>
-                <p>An intuitively execuiton and data flow visualization helps you reasoning the program and reinforce your logic thinking.</p>
+                <p>An intuitive execuiton and data flow visualization helps you to reason the program and reinforce your logic thinking.</p>
               </div>
               <img :src="require('@/assets/icons/reasoning.png')"/>
             </div>
@@ -184,6 +184,8 @@ export default {
     width: 100%;
     background-color: #167DA8;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+
+      overflow: hidden;
 
     .splash-bg {
       position: absolute;
@@ -475,6 +477,10 @@ export default {
     }
 
     .banner {
+      width: 100%;
+      left: 0;
+      border-radius: 0;
+
       .banner-wrapper {
         img {
           display: none;

@@ -6,9 +6,9 @@
 
       <p>Puppet & Brain is a creative platform for children to learn game programming which helps to develop their creativities and logic thinking.</p>
 
-      <p>The core programming experience Puppet & Brain provides is an intuitive node based visual scripting language which is used in major game engines and graphics applications. By learning through tutorials, taking on challenges at different levels, children from age of 6 to 15 are able to learn fundamental programming concepts and can produce simple games, activities and stories of their own. Through creation of their own games,  children can improve their ability of logic thinking, problem solving, collaborating with friends, and enhance creativity. They will be able to apply the experience and knowledges to the real world programming and game creation.</p>
+      <p>The core programming experience Puppet & Brain provides is an intuitive node based visual scripting language which is used in major game engines and graphics applications. By learning through tutorials, taking on challenges at different levels, children from age of 6 to 15 are able to learn fundamental programming concepts and can produce simple games, activities and stories of their own. Through creation of their own games,  children can improve their ability of logic thinking, problem solving, collaborating with friends, and enhance creativity. They will be able to apply the experience and knowledge to the real world programming and game creation.</p>
 
-      <p>Puppet & Brain provides a library of animated puppets. Children can program the brain of the puppets using node based visual scripting language.. It also allows children to upload  images and pictures  to make their own puppets and activities.</p>
+      <p>Puppet & Brain provides a library of animated puppets. Children can program the brain of the puppets using node based visual scripting language. It also allows children to upload  images and pictures  to make their own puppets and activities.</p>
       
       <p>Puppet & Brain is a safe, fun and inspiring place for children to create and share their creations.</p>
 
