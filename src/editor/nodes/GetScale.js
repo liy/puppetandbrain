@@ -33,7 +33,12 @@ export default class GetScale extends Node
 
     this.outputs.assignProperty('scale', {
       get: () => {
-        return this.lookUp.get(this.inputs.value('puppet'))['scale']
+        let actor = this.lookUp.get(this.inputs.value('puppet'));
+        if(actor) {
+          // Clone the scale so that it can be used to set to other variable
+          return new Vec2(actor.scale)
+        }
+        return new Vec2(1,1)
       }
     });
   }

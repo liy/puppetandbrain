@@ -34,8 +34,12 @@ export default class GetPosition extends Node
 
     this.outputs.assignProperty('position', {
       get: () => {
-        // Clone the position so that it can be used to set to other variable
-        return new Vec2(this.lookUp.get(this.inputs.value('puppet'))['position'])
+        let actor = this.lookUp.get(this.inputs.value('puppet'));
+        if(actor) {
+          // Clone the position so that it can be used to set to other variable
+          return new Vec2(actor.position)
+        }
+        return new Vec2();
       }
     });
   }
