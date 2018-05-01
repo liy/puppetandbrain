@@ -1,5 +1,6 @@
 import Node from "./Node";
 import DataType from '../data/DataType';
+import Vec2 from "../math/Vec2";
 
 NodeTemplate.set({
   className: 'GetScale',
