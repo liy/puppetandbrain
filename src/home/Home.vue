@@ -55,7 +55,7 @@
       <div class="white-section">
         <div>
           <h1>Create and share</h1>
-          <p>There are abundant game assets and animations to help you to unleash your creativity. Save and reuse your own puppets. Share your creations to your friends and family.</p>
+          <p>We are adding more game assets and animations to help you to unleash your creativity. Save and reuse your own puppets. Share your creations to your friends and family.</p>
           <div class="status-info">
             <div class="status-wrapper">
               <span class="home-status-counter">{{numPuppets}}</span>
