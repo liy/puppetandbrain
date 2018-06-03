@@ -12,6 +12,7 @@ const TutorialList = () => import('./tutorials/TutorialList.vue')
 const Editor = () => import('./editor/Editor.vue');
 const CreationList = () => import('./creations/CreationList.vue');
 const Help = () => import('./help/Help.vue');
+const Privacy = () => import('./privacy/Privacy.vue');
 
 Vue.use(Router)
 
@@ -126,6 +127,15 @@ export default new Router({
       component: Help,
       beforeEnter: (to, from, next) => {
         document.body.className = 'help'
+        next();
+      }
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: Privacy,
+      beforeEnter: (to, from, next) => {
+        document.body.className = 'privacy'
         next();
       }
     }

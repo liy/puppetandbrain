@@ -69,7 +69,8 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-115062643-3');
+        // "anonymize_ip" Make IP anonymized for GDPR
+        gtag('config', 'UA-115062643-3', {'anonymize_ip': true});
       </script>
     <% } %>
   </head>

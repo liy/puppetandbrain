@@ -61,6 +61,9 @@ body.que-ans {
 body.help {
   background-color: #ebebeb;
 }
+body.privacy {
+  background-color: #2196F3;
+}
 
 #modal-container {
   position: absolute;
