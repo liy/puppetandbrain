@@ -114,3 +114,11 @@ It might also have byteArray which happens during file uploading process.
 If user upload file local drive, all the fields will be presented. 
 
 If however, user choose to get resource directly using a online url, which means file is not uploaded. Therefore, "hash" and "path" field will not be presented.
+
+## test
+
+webpack alias problem
+
+https://alexjoverm.github.io/2017/10/07/Enhance-Jest-configuration-with-Module-Aliases/
+
+https://stackoverflow.com/questions/50748152/jest-cannot-locate-babel-code-frame-when-trying-to-use-alias
